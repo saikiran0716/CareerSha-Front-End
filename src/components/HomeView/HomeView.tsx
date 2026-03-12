@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { carouselData } from '../../assets/carousel/data';
+import { CarouselItem, carouselData } from '../../assets/carousel/data';
 import { Search, Play, Sparkles, TrendingUp, GraduationCap, Map as MapIcon, Award } from 'lucide-react';
 import { PredictorTags } from '../HeroPredictors';
+import { getHomepageCarouselItems } from '../../services/homeContentService';
 // Extracted NewsNotifications component for better maintainability
 import { NewsNotifications } from '../NewsSection';
 
@@ -21,15 +22,43 @@ const SEARCH_SUGGESTIONS = [
 const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) => {
     const navigate = useNavigate();
     const [currentSlide, setCurrentSlide] = useState(0);
+    const [slides, setSlides] = useState<CarouselItem[]>(carouselData);
     const [searchQuery, setSearchQuery] = useState('');
     const [isSearchFocused, setIsSearchFocused] = useState(false);
 
     useEffect(() => {
+        let isMounted = true;
+
+        const loadCarousel = async () => {
+            const items = await getHomepageCarouselItems();
+            if (isMounted && items.length > 0) {
+                setSlides(items);
+            }
+        };
+
+        void loadCarousel();
+
+        return () => {
+            isMounted = false;
+        };
+    }, []);
+
+    useEffect(() => {
+        if (currentSlide >= slides.length) {
+            setCurrentSlide(0);
+        }
+    }, [currentSlide, slides.length]);
+
+    useEffect(() => {
+        if (slides.length <= 1) {
+            return;
+        }
+
         const timer = setInterval(() => {
-            setCurrentSlide((prev) => (prev + 1) % carouselData.length);
+            setCurrentSlide((prev) => (prev + 1) % slides.length);
         }, 4000);
         return () => clearInterval(timer);
-    }, []);
+    }, [slides.length]);
 
     const executeSearch = (query: string) => {
         query = query.trim().toLowerCase();
@@ -227,7 +256,7 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
 
                 {/* Right Side: Featured Card Carousel */}
                 <div className="relative h-[240px] mt-[45px] sm:h-[350px] w-full group animate-fade carousel-container-1024 carousel-container-mobile">
-                    {carouselData.map((item, index) => (
+                    {slides.map((item, index) => (
                         <div
                             key={item.id}
                             className={`absolute inset-0 transition-all duration-1000 ease-in-out rounded-[2.5rem] overflow-hidden shadow-2xl carousel-card-mobile ${index === currentSlide ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8 pointer-events-none'
@@ -248,7 +277,7 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                                             <div className="w-4 h-4 bg-white rounded-full flex items-center justify-center">
                                                 <Sparkles size={8} className="text-indigo-600" />
                                             </div>
-                                            <span className="text-[11px] font-black text-white uppercase tracking-wider italic">CareerSha Story</span>
+                                                <span className="text-[11px] font-black text-white uppercase tracking-wider italic">{item.subtitle || 'CareerSha Story'}</span>
                                         </div>
                                     </div>
                                     <div className="flex flex-col items-end gap-2">
@@ -269,7 +298,7 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                                             className="inline-flex items-center gap-3 px-6 py-3.5 bg-white text-[#1a1a1a] rounded-xl text-[12px] font-black uppercase hover:bg-slate-100 transition-all shadow-xl active:scale-95 group/btn carousel-button-1024 carousel-btn-mobile"
                                         >
                                             <Play size={14} fill="currentColor" className="group-hover/btn:scale-110 transition-transform" />
-                                            Play <span className="ml-1 opacity-60">S1 E{item.id + 3}</span>
+                                            {item.buttonText || 'Explore Now'}
                                         </button>
                                     </div>
                                 </div>
@@ -279,7 +308,7 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
 
                     {/* Progress Bar */}
                     <div className="absolute bottom-6 right-10 z-30 flex gap-2">
-                        {carouselData.map((_, index) => (
+                        {slides.map((_, index) => (
                             <button
                                 key={index}
                                 onClick={() => setCurrentSlide(index)}
