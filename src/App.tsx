@@ -4,7 +4,6 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer';
 import {authService, User} from './services/authService';
 import ScrollToTop from './components/Scrollbutton/ScrollToTop';
-import Loader from './components/Loader/Loader';
 import RoadmapRouters from './AppRouters/RoadmapRouters';
 import AuthModal from './components/AuthModal/AuthModal';
 
@@ -41,7 +40,7 @@ const App: React.FC = () => {
 
     const handleLogout = async () => {
         await authService.logout();
-        window.location.reload(); // Simple reload to reset state
+        setUser(null);
     };
 
     const handleAskAI = useCallback((topic : string) => {

@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, ChevronDown, Search, User as UserIcon, Sun, Moon, TrendingUp, GraduationCap, Map, Award } from "lucide-react";
+import { Menu, X, ChevronDown, Search, User as UserIcon, Sun, Moon, TrendingUp, GraduationCap, Map, Award, LogOut } from "lucide-react";
 import { User } from "../../services/authService";
 import { navigationData } from "../../data/navigationData";
 import MegaMenu from "../MegaMenu/MegaMenu";
@@ -32,7 +32,19 @@ const Header: React.FC<HeaderProps> = ({
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mobileExpandedCat, setMobileExpandedCat] = useState<string | null>(null);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const profileDropdownRef = useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (profileDropdownRef.current && !profileDropdownRef.current.contains(e.target as Node)) {
+        setIsProfileOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -219,29 +231,60 @@ const Header: React.FC<HeaderProps> = ({
                 {isDarkMode ? <Sun size={18} className="animate-pulse-slow" /> : <Moon size={18} />}
               </button>
 
-              {/* Authentication UI - Reserved for future use
-            {user ? (
-              <div className="flex items-center gap-2 md:gap-3">
-                <div className="w-9 h-9 rounded-full border-2 border-indigo-100 dark:border-indigo-900/50 overflow-hidden shadow-sm flex items-center justify-center bg-indigo-600 text-white font-bold">
-                  <img src={user.avatar} alt={user.name} className="w-full h-full object-cover hidden sm:block" />
-                  <span className="sm:hidden text-sm uppercase">S</span>
+              {user ? (
+                <div className="relative" ref={profileDropdownRef}>
+                  <button
+                    onClick={() => setIsProfileOpen(!isProfileOpen)}
+                    className="relative flex-shrink-0"
+                    title={`Signed in as ${user.name}`}
+                  >
+                    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 text-white font-bold text-sm flex items-center justify-center uppercase shadow-lg shadow-indigo-500/30 ring-2 ring-white dark:ring-slate-900 ring-offset-0 transition-all duration-200 hover:shadow-xl hover:shadow-indigo-500/40 hover:scale-110 cursor-pointer">
+                      {user.avatar ? (
+                        <img src={user.avatar} alt={user.name} className="w-full h-full object-cover rounded-full ring-2 ring-white dark:ring-slate-900" />
+                      ) : (
+                        <span>{user.name?.charAt(0) || user.email?.charAt(0)}</span>
+                      )}
+                    </div>
+                  </button>
+
+                  {isProfileOpen && (
+                    <div className="absolute right-0 top-full mt-2 w-60 bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800 overflow-hidden z-50 animate-dropdown">
+                      <div className="flex items-center gap-3 px-4 py-3.5 border-b border-slate-100 dark:border-slate-800">
+                        <div className="relative flex-shrink-0">
+                          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 via-indigo-600 to-purple-600 text-white font-bold text-base flex items-center justify-center uppercase shadow-lg shadow-indigo-500/30 ring-3 ring-indigo-100 dark:ring-slate-800 transition-all duration-200">
+                            {user.avatar ? (
+                              <img src={user.avatar} alt={user.name} className="w-full h-full object-cover rounded-full ring-3 ring-white dark:ring-slate-900" />
+                            ) : (
+                              <span>{user.name?.charAt(0) || user.email?.charAt(0)}</span>
+                            )}
+                          </div>
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-[13px] font-black text-slate-800 dark:text-slate-100 truncate">{user.name}</p>
+                          <p className="text-[11px] text-slate-400 font-medium truncate">{user.email}</p>
+                        </div>
+                      </div>
+                      <div className="p-2">
+                        <button
+                          onClick={() => { onLogout(); setIsProfileOpen(false); }}
+                          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/20 text-red-500 dark:text-red-400 transition-colors text-[12px] font-bold"
+                        >
+                          <LogOut size={15} />
+                          Sign Out
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
+              ) : (
                 <button
-                  onClick={onLogout}
-                  className="hidden sm:block px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-slate-200 dark:hover:bg-slate-800 text-[11px] font-black uppercase tracking-wider text-slate-700 dark:text-slate-300 transition-all"
+                  onClick={onOpenAuth}
+                  className="relative flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-indigo-600 to-indigo-700 text-white flex items-center justify-center shadow-lg shadow-indigo-500/30 ring-2 ring-white dark:ring-slate-900 hover:shadow-xl hover:shadow-indigo-500/40 hover:scale-110 transition-all duration-200"
+                  title="Sign In"
                 >
-                  Logout
+                  <UserIcon size={18} />
                 </button>
-              </div>
-            ) : (
-              <button
-                onClick={onOpenAuth}
-                className="p-2.5 sm:px-5 sm:py-2.5 rounded-xl bg-slate-900 dark:bg-indigo-600 text-white hover:bg-indigo-600 dark:hover:bg-indigo-700 shadow-lg shadow-indigo-500/20 text-[12px] font-bold transition-all flex items-center gap-2"
-              >
-                <UserIcon size={18} />
-              </button>
-            )}
-            */}
+              )}
             </div>
           </div>
         </div>
@@ -375,14 +418,13 @@ const Header: React.FC<HeaderProps> = ({
                   {isDarkMode ? <Sun size={18} className="text-indigo-500" /> : <Moon size={18} className="text-slate-500" />}
                   <span className="text-[10px] font-bold uppercase tracking-wider">{isDarkMode ? "Light" : "Dark"}</span>
                 </button>
-                {/* Authentication UI - Reserved for future use
                 {user ? (
                   <button
-                    onClick={onLogout}
-                    className="flex flex-col items-center justify-center p-3 rounded-2xl bg-white border border-red-100 text-red-600 gap-1.5 hover:bg-red-50 transition-all shadow-sm"
+                    onClick={() => { onLogout(); setIsMobileMenuOpen(false); }}
+                    className="flex flex-col items-center justify-center p-3 rounded-2xl bg-white border border-red-100 text-red-500 gap-1.5 hover:bg-red-50 transition-all shadow-sm"
                   >
-                    <UserIcon size={18} />
-                    <span className="text-[10px] font-bold uppercase tracking-wider">Logout</span>
+                    <LogOut size={18} />
+                    <span className="text-[10px] font-bold uppercase tracking-wider">Sign Out</span>
                   </button>
                 ) : (
                   <button
@@ -393,7 +435,6 @@ const Header: React.FC<HeaderProps> = ({
                     <span className="text-[10px] font-bold uppercase tracking-wider">Sign In</span>
                   </button>
                 )}
-                */}
               </div>
             </div>
           </div>
@@ -417,6 +458,14 @@ const Header: React.FC<HeaderProps> = ({
           @keyframes slideInLeft {
             from { transform: translateX(-100%); }
             to { transform: translateX(0); }
+          }
+          @keyframes avatarGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.3), inset 0 0 20px rgba(99, 102, 241, 0.1); }
+            50% { box-shadow: 0 0 30px rgba(99, 102, 241, 0.5), inset 0 0 20px rgba(99, 102, 241, 0.15); }
+          }
+          @keyframes avatarPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
           }
           .animate-dropdown { animation: dropdown 0.2s ease-out forwards; }
           .animate-fade { animation: fadeIn 0.3s ease-out forwards; }

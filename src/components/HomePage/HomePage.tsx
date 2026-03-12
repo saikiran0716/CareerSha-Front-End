@@ -43,10 +43,6 @@ const HomePage: React.FC<HomePageProps> = ({ user, setIsAuthModalOpen, onAskAI }
     };
 
     const handleFormSubmit = async (data: StudentProfile) => {
-        if (!user) {
-            setIsAuthModalOpen(true);
-            return;
-        }
         setIsLoading(true);
         setProfile(data);
         try {
