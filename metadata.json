@@ -1,0 +1,7 @@
+{
+  "name": "CareerSha",
+  "description": "An AI-powered education and career guidance platform providing personalized study paths, college recommendations, and career insights based on student academic profiles and preferences.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}

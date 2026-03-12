@@ -1,0 +1,49 @@
+﻿App.tsx(13,27): error TS2307: Cannot find module './src/components/RankEstimator/RankEstimator' or its corresponding type declarations.
+App.tsx(14,34): error TS2307: Cannot find module './src/components/CollegeMatcher/CollegePredictor' or its corresponding type declarations.
+src/AppRouters/RoadmapRouters.tsx(10,33): error TS2307: Cannot find module '../components/CollegeMatcher/CollegeMatchResults' or its corresponding type declarations.
+src/components/HomePage/HomePage.tsx(6,38): error TS2307: Cannot find module '../../components/CollegeMatcher/CollegePredictor' or its corresponding type declarations.
+src/data/roadmaps/AiEngineer.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/Animator.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/ArVrDeveloper.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/AutomationEngineer.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/BlockchainDeveloper.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/BusinessAnalyst.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/CloudArchitect.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/CloudNative.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/ContentCreator.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/ContentStrategist.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/CyberSecurity.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/DataAnalyst.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/DatabaseAdministrator.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/DataEngineer.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/DataScientist.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/DevOpsEngineer.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/DigitalMarketer.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/EmbeddedDeveloper.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/EmbeddedSystems.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/FullStackJava.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/FullStackPython.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/GameDeveloper.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/GraphicDesigner.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/HrSpecialist.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/ItProjectManager.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/MachineLearningEngineer.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/MeanStack.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/MernStack.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/MobileAppDeveloper.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/MotionGraphics.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/NetworkEngineer.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/OperationsManager.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/ProductManager.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/PublicRelationsSpecialist.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/QaEngineer.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/RoboticsEngineer.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/SalesEngineer.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/SalesforceDeveloper.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/SapConsultant.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/SoftwareEngineering.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/SoundEngineer.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/SystemsAdministrator.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/TechnicalWriter.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/UiUxDesigner.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
+src/data/roadmaps/VideoEditor.ts(1,10): error TS2305: Module '"../types"' has no exported member 'RoadmapData'.
