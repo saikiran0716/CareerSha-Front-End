@@ -10,7 +10,8 @@ import NotFound from './NotFound';
 import CollegeMatchResults from '../components/CollegeMatcher/CollegeMatchResults';
 import CollegeDetailPage from '../components/CollegeMatcher/CollegeDetailPage';
 import { NewsView } from '../components/NewsSection';
-import BlogSubdomainPage from '../components/BlogSubdomainPage/BlogSubdomainPage';
+import BlogListPage from '../pages/Blog/BlogListPage';
+import BlogDetailPage from '../pages/Blog/BlogDetailPage';
 
 // Roadmap Imports
 // Lazy Load Roadmap Components
@@ -129,7 +130,8 @@ const RoadmapRouters: React.FC<RoadmapRoutersProps> = ({ onAskAI, user, setIsAut
                 <Route path="/rank/ts-eamcet" element={<EAMCETRank />} />
                 
                 <Route path="/latest-news" element={<NewsView />} />
-                <Route path="/blog" element={<BlogSubdomainPage />} />
+                <Route path="/blog" element={<BlogListPage />} />
+                <Route path="/blog/:id" element={<BlogDetailPage />} />
                 <Route path="/recommended-colleges" element={<CollegeMatchResults />} />
                 <Route path="/college/:collegeName" element={<CollegeDetailPage />} />
                 {Object.keys(FOOTER_PAGES).map((slug) => {
