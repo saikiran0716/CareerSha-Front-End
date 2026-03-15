@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CarouselItem, carouselData } from '../../assets/carousel/data';
+import { CoursoalItem, coursoalData } from '../../assets/coursoal/data';
 import { Search, Play, Sparkles, TrendingUp, GraduationCap, Map as MapIcon, Award } from 'lucide-react';
 import { PredictorTags } from '../HeroPredictors';
 import { getHomepageCarouselItems } from '../../services/homeContentService';
@@ -22,7 +22,7 @@ const SEARCH_SUGGESTIONS = [
 const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) => {
     const navigate = useNavigate();
     const [currentSlide, setCurrentSlide] = useState(0);
-    const [slides, setSlides] = useState<CarouselItem[]>(carouselData);
+    const [slides, setSlides] = useState<CoursoalItem[]>(coursoalData);
     const [searchQuery, setSearchQuery] = useState('');
     const [isSearchFocused, setIsSearchFocused] = useState(false);
 
@@ -255,30 +255,28 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                 </div>
 
                 {/* Right Side: Featured Card Carousel */}
-                <div className="relative h-[240px] mt-[45px] sm:h-[350px] w-full group animate-fade carousel-container-1024 carousel-container-mobile">
+                <div className="relative aspect-video mt-[45px] w-full group animate-fade carousel-container-1024 carousel-container-mobile bg-slate-900/10 rounded-[2.5rem] overflow-hidden">
                     {slides.map((item, index) => (
                         <div
                             key={item.id}
                             className={`absolute inset-0 transition-all duration-1000 ease-in-out rounded-[2.5rem] overflow-hidden shadow-2xl carousel-card-mobile ${index === currentSlide ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8 pointer-events-none'
                                 }`}
                         >
-                            <div className="absolute inset-0 bg-gradient-to-br from-[#0014ff]/90 via-[#c400ff]/40 to-transparent z-10" />
+                            <div className="absolute inset-0 bg-black/40 z-10" />
                             <img
                                 src={item.image}
                                 alt={item.title}
-                                className="w-full h-full object-cover"
+                                className="w-full h-full object-contain"
                             />
 
                             <div className="absolute inset-0 z-20 flex flex-col justify-between p-10 carousel-content-1024 carousel-content-mobile">
                                 <div className="flex justify-between items-start">
                                     <div className="space-y-1">
-                                        <p className="text-[10px] text-white/70 font-bold uppercase tracking-widest">Streaming Now</p>
-                                        <div className="flex items-center gap-2">
-                                            <div className="w-4 h-4 bg-white rounded-full flex items-center justify-center">
-                                                <Sparkles size={8} className="text-indigo-600" />
+                                        {item.subtitle && (
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-[11px] font-black text-white uppercase tracking-wider italic">{item.subtitle}</span>
                                             </div>
-                                                <span className="text-[11px] font-black text-white uppercase tracking-wider italic">{item.subtitle || 'CareerSha Story'}</span>
-                                        </div>
+                                        )}
                                     </div>
                                     <div className="flex flex-col items-end gap-2">
                                         {/* "Open in App" badge removed as per request */}
@@ -286,21 +284,27 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                                 </div>
 
                                 <div className="space-y-4 carousel-spacing-1024 carousel-spacing-mobile">
-                                    <h3 className="text-2xl md:text-3xl font-extrabold text-white leading-tight carousel-title-1024 carousel-title-mobile">
-                                        Every {item.title} Matters: <span className="text-white/80 font-medium">Driving<br />the Future of Education</span>
-                                    </h3>
-                                    <p className="text-xs text-white/80 font-medium max-w-sm line-clamp-2 carousel-desc-mobile">
-                                        {item.description}
-                                    </p>
-                                    <div className="flex items-center gap-4 pt-2">
-                                        <button
-                                            onClick={() => onNavigate(item.link)}
-                                            className="inline-flex items-center gap-3 px-6 py-3.5 bg-white text-[#1a1a1a] rounded-xl text-[12px] font-black uppercase hover:bg-slate-100 transition-all shadow-xl active:scale-95 group/btn carousel-button-1024 carousel-btn-mobile"
-                                        >
-                                            <Play size={14} fill="currentColor" className="group-hover/btn:scale-110 transition-transform" />
-                                            {item.buttonText || 'Explore Now'}
-                                        </button>
-                                    </div>
+                                    {item.title && (
+                                        <h3 className="text-2xl md:text-3xl font-extrabold text-white leading-tight carousel-title-1024 carousel-title-mobile">
+                                            {item.title}
+                                        </h3>
+                                    )}
+                                    {item.description && (
+                                        <p className="text-xs text-white/80 font-medium max-w-sm line-clamp-2 carousel-desc-mobile">
+                                            {item.description}
+                                        </p>
+                                    )}
+                                    {item.buttonText && (
+                                        <div className="flex items-center gap-4 pt-2">
+                                            <button
+                                                onClick={() => onNavigate(item.link)}
+                                                className="inline-flex items-center gap-3 px-6 py-3.5 bg-white text-[#1a1a1a] rounded-xl text-[12px] font-black uppercase hover:bg-slate-100 transition-all shadow-xl active:scale-95 group/btn carousel-button-1024 carousel-btn-mobile"
+                                            >
+                                                <Play size={14} fill="currentColor" className="group-hover/btn:scale-110 transition-transform" />
+                                                {item.buttonText}
+                                            </button>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>

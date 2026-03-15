@@ -1,17 +1,22 @@
 export const CATEGORIES = ["ALL NEWS", "ADMISSIONS", "EXAM UPDATES", "RESULTS", "EXAM NOTIFICATIONS"];
 
-export const BREAKING_NEWS = [
-  "JEE Main 2026: Shift-wise analysis now available for Phase 1 results",
-  "NEET UG Registration expected to start by March 2nd week officially",
-  "Top 10 Private Universities offering 100% merit-based scholarships in 2026",
-  "CUET 2026: Eligibility criteria updated for Central Universities - Check Now",
-  "B.Arch Admissions: NATA 2026 qualifying scores released for all zones",
-  "Demo News: New academic policies for 2026 announced by central education board",
-  "Demo News: International student exchange program expands to 40 new global partners",
-  "Demo News: Engineering curriculum gets major overhaul with focus on AI ethics and robotics",
-  "Demo News: Scholarship threshold lowered for merit-based financial aid in 2026",
-  "Demo News: National testing agency announces digital-only format for secondary exams",
-  "Demo News: Top IIMs to introduce sustainability and ESG majors for 2026 sessions"
+export interface BreakingNewsItem {
+  text: string;
+  path: string;
+}
+
+export const BREAKING_NEWS: BreakingNewsItem[] = [
+  { text: "JEE Main 2026: Shift-wise analysis now available for Phase 1 results", path: "/blog/jee-main-2026-analysis" },
+  { text: "NEET UG Registration expected to start by March 2nd week officially", path: "/blog/neet-ug-2026-registration" },
+  { text: "Top 10 Private Universities offering 100% merit-based scholarships in 2026", path: "/blog/merit-scholarships-2026" },
+  { text: "CUET 2026: Eligibility criteria updated for Central Universities - Check Now", path: "/blog/cuet-2026-updates" },
+  { text: "B.Arch Admissions: NATA 2026 qualifying scores released for all zones", path: "/blog/nata-2026-scores" },
+  { text: "Demo News: New academic policies for 2026 announced by central education board", path: "/blog/academic-policies-2026" },
+  { text: "Demo News: International student exchange program expands to 40 new global partners", path: "/blog/intl-exchange-2026" },
+  { text: "Demo News: Engineering curriculum gets major overhaul with focus on AI ethics and robotics", path: "/blog/eng-curriculum-ai" },
+  { text: "Demo News: Scholarship threshold lowered for merit-based financial aid in 2026", path: "/blog/scholarship-threshold" },
+  { text: "Demo News: National testing agency announces digital-only format for secondary exams", path: "/blog/digital-exam-format" },
+  { text: "Demo News: Top IIMs to introduce sustainability and ESG majors for 2026 sessions", path: "/blog/iim-sustainability-2026" }
 ];
 
 export interface ContentItem {
@@ -488,7 +493,7 @@ const getSummary = (item: ContentItem) => {
     return `${item.author ?? "CareerSha Editorial Desk"} shares a focused perspective on ${item.title.toLowerCase()}`;
   }
 
-  return `${item.title} This update is structured to map directly to future Wagtail CMS fields such as title, excerpt, category, author, publish date, and featured image.`;
+  return `${item.title} This comprehensive report explores the latest developments and strategic implications for students and professionals in the 2026 academic landscape. Our editorial team provides deep-dive analysis into market shifts and institutional changes.`;
 };
 
 const getReadTime = (summary: string, type: ContentItem["type"]) => {
@@ -504,37 +509,71 @@ const getReadTime = (summary: string, type: ContentItem["type"]) => {
   return `${Math.max(4, Math.ceil(words / 180))} min read`;
 };
 
-const buildBodyHtml = (item: ContentItem, summary: string, publishedDate: string) => {
-  const safeTitle = escapeHtml(item.title);
+const buildBodyHtml = (item: ContentItem, summary: string) => {
   const safeSummary = escapeHtml(summary);
-  const safeTag = escapeHtml(item.tag);
-  const safeAuthor = escapeHtml(item.author ?? "CareerSha Editorial Desk");
-  const safeRole = escapeHtml(item.role ?? "CMS-ready editorial field");
+  const safeTitle = escapeHtml(item.title);
 
   return `
     <p style="font-size: 1.15rem; font-weight: 500; line-height: 1.85; margin-bottom: 2rem; color: #334155;">
       ${safeSummary}
     </p>
-    <h2 style="font-size: 1.35rem; font-weight: 900; text-transform: uppercase; margin-top: 3rem; margin-bottom: 1rem; color: #0f172a; border-bottom: 2px solid #000; padding-bottom: 0.5rem;">
-      Why This Matters
+    
+    <div style="margin-top: 3rem; margin-bottom: 2rem; padding: 2rem; background-color: #f8fafc; border-left: 4px solid #b91c1c;">
+      <h3 style="font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; color: #b91c1c; margin-bottom: 1rem;">
+        Key Takeaways
+      </h3>
+      <ul style="margin: 0; padding-left: 1.25rem; color: #475569; line-height: 1.8;">
+        <li>Strategic shift in national academic policies for the 2026 session.</li>
+        <li>Integration of multi-conceptual problem solving in core examinations.</li>
+        <li>Increased focus on digital-first certification and agile learning paths.</li>
+      </ul>
+    </div>
+
+    <h2 style="font-size: 1.4rem; font-weight: 900; text-transform: uppercase; margin-top: 3.5rem; margin-bottom: 1.5rem; color: #0f172a; border-bottom: 2px solid #000; padding-bottom: 0.5rem;">
+      Editorial Insight
+    </h2>
+    <p style="margin-bottom: 1.5rem; line-height: 1.9; color: #475569; font-style: italic; border-left: 3px solid #e2e8f0; padding-left: 1.5rem;">
+      "The 2026 landscape represents more than just a change in syllabus; it is a fundamental pivot toward global competitiveness. Institutions are no longer just teaching subjects—they are building resilient professionals ready for an AI-integrated economy."
+    </p>
+
+    <h2 style="font-size: 1.4rem; font-weight: 900; text-transform: uppercase; margin-top: 3.5rem; margin-bottom: 1.5rem; color: #0f172a; border-bottom: 2px solid #000; padding-bottom: 0.5rem;">
+      Detailed Analysis
     </h2>
     <p style="margin-bottom: 1.5rem; line-height: 1.9; color: #475569;">
-      This ${item.type.toLowerCase()} is being presented through a frontend structure that is ready for Wagtail CMS fields such as slug, title, category, featured image, excerpt, author, published date, and SEO metadata. That keeps the UI stable now while backend delivery can be connected later without redesigning the page structure.
+      The evolution of the Indian education system in 2026 is marked by an unprecedented integration of technology and pedagogical innovation. Across major engineering hubs, the traditional lecture-based model is being systematically replaced by high-intensity, project-oriented modules that emphasize real-world application over theoretical memorization. This shift is not merely cosmetic; it represents a deep-seated change in how institutions perceive their role in a rapidly changing global economy. With the rise of specialized AI research labs and sustainability-focused degrees, students are now required to be more versatile, adaptive, and ethically conscious than any generation before them.
     </p>
-    <h2 style="font-size: 1.35rem; font-weight: 900; text-transform: uppercase; margin-top: 3rem; margin-bottom: 1rem; color: #0f172a; border-bottom: 2px solid #000; padding-bottom: 0.5rem;">
-      CMS Publishing Snapshot
+    <p style="margin-bottom: 1.5rem; line-height: 1.9; color: #475569;">
+      Furthermore, the 2026 academic cycle has seen a significant surge in interdisciplinary collaboration. We are seeing a new class of "Polymathic Professionals"—individuals who can traverse the boundaries between data science, humanities, and structural engineering with ease. This versatility is becoming the primary metric for recruitment at top-tier global firms. In response, universities are dismantling traditional department silos, offering flexible paths to graduation that allow students to stack micro-credentials and bespoke certifications. The result is a more resilient workforce, capable of navigating the complexities of a digitally-native and sustainability-driven market.
+    </p>
+    <p style="margin-bottom: 1.5rem; line-height: 1.9; color: #475569;">
+      Finally, the focus on mental health and student well-being has reached a critical turning point. National testing agencies are now collaborating with experts to implement 24/7 counseling support and mindfulness-based testing protocols. The narrative around competitive exams is shifting from one of survived endurance to one of personal growth and psychological resilience. By institutionalizing these support systems, the education sector is ensuring that the pursuit of academic excellence does not come at the cost of institutional integrity or individual health, setting a global standard for holistic student development in the mid-2020s.
+    </p>
+
+    <p style="margin-bottom: 1.5rem; line-height: 1.9; color: #475569;">
+      Looking deeper into the socio-economic impact of these changes, it becomes clear that the 2026 academic shift is also a response to the evolving global labor market. As automation and high-level algorithmic processes become standard across industries, the demand for "Human-Centric Design" and ethical reasoning has never been higher. Institutions are now tasked with producing graduates who are not just technologically proficient, but who also possess a profound understanding of the social consequences of their work. This is leading to a resurgence in the value of philosophy, ethics, and social sciences, even within traditionally technical engineering hub environments.
+    </p>
+
+    <p style="margin-bottom: 1.5rem; line-height: 1.9; color: #475569;">
+      From an infrastructure perspective, the "Smart Campus" of 2026 is a marvel of connectivity and sustainability. By leveraging real-time data analytics and renewable energy grids, top universities have managed to achieve net-zero carbon footprints while providing students with high-speed, immersive digital learning environments. This physical and digital synergy allows for a more fluid exchange of ideas, where a student in Bangalore can collaborate on a biomechanical project with a researcher in Stockholm in a shared virtual lab space. This level of global integration is the new baseline for academic excellence in the mid-2020s.
+    </p>
+
+    <p style="margin-bottom: 1.5rem; line-height: 1.9; color: #475569;">
+      Finally, we must consider the long-term career trajectories being forged in this new era. The traditional concept of a "job for life" has been replaced by a model of continuous, professional evolution. The most successful professionals of 2026 are those who treat their education as a lifelong endeavor, constantly updating their skills through micro-credentials and specialized certifications. This agility is the ultimate safeguard against the unpredictable shifts of an AI-driven global economy. As we move further into this decade, the ability to learn, unlearn, and relearn will remain the most valuable asset any student can possess.
+    </p>
+
+    <h2 style="font-size: 1.4rem; font-weight: 900; text-transform: uppercase; margin-top: 3.5rem; margin-bottom: 1.5rem; color: #0f172a; border-bottom: 2px solid #000; padding-bottom: 0.5rem;">
+      The Bigger Picture
     </h2>
     <p style="margin-bottom: 1.5rem; line-height: 1.9; color: #475569;">
-      Category: ${safeTag}. Published date: ${escapeHtml(publishedDate)}. Author: ${safeAuthor}. Supporting role field: ${safeRole}. These values mirror the content model that should eventually come from the CMS and make the detail page usable for SEO and content previews right now.
+      As traditional boundaries between technology and humanities blur, students must adopt a polymathic approach. This editorial perspective examines how these shifts will impact admissions, long-term career planning, and institutional integrity across major Indian hubs.
     </p>
-    <h2 style="font-size: 1.35rem; font-weight: 900; text-transform: uppercase; margin-top: 3rem; margin-bottom: 1rem; color: #0f172a; border-bottom: 2px solid #000; padding-bottom: 0.5rem;">
-      What Comes Next
-    </h2>
-    <p style="margin-bottom: 1.5rem; line-height: 1.9; color: #475569;">
-      Once the backend is connected, this article body can be replaced with rich text from Wagtail while preserving the same layout, metadata treatment, and related-article navigation. That approach avoids refactoring the page again when the API becomes available.
-    </p>
-    <blockquote style="margin-top: 2rem; padding: 1.25rem 1.5rem; border-left: 4px solid #b91c1c; background: #f8fafc; color: #1e293b; font-weight: 600;">
-      ${safeTitle}
+
+    <blockquote style="margin-top: 3rem; padding: 1.5rem; background: #fafafa; border: 1px solid #eee; color: #1e293b; font-weight: 600; text-align: center;">
+      ${safeTitle} 
+      <br/>
+      <span style="font-size: 0.75rem; font-weight: 400; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-top: 0.5rem;">
+        CareerSha Special Report • 2026
+      </span>
     </blockquote>
   `;
 };
@@ -555,7 +594,7 @@ const normalizeItem = (item: ContentItem): BlogArticle => {
     readTime: getReadTime(summary, item.type),
     seoTitle,
     seoDescription,
-    bodyHtml: buildBodyHtml(item, summary, publishedDate)
+    bodyHtml: buildBodyHtml(item, summary)
   };
 };
 
@@ -616,8 +655,7 @@ export const mapCmsBlogItemToArticle = (item: CmsBlogItem, fallbackId = 1): Blog
       description: summary,
       date: publishedDate
     },
-    summary,
-    publishedDate
+    summary
   );
 
   return {

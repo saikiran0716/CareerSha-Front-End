@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Activity, ArrowRight, Search, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -35,6 +35,7 @@ const setListPageSeo = (searchTerm: string, activeCategory: string) => {
 };
 
 const BlogListPage: React.FC = () => {
+  const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState('ALL NEWS');
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -105,6 +106,7 @@ const BlogListPage: React.FC = () => {
     const sorted = items.sort((a, b) => b.id - a.id);
 
     return {
+      all: sorted,
       stories: sorted.filter((item) => item.type === 'STORY'),
       briefs: sorted.filter((item) => item.type === 'BRIEF'),
       perspectives: sorted.filter((item) => item.type === 'PERSPECTIVE')
@@ -117,6 +119,22 @@ const BlogListPage: React.FC = () => {
     Math.ceil(filteredData.perspectives.length / perspectivesPerPage),
     1
   );
+
+  const handleSearchEnter = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && searchTerm.trim()) {
+      const term = searchTerm.toLowerCase();
+      const matches = articles.filter((item) => 
+        item.title.toLowerCase().includes(term) ||
+        item.summary.toLowerCase().includes(term) ||
+        item.tag.toLowerCase().includes(term)
+      ).sort((a, b) => b.id - a.id);
+
+      if (matches.length > 0) {
+        const topMatch = matches[0];
+        navigate(`${getBlogPath(topMatch)}?q=${encodeURIComponent(searchTerm.trim())}`);
+      }
+    }
+  };
 
   const currentPageData = useMemo(() => {
     const storyStart = (currentPage - 1) * storiesPerPage;
@@ -151,10 +169,16 @@ const BlogListPage: React.FC = () => {
           <div className="relative flex-1 overflow-hidden flex items-center h-full">
             <div className="flex gap-16 whitespace-nowrap animate-marquee hover:[animation-play-state:paused] py-1">
               {BREAKING_NEWS.concat(BREAKING_NEWS).map((item, index) => (
-                <div key={`${item}-${index}`} className="flex items-center gap-6">
-                  <span className="text-[11px] font-bold tracking-widest uppercase">{item}</span>
+                <Link 
+                  key={`${item.text}-${index}`} 
+                  to={item.path}
+                  className="flex items-center gap-6 group/item"
+                >
+                  <span className="text-[11px] font-bold tracking-widest uppercase group-hover/item:text-white/80 transition-colors">
+                    {item.text}
+                  </span>
                   <span className="text-white/30 text-xs">●</span>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
@@ -206,8 +230,9 @@ const BlogListPage: React.FC = () => {
               <Input
                 value={searchTerm}
                 onChange={(event) => setSearchTerm(event.target.value)}
-                placeholder="SEARCH NEWS, EXAMS..."
-                className="pl-7 pr-8 rounded-none border-none bg-transparent h-10 w-full text-[11px] font-medium uppercase tracking-widest focus-visible:ring-0 placeholder:text-slate-400"
+                placeholder="Search news, exams..."
+                onKeyDown={handleSearchEnter}
+                className="pl-7 pr-8 rounded-none border-none bg-transparent h-10 w-full text-[11px] font-medium tracking-widest focus-visible:ring-0 placeholder:text-slate-400"
               />
               {searchTerm && (
                 <button

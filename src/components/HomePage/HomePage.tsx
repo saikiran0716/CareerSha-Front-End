@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import HomeView from '../../components/HomeView/HomeView';
+
 import GenericFooterPage from '../../components/GenericFooterPage/GenericFooterPage';
 import { CollegesView, ResultsView } from '../../components/ExploreViews';
 import RankEstimator from '../../components/RankEstimator/RankEstimator';
@@ -26,14 +28,30 @@ interface HomePageProps {
 }
 
 const HomePage: React.FC<HomePageProps> = ({ user, setIsAuthModalOpen, onAskAI }) => {
+    const navigate = useNavigate();
     const [homeViewMode, setHomeViewMode] = useState<'portal' | 'counseling'>('portal');
     const [profile, setProfile] = useState<StudentProfile | null>(null);
     const [aiResponse, setAiResponse] = useState<AIResponse | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [chatInitialMessage, setChatInitialMessage] = useState<string | null>(null);
 
-    const scrollToSection = (id: string) => {
-        const element = document.getElementById(id);
+    const handleNavigation = (destination: string) => {
+        if (!destination) return;
+
+        // 1. External URLs
+        if (destination.startsWith('http')) {
+            window.open(destination, '_blank', 'noopener,noreferrer');
+            return;
+        }
+
+        // 2. Internal Routes
+        if (destination.startsWith('/')) {
+            navigate(destination);
+            return;
+        }
+
+        // 3. Section IDs (Smooth Scroll)
+        const element = document.getElementById(destination);
         if (element) {
             const headerOffset = 80;
             const elementPosition = element.getBoundingClientRect().top;
@@ -60,7 +78,7 @@ const HomePage: React.FC<HomePageProps> = ({ user, setIsAuthModalOpen, onAskAI }
     const handleReset = () => {
         setProfile(null);
         setAiResponse(null);
-        scrollToSection('home');
+        handleNavigation('home');
         setHomeViewMode('portal');
         setChatInitialMessage(null);
     };
@@ -77,7 +95,7 @@ const HomePage: React.FC<HomePageProps> = ({ user, setIsAuthModalOpen, onAskAI }
 
         const targetId = tool === 'rank' ? 'rank' : tool === 'predictor' ? 'predictor' : '';
         if (targetId) {
-            const timer = setTimeout(() => scrollToSection(targetId), 120);
+            const timer = setTimeout(() => handleNavigation(targetId), 120);
             return () => clearTimeout(timer);
         }
     }, []);
@@ -115,7 +133,7 @@ const HomePage: React.FC<HomePageProps> = ({ user, setIsAuthModalOpen, onAskAI }
                 <HomeView onStartCounseling={
                     () => setHomeViewMode('counseling')
                 }
-                    onNavigate={scrollToSection} />
+                    onNavigate={handleNavigation} />
             </div>
 
             {
@@ -134,7 +152,7 @@ const HomePage: React.FC<HomePageProps> = ({ user, setIsAuthModalOpen, onAskAI }
                                 (data) => {
                                     handleFormSubmit(data);
                                     setHomeViewMode('portal');
-                                    scrollToSection('dashboard');
+                                    handleNavigation('dashboard');
                                 }
                             }
                                 isLoading={isLoading} />
