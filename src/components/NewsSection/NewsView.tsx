@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { getLatestNewsItems, NewsItem } from '../../services/homeContentService';
 
 const NEWS_DATA = [
     {
@@ -11,77 +12,25 @@ const NEWS_DATA = [
         link: "https://jeemain.nta.nic.in",
         isLive: true,
         category: "ENTRANCE"
-    },
-    {
-        id: 2,
-        title: "CBSE Class 10 English Board Exam 2026 Held Successfully; Check Paper Analysis",
-        date: "February 21, 2026, 08:30 AM IST",
-        image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=200",
-        link: "https://cbse.gov.in",
-        isLive: false,
-        category: "BOARD EXAM"
-    },
-    {
-        id: 3,
-        title: "NEET UG 2026 Registration LIVE: Apply by March 8 for May Entrance Examination",
-        date: "February 21, 2026, 08:05 AM IST",
-        image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=200",
-        link: "https://neet.nta.nic.in",
-        isLive: true,
-        category: "ADMISSION"
-    },
-    {
-        id: 4,
-        title: "NEET PG 2026 Counseling: Stray Vacancy Seat Allotment Results Expected Today",
-        date: "February 21, 2026, 07:45 AM IST",
-        image: "https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&q=80&w=200",
-        link: "https://mcc.nic.in",
-        isLive: true,
-        category: "RESULT"
-    },
-    {
-        id: 5,
-        title: "MHT CET 2026 Application Extended: Apply Without Late Fee Till February 24",
-        date: "February 21, 2026, 07:20 AM IST",
-        image: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&q=80&w=200",
-        link: "https://cetcell.mahacet.org",
-        isLive: false,
-        category: "EXAM UPDATE"
-    },
-    {
-        id: 6,
-        title: "UPSC Civil Services Prelims 2026 Registration Ends Feb 24; 1056 Seats Open",
-        date: "February 21, 2026, 07:00 AM IST",
-        image: "https://images.unsplash.com/photo-1574301925340-966952402170?auto=format&fit=crop&q=80&w=200",
-        link: "https://upsc.gov.in",
-        isLive: false,
-        category: "GOVERNMENT"
-    },
-    {
-        id: 7,
-        title: "NABARD Development Assistant Exam 2026 Held Today Across Various Centers",
-        date: "February 21, 2026, 10:00 AM IST",
-        image: "https://images.unsplash.com/photo-1454165833767-027ffb244106?auto=format&fit=crop&q=80&w=200",
-        link: "https://nabard.org",
-        isLive: true,
-        category: "EXAM NEWS"
-    },
-    {
-        id: 8,
-        title: "MAH MCA CET 2026 Registration Window Extended; Exam Scheduled for March 30",
-        date: "February 21, 2026, 09:45 AM IST",
-        image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=200",
-        link: "https://cetcell.mahacet.org",
-        isLive: false,
-        category: "ENTRANCE"
     }
 ];
 
 // Expanded data for the grid
-const EXTENDED_NEWS = [...NEWS_DATA, ...NEWS_DATA];
+const EXTENDED_NEWS = NEWS_DATA;
 
 const NewsView: React.FC = () => {
     const navigate = useNavigate();
+    const [newsItems, setNewsItems] = useState<NewsItem[]>(NEWS_DATA);
+
+    useEffect(() => {
+        const loadNews = async () => {
+            const data = await getLatestNewsItems();
+            if (data.length > 0) {
+                setNewsItems(data);
+            }
+        };
+        void loadNews();
+    }, []);
 
     return (
         <div className="w-full min-h-screen bg-[#f8faff] dark:bg-slate-950 animate-fade">
@@ -126,7 +75,7 @@ const NewsView: React.FC = () => {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    {EXTENDED_NEWS.map((news, idx) => (
+                    {newsItems.map((news, idx) => (
                         <a
                             key={`${news.id}-${idx}`}
                             href={news.link}

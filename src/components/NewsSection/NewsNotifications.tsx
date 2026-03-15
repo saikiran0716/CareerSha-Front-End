@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { ChevronRight, ChevronLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { getLatestNewsItems, NewsItem } from '../../services/homeContentService';
 
 const NEWS_DATA = [
     {
@@ -11,51 +12,6 @@ const NEWS_DATA = [
         link: "https://jeemain.nta.nic.in",
         isLive: true,
         category: "ENTRANCE"
-    },
-    {
-        id: 2,
-        title: "CBSE Class 10 English Board Exam 2026 Held Successfully; Check Paper Analysis",
-        date: "February 21, 2026, 08:30 AM IST",
-        image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=200",
-        link: "https://cbse.gov.in",
-        isLive: false,
-        category: "BOARD EXAM"
-    },
-    {
-        id: 3,
-        title: "NEET UG 2026 Registration LIVE: Apply by March 8 for May Entrance Examination",
-        date: "February 21, 2026, 08:05 AM IST",
-        image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=200",
-        link: "https://neet.nta.nic.in",
-        isLive: true,
-        category: "ADMISSION"
-    },
-    {
-        id: 4,
-        title: "NEET PG 2026 Counseling: Stray Vacancy Seat Allotment Results Expected Today",
-        date: "February 21, 2026, 07:45 AM IST",
-        image: "https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&q=80&w=200",
-        link: "https://mcc.nic.in",
-        isLive: true,
-        category: "RESULT"
-    },
-    {
-        id: 5,
-        title: "MHT CET 2026 Application Extended: Apply Without Late Fee Till February 24",
-        date: "February 21, 2026, 07:20 AM IST",
-        image: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&q=80&w=200",
-        link: "https://cetcell.mahacet.org",
-        isLive: false,
-        category: "EXAM UPDATE"
-    },
-    {
-        id: 6,
-        title: "UPSC Civil Services Prelims 2026 Registration Ends Feb 24; 1056 Seats Open",
-        date: "February 21, 2026, 07:00 AM IST",
-        image: "https://images.unsplash.com/photo-1574301925340-966952402170?auto=format&fit=crop&q=80&w=200",
-        link: "https://upsc.gov.in",
-        isLive: false,
-        category: "GOVERNMENT"
     }
 ];
 
@@ -63,8 +19,19 @@ const NewsNotifications: React.FC = () => {
     const navigate = useNavigate();
     const scrollContainerRef = useRef<HTMLDivElement>(null);
 
+    const [newsItems, setNewsItems] = useState<NewsItem[]>(NEWS_DATA);
     const [isPaused, setIsPaused] = useState(false);
     const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
+
+    useEffect(() => {
+        const loadNews = async () => {
+            const data = await getLatestNewsItems();
+            if (data.length > 0) {
+                setNewsItems(data);
+            }
+        };
+        void loadNews();
+    }, []);
 
     const scroll = (direction: 'left' | 'right') => {
         if (scrollContainerRef.current) {
@@ -187,7 +154,7 @@ const NewsNotifications: React.FC = () => {
                             onMouseLeave={() => setIsPaused(false)}
                             className="flex gap-4 overflow-x-auto pb-0 scrollbar-hide snap-x w-full pointer-events-auto"
                         >
-                            {NEWS_DATA.map((news, index) => (
+                            {newsItems.map((news, index) => (
                                 <div key={news.id} className="flex-shrink-0 flex items-center snap-start w-[90%] sm:w-[48%] lg:w-[32.2%] xl:w-[24.2%] news-item-mobile">
                                     <a
                                         href={news.link}
@@ -220,7 +187,7 @@ const NewsNotifications: React.FC = () => {
                                             </p>
                                         </div>
                                     </a>
-                                    {index !== NEWS_DATA.length - 1 && (
+                                    {index !== newsItems.length - 1 && (
                                         <div className="h-12 w-[1px] bg-slate-100 dark:bg-slate-800 ml-4 hidden lg:block flex-shrink-0 opacity-60" />
                                     )}
                                 </div>
