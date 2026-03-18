@@ -118,6 +118,21 @@ const BlogListPage: React.FC = () => {
     1
   );
 
+  const liveUpdates = useMemo(() => {
+    const visibleStories = filteredData.stories.slice(0, 10);
+    const fallbackStories = articles.slice().sort((a, b) => b.id - a.id).slice(0, 10);
+    const source = visibleStories.length > 0 ? visibleStories : fallbackStories;
+
+    if (source.length === 0) {
+      return BREAKING_NEWS;
+    }
+
+    return source.map((item) => ({
+      text: item.title,
+      path: getBlogPath(item)
+    }));
+  }, [filteredData.stories, articles]);
+
   const currentPageData = useMemo(() => {
     const storyStart = (currentPage - 1) * storiesPerPage;
     const briefStart = (currentPage - 1) * briefsPerPage;
@@ -150,11 +165,11 @@ const BlogListPage: React.FC = () => {
 
           <div className="relative flex-1 overflow-hidden flex items-center h-full">
             <div className="flex gap-16 whitespace-nowrap animate-marquee hover:[animation-play-state:paused] py-1">
-              {BREAKING_NEWS.concat(BREAKING_NEWS).map((item, index) => (
-                <div key={`${item.text}-${index}`} className="flex items-center gap-6">
-                  <span className="text-[11px] font-bold tracking-widest uppercase">{item.text}</span>
+              {liveUpdates.concat(liveUpdates).map((item, index) => (
+                <Link key={`${item.path}-${index}`} to={item.path} className="flex items-center gap-6 group/item">
+                  <span className="text-[11px] font-bold tracking-widest uppercase group-hover/item:text-white/80 transition-colors">{item.text}</span>
                   <span className="text-white/30 text-xs">●</span>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
