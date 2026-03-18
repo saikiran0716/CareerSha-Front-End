@@ -131,6 +131,7 @@ const RoadmapRouters: React.FC<RoadmapRoutersProps> = ({ onAskAI, user, setIsAut
                 
                 <Route path="/latest-news" element={<NewsView />} />
                 <Route path="/blog" element={<BlogListPage />} />
+                <Route path="/blog/category/:categorySlug" element={<BlogListPage />} />
                 <Route path="/blog/:id" element={<BlogDetailPage />} />
                 <Route path="/recommended-colleges" element={<CollegeMatchResults />} />
                 <Route path="/college/:collegeName" element={<CollegeDetailPage />} />

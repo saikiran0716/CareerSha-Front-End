@@ -434,7 +434,7 @@ const RAW_CONTENT_ITEMS: ContentItem[] = [
 const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 const REFERENCE_DATE = new Date("2026-03-14T12:00:00Z");
 
-const slugify = (value: string) =>
+export const slugify = (value: string) =>
   value
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")

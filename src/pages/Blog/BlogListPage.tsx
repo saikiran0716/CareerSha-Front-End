@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Activity, ArrowRight, Search, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -35,7 +35,6 @@ const setListPageSeo = (searchTerm: string, activeCategory: string) => {
 };
 
 const BlogListPage: React.FC = () => {
-  const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState('ALL NEWS');
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -82,9 +81,9 @@ const BlogListPage: React.FC = () => {
     setListPageSeo(searchTerm, activeCategory);
   }, [searchTerm, activeCategory]);
 
-  const storiesPerPage = 8;
-  const briefsPerPage = 7;
-  const perspectivesPerPage = 2;
+  const storiesPerPage = 9;
+  const briefsPerPage = 8;
+  const perspectivesPerPage = 3;
 
   const filteredData = useMemo(() => {
     let items = [...articles];
@@ -106,7 +105,6 @@ const BlogListPage: React.FC = () => {
     const sorted = items.sort((a, b) => b.id - a.id);
 
     return {
-      all: sorted,
       stories: sorted.filter((item) => item.type === 'STORY'),
       briefs: sorted.filter((item) => item.type === 'BRIEF'),
       perspectives: sorted.filter((item) => item.type === 'PERSPECTIVE')
@@ -119,22 +117,6 @@ const BlogListPage: React.FC = () => {
     Math.ceil(filteredData.perspectives.length / perspectivesPerPage),
     1
   );
-
-  const handleSearchEnter = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && searchTerm.trim()) {
-      const term = searchTerm.toLowerCase();
-      const matches = articles.filter((item) => 
-        item.title.toLowerCase().includes(term) ||
-        item.summary.toLowerCase().includes(term) ||
-        item.tag.toLowerCase().includes(term)
-      ).sort((a, b) => b.id - a.id);
-
-      if (matches.length > 0) {
-        const topMatch = matches[0];
-        navigate(`${getBlogPath(topMatch)}?q=${encodeURIComponent(searchTerm.trim())}`);
-      }
-    }
-  };
 
   const currentPageData = useMemo(() => {
     const storyStart = (currentPage - 1) * storiesPerPage;
@@ -169,16 +151,10 @@ const BlogListPage: React.FC = () => {
           <div className="relative flex-1 overflow-hidden flex items-center h-full">
             <div className="flex gap-16 whitespace-nowrap animate-marquee hover:[animation-play-state:paused] py-1">
               {BREAKING_NEWS.concat(BREAKING_NEWS).map((item, index) => (
-                <Link 
-                  key={`${item.text}-${index}`} 
-                  to={item.path}
-                  className="flex items-center gap-6 group/item"
-                >
-                  <span className="text-[11px] font-bold tracking-widest uppercase group-hover/item:text-white/80 transition-colors">
-                    {item.text}
-                  </span>
+                <div key={`${item.text}-${index}`} className="flex items-center gap-6">
+                  <span className="text-[11px] font-bold tracking-widest uppercase">{item.text}</span>
                   <span className="text-white/30 text-xs">●</span>
-                </Link>
+                </div>
               ))}
             </div>
           </div>
@@ -230,9 +206,8 @@ const BlogListPage: React.FC = () => {
               <Input
                 value={searchTerm}
                 onChange={(event) => setSearchTerm(event.target.value)}
-                placeholder="Search news, exams..."
-                onKeyDown={handleSearchEnter}
-                className="pl-7 pr-8 rounded-none border-none bg-transparent h-10 w-full text-[11px] font-medium tracking-widest focus-visible:ring-0 placeholder:text-slate-400"
+                placeholder="SEARCH NEWS, EXAMS..."
+                className="pl-7 pr-8 rounded-none border-none bg-transparent h-10 w-full text-[11px] font-medium uppercase tracking-widest focus-visible:ring-0 placeholder:text-slate-400"
               />
               {searchTerm && (
                 <button
@@ -287,8 +262,8 @@ const BlogListPage: React.FC = () => {
                   <Link
                     key={brief.id}
                     to={getBlogPath(brief)}
-                    className="group flex justify-between gap-3 p-3 bg-white border border-slate-200 hover:border-[#b91c1c]/20 transition-all duration-200 relative z-20"
-                    style={{ opacity: 1, visibility: 'visible' }}
+                    className="group flex justify-between gap-3 p-3 bg-slate-50/60 border border-slate-100 hover:border-[#b91c1c]/20 transition-all duration-300"
+                    style={{ opacity: 1, color: '#0f172a' }}
                   >
                     <div className="flex flex-col flex-1 gap-2">
                       <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[8px] uppercase">
@@ -296,7 +271,7 @@ const BlogListPage: React.FC = () => {
                         <span className="font-bold text-slate-400">{brief.publishedDate}</span>
                         {brief.relativeTime && <span className="font-bold text-slate-500">{brief.relativeTime}</span>}
                       </div>
-                      <h4 className="text-[11px] font-bold text-black dark:text-white leading-tight hover:text-[#b91c1c] line-clamp-3" style={{ opacity: 1, visibility: 'visible' }}>
+                      <h4 className="text-[11px] font-bold text-slate-900 leading-tight hover:text-[#b91c1c] transition-colors line-clamp-3">
                         {brief.title}
                       </h4>
                       <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 group-hover:text-[#b91c1c] transition-colors">
@@ -305,7 +280,7 @@ const BlogListPage: React.FC = () => {
                     </div>
                     {brief.image && (
                       <div className="w-16 h-12 bg-slate-100 shrink-0 overflow-hidden">
-                        <img src={brief.image} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt={brief.title} />
+                        <img src={brief.image} className="w-full h-full object-cover opacity-100 transition-transform duration-500 hover:scale-110" style={{ display: 'block', opacity: 1 }} alt={brief.title} />
                       </div>
                     )}
                   </Link>
@@ -321,7 +296,7 @@ const BlogListPage: React.FC = () => {
                   <p className="text-[11px] font-black uppercase tracking-[0.3em] text-slate-500">Featured Story</p>
                 </div>
 
-                <Link to={getBlogPath(currentPageData.hero)} className="space-y-5 block no-underline group">
+                <Link to={getBlogPath(currentPageData.hero)} className="space-y-5 block no-underline" style={{ opacity: 1, color: '#0f172a' }}>
                   <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
                     <span className="text-[11px] font-black text-[#b91c1c] uppercase tracking-[0.3em]">
                       {currentPageData.hero.tag}
@@ -338,17 +313,18 @@ const BlogListPage: React.FC = () => {
                     <div className="aspect-[16/9] overflow-hidden bg-slate-100 shadow-inner">
                       <img
                         src={currentPageData.hero.image}
-                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                        className="w-full h-full object-cover opacity-100 transition-transform duration-1000 hover:scale-105"
+                        style={{ display: 'block', opacity: 1 }}
                         alt={currentPageData.hero.title}
                       />
                     </div>
                   )}
 
                   <div className="space-y-4">
-                    <h2 className="text-2xl md:text-4xl font-bold text-black dark:text-white leading-[1.2] hover:text-[#b91c1c] tracking-tight" style={{ opacity: 1, visibility: 'visible' }}>
+                    <h2 className="text-2xl md:text-4xl font-bold text-slate-900 leading-[1.2] hover:text-[#b91c1c] transition-colors tracking-tight">
                       {currentPageData.hero.title}
                     </h2>
-                    <p className="text-slate-600 dark:text-slate-300 text-base leading-relaxed" style={{ opacity: 1, visibility: 'visible' }}>{currentPageData.hero.summary}</p>
+                    <p className="text-slate-500 text-base leading-relaxed">{currentPageData.hero.summary}</p>
                     <div className="inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.25em] text-[#b91c1c]">
                       <span>Read More</span>
                       <ArrowRight size={14} />
@@ -375,21 +351,22 @@ const BlogListPage: React.FC = () => {
                   <Link
                     key={item.id}
                     to={getBlogPath(item)}
-                    className="group flex justify-between gap-3 p-3 bg-slate-50 border border-slate-100 dark:bg-slate-900/50 dark:border-slate-800 hover:border-[#b91c1c]/20 transition-all duration-300"
+                    className="group flex justify-between gap-3 p-3 bg-slate-50/60 border border-slate-100 hover:border-[#b91c1c]/20 transition-all duration-300"
+                    style={{ opacity: 1, color: '#0f172a' }}
                   >
                     <div className="flex flex-col justify-center flex-1 gap-2">
                       <div className="flex flex-wrap items-center gap-2">
                         <span className="text-[9px] font-black text-[#b91c1c] uppercase tracking-widest">{item.tag}</span>
                         <span className="text-[9px] font-bold text-slate-400 uppercase">{item.publishedDate}</span>
                       </div>
-                      <h4 className="text-[11px] font-bold text-black dark:text-white leading-tight hover:text-[#b91c1c] line-clamp-3" style={{ opacity: 1, visibility: 'visible' }}>
+                      <h4 className="text-[11px] font-bold text-slate-900 leading-tight hover:text-[#b91c1c] transition-colors line-clamp-3">
                         {item.title}
                       </h4>
-                      <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">{item.author}</p>
+                      <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-slate-500">{item.author}</p>
                     </div>
                     {item.image && (
                       <div className="w-16 h-12 bg-slate-100 shrink-0 overflow-hidden">
-                        <img src={item.image} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt={item.title} />
+                        <img src={item.image} className="w-full h-full object-cover opacity-100 transition-transform duration-500 hover:scale-110" style={{ display: 'block', opacity: 1 }} alt={item.title} />
                       </div>
                     )}
                   </Link>
@@ -409,14 +386,15 @@ const BlogListPage: React.FC = () => {
                     <Link
                       key={story.id}
                       to={getBlogPath(story)}
-                      className="group flex justify-between gap-3 p-3 bg-slate-50 border border-slate-100 dark:bg-slate-900/50 dark:border-slate-800 hover:border-[#b91c1c]/20 transition-all duration-300"
+                      className="group flex justify-between gap-3 p-3 bg-slate-50/60 border border-slate-100 hover:border-[#b91c1c]/20 transition-all duration-300"
+                      style={{ opacity: 1, color: '#0f172a' }}
                     >
                       <div className="flex flex-col justify-center flex-1 gap-2">
                         <div className="flex flex-wrap items-center gap-2">
                           <span className="text-[9px] font-black text-[#b91c1c] uppercase tracking-widest">{story.tag}</span>
                           <span className="text-[9px] font-bold text-slate-400 uppercase">{story.publishedDate}</span>
                         </div>
-                        <h4 className="text-[11px] font-bold text-black dark:text-white leading-tight hover:text-[#b91c1c] line-clamp-3" style={{ opacity: 1, visibility: 'visible' }}>
+                        <h4 className="text-[11px] font-bold text-slate-900 leading-tight hover:text-[#b91c1c] transition-colors line-clamp-3">
                           {story.title}
                         </h4>
                         <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 group-hover:text-[#b91c1c] transition-colors">
@@ -425,7 +403,7 @@ const BlogListPage: React.FC = () => {
                       </div>
                       {story.image && (
                         <div className="w-16 h-12 bg-slate-100 shrink-0 overflow-hidden">
-                          <img src={story.image} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt={story.title} />
+                          <img src={story.image} className="w-full h-full object-cover opacity-100 transition-transform duration-500 hover:scale-110" style={{ display: 'block', opacity: 1 }} alt={story.title} />
                         </div>
                       )}
                     </Link>
@@ -451,12 +429,13 @@ const BlogListPage: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {currentPageData.grid.map((item) => (
-              <Link key={item.id} to={getBlogPath(item)} className="group cursor-pointer space-y-4 block no-underline relative z-20" style={{ opacity: 1, visibility: 'visible' }}>
+              <Link key={item.id} to={getBlogPath(item)} className="cursor-pointer space-y-4 block no-underline" style={{ opacity: 1, color: '#0f172a' }}>
                 {item.image && (
                   <div className="aspect-[16/10] overflow-hidden bg-slate-100">
                     <img
                       src={item.image}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="w-full h-full object-cover opacity-100 transition-transform duration-700 hover:scale-105"
+                      style={{ display: 'block', opacity: 1 }}
                       alt={item.title}
                     />
                   </div>
@@ -467,10 +446,10 @@ const BlogListPage: React.FC = () => {
                     <span className="text-[10px] font-black text-[#b91c1c] uppercase tracking-widest">{item.tag}</span>
                     <span className="text-[10px] font-bold text-slate-400 uppercase">{item.publishedDate}</span>
                   </div>
-                  <h4 className="text-[18px] font-bold text-black dark:text-white leading-tight hover:text-[#b91c1c] tracking-tight" style={{ opacity: 1, visibility: 'visible' }}>
+                  <h4 className="text-[18px] font-bold text-slate-900 leading-tight hover:text-[#b91c1c] transition-colors tracking-tight">
                     {item.title}
                   </h4>
-                  <p className="text-slate-600 dark:text-slate-400 text-[13px] line-clamp-3 leading-relaxed" style={{ opacity: 1, visibility: 'visible' }}>{item.summary}</p>
+                  <p className="text-slate-600 text-[13px] line-clamp-3 leading-relaxed">{item.summary}</p>
                   <div className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 group-hover:text-[#b91c1c] transition-colors">
                     <span>Read More</span>
                     <ArrowRight size={12} />

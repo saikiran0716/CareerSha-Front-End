@@ -2,9 +2,12 @@ import { buildApiUrl } from './apiConfig';
 import {
   BLOG_ARTICLES,
   BlogArticle,
+  BREAKING_NEWS,
+  BreakingNewsItem,
   CmsBlogItem,
   mapCmsBlogItemToArticle,
   mapCmsBlogItemsToArticles,
+  slugify,
 } from '@/pages/Blog/blogData';
 
 type CmsListResponse = CmsBlogItem[] | { items?: CmsBlogItem[]; results?: CmsBlogItem[] };
@@ -72,3 +75,29 @@ export const fetchBlogArticleByIdentifier = async (identifier?: string): Promise
 
 export const getRelatedFromArticles = (articles: BlogArticle[], currentId: number, limit = 4) =>
   articles.filter((item) => item.id !== currentId).slice(0, limit);
+
+export const fetchBreakingNews = async (): Promise<BreakingNewsItem[]> => {
+  try {
+    const response = await fetch(buildApiUrl('/content/latest-news/'));
+    if (!response.ok) {
+      throw new Error(`Failed to fetch breaking news: ${response.status}`);
+    }
+
+    const data = (await response.json()) as CmsBlogItem[];
+    if (!Array.isArray(data) || data.length === 0) {
+      return BREAKING_NEWS;
+    }
+
+    return data.map((item) => {
+      const id = item.id ?? 0;
+      const slug = item.slug?.trim() || `${slugify(item.title || '')}-${id}`;
+      return {
+        text: item.title || 'Breaking Update',
+        path: `/blog/${slug}`,
+      };
+    });
+  } catch (error) {
+    console.error('Failed to load CMS breaking news:', error);
+    return BREAKING_NEWS;
+  }
+};
