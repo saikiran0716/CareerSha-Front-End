@@ -440,6 +440,16 @@ export const slugify = (value: string) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 
+const unescapeHtml = (value: string) => {
+  if (!value) return "";
+  return value
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
+};
+
 const escapeHtml = (value: string) =>
   value
     .replace(/&/g, "&amp;")
@@ -510,12 +520,11 @@ const getReadTime = (summary: string, type: ContentItem["type"]) => {
 };
 
 const buildBodyHtml = (item: ContentItem, summary: string) => {
-  const safeSummary = escapeHtml(summary);
   const safeTitle = escapeHtml(item.title);
 
   return `
     <p style="font-size: 1.15rem; font-weight: 500; line-height: 1.85; margin-bottom: 2rem; color: #334155;">
-      ${safeSummary}
+      ${summary}
     </p>
     
     <div style="margin-top: 3rem; margin-bottom: 2rem; padding: 2rem; background-color: #f8fafc; border-left: 4px solid #b91c1c;">
@@ -627,11 +636,12 @@ export const mapCmsBlogItemToArticle = (item: CmsBlogItem, fallbackId = 1): Blog
   const id = item.id ?? fallbackId;
   const title = item.title?.trim() || `Untitled Article ${id}`;
   const tag = (item.category || item.tag || "ALL NEWS").toUpperCase();
-  const summary =
+  const summaryRaw =
     item.summary?.trim() ||
     item.excerpt?.trim() ||
     item.description?.trim() ||
     `This CMS article is ready for preview in the CareerSha blog detail layout.`;
+  const summary = unescapeHtml(summaryRaw);
   const publishedDateSource = item.published_date || item.publishedDate || item.date;
   const publishedDate = toDisplayDate(publishedDateSource);
   const normalizedType: ContentItem["type"] = item.type ?? "STORY";
@@ -644,20 +654,24 @@ export const mapCmsBlogItemToArticle = (item: CmsBlogItem, fallbackId = 1): Blog
     item.seoDescription?.trim() ||
     summary).slice(0, 155);
   const image = toImageUrl(item.image);
-  const bodyHtml = item.body_html || item.bodyHtml || buildBodyHtml(
-    {
-      id,
-      title,
-      tag,
-      type: normalizedType,
-      author: item.author,
-      role: item.role,
-      image,
-      description: summary,
-      date: publishedDate
-    },
-    summary
-  );
+  
+  const rawBodyHtml = item.body_html || item.bodyHtml;
+  const bodyHtml = rawBodyHtml 
+    ? unescapeHtml(rawBodyHtml) 
+    : buildBodyHtml(
+        {
+          id,
+          title,
+          tag,
+          type: normalizedType,
+          author: item.author,
+          role: item.role,
+          image,
+          description: summary,
+          date: publishedDate
+        },
+        summary
+      );
 
   return {
     id,

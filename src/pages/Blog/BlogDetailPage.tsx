@@ -272,7 +272,10 @@ const BlogDetailPage: React.FC = () => {
                 <h1 className="text-3xl md:text-5xl font-bold leading-[1.15] tracking-tight text-[#0f172a] uppercase">
                   {article.title}
                 </h1>
-                <p className="text-base md:text-lg leading-relaxed text-slate-600 max-w-3xl">{article.summary}</p>
+                <div 
+                  className="text-base md:text-lg leading-relaxed text-slate-600 max-w-3xl"
+                  dangerouslySetInnerHTML={{ __html: article.summary }}
+                />
               </div>
 
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 pt-8 border-t border-slate-100">

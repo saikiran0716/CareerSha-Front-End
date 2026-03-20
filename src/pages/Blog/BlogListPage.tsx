@@ -350,7 +350,10 @@ const BlogListPage: React.FC = () => {
                     <h2 className="text-2xl md:text-4xl font-bold text-slate-900 leading-[1.2] hover:text-[#b91c1c] transition-colors tracking-tight">
                       {currentPageData.hero.title}
                     </h2>
-                    <p className="text-slate-500 text-base leading-relaxed">{currentPageData.hero.summary}</p>
+                    <div 
+                      className="text-slate-500 text-base leading-relaxed line-clamp-3"
+                      dangerouslySetInnerHTML={{ __html: currentPageData.hero.summary }}
+                    />
                     <div className="inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.25em] text-[#b91c1c]">
                       <span>Read More</span>
                       <ArrowRight size={14} />
@@ -442,7 +445,10 @@ const BlogListPage: React.FC = () => {
                   <h4 className="text-[18px] font-bold text-slate-900 leading-tight hover:text-[#b91c1c] transition-colors tracking-tight">
                     {item.title}
                   </h4>
-                  <p className="text-slate-600 text-[13px] line-clamp-3 leading-relaxed">{item.summary}</p>
+                  <div 
+                    className="text-slate-600 text-[13px] line-clamp-3 leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: item.summary }}
+                  />
                   <div className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 group-hover:text-[#b91c1c] transition-colors">
                     <span>Read More</span>
                     <ArrowRight size={12} />
