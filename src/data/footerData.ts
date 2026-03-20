@@ -184,11 +184,14 @@ export const FOOTER_PAGES: Record<string, PageData> = {
     },
 
     // Exams
-    'exam-cat': { title: 'Top Management Entrance Exams', description: 'CAT, XAT, MAT, SNAP, CMAT.', items: EXAMS_MANAGEMENT, type: 'exam', content: '<p>CAT is the toughest management entrance exam in India. It tests Quantitative Ability, Verbal Ability, and Data Interpretation.</p>', faqs: [{ question: 'When is CAT conducted?', answer: 'Usually on the last Sunday of November.' }] },
-    'exam-jee': { title: 'Top Engineering Entrance Exams', description: 'JEE Main, JEE Advanced, GATE, BITSAT.', items: EXAMS_ENGINEERING, type: 'exam', content: '<p>JEE Main is the gateway to NITs, IIITs, and GFTIs. It is also the qualifying exam for JEE Advanced.</p>', faqs: [{ question: 'How many attempts are allowed?', answer: 'Students can attempt JEE Main for 3 consecutive years.' }] },
-    'exam-neet': { title: 'Top Medical Entrance Exams', description: 'NEET UG, NEET PG, INI-CET.', items: EXAMS_MEDICAL, type: 'exam', content: '<p>NEET UG is mandatory for MBBS/BDS courses in India. It is a pen-and-paper test comprising Physics, Chemistry, and Biology.</p>', faqs: [{ question: 'Is there negative marking?', answer: 'Yes, 1 mark is deducted for every incorrect answer.' }] },
-    'exam-law': { title: 'Top Law Entrance Exams', description: 'CLAT, AILET.', items: EXAMS_LAW, type: 'exam', content: '<p>CLAT is conducted for admission to 22 National Law Universities (NLUs) in India.</p>', faqs: COMMON_FAQS },
-    'exam-design': { title: 'Top Design Entrance Exams', description: 'NIFT, UCEED.', items: EXAMS_DESIGN, type: 'exam', content: '<p>Design exams test creativity, visualization, and observation skills.</p>', faqs: COMMON_FAQS },
+    'exam-cat': { title: 'CAT 2026', description: 'Common Admission Test 2026.', items: EXAMS_MANAGEMENT, type: 'exam', content: '<p>CAT is the toughest management entrance exam in India.</p>', faqs: [{ question: 'When is CAT 2026 conducted?', answer: 'Usually on the last Sunday of November 2026.' }] },
+    'exam-gate': { title: 'GATE 2026', description: 'Graduate Aptitude Test in Engineering 2026.', items: EXAMS_ENGINEERING, type: 'exam', content: '<p>GATE is the entry point for M.Tech and PSUs.</p>', faqs: [{ question: 'When is GATE 2026?', answer: 'February 2026.' }] },
+    'exam-jee-main': { title: 'JEE Main 2026', description: 'Joint Entrance Examination 2026.', items: EXAMS_ENGINEERING, type: 'exam', content: '<p>JEE Main is for NITs and IIITs.</p>', faqs: [{ question: 'How many attempts?', answer: '3 years.' }] },
+    'exam-neet': { title: 'NEET 2026', description: 'National Eligibility cum Entrance Test 2026.', items: EXAMS_MEDICAL, type: 'exam', content: '<p>NEET UG is mandatory for MBBS/BDS.</p>', faqs: [{ question: 'Negative marking?', answer: 'Yes.' }] },
+    'exam-xat': { title: 'XAT 2026', description: 'Xavier Aptitude Test 2026.', items: EXAMS_MANAGEMENT, type: 'exam', content: '<p>XAT is for XLRI and other top B-schools.</p>', faqs: COMMON_FAQS },
+    'exam-clat': { title: 'CLAT 2026', description: 'Common Law Admission Test 2026.', items: EXAMS_LAW, type: 'exam', content: '<p>CLAT is for NLUs.</p>', faqs: COMMON_FAQS },
+    'exam-mat': { title: 'MAT 2026', description: 'Management Aptitude Test 2026.', items: EXAMS_MANAGEMENT, type: 'exam', content: '<p>MAT is held multiple times a year.</p>', faqs: COMMON_FAQS },
+    'exam-nift': { title: 'NIFT Entrance 2026', description: 'NIFT Admissions 2026.', items: EXAMS_DESIGN, type: 'exam', content: '<p>For fashion design aspirants.</p>', faqs: COMMON_FAQS },
 
     // Admission Tools
     'tool-loan': { title: 'Education Loan Providers', description: 'Compare interest rates and schemes.', items: TOOLS_LOAN, type: 'exam', content: '<p>Education loans cover tuition fees, accommodation, and other expenses. Check for tax benefits under Sec 80E.</p>', faqs: COMMON_FAQS },
@@ -440,15 +443,7 @@ FOOTER_PAGES['pharma-india'] = { title: 'Top B.Pharma Colleges', description: 'P
 FOOTER_PAGES['nursing-india'] = { title: 'Top Nursing Colleges', description: 'B.Sc Nursing Institutes.', items: [], type: 'college', content: '<p>Nursing is a noble and high-demand profession.</p>', faqs: COMMON_FAQS };
 FOOTER_PAGES['paramedical-india'] = { title: 'Top Paramedical Colleges', description: 'Allied Health Sciences.', items: [], type: 'college', content: '<p>Paramedical courses support the healthcare system.</p>', faqs: COMMON_FAQS };
 
-// EXAMS (Explicitly defined to ensure fetching)
-FOOTER_PAGES['exams-cat'] = { title: 'CAT 2025 Exam', description: 'Common Admission Test.', items: [], type: 'exam', content: '<p>CAT is the gateway to IIMs.</p>', faqs: COMMON_FAQS };
-FOOTER_PAGES['exams-gate'] = { title: 'GATE 2025 Exam', description: 'Graduate Aptitude Test in Engineering.', items: [], type: 'exam', content: '<p>GATE is for M.Tech admissions and PSU jobs.</p>', faqs: COMMON_FAQS };
-FOOTER_PAGES['exams-jee-main'] = { title: 'JEE Main 2025', description: 'Joint Entrance Examination.', items: [], type: 'exam', content: '<p>JEE Main is for NITs and IIITs.</p>', faqs: COMMON_FAQS };
-FOOTER_PAGES['exams-neet'] = { title: 'NEET 2025', description: 'National Eligibility cum Entrance Test.', items: [], type: 'exam', content: '<p>NEET is the single entrance for medical admissions.</p>', faqs: COMMON_FAQS };
-FOOTER_PAGES['exams-xat'] = { title: 'XAT 2025', description: 'Xavier Aptitude Test.', items: [], type: 'exam', content: '<p>XAT is conducted by XLRI.</p>', faqs: COMMON_FAQS };
-FOOTER_PAGES['exams-clat'] = { title: 'CLAT 2025', description: 'Common Law Admission Test.', items: [], type: 'exam', content: '<p>CLAT is for National Law Universities.</p>', faqs: COMMON_FAQS };
-FOOTER_PAGES['exams-mat'] = { title: 'MAT 2025', description: 'Management Aptitude Test.', items: [], type: 'exam', content: '<p>MAT is accepted by many B-schools.</p>', faqs: COMMON_FAQS };
-FOOTER_PAGES['exams-nift'] = { title: 'NIFT Entrance 2025', description: 'National Institute of Fashion Technology Entrance.', items: [], type: 'exam', content: '<p>NIFT Entrance is for fashion design admissions.</p>', faqs: COMMON_FAQS };
+// Removing redundant plural keys to avoid misrouting to /college/
 
 // TOOLS
 FOOTER_PAGES['tools-predictor'] = { title: 'College Predictor', description: 'Predict your college based on rank.', items: [], type: 'generic', content: '<p>Use our advanced algorithms to predict your admission chances.</p>', faqs: [] };

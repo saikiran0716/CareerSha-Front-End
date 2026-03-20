@@ -32,6 +32,15 @@ const setListPageSeo = (searchTerm: string, activeCategory: string) => {
   ensureMeta('meta[name="description"]', 'name', 'description', description);
   ensureMeta('meta[property="og:title"]', 'property', 'og:title', title);
   ensureMeta('meta[property="og:description"]', 'property', 'og:description', description);
+
+  // Handle Canonical Tag
+  let canonical = document.head.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+  if (!canonical) {
+    canonical = document.createElement('link');
+    canonical.setAttribute('rel', 'canonical');
+    document.head.appendChild(canonical);
+  }
+  canonical.setAttribute('href', window.location.origin + window.location.pathname);
 };
 
 const BlogListPage: React.FC = () => {
@@ -106,7 +115,7 @@ const BlogListPage: React.FC = () => {
 
     return {
       stories: sorted.filter((item) => item.type === 'STORY'),
-      briefs: sorted.filter((item) => item.type === 'BRIEF'),
+      briefs: sorted.filter((item) => item.type === 'BRIEF' || item.type === 'STORY'),
       perspectives: sorted.filter((item) => item.type === 'PERSPECTIVE')
     };
   }, [activeCategory, searchTerm, articles]);
@@ -135,24 +144,26 @@ const BlogListPage: React.FC = () => {
 
   const currentPageData = useMemo(() => {
     const storyStart = (currentPage - 1) * storiesPerPage;
-    const briefStart = (currentPage - 1) * briefsPerPage;
     const perspectiveStart = (currentPage - 1) * perspectivesPerPage;
 
+    // Global list for sidebars (Always show all categories regardless of activeCategory)
+    const globalLatest = [...articles].sort((a, b) => b.id - a.id);
+
     const pageStories = filteredData.stories.slice(storyStart, storyStart + storiesPerPage);
-    let recent = filteredData.stories.slice(storyStart + storiesPerPage, storyStart + storiesPerPage + 4);
+    let recent = globalLatest.slice(5, 10);
 
     if (recent.length === 0) {
-      recent = filteredData.stories.slice(0, 4);
+      recent = globalLatest.slice(0, 5);
     }
 
     return {
       hero: pageStories[0] ?? null,
       grid: pageStories.slice(1),
       recent,
-      briefs: filteredData.briefs.slice(briefStart, briefStart + briefsPerPage),
+      briefs: globalLatest.slice(0, 5),
       perspectives: filteredData.perspectives.slice(perspectiveStart, perspectiveStart + perspectivesPerPage)
     };
-  }, [currentPage, filteredData]);
+  }, [currentPage, filteredData, articles]);
 
   return (
     <div className="min-h-screen bg-white text-slate-900 selection:bg-[#b91c1c] selection:text-white relative z-10">
@@ -355,39 +366,6 @@ const BlogListPage: React.FC = () => {
           </div>
 
           <aside className="lg:col-span-3 lg:pl-4 space-y-8 h-fit lg:border-l border-slate-100">
-            <section className="space-y-6">
-              <div className="flex items-center gap-3 border-b-2 border-black pb-3">
-                <h2 className="text-sm font-black uppercase tracking-[0.2em]">Insights</h2>
-                <div className="w-1.5 h-1.5 bg-[#b91c1c] rounded-full animate-pulse" />
-              </div>
-
-              <div className="grid grid-cols-1 gap-3">
-                {currentPageData.perspectives.map((item) => (
-                  <Link
-                    key={item.id}
-                    to={getBlogPath(item)}
-                    className="group flex justify-between gap-3 p-3 bg-slate-50/60 border border-slate-100 hover:border-[#b91c1c]/20 transition-all duration-300"
-                    style={{ opacity: 1, color: '#0f172a' }}
-                  >
-                    <div className="flex flex-col justify-center flex-1 gap-2">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="text-[9px] font-black text-[#b91c1c] uppercase tracking-widest">{item.tag}</span>
-                        <span className="text-[9px] font-bold text-slate-400 uppercase">{item.publishedDate}</span>
-                      </div>
-                      <h4 className="text-[11px] font-bold text-slate-900 leading-tight hover:text-[#b91c1c] transition-colors line-clamp-3">
-                        {item.title}
-                      </h4>
-                      <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-slate-500">{item.author}</p>
-                    </div>
-                    {item.image && (
-                      <div className="w-16 h-12 bg-slate-100 shrink-0 overflow-hidden">
-                        <img src={item.image} className="w-full h-full object-cover opacity-100 transition-transform duration-500 hover:scale-110" style={{ display: 'block', opacity: 1 }} alt={item.title} />
-                      </div>
-                    )}
-                  </Link>
-                ))}
-              </div>
-            </section>
 
             {currentPageData.recent.length > 0 && (
               <section className="space-y-6">

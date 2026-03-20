@@ -63,14 +63,14 @@ export const navigationData = [
             {
                 heading: "Top Entrance Exams",
                 links: [
-                    { name: "CAT 2025", url: "/exams/cat" },
-                    { name: "GATE 2025", url: "/exams/gate" },
-                    { name: "JEE Main 2025", url: "/exams/jee-main" },
-                    { name: "NEET 2025", url: "/exams/neet" },
-                    { name: "XAT 2025", url: "/exams/xat" },
-                    { name: "CLAT 2025", url: "/exams/clat" },
-                    { name: "MAT 2025", url: "/exams/mat" },
-                    { name: "NIFT 2025", url: "/exams/nift" }
+                    { name: "CAT 2026", url: "/exams/cat" },
+                    { name: "GATE 2026", url: "/exams/gate" },
+                    { name: "JEE Main 2026", url: "/exams/jee-main" },
+                    { name: "NEET 2026", url: "/exams/neet" },
+                    { name: "XAT 2026", url: "/exams/xat" },
+                    { name: "CLAT 2026", url: "/exams/clat" },
+                    { name: "MAT 2026", url: "/exams/mat" },
+                    { name: "NIFT 2026", url: "/exams/nift" }
                 ]
             }
         ]

@@ -132,7 +132,7 @@ const NewsNotifications: React.FC = () => {
                             </h2>
                         </div>
                         <button
-                            onClick={() => navigate('/latest-news')}
+                            onClick={() => navigate('/blog')}
                             className="text-indigo-600 dark:text-indigo-400 text-xs font-black uppercase tracking-widest flex items-center gap-1 hover:text-indigo-700 transition-colors group news-view-all"
                         >
                             View All <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />

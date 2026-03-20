@@ -582,7 +582,7 @@ const normalizeItem = (item: ContentItem): BlogArticle => {
   const summary = getSummary(item);
   const publishedDate = getPublishedDate(item);
   const slug = `${slugify(item.title)}-${item.id}`;
-  const seoTitle = `${item.title} | CareerSha Blog`;
+  const seoTitle = `${item.title} | CareerSha Blog`.slice(0, 60);
   const seoDescription = summary.slice(0, 155);
 
   return {
@@ -637,11 +637,12 @@ export const mapCmsBlogItemToArticle = (item: CmsBlogItem, fallbackId = 1): Blog
   const normalizedType: ContentItem["type"] = item.type ?? "STORY";
   const readTime = item.read_time || item.readTime || getReadTime(summary, normalizedType);
   const slug = item.slug?.trim() || `${slugify(title)}-${id}`;
-  const seoTitle = item.seo_title?.trim() || item.seoTitle?.trim() || `${title} | CareerSha Blog`;
+  const seoTitleInput = item.seo_title?.trim() || item.seoTitle?.trim() || `${title} | CareerSha Blog`;
+  const seoTitle = seoTitleInput.slice(0, 60);
   const seoDescription =
-    item.seo_description?.trim() ||
+    (item.seo_description?.trim() ||
     item.seoDescription?.trim() ||
-    summary.slice(0, 155);
+    summary).slice(0, 155);
   const image = toImageUrl(item.image);
   const bodyHtml = item.body_html || item.bodyHtml || buildBodyHtml(
     {

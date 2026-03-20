@@ -543,6 +543,23 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
                                     <button
                                         key={idx}
                                         onClick={() => {
+                                            const lowerTitle = (item.title || '').toLowerCase();
+                                            const isExam = lowerTitle.includes('gate') || lowerTitle.includes('cat ') || lowerTitle === 'cat' || lowerTitle.includes('jee') || lowerTitle.includes('neet') || lowerTitle.includes('xat') || lowerTitle.includes('clat') || lowerTitle.includes('mat') || lowerTitle.includes('nift');
+                                            
+                                            if (isExam) {
+                                                let target = 'cat';
+                                                if (lowerTitle.includes('gate')) target = 'gate';
+                                                else if (lowerTitle.includes('jee')) target = 'jee-main';
+                                                else if (lowerTitle.includes('neet')) target = 'neet';
+                                                else if (lowerTitle.includes('xat')) target = 'xat';
+                                                else if (lowerTitle.includes('clat')) target = 'clat';
+                                                else if (lowerTitle.includes('mat')) target = 'mat';
+                                                else if (lowerTitle.includes('nift')) target = 'nift';
+                                                
+                                                navigate(`/exams/${target}`);
+                                                return;
+                                            }
+
                                             const toolUrl = getToolRedirectUrl(item);
                                             if (toolUrl) {
                                                 navigate(toolUrl);

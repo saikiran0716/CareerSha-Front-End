@@ -1,5 +1,9 @@
-:root { --brand-primary: #4f46e5; --brand-secondary: #a855f7; --bg-main: #ffffff; --text-main: #1e293b; }
-@media (prefers-color-scheme: dark) { :root { --bg-main: #020617; --text-main: #f8fafc; } }
+:root {
+    --brand-primary: #4f46e5;
+    --brand-secondary: #a855f7;
+    --bg-white: #ffffff;
+    --text-slate: #0f172a;
+}
 
 .initial-loader {
     position: fixed;
@@ -8,44 +12,25 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: var(--bg-main);
+    background: var(--bg-white);
     z-index: 9999;
     font-family: 'Inter', system-ui, sans-serif;
-    overflow: hidden;
-}
-
-/* Fluid background hints */
-.bg-blob {
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(79, 70, 229, 0.05) 0%, transparent 70%);
-    filter: blur(80px);
-    z-index: -1;
 }
 
 .loader-box {
-    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
+    animation: simpleFadeIn 0.8s ease-out;
 }
 
 .rings-container {
     position: relative;
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.ring-static {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 1px solid rgba(79, 70, 229, 0.1);
 }
 
 .ring-active {
@@ -53,61 +38,59 @@
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    border: 3px solid transparent;
+    border: 2px solid #f1f5f9;
     border-top-color: var(--brand-primary);
-    animation: rotate 1.4s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+    animation: rotate 1.2s cubic-bezier(0.5, 0.1, 0.4, 0.9) infinite;
+}
+
+.ring-active:nth-child(2) {
+    width: 65%;
+    height: 65%;
+    border-color: #f1f5f9;
+    border-bottom-color: var(--brand-secondary);
+    animation: rotate 1.8s cubic-bezier(0.5, 0.1, 0.4, 0.9) infinite reverse;
 }
 
 .core-elite {
-    width: 32px;
-    height: 32px;
-    background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
-    border-radius: 10px;
-    transform: rotate(45deg);
-    box-shadow: 0 0 30px rgba(79, 70, 229, 0.4);
-    animation: elitePulse 2s ease-in-out infinite;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 12px;
+    height: 12px;
+    background: var(--brand-primary);
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(79, 70, 229, 0.3);
+    animation: softPulse 1.5s ease-in-out infinite;
 }
 
 .brand-elite {
-    margin-top: 50px;
+    margin-top: 2rem;
     text-align: center;
-    animation: eliteFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .brand-h {
-    font-size: 22px;
-    font-weight: 900;
-    letter-spacing: -0.03em;
-    color: var(--text-main);
-    text-transform: uppercase;
-    font-style: italic;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-slate);
 }
 
 .brand-tag {
-    font-size: 10px;
-    font-weight: 800;
-    color: #64748b;
-    text-transform: uppercase;
-    letter-spacing: 0.4em;
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    display: none; /* Hide 'please wait' text as requested */
 }
 
-.brand-tag::before, .brand-tag::after {
-    content: '';
-    height: 1px;
-    width: 15px;
-    background: rgba(100, 116, 139, 0.2);
+.bg-blob {
+    display: none; /* Hide dark blobs for simplicity */
 }
 
-@keyframes rotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-@keyframes elitePulse { 
-    0%, 100% { transform: rotate(45deg) scale(0.9); opacity: 0.8; } 
-    50% { transform: rotate(45deg) scale(1.1); opacity: 1; } 
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
-@keyframes eliteFadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+@keyframes softPulse {
+    0%, 100% { transform: scale(0.9); opacity: 0.6; }
+    50% { transform: scale(1.1); opacity: 1; }
+}
+
+@keyframes simpleFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

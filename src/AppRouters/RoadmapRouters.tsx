@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import { FOOTER_PAGES } from '../data/footerData';
 import { navigationData } from '../data/navigationData';
 import GenericFooterPage from '../components/GenericFooterPage/GenericFooterPage';
@@ -12,6 +12,7 @@ import CollegeDetailPage from '../components/CollegeMatcher/CollegeDetailPage';
 import { NewsView } from '../components/NewsSection';
 import BlogListPage from '../pages/Blog/BlogListPage';
 import BlogDetailPage from '../pages/Blog/BlogDetailPage';
+import ExamDetailsPge from '../components/EXAMS/ExamDetailsPge';
 
 // Roadmap Imports
 // Lazy Load Roadmap Components
@@ -123,19 +124,33 @@ const RoadmapRouters: React.FC<RoadmapRoutersProps> = ({ onAskAI, user, setIsAut
                 <Route path="/roadmap/content-creator" element={<ContentCreatorRoadmap onAskAI={onAskAI} />} />
                 <Route path="/roadmap/animator" element={<AnimatorRoadmap onAskAI={onAskAI} />} />
                 <Route path="/roadmap/motion-graphics" element={<MotionGraphicsRoadmap onAskAI={onAskAI} />} />
-                
+
                 {/* Rank Predictor Routes */}
                 <Route path="/rank/jee-main" element={<JEEMainRank />} />
                 <Route path="/rank/neet" element={<NEETRank />} />
                 <Route path="/rank/ts-eamcet" element={<EAMCETRank />} />
-                
+
+                <Route path="/exams/:examId" element={<ExamDetailsPge />} />
                 <Route path="/latest-news" element={<NewsView />} />
                 <Route path="/blog" element={<BlogListPage />} />
                 <Route path="/blog/category/:categorySlug" element={<BlogListPage />} />
                 <Route path="/blog/:id" element={<BlogDetailPage />} />
                 <Route path="/recommended-colleges" element={<CollegeMatchResults />} />
+                {/* Global Redirects for Exams hitting /college/ path */}
+                <Route path="/college/gate*" element={<Navigate to="/exams/gate" replace />} />
+                <Route path="/college/cat*" element={<Navigate to="/exams/cat" replace />} />
+                <Route path="/college/jee*" element={<Navigate to="/exams/jee-main" replace />} />
+                <Route path="/college/neet*" element={<Navigate to="/exams/neet" replace />} />
+                <Route path="/college/xat*" element={<Navigate to="/exams/xat" replace />} />
+                <Route path="/college/clat*" element={<Navigate to="/exams/clat" replace />} />
+                <Route path="/college/mat*" element={<Navigate to="/exams/mat" replace />} />
+                <Route path="/college/nift*" element={<Navigate to="/exams/nift" replace />} />
+
                 <Route path="/college/:collegeName" element={<CollegeDetailPage />} />
                 {Object.keys(FOOTER_PAGES).map((slug) => {
+                    // Skip exam-related slugs here as they are handled by the static /exams/:examId route
+                    if (slug.startsWith('exam-') || slug.startsWith('exams-')) return null;
+
                     const footerPageData = FOOTER_PAGES[slug];
                     // Map slugs to paths: 'mba-india' -> '/mba/india', 'city-delhi' -> '/city/delhi'
                     // Special cases like 'iits-india' should keep their structure if needed, 
@@ -152,7 +167,6 @@ const RoadmapRouters: React.FC<RoadmapRoutersProps> = ({ onAskAI, user, setIsAut
                     if (slug === 'aiims-colleges') path = '/aiims/colleges';
                     if (slug === 'btech-india') path = '/eng/india';
                     if (slug === 'mbbs-india') path = '/mbbs/india';
-                    if (slug.startsWith('exam-')) path = `/exams/${slug.replace('exam-', '')}`;
                     if (slug.startsWith('tool-')) path = `/tools/${slug.replace('tool-', '')}`;
                     if (slug.startsWith('legal-')) path = `/legal/${slug.replace('legal-', '')}`;
                     if (slug.startsWith('company-')) path = `/company/${slug.replace('company-', '')}`;

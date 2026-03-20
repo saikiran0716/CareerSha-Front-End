@@ -27,6 +27,15 @@ const setArticleSeo = (title: string, description: string, image?: string) => {
   if (image) {
     ensureMeta('meta[property="og:image"]', 'property', 'og:image', image);
   }
+
+  // Handle Canonical Tag
+  let canonical = document.head.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+  if (!canonical) {
+    canonical = document.createElement('link');
+    canonical.setAttribute('rel', 'canonical');
+    document.head.appendChild(canonical);
+  }
+  canonical.setAttribute('href', window.location.origin + window.location.pathname);
 };
 
 const BlogDetailPage: React.FC = () => {
@@ -297,15 +306,6 @@ const BlogDetailPage: React.FC = () => {
               </div>
             </header>
 
-            {article.image && (
-              <div className="aspect-[21/9] overflow-hidden bg-slate-100 border-y border-black relative z-10">
-                <img
-                  src={article.image}
-                  alt={article.title}
-                  className="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-1000"
-                />
-              </div>
-            )}
 
             <div className="bg-white pb-10">
               <div className="space-y-8 text-[#334155] text-base md:text-lg leading-relaxed font-normal transition-colors">
