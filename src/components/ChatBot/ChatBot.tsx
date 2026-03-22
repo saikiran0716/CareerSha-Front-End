@@ -123,9 +123,9 @@ const ChatBot: React.FC<Props> = ({ profile, initialMessage, onMessageProcessed 
     <>
       {/* No backdrop to keep background visible as requested */}
 
-      <div className={`fixed z-[100] transition-all duration-500 cubic-bezier(0.19, 1, 0.22, 1) ${isOpen
-        ? 'bottom-16 right-[68px] sm:bottom-24 sm:right-[110px] w-[260px] h-[380px] sm:w-[340px] sm:h-[450px]'
-        : 'bottom-[47px] right-[68px] sm:right-[110px] w-auto h-auto'
+      <div className={`fixed z-[110] transition-all duration-500 cubic-bezier(0.19, 1, 0.22, 1) ${isOpen
+        ? 'bottom-2 right-2 sm:bottom-10 sm:right-10 w-[260px] sm:w-[340px] max-w-[calc(100%-1rem)] h-[340px] sm:h-[450px] max-h-[calc(100vh-1.5rem)] sm:max-h-[calc(100vh-8rem)]'
+        : 'bottom-4 right-4 sm:bottom-10 sm:right-10 w-auto h-auto'
         }`}>
         {isOpen ? (
           <div className="flex flex-col h-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-md rounded-[1.5rem] shadow-[0_8px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)] overflow-hidden border border-white/20 dark:border-slate-700 ring-1 ring-black/5 dark:ring-white/5 animate-scaleIn origin-bottom-right transition-all duration-500">
@@ -167,7 +167,7 @@ const ChatBot: React.FC<Props> = ({ profile, initialMessage, onMessageProcessed 
               {messages.map((msg, i) => (
                 <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-slideUp`} style={{ animationDelay: `${i * 0.03}s` }}>
                   {msg.role === 'assistant' && (
-                    <div className="w-6 h-6 rounded-full bg-white dark:bg-slate-800 border border-indigo-100 dark:border-indigo-900 flex-shrink-0 mr-2 mt-1 flex items-center justify-center text-indigo-600 dark:text-indigo-400 text-[10px] font-bold shadow-sm">AI</div>
+                    <div className="w-6 h-6 rounded-full bg-white dark:bg-slate-800 border border-indigo-100 dark:border-indigo-900 flex-shrink-0 mr-2 mt-1 flex items-center justify-center text-indigo-600 dark:text-indigo-400 text-[10px] font-bold shadow-sm">C</div>
                   )}
 
                   <div className={`max-w-[90%] p-3 shadow-sm relative text-sm ${msg.role === 'user'

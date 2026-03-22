@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useParams, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import {
     ArrowLeft, Globe, Phone, Award, ExternalLink,
     MapPin, Building2, Clock, School, Calendar, ChevronDown, ChevronUp,
@@ -139,6 +139,10 @@ const CollegeDetailPage: React.FC = () => {
     ].filter(r => r.val);
 
     const isGovt = typeVal?.toLowerCase().includes('gov') || typeVal?.toLowerCase().includes('national') || typeVal?.toLowerCase().includes('central') || typeVal?.toLowerCase().includes('iit') || typeVal?.toLowerCase().includes('nit');
+
+    if (!loading && !d && !pc) {
+        return <Navigate to="/404" replace />;
+    }
 
     return (
         <div className="relative z-10 min-h-screen bg-slate-100 text-slate-800 pb-24">

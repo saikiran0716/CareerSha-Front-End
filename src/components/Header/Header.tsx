@@ -108,10 +108,10 @@ const Header: React.FC<HeaderProps> = ({
   return (
     <>
       <header className="sticky top-0 z-[100] bg-white/90 backdrop-blur-xl border-b border-slate-200/60 shadow-sm transition-all duration-300">
-        <div className="max-w-none mx-auto px-3 sm:px-6 lg:px-0 h-18 flex items-center justify-between lg:gap-4 py-3">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-start lg:gap-6 py-3 relative">
 
           {/* Mobile Menu Button - Wrapped for Centering Logic */}
-          <div className="flex-1 lg:flex-none flex justify-start">
+          <div className="flex-1 lg:flex-none flex justify-start lg:hidden">
             <button
               className="lg:hidden p-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -121,19 +121,15 @@ const Header: React.FC<HeaderProps> = ({
           </div>
 
           {/* Centered Logo / Branding */}
-          <div className="flex-none lg:flex-none flex justify-center">
-            <Link to="/" className="flex items-center gap-2 cursor-pointer group shrink-0">
-              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center text-white font-bold text-sm sm:text-base shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-all duration-300">
-                CS
-              </div>
-              <h1 className="text-sm sm:text-lg font-extrabold text-slate-800 tracking-tight leading-none">
-                Career<span className="text-indigo-600">Sha</span>
-              </h1>
+          <div className="absolute left-1/2 -translate-x-1/2 lg:relative lg:left-0 lg:translate-x-0 flex-none lg:flex-none flex justify-center">
+            <Link to="/" className="flex items-center gap-2 cursor-pointer group shrink-0 lg:pl-8">
+              <img src="https://japamantra.in/wp-content/uploads/2026/03/careersha.png" className="w-auto h-10 sm:h-12 object-contain" alt="CareerSha Logo" />
+              {/* Text hidden completely to prevent row crowding on navigation desktop rows */}
             </Link>
           </div>
 
           {/* Desktop Categories Nav */}
-          <nav className="hidden lg:flex lg:gap-1 xl:gap-2 items-center">
+          <nav className="ml-auto hidden lg:flex lg:gap-1 xl:gap-2 items-center">
             {navigationData.map((cat) => (
               <div
                 key={cat.title}
@@ -305,10 +301,8 @@ const Header: React.FC<HeaderProps> = ({
               {/* Drawer Header for mobile */}
               <div className="flex items-center justify-between mb-8 pb-4 border-b border-slate-100">
                 <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center text-white font-bold text-sm">
-                    CS
-                  </div>
-                  <span className="font-bold text-slate-800">CareerSha</span>
+                  <img src="https://japamantra.in/wp-content/uploads/2026/03/careersha.png" className="w-auto h-9 object-contain" alt="CareerSha Logo" />
+                  {/* Text hidden completely for clean design consistency */}
                 </Link>
                 <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 text-slate-400 hover:text-slate-600">
                   <X size={20} />

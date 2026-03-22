@@ -117,7 +117,7 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({
 
     return (
         <section
-            className="w-full bg-[#F5F7FC] rounded-[32px] pt-16 pb-16 mt-0 mb-6 font-sans relative overflow-hidden"
+            className="w-full bg-[#F5F7FC] rounded-[32px] py-8 sm:py-16 mt-0 mb-6 font-sans relative overflow-hidden"
         >
             <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-8 animate-fade" style={{ position: "relative", zIndex: 1 }}>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">

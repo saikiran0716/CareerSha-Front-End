@@ -217,7 +217,53 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.dark .glass {
-    background: rgba(15, 23, 42, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+
+/* Responsive Breakpoints */
+
+/* Large Desktop (1440px) */
+@media (max-width: 1440px) {
+    .max-w-1440 {
+        max-width: 1440px;
+    }
 }
+
+/* Laptop / Small Desktop (1024px) */
+@media (max-width: 1024px) {
+    .max-w-1024 {
+        max-width: 1024px;
+    }
+}
+
+/* Tablet (768px) */
+@media (max-width: 768px) {
+    .section-padding {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+}
+
+/* Large Mobile (425px) */
+@media (max-width: 425px) {
+    .section-padding-mobile {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+}
+
+/* Small Mobile (375px) */
+@media (max-width: 375px) {
+    .section-padding-small {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+    
+    .text-balance {
+        text-wrap: balance;
+    }
+}
+
+/* Prevent horizontal scroll globally */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}

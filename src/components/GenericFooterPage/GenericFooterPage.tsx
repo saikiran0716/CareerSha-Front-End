@@ -234,22 +234,20 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
     useEffect(() => {
         // If we have a valid cache for this pageId, restore it and skip fetch
         const cached = readCache();
-        if (cached) {
+        if (cached && cached.data && cached.data.items && cached.data.items.length > 0) {
             setData(cached.data);
             setVisibleCount(cached.visibleCount);
             setNoMoreData(cached.noMoreData);
-            setLoading(false);
-            setError(false);
-            return;
+        } else {
+            // Reset to initial data state on id change only if no cache exists
+            setData(initialData);
         }
-
-        // Reset to initial data on id change
-        setData(initialData);
+        
         setLoading(false);
         setError(false);
 
         // If content is missing or items are placeholders, fetch real data
-        const shouldFetch = !initialData.items || initialData.items.length < 2 || (initialData.content === 'Content coming soon...' || initialData.content === '<p>Loading info...</p>');
+        const shouldFetch = true; // Force fetching real data dynamically from AI
 
         if (shouldFetch) {
             const fetchData = async () => {
@@ -257,7 +255,9 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
                 try {
                     const dynamicData = await getFooterPageContent(initialData.title, initialData.type, [], 6);
                     setData(prev => {
-                        const useDynamicItems = !prev.items || prev.items.length < 10 || (dynamicData.items && dynamicData.items.length > prev.items.length);
+                        const isErrorResponse = dynamicData.description?.toLowerCase().includes("unavailable") || dynamicData.description?.toLowerCase().includes("api configuration");
+                        const useDynamicItems = dynamicData.items && dynamicData.items.length > 0 && !isErrorResponse;
+                        
                         const merged = {
                             ...prev,
                             ...dynamicData,
@@ -274,15 +274,18 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
                                         link: match?.link || item.link
                                     };
                                 }) || prev.items)
-                                : prev.items
+                                : []
                         };
                         // Save to cache immediately after successful fetch
-                        writeCache(merged, PAGE_SIZE, false);
+                        if (!isErrorResponse) {
+                            writeCache(merged, PAGE_SIZE, false);
+                        }
                         return merged;
                     });
                 } catch (e) {
                     console.error("Failed to fetch footer content", e);
                     setError(true);
+                    setData(prev => ({ ...prev, items: [] })); // Remove fallback items on error
                 } finally {
                     setLoading(false);
                 }
@@ -447,7 +450,7 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
                 )}
 
                 {/* College/Items Grid - THE CORE LIST (Hidden initially for reviews) */}
-                {data.type === 'review' ? (
+                {!loading && (data.type === 'review' ? (
                     /* SPECIALIZED REVIEW UI - COMPACT */
                     /* Only show grid if search has been performed */
                     hasSearched ? (
@@ -630,7 +633,7 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
                             )}
                         </div>
                     </>
-                )}
+                ))}
 
 
 

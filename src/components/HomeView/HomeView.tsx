@@ -130,20 +130,30 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                                     gap: 0.25rem !important;
                                 }
                                 .carousel-title-mobile {
-                                    font-size: 1rem !important;
+                                    font-size: 0.9rem !important;
                                     line-height: 1.2 !important;
+                                    text-wrap: balance !important;
                                 }
                                 .carousel-desc-mobile {
-                                    -webkit-line-clamp: unset !important;
-                                    line-clamp: unset !important;
-                                    max-height: none !important;
-                                    overflow: visible !important;
+                                    -webkit-line-clamp: 2 !important;
+                                    line-clamp: 2 !important;
+                                    max-height: 2.6em !important;
+                                    overflow: hidden !important;
                                     font-size: 0.65rem !important;
                                     line-height: 1.3 !important;
                                 }
                                 .carousel-btn-mobile {
                                     padding: 0.6rem 1rem !important;
                                     font-size: 10px !important;
+                                }
+                                .hero-title-responsive {
+                                    font-size: 1.35rem !important;
+                                }
+                            }
+
+                            @media (min-width: 341px) and (max-width: 425px) {
+                                .hero-title-responsive {
+                                    font-size: 1.65rem !important;
                                 }
                             }
 
@@ -190,15 +200,14 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
             </div>
 
             {/* Split Hero Section */}
-            <section className="relative z-30 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center pt-8 sm:pt-12 px-3 sm:px-6 lg:px-12 mx-auto max-w-none hero-grid-1024 hero-section-mobile">
+            <section className="relative z-30 grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-10 items-center pt-4 sm:pt-8 px-3 sm:px-6 lg:px-8 mx-auto max-w-none hero-grid-1024 hero-section-mobile">
                 {/* Left Side: Content & Search */}
-                <div className="flex flex-col items-center sm:items-start text-center sm:text-left space-y-6 animate-slide hero-content-mobile">
-                    <h1 className="text-3xl sm:text-3xl md:text-4xl font-semibold text-slate-900 dark:text-white tracking-tight leading-[1.2]">
-                        <span className="hero-title-1024">Empowering Students.</span><br />
-                        <span className="text-slate-500 dark:text-slate-400 font-semibold">Building Futures.</span>
+                <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-6 animate-slide hero-content-mobile">
+                    <h1 className="text-3xl sm:text-3xl md:text-4xl font-semibold text-slate-900 dark:text-white tracking-tight leading-[1.2] hero-title-responsive">
+                        <span className="hero-title-1024">Transforming Data <br /> into Student Success</span>
                     </h1>
 
-                    <div className="relative group w-full max-w-lg z-50">
+                    <div className="relative group w-full max-w-xl z-50">
                         <input
                             type="text"
                             placeholder="Search Colleges & more"
@@ -255,7 +264,7 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                 </div>
 
                 {/* Right Side: Featured Card Carousel */}
-                <div className="relative aspect-video mt-[45px] w-full group animate-fade carousel-container-1024 carousel-container-mobile bg-slate-900/10 rounded-[2.5rem] overflow-hidden">
+                <div className="relative aspect-video mt-0 lg:mt-[45px] w-full group animate-fade carousel-container-1024 carousel-container-mobile bg-slate-900/10 rounded-[2.5rem] overflow-hidden">
                     {slides.map((item, index) => (
                         <div
                             key={item.id}

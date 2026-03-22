@@ -34,8 +34,7 @@ export const footerNavigation = [
             { name: "Medical Colleges in Kerala", url: "/med/kerala" },
             { name: "Medical Colleges in Karnataka", url: "/med/karnataka" },
             { name: "B.Pharma Colleges", url: "/pharma/india" },
-            { name: "Nursing Colleges", url: "/nursing/india" },
-            { name: "Paramedical Courses", url: "/paramedical/india" }
+            { name: "Nursing Colleges", url: "/nursing/india" }
         ]
     },
     {

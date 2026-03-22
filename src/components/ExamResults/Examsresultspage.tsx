@@ -160,10 +160,12 @@ interface ExamResultsPageProps {
 const ExamResultsPage: React.FC<ExamResultsPageProps> = ({ onAskAI, compact = false }) => {
     const [resolvingFor, setResolvingFor] = useState<{ name: string; categoryIdx: number } | null>(null);
     const [is1024, setIs1024] = useState(window.innerWidth >= 1024 && window.innerWidth < 1280);
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
 
     useEffect(() => {
         const handleResize = () => {
             setIs1024(window.innerWidth >= 1024 && window.innerWidth < 1280);
+            setIsMobile(window.innerWidth < 640);
         };
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
@@ -191,7 +193,7 @@ const ExamResultsPage: React.FC<ExamResultsPageProps> = ({ onAskAI, compact = fa
 
 
     return (
-        <div className={compact ? "font-sans pb-12 w-full max-w-[1400px] mx-auto px-6 lg:px-8" : "w-full pt-4 pb-12 mb-6 font-sans max-w-[1400px] mx-auto px-6 lg:px-8"}>
+        <div className={compact ? "font-sans pb-12 w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8" : "w-full pt-4 pb-12 mb-6 font-sans max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8"}>
             {!compact && (
                 <div className="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-l-4 border-[#4B63D3] pl-4 sm:pl-5 py-1">
                     <div className="flex flex-col gap-1">
@@ -244,7 +246,7 @@ const ExamResultsPage: React.FC<ExamResultsPageProps> = ({ onAskAI, compact = fa
                                     <option value="" disabled>
                                         {(resolvingFor && resolvingFor.categoryIdx === idx)
                                             ? `Loading ${resolvingFor.name}...`
-                                            : is1024
+                                            : (is1024 || isMobile)
                                                 ? `${category.title.split('(')[0].trim()} Results`
                                                 : `Know Your ${category.title.split('(')[0].trim()} Results`}
                                     </option>

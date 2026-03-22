@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 interface PredictorTagsProps {
@@ -18,16 +18,17 @@ const PREDICTOR_DATA = [
 const PredictorTags: React.FC<PredictorTagsProps> = ({ onNavigate, onStartCounseling }) => {
     const navigate = useNavigate();
     return (
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full items-center lg:items-start">
             <style dangerouslySetInnerHTML={{ __html: `
-                @media (max-width: 425px) {
+                @media (max-width: 640px) {
                     .predictor-grid-mobile {
                         gap: 0.75rem !important;
                         margin-top: 10px !important;
+                        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
                     }
                     .predictor-btn-mobile {
                         height: auto !important;
-                        min-height: 44px !important;
+                        min-height: 80px !important;
                         padding: 0.75rem 1rem !important;
                         background-color: #f8fafc !important;
                         border: 1px solid #e2e8f0 !important;
@@ -45,6 +46,18 @@ const PredictorTags: React.FC<PredictorTagsProps> = ({ onNavigate, onStartCounse
                         text-transform: none !important;
                         letter-spacing: normal !important;
                         line-height: 1.2 !important;
+                    }
+                }
+                @media (max-width: 1024px) {
+                    .predictor-btn-1024 {
+                        min-height: 68px !important;
+                        padding: 0.75rem 1rem !important;
+                    }
+                    .predictor-label-1024 {
+                        text-transform: none !important;
+                        letter-spacing: normal !important;
+                        font-size: 13px !important;
+                        text-align: center !important;
                     }
                 }
             `}} />

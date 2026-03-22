@@ -44,7 +44,7 @@ const setListPageSeo = (searchTerm: string, activeCategory: string) => {
 };
 
 const BlogListPage: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState('ALL NEWS');
+  const [activeCategory, setActiveCategory] = useState('All News');
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [articles, setArticles] = useState<BlogArticle[]>([]);
@@ -97,8 +97,8 @@ const BlogListPage: React.FC = () => {
   const filteredData = useMemo(() => {
     let items = [...articles];
 
-    if (activeCategory !== 'ALL NEWS') {
-      items = items.filter((item) => item.tag === activeCategory);
+    if (activeCategory.toUpperCase() !== 'ALL NEWS') {
+      items = items.filter((item) => item.tag.toUpperCase() === activeCategory.toUpperCase());
     }
 
     if (searchTerm) {
@@ -168,10 +168,10 @@ const BlogListPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-white text-slate-900 selection:bg-[#b91c1c] selection:text-white relative z-10">
       <div className="bg-[#b91c1c] text-white h-11 flex items-center overflow-hidden border-b border-[#b91c1c] relative z-50">
-        <div className="container mx-auto px-4 lg:px-6 max-w-7xl flex items-center h-full">
-          <div className="text-[10px] font-black pr-6 flex items-center gap-2 border-r border-white/20 h-full mr-6 shrink-0 uppercase tracking-[0.2em]">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-12 lg:px-16 flex items-center h-full w-full">
+          <div className="text-[10px] font-black pr-3 sm:pr-6 flex items-center gap-1.5 sm:gap-2 border-r border-white/20 h-full mr-3 sm:mr-6 shrink-0 uppercase tracking-[0.2em]">
             <Activity size={14} className="animate-pulse" />
-            <span>Latest Live Updates</span>
+            <span className="hidden sm:inline">Latest Live Updates</span>
           </div>
 
           <div className="relative flex-1 overflow-hidden flex items-center h-full">
@@ -202,23 +202,18 @@ const BlogListPage: React.FC = () => {
       />
 
       <header className="border-b border-slate-100 bg-white sticky top-0 z-40">
-        <div className="container mx-auto px-4 max-w-7xl">
+        <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-16">
           <div className="flex flex-col lg:flex-row items-center justify-between py-2 gap-4">
             <div className="flex flex-col lg:flex-row items-center lg:items-center gap-8">
-              <Link to="/blog" className="flex flex-col items-center lg:items-start group shrink-0">
-                <h1 className="text-3xl font-semibold tracking-tighter uppercase leading-none">CAREERSHA</h1>
-                <p className="text-[9px] font-bold text-[#b91c1c] uppercase tracking-[0.4em] mt-1">
-                  Global Academic Intelligence
-                </p>
-              </Link>
+              {/* Static title logo removed for layout simplification */}
 
               <nav className="hidden lg:flex items-center gap-6">
                 {CATEGORIES.map((category) => (
                   <button
                     key={category}
                     onClick={() => setActiveCategory(category)}
-                    className={`text-[12px] font-medium uppercase tracking-wider transition-all whitespace-nowrap px-1 hover:text-[#b91c1c] ${
-                      activeCategory === category ? 'text-[#b91c1c]' : 'text-slate-500'
+                    className={`text-[14px] font-semibold tracking-wider transition-all whitespace-nowrap px-1 hover:text-[#b91c1c] ${
+                      activeCategory === category ? 'text-[#b91c1c]' : 'text-slate-700'
                     }`}
                   >
                     {category}
@@ -232,8 +227,8 @@ const BlogListPage: React.FC = () => {
               <Input
                 value={searchTerm}
                 onChange={(event) => setSearchTerm(event.target.value)}
-                placeholder="SEARCH NEWS, EXAMS..."
-                className="pl-7 pr-8 rounded-none border-none bg-transparent h-10 w-full text-[11px] font-medium uppercase tracking-widest focus-visible:ring-0 placeholder:text-slate-400"
+                placeholder="Search news, exams..."
+                className="pl-7 pr-8 rounded-none border-none bg-transparent h-10 w-full text-[11px] font-medium tracking-widest focus-visible:ring-0 placeholder:text-slate-400"
               />
               {searchTerm && (
                 <button
@@ -246,13 +241,13 @@ const BlogListPage: React.FC = () => {
             </div>
           </div>
 
-          <nav className="flex lg:hidden items-center gap-6 h-12 overflow-x-auto scrollbar-hide border-t border-slate-50">
+          <nav className="flex lg:hidden items-center gap-6 h-12 overflow-x-auto scrollbar-hide border-t border-slate-50 px-4">
             {CATEGORIES.map((category) => (
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`text-[10px] font-bold uppercase tracking-widest transition-all whitespace-nowrap px-1 ${
-                  activeCategory === category ? 'text-[#b91c1c]' : 'text-slate-400'
+                className={`text-[12px] font-bold tracking-widest transition-all whitespace-nowrap px-1 ${
+                  activeCategory === category ? 'text-[#b91c1c]' : 'text-slate-700'
                 }`}
               >
                 {category}
@@ -262,7 +257,7 @@ const BlogListPage: React.FC = () => {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 pt-2 pb-12 max-w-7xl">
+      <main className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-16 pt-2 pb-12">
         {loadError && (
           <div className="mb-6 border border-amber-200 bg-amber-50 text-amber-700 px-4 py-3 text-sm">
             {loadError}
@@ -412,12 +407,12 @@ const BlogListPage: React.FC = () => {
 
         <section className="mt-2 space-y-12 pt-8 border-t border-slate-100">
           <div className="flex items-center justify-between gap-4 border-b-2 border-black pb-3">
-            <div>
-              <h2 className="text-sm font-black uppercase tracking-[0.2em]">More Stories</h2>
-              <p className="text-xs text-slate-500 mt-2">
-                Structured for CMS fields: title, excerpt, date, category, and dedicated detail pages.
-              </p>
-            </div>
+             <div>
+               <h2 className="text-sm font-black uppercase tracking-[0.2em]">More Stories</h2>
+               <p className="text-xs text-slate-500 mt-2">
+                 Stay informed with our latest articles, guides, and expert student insights.
+               </p>
+             </div>
             <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">
               Page {currentPage} of {totalPages}
             </p>
@@ -425,33 +420,33 @@ const BlogListPage: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {currentPageData.grid.map((item) => (
-              <Link key={item.id} to={getBlogPath(item)} className="cursor-pointer space-y-4 block no-underline" style={{ opacity: 1, color: '#0f172a' }}>
+              <Link key={item.id} to={getBlogPath(item)} className="bg-white border border-slate-100/80 rounded-2xl p-4 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col no-underline group" style={{ opacity: 1, color: '#0f172a' }}>
                 {item.image && (
-                  <div className="aspect-[16/10] overflow-hidden bg-slate-100">
+                  <div className="aspect-[16/10] overflow-hidden bg-slate-100 rounded-xl mb-3.5 flex-shrink-0">
                     <img
                       src={item.image}
-                      className="w-full h-full object-cover opacity-100 transition-transform duration-700 hover:scale-105"
+                      className="w-full h-full object-cover opacity-100 transition-transform duration-700 group-hover:scale-105"
                       style={{ display: 'block', opacity: 1 }}
                       alt={item.title}
                     />
                   </div>
                 )}
 
-                <div className="space-y-3">
-                  <div className="flex flex-wrap items-center gap-3">
-                    <span className="text-[10px] font-black text-[#b91c1c] uppercase tracking-widest">{item.tag}</span>
-                    <span className="text-[10px] font-bold text-slate-400 uppercase">{item.publishedDate}</span>
+                <div className="space-y-2.5 flex-1 flex flex-col">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-[9px] font-black text-[#b91c1c] uppercase tracking-widest bg-red-50 px-2 py-0.5 rounded">{item.tag}</span>
+                    <span className="text-[9px] font-bold text-slate-400 uppercase">{item.publishedDate}</span>
                   </div>
-                  <h4 className="text-[18px] font-bold text-slate-900 leading-tight hover:text-[#b91c1c] transition-colors tracking-tight">
+                  <h4 className="text-[15px] font-bold text-slate-900 leading-tight group-hover:text-[#b91c1c] transition-colors tracking-tight line-clamp-2">
                     {item.title}
                   </h4>
                   <div 
-                    className="text-slate-600 text-[13px] line-clamp-3 leading-relaxed"
+                    className="text-slate-500 text-[12px] line-clamp-3 leading-relaxed flex-1"
                     dangerouslySetInnerHTML={{ __html: item.summary }}
                   />
-                  <div className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 group-hover:text-[#b91c1c] transition-colors">
+                  <div className="inline-flex items-center gap-1 text-[9px] font-black uppercase tracking-[0.2em] text-[#b91c1c] pt-2">
                     <span>Read More</span>
-                    <ArrowRight size={12} />
+                    <ArrowRight size={11} className="transition-transform group-hover:translate-x-1" />
                   </div>
                 </div>
               </Link>
