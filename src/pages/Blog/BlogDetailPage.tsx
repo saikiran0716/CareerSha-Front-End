@@ -192,10 +192,10 @@ const BlogDetailPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-white text-[#1a1c1e] selection:bg-[#b91c1c] selection:text-white relative z-10">
       <div className="bg-[#b91c1c] text-white h-11 flex items-center overflow-hidden border-b border-[#b91c1c] relative z-50">
-        <div className="container mx-auto px-4 lg:px-6 max-w-7xl flex items-center h-full">
-          <div className="text-[10px] font-black pr-6 flex items-center gap-2 border-r border-white/20 h-full mr-6 shrink-0 uppercase tracking-[0.2em]">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-12 lg:px-16 flex items-center h-full w-full">
+          <div className="text-[10px] font-black pr-3 sm:pr-6 flex items-center gap-1.5 sm:gap-2 border-r border-white/20 h-full mr-3 sm:mr-6 shrink-0 uppercase tracking-[0.2em]">
             <Activity size={14} className="animate-pulse" />
-            <span>Latest Live Updates</span>
+            <span className="hidden sm:inline">Latest Live Updates</span>
           </div>
 
           <div className="relative flex-1 overflow-hidden flex items-center h-full">
@@ -232,7 +232,7 @@ const BlogDetailPage: React.FC = () => {
       />
 
       <header className="border-b border-slate-100 bg-white sticky top-0 z-40 shadow-sm">
-        <div className="container mx-auto px-4 max-w-7xl h-16 flex items-center justify-between">
+        <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-16 h-16 flex items-center justify-between">
           <Button
             variant="ghost"
             onClick={() => navigate('/blog')}
@@ -242,8 +242,7 @@ const BlogDetailPage: React.FC = () => {
             <span className="text-[10px] font-bold uppercase tracking-widest">Back to Hub</span>
           </Button>
 
-          <Link to="/blog" className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center">
-            <h1 className="text-lg font-black tracking-tight uppercase leading-none text-black">CAREERSHA</h1>
+          <Link to="/blog" className="absolute left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center">
             <p className="text-[7px] font-semibold text-[#b91c1c] uppercase tracking-[0.4em] mt-0.5">The Broadsheet</p>
           </Link>
 
@@ -278,7 +277,7 @@ const BlogDetailPage: React.FC = () => {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 pt-12 pb-0 max-w-7xl relative z-20">
+      <main className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-16 pt-12 pb-0 relative z-20">
         {loadError && (
           <div className="mb-6 border border-amber-200 bg-amber-50 text-amber-700 px-4 py-3 text-sm">
             {loadError}

@@ -22,6 +22,7 @@ import {
     Users,
     BookOpen
 } from "lucide-react";
+import BookLoader from "../BookLoader/BookLoader";
 
 /* ---------------- COLLEGE LOGO COMPONENT ---------------- */
 
@@ -184,7 +185,9 @@ const CollegeMatchResults: React.FC = () => {
         return cachedData ? JSON.parse(cachedData) : [];
     });
     const [visibleCount, setVisibleCount] = useState(8);
-    const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
+    const [viewMode, setViewMode] = useState<'list' | 'grid'>(() => {
+        return typeof window !== 'undefined' && window.innerWidth < 768 ? 'grid' : 'list';
+    });
     const [page, setPage] = useState(() => {
         return sessionStorage.getItem(cacheKey) ? 1 : 1;
     });
@@ -278,7 +281,7 @@ const CollegeMatchResults: React.FC = () => {
                     >
                         <ArrowRight size={15} className="rotate-180" />
                     </button>
-                    <div className="flex items-center gap-2">
+                    <div className="hidden md:flex items-center gap-2">
                         <div className="flex bg-slate-100 p-0.5 rounded-lg border border-slate-200 gap-0.5">
                             <button onClick={() => setViewMode('list')} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${viewMode === 'list' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-400 hover:text-slate-700'}`}>
                                 <LayoutList size={12} /> List
@@ -295,7 +298,7 @@ const CollegeMatchResults: React.FC = () => {
 
                 {/* PAGE TITLE + CHIPS */}
                 <div className="flex flex-wrap items-end justify-between gap-4 mb-6">
-                    <h1 className="text-[38px] font-black text-slate-900 tracking-tight leading-none uppercase">Matched Institutions</h1>
+                    <h1 className="text-2xl sm:text-[38px] font-black text-slate-900 tracking-tight leading-none uppercase">Matched Institutions</h1>
                     <div className="flex items-center gap-2 flex-wrap">
                         <span className="px-4 py-1.5 bg-white border border-slate-200 text-slate-700 rounded-lg text-[10px] font-bold tracking-widest uppercase shadow-sm">Rank #{rank}</span>
                         <span className="px-4 py-1.5 bg-blue-600 text-white rounded-lg text-[10px] font-bold tracking-widest uppercase shadow-sm">{category}</span>
@@ -304,11 +307,10 @@ const CollegeMatchResults: React.FC = () => {
                 </div>
 
                 {loading && results.length === 0 ? (
-                    <div className="flex flex-col items-center justify-center py-48 space-y-8">
-                        <div className="w-24 h-24 relative">
-                            <div className="absolute inset-0 border-[6px] border-slate-200 rounded-3xl rotate-45" />
-                            <div className="absolute inset-0 border-[6px] border-blue-500 rounded-3xl rotate-45 border-t-transparent animate-spin" />
-                            <Sparkles className="absolute inset-0 m-auto text-blue-500" size={30} />
+                    <div className="flex flex-col items-center justify-center min-h-[60vh] py-12 space-y-8">
+                        <div className="relative">
+                            <div className="absolute inset-0 bg-indigo-500/5 rounded-full filter blur-3xl animate-pulse"></div>
+                            <BookLoader size="lg" />
                         </div>
                         <div className="text-center space-y-2">
                             <h3 className="text-base font-bold text-slate-800 tracking-widest uppercase">Finding Best Matches</h3>
@@ -321,7 +323,7 @@ const CollegeMatchResults: React.FC = () => {
                             /* ── LIST / TABLE VIEW ── */
                             <div className="rounded-2xl overflow-hidden shadow-sm border border-slate-200">
                                 {/* TABLE HEADER */}
-                                <div className="bg-blue-700 grid grid-cols-[1fr_160px_200px_160px] px-6 py-4">
+                                <div className="hidden md:grid bg-blue-700 grid-cols-[1fr_160px_200px_160px] px-6 py-4">
                                     <span className="text-[10px] font-bold text-white/80 uppercase tracking-widest">Institutional Profile</span>
                                     <span className="text-[10px] font-bold text-white/80 uppercase tracking-widest">Type</span>
                                     <span className="text-[10px] font-bold text-white/80 uppercase tracking-widest">Expected Rank</span>
@@ -336,10 +338,10 @@ const CollegeMatchResults: React.FC = () => {
                                             initial={{ opacity: 0, y: 10 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             transition={{ delay: idx * 0.03, duration: 0.25 }}
-                                            className="grid grid-cols-[1fr_160px_200px_160px] px-6 py-5 hover:bg-blue-50/40 transition-colors group items-center"
+                                            className="flex flex-col md:grid md:grid-cols-[1fr_160px_200px_160px] px-6 py-5 hover:bg-blue-50/40 transition-colors group items-center gap-4 md:gap-0"
                                         >
                                             {/* COL 1: PROFILE */}
-                                            <div className="flex items-start gap-4 pr-6">
+                                            <div className="flex items-start gap-4 pr-6 w-full">
                                                 <div className="w-12 h-12 rounded-full flex-shrink-0 flex items-center justify-center overflow-hidden border-2 border-slate-200 bg-white shadow-sm">
                                                     <CollegeLogo logoUrl={college.logoUrl} website={college.website} name={college.name} iconSize={22} />
                                                 </div>
@@ -359,29 +361,31 @@ const CollegeMatchResults: React.FC = () => {
                                                     <p className="text-[11px] text-slate-500 mt-1.5 leading-relaxed line-clamp-2">{college.careerInsight}</p>
                                                 </div>
                                             </div>
-
-                                            {/* COL 2: TYPE */}
-                                            <div>
-                                                <span className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-[9px] font-bold uppercase tracking-widest ${college.type === 'GOVERNMENT' ? 'bg-amber-400 text-white' : 'bg-slate-800 text-white'}`}>
-                                                    {college.type === 'GOVERNMENT' ? <ShieldCheck size={10} /> : <Building2 size={10} />}
-                                                    {college.type}
-                                                </span>
-                                            </div>
-
-                                            {/* COL 3: RANK */}
-                                            <div>
-                                                <div className="flex items-center gap-1">
-                                                    <Hash size={14} className="text-blue-500 flex-shrink-0" />
-                                                    <span className="text-[18px] font-black text-blue-600 tracking-tight leading-none">{college.categoryCutoff}</span>
+                                            {/* WRAPPER FOR MOBILE ROW */}
+                                            <div className="flex items-center justify-between w-full md:contents">
+                                                {/* COL 2: TYPE */}
+                                                <div>
+                                                    <span className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-[9px] font-bold uppercase tracking-widest ${college.type === 'GOVERNMENT' ? 'bg-amber-400 text-white' : 'bg-slate-800 text-white'}`}>
+                                                        {college.type === 'GOVERNMENT' ? <ShieldCheck size={10} /> : <Building2 size={10} />}
+                                                        {college.type}
+                                                    </span>
                                                 </div>
-                                                <p className="text-[8px] font-bold text-slate-400 uppercase tracking-widest mt-1">Closing Rank</p>
+
+                                                {/* COL 3: RANK */}
+                                                <div>
+                                                    <div className="flex items-center gap-1">
+                                                        <Hash size={14} className="text-blue-500 flex-shrink-0" />
+                                                        <span className="text-[18px] font-black text-blue-600 tracking-tight leading-none">{college.categoryCutoff}</span>
+                                                    </div>
+                                                    <p className="text-[8px] font-bold text-slate-400 uppercase tracking-widest mt-1">Closing Rank</p>
+                                                </div>
                                             </div>
 
                                             {/* COL 4: ACTION */}
-                                            <div className="flex justify-end">
+                                            <div className="flex justify-end w-full md:w-auto">
                                                 <button
                                                     onClick={() => navigate(`/college/${encodeURIComponent(college.name)}`, { state: { college } })}
-                                                    className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm shadow-blue-200 active:scale-95"
+                                                    className="w-full md:w-auto flex items-center justify-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm shadow-blue-200 active:scale-95"
                                                 >
                                                     View Profile <ArrowRight size={12} />
                                                 </button>

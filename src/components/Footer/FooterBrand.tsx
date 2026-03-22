@@ -14,7 +14,7 @@ const FooterBrand: React.FC = () => {
                     </div>
                 </div>
                 <p className="text-gray-400 font-normal text-sm leading-7">
-                    CareerSha is India's premier education counseling portal, leveraging 10M+ data points to guide students toward their ideal academic future. From rank prediction to college matching, we bridge the gap between aspiration and admission.
+                    CareerSha is India’s advanced education guidance platform, powered by millions of real admission data points. From accurate rank prediction to smart college matching, we help students make confident decisions and turn their career goals into reality.
                 </p>
             </div>
 
