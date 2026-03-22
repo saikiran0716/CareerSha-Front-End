@@ -3,6 +3,7 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 import { FOOTER_PAGES } from '../data/footerData';
 import { navigationData } from '../data/navigationData';
 import GenericFooterPage from '../components/GenericFooterPage/GenericFooterPage';
+import StaticInfoPage from '../components/StaticInfoPage/StaticInfoPage';
 import AIRoadmap from '../features/roadmaps/AIRoadmap';
 import HomePage from '../components/HomePage/HomePage';
 import Loader from '../components/Loader/Loader';
@@ -13,6 +14,13 @@ import { NewsView } from '../components/NewsSection';
 import BlogListPage from '../pages/Blog/BlogListPage';
 import BlogDetailPage from '../pages/Blog/BlogDetailPage';
 import ExamDetailsPge from '../components/EXAMS/ExamDetailsPge';
+
+// Static Pages Imports
+import AboutUs from '../pages/Static/AboutUs';
+import ContactUs from '../pages/Static/ContactUs';
+import PrivacyPolicy from '../pages/Static/PrivacyPolicy';
+import TermsAndConditions from '../pages/Static/TermsAndConditions';
+import Disclaimer from '../pages/Static/Disclaimer';
 
 // Roadmap Imports
 // Lazy Load Roadmap Components
@@ -129,6 +137,13 @@ const RoadmapRouters: React.FC<RoadmapRoutersProps> = ({ onAskAI, user, setIsAut
                 <Route path="/rank/jee-main" element={<JEEMainRank />} />
                 <Route path="/rank/neet" element={<NEETRank />} />
                 <Route path="/rank/ts-eamcet" element={<EAMCETRank />} />
+                
+                {/* Static Content Routes */}
+                <Route path="/about-us" element={<AboutUs />} />
+                <Route path="/contact-us" element={<ContactUs />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+                <Route path="/disclaimer" element={<Disclaimer />} />
 
                 <Route path="/exams/:examId" element={<ExamDetailsPge />} />
                 <Route path="/latest-news" element={<NewsView />} />
@@ -152,7 +167,13 @@ const RoadmapRouters: React.FC<RoadmapRoutersProps> = ({ onAskAI, user, setIsAut
                     if (slug.startsWith('exam-') || slug.startsWith('exams-')) return null;
 
                     const footerPageData = FOOTER_PAGES[slug];
-                    // Map slugs to paths: 'mba-india' -> '/mba/india', 'city-delhi' -> '/city/delhi'
+                    // Skip these specific slugs as they are now handled by dedicated components above
+                    const isDedicatedStatic = [
+                      'company-about', 'company-contact', 
+                      'legal-privacy', 'legal-terms', 'legal-disclaimer'
+                    ].includes(slug);
+                    
+                    if (isDedicatedStatic) return null;
                     // Special cases like 'iits-india' should keep their structure if needed, 
                     // but for footer links we usually want the URL in the navigation to match.
 
@@ -177,14 +198,23 @@ const RoadmapRouters: React.FC<RoadmapRoutersProps> = ({ onAskAI, user, setIsAut
                             key={slug}
                             path={path}
                             element={
-                                <main className="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 py-12">
-                                    <GenericFooterPage
-                                        data={footerPageData}
-                                        onBack={() => window.history.back()}
-                                        onAskAI={onAskAI}
-                                        pageId={slug}
-                                    />
-                                </main>
+                                <div className="relative z-10">
+                                    {(slug.startsWith('legal-') || slug.startsWith('company-') || slug.startsWith('site-')) ? (
+                                        <StaticInfoPage
+                                            data={footerPageData}
+                                            onBack={() => window.history.back()}
+                                        />
+                                    ) : (
+                                        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 py-12">
+                                            <GenericFooterPage
+                                                data={footerPageData}
+                                                onBack={() => window.history.back()}
+                                                onAskAI={onAskAI}
+                                                pageId={slug}
+                                            />
+                                        </div>
+                                    )}
+                                </div>
                             }
                         />
                     );

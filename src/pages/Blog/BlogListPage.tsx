@@ -9,7 +9,7 @@ import { fetchBlogArticles } from '@/services/blogService';
 const setListPageSeo = (searchTerm: string, activeCategory: string) => {
   const title = searchTerm
     ? `Search results for ${searchTerm} | CareerSha Blog`
-    : activeCategory === 'ALL NEWS'
+    : activeCategory.toUpperCase() === 'ALL NEWS'
       ? 'CareerSha Blog | News, Insights, and Jobs Portal'
       : `${activeCategory} | CareerSha Blog`;
 
@@ -96,8 +96,8 @@ const BlogListPage: React.FC = () => {
   const filteredData = useMemo(() => {
     let items = [...articles];
 
-    if (activeCategory.toUpperCase().toUpperCase() !== 'ALL NEWS') {
-      items = items.filter((item) => item.tag.toUpperCase().toUpperCase() === activeCategory.toUpperCase().toUpperCase());
+    if (activeCategory.toUpperCase() !== 'ALL NEWS') {
+      items = items.filter((item) => item.tag.trim().toUpperCase() === activeCategory.trim().toUpperCase());
     }
 
     if (searchTerm) {
@@ -113,7 +113,7 @@ const BlogListPage: React.FC = () => {
     const sorted = items.sort((a, b) => b.id - a.id);
 
     return {
-      stories: sorted.filter((item) => item.type === 'STORY'),
+      stories: sorted.filter((item) => item.type === 'STORY' || activeCategory.toUpperCase() !== 'ALL NEWS'),
       briefs: sorted.filter((item) => item.type === 'BRIEF' || item.type === 'STORY'),
     };
   }, [activeCategory, searchTerm, articles]);
@@ -146,17 +146,13 @@ const BlogListPage: React.FC = () => {
     const globalLatest = [...articles].sort((a, b) => b.id - a.id);
 
     const pageStories = filteredData.stories.slice(storyStart, storyStart + storiesPerPage);
-    let recent = globalLatest.slice(5, 10);
-
-    if (recent.length === 0) {
-      recent = globalLatest.slice(0, 5);
-    }
+    const recent = globalLatest.slice(7, 14);
 
     return {
       hero: pageStories[0] ?? null,
       grid: pageStories.slice(1),
       recent,
-      briefs: globalLatest.slice(0, 5),
+      briefs: globalLatest.slice(0, 7),
     };
   }, [currentPage, filteredData, articles]);
 
@@ -265,8 +261,8 @@ const BlogListPage: React.FC = () => {
           </div>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          <aside className="lg:col-span-3 lg:pr-4 space-y-8 h-fit lg:border-r border-slate-100">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          <aside className="lg:col-span-3 lg:pr-4 space-y-8 lg:border-r border-slate-100 flex flex-col">
             <section className="space-y-6">
               <div className="flex items-center gap-3 border-b-2 border-black pb-3">
                 <h2 className="text-sm font-black uppercase tracking-[0.2em]">Latest News</h2>
@@ -310,10 +306,6 @@ const BlogListPage: React.FC = () => {
           <div className="lg:col-span-6 lg:px-4 space-y-12 min-h-[500px]">
             {currentPageData.hero ? (
               <>
-                <div className="border-b border-slate-100 pb-4">
-                  <p className="text-[11px] font-black uppercase tracking-[0.3em] text-slate-500">Featured Story</p>
-                </div>
-
                 <Link to={getBlogPath(currentPageData.hero)} className="space-y-5 block no-underline" style={{ opacity: 1, color: '#0f172a' }}>
                   <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
                     <span className="text-[11px] font-black text-[#b91c1c] uppercase tracking-[0.3em]">
@@ -328,10 +320,10 @@ const BlogListPage: React.FC = () => {
                   </div>
 
                   {currentPageData.hero.image && (
-                    <div className="aspect-[16/9] overflow-hidden bg-slate-100 shadow-inner">
+                    <div className="aspect-[16/9] overflow-hidden bg-slate-50 border border-slate-100/50 shadow-inner rounded-xl">
                       <img
                         src={currentPageData.hero.image}
-                        className="w-full h-full object-cover opacity-100 transition-transform duration-1000 hover:scale-105"
+                        className="w-full h-full object-contain opacity-100 transition-transform duration-1000 hover:scale-[1.02]"
                         style={{ display: 'block', opacity: 1 }}
                         alt={currentPageData.hero.title}
                       />
@@ -360,7 +352,7 @@ const BlogListPage: React.FC = () => {
             )}
           </div>
 
-          <aside className="lg:col-span-3 lg:pl-4 space-y-8 h-fit lg:border-l border-slate-100">
+          <aside className="lg:col-span-3 lg:pl-4 space-y-8 lg:border-l border-slate-100 flex flex-col">
 
             {currentPageData.recent.length > 0 && (
               <section className="space-y-6">

@@ -29,6 +29,11 @@ export default {
           950: '#020617',
         }
       },
+      screens: {
+        'xs': '375px',
+        'ms': '475px',
+        'fhd': '1440px',
+      },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
       }

@@ -247,7 +247,8 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
         setError(false);
 
         // If content is missing or items are placeholders, fetch real data
-        const shouldFetch = true; // Force fetching real data dynamically from AI
+        const isStaticPage = pageId.startsWith('legal-') || pageId.startsWith('company-') || pageId.startsWith('site-');
+        const shouldFetch = !isStaticPage; 
 
         if (shouldFetch) {
             const fetchData = async () => {
