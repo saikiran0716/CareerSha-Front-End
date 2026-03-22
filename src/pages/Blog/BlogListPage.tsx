@@ -10,12 +10,12 @@ const setListPageSeo = (searchTerm: string, activeCategory: string) => {
   const title = searchTerm
     ? `Search results for ${searchTerm} | CareerSha Blog`
     : activeCategory === 'ALL NEWS'
-      ? 'CareerSha Blog | News, Insights, and Exam Updates'
+      ? 'CareerSha Blog | News, Insights, and Jobs Portal'
       : `${activeCategory} | CareerSha Blog`;
 
   const description = searchTerm
     ? `Browse CareerSha blog results for ${searchTerm}.`
-    : `Browse CareerSha blog coverage across ${activeCategory === 'ALL NEWS' ? 'admissions, exam updates, results, and student insights' : activeCategory.toLowerCase()}.`;
+    : `Browse CareerSha blog coverage across ${activeCategory === 'ALL NEWS' ? 'admissions, Jobs Portal, results, and student insights' : activeCategory.toLowerCase()}.`;
 
   document.title = title;
 
@@ -92,13 +92,12 @@ const BlogListPage: React.FC = () => {
 
   const storiesPerPage = 9;
   const briefsPerPage = 8;
-  const perspectivesPerPage = 3;
 
   const filteredData = useMemo(() => {
     let items = [...articles];
 
-    if (activeCategory !== 'ALL NEWS') {
-      items = items.filter((item) => item.tag === activeCategory);
+    if (activeCategory.toUpperCase() !== 'ALL NEWS') {
+      items = items.filter((item) => item.tag.toUpperCase() === activeCategory.toUpperCase());
     }
 
     if (searchTerm) {
@@ -116,14 +115,12 @@ const BlogListPage: React.FC = () => {
     return {
       stories: sorted.filter((item) => item.type === 'STORY'),
       briefs: sorted.filter((item) => item.type === 'BRIEF' || item.type === 'STORY'),
-      perspectives: sorted.filter((item) => item.type === 'PERSPECTIVE')
     };
   }, [activeCategory, searchTerm, articles]);
 
   const totalPages = Math.max(
     Math.ceil(filteredData.stories.length / storiesPerPage),
     Math.ceil(filteredData.briefs.length / briefsPerPage),
-    Math.ceil(filteredData.perspectives.length / perspectivesPerPage),
     1
   );
 
@@ -144,7 +141,6 @@ const BlogListPage: React.FC = () => {
 
   const currentPageData = useMemo(() => {
     const storyStart = (currentPage - 1) * storiesPerPage;
-    const perspectiveStart = (currentPage - 1) * perspectivesPerPage;
 
     // Global list for sidebars (Always show all categories regardless of activeCategory)
     const globalLatest = [...articles].sort((a, b) => b.id - a.id);
@@ -161,7 +157,6 @@ const BlogListPage: React.FC = () => {
       grid: pageStories.slice(1),
       recent,
       briefs: globalLatest.slice(0, 5),
-      perspectives: filteredData.perspectives.slice(perspectiveStart, perspectiveStart + perspectivesPerPage)
     };
   }, [currentPage, filteredData, articles]);
 
@@ -293,7 +288,9 @@ const BlogListPage: React.FC = () => {
                   >
                     <div className="flex flex-col flex-1 gap-2">
                       <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[8px] uppercase">
-                        <span className="font-black text-[#b91c1c] tracking-widest">{brief.tag}</span>
+                        <span className="font-black text-[#b91c1c] tracking-widest">
+                          {brief.tag.toUpperCase() !== 'ALL NEWS' && brief.tag}
+                        </span>
                         <span className="font-bold text-slate-400">{brief.publishedDate}</span>
                         {brief.relativeTime && <span className="font-bold text-slate-500">{brief.relativeTime}</span>}
                       </div>
@@ -325,7 +322,7 @@ const BlogListPage: React.FC = () => {
                 <Link to={getBlogPath(currentPageData.hero)} className="space-y-5 block no-underline" style={{ opacity: 1, color: '#0f172a' }}>
                   <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
                     <span className="text-[11px] font-black text-[#b91c1c] uppercase tracking-[0.3em]">
-                      {currentPageData.hero.tag}
+                      {currentPageData.hero.tag.toUpperCase() !== 'ALL NEWS' && currentPageData.hero.tag}
                     </span>
                     <span className="text-[11px] font-bold text-slate-400 uppercase">
                       {currentPageData.hero.publishedDate}
@@ -387,7 +384,9 @@ const BlogListPage: React.FC = () => {
                     >
                       <div className="flex flex-col justify-center flex-1 gap-2">
                         <div className="flex flex-wrap items-center gap-2">
-                          <span className="text-[9px] font-black text-[#b91c1c] uppercase tracking-widest">{story.tag}</span>
+                          <span className="text-[9px] font-black text-[#b91c1c] uppercase tracking-widest">
+                            {story.tag.toUpperCase() !== 'ALL NEWS' && story.tag}
+                          </span>
                           <span className="text-[9px] font-bold text-slate-400 uppercase">{story.publishedDate}</span>
                         </div>
                         <h4 className="text-[11px] font-bold text-slate-900 leading-tight hover:text-[#b91c1c] transition-colors line-clamp-3">
@@ -412,12 +411,6 @@ const BlogListPage: React.FC = () => {
 
         <section className="mt-2 space-y-12 pt-8 border-t border-slate-100">
           <div className="flex items-center justify-between gap-4 border-b-2 border-black pb-3">
-            <div>
-              <h2 className="text-sm font-black uppercase tracking-[0.2em]">More Stories</h2>
-              <p className="text-xs text-slate-500 mt-2">
-                Structured for CMS fields: title, excerpt, date, category, and dedicated detail pages.
-              </p>
-            </div>
             <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">
               Page {currentPage} of {totalPages}
             </p>
@@ -439,7 +432,9 @@ const BlogListPage: React.FC = () => {
 
                 <div className="space-y-3">
                   <div className="flex flex-wrap items-center gap-3">
-                    <span className="text-[10px] font-black text-[#b91c1c] uppercase tracking-widest">{item.tag}</span>
+                    <span className="text-[10px] font-black text-[#b91c1c] uppercase tracking-widest">
+                      {item.tag.toUpperCase() !== 'ALL NEWS' && item.tag}
+                    </span>
                     <span className="text-[10px] font-bold text-slate-400 uppercase">{item.publishedDate}</span>
                   </div>
                   <h4 className="text-[18px] font-bold text-slate-900 leading-tight hover:text-[#b91c1c] transition-colors tracking-tight">

@@ -45,7 +45,7 @@ const BlogDetailPage: React.FC = () => {
   const searchQuery = searchParams.get('q') || '';
   
   const [searchTerm, setSearchTerm] = useState(searchQuery);
-  const [article, setArticle] = useState<BlogArticle>(BLOG_ARTICLES[0]);
+  const [article, setArticle] = useState<BlogArticle | null>(BLOG_ARTICLES.length > 0 ? BLOG_ARTICLES[0] : null);
   const [allArticles, setAllArticles] = useState<BlogArticle[]>(BLOG_ARTICLES);
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -68,6 +68,7 @@ const BlogDetailPage: React.FC = () => {
   };
 
   const handleShare = async () => {
+    if (!article) return;
     const shareData = {
       title: article.title,
       text: article.summary,
@@ -123,6 +124,8 @@ const BlogDetailPage: React.FC = () => {
   }, [id]);
 
   const sidebarData = useMemo(() => {
+    if (!article) return { latest: [], related: [], title: null };
+
     if (searchQuery) {
       const term = searchQuery.toLowerCase();
       const filtered = allArticles.filter((item) =>
@@ -145,14 +148,46 @@ const BlogDetailPage: React.FC = () => {
       related: related.slice(4, 8),
       title: null
     };
-  }, [allArticles, article.id, searchQuery]);
+  }, [allArticles, article?.id, searchQuery]);
 
   const nextArticle = sidebarData.latest[0];
 
   useEffect(() => {
-    setArticleSeo(article.seoTitle, article.seoDescription, article.image);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (article) {
+      setArticleSeo(article.seoTitle, article.seoDescription, article.image);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }, [article]);
+
+  if (!article && isLoading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <Activity className="mx-auto text-[#b91c1c] animate-pulse" size={48} />
+          <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Loading Broadsheet...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!article && !isLoading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center space-y-6 max-w-md px-4">
+          <X className="mx-auto text-slate-300" size={64} />
+          <div className="space-y-2">
+            <h2 className="text-xl font-bold uppercase tracking-tight">Article Not Found</h2>
+            <p className="text-sm text-slate-500">The story you are looking for might have been moved or archived.</p>
+          </div>
+          <Button onClick={() => navigate('/blog')} variant="outline" className="rounded-none uppercase text-[10px] font-black tracking-widest">
+            Return to Hub
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  if (!article) return null;
 
   return (
     <div className="min-h-screen bg-white text-[#1a1c1e] selection:bg-[#b91c1c] selection:text-white relative z-10">
