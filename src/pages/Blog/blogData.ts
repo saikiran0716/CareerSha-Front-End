@@ -5,7 +5,11 @@ export interface BreakingNewsItem {
   path: string;
 }
 
-export const BREAKING_NEWS: BreakingNewsItem[] = [];
+export const BREAKING_NEWS: BreakingNewsItem[] = [
+  { text: "CareerSha Admissions 2026: Phase 1 Applications Now Open for Top Engineering Colleges", path: "/blog" },
+  { text: "Latest Job Portal Update: 50+ New Tech Internships Added for Summer 2026", path: "/blog" },
+  { text: "Exam Alert: Final Countdown for National Entrance Exams - Check Mandatory Guidelines", path: "/blog" }
+];
 
 export interface ContentItem {
   id: number;
@@ -60,7 +64,44 @@ export interface CmsBlogItem {
 }
 
 
-const RAW_CONTENT_ITEMS: ContentItem[] = [];
+const RAW_CONTENT_ITEMS: ContentItem[] = [
+  {
+    id: 1,
+    type: "STORY",
+    title: "Top High-Paying Skills to Learn in 2026 (Without Degree)",
+    tag: "EXAM UPDATES",
+    description: "Discover the most in-demand skills for the 2026 job market. This comprehensive guide covers technical and soft skills that leading employers are seeking in the academic and professional landscape.",
+    date: "MAR 14, 2026",
+    time: "2h ago",
+    author: "CareerSha Editorial Desk",
+    role: "Education Consultant",
+    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop"
+  },
+  {
+    id: 2,
+    type: "STORY",
+    title: "Top Freelancing Careers for Beginners (No Experience Needed)",
+    tag: "JOBS PORTAL",
+    description: "Start your professional journey with these accessible freelancing paths. Learn how to leverage basic skills into high-value services for global clients in the 2026 gig economy.",
+    date: "MAR 13, 2026",
+    time: "1d ago",
+    author: "CareerSha",
+    role: "Career Coach",
+    image: "https://images.unsplash.com/photo-1484417824246-195028aa37b0?q=80&w=1932&auto=format&fit=crop"
+  },
+  {
+    id: 3,
+    type: "BRIEF",
+    title: "CareerSha Admissions 2026: Phase 1 Applications Now Open",
+    tag: "ADMISSIONS",
+    description: "Major engineering hubs have opened their initial registration portals. Check the mandatory guidelines and deadline reminders for the upcoming academic cycle.",
+    date: "MAR 12, 2026",
+    time: "2d ago",
+    author: "Team CareerSha",
+    role: "Admissions Head",
+    image: "https://images.unsplash.com/photo-1523050335392-93851179ae22?q=80&w=2070&auto=format&fit=crop"
+  }
+];
 
 const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 const REFERENCE_DATE = new Date("2026-03-14T12:00:00Z");
@@ -123,6 +164,15 @@ const getPublishedDate = (item: ContentItem) => {
   }
 
   return formatDate(derivedDate);
+};
+
+// Helper to strip HTML tags and get clean text
+const stripHtml = (html?: string) => {
+  if (!html) return "";
+  return html
+    .replace(/<[^>]*>?/gm, "") // Remove tags
+    .replace(/\s+/g, " ") // Normalize whitespace
+    .trim();
 };
 
 const getSummary = (item: ContentItem) => {
@@ -285,11 +335,17 @@ export const mapCmsBlogItemToArticle = (item: CmsBlogItem, fallbackId = 1): Blog
   }
 
   const tag = rawCategory.replace(/-/g, ' ').toUpperCase();
+  
+  const rawBodyHtml = item.body_html || item.bodyHtml;
+  const cleanBodyText = stripHtml(unescapeHtml(rawBodyHtml || ''));
+  
   const summaryRaw =
+    (cleanBodyText && cleanBodyText.length > 20) ? cleanBodyText :
     item.summary?.trim() ||
     item.excerpt?.trim() ||
     item.description?.trim() ||
     `This CMS article is ready for preview in the CareerSha blog detail layout.`;
+  
   const summary = unescapeHtml(summaryRaw);
   const publishedDateSource = item.published_date || item.publishedDate || item.date;
   const publishedDate = toDisplayDate(publishedDateSource);
@@ -307,7 +363,6 @@ export const mapCmsBlogItemToArticle = (item: CmsBlogItem, fallbackId = 1): Blog
     summary).slice(0, 155);
   const image = toImageUrl(item.image);
   
-  const rawBodyHtml = item.body_html || item.bodyHtml;
   const bodyHtml = rawBodyHtml 
     ? unescapeHtml(rawBodyHtml) 
     : buildBodyHtml(

@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { Activity, ArrowRight, Bookmark, ChevronLeft, Clock, Search, Share2, User, X } from 'lucide-react';
+import { Activity, ChevronLeft, Clock, Search, Share2, User, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { BLOG_ARTICLES, BlogArticle, BREAKING_NEWS, getBlogPath } from './blogData';
@@ -43,7 +43,7 @@ const BlogDetailPage: React.FC = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get('q') || '';
-  
+
   const [searchTerm, setSearchTerm] = useState(searchQuery);
   const [article, setArticle] = useState<BlogArticle | null>(BLOG_ARTICLES.length > 0 ? BLOG_ARTICLES[0] : null);
   const [allArticles, setAllArticles] = useState<BlogArticle[]>(BLOG_ARTICLES);
@@ -130,8 +130,8 @@ const BlogDetailPage: React.FC = () => {
       const term = searchQuery.toLowerCase();
       const filtered = allArticles.filter((item) =>
         (item.title.toLowerCase().includes(term) ||
-        item.summary.toLowerCase().includes(term) ||
-        item.tag.toLowerCase().includes(term)) &&
+          item.summary.toLowerCase().includes(term) ||
+          item.tag.toLowerCase().includes(term)) &&
         item.id !== article.id
       );
 
@@ -148,7 +148,26 @@ const BlogDetailPage: React.FC = () => {
       related: related.slice(4, 8),
       title: null
     };
-  }, [allArticles, article?.id, searchQuery]);
+  }, [allArticles, article, searchQuery]);
+
+  const liveUpdates = useMemo(() => {
+    // Priority 1: Use allArticles if they exist
+    if (allArticles.length > 0) {
+      const sorted = [...allArticles].sort((a, b) => {
+        const idA = Number(a.id) || 0;
+        const idB = Number(b.id) || 0;
+        return idB - idA;
+      });
+      
+      return sorted.slice(0, 10).map((item) => ({
+        text: item.title,
+        path: getBlogPath(item)
+      }));
+    }
+
+    // Priority 2: Use hardcoded BREAKING_NEWS as immediate fallback
+    return BREAKING_NEWS;
+  }, [allArticles]);
 
   const nextArticle = sidebarData.latest[0];
 
@@ -192,7 +211,7 @@ const BlogDetailPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-white text-[#1a1c1e] selection:bg-[#b91c1c] selection:text-white relative z-10">
       <div className="bg-[#b91c1c] text-white h-11 flex items-center overflow-hidden border-b border-[#b91c1c] relative z-50">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-12 lg:px-16 flex items-center h-full w-full">
+        <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-16 flex items-center h-full w-full">
           <div className="text-[10px] font-black pr-3 sm:pr-6 flex items-center gap-1.5 sm:gap-2 border-r border-white/20 h-full mr-3 sm:mr-6 shrink-0 uppercase tracking-[0.2em]">
             <Activity size={14} className="animate-pulse" />
             <span className="hidden sm:inline">Latest Live Updates</span>
@@ -201,8 +220,8 @@ const BlogDetailPage: React.FC = () => {
           <div className="relative flex-1 overflow-hidden flex items-center h-full">
             <div className="flex gap-16 whitespace-nowrap animate-marquee hover:[animation-play-state:paused] py-1">
               {BREAKING_NEWS.concat(BREAKING_NEWS).map((item, index) => (
-                <Link 
-                  key={`${item.text}-${index}`} 
+                <Link
+                  key={`${item.text}-${index}`}
                   to={item.path}
                   className="flex items-center gap-6 group/item"
                 >
@@ -242,10 +261,6 @@ const BlogDetailPage: React.FC = () => {
             <span className="text-[10px] font-bold uppercase tracking-widest">Back to Hub</span>
           </Button>
 
-          <Link to="/blog" className="absolute left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center">
-            <p className="text-[7px] font-semibold text-[#b91c1c] uppercase tracking-[0.4em] mt-0.5">The Broadsheet</p>
-          </Link>
-
           <div className="flex items-center gap-4">
             <div className="relative group w-48 lg:w-64 border-b border-slate-100 focus-within:border-[#b91c1c] transition-colors duration-300">
               <Search className="absolute left-0 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-[#b91c1c] transition-colors" size={13} />
@@ -265,7 +280,7 @@ const BlogDetailPage: React.FC = () => {
                 </button>
               )}
             </div>
-            
+
             <button
               onClick={handleShare}
               className="p-2 hover:bg-slate-50 rounded-full transition-colors text-slate-400 hover:text-[#b91c1c]"
@@ -290,8 +305,8 @@ const BlogDetailPage: React.FC = () => {
           </div>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-          <article className="lg:col-span-8 space-y-12">
+        <div className="flex flex-col lg:flex-row gap-16 items-stretch">
+          <article className="flex-1 min-w-0 space-y-12">
             <header className="space-y-8">
               <div className="flex flex-wrap items-center gap-4">
                 <span className="bg-[#b91c1c] text-white rounded-none text-[9px] font-bold tracking-[0.2em] px-3 py-1 uppercase border-0">
@@ -302,11 +317,10 @@ const BlogDetailPage: React.FC = () => {
               </div>
 
               <div className="space-y-4">
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">Dedicated Blog Details Page</p>
                 <h1 className="text-3xl md:text-5xl font-bold leading-[1.15] tracking-tight text-[#0f172a] uppercase">
                   {article.title}
                 </h1>
-                <div 
+                <div
                   className="text-base md:text-lg leading-relaxed text-slate-600 max-w-3xl"
                   dangerouslySetInnerHTML={{ __html: article.summary }}
                 />
@@ -319,10 +333,10 @@ const BlogDetailPage: React.FC = () => {
                   </div>
                   <div>
                     <p className="text-[11px] font-bold uppercase tracking-wider text-black">
-                      {article.author ?? 'CareerSha Editorial Desk'}
+                      {article.author ?? 'CareerSha'}
                     </p>
                     <p className="text-[9px] font-medium text-slate-400 uppercase tracking-widest">
-                      {article.role ?? 'CMS-ready article field'}
+                      {article.role ?? 'Team CareerSha'}
                     </p>
                   </div>
                 </div>
@@ -353,19 +367,18 @@ const BlogDetailPage: React.FC = () => {
 
           </article>
 
-          <aside className="lg:col-span-4 space-y-16 lg:border-l lg:border-slate-100 lg:pl-12 lg:sticky lg:top-24 lg:self-start">
-
-
-            <section className="space-y-6">
-              <div className="flex items-center gap-4 border-b-2 border-black pb-3">
-                <h2 className="text-sm font-bold uppercase tracking-[0.15em] text-black">
-                  {sidebarData.title ? sidebarData.title : 'Latest News'}
-                </h2>
-              </div>
-              <div className="space-y-4">
+          <aside className="lg:w-[400px] shrink-0 lg:border-l lg:border-slate-100 lg:pl-12 relative">
+             <div className="lg:sticky lg:bottom-10 lg:self-start space-y-16">
+               <section className="space-y-6">
+                 <div className="flex items-center gap-4 border-b-2 border-black pb-3">
+                   <h2 className="text-sm font-bold uppercase tracking-[0.15em] text-black">
+                     {sidebarData.title ? sidebarData.title : 'Latest News'}
+                   </h2>
+                 </div>
+                 <div className="space-y-4">
                 {sidebarData.latest.map((news, index) => (
-                  <Link 
-                    key={index} 
+                  <Link
+                    key={index}
                     to={sidebarData.title ? `${getBlogPath(news)}?q=${encodeURIComponent(searchQuery)}` : getBlogPath(news)}
                     className="flex gap-3 items-start group"
                   >
@@ -434,6 +447,7 @@ const BlogDetailPage: React.FC = () => {
             )}
 
 
+            </div>
           </aside>
         </div>
       </main>

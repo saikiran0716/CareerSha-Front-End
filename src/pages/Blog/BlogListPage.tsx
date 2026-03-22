@@ -110,7 +110,11 @@ const BlogListPage: React.FC = () => {
       );
     }
 
-    const sorted = items.sort((a, b) => b.id - a.id);
+    const sorted = [...items].sort((a, b) => {
+      const idA = Number(a.id) || 0;
+      const idB = Number(b.id) || 0;
+      return idB - idA;
+    });
 
     return {
       stories: sorted.filter((item) => item.type === 'STORY' || activeCategory.toUpperCase() !== 'ALL NEWS'),
@@ -203,9 +207,8 @@ const BlogListPage: React.FC = () => {
                   <button
                     key={category}
                     onClick={() => setActiveCategory(category)}
-                    className={`text-[14px] font-semibold tracking-wider transition-all whitespace-nowrap px-1 hover:text-[#b91c1c] ${
-                      activeCategory === category ? 'text-[#b91c1c]' : 'text-slate-700'
-                    }`}
+                    className={`text-[14px] font-semibold tracking-wider transition-all whitespace-nowrap px-1 hover:text-[#b91c1c] ${activeCategory === category ? 'text-[#b91c1c]' : 'text-slate-700'
+                      }`}
                   >
                     {category}
                   </button>
@@ -237,9 +240,8 @@ const BlogListPage: React.FC = () => {
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`text-[12px] font-bold tracking-widest transition-all whitespace-nowrap px-1 ${
-                  activeCategory === category ? 'text-[#b91c1c]' : 'text-slate-700'
-                }`}
+                className={`text-[12px] font-bold tracking-widest transition-all whitespace-nowrap px-1 ${activeCategory === category ? 'text-[#b91c1c]' : 'text-slate-700'
+                  }`}
               >
                 {category}
               </button>
@@ -288,7 +290,7 @@ const BlogListPage: React.FC = () => {
                       <h4 className="text-[11px] font-bold text-slate-900 leading-tight hover:text-[#b91c1c] transition-colors line-clamp-3">
                         {brief.title}
                       </h4>
-                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 group-hover:text-[#b91c1c] transition-colors">
+                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#b91c1c] transition-colors">
                         Read More
                       </span>
                     </div>
@@ -303,10 +305,15 @@ const BlogListPage: React.FC = () => {
             </section>
           </aside>
 
-          <div className="lg:col-span-6 lg:px-4 space-y-12 min-h-[500px]">
+          <div className="lg:col-span-6 lg:border-x border-slate-100 lg:px-6 flex flex-col min-h-[500px]">
             {currentPageData.hero ? (
-              <>
-                <Link to={getBlogPath(currentPageData.hero)} className="space-y-5 block no-underline" style={{ opacity: 1, color: '#0f172a' }}>
+              <section className="flex-1 flex flex-col space-y-6">
+                <div className="flex items-center gap-3 border-b-2 border-slate-900 pb-3">
+                  <h2 className="text-sm font-black uppercase tracking-[0.2em] text-slate-800">Featured Story</h2>
+                  <div className="w-1.5 h-1.5 bg-[#b91c1c] rounded-full" />
+                </div>
+
+                <Link to={getBlogPath(currentPageData.hero)} className="flex-1 flex flex-col space-y-5 p-6 bg-slate-50/60 border border-slate-100 transition-all duration-300 no-underline group" style={{ opacity: 1, color: '#0f172a' }}>
                   <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
                     <span className="text-[11px] font-black text-[#b91c1c] uppercase tracking-[0.3em]">
                       {currentPageData.hero.tag.toUpperCase() !== 'ALL NEWS' && currentPageData.hero.tag}
@@ -330,21 +337,20 @@ const BlogListPage: React.FC = () => {
                     </div>
                   )}
 
-                  <div className="space-y-4">
+                  <div className="flex-1 flex flex-col space-y-4">
                     <h2 className="text-2xl md:text-4xl font-bold text-slate-900 leading-[1.2] hover:text-[#b91c1c] transition-colors tracking-tight">
                       {currentPageData.hero.title}
                     </h2>
-                    <div 
-                      className="text-slate-500 text-base leading-relaxed line-clamp-3"
+                    <div
+                      className="text-slate-500 text-base leading-relaxed line-clamp-6 flex-1"
                       dangerouslySetInnerHTML={{ __html: currentPageData.hero.summary }}
                     />
-                    <div className="inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.25em] text-[#b91c1c]">
-                      <span>Read More</span>
-                      <ArrowRight size={14} />
-                    </div>
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#b91c1c] transition-colors mt-auto">
+                      Read More
+                    </span>
                   </div>
                 </Link>
-              </>
+              </section>
             ) : (
               <div className="text-center py-20 opacity-40">
                 <p className="text-[11px] font-black uppercase tracking-widest">No matching stories found on this page.</p>
@@ -366,7 +372,7 @@ const BlogListPage: React.FC = () => {
                     <Link
                       key={story.id}
                       to={getBlogPath(story)}
-                      className="group flex justify-between gap-3 p-3 bg-slate-50/60 border border-slate-100 hover:border-[#b91c1c]/20 transition-all duration-300"
+                      className="group flex justify-between gap-3 p-3 bg-slate-50/60 border border-slate-100 transition-all duration-300"
                       style={{ opacity: 1, color: '#0f172a' }}
                     >
                       <div className="flex flex-col justify-center flex-1 gap-2">
@@ -379,7 +385,7 @@ const BlogListPage: React.FC = () => {
                         <h4 className="text-[11px] font-bold text-slate-900 leading-tight hover:text-[#b91c1c] transition-colors line-clamp-3">
                           {story.title}
                         </h4>
-                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 group-hover:text-[#b91c1c] transition-colors">
+                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#b91c1c] transition-colors">
                           Read More
                         </span>
                       </div>
@@ -405,7 +411,7 @@ const BlogListPage: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {currentPageData.grid.map((item) => (
-              <Link key={item.id} to={getBlogPath(item)} className="bg-white border border-slate-100/80 rounded-2xl p-4 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col no-underline group" style={{ opacity: 1, color: '#0f172a' }}>
+              <Link key={item.id} to={getBlogPath(item)} className="bg-white border border-slate-100/80 rounded-2xl p-4 shadow-sm transition-all duration-300 overflow-hidden flex flex-col no-underline group" style={{ opacity: 1, color: '#0f172a' }}>
                 {item.image && (
                   <div className="aspect-[16/10] overflow-hidden bg-slate-100 rounded-xl mb-3.5 flex-shrink-0">
                     <img
@@ -427,13 +433,12 @@ const BlogListPage: React.FC = () => {
                   <h4 className="text-[15px] font-bold text-slate-900 leading-tight group-hover:text-[#b91c1c] transition-colors tracking-tight line-clamp-2">
                     {item.title}
                   </h4>
-                  <div 
+                  <div
                     className="text-slate-500 text-[12px] line-clamp-3 leading-relaxed flex-1"
                     dangerouslySetInnerHTML={{ __html: item.summary }}
                   />
-                  <div className="inline-flex items-center gap-1 text-[9px] font-black uppercase tracking-[0.2em] text-[#b91c1c] pt-2">
+                  <div className="inline-flex items-center gap-1 text-[9px] font-black uppercase tracking-[0.2em] text-[#b91c1c] pt-2 mt-auto">
                     <span>Read More</span>
-                    <ArrowRight size={11} className="transition-transform group-hover:translate-x-1" />
                   </div>
                 </div>
               </Link>
@@ -458,11 +463,10 @@ const BlogListPage: React.FC = () => {
                     key={page}
                     variant={currentPage === page ? 'default' : 'outline'}
                     size="sm"
-                    className={`min-w-[32px] rounded-none text-[10px] font-black transition-all ${
-                      currentPage === page
-                        ? 'bg-[#b91c1c] text-white border-[#b91c1c]'
-                        : 'border-slate-200 hover:border-[#b91c1c] hover:text-[#b91c1c]'
-                    }`}
+                    className={`min-w-[32px] rounded-none text-[10px] font-black transition-all ${currentPage === page
+                      ? 'bg-[#b91c1c] text-white border-[#b91c1c]'
+                      : 'border-slate-200 hover:border-[#b91c1c] hover:text-[#b91c1c]'
+                      }`}
                     onClick={() => setCurrentPage(page)}
                   >
                     {String(page).padStart(2, '0')}
