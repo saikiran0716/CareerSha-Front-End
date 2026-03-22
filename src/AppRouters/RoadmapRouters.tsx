@@ -11,8 +11,8 @@ import NotFound from './NotFound';
 import CollegeMatchResults from '../components/CollegeMatcher/CollegeMatchResults';
 import CollegeDetailPage from '../components/CollegeMatcher/CollegeDetailPage';
 import { NewsView } from '../components/NewsSection';
-import BlogListPage from '../pages/Blog/BlogListPage';
-import BlogDetailPage from '../pages/Blog/BlogDetailPage';
+const BlogListPage = lazy(() => import('../pages/Blog/BlogListPage'));
+const BlogDetailPage = lazy(() => import('../pages/Blog/BlogDetailPage'));
 import ExamDetailsPge from '../components/EXAMS/ExamDetailsPge';
 
 // Static Pages Imports
@@ -150,6 +150,8 @@ const RoadmapRouters: React.FC<RoadmapRoutersProps> = ({ onAskAI, user, setIsAut
                 <Route path="/blog" element={<BlogListPage />} />
                 <Route path="/blog/category/:categorySlug" element={<BlogListPage />} />
                 <Route path="/blog/:id" element={<BlogDetailPage />} />
+                                <Route path="/blog" element={<BlogListPage />} />
+                                <Route path="/blog/:id" element={<BlogDetailPage />} />
                 <Route path="/recommended-colleges" element={<CollegeMatchResults />} />
                 {/* Global Redirects for Exams hitting /college/ path */}
                 <Route path="/college/gate*" element={<Navigate to="/exams/gate" replace />} />
