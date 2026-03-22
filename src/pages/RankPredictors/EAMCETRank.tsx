@@ -11,12 +11,12 @@ const EAMCETRank: React.FC = () => {
     };
 
     return (
-        <div>
+        <div className="bg-[#F5F7FC] min-h-screen relative">
             {/* Back Button Container */}
-            <div className="fixed top-24 left-4 sm:left-8 md:left-12 z-50 pt-2">
+            <div className="max-w-[1400px] mx-auto px-6 lg:px-8 relative pt-12">
                 <button
                     onClick={() => navigate(-1)}
-                    className="group flex items-center gap-1 text-blue-600 font-semibold hover:text-blue-700 transition-colors"
+                    className="absolute top-6 left-6 lg:left-8 z-50 group flex items-center gap-1 text-blue-600 font-semibold hover:text-blue-700 transition-colors"
                 >
                     <ArrowLeft 
                         size={18} 

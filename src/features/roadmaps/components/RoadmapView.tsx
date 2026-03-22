@@ -71,7 +71,7 @@ const RoadmapView: React.FC<RoadmapViewProps> = ({ roadmap, onAskAI }) => {
             {/* Steps Timeline Tree */}
             <div className="relative px-2 sm:px-6">
                 {/* Central Root Trunk (Dotted) */}
-                <div className="absolute left-6 md:left-1/2 -top-6 md:-top-10 bottom-0 border-l-2 border-dotted border-slate-300 dark:border-slate-800 -translate-x-1/2 timeline-line z-0" />
+                <div className="absolute left-1/2 -top-6 md:-top-10 bottom-0 border-l-2 border-dotted border-slate-300 dark:border-slate-800 -translate-x-[1px] timeline-line z-0" />
 
                 <div className="space-y-6 md:space-y-0 relative steps-container">
                     {roadmap.steps.map((step, index) => {
@@ -132,9 +132,9 @@ const RoadmapView: React.FC<RoadmapViewProps> = ({ roadmap, onAskAI }) => {
                                 <div className="hidden md:block w-1/2" />
 
                                 {/* Trunk Node (Layered for Masking & Clarity) */}
-                                <div className="absolute left-6 md:left-1/2 w-6 h-6 rounded-full -translate-x-1/2 z-40 flex items-center justify-center timeline-node">
+                                <div className="absolute top-0 left-1/2 w-6 h-6 rounded-full -translate-x-1/2 -translate-y-1/2 md:top-auto left-1/2 z-40 flex items-center justify-center timeline-node">
                                     {/* Pulse Animation */}
-                                    <div className={`absolute w-full h-full rounded-full ${color.bg} opacity-25 animate-ping`} style={{ animationDuration: '4s' }} />
+                                    <div className={`absolute w-full h-full rounded-full ${color.bg} opacity-25`} style={{ animationDuration: '4s' }} />
                                     
                                     {/* Masking Base: Hides the dotted line behind the node */}
                                     <div className="absolute w-5 h-5 rounded-full bg-white dark:bg-slate-950 shadow-sm" />
@@ -150,7 +150,7 @@ const RoadmapView: React.FC<RoadmapViewProps> = ({ roadmap, onAskAI }) => {
 
             {/* Final Achievement Section */}
             <div className="relative pb-32 achievement-section">
-                <div className="absolute top-0 bottom-1/2 left-6 md:left-1/2 border-l-2 border-dotted border-slate-300 dark:border-slate-800 -translate-x-1/2 timeline-line" />
+                <div className="absolute top-0 bottom-1/2 left-1/2 border-l-2 border-dotted border-slate-300 dark:border-slate-800 -translate-x-[1px] timeline-line" />
 
                 <div className="relative z-10 flex flex-col items-center w-full">
                     <div className="inline-flex flex-col items-center mt-8 md:mt-16">

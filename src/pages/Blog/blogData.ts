@@ -1,4 +1,4 @@
-export const CATEGORIES = ["ALL NEWS", "ADMISSIONS", "EXAM UPDATES", "RESULTS", "EXAM NOTIFICATIONS"];
+export const CATEGORIES = ["All News", "Admissions", "Exam Updates", "Results", "Exam Notifications"];
 
 export interface BreakingNewsItem {
   text: string;

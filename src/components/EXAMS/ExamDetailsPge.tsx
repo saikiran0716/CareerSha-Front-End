@@ -59,10 +59,10 @@ const ExamDetailsPage: React.FC = () => {
         <div className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans selection:bg-indigo-500/30">
             {/* Top Navigation */}
             <nav className="sticky top-[72px] z-50 w-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-100 dark:border-slate-800">
-                <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+                <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-16 h-16 flex items-center justify-between">
                     <button
                         onClick={() => navigate(-1)}
-                        className="flex items-center gap-2 text-slate-400 hover:text-indigo-600 font-bold text-[10px] uppercase tracking-[0.2em] transition-all"
+                        className="flex items-center gap-2 text-slate-400 hover:text-indigo-600 font-bold text-[10px] uppercase tracking-[0.2em] transition-all -ml-1"
                     >
                         <ChevronLeft size={14} />
                         Back to Exams
@@ -78,7 +78,7 @@ const ExamDetailsPage: React.FC = () => {
 
             {/* Exam Hero Section */}
             <div className="relative pt-12 pb-24 lg:pt-20 lg:pb-32 overflow-hidden bg-slate-50 dark:bg-slate-900/40">
-                <div className="max-w-7xl mx-auto px-6 relative z-10">
+                <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-16 relative z-10">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                         <div className="space-y-10 text-center lg:text-left">
                             <div className="space-y-4">
@@ -147,7 +147,7 @@ const ExamDetailsPage: React.FC = () => {
             </div>
 
             {/* Tabs & Content */}
-            <div className="max-w-7xl mx-auto px-6 -mt-12 relative z-20 pb-24">
+            <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-16 -mt-12 relative z-20 pb-24">
                 <div className="bg-white dark:bg-slate-900 rounded-[3rem] shadow-2xl shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-slate-800 overflow-hidden">
 
                     {/* Navigation Tabs */}
@@ -308,35 +308,7 @@ const ExamDetailsPage: React.FC = () => {
                 </div>
             </div>
 
-            {/* Official Call to Action - Removed "Course/Placement" terminology */}
-            <div className="max-w-7xl mx-auto px-6 pb-24">
-                <div className="p-10 lg:p-16 rounded-[3rem] bg-indigo-950 text-white relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10">
-                    <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-indigo-500/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2"></div>
 
-                    <div className="max-w-xl relative z-10 text-center md:text-left">
-                        <h2 className="text-3xl lg:text-4xl font-black uppercase tracking-tighter mb-4">Ready to Apply?</h2>
-                        <p className="text-indigo-200 font-medium">
-                            Ensure you have carefully read all eligibility criteria, syllabus details, and important dates before initiating your application process for {exam.title}.
-                        </p>
-                    </div>
-
-                    <div className="flex flex-col w-full md:w-auto gap-4 relative z-10">
-                        <a
-                            href={exam.portalUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center gap-2 px-8 py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl font-black uppercase tracking-widest text-xs transition-all"
-                        >
-                            <ExternalLink size={16} />
-                            Official Portal
-                        </a>
-                        <button className="flex items-center justify-center gap-2 px-8 py-4 bg-white/10 hover:bg-white/20 text-white rounded-2xl border border-white/20 font-black uppercase tracking-widest text-xs transition-all">
-                            <FileText size={16} />
-                            Official Notification PDF
-                        </button>
-                    </div>
-                </div>
-            </div>
 
             <style>
                 {`

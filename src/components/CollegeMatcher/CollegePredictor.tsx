@@ -164,7 +164,7 @@ export const CollegePredictorView = ({ profile }: any) => {
                                         <Zap size={22} strokeWidth={2.5} />
                                     </div>
                                     <div>
-                                        <h4 className="text-[16px] lg:text-[17px] font-bold text-slate-800 mb-1.5 leading-tight">2. AI Synchronization</h4>
+                                        <h4 className="text-[16px] lg:text-[17px] font-bold text-slate-800 mb-1.5 leading-tight">2. Synchronization</h4>
                                         <p className="text-[14px] lg:text-[15px] text-slate-500 font-medium leading-[1.6]">
                                             We instantly cross-reference your profile against millions of verified past admission outcomes.
                                         </p>

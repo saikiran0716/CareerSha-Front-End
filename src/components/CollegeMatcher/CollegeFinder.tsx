@@ -20,6 +20,7 @@ import {
     Zap,
     Filter
 } from "lucide-react";
+import BookLoader from "../BookLoader/BookLoader";
 
 /* ---------------- TYPES ---------------- */
 
@@ -315,7 +316,7 @@ export const CollegeFinder: React.FC = () => {
                 <AnimatePresence mode="wait">
                     {isFetching ? (
                         <motion.div key="loading" className="flex flex-col items-center justify-center py-20 opacity-50 space-y-4">
-                            <div className="w-12 h-12 border-4 border-slate-200 border-t-purple-600 rounded-full animate-spin" />
+                            <BookLoader size="lg" />
                             <p className="text-slate-500 text-xs font-bold uppercase tracking-widest animate-pulse">Running AI Engine...</p>
                         </motion.div>
                     ) : viewMode === "TABLE" ? (
