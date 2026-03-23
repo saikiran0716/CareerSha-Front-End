@@ -32,6 +32,8 @@ export interface BlogArticle extends ContentItem {
   readTime: string;
   seoTitle: string;
   seoDescription: string;
+  seoKeywords: string;
+  canonicalUrl?: string;
   bodyHtml: string;
 }
 
@@ -59,6 +61,9 @@ export interface CmsBlogItem {
   seoTitle?: string;
   seo_description?: string;
   seoDescription?: string;
+  focus_keyword?: string;
+  secondary_keywords?: string;
+  canonical_url?: string;
   body_html?: string;
   bodyHtml?: string;
 }
@@ -284,6 +289,7 @@ const normalizeItem = (item: ContentItem): BlogArticle => {
     readTime: getReadTime(summary, item.type),
     seoTitle,
     seoDescription,
+    seoKeywords: "", // Local fallback item doesn't have keywords
     bodyHtml: buildBodyHtml(item, summary)
   };
 };
@@ -361,6 +367,11 @@ export const mapCmsBlogItemToArticle = (item: CmsBlogItem, fallbackId = 1): Blog
     (item.seo_description?.trim() ||
     item.seoDescription?.trim() ||
     summary).slice(0, 155);
+  
+  const focus = item.focus_keyword?.trim() || "";
+  const secondary = item.secondary_keywords?.trim() || "";
+  const seoKeywords = [focus, secondary].filter(Boolean).join(", ");
+  
   const image = toImageUrl(item.image);
   
   const bodyHtml = rawBodyHtml 
@@ -396,6 +407,8 @@ export const mapCmsBlogItemToArticle = (item: CmsBlogItem, fallbackId = 1): Blog
     readTime,
     seoTitle,
     seoDescription,
+    seoKeywords,
+    canonicalUrl: item.canonical_url?.trim() || undefined,
     bodyHtml
   };
 };

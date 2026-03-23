@@ -16,11 +16,11 @@ const BlogDetailPage = lazy(() => import('../pages/Blog/BlogDetailPage'));
 import ExamDetailsPge from '../components/EXAMS/ExamDetailsPge';
 
 // Static Pages Imports
-import AboutUs from '../pages/Static/AboutUs';
-import ContactUs from '../pages/Static/ContactUs';
-import PrivacyPolicy from '../pages/Static/PrivacyPolicy';
-import TermsAndConditions from '../pages/Static/TermsAndConditions';
-import Disclaimer from '../pages/Static/Disclaimer';
+import AboutUs from '../pages/Footer_Pages_Static/AboutUs';
+import ContactUs from '../pages/Footer_Pages_Static/ContactUs';
+import PrivacyPolicy from '../pages/Footer_Pages_Static/PrivacyPolicy';
+import TermsAndConditions from '../pages/Footer_Pages_Static/TermsAndConditions';
+import Disclaimer from '../pages/Footer_Pages_Static/Disclaimer';
 
 // Roadmap Imports
 // Lazy Load Roadmap Components

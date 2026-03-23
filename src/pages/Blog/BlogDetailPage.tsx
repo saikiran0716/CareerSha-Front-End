@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { BLOG_ARTICLES, BlogArticle, BREAKING_NEWS, getBlogPath } from './blogData';
 import { fetchBlogArticleByIdentifier, fetchBlogArticles, getRelatedFromArticles } from '@/services/blogService';
 
-const setArticleSeo = (title: string, description: string, image?: string) => {
+const setArticleSeo = (title: string, description: string, keywords?: string, image?: string, canonicalUrl?: string) => {
   document.title = title;
 
   const ensureMeta = (selector: string, attribute: 'name' | 'property', value: string, content: string) => {
@@ -24,6 +24,10 @@ const setArticleSeo = (title: string, description: string, image?: string) => {
   ensureMeta('meta[property="og:description"]', 'property', 'og:description', description);
   ensureMeta('meta[property="og:type"]', 'property', 'og:type', 'article');
 
+  if (keywords) {
+    ensureMeta('meta[name="keywords"]', 'name', 'keywords', keywords);
+  }
+
   if (image) {
     ensureMeta('meta[property="og:image"]', 'property', 'og:image', image);
   }
@@ -35,7 +39,7 @@ const setArticleSeo = (title: string, description: string, image?: string) => {
     canonical.setAttribute('rel', 'canonical');
     document.head.appendChild(canonical);
   }
-  canonical.setAttribute('href', window.location.origin + window.location.pathname);
+  canonical.setAttribute('href', canonicalUrl || (window.location.origin + window.location.pathname));
 };
 
 const BlogDetailPage: React.FC = () => {
@@ -158,7 +162,7 @@ const BlogDetailPage: React.FC = () => {
         const idB = Number(b.id) || 0;
         return idB - idA;
       });
-      
+
       return sorted.slice(0, 10).map((item) => ({
         text: item.title,
         path: getBlogPath(item)
@@ -173,7 +177,7 @@ const BlogDetailPage: React.FC = () => {
 
   useEffect(() => {
     if (article) {
-      setArticleSeo(article.seoTitle, article.seoDescription, article.image);
+      setArticleSeo(article.seoTitle, article.seoDescription, article.seoKeywords, article.image, article.canonicalUrl);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [article]);
@@ -368,83 +372,83 @@ const BlogDetailPage: React.FC = () => {
           </article>
 
           <aside className="lg:w-[400px] shrink-0 lg:border-l lg:border-slate-100 lg:pl-12 relative">
-             <div className="lg:sticky lg:bottom-10 lg:self-start space-y-16">
-               <section className="space-y-6">
-                 <div className="flex items-center gap-4 border-b-2 border-black pb-3">
-                   <h2 className="text-sm font-bold uppercase tracking-[0.15em] text-black">
-                     {sidebarData.title ? sidebarData.title : 'Latest News'}
-                   </h2>
-                 </div>
-                 <div className="space-y-4">
-                {sidebarData.latest.map((news, index) => (
-                  <Link
-                    key={index}
-                    to={sidebarData.title ? `${getBlogPath(news)}?q=${encodeURIComponent(searchQuery)}` : getBlogPath(news)}
-                    className="flex gap-3 items-start group"
-                  >
-                    <span className="w-1 h-4 bg-[#b91c1c] shrink-0 mt-1" />
-                    <p className="text-[11px] font-bold leading-relaxed text-slate-800 uppercase tracking-tight group-hover:text-[#b91c1c] transition-colors">
-                      {news.title}
-                    </p>
-                  </Link>
-                ))}
-              </div>
-            </section>
-
-            <section className="space-y-8">
-              <div className="flex items-center gap-4 border-b-2 border-black pb-3">
-                <h2 className="text-sm font-bold uppercase tracking-[0.15em] text-black">
-                  {sidebarData.title ? 'Further Results' : 'Related Blogs'}
-                </h2>
-              </div>
-              <div className="space-y-6">
-                {sidebarData.related.map((item) => (
-                  <Link
-                    key={item.id}
-                    to={sidebarData.title ? `${getBlogPath(item)}?q=${encodeURIComponent(searchQuery)}` : getBlogPath(item)}
-                    className="group flex gap-4 p-0 bg-transparent border-0 transition-all"
-                  >
-                    {item.image && (
-                      <div className="w-20 h-16 bg-white shrink-0 overflow-hidden border border-slate-100">
-                        <img src={item.image} className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" alt={item.title} />
-                      </div>
-                    )}
-                    <div className="flex flex-col flex-1 justify-center space-y-1">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="text-[8px] font-bold text-[#b91c1c] uppercase tracking-wider">{item.tag}</span>
-                      </div>
-                      <h4 className="text-[10px] font-bold leading-tight group-hover:text-[#b91c1c] transition-colors line-clamp-2 uppercase text-black">
-                        {item.title}
-                      </h4>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </section>
-
-            {!searchQuery && (
-              <section className="space-y-8">
+            <div className="lg:sticky lg:bottom-10 lg:self-start space-y-16">
+              <section className="space-y-6">
                 <div className="flex items-center gap-4 border-b-2 border-black pb-3">
-                  <h2 className="text-sm font-bold uppercase tracking-[0.15em] text-black">Recent News</h2>
+                  <h2 className="text-sm font-bold uppercase tracking-[0.15em] text-black">
+                    {sidebarData.title ? sidebarData.title : 'Latest News'}
+                  </h2>
                 </div>
                 <div className="space-y-4">
-                  {allArticles.filter(a => a.id !== article.id).slice(0, 4).map((item) => (
+                  {sidebarData.latest.map((news, index) => (
                     <Link
-                      key={item.id}
-                      to={getBlogPath(item)}
-                      className="block group border-b border-slate-100 pb-4 last:border-0"
+                      key={index}
+                      to={sidebarData.title ? `${getBlogPath(news)}?q=${encodeURIComponent(searchQuery)}` : getBlogPath(news)}
+                      className="flex gap-3 items-start group"
                     >
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="text-[8px] font-bold text-[#b91c1c] uppercase">{item.tag}</span>
-                      </div>
-                      <h4 className="text-[11px] font-bold leading-snug group-hover:text-[#b91c1c] transition-colors uppercase text-black">
-                        {item.title}
-                      </h4>
+                      <span className="w-1 h-4 bg-[#b91c1c] shrink-0 mt-1" />
+                      <p className="text-[11px] font-bold leading-relaxed text-slate-800 uppercase tracking-tight group-hover:text-[#b91c1c] transition-colors">
+                        {news.title}
+                      </p>
                     </Link>
                   ))}
                 </div>
               </section>
-            )}
+
+              <section className="space-y-8">
+                <div className="flex items-center gap-4 border-b-2 border-black pb-3">
+                  <h2 className="text-sm font-bold uppercase tracking-[0.15em] text-black">
+                    {sidebarData.title ? 'Further Results' : 'Related Blogs'}
+                  </h2>
+                </div>
+                <div className="space-y-6">
+                  {sidebarData.related.map((item) => (
+                    <Link
+                      key={item.id}
+                      to={sidebarData.title ? `${getBlogPath(item)}?q=${encodeURIComponent(searchQuery)}` : getBlogPath(item)}
+                      className="group flex gap-4 p-0 bg-transparent border-0 transition-all"
+                    >
+                      {item.image && (
+                        <div className="w-20 h-16 bg-white shrink-0 overflow-hidden border border-slate-100">
+                          <img src={item.image} className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" alt={item.title} />
+                        </div>
+                      )}
+                      <div className="flex flex-col flex-1 justify-center space-y-1">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span className="text-[8px] font-bold text-[#b91c1c] uppercase tracking-wider">{item.tag}</span>
+                        </div>
+                        <h4 className="text-[10px] font-bold leading-tight group-hover:text-[#b91c1c] transition-colors line-clamp-2 uppercase text-black">
+                          {item.title}
+                        </h4>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+
+              {!searchQuery && (
+                <section className="space-y-8">
+                  <div className="flex items-center gap-4 border-b-2 border-black pb-3">
+                    <h2 className="text-sm font-bold uppercase tracking-[0.15em] text-black">Recent News</h2>
+                  </div>
+                  <div className="space-y-4">
+                    {allArticles.filter(a => a.id !== article.id).slice(0, 4).map((item) => (
+                      <Link
+                        key={item.id}
+                        to={getBlogPath(item)}
+                        className="block group border-b border-slate-100 pb-4 last:border-0"
+                      >
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-[8px] font-bold text-[#b91c1c] uppercase">{item.tag}</span>
+                        </div>
+                        <h4 className="text-[11px] font-bold leading-snug group-hover:text-[#b91c1c] transition-colors uppercase text-black">
+                          {item.title}
+                        </h4>
+                      </Link>
+                    ))}
+                  </div>
+                </section>
+              )}
 
 
             </div>
