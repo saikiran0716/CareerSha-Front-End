@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { ChevronDown, Target, Zap, ShieldCheck } from 'lucide-react';
 import illustration from '../../assets/college-predictor-illustration.png';
 
@@ -25,8 +25,10 @@ export const CollegePredictorView = ({ profile }: any) => {
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
     const [errors, setErrors] = useState<{ rank?: string, exam?: string }>({});
 
+    const location = useLocation();
+
     React.useEffect(() => {
-        const params = new URLSearchParams(window.location.search);
+        const params = new URLSearchParams(location.search);
         if ((params.get("tool") || "").toLowerCase() !== "predictor") {
             return;
         }
@@ -49,7 +51,7 @@ export const CollegePredictorView = ({ profile }: any) => {
         if (streamParam && STREAMS.includes(streamParam)) {
             setStream(streamParam);
         }
-    }, []);
+    }, [location.search]);
 
     const handlePredict = () => {
         const newErrors: any = {};

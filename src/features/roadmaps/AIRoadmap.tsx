@@ -43,10 +43,7 @@ export const AIRoadmap: React.FC<AIRoadmapProps> = ({ onSelectRoadmap, selectedR
                         font-size: 14px !important;
                         margin-top: 0.5rem !important;
                     }
-                    /* Limit to 5 items on mobile only */
-                    .roadmap-section-mobile .grid > div:nth-child(n+6) {
-                        display: none !important;
-                    }
+
                     .roadmap-section-mobile .grid {
                         gap: 1rem !important;
                     }

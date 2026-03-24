@@ -88,8 +88,10 @@ const HomePage: React.FC<HomePageProps> = ({ user, setIsAuthModalOpen, onAskAI }
         onAskAI(topic);
     }, [onAskAI]);
 
+    const location = useLocation();
+
     useEffect(() => {
-        const params = new URLSearchParams(window.location.search);
+        const params = new URLSearchParams(location.search);
         const tool = (params.get('tool') || '').toLowerCase();
         if (!tool) return;
 
@@ -98,7 +100,7 @@ const HomePage: React.FC<HomePageProps> = ({ user, setIsAuthModalOpen, onAskAI }
             const timer = setTimeout(() => handleNavigation(targetId), 120);
             return () => clearTimeout(timer);
         }
-    }, []);
+    }, [location.search]);
 
     // Use the prop function directly if internal state isn't needed for this simple pass-through,
     // or keep local state if ChatBot needs it. For now, sticking to logic from App.tsx.
