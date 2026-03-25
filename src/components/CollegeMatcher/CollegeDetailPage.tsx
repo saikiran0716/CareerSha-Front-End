@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation, Navigate } from 'react-router-dom';
+import SEO from '../SEO/SEO';
 import {
     ArrowLeft, Globe, Phone, Award, ExternalLink,
     MapPin, Building2, Clock, School, Calendar, ChevronDown, ChevronUp,
@@ -146,6 +147,11 @@ const CollegeDetailPage: React.FC = () => {
 
     return (
         <div className="relative z-10 min-h-screen bg-slate-100 text-slate-800 pb-24">
+            <SEO 
+                title={`${name} | College Details`} 
+                description={desc || `View detailed information about ${name}, including placements, admissions, campus life, and more.`}
+                keywords={`${name}, ${locVal}, ${typeVal}, college details, placements, admissions`}
+            />
 
             {/* ── TOP NAV ── */}
             <div className="bg-gradient-to-r from-blue-800 to-indigo-800 sticky top-0 z-50">

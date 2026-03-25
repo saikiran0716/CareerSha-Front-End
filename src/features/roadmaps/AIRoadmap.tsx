@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { Star, LayoutGrid, ChevronDown, ArrowLeft } from 'lucide-react';
 import { careerRoadmaps } from './roadmapData';
 import RoadmapCard from './RoadmapCard';
+import SEO from '../../components/SEO/SEO';
 
 interface AIRoadmapProps {
     onSelectRoadmap?: (id: string) => void;
@@ -28,6 +29,13 @@ export const AIRoadmap: React.FC<AIRoadmapProps> = ({ onSelectRoadmap, selectedR
 
     return (
         <section id="library" className={`relative px-3 sm:px-6 lg:px-8 mx-auto w-full max-w-[1400px] bg-[#F5F7FC] rounded-[32px] mb-6 dark:bg-slate-950 roadmap-section-mobile py-8 lg:py-16 ${isStandalone ? 'min-h-screen' : ''}`}>
+            {isStandalone && (
+                <SEO 
+                    title="Career Roadmaps" 
+                    description="Explore 20+ premium career roadmaps from 10th standard to professional entry. Step-by-step guides for Software Engineering, Data Science, UI/UX, and more."
+                    keywords="career roadmaps, software engineering roadmap, data science roadmap, career planning, student guidance"
+                />
+            )}
             <style dangerouslySetInnerHTML={{
                 __html: `
                 @media (max-width: 639px) {

@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { RankEstimator } from '../../components/RankEstimator/RankEstimator';
+import SEO from '../../components/SEO/SEO';
 
 const EAMCETRank: React.FC = () => {
     const navigate = useNavigate();
@@ -12,6 +13,11 @@ const EAMCETRank: React.FC = () => {
 
     return (
         <div className="bg-[#F5F7FC] min-h-screen relative">
+            <SEO 
+                title="TS EAMCET Rank Predictor" 
+                description="Predict your TS EAMCET 2026 rank based on your score. Get accurate estimates and college possibilities."
+                keywords="TS EAMCET rank predictor, EAMCET 2026, rank estimator, engineering entrance"
+            />
             {/* Back Button Container */}
             <div className="max-w-[1400px] mx-auto px-6 lg:px-8 relative pt-12">
                 <button

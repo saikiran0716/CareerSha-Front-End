@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { discoverCollegesLive } from "../../services/geminiService";
+import SEO from "../SEO/SEO";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     School,
@@ -271,6 +272,11 @@ const CollegeMatchResults: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-[#EEF2F7] font-sans relative pb-20">
+            <SEO 
+                title={`Colleges for ${exam.toUpperCase()} Rank ${rank} | College Matcher`} 
+                description={`View recommended colleges and universities for your ${exam} rank of ${rank}. Get personalized admission insights and placement data.`}
+                keywords={`college predictor, ${exam} colleges, rank ${rank}, college matcher, admission help`}
+            />
 
             {/* SLIM TOP NAV */}
             <header className="sticky top-0 z-[100] bg-white border-b border-slate-200 shadow-sm">

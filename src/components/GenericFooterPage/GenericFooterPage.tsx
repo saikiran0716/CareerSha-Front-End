@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { PageData, PageItem } from '../../data/types.ts';
 import { getFooterPageContent, getCollegeReviews, getCollegeSuggestions } from '../../services/geminiService';
 import BookLoader from '../BookLoader/BookLoader';
+import SEO from '../SEO/SEO';
 
 interface GenericFooterPageProps {
     data: PageData;
@@ -350,6 +351,7 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
 
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-black transition-colors duration-300">
+            <SEO title={data.title} description={data.description} />
             {/* Navigation / Header Area */}
             <div className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50 shadow-sm/50 backdrop-blur-md bg-white/80 dark:bg-slate-900/80">
                 <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 h-14 flex items-center justify-center relative">

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import {BrowserRouter} from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import App from './App';
 
 const rootElement = document.getElementById('root');
@@ -14,16 +15,18 @@ const googleClientId = (import.meta.env.VITE_GOOGLE_CLIENT_ID || '').trim();
 
 root.render (
     <React.StrictMode>
-        {googleClientId ? (
-            <GoogleOAuthProvider clientId={googleClientId}>
+        <HelmetProvider>
+            {googleClientId ? (
+                <GoogleOAuthProvider clientId={googleClientId}>
+                    <BrowserRouter>
+                        <App/>
+                    </BrowserRouter>
+                </GoogleOAuthProvider>
+            ) : (
                 <BrowserRouter>
                     <App/>
                 </BrowserRouter>
-            </GoogleOAuthProvider>
-        ) : (
-            <BrowserRouter>
-                <App/>
-            </BrowserRouter>
-        )}
+            )}
+        </HelmetProvider>
     </React.StrictMode>
 );

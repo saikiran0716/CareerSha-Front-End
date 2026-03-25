@@ -1,5 +1,6 @@
 import React from 'react';
 import { PageData } from '../../data/types.ts';
+import SEO from '../SEO/SEO';
 
 interface StaticInfoPageProps {
     data: PageData;
@@ -9,6 +10,7 @@ interface StaticInfoPageProps {
 const StaticInfoPage: React.FC<StaticInfoPageProps> = ({ data, onBack }) => {
     return (
         <div className="w-full transition-colors duration-300">
+            <SEO title={data.title} description={data.description} />
             {/* Simple Title Section */}
             <div className="border-b border-slate-100 dark:border-slate-800">
                 <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 h-10 flex items-center justify-center relative uppercase">

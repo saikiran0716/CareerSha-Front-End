@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import SEO from '../SEO/SEO';
 import {
     ChevronLeft,
     Calendar,
@@ -57,6 +58,11 @@ const ExamDetailsPage: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans selection:bg-indigo-500/30">
+            <SEO 
+                title={`${exam.title} ${exam.year}`} 
+                description={exam.overview} 
+                keywords={`${exam.title}, ${exam.category} exam, ${exam.year} exams, eligibility, syllabus`}
+            />
             {/* Top Navigation */}
             <nav className="sticky top-[72px] z-50 w-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-100 dark:border-slate-800">
                 <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-16 h-16 flex items-center justify-between">

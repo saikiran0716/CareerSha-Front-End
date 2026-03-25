@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import SEO from '../../components/SEO/SEO';
 
 interface StaticLayoutProps {
     title: string;
@@ -11,6 +12,7 @@ const StaticLayout: React.FC<StaticLayoutProps> = ({ title, children }) => {
 
     return (
         <div className="min-h-screen bg-slate-50 transition-colors duration-300">
+            <SEO title={title} />
             {/* Header Section */}
             <div className="bg-white border-b border-slate-200 sticky top-0 z-20">
                 <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 h-16 flex items-center justify-between">

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import HomeView from '../../components/HomeView/HomeView';
+import SEO from '../../components/SEO/SEO';
 
 import GenericFooterPage from '../../components/GenericFooterPage/GenericFooterPage';
 import { CollegesView, ResultsView } from '../../components/ExploreViews';
@@ -131,6 +132,11 @@ const HomePage: React.FC<HomePageProps> = ({ user, setIsAuthModalOpen, onAskAI }
 
     return (
         <main className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-0 pb-8 sm:pb-12 flex flex-col gap-0 overflow-x-hidden">
+            <SEO 
+                title="Home" 
+                description="Expert career guidance, personalized roadmaps, and college predictability tools to help you navigate your academic journey."
+                keywords="career guidance, roadmaps, college predictor, engineering, medical, career planning"
+            />
             <div id="home">
                 <HomeView onStartCounseling={
                     () => setHomeViewMode('counseling')

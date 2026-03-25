@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ChevronLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { getLatestNewsItems, NewsItem } from '../../services/homeContentService';
+import SEO from '../SEO/SEO';
 
 const NEWS_DATA = [
     {
@@ -34,6 +35,11 @@ const NewsView: React.FC = () => {
 
     return (
         <div className="w-full min-h-screen bg-[#f8faff] dark:bg-slate-950 animate-fade">
+            <SEO 
+                title="Latest News & Notifications" 
+                description="Real-time information about exams, results, and admissions for 2026. Stay updated with CareerSha."
+                keywords="latest news, exam notifications, results 2026, admission updates"
+            />
             {/* Professional Header */}
             <header className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-slate-100 dark:border-slate-800">
                 <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 h-20 flex items-center justify-between">
