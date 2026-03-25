@@ -154,14 +154,14 @@ const RoadmapRouters: React.FC<RoadmapRoutersProps> = ({ onAskAI, user, setIsAut
                                 <Route path="/blog/:id" element={<BlogDetailPage />} />
                 <Route path="/recommended-colleges" element={<CollegeMatchResults />} />
                 {/* Global Redirects for Exams hitting /college/ path */}
-                <Route path="/college/gate*" element={<Navigate to="/exams/gate" replace />} />
-                <Route path="/college/cat*" element={<Navigate to="/exams/cat" replace />} />
-                <Route path="/college/jee*" element={<Navigate to="/exams/jee-main" replace />} />
-                <Route path="/college/neet*" element={<Navigate to="/exams/neet" replace />} />
-                <Route path="/college/xat*" element={<Navigate to="/exams/xat" replace />} />
-                <Route path="/college/clat*" element={<Navigate to="/exams/clat" replace />} />
-                <Route path="/college/mat*" element={<Navigate to="/exams/mat" replace />} />
-                <Route path="/college/nift*" element={<Navigate to="/exams/nift" replace />} />
+                <Route path="/college/gate/*" element={<Navigate to="/exams/gate" replace />} />
+                <Route path="/college/cat/*" element={<Navigate to="/exams/cat" replace />} />
+                <Route path="/college/jee/*" element={<Navigate to="/exams/jee-main" replace />} />
+                <Route path="/college/neet/*" element={<Navigate to="/exams/neet" replace />} />
+                <Route path="/college/xat/*" element={<Navigate to="/exams/xat" replace />} />
+                <Route path="/college/clat/*" element={<Navigate to="/exams/clat" replace />} />
+                <Route path="/college/mat/*" element={<Navigate to="/exams/mat" replace />} />
+                <Route path="/college/nift/*" element={<Navigate to="/exams/nift" replace />} />
 
                 <Route path="/college/:collegeName" element={<CollegeDetailPage />} />
                 {Object.keys(FOOTER_PAGES).map((slug) => {
