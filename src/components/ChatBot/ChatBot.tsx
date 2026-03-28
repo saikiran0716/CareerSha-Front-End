@@ -121,7 +121,25 @@ const ChatBot: React.FC<Props> = ({ profile, initialMessage, onMessageProcessed 
 
   return (
     <>
-      {/* No backdrop to keep background visible as requested */}
+      <style>{`
+        .chat-scroll-container::-webkit-scrollbar {
+          width: 5px;
+        }
+        .chat-scroll-container::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .chat-scroll-container::-webkit-scrollbar-thumb {
+          background: rgba(99, 102, 241, 0.2);
+          border-radius: 10px;
+        }
+        .chat-scroll-container::-webkit-scrollbar-thumb:hover {
+          background: rgba(99, 102, 241, 0.4);
+        }
+        /* Hide scrollbar buttons (arrows) */
+        .chat-scroll-container::-webkit-scrollbar-button {
+          display: none;
+        }
+      `}</style>
 
       <div className={`fixed z-[9999] transition-all duration-500 cubic-bezier(0.19, 1, 0.22, 1) ${isOpen
         ? 'bottom-2 right-2 sm:bottom-10 sm:right-10 w-[260px] sm:w-[340px] max-w-[calc(100%-1rem)] h-[340px] sm:h-[450px] max-h-[calc(100vh-1.5rem)] sm:max-h-[calc(100vh-8rem)]'
@@ -163,7 +181,7 @@ const ChatBot: React.FC<Props> = ({ profile, initialMessage, onMessageProcessed 
             </div>
 
             {/* Chat Area */}
-            <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-5 bg-slate-50/30 dark:bg-slate-950/30 scroll-smooth">
+            <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-5 bg-slate-50/30 dark:bg-slate-950/30 scroll-smooth chat-scroll-container">
               {messages.map((msg, i) => (
                 <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-slideUp`} style={{ animationDelay: `${i * 0.03}s` }}>
                   {msg.role === 'assistant' && (

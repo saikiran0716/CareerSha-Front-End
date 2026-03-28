@@ -16,35 +16,31 @@ const FooterBottom: React.FC<FooterBottomProps> = ({ onNavigate }) => {
                 </p>
             </div>
 
-            <div className="flex flex-wrap justify-center md:justify-end items-center gap-x-3 xs:gap-x-4 ms:gap-x-5">
+            <div className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center md:justify-end items-center gap-x-4 gap-y-4 sm:gap-x-5">
                 {[
                     { label: 'About Us', id: 'company-about' },
                     { label: 'Contact Us', id: 'company-contact' },
                     { label: 'Terms & Conditions', id: 'legal-terms' },
                     { label: 'Privacy Policy', id: 'legal-privacy' },
                     { label: 'Disclaimer', id: 'legal-disclaimer' }
-                ].map((link, index, array) => (
-                    <React.Fragment key={link.id}>
-                        <button
-                            onClick={() => {
-                                const pathMap: Record<string, string> = {
-                                    'company-about': '/about-us',
-                                    'company-contact': '/contact-us',
-                                    'legal-terms': '/terms-and-conditions',
-                                    'legal-privacy': '/privacy-policy',
-                                    'legal-disclaimer': '/disclaimer'
-                                };
-                                const path = pathMap[link.id] || `/${link.id.replace('legal-', '').replace('company-', '')}`;
-                                onNavigate?.(path);
-                            }}
-                            className="text-gray-500 hover:text-white transition-all duration-300 text-[9px] xs:text-[10px] ms:text-[11px] font-bold uppercase tracking-widest hover:translate-y-[-1px] active:translate-y-0"
-                        >
-                            {link.label}
-                        </button>
-                        {index < array.length - 1 && (
-                            <span className="text-gray-800 text-[10px] font-light">|</span>
-                        )}
-                    </React.Fragment>
+                ].map((link) => (
+                    <button
+                        key={link.id}
+                        onClick={() => {
+                            const pathMap: Record<string, string> = {
+                                'company-about': '/about-us',
+                                'company-contact': '/contact-us',
+                                'legal-terms': '/terms-and-conditions',
+                                'legal-privacy': '/privacy-policy',
+                                'legal-disclaimer': '/disclaimer'
+                            };
+                            const path = pathMap[link.id] || `/${link.id.replace('legal-', '').replace('company-', '')}`;
+                            onNavigate?.(path);
+                        }}
+                        className="text-gray-500 hover:text-white transition-all duration-300 text-[10px] ms:text-[11px] font-bold uppercase tracking-widest text-center sm:text-left"
+                    >
+                        {link.label}
+                    </button>
                 ))}
             </div>
         </div>

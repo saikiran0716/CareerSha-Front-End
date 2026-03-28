@@ -8,7 +8,6 @@ import { CollegesView, ResultsView } from '../../components/ExploreViews';
 import RankEstimator from '../../components/RankEstimator/RankEstimator';
 import { CollegePredictorView } from '../../components/CollegeMatcher/CollegePredictor';
 import AIRoadmap from '../../features/roadmaps/AIRoadmap';
-import ChatBot from '../../components/ChatBot/ChatBot';
 import StudentForm from '../../components/StudentForm';
 import PersonalizedReport from '../../components/PersonalizedReport/PersonalizedReport';
 import {
@@ -34,7 +33,6 @@ const HomePage: React.FC<HomePageProps> = ({ user, setIsAuthModalOpen, onAskAI }
     const [profile, setProfile] = useState<StudentProfile | null>(null);
     const [aiResponse, setAiResponse] = useState<AIResponse | null>(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [chatInitialMessage, setChatInitialMessage] = useState<string | null>(null);
 
     const handleNavigation = (destination: string) => {
         if (!destination) return;
@@ -81,11 +79,9 @@ const HomePage: React.FC<HomePageProps> = ({ user, setIsAuthModalOpen, onAskAI }
         setAiResponse(null);
         handleNavigation('home');
         setHomeViewMode('portal');
-        setChatInitialMessage(null);
     };
 
     const handleAskAICallback = useCallback((topic: string) => {
-        setChatInitialMessage(topic);
         onAskAI(topic);
     }, [onAskAI]);
 
@@ -196,13 +192,6 @@ const HomePage: React.FC<HomePageProps> = ({ user, setIsAuthModalOpen, onAskAI }
             }
 
 
-            <ChatBot profile={
-                profile || emptyProfile
-            }
-                initialMessage={chatInitialMessage}
-                onMessageProcessed={
-                    () => setChatInitialMessage(null)
-                } />
         </main>
     );
 };

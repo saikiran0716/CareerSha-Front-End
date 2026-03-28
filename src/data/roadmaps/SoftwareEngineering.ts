@@ -30,7 +30,7 @@ export const softwareEngineeringData: RoadmapData = {
             title: "Entrance Exams",
             subtitle: "The Gateways",
             description: "Clear national, state, or global exams to enter your choice of elite institutions.",
-            details: ["JEE Main/Adv (IITs/NITs)", "EAMCET / ECET (State)", "SAT / TOEFL (Global: MIT)"],
+            details: ["JEE MAINS/Adv (IITs/NITs)", "EAMCET / ECET (State)", "SAT / TOEFL (Global: MIT)"],
             iconName: "Zap"
         },
         {

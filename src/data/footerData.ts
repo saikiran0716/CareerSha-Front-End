@@ -58,7 +58,7 @@ const COLLEGES_MED = MED_INDIA;
 // Restored EXAMS array for internal footer logic
 const EXAMS = [
     { title: 'CAT', subtitle: 'Common Admission Test', tags: ['MBA', 'Entrance'], image: IMAGES.exam },
-    { title: 'JEE Main', subtitle: 'Joint Entrance Exam', tags: ['Engineering', 'Entrance'], image: IMAGES.exam },
+    { title: 'JEE MAINS', subtitle: 'Joint Entrance Exam', tags: ['Engineering', 'Entrance'], image: IMAGES.exam },
     { title: 'NEET', subtitle: 'National Eligibility cum Entrance Test', tags: ['Medical', 'Entrance'], image: IMAGES.exam },
     { title: 'GATE', subtitle: 'Graduate Aptitude Test in Engineering', tags: ['M.Tech', 'Entrance'], image: IMAGES.exam },
     { title: 'CLAT', subtitle: 'Common Law Admission Test', tags: ['Law', 'Entrance'], image: IMAGES.exam }
@@ -71,7 +71,7 @@ const getCollegesByCity = (city: string): PageItem[] => {
 
 const COMMON_FAQS = [
     { question: 'What are the eligibility criteria?', answer: 'Generally, candidates must have completed their 10+2 or graduation with a minimum aggregate score (usually 50-60%) depending on the program and category.' },
-    { question: 'Is there an entrance exam?', answer: 'Yes, most top tier colleges accept national level scores like CAT, JEE Main, NEET, or GATE. Some private universities have their own entrance tests.' },
+    { question: 'Is there an entrance exam?', answer: 'Yes, most top tier colleges accept national level scores like CAT, JEE MAINS, NEET, or GATE. Some private universities have their own entrance tests.' },
     { question: 'What is the fee structure?', answer: 'Fees vary significantly. Government colleges usually range from ₹10K to ₹2L per year, while private institutions can range from ₹2L to ₹25L per year.' },
     { question: "How to check college ranking?", answer: "Check NIRF ranking on the official website." },
     { question: "Are scholarships available?", answer: "Yes, most colleges offer merit-based and need-based scholarships." }
@@ -125,7 +125,7 @@ export const FOOTER_PAGES: Record<string, PageData> = {
         description: 'India\'s finest technical institutes fostering innovation. IITs, NITs, and IIITs.',
         items: ENG_INDIA,
         type: 'college',
-        content: '<p>Engineering remains the most sought-after career path in India. The <strong>IITs</strong> are globally recognized for excellence. Admission is primarily through JEE Main and JEE Advanced.</p>',
+        content: '<p>Engineering remains the most sought-after career path in India. The <strong>IITs</strong> are globally recognized for excellence. Admission is primarily through JEE MAINS and JEE Advanced.</p>',
         faqs: COMMON_FAQS
     },
     'iits-india': {
@@ -186,7 +186,7 @@ export const FOOTER_PAGES: Record<string, PageData> = {
     // Exams
     'exam-cat': { title: 'CAT 2026', description: 'Common Admission Test 2026.', items: EXAMS_MANAGEMENT, type: 'exam', content: '<p>CAT is the toughest management entrance exam in India.</p>', faqs: [{ question: 'When is CAT 2026 conducted?', answer: 'Usually on the last Sunday of November 2026.' }] },
     'exam-gate': { title: 'GATE 2026', description: 'Graduate Aptitude Test in Engineering 2026.', items: EXAMS_ENGINEERING, type: 'exam', content: '<p>GATE is the entry point for M.Tech and PSUs.</p>', faqs: [{ question: 'When is GATE 2026?', answer: 'February 2026.' }] },
-    'exam-jee-main': { title: 'JEE Main 2026', description: 'Joint Entrance Examination 2026.', items: EXAMS_ENGINEERING, type: 'exam', content: '<p>JEE Main is for NITs and IIITs.</p>', faqs: [{ question: 'How many attempts?', answer: '3 years.' }] },
+    'exam-jee-main': { title: 'JEE MAINS 2026', description: 'Joint Entrance Examination 2026.', items: EXAMS_ENGINEERING, type: 'exam', content: '<p>JEE MAINS is for NITs and IIITs.</p>', faqs: [{ question: 'How many attempts?', answer: '3 years.' }] },
     'exam-neet': { title: 'NEET 2026', description: 'National Eligibility cum Entrance Test 2026.', items: EXAMS_MEDICAL, type: 'exam', content: '<p>NEET UG is mandatory for MBBS/BDS.</p>', faqs: [{ question: 'Negative marking?', answer: 'Yes.' }] },
     'exam-xat': { title: 'XAT 2026', description: 'Xavier Aptitude Test 2026.', items: EXAMS_MANAGEMENT, type: 'exam', content: '<p>XAT is for XLRI and other top B-schools.</p>', faqs: COMMON_FAQS },
     'exam-clat': { title: 'CLAT 2026', description: 'Common Law Admission Test 2026.', items: EXAMS_LAW, type: 'exam', content: '<p>CLAT is for NLUs.</p>', faqs: COMMON_FAQS },
@@ -197,7 +197,7 @@ export const FOOTER_PAGES: Record<string, PageData> = {
     'tool-loan': { title: 'Education Loan Providers', description: 'Compare interest rates and schemes.', items: TOOLS_LOAN, type: 'exam', content: '<p>Education loans cover tuition fees, accommodation, and other expenses. Check for tax benefits under Sec 80E.</p>', faqs: COMMON_FAQS },
     'tool-scholarship': { title: 'Top Scholarships in India', description: 'Merit and Need-based Financial Aid.', items: TOOLS_SCHOLARSHIP, type: 'exam', content: '<p>Scholarships are available from government, corporates, and universities.</p>', faqs: COMMON_FAQS },
     'tool-abroad': { title: 'Study Abroad Destinations', description: 'USA, UK, Canada, Germany, Australia.', items: TOOLS_ABROAD, type: 'exam', content: '<p>Studying abroad offers global exposure. Check visa requirements and post-study work rights.</p>', faqs: COMMON_FAQS },
-    'tool-predictor': { title: 'College Predictors', description: 'JEE Main, NEET, CAT, GATE', items: TOOLS_PREDICTOR, type: 'exam', content: '<p>Predict your chances of admission into top colleges based on your exam score or percentile.</p>', faqs: COMMON_FAQS },
+    'tool-predictor': { title: 'College Predictors', description: 'JEE MAINS, NEET, CAT, GATE', items: TOOLS_PREDICTOR, type: 'exam', content: '<p>Predict your chances of admission into top colleges based on your exam score or percentile.</p>', faqs: COMMON_FAQS },
     'tool-rank': { title: 'Rank Estimators', description: 'Calculate your expected rank', items: TOOLS_RANK, type: 'exam', content: '<p>Estimate your All India Rank (AIR) based on your expected score.</p>', faqs: COMMON_FAQS },
     'tool-reviews': { title: 'College Reviews', description: 'Student & Alumni Verdicts', items: TOOLS_REVIEWS, type: 'review', content: '<p>Read authentic reviews from current students and alumni about campus life, placements, and faculty.</p>', faqs: COMMON_FAQS },
     'tool-compare': { title: 'Compare Colleges', description: 'Side-by-side Comparison', items: TOOLS_COMPARE, type: 'exam', content: '<p>Compare colleges on parameters like placements, fees, infrastructure, and cutoffs.</p>', faqs: COMMON_FAQS },

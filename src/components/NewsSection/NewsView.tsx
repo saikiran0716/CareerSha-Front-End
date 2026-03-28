@@ -7,7 +7,7 @@ import SEO from '../SEO/SEO';
 const NEWS_DATA = [
     {
         id: 1,
-        title: "JEE Main 2026 Session 1 Results Out; Paper 2 Answer Key Challenge Ends Today",
+        title: "JEE MAINS 2026 Session 1 Results Out; Paper 2 Answer Key Challenge Ends Today",
         date: "February 21, 2026, 09:15 AM IST",
         image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=80&w=200",
         link: "https://jeemain.nta.nic.in",
@@ -35,8 +35,8 @@ const NewsView: React.FC = () => {
 
     return (
         <div className="w-full min-h-screen bg-[#f8faff] dark:bg-slate-950 animate-fade">
-            <SEO 
-                title="Latest News & Notifications" 
+            <SEO
+                title="Latest News & Notifications"
                 description="Real-time information about exams, results, and admissions for 2026. Stay updated with CareerSha."
                 keywords="latest news, exam notifications, results 2026, admission updates"
             />

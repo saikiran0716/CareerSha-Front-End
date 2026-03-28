@@ -15,7 +15,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 
 const EXAM_MAX_MARKS: Record<string, number> = {
-    "JEE Main": 300,
+    "JEE MAINS": 300,
     "JEE Advanced": 360,
     "NEET": 720,
     "CUET": 800,
@@ -28,7 +28,7 @@ const EXAM_MAX_MARKS: Record<string, number> = {
     "AP ECET": 200
 };
 
-const EXAM_OPTIONS = ["JEE Main", "JEE Advanced", "NEET", "CUET", "BITSAT", "VITEEE", "MHT CET", "KCET", "TS EAMCET", "TS ECET", "AP ECET"];
+const EXAM_OPTIONS = ["JEE MAINS", "JEE Advanced", "NEET", "CUET", "BITSAT", "VITEEE", "MHT CET", "KCET", "TS EAMCET", "TS ECET", "AP ECET"];
 
 const normalizeExamLabel = (value: string): string => {
     const normalized = (value || "").replace(/-/g, " ").trim().toLowerCase();
@@ -44,7 +44,7 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({
     onAskAI,
     defaultExam,
 }) => {
-    const [exam, setExam] = useState("JEE Main");
+    const [exam, setExam] = useState("JEE MAINS");
     const [score, setScore] = useState("");
     const [category, setCategory] = useState("General");
     const [isEstimating, setIsEstimating] = useState(false);

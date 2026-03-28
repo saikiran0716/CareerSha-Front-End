@@ -5,7 +5,7 @@ import { ChevronDown, Target, Zap, ShieldCheck } from 'lucide-react';
 import illustration from '../../assets/college-predictor-illustration.png';
 
 const EXAMS = [
-    "JEE Main", "JEE Advanced", "NEET", "CAT", "GATE", "BITSAT", "VITEEE", "CUET",
+    "JEE MAINS", "JEE Advanced", "NEET", "CAT", "GATE", "BITSAT", "VITEEE", "CUET",
     "XAT", "SNAP", "NMAT", "CMAT", "MAT", "NATA", "SRMJEEE", "MET",
     "COMEDK", "WBJEE", "MHT CET", "TS EAMCET", "AP EAMCET", "TS ECET", "AP ECET", "KCET", "KEAM", "GUJCET"
 ];

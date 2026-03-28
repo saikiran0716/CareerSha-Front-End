@@ -84,7 +84,7 @@ const CollegeMatchResults: React.FC = () => {
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
     const rank = searchParams.get("rank") || "0";
-    const exam = searchParams.get("exam") || "JEE MAIN";
+    const exam = searchParams.get("exam") || "JEE MAINS";
     const category = searchParams.get("category") || "OC";
 
     const cacheKey = `college_results_${exam}_${rank}_${category}`;
@@ -185,8 +185,8 @@ const CollegeMatchResults: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-[#EEF2F7] font-sans relative pb-20">
-            <SEO 
-                title={`Colleges for ${exam.toUpperCase()} Rank ${rank} | College Matcher`} 
+            <SEO
+                title={`Colleges for ${exam.toUpperCase()} Rank ${rank} | College Matcher`}
                 description={`View recommended colleges and universities for your ${exam} rank of ${rank}. Get personalized admission insights and placement data.`}
                 keywords={`college predictor, ${exam} colleges, rank ${rank}, college matcher, admission help`}
             />
@@ -237,7 +237,7 @@ const CollegeMatchResults: React.FC = () => {
                             <p className="text-sm font-medium text-slate-500 dark:text-slate-400 tracking-tight leading-relaxed">
                                 {error}
                             </p>
-                            <button 
+                            <button
                                 onClick={() => { setLoading(true); sessionStorage.removeItem(cacheKey); }}
                                 className="mt-4 px-8 py-3 bg-indigo-600 hover:bg-slate-900 text-white rounded-xl text-xs font-bold uppercase tracking-widest transition-all shadow-lg active:scale-95"
                             >

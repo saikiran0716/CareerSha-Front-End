@@ -21,7 +21,7 @@ export const roboticsEngineerData: RoadmapData = {
             title: "Entrance Exams",
             subtitle: "Engineering Entry",
             description: "Clear exams to get into top technical institutes.",
-            details: ["JEE Main/Advanced", "Bitsat", "State CETs"]
+            details: ["JEE MAINS/Advanced", "Bitsat", "State CETs"]
         },
         {
             id: 3,

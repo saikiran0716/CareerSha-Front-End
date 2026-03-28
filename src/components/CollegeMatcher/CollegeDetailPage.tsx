@@ -11,7 +11,7 @@ import {
 } from 'lucide-react';
 import { getCollegeDetails } from '../../services/geminiService';
 import { CollegeDetail } from '../../types';
-import Loader from '../Loader/Loader';
+import GlassLoader from '../Loader/GlassLoader';
 
 const getLogoSrc = (apiLogo: string, website: string, passedLogo: string): string => {
     if (passedLogo) return passedLogo;
@@ -142,21 +142,23 @@ const CollegeDetailPage: React.FC = () => {
 
     const isGovt = typeVal?.toLowerCase().includes('gov') || typeVal?.toLowerCase().includes('national') || typeVal?.toLowerCase().includes('central') || typeVal?.toLowerCase().includes('iit') || typeVal?.toLowerCase().includes('nit');
 
-    if (loading && !d) {
-        return <Loader fullScreen />;
-    }
-
     if (!loading && !d && !pc) {
         return <Navigate to="/404" replace />;
     }
 
     return (
-        <div className="relative z-10 min-h-screen bg-slate-100 text-slate-800 pb-24">
+        <div className="relative min-h-screen bg-slate-100 dark:bg-slate-950 overflow-x-hidden">
             <SEO 
                 title={`${name} Admission, Fees, Courses & Placement 2026`} 
                 description={`Check ${name} details including courses, fees, placements, and admission process. Get complete information on 2026 admissions.`}
                 keywords={`${name}, ${locVal}, ${typeVal}, college details, placements, admissions, 2026`}
             />
+
+            {/* Glass Loader Overlay */}
+            {loading && <GlassLoader />}
+
+            {/* Main Content Wrapper (Blurred while loading) */}
+            <div className={`transition-all duration-1000 ease-out pointer-events-auto ${loading ? 'blur-2xl opacity-40 scale-[0.98]' : 'blur-0 opacity-100 scale-100'}`}>
 
             {/* ── TOP NAV ── */}
             <div className="bg-gradient-to-r from-blue-800 to-indigo-800 sticky top-0 z-50">
@@ -807,6 +809,7 @@ const CollegeDetailPage: React.FC = () => {
                         )}
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     );

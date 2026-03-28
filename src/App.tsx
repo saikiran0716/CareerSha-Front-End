@@ -6,12 +6,15 @@ import { authService, User } from './services/authService';
 import ScrollToTop from './components/Scrollbutton/ScrollToTop';
 import RoadmapRouters from './AppRouters/RoadmapRouters';
 import AuthModal from './components/AuthModal/AuthModal';
+import ChatBot from './components/ChatBot/ChatBot';
+import { StudentProfile, Qualification, BudgetRange, CollegeType } from './types';
 
 const App: React.FC = () => {
 
     const [isDarkMode, setIsDarkMode] = useState(() => localStorage.getItem('theme') === 'dark');
     const [user, setUser] = useState<User | null>(null);
     const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+    const [chatInitialMessage, setChatInitialMessage] = useState<string | null>(null);
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -44,11 +47,32 @@ const App: React.FC = () => {
     };
 
     const handleAskAI = useCallback((topic: string) => {
-        // This handler can be passed down if needed by other components,
-        // but HomePage handles its own chatbot state now.
-        // We keep it here to satisfy the RoadmapRouters interface.
+        setChatInitialMessage(topic);
     }, []);
 
+    const defaultProfile: StudentProfile = {
+        name: user?.name || 'Explorer',
+        academic: {
+            qualification: Qualification.Twelfth,
+            board: '',
+            year: '',
+            subjects: '',
+            marks: ''
+        },
+        exam: {
+            examName: '',
+            rank: '',
+            category: 'General',
+            quota: 'State'
+        },
+        preferences: {
+            stream: '',
+            location: '',
+            budget: BudgetRange.Medium,
+            collegeType: CollegeType.Government,
+            careerGoal: '' as any
+        }
+    };
 
     return (
         <div className={
@@ -86,6 +110,13 @@ const App: React.FC = () => {
             <Footer onPageRequest={
                 (path) => navigate(path)
             } />
+            
+            <ChatBot 
+                profile={defaultProfile}
+                initialMessage={chatInitialMessage}
+                onMessageProcessed={() => setChatInitialMessage(null)}
+            />
+            
             <ScrollToTop />
         </div>
     );
