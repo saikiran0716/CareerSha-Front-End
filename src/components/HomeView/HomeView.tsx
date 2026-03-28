@@ -200,11 +200,11 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
             </div>
 
             {/* Split Hero Section */}
-            <section className="relative z-30 grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-10 items-center pt-4 sm:pt-8 px-3 sm:px-6 lg:px-8 mx-auto max-w-none hero-grid-1024 hero-section-mobile">
+            <section className="relative z-30 grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-10 items-center pt-2 px-3 sm:px-6 lg:px-8 mx-auto max-w-none hero-grid-1024 hero-section-mobile">
                 {/* Left Side: Content & Search */}
                 <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-6 animate-slide hero-content-mobile">
                     <h1 className="text-3xl sm:text-3xl md:text-4xl font-semibold text-slate-900 dark:text-white tracking-tight leading-[1.2] hero-title-responsive">
-                        <span className="hero-title-1024">Transforming Data <br /> into Student Success</span>
+                        <span className="hero-title-1024">Empowering Students with <br /> Smart Education & Career Tools</span>
                     </h1>
 
                     <div className="relative group w-full max-w-xl z-50">
@@ -264,7 +264,7 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                 </div>
 
                 {/* Right Side: Featured Card Carousel */}
-                <div className="relative aspect-video mt-0 lg:mt-[45px] w-full group animate-fade carousel-container-1024 carousel-container-mobile bg-slate-900/10 rounded-[2.5rem] overflow-hidden">
+                <div className="relative aspect-video mt-0 lg:mt-6 w-full group animate-fade carousel-container-1024 carousel-container-mobile bg-slate-900/10 rounded-[2.5rem] overflow-hidden">
                     {slides.map((item, index) => (
                         <div
                             key={item.id}
@@ -340,6 +340,17 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
 
 
 
+            {/* SEO Content Block */}
+            <div className="relative z-20 mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center lg:text-left border-t border-slate-100 dark:border-slate-800/50">
+                <div className="max-w-4xl">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-4">India’s Best Education Platform</h2>
+                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-lg">
+                        Find colleges, exams, and career guidance tools in one place. 
+                        Use our rank predictor, college matcher, and roadmap tools to plan your future.
+                    </p>
+                </div>
+            </div>
+
             <style>
                 {`
                 @keyframes dropdown { from { opacity: 0; transform: translateY(10px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
@@ -354,7 +365,5 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
         </div>
     );
 };
-
-
 
 export default HomeView;

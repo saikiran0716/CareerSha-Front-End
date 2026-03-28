@@ -256,14 +256,15 @@ body {
         padding-top: 1.5rem;
         padding-bottom: 1.5rem;
     }
-    
+
     .text-balance {
         text-wrap: balance;
     }
 }
 
 /* Prevent horizontal scroll globally */
-html, body {
+html,
+body {
     max-width: 100%;
     overflow-x: hidden;
-}
+}

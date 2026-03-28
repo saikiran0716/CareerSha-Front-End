@@ -6,6 +6,7 @@ import GenericFooterPage from '../components/GenericFooterPage/GenericFooterPage
 import StaticInfoPage from '../components/StaticInfoPage/StaticInfoPage';
 import AIRoadmap from '../features/roadmaps/AIRoadmap';
 import HomePage from '../components/HomePage/HomePage';
+import AuthPage from '../pages/AuthPage';
 import Loader from '../components/Loader/Loader';
 import NotFound from './NotFound';
 import CollegeMatchResults from '../components/CollegeMatcher/CollegeMatchResults';
@@ -14,6 +15,14 @@ import { NewsView } from '../components/NewsSection';
 const BlogListPage = lazy(() => import('../pages/Blog/BlogListPage'));
 const BlogDetailPage = lazy(() => import('../pages/Blog/BlogDetailPage'));
 import ExamDetailsPge from '../components/EXAMS/ExamDetailsPge';
+import SearchPage from '../pages/SearchPage';
+import RankPredictorPage from '../pages/RankPredictorPage';
+import CollegeMatcherPage from '../pages/CollegeMatcherPage';
+import ExamsHubPage from '../pages/ExamsHubPage';
+import CareerLibraryPage from '../pages/CareerLibraryPage';
+import ResultsPage from '../pages/ResultsPage';
+import NewsPage from '../pages/NewsPage';
+import SEO from '../components/SEO/SEO';
 
 // Static Pages Imports
 import AboutUs from '../pages/Footer_Pages_Static/AboutUs';
@@ -86,7 +95,25 @@ const RoadmapRouters: React.FC<RoadmapRoutersProps> = ({ onAskAI, user, setIsAut
         <Suspense fallback={<div className="min-h-[50vh] flex items-center justify-center"><Loader /></div>}>
             <Routes>
                 <Route path="/" element={<HomePage user={user} setIsAuthModalOpen={setIsAuthModalOpen} onAskAI={onAskAI} />} />
-                <Route path="/roadmaps" element={<main className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12"><AIRoadmap /></main>} />
+                <Route path="/login" element={<AuthPage user={user} onAuthSuccess={(u) => setIsAuthModalOpen(false)} />} />
+                <Route path="/register" element={<AuthPage user={user} onAuthSuccess={(u) => setIsAuthModalOpen(false)} />} />
+                <Route path="/search" element={<SearchPage />} />
+                <Route path="/rank-estimator" element={<RankPredictorPage onAskAI={onAskAI} />} />
+                <Route path="/college-matcher" element={<CollegeMatcherPage onAskAI={onAskAI} />} />
+                <Route path="/exams" element={<ExamsHubPage />} />
+                <Route path="/career-library" element={<CareerLibraryPage />} />
+                <Route path="/results" element={<ResultsPage onAskAI={onAskAI} />} />
+                <Route path="/news" element={<NewsPage />} />
+                <Route path="/roadmaps" element={
+                    <main className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
+                        <SEO 
+                            title="Career Roadmaps | Step-by-Step Career Planning"
+                            description="Plan your career journey with detailed roadmaps for different professions."
+                        />
+                        <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-8 text-center pt-8">Career Roadmaps</h1>
+                        <AIRoadmap />
+                    </main>
+                } />
                 <Route path="/roadmap/software-engineer" element={<SoftwareEngineeringRoadmap onAskAI={onAskAI} />} />
                 <Route path="/roadmap/data-scientist" element={<DataScientistRoadmap onAskAI={onAskAI} />} />
                 <Route path="/roadmap/ui-ux-designer" element={<UiUxDesignerRoadmap onAskAI={onAskAI} />} />

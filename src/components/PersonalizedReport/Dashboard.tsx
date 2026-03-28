@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SEO from '../SEO/SEO';
 import { AIResponse, College } from '../../types';
 import {
   BarChart,
@@ -150,6 +151,10 @@ const Dashboard: React.FC<Props> = ({ data }) => {
 
   return (
     <div className="w-full py-12 space-y-16">
+      <SEO 
+        title="My Dashboard | CareerSha" 
+        robots="noindex, nofollow" 
+      />
 
       {/* Summary */}
       <section className="bg-white p-8 rounded-xl border border-slate-200">

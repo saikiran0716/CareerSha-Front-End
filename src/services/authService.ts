@@ -1,4 +1,4 @@
-﻿export interface User {
+export interface User {
   id: string | number;
   name: string;
   email: string;
@@ -58,7 +58,7 @@ const parseError = async (response: Response, fallbackCode: string, fallbackMess
   throw { code: fallbackCode, message };
 };
 
-type PendingAuthResult = {
+export type PendingAuthResult = {
   requires2FA: true;
   pendingToken: string;
   email?: string;
@@ -66,12 +66,12 @@ type PendingAuthResult = {
   expiresInSeconds?: number;
 };
 
-type CompletedAuthResult = {
+export type CompletedAuthResult = {
   requires2FA: false;
   user: User;
 };
 
-type AuthResult = PendingAuthResult | CompletedAuthResult;
+export type AuthResult = PendingAuthResult | CompletedAuthResult;
 
 export const authService = {
   /**

@@ -133,9 +133,9 @@ const HomePage: React.FC<HomePageProps> = ({ user, setIsAuthModalOpen, onAskAI }
     return (
         <main className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-0 pb-8 sm:pb-12 flex flex-col gap-0 overflow-x-hidden">
             <SEO 
-                title="Home" 
-                description="Expert career guidance, personalized roadmaps, and college predictability tools to help you navigate your academic journey."
-                keywords="career guidance, roadmaps, college predictor, engineering, medical, career planning"
+                title="Best Education Platform in India 2026 | Colleges, Exams, Careers" 
+                description="Explore colleges, exams, rank predictors, and career guidance on India's best education platform. Get latest updates, results, and career tools in one place."
+                keywords="education platform India, college search India, exam updates, career guidance"
             />
             <div id="home">
                 <HomeView onStartCounseling={

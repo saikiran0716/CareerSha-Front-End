@@ -148,9 +148,9 @@ const CollegeDetailPage: React.FC = () => {
     return (
         <div className="relative z-10 min-h-screen bg-slate-100 text-slate-800 pb-24">
             <SEO 
-                title={`${name} | College Details`} 
-                description={desc || `View detailed information about ${name}, including placements, admissions, campus life, and more.`}
-                keywords={`${name}, ${locVal}, ${typeVal}, college details, placements, admissions`}
+                title={`${name} Admission, Fees, Courses & Placement 2026`} 
+                description={`Check ${name} details including courses, fees, placements, and admission process. Get complete information on 2026 admissions.`}
+                keywords={`${name}, ${locVal}, ${typeVal}, college details, placements, admissions, 2026`}
             />
 
             {/* ── TOP NAV ── */}

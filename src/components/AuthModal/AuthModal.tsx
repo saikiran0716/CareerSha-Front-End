@@ -60,7 +60,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
     try {
       if (isLogin) {
         const result = await authService.login(email, password);
-        if (result.requires2FA) {
+        if (result.requires2FA === true) {
           setPendingToken(result.pendingToken);
           setVerificationTarget(result.email || email);
           setShow2FA(true);
@@ -70,7 +70,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
         }
       } else {
         const result = await authService.signup(name, email, password);
-        if (result.requires2FA) {
+        if (result.requires2FA === true) {
           setPendingToken(result.pendingToken);
           setVerificationTarget(result.email || email);
           setShow2FA(true);
@@ -131,7 +131,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
     setIsLoading(true);
     try {
       const result = await authService.loginWithGoogle(credential);
-      if (result.requires2FA) {
+      if (result.requires2FA === true) {
         setPendingToken(result.pendingToken);
         setVerificationTarget(result.email || 'your email');
         setShow2FA(true);
