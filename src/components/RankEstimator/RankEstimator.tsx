@@ -23,10 +23,12 @@ const EXAM_MAX_MARKS: Record<string, number> = {
     "VITEEE": 125,
     "MHT CET": 200,
     "KCET": 180,
-    "TS EAMCET": 160
+    "TS EAMCET": 160,
+    "TS ECET": 200,
+    "AP ECET": 200
 };
 
-const EXAM_OPTIONS = ["JEE Main", "JEE Advanced", "NEET", "CUET", "BITSAT", "VITEEE", "MHT CET", "KCET", "TS EAMCET"];
+const EXAM_OPTIONS = ["JEE Main", "JEE Advanced", "NEET", "CUET", "BITSAT", "VITEEE", "MHT CET", "KCET", "TS EAMCET", "TS ECET", "AP ECET"];
 
 const normalizeExamLabel = (value: string): string => {
     const normalized = (value || "").replace(/-/g, " ").trim().toLowerCase();

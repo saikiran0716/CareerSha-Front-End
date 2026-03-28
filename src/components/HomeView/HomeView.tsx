@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CoursoalItem, coursoalData } from '../../assets/coursoal/data';
-import { Search, Play, Sparkles, TrendingUp, GraduationCap, Map as MapIcon, Award } from 'lucide-react';
+import { Search, Sparkles, TrendingUp, GraduationCap, Map as MapIcon, Award } from 'lucide-react';
 import { PredictorTags } from '../HeroPredictors';
 import { getHomepageCarouselItems } from '../../services/homeContentService';
 // Extracted NewsNotifications component for better maintainability
@@ -204,7 +204,7 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                 {/* Left Side: Content & Search */}
                 <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-6 animate-slide hero-content-mobile">
                     <h1 className="text-3xl sm:text-3xl md:text-4xl font-semibold text-slate-900 dark:text-white tracking-tight leading-[1.2] hero-title-responsive">
-                        <span className="hero-title-1024">Empowering Students with <br /> Smart Education & Career Tools</span>
+                        <span className="hero-title-1024 font-semibold">Empowering Students with <br /> Smart Education & Career Tools</span>
                     </h1>
 
                     <div className="relative group w-full max-w-xl z-50">
@@ -309,7 +309,6 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                                                 onClick={() => onNavigate(item.link)}
                                                 className="inline-flex items-center gap-3 px-6 py-3.5 bg-white text-[#1a1a1a] rounded-xl text-[12px] font-black uppercase hover:bg-slate-100 transition-all shadow-xl active:scale-95 group/btn carousel-button-1024 carousel-btn-mobile"
                                             >
-                                                <Play size={14} fill="currentColor" className="group-hover/btn:scale-110 transition-transform" />
                                                 {item.buttonText}
                                             </button>
                                         </div>

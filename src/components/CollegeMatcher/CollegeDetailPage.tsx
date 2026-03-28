@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { getCollegeDetails } from '../../services/geminiService';
 import { CollegeDetail } from '../../types';
+import Loader from '../Loader/Loader';
 
 const getLogoSrc = (apiLogo: string, website: string, passedLogo: string): string => {
     if (passedLogo) return passedLogo;
@@ -141,6 +142,10 @@ const CollegeDetailPage: React.FC = () => {
 
     const isGovt = typeVal?.toLowerCase().includes('gov') || typeVal?.toLowerCase().includes('national') || typeVal?.toLowerCase().includes('central') || typeVal?.toLowerCase().includes('iit') || typeVal?.toLowerCase().includes('nit');
 
+    if (loading && !d) {
+        return <Loader fullScreen />;
+    }
+
     if (!loading && !d && !pc) {
         return <Navigate to="/404" replace />;
     }
@@ -159,7 +164,6 @@ const CollegeDetailPage: React.FC = () => {
                     <button onClick={() => navigate(-1)} className="flex items-center gap-1.5 text-blue-200 hover:text-white text-sm font-medium transition-colors">
                         <ArrowLeft size={14} /> Back to Results
                     </button>
-                    {loading && <span className="text-[11px] text-blue-300 flex items-center gap-1.5"><Loader2 size={11} className="animate-spin text-blue-300" />Generating profile…</span>}
                 </div>
             </div>
 

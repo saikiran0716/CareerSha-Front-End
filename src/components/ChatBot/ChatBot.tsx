@@ -123,7 +123,7 @@ const ChatBot: React.FC<Props> = ({ profile, initialMessage, onMessageProcessed 
     <>
       {/* No backdrop to keep background visible as requested */}
 
-      <div className={`fixed z-[110] transition-all duration-500 cubic-bezier(0.19, 1, 0.22, 1) ${isOpen
+      <div className={`fixed z-[9999] transition-all duration-500 cubic-bezier(0.19, 1, 0.22, 1) ${isOpen
         ? 'bottom-2 right-2 sm:bottom-10 sm:right-10 w-[260px] sm:w-[340px] max-w-[calc(100%-1rem)] h-[340px] sm:h-[450px] max-h-[calc(100vh-1.5rem)] sm:max-h-[calc(100vh-8rem)]'
         : 'bottom-4 right-4 sm:bottom-10 sm:right-10 w-auto h-auto'
         }`}>
@@ -247,7 +247,7 @@ const ChatBot: React.FC<Props> = ({ profile, initialMessage, onMessageProcessed 
         ) : (
           <button
             onClick={() => setIsOpen(true)}
-            className="group relative bg-indigo-600 text-white w-12 h-12 sm:w-14 sm:h-14 rounded-full shadow-lg shadow-indigo-500/30 hover:bg-indigo-700 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center z-[100]"
+            className="group relative bg-indigo-600 text-white w-12 h-12 sm:w-14 sm:h-14 rounded-full shadow-lg shadow-indigo-500/30 hover:bg-indigo-700 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center z-[9999]"
           >
             <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />

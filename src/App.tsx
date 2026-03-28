@@ -1,8 +1,8 @@
-import React, {useState, useCallback, useEffect} from 'react';
-import {useLocation, useNavigate} from 'react-router-dom';
+import React, { useState, useCallback, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Footer from './components/Footer';
-import {authService, User} from './services/authService';
+import { authService, User } from './services/authService';
 import ScrollToTop from './components/Scrollbutton/ScrollToTop';
 import RoadmapRouters from './AppRouters/RoadmapRouters';
 import AuthModal from './components/AuthModal/AuthModal';
@@ -10,7 +10,7 @@ import AuthModal from './components/AuthModal/AuthModal';
 const App: React.FC = () => {
 
     const [isDarkMode, setIsDarkMode] = useState(() => localStorage.getItem('theme') === 'dark');
-    const [user, setUser] = useState < User | null > (null);
+    const [user, setUser] = useState<User | null>(null);
     const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
     const location = useLocation();
@@ -18,7 +18,7 @@ const App: React.FC = () => {
 
     useEffect(() => {
         const unsubscribe = authService.onStateChange((u) => setUser(u));
-        return() => unsubscribe();
+        return () => unsubscribe();
     }, []);
 
     useEffect(() => {
@@ -43,7 +43,7 @@ const App: React.FC = () => {
         setUser(null);
     };
 
-    const handleAskAI = useCallback((topic : string) => {
+    const handleAskAI = useCallback((topic: string) => {
         // This handler can be passed down if needed by other components,
         // but HomePage handles its own chatbot state now.
         // We keep it here to satisfy the RoadmapRouters interface.
@@ -52,8 +52,7 @@ const App: React.FC = () => {
 
     return (
         <div className={
-            `min-h-screen w-full max-w-full box-border bg-slate-50 dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 transition-colors duration-300 selection:bg-indigo-500/30 ${
-                isDarkMode ? 'dark' : ''
+            `min-h-screen w-full max-w-full box-border bg-slate-50 dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 transition-colors duration-300 selection:bg-indigo-500/30 ${isDarkMode ? 'dark' : ''
             }`
         }>
             {/* Global Background */}
@@ -70,11 +69,11 @@ const App: React.FC = () => {
                 }
                 onLogout={handleLogout}
                 isDarkMode={isDarkMode}
-                onToggleDarkMode={toggleDarkMode}/>
+                onToggleDarkMode={toggleDarkMode} />
 
             <RoadmapRouters onAskAI={handleAskAI}
                 user={user}
-                setIsAuthModalOpen={setIsAuthModalOpen}/>
+                setIsAuthModalOpen={setIsAuthModalOpen} />
 
             <AuthModal isOpen={isAuthModalOpen}
                 onClose={
@@ -82,12 +81,12 @@ const App: React.FC = () => {
                 }
                 onAuthSuccess={
                     (u) => setUser(u)
-                }/>
+                } />
 
             <Footer onPageRequest={
                 (path) => navigate(path)
-            }/>
-            <ScrollToTop/>
+            } />
+            <ScrollToTop />
         </div>
     );
 };
