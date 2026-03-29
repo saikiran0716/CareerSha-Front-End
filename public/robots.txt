@@ -1,9 +1,13 @@
 User-agent: *
 Allow: /
 
-# Disallow admin/private routes (if any)
-Disallow: /admin/
-Disallow: /api/
+# Block private / non-SEO pages
+Disallow: /login
+Disallow: /register
+Disallow: /dashboard
+
+# Optional: block query parameters (if needed later)
+# Disallow: /*?*
 
 # Sitemap location
 Sitemap: https://careersha.com/sitemap.xml

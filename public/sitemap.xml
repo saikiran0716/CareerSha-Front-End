@@ -1,115 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- MAIN PAGES -->
+  <!-- Homepage -->
   <url>
     <loc>https://careersha.com/</loc>
+    <lastmod>2026-03-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- TOOLS -->
+  <!-- Jobs Listing -->
   <url>
-    <loc>https://careersha.com/tools</loc>
+    <loc>https://careersha.com/jobs</loc>
+    <lastmod>2026-03-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
 
-  <url>
-    <loc>https://careersha.com/tools/jee-rank-predictor</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://careersha.com/tools/neet-rank-predictor</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://careersha.com/tools/college-predictor</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://careersha.com/tools/eamcet-rank-predictor</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- EXAMS -->
-  <url>
-    <loc>https://careersha.com/exams</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- BLOG -->
+  <!-- Blog -->
   <url>
     <loc>https://careersha.com/blog</loc>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-03-29</lastmod>
+    <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- CAREER ROADMAPS -->
-  <url>
-    <loc>https://careersha.com/roadmaps</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- MBA -->
-  <url>
-    <loc>https://careersha.com/mba</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- ENGINEERING -->
-  <url>
-    <loc>https://careersha.com/engineering</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- MEDICAL -->
-  <url>
-    <loc>https://careersha.com/medical</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- LEGAL / FOOTER -->
+  <!-- About -->
   <url>
     <loc>https://careersha.com/about</loc>
+    <lastmod>2026-03-29</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.6</priority>
   </url>
 
+  <!-- Contact -->
   <url>
     <loc>https://careersha.com/contact</loc>
+    <lastmod>2026-03-29</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-
-  <url>
-    <loc>https://careersha.com/privacy-policy</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-
-  <url>
-    <loc>https://careersha.com/terms</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-
-  <url>
-    <loc>https://careersha.com/disclaimer</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <priority>0.6</priority>
   </url>
 
 </urlset>
