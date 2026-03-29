@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { getCollegeDetails } from '../../services/geminiService';
 import { CollegeDetail } from '../../types';
+import GlassLoader from '../Loader/GlassLoader';
 
 const getLogoSrc = (apiLogo: string, website: string, passedLogo: string): string => {
     if (passedLogo) return passedLogo;
@@ -146,12 +147,18 @@ const CollegeDetailPage: React.FC = () => {
     }
 
     return (
-        <div className="relative z-10 min-h-screen bg-slate-100 text-slate-800 pb-24">
+        <div className="relative min-h-screen bg-slate-100 dark:bg-slate-950 overflow-x-hidden">
             <SEO 
                 title={`${name} Admission, Fees, Courses & Placement 2026`} 
                 description={`Check ${name} details including courses, fees, placements, and admission process. Get complete information on 2026 admissions.`}
                 keywords={`${name}, ${locVal}, ${typeVal}, college details, placements, admissions, 2026`}
             />
+
+            {/* Glass Loader Overlay */}
+            {loading && <GlassLoader />}
+
+            {/* Main Content Wrapper (Blurred while loading) */}
+            <div className={`transition-all duration-1000 ease-out pointer-events-auto ${loading ? 'blur-2xl opacity-40 scale-[0.98]' : 'blur-0 opacity-100 scale-100'}`}>
 
             {/* ── TOP NAV ── */}
             <div className="bg-gradient-to-r from-blue-800 to-indigo-800 sticky top-0 z-50">
@@ -159,7 +166,6 @@ const CollegeDetailPage: React.FC = () => {
                     <button onClick={() => navigate(-1)} className="flex items-center gap-1.5 text-blue-200 hover:text-white text-sm font-medium transition-colors">
                         <ArrowLeft size={14} /> Back to Results
                     </button>
-                    {loading && <span className="text-[11px] text-blue-300 flex items-center gap-1.5"><Loader2 size={11} className="animate-spin text-blue-300" />Generating profile…</span>}
                 </div>
             </div>
 
@@ -803,6 +809,7 @@ const CollegeDetailPage: React.FC = () => {
                         )}
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     );

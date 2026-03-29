@@ -3,7 +3,7 @@ import { IMAGES } from '../constants';
 
 export const TOOLS_PREDICTOR: PageItem[] = [
     {
-        "title": "JEE Main Predictor",
+        "title": "JEE MAINS Predictor",
         "subtitle": "Engineering",
         "tags": [
             "B.Tech",

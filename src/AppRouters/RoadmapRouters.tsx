@@ -106,7 +106,7 @@ const RoadmapRouters: React.FC<RoadmapRoutersProps> = ({ onAskAI, user, setIsAut
                 <Route path="/news" element={<NewsPage />} />
                 <Route path="/roadmaps" element={
                     <main className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
-                        <SEO 
+                        <SEO
                             title="Career Roadmaps | Step-by-Step Career Planning"
                             description="Plan your career journey with detailed roadmaps for different professions."
                         />
@@ -164,7 +164,7 @@ const RoadmapRouters: React.FC<RoadmapRoutersProps> = ({ onAskAI, user, setIsAut
                 <Route path="/rank/jee-main" element={<JEEMainRank />} />
                 <Route path="/rank/neet" element={<NEETRank />} />
                 <Route path="/rank/ts-eamcet" element={<EAMCETRank />} />
-                
+
                 {/* Static Content Routes */}
                 <Route path="/about-us" element={<AboutUs />} />
                 <Route path="/contact-us" element={<ContactUs />} />
@@ -177,8 +177,8 @@ const RoadmapRouters: React.FC<RoadmapRoutersProps> = ({ onAskAI, user, setIsAut
                 <Route path="/blog" element={<BlogListPage />} />
                 <Route path="/blog/category/:categorySlug" element={<BlogListPage />} />
                 <Route path="/blog/:id" element={<BlogDetailPage />} />
-                                <Route path="/blog" element={<BlogListPage />} />
-                                <Route path="/blog/:id" element={<BlogDetailPage />} />
+                <Route path="/blog" element={<BlogListPage />} />
+                <Route path="/blog/:id" element={<BlogDetailPage />} />
                 <Route path="/recommended-colleges" element={<CollegeMatchResults />} />
                 {/* Global Redirects for Exams hitting /college/ path */}
                 <Route path="/college/gate/*" element={<Navigate to="/exams/gate" replace />} />
@@ -198,10 +198,10 @@ const RoadmapRouters: React.FC<RoadmapRoutersProps> = ({ onAskAI, user, setIsAut
                     const footerPageData = FOOTER_PAGES[slug];
                     // Skip these specific slugs as they are now handled by dedicated components above
                     const isDedicatedStatic = [
-                      'company-about', 'company-contact', 
-                      'legal-privacy', 'legal-terms', 'legal-disclaimer'
+                        'company-about', 'company-contact',
+                        'legal-privacy', 'legal-terms', 'legal-disclaimer'
                     ].includes(slug);
-                    
+
                     if (isDedicatedStatic) return null;
                     // Special cases like 'iits-india' should keep their structure if needed, 
                     // but for footer links we usually want the URL in the navigation to match.

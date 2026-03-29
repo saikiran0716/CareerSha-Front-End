@@ -6,7 +6,7 @@ import { getLatestNewsItems, NewsItem } from '../../services/homeContentService'
 const NEWS_DATA = [
     {
         id: 1,
-        title: "JEE Main 2026 Session 1 Results Out; Paper 2 Answer Key Challenge Ends Today",
+        title: "JEE MAINS 2026 Session 1 Results Out; Paper 2 Answer Key Challenge Ends Today",
         date: "February 21, 2026, 09:15 AM IST",
         image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=80&w=200",
         link: "https://jeemain.nta.nic.in",
@@ -65,7 +65,8 @@ const NewsNotifications: React.FC = () => {
 
     return (
         <section className="bg-transparent dark:bg-transparent py-2 select-none news-section-mobile">
-            <style dangerouslySetInnerHTML={{ __html: `
+            <style dangerouslySetInnerHTML={{
+                __html: `
                 @media (max-width: 639px) {
                     .news-section-mobile .news-container-mobile {
                         padding: 0.5rem !important;

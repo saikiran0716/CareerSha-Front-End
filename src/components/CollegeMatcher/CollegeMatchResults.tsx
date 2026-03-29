@@ -23,7 +23,7 @@ import {
     Users,
     BookOpen
 } from "lucide-react";
-import BookLoader from "../BookLoader/BookLoader";
+import Loader from "../Loader/Loader";
 
 /* ---------------- COLLEGE LOGO COMPONENT ---------------- */
 
@@ -76,95 +76,7 @@ interface CollegeResult {
     logoUrl?: string;
 }
 
-/* ---------------- MOCK DATA ---------------- */
 
-const MOCK_COLLEGES: CollegeResult[] = [
-    {
-        id: "1",
-        name: "Indian Institute of Technology Bombay",
-        branch: "Computer Science & Engineering",
-        generalCutoff: "1 - 67",
-        categoryCutoff: "42",
-        type: "GOVERNMENT",
-        careerInsight: "Unmatched placement records with top-tier global tech giants and research opportunities.",
-        medianPackage: "23.5 LPA",
-        recruiters: ["Google", "Microsoft", "Amazon", "Apple"],
-        phone: "022-25722545",
-        isRecommended: true,
-        location: "MUMBAI, MAHARASHTRA",
-        fees: "₹2,10,000/yr",
-        website: "https://www.iitb.ac.in",
-        logoUrl: "https://upload.wikimedia.org/wikipedia/en/1/1d/IIT_Bombay_Logo.svg"
-    },
-    {
-        id: "2",
-        name: "Vellore Institute of Technology",
-        branch: "Information Technology",
-        generalCutoff: "2000 - 4500",
-        categoryCutoff: "3200",
-        type: "PRIVATE",
-        careerInsight: "Excellent infrastructure with a strong focus on industry-aligned technical skills.",
-        medianPackage: "8.2 LPA",
-        recruiters: ["TCS", "Infosys", "Wipro"],
-        phone: "0416-2243091",
-        isRecommended: true,
-        location: "VELLORE, TAMIL NADU",
-        fees: "₹1,98,000/yr",
-        website: "https://vit.ac.in",
-        logoUrl: "https://upload.wikimedia.org/wikipedia/en/b/b0/VIT_University_logo.svg"
-    },
-    {
-        id: "3",
-        name: "Indian Institute of Technology Madras",
-        branch: "Data Science & AI",
-        generalCutoff: "1 - 150",
-        categoryCutoff: "85",
-        type: "GOVERNMENT",
-        careerInsight: "India's #1 Ranked Engineering Institute. 100% placements for CS with average packages exceeding 35 LPA.",
-        medianPackage: "32.5 LPA",
-        recruiters: ["Google", "Microsoft", "Apple", "Goldman Sachs"],
-        phone: "044-22578101",
-        isRecommended: true,
-        location: "CHENNAI, TAMIL NADU",
-        fees: "₹2,09,000/yr",
-        website: "https://www.iitm.ac.in",
-        logoUrl: "https://upload.wikimedia.org/wikipedia/en/6/69/IIT_Madras_Logo.svg"
-    },
-    {
-        id: "4",
-        name: "BITS Pilani",
-        branch: "Electronics & Communication",
-        generalCutoff: "350 - 380 (BITS-Score)",
-        categoryCutoff: "365",
-        type: "PRIVATE",
-        careerInsight: "Renowned 'Zero Attendance' policy fostering entrepreneurship and self-learning.",
-        medianPackage: "23.4 LPA",
-        recruiters: ["Uber", "Nvidia", "Adobe", "Postman"],
-        phone: "01596-242210",
-        isRecommended: true,
-        location: "PILANI, RAJASTHAN",
-        fees: "₹5,41,000/yr",
-        website: "https://www.bits-pilani.ac.in",
-        logoUrl: "https://upload.wikimedia.org/wikipedia/en/d/d3/BITS_Pilani-Logo.svg"
-    },
-    {
-        id: "5",
-        name: "NIT Trichy",
-        branch: "Mechanical Engineering",
-        generalCutoff: "800 - 3500",
-        categoryCutoff: "2840",
-        type: "GOVERNMENT",
-        careerInsight: "Top-ranked NIT with powerful alumni network and core engineering excellence.",
-        medianPackage: "12 LPA",
-        recruiters: ["L&T", "Reliance", "Tata Motors", "BPCL"],
-        phone: "0431-2503000",
-        isRecommended: true,
-        location: "TRICHY, TAMIL NADU",
-        fees: "₹1,45,000/yr",
-        website: "https://www.nitt.edu",
-        logoUrl: "https://upload.wikimedia.org/wikipedia/en/e/e5/NIT_Trichy_logo.png"
-    }
-];
 
 /* ---------------- COMPONENTS ---------------- */
 
@@ -172,7 +84,7 @@ const CollegeMatchResults: React.FC = () => {
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
     const rank = searchParams.get("rank") || "0";
-    const exam = searchParams.get("exam") || "JEE MAIN";
+    const exam = searchParams.get("exam") || "JEE MAINS";
     const category = searchParams.get("category") || "OC";
 
     const cacheKey = `college_results_${exam}_${rank}_${category}`;
@@ -185,6 +97,7 @@ const CollegeMatchResults: React.FC = () => {
         const cachedData = sessionStorage.getItem(cacheKey);
         return cachedData ? JSON.parse(cachedData) : [];
     });
+    const [error, setError] = useState<string | null>(null);
     const [visibleCount, setVisibleCount] = useState(8);
     const [viewMode, setViewMode] = useState<'list' | 'grid'>(() => {
         return typeof window !== 'undefined' && window.innerWidth < 768 ? 'grid' : 'list';
@@ -199,8 +112,8 @@ const CollegeMatchResults: React.FC = () => {
             id: `ai-${offset + index}`,
             name: c.name,
             branch: c.branch || "Computer Science",
-            generalCutoff: c.generalCutoff || "N/A",
-            categoryCutoff: c.categoryCutoff || "N/A",
+            generalCutoff: (c.generalCutoff || "N/A").replace(/\s*\([^)]*\)\s*/g, '').trim(),
+            categoryCutoff: (c.categoryCutoff || "N/A").replace(/\s*\([^)]*\)\s*/g, '').trim(),
             type: c.type?.toUpperCase().includes("GOV") ? "GOVERNMENT" : "PRIVATE",
             careerInsight: c.careerInsight || "No specific placement data available.",
             medianPackage: c.medianPackage || "N/A",
@@ -219,6 +132,7 @@ const CollegeMatchResults: React.FC = () => {
         const fetchResults = async () => {
             if (!loading) return;
             setLoading(true);
+            setError(null);
             try {
                 const liveColleges = await discoverCollegesLive("", rank, exam, category, 1);
                 if (liveColleges && liveColleges.length > 0) {
@@ -227,13 +141,12 @@ const CollegeMatchResults: React.FC = () => {
                     setPage(1);
                     sessionStorage.setItem(cacheKey, JSON.stringify(mapped));
                 } else {
-                    setResults([...MOCK_COLLEGES]);
-                    sessionStorage.setItem(cacheKey, JSON.stringify([...MOCK_COLLEGES]));
+                    setResults([]);
                 }
             } catch (error) {
                 console.error("Error fetching college recommendations:", error);
-                setResults([...MOCK_COLLEGES]);
-                sessionStorage.setItem(cacheKey, JSON.stringify([...MOCK_COLLEGES]));
+                setError("Unable to fetch college matches. Please check your internet connection or try again later.");
+                setResults([]);
             } finally {
                 setLoading(false);
             }
@@ -272,8 +185,8 @@ const CollegeMatchResults: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-[#EEF2F7] font-sans relative pb-20">
-            <SEO 
-                title={`Colleges for ${exam.toUpperCase()} Rank ${rank} | College Matcher`} 
+            <SEO
+                title={`Colleges for ${exam.toUpperCase()} Rank ${rank} | College Matcher`}
                 description={`View recommended colleges and universities for your ${exam} rank of ${rank}. Get personalized admission insights and placement data.`}
                 keywords={`college predictor, ${exam} colleges, rank ${rank}, college matcher, admission help`}
             />
@@ -313,14 +226,23 @@ const CollegeMatchResults: React.FC = () => {
                 </div>
 
                 {loading && results.length === 0 ? (
-                    <div className="flex flex-col items-center justify-center min-h-[60vh] py-12 space-y-8">
-                        <div className="relative">
-                            <div className="absolute inset-0 bg-indigo-500/5 rounded-full filter blur-3xl animate-pulse"></div>
-                            <BookLoader size="lg" />
+                    <Loader fullScreen />
+                ) : error ? (
+                    <div className="flex flex-col items-center justify-center min-h-[60vh] py-12 space-y-8 text-center px-4">
+                        <div className="w-20 h-20 bg-red-100 dark:bg-red-900/20 rounded-full flex items-center justify-center text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800 animate-bounce">
+                            <Activity size={32} />
                         </div>
-                        <div className="text-center space-y-2">
-                            <h3 className="text-base font-bold text-slate-800 tracking-widest uppercase">Finding Best Matches</h3>
-                            <p className="text-[11px] font-semibold text-slate-400 tracking-wider uppercase">Analyzing {exam} admission data…</p>
+                        <div className="max-w-md space-y-4">
+                            <h3 className="text-xl font-black text-slate-800 dark:text-white uppercase tracking-tighter">Matches Unreachable</h3>
+                            <p className="text-sm font-medium text-slate-500 dark:text-slate-400 tracking-tight leading-relaxed">
+                                {error}
+                            </p>
+                            <button
+                                onClick={() => { setLoading(true); sessionStorage.removeItem(cacheKey); }}
+                                className="mt-4 px-8 py-3 bg-indigo-600 hover:bg-slate-900 text-white rounded-xl text-xs font-bold uppercase tracking-widest transition-all shadow-lg active:scale-95"
+                            >
+                                Retry Discovery
+                            </button>
                         </div>
                     </div>
                 ) : currentItems.length > 0 ? (
@@ -371,7 +293,7 @@ const CollegeMatchResults: React.FC = () => {
                                             <div className="flex items-center justify-between w-full md:contents">
                                                 {/* COL 2: TYPE */}
                                                 <div>
-                                                    <span className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-[9px] font-bold uppercase tracking-widest ${college.type === 'GOVERNMENT' ? 'bg-amber-400 text-white' : 'bg-slate-800 text-white'}`}>
+                                                    <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[9px] font-extrabold uppercase tracking-widest border ${college.type === 'GOVERNMENT' ? 'bg-[#FFFBEB] border-[#FEF3C7] text-[#D97706]' : 'bg-[#F8FAFC] border-[#E2E8F0] text-[#475569]'}`}>
                                                         {college.type === 'GOVERNMENT' ? <ShieldCheck size={10} /> : <Building2 size={10} />}
                                                         {college.type}
                                                     </span>
@@ -381,9 +303,8 @@ const CollegeMatchResults: React.FC = () => {
                                                 <div>
                                                     <div className="flex items-center gap-1">
                                                         <Hash size={14} className="text-blue-500 flex-shrink-0" />
-                                                        <span className="text-[18px] font-black text-blue-600 tracking-tight leading-none">{college.categoryCutoff}</span>
+                                                        <span className="text-[15px] font-black text-blue-600 tracking-tight leading-none">{college.categoryCutoff}</span>
                                                     </div>
-                                                    <p className="text-[8px] font-bold text-slate-400 uppercase tracking-widest mt-1">Closing Rank</p>
                                                 </div>
                                             </div>
 
@@ -417,9 +338,9 @@ const CollegeMatchResults: React.FC = () => {
                                                 <CollegeLogo logoUrl={college.logoUrl} website={college.website} name={college.name} iconSize={20} />
                                             </div>
                                             <div className="flex flex-col items-end gap-1.5">
-                                                <span className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-[8px] font-bold uppercase tracking-widest ${college.type === 'GOVERNMENT' ? 'bg-amber-400 text-white' : 'bg-slate-800 text-white'}`}>
+                                                <span className={`px-2 py-1 rounded-lg text-[8px] font-extrabold uppercase tracking-widest flex items-center gap-1 border ${college.type === 'GOVERNMENT' ? 'bg-[#FFFBEB] border-[#FEF3C7] text-[#D97706]' : 'bg-[#F8FAFC] border-[#E2E8F0] text-[#475569]'}`}>
                                                     {college.type === 'GOVERNMENT' ? <ShieldCheck size={9} /> : <Building2 size={9} />}
-                                                    {college.type === 'GOVERNMENT' ? 'Government' : 'Private'}
+                                                    {college.type}
                                                 </span>
                                                 {college.chance !== undefined && (
                                                     <span className={`px-2.5 py-1 rounded-full text-[8px] font-bold uppercase tracking-wider ${college.chance >= 70 ? 'bg-emerald-100 text-emerald-700' : college.chance >= 40 ? 'bg-amber-100 text-amber-700' : 'bg-red-100 text-red-600'}`}>
@@ -441,10 +362,9 @@ const CollegeMatchResults: React.FC = () => {
                                         {/* STATS */}
                                         <div className="grid grid-cols-2 gap-2 mb-3">
                                             <div className="bg-slate-50 rounded-xl p-2.5 border border-slate-100">
-                                                <p className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Closing Rank</p>
                                                 <div className="flex items-center gap-0.5 mt-0.5">
                                                     <Hash size={11} className="text-blue-500" />
-                                                    <span className="text-[14px] font-black text-blue-600 leading-none">{college.categoryCutoff}</span>
+                                                    <span className="text-[12px] font-black text-blue-600 leading-none">{college.categoryCutoff}</span>
                                                 </div>
                                             </div>
                                             <div className="bg-slate-50 rounded-xl p-2.5 border border-slate-100">

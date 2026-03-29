@@ -8,7 +8,6 @@ import { CollegesView, ResultsView } from '../../components/ExploreViews';
 import RankEstimator from '../../components/RankEstimator/RankEstimator';
 import { CollegePredictorView } from '../../components/CollegeMatcher/CollegePredictor';
 import AIRoadmap from '../../features/roadmaps/AIRoadmap';
-import ChatBot from '../../components/ChatBot/ChatBot';
 import StudentForm from '../../components/StudentForm';
 import PersonalizedReport from '../../components/PersonalizedReport/PersonalizedReport';
 import {
@@ -34,7 +33,6 @@ const HomePage: React.FC<HomePageProps> = ({ user, setIsAuthModalOpen, onAskAI }
     const [profile, setProfile] = useState<StudentProfile | null>(null);
     const [aiResponse, setAiResponse] = useState<AIResponse | null>(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [chatInitialMessage, setChatInitialMessage] = useState<string | null>(null);
 
     const handleNavigation = (destination: string) => {
         if (!destination) return;
@@ -81,11 +79,9 @@ const HomePage: React.FC<HomePageProps> = ({ user, setIsAuthModalOpen, onAskAI }
         setAiResponse(null);
         handleNavigation('home');
         setHomeViewMode('portal');
-        setChatInitialMessage(null);
     };
 
     const handleAskAICallback = useCallback((topic: string) => {
-        setChatInitialMessage(topic);
         onAskAI(topic);
     }, [onAskAI]);
 
@@ -132,8 +128,8 @@ const HomePage: React.FC<HomePageProps> = ({ user, setIsAuthModalOpen, onAskAI }
 
     return (
         <main className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-0 pb-8 sm:pb-12 flex flex-col gap-0 overflow-x-hidden">
-            <SEO 
-                title="Best Education Platform in India 2026 | Colleges, Exams, Careers" 
+            <SEO
+                title="Best Education Platform in India 2026 | Colleges, Exams, Careers"
                 description="Explore colleges, exams, rank predictors, and career guidance on India's best education platform. Get latest updates, results, and career tools in one place."
                 keywords="education platform India, college search India, exam updates, career guidance"
             />
@@ -196,13 +192,6 @@ const HomePage: React.FC<HomePageProps> = ({ user, setIsAuthModalOpen, onAskAI }
             }
 
 
-            <ChatBot profile={
-                profile || emptyProfile
-            }
-                initialMessage={chatInitialMessage}
-                onMessageProcessed={
-                    () => setChatInitialMessage(null)
-                } />
         </main>
     );
 };

@@ -5,9 +5,9 @@ import { ChevronDown, Target, Zap, ShieldCheck } from 'lucide-react';
 import illustration from '../../assets/college-predictor-illustration.png';
 
 const EXAMS = [
-    "JEE Main", "JEE Advanced", "NEET", "CAT", "GATE", "BITSAT", "VITEEE", "CUET",
+    "JEE MAINS", "JEE Advanced", "NEET", "CAT", "GATE", "BITSAT", "VITEEE", "CUET",
     "XAT", "SNAP", "NMAT", "CMAT", "MAT", "NATA", "SRMJEEE", "MET",
-    "COMEDK", "WBJEE", "MHT CET", "TS EAMCET", "AP EAMCET", "KCET", "KEAM", "GUJCET"
+    "COMEDK", "WBJEE", "MHT CET", "TS EAMCET", "AP EAMCET", "TS ECET", "AP ECET", "KCET", "KEAM", "GUJCET"
 ];
 const CATEGORIES = ["General", "OBC", "SC", "ST", "EWS", "PWD"];
 const STREAMS = ["Engineering", "Medical", "Management", "Science", "Architecture"];
@@ -17,7 +17,7 @@ const TYPES = ["Government", "Private", "Any"];
 export const CollegePredictorView = ({ profile }: any) => {
     const navigate = useNavigate();
 
-    const [exam, setExam] = useState(profile?.exam?.examName || "");
+    const [exam, setExam] = useState(profile?.exam?.examName || "TS EAMCET");
     const [rank, setRank] = useState(profile?.exam?.rank || "");
     const [category, setCategory] = useState(profile?.exam?.category || "General");
     const [stream, setStream] = useState("Engineering");

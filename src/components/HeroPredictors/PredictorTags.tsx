@@ -7,7 +7,7 @@ interface PredictorTagsProps {
 }
 
 const PREDICTOR_DATA = [
-    { id: 'rank', label: 'JEE Main Rank Predictor', tag: 'Popular', tagColor: 'bg-orange-500', url: '/rank/jee-main' },
+    { id: 'rank', label: 'JEE MAINS Rank Predictor', tag: 'Popular', tagColor: 'bg-orange-500', url: '/rank/jee-main' },
     { id: 'rank', label: 'NEET Rank Predictor', tag: 'Popular', tagColor: 'bg-orange-500', url: '/rank/neet' },
     { id: 'predictor', label: 'College Predictor', tag: 'Top Pick', tagColor: 'bg-indigo-500', url: '/?tool=predictor&exam=jee-main' },
     { id: 'rank', label: 'EAMCET Rank Predictor', tag: 'Trending', tagColor: 'bg-emerald-500', url: '/rank/ts-eamcet' },
@@ -19,7 +19,8 @@ const PredictorTags: React.FC<PredictorTagsProps> = ({ onNavigate, onStartCounse
     const navigate = useNavigate();
     return (
         <div className="flex flex-col w-full items-center lg:items-start">
-            <style dangerouslySetInnerHTML={{ __html: `
+            <style dangerouslySetInnerHTML={{
+                __html: `
                 @media (max-width: 640px) {
                     .predictor-grid-mobile {
                         gap: 0.75rem !important;

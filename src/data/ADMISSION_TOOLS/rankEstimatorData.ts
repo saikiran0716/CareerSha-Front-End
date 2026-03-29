@@ -36,7 +36,7 @@ export const TOOLS_RANK: PageItem[] = [
             },
             {
                 "label": "Year",
-                "value": "2025"
+                "value": "2026"
             }
         ],
         "image": IMAGES.exam,

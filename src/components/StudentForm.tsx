@@ -26,7 +26,7 @@ const StudentForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
       marks: "",
     },
     exam: {
-      examName: "JEE Main",
+      examName: "JEE MAINS",
       rank: "",
       category: "General",
       quota: "State",
@@ -103,10 +103,10 @@ const StudentForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
             <div key={s} className="flex flex-col items-center">
               <div
                 className={`w-8 h-8 flex items-center justify-center rounded-full text-xs font-semibold ${step === s
-                    ? "bg-indigo-600 text-white"
-                    : step > s
-                      ? "bg-green-500 text-white"
-                      : "bg-gray-200 text-gray-500"
+                  ? "bg-indigo-600 text-white"
+                  : step > s
+                    ? "bg-green-500 text-white"
+                    : "bg-gray-200 text-gray-500"
                   }`}
               >
                 {step > s ? "✓" : s}

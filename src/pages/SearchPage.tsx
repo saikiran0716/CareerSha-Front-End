@@ -7,13 +7,13 @@ const SearchPage: React.FC = () => {
 
   return (
     <div className="pt-8 min-h-[60vh]">
-      <SEO 
+      <SEO
         title="Search Colleges, Exams & Courses in India"
         description="Search top colleges, entrance exams, and courses across India with smart filters and tools."
       />
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-8 text-center">Search Colleges, Exams & Courses</h1>
-        
+
         <div className="max-w-2xl mx-auto relative group">
           <input
             type="text"
@@ -26,9 +26,9 @@ const SearchPage: React.FC = () => {
             <Search size={24} />
           </div>
         </div>
-        
+
         <div className="mt-12 text-center text-slate-500">
-          <p>Try searching for "IIT Delhi", "JEE Main", or "MBA Colleges"</p>
+          <p>Try searching for "IIT Delhi", "JEE MAINS", or "MBA Colleges"</p>
         </div>
       </div>
     </div>

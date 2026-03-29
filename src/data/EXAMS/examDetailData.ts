@@ -105,10 +105,10 @@ export const ENTRANCE_EXAMS_DATA: Record<string, EntranceExamInfo> = {
     },
     'jee-main': {
         id: 'jee-main',
-        title: 'JEE Main 2026',
+        title: 'JEE MAINS 2026',
         fullName: 'Joint Entrance Examination 2026',
         year: '2026',
-        overview: 'JEE Main is the largest engineering entrance exam in India, serving as the gateway to NITs, IIITs, and becoming eligible for JEE Advanced (IIT admissions).',
+        overview: 'JEE MAINS is the largest engineering entrance exam in India, serving as the gateway to NITs, IIITs, and becoming eligible for JEE Advanced (IIT admissions).',
         category: 'Engineering',
         currentStatus: 'Session 2 Ongoing',
         lastChecked: 'March 19, 2026',
@@ -118,7 +118,7 @@ export const ENTRANCE_EXAMS_DATA: Record<string, EntranceExamInfo> = {
             'Score accepted by most state and private technical universities'
         ],
         timeline: [
-            { event: 'Session 1 Registration', date: 'November 2025', status: 'completed' },
+            { event: 'Session 1 Registration', date: 'November 2026', status: 'completed' },
             { event: 'Session 1 Examination', date: 'January 2026', status: 'completed' },
             { event: 'Session 2 Registration', date: 'February 2026', status: 'ongoing' },
             { event: 'Session 2 Examination', date: 'April 2026', status: 'upcoming' }
@@ -140,7 +140,7 @@ export const ENTRANCE_EXAMS_DATA: Record<string, EntranceExamInfo> = {
             markingScheme: '+4 for correct, -1 for incorrect'
         },
         prepStrategy: [
-            'Focus on NCERT: 80% of JEE Main questions are directly or indirectly based on NCERT concepts.',
+            'Focus on NCERT: 80% of JEE MAINS questions are directly or indirectly based on NCERT concepts.',
             'Previous Year Papers: Solve the last 5 years of NTA papers to understand trends.',
             'Timed Practice: Solve 25 questions in 60 minutes to improve speed.',
             'Formula Sheets: Maintain a quick-revision notebook for Physics and Math formulas.'
@@ -247,7 +247,7 @@ export const ENTRANCE_EXAMS_DATA: Record<string, EntranceExamInfo> = {
             'Highly preferred by Public Sector Undertakings (PSUs)'
         ],
         timeline: [
-            { event: 'Application Process', date: 'September - October 2025', status: 'completed' },
+            { event: 'Application Process', date: 'September - October 2026', status: 'completed' },
             { event: 'GATE Examination', date: 'February 2026', status: 'completed' },
             { event: 'Resulsts Upload', date: 'March 16, 2026', status: 'completed' },
             { event: 'Scorecard Download', date: 'March 2026', status: 'ongoing' }

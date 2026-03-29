@@ -121,9 +121,27 @@ const ChatBot: React.FC<Props> = ({ profile, initialMessage, onMessageProcessed 
 
   return (
     <>
-      {/* No backdrop to keep background visible as requested */}
+      <style>{`
+        .chat-scroll-container::-webkit-scrollbar {
+          width: 5px;
+        }
+        .chat-scroll-container::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .chat-scroll-container::-webkit-scrollbar-thumb {
+          background: rgba(99, 102, 241, 0.2);
+          border-radius: 10px;
+        }
+        .chat-scroll-container::-webkit-scrollbar-thumb:hover {
+          background: rgba(99, 102, 241, 0.4);
+        }
+        /* Hide scrollbar buttons (arrows) */
+        .chat-scroll-container::-webkit-scrollbar-button {
+          display: none;
+        }
+      `}</style>
 
-      <div className={`fixed z-[110] transition-all duration-500 cubic-bezier(0.19, 1, 0.22, 1) ${isOpen
+      <div className={`fixed z-[9999] transition-all duration-500 cubic-bezier(0.19, 1, 0.22, 1) ${isOpen
         ? 'bottom-2 right-2 sm:bottom-10 sm:right-10 w-[260px] sm:w-[340px] max-w-[calc(100%-1rem)] h-[340px] sm:h-[450px] max-h-[calc(100vh-1.5rem)] sm:max-h-[calc(100vh-8rem)]'
         : 'bottom-4 right-4 sm:bottom-10 sm:right-10 w-auto h-auto'
         }`}>
@@ -163,7 +181,7 @@ const ChatBot: React.FC<Props> = ({ profile, initialMessage, onMessageProcessed 
             </div>
 
             {/* Chat Area */}
-            <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-5 bg-slate-50/30 dark:bg-slate-950/30 scroll-smooth">
+            <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-5 bg-slate-50/30 dark:bg-slate-950/30 scroll-smooth chat-scroll-container">
               {messages.map((msg, i) => (
                 <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-slideUp`} style={{ animationDelay: `${i * 0.03}s` }}>
                   {msg.role === 'assistant' && (
@@ -247,7 +265,7 @@ const ChatBot: React.FC<Props> = ({ profile, initialMessage, onMessageProcessed 
         ) : (
           <button
             onClick={() => setIsOpen(true)}
-            className="group relative bg-indigo-600 text-white w-12 h-12 sm:w-14 sm:h-14 rounded-full shadow-lg shadow-indigo-500/30 hover:bg-indigo-700 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center z-[100]"
+            className="group relative bg-indigo-600 text-white w-12 h-12 sm:w-14 sm:h-14 rounded-full shadow-lg shadow-indigo-500/30 hover:bg-indigo-700 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center z-[9999]"
           >
             <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />

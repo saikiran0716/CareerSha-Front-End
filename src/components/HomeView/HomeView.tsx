@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CoursoalItem, coursoalData } from '../../assets/coursoal/data';
-import { Search, Play, Sparkles, TrendingUp, GraduationCap, Map as MapIcon, Award } from 'lucide-react';
+import { Search, Sparkles, TrendingUp, GraduationCap, Map as MapIcon, Award } from 'lucide-react';
 import { PredictorTags } from '../HeroPredictors';
 import { getHomepageCarouselItems } from '../../services/homeContentService';
 // Extracted NewsNotifications component for better maintainability
@@ -120,7 +120,7 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                                     height: 240px !important;
                                 }
                                 .carousel-card-mobile {
-                                    border-radius: 1.25rem !important;
+                                    border-radius: 1rem !important;
                                 }
                                 .carousel-content-mobile {
                                     padding: 0.75rem !important;
@@ -204,7 +204,7 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                 {/* Left Side: Content & Search */}
                 <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-6 animate-slide hero-content-mobile">
                     <h1 className="text-3xl sm:text-3xl md:text-4xl font-semibold text-slate-900 dark:text-white tracking-tight leading-[1.2] hero-title-responsive">
-                        <span className="hero-title-1024">Empowering Students with <br /> Smart Education & Career Tools</span>
+                        <span className="hero-title-1024 font-semibold">Empowering Students with <br /> Smart Education & Career Tools</span>
                     </h1>
 
                     <div className="relative group w-full max-w-xl z-50">
@@ -264,11 +264,11 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                 </div>
 
                 {/* Right Side: Featured Card Carousel */}
-                <div className="relative aspect-video mt-0 lg:mt-6 w-full group animate-fade carousel-container-1024 carousel-container-mobile bg-slate-900/10 rounded-[2.5rem] overflow-hidden">
+                <div className="relative aspect-video mt-0 lg:mt-6 w-full group animate-fade carousel-container-1024 carousel-container-mobile bg-slate-900/10 rounded-[1.5rem] overflow-hidden">
                     {slides.map((item, index) => (
                         <div
                             key={item.id}
-                            className={`absolute inset-0 transition-all duration-1000 ease-in-out rounded-[2.5rem] overflow-hidden shadow-2xl carousel-card-mobile ${index === currentSlide ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8 pointer-events-none'
+                            className={`absolute inset-0 transition-all duration-1000 ease-in-out rounded-[1.5rem] overflow-hidden shadow-2xl carousel-card-mobile ${index === currentSlide ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8 pointer-events-none'
                                 }`}
                         >
                             <div className="absolute inset-0 bg-black/40 z-10" />
@@ -309,7 +309,6 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                                                 onClick={() => onNavigate(item.link)}
                                                 className="inline-flex items-center gap-3 px-6 py-3.5 bg-white text-[#1a1a1a] rounded-xl text-[12px] font-black uppercase hover:bg-slate-100 transition-all shadow-xl active:scale-95 group/btn carousel-button-1024 carousel-btn-mobile"
                                             >
-                                                <Play size={14} fill="currentColor" className="group-hover/btn:scale-110 transition-transform" />
                                                 {item.buttonText}
                                             </button>
                                         </div>
@@ -341,7 +340,7 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
 
 
             {/* SEO Content Block */}
-            <div className="relative z-20 mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center lg:text-left border-t border-slate-100 dark:border-slate-800/50">
+            {/* <div className="relative z-20 mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center lg:text-left border-t border-slate-100 dark:border-slate-800/50">
                 <div className="max-w-4xl">
                     <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-4">India’s Best Education Platform</h2>
                     <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-lg">
@@ -349,7 +348,7 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                         Use our rank predictor, college matcher, and roadmap tools to plan your future.
                     </p>
                 </div>
-            </div>
+            </div> */}
 
             <style>
                 {`

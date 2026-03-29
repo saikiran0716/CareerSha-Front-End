@@ -64,7 +64,7 @@ export const navigationData = [
                 links: [
                     { name: "CAT 2026", url: "/exams/cat" },
                     { name: "GATE 2026", url: "/exams/gate" },
-                    { name: "JEE Main 2026", url: "/exams/jee-main" },
+                    { name: "JEE MAINS 2026", url: "/exams/jee-main" },
                     { name: "NEET 2026", url: "/exams/neet" },
                     { name: "XAT 2026", url: "/exams/xat" },
                     { name: "CLAT 2026", url: "/exams/clat" },

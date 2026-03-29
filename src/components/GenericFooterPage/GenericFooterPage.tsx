@@ -95,7 +95,7 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
 
     const getExamFromTitle = (title: string): string => {
         const lower = (title || '').toLowerCase();
-        if (lower.includes('jee main')) return 'JEE Main';
+        if (lower.includes('JEE MAINS')) return 'JEE MAINS';
         if (lower.includes('jee advanced')) return 'JEE Advanced';
         if (lower.includes('neet')) return 'NEET';
         if (lower.includes('cat')) return 'CAT';
@@ -243,13 +243,13 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
             // Reset to initial data state on id change only if no cache exists
             setData(initialData);
         }
-        
+
         setLoading(false);
         setError(false);
 
         // If content is missing or items are placeholders, fetch real data
         const isStaticPage = pageId.startsWith('legal-') || pageId.startsWith('company-') || pageId.startsWith('site-');
-        const shouldFetch = !isStaticPage; 
+        const shouldFetch = !isStaticPage;
 
         if (shouldFetch) {
             const fetchData = async () => {
@@ -259,7 +259,7 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
                     setData(prev => {
                         const isErrorResponse = dynamicData.description?.toLowerCase().includes("unavailable") || dynamicData.description?.toLowerCase().includes("api configuration");
                         const useDynamicItems = dynamicData.items && dynamicData.items.length > 0 && !isErrorResponse;
-                        
+
                         const merged = {
                             ...prev,
                             ...dynamicData,
@@ -551,7 +551,7 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
                                         onClick={() => {
                                             const lowerTitle = (item.title || '').toLowerCase();
                                             const isExam = lowerTitle.includes('gate') || lowerTitle.includes('cat ') || lowerTitle === 'cat' || lowerTitle.includes('jee') || lowerTitle.includes('neet') || lowerTitle.includes('xat') || lowerTitle.includes('clat') || lowerTitle.includes('mat') || lowerTitle.includes('nift');
-                                            
+
                                             if (isExam) {
                                                 let target = 'cat';
                                                 if (lowerTitle.includes('gate')) target = 'gate';
@@ -561,7 +561,7 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
                                                 else if (lowerTitle.includes('clat')) target = 'clat';
                                                 else if (lowerTitle.includes('mat')) target = 'mat';
                                                 else if (lowerTitle.includes('nift')) target = 'nift';
-                                                
+
                                                 navigate(`/exams/${target}`);
                                                 return;
                                             }
