@@ -25,9 +25,9 @@ const SEO: React.FC<SEOProps> = ({
   twitterCard = 'summary_large_image',
 }) => {
   const siteName = 'CareerSha';
-  const siteUrl = 'https://careersha.in'; // Replace with actual domain if known
-  const fullTitle = title ? (title.includes(siteName) ? title : `${title} | ${siteName}`) : siteName;
-  const defaultDescription = 'CareerSha - Your ultimate destination for career roadmaps, college information, and academic success.';
+  const siteUrl = 'https://careersha.com'; // Replace with actual domain if known
+  const fullTitle = title || siteName;
+  const defaultDescription = 'CareerSha helps students with rank predictors, college prediction, exam updates and career guidance in India.';
   
   // Use window.location.href for canonical if not provided
   const currentCanonical = canonical || (typeof window !== 'undefined' ? window.location.origin + window.location.pathname : '');

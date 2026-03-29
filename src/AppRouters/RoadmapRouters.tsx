@@ -165,6 +165,48 @@ const RoadmapRouters: React.FC<RoadmapRoutersProps> = ({ onAskAI, user, setIsAut
                 <Route path="/rank/neet" element={<NEETRank />} />
                 <Route path="/rank/ts-eamcet" element={<EAMCETRank />} />
 
+                {/* Master Category SEO Routes */}
+                <Route path="/mba" element={
+                    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 py-12">
+                        <GenericFooterPage
+                            data={FOOTER_PAGES['mba-india']}
+                            onBack={() => window.history.back()}
+                            onAskAI={onAskAI}
+                            pageId="mba-india"
+                        />
+                    </div>
+                } />
+                <Route path="/engineering" element={
+                    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 py-12">
+                        <GenericFooterPage
+                            data={FOOTER_PAGES['eng-india']}
+                            onBack={() => window.history.back()}
+                            onAskAI={onAskAI}
+                            pageId="eng-india"
+                        />
+                    </div>
+                } />
+                <Route path="/medical" element={
+                    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 py-12">
+                        <GenericFooterPage
+                            data={FOOTER_PAGES['med-india']}
+                            onBack={() => window.history.back()}
+                            onAskAI={onAskAI}
+                            pageId="med-india"
+                        />
+                    </div>
+                } />
+                <Route path="/tools" element={
+                    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 py-12">
+                        <GenericFooterPage
+                            data={FOOTER_PAGES['tools-hub']}
+                            onBack={() => window.history.back()}
+                            onAskAI={onAskAI}
+                            pageId="tools-hub"
+                        />
+                    </div>
+                } />
+
                 {/* Static Content Routes */}
                 <Route path="/about-us" element={<AboutUs />} />
                 <Route path="/contact-us" element={<ContactUs />} />

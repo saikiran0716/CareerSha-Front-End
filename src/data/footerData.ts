@@ -108,11 +108,26 @@ const generateCityData = (city: string, colleges: PageItem[] = []): PageData => 
 export const FOOTER_PAGES: Record<string, PageData> = {
     // MBA
     'mba-india': {
-        title: 'Best MBA Colleges in India',
-        description: 'Discover the best business schools offering world-class management education in India. Compare IIMs, IITs, and Top Private B-Schools.',
+        title: 'MBA Colleges in India 2026 - Top MBA Colleges | CareerSha',
+        description: 'Explore top MBA colleges in India, entrance exams, fees, placements and career guidance.',
         items: COLLEGES_MBA.slice(0, 150),
         type: 'college',
-        content: '<p>India is home to over 5,000 management institutes. The <strong>Indian Institutes of Management (IIMs)</strong> are the crown jewels, followed by XLRI, FMS, and SPJIMR. An MBA in India opens doors to leadership roles in Finance, Marketing, Consulting, and Operations.</p>',
+        content: `
+            <div class="prose prose-slate max-w-none">
+                <p><strong>MBA in India</strong> remains one of the most sought-after postgraduate degrees, offering a gateway to high-paying corporate roles and leadership positions. With India's economy growing rapidly, the demand for skilled managers in sectors like Finance, Marketing, Operations, and Business Analytics has never been higher.</p>
+                <p>The <strong>Indian Institutes of Management (IIMs)</strong> are the most prestigious MBA colleges in India, known for their rigorous selection process and stellar placement records. However, several other top-tier institutions like XLRI Jamshedpur, FMS Delhi, and SPJIMR Mumbai offer world-class management education that is on par with global standards.</p>
+                <h3>Top MBA Entrance Exams</h3>
+                <ul>
+                    <li><strong>CAT (Common Admission Test):</strong> Conducted by IIMs, it is the most popular entrance exam for management aspirants.</li>
+                    <li><strong>XAT (Xavier Aptitude Test):</strong> Accepted by XLRI and several other top-tier private B-schools.</li>
+                    <li><strong>MAT, CMAT, and NMAT:</strong> Other important national-level exams for various private and state universities.</li>
+                </ul>
+                <h3>Specializations in High Demand</h3>
+                <p>Modern MBA programs offer specialized tracks to help students align their education with industry trends. <strong>Data Analytics</strong> and <strong>Digital Marketing</strong> are currently trending, while traditional specializations like <strong>Financial Management</strong> and <strong>Human Resource Management</strong> continue to offer stable and lucrative career paths.</p>
+                <p>When choosing an MBA college, students should consider factors such as <strong>ROI (Return on Investment)</strong>, faculty expertise, alumni network, and industrial exposure. At CareerSha, we provide detailed insights into every top B-school to help you make an informed decision for your 2026 admissions.</p>
+                <p>Whether you are a fresh graduate or a working professional looking for an Executive MBA, the Indian management education landscape has something for everyone. Explore our comprehensive list of colleges, compare their fees, and check placement statistics to start your management journey today.</p>
+            </div>
+        `,
         faqs: COMMON_FAQS
     },
     'mba-delhi': { title: 'MBA Colleges in Delhi NCR', description: 'Premier management institutes in the capital region.', items: getCollegesByCity('Delhi').filter(c => COLLEGES_MBA.some(m => m.title === c.title)).concat(getCollegesByCity('Gurgaon'), getCollegesByCity('Ghaziabad'), getCollegesByCity('Noida')), type: 'college', content: '<p>Delhi NCR is a hub for corporate headquarters.</p>', faqs: COMMON_FAQS },
@@ -121,11 +136,26 @@ export const FOOTER_PAGES: Record<string, PageData> = {
 
     // Engineering
     'eng-india': {
-        title: 'Top Engineering Colleges in India',
-        description: 'India\'s finest technical institutes fostering innovation. IITs, NITs, and IIITs.',
+        title: 'Engineering Colleges in India 2026 - Top BTech Colleges | CareerSha',
+        description: 'Find top engineering colleges, JEE counselling, cutoff and placements in India.',
         items: ENG_INDIA,
         type: 'college',
-        content: '<p>Engineering remains the most sought-after career path in India. The <strong>IITs</strong> are globally recognized for excellence. Admission is primarily through JEE MAINS and JEE Advanced.</p>',
+        content: `
+            <div class="prose prose-slate max-w-none">
+                <p><strong>Engineering in India</strong> is a cornerstone of the nation's higher education system, producing millions of skilled professionals every year. With the rise of AI, Robotics, and Renewable Energy, the technical education landscape is evolving rapidly to meet the challenges of the 21st century.</p>
+                <p>The <strong>Indian Institutes of Technology (IITs)</strong> and <strong>National Institutes of Technology (NITs)</strong> represent the pinnacle of technical excellence in India. Getting into these institutions requires passing the grueling JEE Main and JEE Advanced examinations, which test a student's deep understanding of Physics, Chemistry, and Mathematics.</p>
+                <h3>Popular Engineering Branches</h3>
+                <ul>
+                    <li><strong>Computer Science (CSE):</strong> The most popular choice, focusing on software development, AI, and data science.</li>
+                    <li><strong>Mechanical Engineering:</strong> A core branch dealing with machinery, thermodynamics, and manufacturing.</li>
+                    <li><strong>Electronics & Communication (ECE):</strong> Focuses on semiconductors, telecommunications, and VLSI design.</li>
+                </ul>
+                <h3>Admission and Counselling Process</h3>
+                <p>Admissions to B.Tech programs are primarily merit-based. The <strong>JoSAA (Joint Seat Allocation Authority)</strong> handles counselling for IITs, NITs, and IIITs. State-level exams like EAMCET, KCET, and MHT-CET are also pivotal for admission into reputable state-government and private engineering colleges.</p>
+                <p>Prospective students should look beyond rankings and evaluate colleges based on <strong>Research Labs</strong>, industry tie-ups, internship opportunities, and the strength of their entrepreneurship cells. CareerSha offers comprehensive tools including rank predictors and college matchers to simplify your engineering admission journey.</p>
+                <p>As the "Startup Capital of the World," India offers immense potential for engineering graduates to innovate and lead. Start exploring the top B.Tech colleges today and choose the branch that aligns with your passion and the future of technology.</p>
+            </div>
+        `,
         faqs: COMMON_FAQS
     },
     'iits-india': {
@@ -159,11 +189,26 @@ export const FOOTER_PAGES: Record<string, PageData> = {
 
     // Medical
     'med-india': {
-        title: 'Top Medical Colleges in India',
-        description: 'India\'s most prestigious medical institutions for MBBS and BDS.',
+        title: 'Medical Colleges in India 2026 - MBBS, NEET Colleges | CareerSha',
+        description: 'Discover top medical colleges, NEET counselling, MBBS fees and rankings in India.',
         items: MED_INDIA,
         type: 'college',
-        content: '<p>Medical education in India is highly competitive. AIIMS New Delhi sets the benchmark. NEET UG is the single gateway for admission to all medical colleges.</p>',
+        content: `
+            <div class="prose prose-slate max-w-none">
+                <p><strong>Medical Education in India</strong> is highly prestigious and rigorously structured to produce world-class doctors and healthcare professionals. The journey to becoming a doctor in India starts with the NEET (National Eligibility cum Entrance Test), which is the mandatory gateway for MBBS and BDS admissions across the country.</p>
+                <p>The <strong>All India Institutes of Medical Sciences (AIIMS)</strong> are the most coveted medical institutions, known for their state-of-the-art facilities and experienced faculty. Other leading names include Maulana Azad Medical College (MAMC), Christian Medical College (CMC) Vellore, and Armed Forces Medical College (AFMC) Pune.</p>
+                <h3>Top Medical Courses</h3>
+                <ul>
+                    <li><strong>MBBS (Bachelor of Medicine and Bachelor of Surgery):</strong> The standard degree for aspiring doctors.</li>
+                    <li><strong>BDS (Bachelor of Dental Surgery):</strong> For students focusing on dental care and oral health.</li>
+                    <li><strong>B.Pharma & Nursing:</strong> Essential allied health services that offer excellent career opportunities.</li>
+                </ul>
+                <h3>The Path to Specialization</h3>
+                <p>After completing an MBBS degree, many students pursue postgraduate specialization (MD/MS) through exams like NEET PG or INI-CET. These advanced degrees allow doctors to specialize in fields such as Cardiology, Neurology, Pediatrics, and Surgery, catering to the growing healthcare needs of India's population.</p>
+                <p>Choosing the right medical college involves evaluating the <strong>clinical exposure</strong> (patient inflow), hospital infrastructure, faculty-to-student ratio, and the success rate of students in PG exams. CareerSha helps you navigate the complex NEET counselling process with expert insights and college rankings.</p>
+                <p>With India emerging as a global hub for medical tourism, the scope for healthcare professionals is vast. Explore top medical colleges today and take the first step towards a noble career in saving lives and improving public health.</p>
+            </div>
+        `,
         faqs: COMMON_FAQS
     },
     'aiims-colleges': {
@@ -452,6 +497,28 @@ FOOTER_PAGES['tools-reviews'] = { title: 'College Reviews', description: 'Real s
 FOOTER_PAGES['tools-compare'] = { title: 'Compare Colleges', description: 'Side-by-side comparison.', items: [], type: 'generic', content: '<p>Compare colleges on fees, placements, and more.</p>', faqs: [] };
 FOOTER_PAGES['tools-loan'] = { title: 'Education Loan', description: 'Financing your education.', items: [], type: 'generic', content: '<p>Information on education loans and interest rates.</p>', faqs: [] };
 FOOTER_PAGES['tools-scholarship'] = { title: 'Scholarships', description: 'Financial aid opportunities.', items: [], type: 'generic', content: '<p>Find scholarships you are eligible for.</p>', faqs: [] };
-FOOTER_PAGES['tools-abroad'] = { title: 'Study Abroad', description: 'International education.', items: [], type: 'generic', content: '<p>Guide to studying in top universities abroad.</p>', faqs: [] };
+FOOTER_PAGES['tools-hub'] = {
+    title: 'Rank Predictor & College Predictor Tools | CareerSha',
+    description: 'Use CareerSha tools like JEE, NEET, EAMCET rank predictors and college predictor.',
+    items: [],
+    type: 'generic',
+    content: `
+        <div class="prose prose-slate max-w-none">
+            <p><strong>CareerSha Admission Tools</strong> are designed to take the guesswork out of the complex admission process in India. By leveraging data from previous years' cutoffs and seat allocation patterns, our tools provide students with highly accurate predictions to help them plan their next steps.</p>
+            <p>Our <strong>Rank Predictors</strong> for exams like JEE Main, NEET, and EAMCET allow students to estimate their All India Rank (AIR) based on their expected or actual raw scores. This information is crucial for understanding which category of colleges—IITs, NITs, or Top Private Universities—might be within reach.</p>
+            <h3>Key Features of Our Tools</h3>
+            <ul>
+                <li><strong>College Matcher:</strong> Enter your rank and preferences (location, budget, branch) to find the best-fitting colleges.</li>
+                <li><strong>Cutoff Analysis:</strong> View historical cutoff trends for various categories including General, OBC, SC, ST, and EWS.</li>
+                <li><strong>Personalized Reports:</strong> Get a detailed PDF report of your admission chances and recommended roadmaps.</li>
+            </ul>
+            <h3>How for Use These Tools Effectively</h3>
+            <p>To get the best results, ensure you provide accurate details regarding your exam category and domicile status, as these significantly impact seat allocation in government-funded institutions. Cross-referencing our predictor results with the official JoSAA or MCC brochures will give you a 100% clear picture of your admission possibilities.</p>
+            <p>At CareerSha, we believe in empowering students with "Decision Intelligence." Our tools are constantly updated with the latest counseling rules and seat matrix changes for the 2026 academic year. Whether you are aiming for an IIM, an IIT, or an AIIMS, our predictor tools are your best companions during the counseling season.</p>
+            <p>Don't leave your career to chance. Use our data-driven tools today to discover your potential and secure a seat in your dream college.</p>
+        </div>
+    `,
+    faqs: []
+};
 
 
