@@ -73,7 +73,14 @@
 }
 
 .brand-tag {
-    display: none; /* Hide 'please wait' text as requested */
+    font-size: 14px;
+    color: #64748b;
+    margin-top: 0.75rem;
+    font-weight: 500;
+    max-width: 380px;
+    line-height: 1.5;
+    opacity: 0;
+    animation: simpleFadeIn 0.8s ease-out 0.4s forwards;
 }
 
 .bg-blob {
