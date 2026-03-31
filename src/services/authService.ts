@@ -7,7 +7,7 @@ export interface User {
   provider?: string;
 }
 
-import { buildApiUrl } from './apiConfig';
+import { buildApiUrl, SERVER_ROOT, isLocalhost } from './apiConfig';
 
 const SESSION_KEY = 'edupath_user_session';
 
@@ -26,14 +26,39 @@ const persistUser = (user: User | null) => {
   }
 };
 
-const normalizeUser = (data: any): User => ({
-  id: data?.user?.id,
-  name: data?.user?.name || data?.user?.first_name || 'User',
-  email: data?.user?.email || '',
-  avatar: data?.user?.avatar,
-  token: data?.token,
-  provider: data?.provider,
-});
+const normalizeUser = (data: any): User => {
+  const u = data?.user || data || {};
+  return {
+    id: u.id || u.pk || 'guest',
+    name: u.name || u.first_name || u.full_name || u.username || u.email?.split('@')[0] || 'User',
+    email: u.email || '',
+    avatar: u.avatar || u.picture || u.photo_url || data?.picture,
+    token: data?.token || data?.access_token || u.token,
+    provider: data?.provider || u.provider || 'local',
+  };
+};
+
+/**
+ * Enhanced Fetch Wrapper to detect connectivity issues
+ */
+const safeFetch = async (url: string, options: RequestInit) => {
+  try {
+    const response = await fetch(url, options);
+    return response;
+  } catch (err: any) {
+    if (err instanceof TypeError && err.message.includes('fetch')) {
+      const helpMsg = isLocalhost 
+        ? `Could not connect to the backend server at ${SERVER_ROOT}. Please ensure your Django/Python server is running on port 8000.`
+        : `Could not reach the production API at ${SERVER_ROOT}. Please check your internet connection or server status.`;
+      
+      throw {
+        code: 'auth/network-error',
+        message: helpMsg
+      };
+    }
+    throw err;
+  }
+};
 
 const parseError = async (response: Response, fallbackCode: string, fallbackMessage: string) => {
   let payload: any = null;
@@ -107,7 +132,7 @@ export const authService = {
   },
 
   signup: async (name: string, email: string, password?: string): Promise<AuthResult> => {
-    const response = await fetch(buildApiUrl('/auth/register/'), {
+    const response = await safeFetch(buildApiUrl('/auth/register/'), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -140,7 +165,7 @@ export const authService = {
    * Login using Django Backend
    */
   login: async (email: string, password?: string): Promise<AuthResult> => {
-    const response = await fetch(buildApiUrl('/auth/login/'), {
+    const response = await safeFetch(buildApiUrl('/auth/login/'), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -174,7 +199,7 @@ export const authService = {
    * Verification of the 6-digit 2FA code (Kept for compatibility if needed later, but login handles session)
    */
   verify2FA: async (pendingToken: string, code: string): Promise<User> => {
-    const response = await fetch(buildApiUrl('/auth/verify-2fa/'), {
+    const response = await safeFetch(buildApiUrl('/auth/verify-2fa/'), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -194,7 +219,7 @@ export const authService = {
   },
 
   loginWithGoogle: async (credential: string): Promise<AuthResult> => {
-    const response = await fetch(buildApiUrl('/auth/google/'), {
+    const response = await safeFetch(buildApiUrl('/auth/google/'), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -225,7 +250,7 @@ export const authService = {
 
   logout: async () => {
     try {
-      await fetch(buildApiUrl('/auth/logout/'), {
+      await safeFetch(buildApiUrl('/auth/logout/'), {
         method: 'POST',
         headers: {
           ...authService.getAuthHeaders(),
