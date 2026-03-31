@@ -45,7 +45,7 @@ const Loader: React.FC<LoaderProps> = ({ fullScreen = false }) => {
 
                 <div className="relative h-4 overflow-hidden">
                     <p className="text-[11px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.4em] animate-slide-up">
-                        please wait a moment
+                        Smart Education & Career Tools
                     </p>
                 </div>
 
