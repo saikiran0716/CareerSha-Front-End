@@ -158,7 +158,7 @@ const CollegeDetailPage: React.FC = () => {
             {loading && <GlassLoader />}
 
             {/* Main Content Wrapper (Blurred while loading) */}
-            <div className={`transition-all duration-1000 ease-out pointer-events-auto ${loading ? 'blur-2xl opacity-40 scale-[0.98]' : 'blur-0 opacity-100 scale-100'}`}>
+            <div className={`transition-all duration-1000 ease-out pointer-events-auto ${loading ? 'blur-md opacity-40 scale-[0.98]' : 'blur-0 opacity-100 scale-100'}`}>
 
             {/* ── TOP NAV ── */}
             <div className="bg-gradient-to-r from-blue-800 to-indigo-800 sticky top-0 z-50">
