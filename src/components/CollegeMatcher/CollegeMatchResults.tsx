@@ -23,7 +23,7 @@ import {
     Users,
     BookOpen
 } from "lucide-react";
-import Loader from "../Loader/Loader";
+import GlassLoader from "../Loader/GlassLoader";
 
 /* ---------------- COLLEGE LOGO COMPONENT ---------------- */
 
@@ -213,7 +213,7 @@ const CollegeMatchResults: React.FC = () => {
                 </div>
             </header>
 
-            <main className="max-w-[1400px] mx-auto px-8 py-8 relative z-10">
+            <main className={`max-w-[1400px] mx-auto px-8 py-8 relative z-10 transition-all duration-500 ${loading && results.length === 0 ? 'blur-md' : 'blur-0'}`}>
 
                 {/* PAGE TITLE + CHIPS */}
                 <div className="flex flex-wrap items-end justify-between gap-4 mb-6">
@@ -226,7 +226,7 @@ const CollegeMatchResults: React.FC = () => {
                 </div>
 
                 {loading && results.length === 0 ? (
-                    <Loader fullScreen />
+                    <GlassLoader />
                 ) : error ? (
                     <div className="flex flex-col items-center justify-center min-h-[60vh] py-12 space-y-8 text-center px-4">
                         <div className="w-20 h-20 bg-red-100 dark:bg-red-900/20 rounded-full flex items-center justify-center text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800 animate-bounce">
