@@ -28,19 +28,19 @@ const GlassLoader: React.FC = () => {
             {/* Premium Typography */}
             <div className="mt-16 flex flex-col items-center space-y-4">
                 <div className="flex items-center gap-3">
-                    <span className="text-2xl font-black text-slate-900 dark:text-white tracking-[-0.04em] uppercase italic">CareerSha</span>
-                    <div className="h-6 w-[2px] bg-slate-200 dark:bg-slate-800 rotate-12" />
-                    <span className="text-2xl font-medium text-indigo-600 dark:text-indigo-400 tracking-[-0.04em] uppercase">AI</span>
+                    <span className="text-2xl font-semibold text-slate-900 dark:text-white tracking-[-0.04em]">
+                        Career<span className="font-normal text-indigo-600 dark:text-indigo-400">Sha</span>
+                    </span>
                 </div>
 
                 <div className="relative h-4 overflow-hidden">
-                    <p className="text-[11px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.4em] animate-slide-up">
-                        Analysing Institution Data
+                    <p className="text-[14px] font-medium text-slate-400 dark:text-slate-500 tracking-wide animate-slide-up">
+                        please wait a moment
                     </p>
                 </div>
 
                 {/* Simulated Progress Micro-bar */}
-                <div className="w-32 h-[2px] bg-slate-100 dark:bg-slate-800/50 rounded-full overflow-hidden mt-4">
+                <div className="w-32 h-[2px] bg-slate-100 dark:bg-slate-800/50 rounded-full overflow-hidden mt-2">
                     <div className="h-full bg-gradient-to-r from-transparent via-indigo-600 to-transparent w-full animate-[progress-slide_2s_ease-in-out_infinite]" />
                 </div>
             </div>
