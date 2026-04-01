@@ -117,6 +117,11 @@ const CollegeDetailPage: React.FC = () => {
     const email_ = d?.email || '';
     const address_ = d?.address || locVal;
 
+    const mergedRecruiters = Array.from(new Set([
+        ...(d?.topRecruiters || []),
+        ...(pc?.recruiters || [])
+    ])).filter(Boolean);
+
     const highlightRows = [
         { param: 'Established', val: est },
         { param: 'Institute Type', val: typeVal },
@@ -131,7 +136,8 @@ const CollegeDetailPage: React.FC = () => {
         { param: 'Gender Ratio (M:F)', val: d?.genderRatio },
         { param: 'Students (Other States)', val: d?.studentsFromOtherStates },
         { param: 'Placement Rate', val: d?.placementRate },
-        { param: 'Avg. Package', val: d?.avgPackage || pc?.medianPackage },
+        { param: 'Avg. Package', val: d?.avgPackage },
+        { param: 'Median Package', val: pc?.medianPackage },
         { param: 'Highest Package', val: d?.highestPackage },
         { param: 'NIRF Rank', val: nirf ? `#${nirf} (National)` : undefined },
         { param: 'Accreditations', val: d?.accreditations?.join(' | ') },
@@ -158,7 +164,7 @@ const CollegeDetailPage: React.FC = () => {
             {loading && <GlassLoader />}
 
             {/* Main Content Wrapper (Blurred while loading) */}
-            <div className={`transition-all duration-1000 ease-out pointer-events-auto ${loading ? 'blur-2xl opacity-40 scale-[0.98]' : 'blur-0 opacity-100 scale-100'}`}>
+            <div className={`transition-all duration-1000 ease-out pointer-events-auto ${loading ? 'blur-md opacity-40 scale-[0.98]' : 'blur-0 opacity-100 scale-100'}`}>
 
             {/* ── TOP NAV ── */}
             <div className="bg-gradient-to-r from-blue-800 to-indigo-800 sticky top-0 z-50">
@@ -202,10 +208,11 @@ const CollegeDetailPage: React.FC = () => {
                                 {d?.campusArea && <span className="flex items-center gap-1.5"><Building2 size={13} /> {d.campusArea}</span>}
                             </div>
                             {/* Placement quick-stat pills */}
-                            {(d?.placementRate || d?.avgPackage || d?.highestPackage) && (
+                            {(d?.placementRate || d?.avgPackage || d?.highestPackage || pc?.medianPackage) && (
                                 <div className="flex flex-wrap gap-2 mt-3">
                                     {d?.placementRate && <span className="bg-emerald-500/20 border border-emerald-400/30 text-emerald-200 text-[11px] font-bold px-3 py-1 rounded-full">📊 {d.placementRate} Placed</span>}
-                                    {(d?.avgPackage || pc?.medianPackage) && <span className="bg-blue-400/20 border border-blue-300/30 text-blue-200 text-[11px] font-bold px-3 py-1 rounded-full">💼 {d?.avgPackage || pc?.medianPackage} Avg CTC</span>}
+                                    {d?.avgPackage && <span className="bg-blue-400/20 border border-blue-300/30 text-blue-200 text-[11px] font-bold px-3 py-1 rounded-full">💼 {d.avgPackage} Avg CTC</span>}
+                                    {pc?.medianPackage && pc.medianPackage !== d?.avgPackage && <span className="bg-blue-400/20 border border-blue-300/30 text-blue-200 text-[11px] font-bold px-3 py-1 rounded-full">💼 {pc.medianPackage} Median CTC</span>}
                                     {d?.highestPackage && <span className="bg-violet-400/20 border border-violet-300/30 text-violet-200 text-[11px] font-bold px-3 py-1 rounded-full">🚀 {d.highestPackage} Top CTC</span>}
                                 </div>
                             )}
@@ -428,17 +435,18 @@ const CollegeDetailPage: React.FC = () => {
                                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-5">
                                         {[
                                             { label: 'Placement Rate', val: d?.placementRate, color: 'green' },
-                                            { label: 'Avg. Package', val: d?.avgPackage || pc?.medianPackage, color: 'blue' },
+                                            { label: 'Avg. Package', val: d?.avgPackage, color: 'blue' },
+                                            { label: 'Median Package', val: pc?.medianPackage && pc.medianPackage !== d?.avgPackage ? pc.medianPackage : undefined, color: 'blue' },
                                             { label: 'Highest Package', val: d?.highestPackage, color: 'purple' },
                                         ].filter(s => s.val).map((s, i) => (
                                             <StatBadge key={i} label={s.label} value={s.val!} color={s.color} />
                                         ))}
                                     </div>
-                                    {(d?.topRecruiters?.length || pc?.recruiters?.length) ? (
+                                    {mergedRecruiters.length > 0 ? (
                                         <div>
                                             <p className="text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-3">Top Recruiters</p>
                                             <div className="flex flex-wrap gap-2">
-                                                {(d?.topRecruiters || pc?.recruiters || []).map((r: string, i: number) => (
+                                                {mergedRecruiters.map((r: string, i: number) => (
                                                     <span key={i} className="px-3 py-1.5 bg-white border border-slate-200 text-slate-700 rounded-lg text-[12px] font-semibold shadow-sm">{r}</span>
                                                 ))}
                                             </div>

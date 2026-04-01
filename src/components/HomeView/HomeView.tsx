@@ -204,7 +204,7 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                 {/* Left Side: Content & Search */}
                 <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-6 animate-slide hero-content-mobile">
                     <h1 className="text-3xl sm:text-3xl md:text-4xl font-semibold text-slate-900 dark:text-white tracking-tight leading-[1.2] hero-title-responsive">
-                        <span className="hero-title-1024 font-semibold">Empowering Students with <br /> Smart Education & Career Tools</span>
+                        <span className="hero-title-1024 font-semibold text-slate-800 dark:text-slate-400">Navigating Education<br />Accelerating Careers</span>
                     </h1>
 
                     <div className="relative group w-full max-w-xl z-50">

@@ -363,7 +363,7 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({
                     </div>
 
                     {/* ── RIGHT SIDE — Simplified Preview Panel ── */}
-                    <div className="hidden lg:flex flex-col justify-center items-center">
+                    <div className="flex flex-col justify-center items-center">
                         <motion.div
                             initial={{ opacity: 0, scale: 0.98 }}
                             animate={{ opacity: 1, scale: 1 }}
@@ -397,7 +397,7 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({
                                             Awaiting Rank Input
                                         </h4>
                                         <p style={{ fontSize: "13px", color: "#64748B", lineHeight: "1.5", maxWidth: "260px", margin: "0 auto" }}>
-                                            Enter your details on the left to see your personalized analysis package.
+                                            Enter your details to see your personalized analysis package.
                                         </p>
                                     </motion.div>
                                 ) : (
@@ -475,8 +475,6 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({
 
                                         <div style={{ background: "#f8fafc", padding: "16px", borderRadius: "14px", border: "1px solid #f1f5f9" }}>
                                             <div className="flex items-center gap-2 mb-2">
-                                                <Sparkles size={12} style={{ color: "#4B63D3" }} />
-                                                <span style={{ fontSize: "11px", fontWeight: 800, color: "#64748B", textTransform: "uppercase", letterSpacing: "0.5px" }}>AI Analysis</span>
                                             </div>
                                             <ul
                                                 className="list-disc pl-4 space-y-1.5"
