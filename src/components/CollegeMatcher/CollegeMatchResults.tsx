@@ -191,43 +191,46 @@ const CollegeMatchResults: React.FC = () => {
                 keywords={`college predictor, ${exam} colleges, rank ${rank}, college matcher, admission help`}
             />
 
-            {/* SLIM TOP NAV */}
-            <header className="sticky top-0 z-[100] bg-white border-b border-slate-200 shadow-sm">
-                <div className="max-w-[1400px] mx-auto px-8 flex items-center justify-between h-14">
-                    <button
-                        onClick={() => navigate(-1)}
-                        className="w-8 h-8 bg-slate-100 hover:bg-slate-200 rounded-lg text-slate-600 transition-all flex items-center justify-center active:scale-95"
-                    >
-                        <ArrowRight size={15} className="rotate-180" />
-                    </button>
-                    <div className="hidden md:flex items-center gap-2">
-                        <div className="flex bg-slate-100 p-0.5 rounded-lg border border-slate-200 gap-0.5">
-                            <button onClick={() => setViewMode('list')} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${viewMode === 'list' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-400 hover:text-slate-700'}`}>
-                                <LayoutList size={12} /> List
-                            </button>
-                            <button onClick={() => setViewMode('grid')} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${viewMode === 'grid' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-400 hover:text-slate-700'}`}>
-                                <LayoutGrid size={12} /> Grid
-                            </button>
+            {/* Glass Loader Overlay */}
+            {loading && <GlassLoader />}
+
+            {/* Main Content Wrapper (Blurred while loading) */}
+            <div className={`transition-all duration-1000 ease-out pointer-events-auto ${loading ? 'blur-md opacity-40 scale-[0.98]' : 'blur-0 opacity-100 scale-100'}`}>
+                {/* SLIM TOP NAV */}
+                <header className="sticky top-0 z-[100] bg-white border-b border-slate-200 shadow-sm">
+                    <div className="max-w-[1400px] mx-auto px-8 flex items-center justify-between h-14">
+                        <button
+                            onClick={() => navigate(-1)}
+                            className="w-8 h-8 bg-slate-100 hover:bg-slate-200 rounded-lg text-slate-600 transition-all flex items-center justify-center active:scale-95"
+                        >
+                            <ArrowRight size={15} className="rotate-180" />
+                        </button>
+                        <div className="hidden md:flex items-center gap-2">
+                            <div className="flex bg-slate-100 p-0.5 rounded-lg border border-slate-200 gap-0.5">
+                                <button onClick={() => setViewMode('list')} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${viewMode === 'list' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-400 hover:text-slate-700'}`}>
+                                    <LayoutList size={12} /> List
+                                </button>
+                                <button onClick={() => setViewMode('grid')} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${viewMode === 'grid' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-400 hover:text-slate-700'}`}>
+                                    <LayoutGrid size={12} /> Grid
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </header>
+                </header>
 
-            <main className={`max-w-[1400px] mx-auto px-8 py-8 relative z-10 transition-all duration-500 ${loading && results.length === 0 ? 'blur-md' : 'blur-0'}`}>
+                <main className="max-w-[1400px] mx-auto px-8 py-8 relative z-10">
 
-                {/* PAGE TITLE + CHIPS */}
-                <div className="flex flex-wrap items-end justify-between gap-4 mb-6">
-                    <h1 className="text-2xl sm:text-[38px] font-black text-slate-900 tracking-tight leading-none uppercase">Matched Institutions</h1>
-                    <div className="flex items-center gap-2 flex-wrap">
-                        <span className="px-4 py-1.5 bg-white border border-slate-200 text-slate-700 rounded-lg text-[10px] font-bold tracking-widest uppercase shadow-sm">Rank #{rank}</span>
-                        <span className="px-4 py-1.5 bg-blue-600 text-white rounded-lg text-[10px] font-bold tracking-widest uppercase shadow-sm">{category}</span>
-                        <span className="px-4 py-1.5 bg-white border border-slate-200 text-slate-700 rounded-lg text-[10px] font-bold tracking-widest uppercase shadow-sm">{exam.toUpperCase()}</span>
+                    {/* PAGE TITLE + CHIPS */}
+                    <div className="flex flex-wrap items-end justify-between gap-4 mb-6">
+                        <h1 className="text-2xl sm:text-[38px] font-black text-slate-900 tracking-tight leading-none uppercase">Matched Institutions</h1>
+                        <div className="flex items-center gap-2 flex-wrap">
+                            <span className="px-4 py-1.5 bg-white border border-slate-200 text-slate-700 rounded-lg text-[10px] font-bold tracking-widest uppercase shadow-sm">Rank #{rank}</span>
+                            <span className="px-4 py-1.5 bg-blue-600 text-white rounded-lg text-[10px] font-bold tracking-widest uppercase shadow-sm">{category}</span>
+                            <span className="px-4 py-1.5 bg-white border border-slate-200 text-slate-700 rounded-lg text-[10px] font-bold tracking-widest uppercase shadow-sm">{exam.toUpperCase()}</span>
+                        </div>
                     </div>
-                </div>
 
-                {loading && results.length === 0 ? (
-                    <GlassLoader />
-                ) : error ? (
+                    {error ? (
                     <div className="flex flex-col items-center justify-center min-h-[60vh] py-12 space-y-8 text-center px-4">
                         <div className="w-20 h-20 bg-red-100 dark:bg-red-900/20 rounded-full flex items-center justify-center text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800 animate-bounce">
                             <Activity size={32} />
@@ -437,7 +440,8 @@ const CollegeMatchResults: React.FC = () => {
                         <button onClick={() => navigate(-1)} className="px-10 py-4 bg-slate-900 text-white rounded-full text-[11px] font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl">Refine Search</button>
                     </div>
                 )}
-            </main>
+                    </main>
+                </div>
 
             <style>{`
                 ::-webkit-scrollbar { width: 6px; }

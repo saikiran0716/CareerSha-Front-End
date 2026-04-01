@@ -135,26 +135,7 @@ const HomePage: React.FC<HomePageProps> = ({ user, setIsAuthModalOpen, onAskAI }
                 canonical="https://careersha.com/"
             />
             {/* SEO Content Section - Rich text for Google Indexing */}
-            <div className="sr-only lg:not-sr-only lg:opacity-0 lg:h-0 overflow-hidden">
-                <h1>CareerSha - Smart Education & Career Tools India</h1>
-                <p>Welcome to <strong>CareerSha</strong>, India's most advanced platform for 2026 college admissions and career guidance. Our mission is to empower students with "Decision Intelligence" by providing data-driven tools such as <strong>Rank Predictors</strong> and <strong>College Matchers</strong> for competitive exams like JEE Main, NEET, and EAMCET.</p>
-                
-                <h2>Why Choose CareerSha for Your Career Journey?</h2>
-                <p>Navigating the complex landscape of Indian higher education can be overwhelming. With thousands of colleges and dozens of entrance exams, students often struggle to find the right path. CareerSha simplifies this by offering:</p>
-                <ul>
-                    <li><strong>Accurate Rank Predictors:</strong> Based on historical data, we help you estimate your JEE, NEET, and EAMCET ranks before official results.</li>
-                    <li><strong>Top College Guidance:</strong> Detailed information on IITs, NITs, IIMs, and Top Medical Colleges in India.</li>
-                    <li><strong>Expert Career Roadmaps:</strong> Step-by-step guides for trending professions like AI Engineering, Data Science, and Law.</li>
-                </ul>
 
-                <h2>JEE Main and NEET 2026 Admission Tools</h2>
-                <p>Our specialized tools like the <strong>JEE Main College Matcher</strong> and <strong>NEET Rank Estimator</strong> are updated for the 2026 session. Whether you are aiming for a seat in a prestigious government institute or a top-tier private university, our algorithms analyze your scores and categories to provide personalized recommendations.</p>
-                
-                <h2>Latest Education News and Exam Updates</h2>
-                <p>Stay ahead with our <strong>Exams Hub</strong>, featuring real-time updates on exam dates, syllabus changes, and result declarations. CareerSha is your one-stop destination for everything related to <strong>Entrance Exams 2026 India</strong>, ensuring you never miss an important deadline.</p>
-                
-                <p>Start your journey today by exploring our career library or using our predictor tools. With CareerSha, you are not just searching for a college; you are engineering your future success.</p>
-            </div>
             <div id="home">
                 <HomeView onStartCounseling={
                     () => setHomeViewMode('counseling')
@@ -186,8 +167,6 @@ const HomePage: React.FC<HomePageProps> = ({ user, setIsAuthModalOpen, onAskAI }
                     </div>
                 )
             }
-
-
             <div id="rank" className="scroll-mt-28">
                 <RankEstimator onAskAI={handleAskAICallback} />
             </div>
