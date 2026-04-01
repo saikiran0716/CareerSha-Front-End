@@ -107,8 +107,10 @@ const RoadmapRouters: React.FC<RoadmapRoutersProps> = ({ onAskAI, user, setIsAut
                 <Route path="/roadmaps" element={
                     <main className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
                         <SEO
-                            title="Career Roadmaps | Step-by-Step Career Planning"
-                            description="Plan your career journey with detailed roadmaps for different professions."
+                            title="Career Roadmaps 2026 | Step-by-Step Career Planning"
+                            description="Plan your career journey with detailed, expert-verified roadmaps for over 40+ professions including AI, Software Engineering, and Management. Your step-by-step guide to career success in 2026."
+                            keywords="career roadmaps, career planning india, how to become a developer, ai engineer roadmap, product management career guide"
+                            canonical="https://careersha.com/roadmaps"
                         />
                         <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-8 text-center pt-8">Career Roadmaps</h1>
                         <AIRoadmap />

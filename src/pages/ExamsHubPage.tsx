@@ -9,8 +9,9 @@ const ExamsHubPage: React.FC = () => {
   return (
     <div className="pt-8">
       <SEO 
-        title="Entrance Exams 2026 India - JEE, NEET, EAMCET Updates | CareerSha"
-        description="Get latest updates on JEE, NEET, EAMCET exams including syllabus, dates and results."
+        title="Entrance Exams 2026 India | JEE, NEET, EAMCET, CAT & GATE UPDATES"
+        description="Stay updated with the latest entrance exam dates, syllabus changes, and result declarations for JEE, NEET, EAMCET, CAT, and GATE 2026 in India."
+        keywords="entrance exams 2026, JEE Main registration, NEET exam dates, catalyst entrance exam, gate 2026 syllabus, mba cat exam india"
         canonical="https://careersha.com/exams"
       />
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">

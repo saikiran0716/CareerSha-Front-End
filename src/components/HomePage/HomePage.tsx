@@ -129,9 +129,9 @@ const HomePage: React.FC<HomePageProps> = ({ user, setIsAuthModalOpen, onAskAI }
     return (
         <main className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-0 pb-8 sm:pb-12 flex flex-col gap-0 overflow-x-hidden">
             <SEO
-                title="CareerSha - College Predictor, Rank Predictor & Career Guidance India"
-                description="Use CareerSha for JEE, NEET, EAMCET rank predictors, college predictor, exam results and career guidance in India."
-                keywords="college predictor, rank predictor, JEE Main 2026, NEET 2026, career guidance India"
+                title="CareerSha | rank Predictor, College Predictor & Career Guidance 2026"
+                description="Rank predictors, college matcher, and expert career guidance for JEE Main, NEET, EAMCET, and MBA aspirants in India. Decision-driven career tools for 2026 admissions."
+                keywords="college predictor, rank predictor, JEE Main 2026, NEET 2026, career guidance India, college matching tool"
                 canonical="https://careersha.com/"
             />
             {/* SEO Content Section - Rich text for Google Indexing */}

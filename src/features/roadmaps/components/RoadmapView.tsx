@@ -33,9 +33,10 @@ const RoadmapView: React.FC<RoadmapViewProps> = ({ roadmap, onAskAI }) => {
     return (
         <div className="max-w-[1440px] mx-auto pt-4 pb-12 px-6 sm:px-10 lg:px-16 animate-fade bg-slate-50/10 dark:bg-transparent">
             <SEO 
-                title={`${roadmap.title} Roadmap`} 
-                description={roadmap.description} 
-                keywords={`${roadmap.title}, career roadmap, professional growth, ${roadmap.title} skills`}
+                title={`${roadmap.title} Career Roadmap 2026 | Step-by-Step Guide`} 
+                description={`Master ${roadmap.title} with our specialized 2026 career roadmap. ${roadmap.description} Learn the skills, tools, and pathway to success.`} 
+                keywords={`${roadmap.title} career, how to become a ${roadmap.title}, ${roadmap.title} roadmap 2026, professional guide`}
+                canonical={`https://careersha.com/roadmap/${roadmap.title.toLowerCase().replace(/\s+/g, '-')}`}
             />
             {/* Action Bar */}
             <div className="flex items-center justify-between mb-6">
