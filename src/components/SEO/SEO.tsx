@@ -21,19 +21,19 @@ const SEO: React.FC<SEOProps> = ({
   robots = 'index, follow',
   schema,
   ogType = 'website',
-  ogImage = 'https://careersha.com/og-image.png',
+  ogImage = 'https://www.careersha.com/og-image.png',
   twitterCard = 'summary_large_image',
 }) => {
   const siteName = 'CareerSha';
-  const siteUrl = 'https://careersha.com';
+  const siteUrl = 'https://www.careersha.com';
   // Standardize title format: "Page | CareerSha" or "CareerSha - Tagline"
-  const fullTitle = title 
-    ? (title.includes(siteName) ? title : `${title} | ${siteName}`) 
+  const fullTitle = title
+    ? (title.includes(siteName) ? title : `${title} | ${siteName}`)
     : `CareerSha | Smart Education & Career Tools for Students`;
-    
+
   const defaultDescription = 'CareerSha helps students with Rank Predictors, College Matcher, Exam Updates, and expert Career Guidance for JEE, NEET, MBA, Engineering, and Medical aspirants in India.';
   const defaultKeywords = 'rank predictor, college predictor, career guidance, jee main 2026, neet 2026, mba admissions, engineering entrance exams, medical counseling, CareerSha';
-  
+
   // Set canonical URL (stripping trailing slash for consistency)
   const currentCanonical = canonical || (typeof window !== 'undefined' ? siteUrl + window.location.pathname.replace(/\/$/, '') : '');
 
@@ -67,7 +67,7 @@ const SEO: React.FC<SEOProps> = ({
           {JSON.stringify(schema)}
         </script>
       )}
-      
+
       {/* Organization Schema (Consistent identification) */}
       <script type="application/ld+json">
         {JSON.stringify({
@@ -88,7 +88,7 @@ const SEO: React.FC<SEOProps> = ({
           ]
         })}
       </script>
-      
+
       {/* Default Website Schema for Home/Root */}
       {(!schema && (title?.toLowerCase().includes('home') || !title)) && (
         <script type="application/ld+json">

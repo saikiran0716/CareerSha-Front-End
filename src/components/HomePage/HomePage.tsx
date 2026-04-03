@@ -132,7 +132,7 @@ const HomePage: React.FC<HomePageProps> = ({ user, setIsAuthModalOpen, onAskAI }
                 title="CareerSha | rank Predictor, College Predictor & Career Guidance 2026"
                 description="Rank predictors, college matcher, and expert career guidance for JEE Main, NEET, EAMCET, and MBA aspirants in India. Decision-driven career tools for 2026 admissions."
                 keywords="college predictor, rank predictor, JEE Main 2026, NEET 2026, career guidance India, college matching tool"
-                canonical="https://careersha.com/"
+                canonical="https://www.careersha.com/"
             />
             {/* SEO Content Section - Rich text for Google Indexing */}
 

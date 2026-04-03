@@ -38,7 +38,7 @@ const setListPageSeo = (searchTerm: string, activeCategory: string) => {
     canonical.setAttribute('rel', 'canonical');
     document.head.appendChild(canonical);
   }
-  canonical.setAttribute('href', 'https://careersha.com/blog');
+  canonical.setAttribute('href', 'https://www.careersha.com/blog');
 };
 
 const BlogListPage: React.FC = () => {
@@ -254,7 +254,7 @@ const BlogListPage: React.FC = () => {
           <div className="prose prose-slate max-w-none mb-12 border-b border-slate-100 pb-12">
             <h1>CareerSha Blog: Your Guide to Education and Career Success</h1>
             <p>Welcome to the <strong>CareerSha Blog</strong>, the ultimate resource for students, parents, and educators in India. In an era of rapidly changing exam patterns and evolving career landscapes, staying informed is the key to making the right decisions. Our blog is dedicated to providing the <strong>latest education news</strong>, comprehensive exam updates, and expert career tips to help you stay ahead of the curve.</p>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 not-prose mb-8">
               <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
                 <h3 className="font-bold text-slate-900 mb-2">Exam Results & Updates</h3>
@@ -268,9 +268,9 @@ const BlogListPage: React.FC = () => {
 
             <h2>Empowering Students with Decision Intelligence</h2>
             <p>At CareerSha, we believe that every student deserves access to high-quality information. Our blog features <strong>in-depth guides</strong> on college admissions, scholarship opportunities, and industrial trends. Whether you are looking for the best MBA colleges in India or tips to crack the JEE Advanced, our articles are designed to provide actionable intelligence.</p>
-            
+
             <p>Our team of education experts and researchers works tirelessly to bring you <strong>authentic news</strong> and verified data. We understand the pressure of the admission season, and our "How-to" guides and student success stories are here to provide both motivation and practical advice. Join our community of thousands of readers and take control of your academic journey today.</p>
-            
+
             <p>Stay tuned for our bi-weekly updates on <strong>entrance exams 2026</strong>, career planning strategies, and expert interviews. With the CareerSha Blog, you are not just reading news; you are preparing for a brighter future.</p>
           </div>
         )}

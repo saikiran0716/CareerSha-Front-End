@@ -32,11 +32,11 @@ const RoadmapView: React.FC<RoadmapViewProps> = ({ roadmap, onAskAI }) => {
 
     return (
         <div className="max-w-[1440px] mx-auto pt-4 pb-12 px-6 sm:px-10 lg:px-16 animate-fade bg-slate-50/10 dark:bg-transparent">
-            <SEO 
-                title={`${roadmap.title} Career Roadmap 2026 | Step-by-Step Guide`} 
-                description={`Master ${roadmap.title} with our specialized 2026 career roadmap. ${roadmap.description} Learn the skills, tools, and pathway to success.`} 
+            <SEO
+                title={`${roadmap.title} Career Roadmap 2026 | Step-by-Step Guide`}
+                description={`Master ${roadmap.title} with our specialized 2026 career roadmap. ${roadmap.description} Learn the skills, tools, and pathway to success.`}
                 keywords={`${roadmap.title} career, how to become a ${roadmap.title}, ${roadmap.title} roadmap 2026, professional guide`}
-                canonical={`https://careersha.com/roadmap/${roadmap.title.toLowerCase().replace(/\s+/g, '-')}`}
+                canonical={`https://www.careersha.com/roadmap/${roadmap.title.toLowerCase().replace(/\s+/g, '-')}`}
             />
             {/* Action Bar */}
             <div className="flex items-center justify-between mb-6">
@@ -111,7 +111,7 @@ const RoadmapView: React.FC<RoadmapViewProps> = ({ roadmap, onAskAI }) => {
                                         <div className={`group relative bg-white dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200 dark:border-white/10 p-3 md:p-3.5 rounded-[2rem] shadow-[0_4px_20px_-4px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_40px_-4px_rgba(0,0,0,0.12)] transition-all duration-500 active:scale-[0.99] step-card`}>
                                             {/* Accent Bar */}
                                             <div className={`absolute top-0 bottom-0 ${isEven ? 'md:right-0' : 'md:left-0'} left-0 w-1.5 ${color.bg} rounded-full opacity-40 step-accent-bar`} />
-                                            
+
                                             <div className="space-y-3">
                                                 <div className="flex items-center justify-between">
                                                     <div className="space-y-1">
@@ -142,10 +142,10 @@ const RoadmapView: React.FC<RoadmapViewProps> = ({ roadmap, onAskAI }) => {
                                 <div className="absolute top-0 left-1/2 w-6 h-6 rounded-full -translate-x-1/2 -translate-y-1/2 md:top-auto left-1/2 z-40 flex items-center justify-center timeline-node">
                                     {/* Pulse Animation */}
                                     <div className={`absolute w-full h-full rounded-full ${color.bg} opacity-25`} style={{ animationDuration: '4s' }} />
-                                    
+
                                     {/* Masking Base: Hides the dotted line behind the node */}
                                     <div className="absolute w-5 h-5 rounded-full bg-white dark:bg-slate-950 shadow-sm" />
-                                    
+
                                     {/* Visual Node: The colorful dot with border and ring */}
                                     <div className={`relative w-4 h-4 rounded-full ${color.bg} border-2 border-white dark:border-slate-900 shadow-md ring-4 ring-white/60 dark:ring-slate-900/60 z-10`} />
                                 </div>

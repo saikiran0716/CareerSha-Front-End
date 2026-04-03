@@ -5,11 +5,11 @@ import { NewsView } from '../components/NewsSection';
 const NewsPage: React.FC = () => {
   return (
     <div className="pt-8">
-      <SEO 
+      <SEO
         title="Latest Education News 2026 | JEE, NEET & Admission Updates"
         description="Stay up-to-date with the latest education news in India. Real-time updates on competitive exams, college admission notifications, and career news for 2026."
         keywords="education news india, jee main 2026 updates, neet exam notification, college admission news, breaking exam news"
-        canonical="https://careersha.com/news"
+        canonical="https://www.careersha.com/news"
       />
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-8 text-center">Latest News & Notifications</h1>
