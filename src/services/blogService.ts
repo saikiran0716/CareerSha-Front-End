@@ -1,6 +1,5 @@
 import { buildApiUrl } from './apiConfig';
 import {
-  BLOG_ARTICLES,
   BlogArticle,
   BREAKING_NEWS,
   BreakingNewsItem,
@@ -41,20 +40,16 @@ export const fetchBlogArticles = async (): Promise<BlogArticle[]> => {
     const payload = (await response.json()) as CmsListResponse;
     const items = toList(payload);
 
-    if (items.length === 0) {
-      return BLOG_ARTICLES;
-    }
-
-    return mapCmsBlogItemsToArticles(items);
+    return items.length === 0 ? [] : mapCmsBlogItemsToArticles(items);
   } catch (error) {
     console.error('Failed to load CMS blog list:', error);
-    return BLOG_ARTICLES;
+    return [];
   }
 };
 
-export const fetchBlogArticleByIdentifier = async (identifier?: string): Promise<BlogArticle> => {
+export const fetchBlogArticleByIdentifier = async (identifier?: string): Promise<BlogArticle | null> => {
   if (!identifier) {
-    return BLOG_ARTICLES[0];
+    return null;
   }
 
   try {
@@ -65,11 +60,10 @@ export const fetchBlogArticleByIdentifier = async (identifier?: string): Promise
     }
 
     const list = await fetchBlogArticles();
-    return list.find((item) => item.slug === identifier || String(item.id) === identifier) ?? BLOG_ARTICLES[0];
+    return list.find((item) => item.slug === identifier || String(item.id) === identifier) ?? null;
   } catch (error) {
     console.error('Failed to load CMS blog detail:', error);
-    const fallback = BLOG_ARTICLES.find((item) => item.slug === identifier || String(item.id) === identifier);
-    return fallback ?? BLOG_ARTICLES[0];
+    return null;
   }
 };
 

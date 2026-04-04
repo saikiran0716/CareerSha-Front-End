@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { Activity, ChevronLeft, Clock, Search, Share2, User, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { BLOG_ARTICLES, BlogArticle, BREAKING_NEWS, getBlogPath } from './blogData';
+import { BlogArticle, getBlogPath } from './blogData';
 import { fetchBlogArticleByIdentifier, fetchBlogArticles, getRelatedFromArticles } from '@/services/blogService';
 
 const setArticleSeo = (title: string, description: string, keywords?: string, image?: string, canonicalUrl?: string) => {
@@ -49,8 +49,8 @@ const BlogDetailPage: React.FC = () => {
   const searchQuery = searchParams.get('q') || '';
 
   const [searchTerm, setSearchTerm] = useState(searchQuery);
-  const [article, setArticle] = useState<BlogArticle | null>(BLOG_ARTICLES.length > 0 ? BLOG_ARTICLES[0] : null);
-  const [allArticles, setAllArticles] = useState<BlogArticle[]>(BLOG_ARTICLES);
+  const [article, setArticle] = useState<BlogArticle | null>(null);
+  const [allArticles, setAllArticles] = useState<BlogArticle[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
 
@@ -155,7 +155,6 @@ const BlogDetailPage: React.FC = () => {
   }, [allArticles, article, searchQuery]);
 
   const liveUpdates = useMemo(() => {
-    // Priority 1: Use allArticles if they exist
     if (allArticles.length > 0) {
       const sorted = [...allArticles].sort((a, b) => {
         const idA = Number(a.id) || 0;
@@ -169,11 +168,52 @@ const BlogDetailPage: React.FC = () => {
       }));
     }
 
-    // Priority 2: Use hardcoded BREAKING_NEWS as immediate fallback
-    return BREAKING_NEWS;
+    return [];
   }, [allArticles]);
 
   const nextArticle = sidebarData.latest[0];
+
+  const sanitizedBodyHtml = useMemo(() => {
+    if (!article) return '';
+    let html = article.bodyHtml || '';
+
+    // Remove all H1 elements from body (prevent duplicate title under image)
+    html = html.replace(/<h1[\s\S]*?<\/h1>/gi, '');
+
+    // Remove the first image tag in the body (prevent duplicate inline image)
+    html = html.replace(/<img[^>]*>/i, '');
+
+    // Remove any heading (h1-h6) that exactly matches the article title
+    const escapeRegExp = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const titleText = (article.title || '').trim();
+    if (titleText) {
+      const titleHeadingRegex = new RegExp(`<h[1-6][^>]*>\\s*${escapeRegExp(titleText)}\\s*<\\/h[1-6]>`, 'i');
+      html = html.replace(titleHeadingRegex, '');
+
+      // Remove simple wrapper tags that exactly contain the title (p, div, strong, b)
+      const wrapperRegex = new RegExp(`<(p|div|strong|b)[^>]*>\\s*${escapeRegExp(titleText)}\\s*<\\/\\1>`, 'i');
+      html = html.replace(wrapperRegex, '');
+
+      // Fallback: remove the first raw occurrence of the title string
+      const rawTitleRegex = new RegExp(escapeRegExp(titleText));
+      html = html.replace(rawTitleRegex, '');
+    }
+
+    return html;
+  }, [article]);
+
+  const formattedDate = useMemo(() => {
+    if (!article) return null;
+    const raw = (article.publishedDate || (article as any).date || '').toString();
+    if (!raw) return null;
+    try {
+      const d = new Date(raw);
+      if (isNaN(d.getTime())) return raw;
+      return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+    } catch (e) {
+      return raw;
+    }
+  }, [article]);
 
   useEffect(() => {
     if (article) {
@@ -223,7 +263,7 @@ const BlogDetailPage: React.FC = () => {
 
           <div className="relative flex-1 overflow-hidden flex items-center h-full">
             <div className="flex gap-16 whitespace-nowrap animate-marquee hover:[animation-play-state:paused] py-1">
-              {BREAKING_NEWS.concat(BREAKING_NEWS).map((item, index) => (
+              {liveUpdates.concat(liveUpdates).map((item, index) => (
                 <Link
                   key={`${item.text}-${index}`}
                   to={item.path}
@@ -305,7 +345,7 @@ const BlogDetailPage: React.FC = () => {
 
         {isLoading && (
           <div className="mb-6 border border-slate-200 bg-slate-50 text-slate-600 px-4 py-3 text-sm">
-            Loading article from CMS...
+            Loading please wait...
           </div>
         )}
 
@@ -316,47 +356,47 @@ const BlogDetailPage: React.FC = () => {
                 {article.tag}
               </span>
 
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold uppercase tracking-tight text-black leading-tight">
+                {article.title}
+              </h1>
+
+              <div className="flex items-center justify-between gap-4 flex-wrap">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-slate-900 border-2 border-slate-800 flex items-center justify-center text-white font-black text-lg shrink-0">
+                    <User size={20} />
+                  </div>
+                  <div>
+                    <p className="text-[12px] md:text-[16px] lg:text-[18px] font-bold uppercase tracking-wider text-black">
+                      {article.author ?? 'CareerSha'}
+                    </p>
+                    <p className="text-[10px] md:text-[12px] text-slate-400 uppercase tracking-widest">
+                      {article.role ?? 'Team CareerSha'}
+                    </p>
+                  </div>
+                </div>
+
+                {formattedDate && (
+                  <div className="text-[10px] md:text-[12px] text-slate-400 uppercase tracking-widest">
+                    {formattedDate}
+                  </div>
+                )}
+              </div>
+
               {article.image && (
-                <div className="w-full h-96 bg-slate-100 overflow-hidden border border-slate-200">
-                  <img src={article.image} alt={article.title} className="w-full h-full object-cover" />
+                <div className="w-full bg-slate-100 overflow-hidden border border-slate-200">
+                  <img src={article.image} alt={article.title} className="w-full h-auto object-contain" />
                 </div>
               )}
-
-              <div className="space-y-4">
-                <h1 className="text-3xl md:text-5xl font-bold leading-[1.15] tracking-tight text-[#0f172a] uppercase">
-                  {article.title}
-                </h1>
-                <div
-                  className="text-base md:text-lg leading-relaxed text-slate-600 max-w-3xl"
-                  dangerouslySetInnerHTML={{ __html: article.summary }}
-                />
-              </div>
-
-              <div className="flex items-center gap-5 pt-8">
-                <div className="w-14 h-14 rounded-none bg-slate-900 border-2 border-slate-800 flex items-center justify-center text-white font-black text-xl">
-                  <User size={24} />
-                </div>
-                <div>
-                  <p className="text-[11px] font-bold uppercase tracking-wider text-black">
-                    {article.author ?? 'CareerSha'}
-                  </p>
-                  <p className="text-[9px] font-medium text-slate-400 uppercase tracking-widest">
-                    {article.role ?? 'Team CareerSha'}
-                  </p>
-                </div>
-              </div>
             </header>
 
 
             <div className="bg-white pb-10">
               <div className="space-y-8 text-[#334155] text-base md:text-lg leading-relaxed font-normal transition-colors">
-                <div dangerouslySetInnerHTML={{ __html: article.bodyHtml }} />
+                <div dangerouslySetInnerHTML={{ __html: sanitizedBodyHtml }} />
               </div>
             </div>
-
-
           </article>
-
+            
           <aside className="lg:w-[400px] shrink-0 lg:border-l lg:border-slate-100 lg:pl-12 relative">
             <div className="lg:sticky lg:bottom-10 lg:self-start space-y-16">
               <section className="space-y-6">
@@ -395,6 +435,7 @@ const BlogDetailPage: React.FC = () => {
                           <img src={item.image} className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" alt={item.title} />
                         </div>
                       )}
+
                       <div className="flex flex-col flex-1 justify-center space-y-1">
                         <div className="flex flex-wrap items-center gap-2">
                           <span className="text-[8px] font-bold text-[#b91c1c] uppercase tracking-wider">{item.tag}</span>

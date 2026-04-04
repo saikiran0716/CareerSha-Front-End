@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Activity, ArrowRight, Search, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { BlogArticle, BREAKING_NEWS, CATEGORIES, getBlogPath } from './blogData';
+import { BlogArticle, CATEGORIES, getBlogPath } from './blogData';
 import { fetchBlogArticles } from '@/services/blogService';
 
 const setListPageSeo = (searchTerm: string, activeCategory: string) => {
@@ -132,7 +132,7 @@ const BlogListPage: React.FC = () => {
     const source = visibleStories.length > 0 ? visibleStories : fallbackStories;
 
     if (source.length === 0) {
-      return BREAKING_NEWS;
+      return [];
     }
 
     return source.map((item) => ({

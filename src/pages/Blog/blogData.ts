@@ -67,47 +67,6 @@ export interface CmsBlogItem {
   body_html?: string;
   bodyHtml?: string;
 }
-
-
-const RAW_CONTENT_ITEMS: ContentItem[] = [
-  {
-    id: 1,
-    type: "STORY",
-    title: "Top High-Paying Skills to Learn in 2026 (Without Degree)",
-    tag: "EXAM UPDATES",
-    description: "Discover the most in-demand skills for the 2026 job market. This comprehensive guide covers technical and soft skills that leading employers are seeking in the academic and professional landscape.",
-    date: "MAR 14, 2026",
-    time: "2h ago",
-    author: "CareerSha Editorial Desk",
-    role: "Education Consultant",
-    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop"
-  },
-  {
-    id: 2,
-    type: "STORY",
-    title: "Top Freelancing Careers for Beginners (No Experience Needed)",
-    tag: "JOBS PORTAL",
-    description: "Start your professional journey with these accessible freelancing paths. Learn how to leverage basic skills into high-value services for global clients in the 2026 gig economy.",
-    date: "MAR 13, 2026",
-    time: "1d ago",
-    author: "CareerSha",
-    role: "Career Coach",
-    image: "https://images.unsplash.com/photo-1484417824246-195028aa37b0?q=80&w=1932&auto=format&fit=crop"
-  },
-  {
-    id: 3,
-    type: "BRIEF",
-    title: "CareerSha Admissions 2026: Phase 1 Applications Now Open",
-    tag: "ADMISSIONS",
-    description: "Major engineering hubs have opened their initial registration portals. Check the mandatory guidelines and deadline reminders for the upcoming academic cycle.",
-    date: "MAR 12, 2026",
-    time: "2d ago",
-    author: "Team CareerSha",
-    role: "Admissions Head",
-    image: "https://images.unsplash.com/photo-1523050335392-93851179ae22?q=80&w=2070&auto=format&fit=crop"
-  }
-];
-
 const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 const REFERENCE_DATE = new Date("2026-03-14T12:00:00Z");
 
@@ -208,6 +167,12 @@ const getReadTime = (summary: string, type: ContentItem["type"]) => {
 const buildBodyHtml = (item: ContentItem, summary: string) => {
   return ``;
 };
+
+const removeSectionLines = (html: string) =>
+  html
+    .replace(/border-(?:bottom|top|left):\s*[^;"']+;?/gi, '')
+    .replace(/<hr\b[^>]*>/gi, '')
+    .replace(/\s{2,}/g, ' ');
 
 const normalizeItem = (item: ContentItem): BlogArticle => {
   const summary = getSummary(item);
@@ -311,7 +276,7 @@ export const mapCmsBlogItemToArticle = (item: CmsBlogItem, fallbackId = 1): Blog
   const image = toImageUrl(item.image);
   
   const bodyHtml = rawBodyHtml 
-    ? unescapeHtml(rawBodyHtml) 
+    ? removeSectionLines(unescapeHtml(rawBodyHtml)) 
     : buildBodyHtml(
         {
           id,
@@ -352,16 +317,16 @@ export const mapCmsBlogItemToArticle = (item: CmsBlogItem, fallbackId = 1): Blog
 export const mapCmsBlogItemsToArticles = (items: CmsBlogItem[]) =>
   items.map((item, index) => mapCmsBlogItemToArticle(item, index + 1));
 
-export const BLOG_ARTICLES = RAW_CONTENT_ITEMS.map(normalizeItem);
+export const BLOG_ARTICLES: BlogArticle[] = [];
 
 export const getBlogPath = (item: Pick<BlogArticle, "slug">) => `/blog/${item.slug}`;
 
 export const getBlogByIdentifier = (identifier?: string) => {
   if (!identifier) {
-    return BLOG_ARTICLES[0];
+    return null;
   }
 
-  return BLOG_ARTICLES.find((item) => item.slug === identifier || String(item.id) === identifier) ?? BLOG_ARTICLES[0];
+  return BLOG_ARTICLES.find((item) => item.slug === identifier || String(item.id) === identifier) ?? null;
 };
 
 export const getRelatedBlogs = (currentId: number, limit = 4) =>
