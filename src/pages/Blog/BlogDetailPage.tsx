@@ -360,11 +360,9 @@ const BlogDetailPage: React.FC = () => {
           <aside className="lg:w-[400px] shrink-0 lg:border-l lg:border-slate-100 lg:pl-12 relative">
             <div className="lg:sticky lg:bottom-10 lg:self-start space-y-16">
               <section className="space-y-6">
-                <div className="flex items-center gap-4 border-b-2 border-black pb-3">
-                  <h2 className="text-sm font-bold uppercase tracking-[0.15em] text-black">
-                    {sidebarData.title ? sidebarData.title : 'Latest News'}
-                  </h2>
-                </div>
+                <h2 className="text-sm font-bold uppercase tracking-[0.15em] text-black">
+                  {sidebarData.title ? sidebarData.title : 'Latest News'}
+                </h2>
                 <div className="space-y-4">
                   {sidebarData.latest.map((news, index) => (
                     <Link
@@ -382,11 +380,9 @@ const BlogDetailPage: React.FC = () => {
               </section>
 
               <section className="space-y-8">
-                <div className="flex items-center gap-4 border-b-2 border-black pb-3">
-                  <h2 className="text-sm font-bold uppercase tracking-[0.15em] text-black">
-                    {sidebarData.title ? 'Further Results' : 'Related Blogs'}
-                  </h2>
-                </div>
+                <h2 className="text-sm font-bold uppercase tracking-[0.15em] text-black">
+                  {sidebarData.title ? 'Further Results' : 'Related Blogs'}
+                </h2>
                 <div className="space-y-6">
                   {sidebarData.related.map((item) => (
                     <Link
@@ -414,9 +410,7 @@ const BlogDetailPage: React.FC = () => {
 
               {!searchQuery && (
                 <section className="space-y-8">
-                  <div className="flex items-center gap-4 border-b-2 border-black pb-3">
-                    <h2 className="text-sm font-bold uppercase tracking-[0.15em] text-black">Recent News</h2>
-                  </div>
+                  <h2 className="text-sm font-bold uppercase tracking-[0.15em] text-black">Recent News</h2>
                   <div className="space-y-4">
                     {allArticles.filter(a => a.id !== article.id).slice(0, 4).map((item) => (
                       <Link

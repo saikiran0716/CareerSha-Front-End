@@ -4,24 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { getLatestNewsItems, NewsItem } from '../../services/homeContentService';
 import SEO from '../SEO/SEO';
 
-const NEWS_DATA = [
-    {
-        id: 1,
-        title: "JEE MAINS 2026 Session 1 Results Out; Paper 2 Answer Key Challenge Ends Today",
-        date: "February 21, 2026, 09:15 AM IST",
-        image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=80&w=200",
-        link: "https://jeemain.nta.nic.in",
-        isLive: true,
-        category: "ENTRANCE"
-    }
-];
-
-// Expanded data for the grid
-const EXTENDED_NEWS = NEWS_DATA;
-
 const NewsView: React.FC = () => {
     const navigate = useNavigate();
-    const [newsItems, setNewsItems] = useState<NewsItem[]>(NEWS_DATA);
+    const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
 
     useEffect(() => {
         const loadNews = async () => {
