@@ -42,7 +42,7 @@ const setListPageSeo = (searchTerm: string, activeCategory: string) => {
 };
 
 const BlogListPage: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState('All News');
+  const [activeCategory, setActiveCategory] = useState(CATEGORIES[0]);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [articles, setArticles] = useState<BlogArticle[]>([]);
@@ -120,8 +120,10 @@ const BlogListPage: React.FC = () => {
     };
   }, [activeCategory, searchTerm, articles]);
 
+  const centerFeed = filteredData.stories.length > 0 ? filteredData.stories : filteredData.briefs;
+
   const totalPages = Math.max(
-    Math.ceil(filteredData.stories.length / storiesPerPage),
+    Math.ceil(centerFeed.length / storiesPerPage),
     Math.ceil(filteredData.briefs.length / briefsPerPage),
     1
   );
@@ -147,16 +149,17 @@ const BlogListPage: React.FC = () => {
     // Global list for sidebars (Always show all categories regardless of activeCategory)
     const globalLatest = [...articles].sort((a, b) => b.id - a.id);
 
-    const pageStories = filteredData.stories.slice(storyStart, storyStart + storiesPerPage);
-    const recent = globalLatest.slice(7, 14);
+    const pageStories = centerFeed.slice(storyStart, storyStart + storiesPerPage);
+    const recentSlice = globalLatest.slice(7, 14);
+    const recentRight = recentSlice.length > 0 ? recentSlice : globalLatest.slice(0, 4);
 
     return {
       hero: pageStories[0] ?? null,
       grid: pageStories.slice(1),
-      recent,
+      recentRight,
       briefs: globalLatest.slice(0, 7),
     };
-  }, [currentPage, filteredData, articles]);
+  }, [currentPage, centerFeed, filteredData, articles]);
 
   return (
     <div className="min-h-screen bg-white text-slate-900 selection:bg-[#b91c1c] selection:text-white relative z-10">
@@ -249,32 +252,6 @@ const BlogListPage: React.FC = () => {
       </header>
 
       <main className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-16 pt-2 pb-12">
-        {/* SEO Content Section - Introduction to CareerSha Blog */}
-        {!searchTerm && activeCategory === 'All News' && (
-          <div className="prose prose-slate max-w-none mb-12 border-b border-slate-100 pb-12">
-            <h1>CareerSha Blog: Your Guide to Education and Career Success</h1>
-            <p>Welcome to the <strong>CareerSha Blog</strong>, the ultimate resource for students, parents, and educators in India. In an era of rapidly changing exam patterns and evolving career landscapes, staying informed is the key to making the right decisions. Our blog is dedicated to providing the <strong>latest education news</strong>, comprehensive exam updates, and expert career tips to help you stay ahead of the curve.</p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 not-prose mb-8">
-              <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
-                <h3 className="font-bold text-slate-900 mb-2">Exam Results & Updates</h3>
-                <p className="text-sm text-slate-600">Get real-time insights into <strong>JEE Main 2026</strong>, <strong>NEET 2026</strong>, and state-level exams like EAMCET. From syllabus deep-dives to result declaration dates, we cover it all.</p>
-              </div>
-              <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
-                <h3 className="font-bold text-slate-900 mb-2">Career Guidance & Tips</h3>
-                <p className="text-sm text-slate-600">Explore career roadmaps for engineering, medicine, and emerging fields. Our experts provide tips on <strong>how to choose the right college</strong> and prepare for a successful professional life.</p>
-              </div>
-            </div>
-
-            <h2>Empowering Students with Decision Intelligence</h2>
-            <p>At CareerSha, we believe that every student deserves access to high-quality information. Our blog features <strong>in-depth guides</strong> on college admissions, scholarship opportunities, and industrial trends. Whether you are looking for the best MBA colleges in India or tips to crack the JEE Advanced, our articles are designed to provide actionable intelligence.</p>
-
-            <p>Our team of education experts and researchers works tirelessly to bring you <strong>authentic news</strong> and verified data. We understand the pressure of the admission season, and our "How-to" guides and student success stories are here to provide both motivation and practical advice. Join our community of thousands of readers and take control of your academic journey today.</p>
-
-            <p>Stay tuned for our bi-weekly updates on <strong>entrance exams 2026</strong>, career planning strategies, and expert interviews. With the CareerSha Blog, you are not just reading news; you are preparing for a brighter future.</p>
-          </div>
-        )}
-
         {loadError && (
           <div className="mb-6 border border-amber-200 bg-amber-50 text-amber-700 px-4 py-3 text-sm">
             {loadError}
@@ -283,7 +260,7 @@ const BlogListPage: React.FC = () => {
 
         {isLoading && (
           <div className="mb-6 border border-slate-200 bg-slate-50 text-slate-600 px-4 py-3 text-sm">
-            Loading blogs from CMS...
+            Loading please wait...
           </div>
         )}
 
@@ -384,7 +361,7 @@ const BlogListPage: React.FC = () => {
 
           <aside className="lg:col-span-3 lg:pl-4 space-y-8 lg:border-l border-slate-100 flex flex-col">
 
-            {currentPageData.recent.length > 0 && (
+            {currentPageData.recentRight.length > 0 && (
               <section className="space-y-6">
                 <div className="flex items-center gap-3 border-b-2 border-black pb-3">
                   <h2 className="text-sm font-black uppercase tracking-[0.2em]">Recent News</h2>
@@ -392,7 +369,7 @@ const BlogListPage: React.FC = () => {
                 </div>
 
                 <div className="grid grid-cols-1 gap-3">
-                  {currentPageData.recent.map((story) => (
+                  {currentPageData.recentRight.map((story) => (
                     <Link
                       key={story.id}
                       to={getBlogPath(story)}

@@ -5,12 +5,6 @@ export interface BreakingNewsItem {
   path: string;
 }
 
-export const BREAKING_NEWS: BreakingNewsItem[] = [
-  { text: "CareerSha Admissions 2026: Phase 1 Applications Now Open for Top Engineering Colleges", path: "/blog" },
-  { text: "Latest Job Portal Update: 50+ New Tech Internships Added for Summer 2026", path: "/blog" },
-  { text: "Exam Alert: Final Countdown for National Entrance Exams - Check Mandatory Guidelines", path: "/blog" }
-];
-
 export interface ContentItem {
   id: number;
   type: "STORY" | "BRIEF" | "PERSPECTIVE";

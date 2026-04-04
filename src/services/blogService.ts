@@ -1,7 +1,6 @@
 import { buildApiUrl } from './apiConfig';
 import {
   BlogArticle,
-  BREAKING_NEWS,
   BreakingNewsItem,
   CmsBlogItem,
   mapCmsBlogItemToArticle,
@@ -79,7 +78,7 @@ export const fetchBreakingNews = async (): Promise<BreakingNewsItem[]> => {
 
     const data = (await response.json()) as CmsBlogItem[];
     if (!Array.isArray(data) || data.length === 0) {
-      return BREAKING_NEWS;
+      return [];
     }
 
     return data.map((item) => {
@@ -92,6 +91,6 @@ export const fetchBreakingNews = async (): Promise<BreakingNewsItem[]> => {
     });
   } catch (error) {
     console.error('Failed to load CMS breaking news:', error);
-    return BREAKING_NEWS;
+    return [];
   }
 };

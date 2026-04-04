@@ -4,7 +4,7 @@ import { Activity, ChevronLeft, Clock, Search, Share2, User, X } from 'lucide-re
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { BlogArticle, getBlogPath } from './blogData';
-import { fetchBlogArticleByIdentifier, fetchBlogArticles, getRelatedFromArticles } from '@/services/blogService';
+import { fetchBlogArticleByIdentifier, fetchBlogArticles } from '@/services/blogService';
 
 const setArticleSeo = (title: string, description: string, keywords?: string, image?: string, canonicalUrl?: string) => {
   document.title = title;
@@ -127,12 +127,22 @@ const BlogDetailPage: React.FC = () => {
     };
   }, [id]);
 
+  const sortedArticles = useMemo(() => {
+    return [...allArticles].sort((a, b) => {
+      const idA = Number(a.id) || 0;
+      const idB = Number(b.id) || 0;
+      return idB - idA;
+    });
+  }, [allArticles]);
+
   const sidebarData = useMemo(() => {
-    if (!article) return { latest: [], related: [], title: null };
+    if (!article) return { latest: [], related: [], recent: [], title: null };
+
+    const basePool = sortedArticles.filter((item) => item.id !== article.id);
 
     if (searchQuery) {
       const term = searchQuery.toLowerCase();
-      const filtered = allArticles.filter((item) =>
+      const filtered = basePool.filter((item) =>
         (item.title.toLowerCase().includes(term) ||
           item.summary.toLowerCase().includes(term) ||
           item.tag.toLowerCase().includes(term)) &&
@@ -142,17 +152,26 @@ const BlogDetailPage: React.FC = () => {
       return {
         latest: filtered.slice(0, 4),
         related: filtered.slice(4, 8),
+        recent: filtered.slice(8, 12),
         title: `Search: ${searchQuery}`
       };
     }
 
-    const related = getRelatedFromArticles(allArticles, article.id, 8);
+    const latest = basePool.slice(0, 4);
+    const latestIds = new Set(latest.map((item) => item.id));
+
+    const related = basePool.filter((item) => !latestIds.has(item.id)).slice(0, 4);
+    const relatedIds = new Set(related.map((item) => item.id));
+
+    const recent = basePool.filter((item) => !latestIds.has(item.id) && !relatedIds.has(item.id)).slice(0, 4);
+
     return {
-      latest: related.slice(0, 4),
-      related: related.slice(4, 8),
+      latest,
+      related,
+      recent,
       title: null
     };
-  }, [allArticles, article, searchQuery]);
+  }, [sortedArticles, article, searchQuery]);
 
   const liveUpdates = useMemo(() => {
     if (allArticles.length > 0) {
@@ -453,7 +472,7 @@ const BlogDetailPage: React.FC = () => {
                 <section className="space-y-8">
                   <h2 className="text-sm font-bold uppercase tracking-[0.15em] text-black">Recent News</h2>
                   <div className="space-y-4">
-                    {allArticles.filter(a => a.id !== article.id).slice(0, 4).map((item) => (
+                    {sidebarData.recent.map((item) => (
                       <Link
                         key={item.id}
                         to={getBlogPath(item)}
