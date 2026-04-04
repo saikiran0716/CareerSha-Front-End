@@ -312,13 +312,15 @@ const BlogDetailPage: React.FC = () => {
         <div className="flex flex-col lg:flex-row gap-16 items-stretch">
           <article className="flex-1 min-w-0 space-y-12">
             <header className="space-y-8">
-              <div className="flex flex-wrap items-center gap-4">
-                <span className="bg-[#b91c1c] text-white rounded-none text-[9px] font-bold tracking-[0.2em] px-3 py-1 uppercase border-0">
-                  {article.tag}
-                </span>
-                <div className="h-px w-12 bg-slate-200" />
-                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">{article.readTime}</span>
-              </div>
+              <span className="bg-[#b91c1c] text-white rounded-none text-[9px] font-bold tracking-[0.2em] px-3 py-1 uppercase border-0 w-fit">
+                {article.tag}
+              </span>
+
+              {article.image && (
+                <div className="w-full h-96 bg-slate-100 overflow-hidden border border-slate-200">
+                  <img src={article.image} alt={article.title} className="w-full h-full object-cover" />
+                </div>
+              )}
 
               <div className="space-y-4">
                 <h1 className="text-3xl md:text-5xl font-bold leading-[1.15] tracking-tight text-[#0f172a] uppercase">
@@ -330,33 +332,17 @@ const BlogDetailPage: React.FC = () => {
                 />
               </div>
 
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 pt-8 border-t border-slate-100">
-                <div className="flex items-center gap-5">
-                  <div className="w-14 h-14 rounded-none bg-slate-900 border-2 border-slate-800 flex items-center justify-center text-white font-black text-xl">
-                    <User size={24} />
-                  </div>
-                  <div>
-                    <p className="text-[11px] font-bold uppercase tracking-wider text-black">
-                      {article.author ?? 'CareerSha'}
-                    </p>
-                    <p className="text-[9px] font-medium text-slate-400 uppercase tracking-widest">
-                      {article.role ?? 'Team CareerSha'}
-                    </p>
-                  </div>
+              <div className="flex items-center gap-5 pt-8">
+                <div className="w-14 h-14 rounded-none bg-slate-900 border-2 border-slate-800 flex items-center justify-center text-white font-black text-xl">
+                  <User size={24} />
                 </div>
-
-                <div className="flex items-center gap-8">
-                  <div className="flex items-center gap-2 text-slate-400">
-                    <Clock size={16} />
-                    <span className="text-[10px] font-bold uppercase tracking-widest">{article.readTime}</span>
-                  </div>
-                  <button
-                    onClick={handleShare}
-                    className="p-2 hover:bg-slate-50 transition-all text-slate-400 hover:text-[#b91c1c]"
-                    aria-label="Share article"
-                  >
-                    <Share2 size={20} />
-                  </button>
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-black">
+                    {article.author ?? 'CareerSha'}
+                  </p>
+                  <p className="text-[9px] font-medium text-slate-400 uppercase tracking-widest">
+                    {article.role ?? 'Team CareerSha'}
+                  </p>
                 </div>
               </div>
             </header>

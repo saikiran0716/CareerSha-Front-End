@@ -209,10 +209,6 @@ const buildBodyHtml = (item: ContentItem, summary: string) => {
   const safeTitle = escapeHtml(item.title);
 
   return `
-    <p style="font-size: 1.15rem; font-weight: 500; line-height: 1.85; margin-bottom: 2rem; color: #334155;">
-      ${summary}
-    </p>
-    
     <div style="margin-top: 3rem; margin-bottom: 2rem; padding: 2rem; background-color: #f8fafc; border-left: 4px solid #b91c1c;">
       <h3 style="font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; color: #b91c1c; margin-bottom: 1rem;">
         Key Takeaways
@@ -224,14 +220,14 @@ const buildBodyHtml = (item: ContentItem, summary: string) => {
       </ul>
     </div>
 
-    <h2 style="font-size: 1.4rem; font-weight: 900; text-transform: uppercase; margin-top: 3.5rem; margin-bottom: 1.5rem; color: #0f172a; border-bottom: 2px solid #000; padding-bottom: 0.5rem;">
+    <h2 style="font-size: 1.4rem; font-weight: 900; text-transform: uppercase; margin-top: 3.5rem; margin-bottom: 1.5rem; color: #0f172a; padding-bottom: 0.5rem;">
       Editorial Insight
     </h2>
     <p style="margin-bottom: 1.5rem; line-height: 1.9; color: #475569; font-style: italic; border-left: 3px solid #e2e8f0; padding-left: 1.5rem;">
       "The 2026 landscape represents more than just a change in syllabus; it is a fundamental pivot toward global competitiveness. Institutions are no longer just teaching subjects—they are building resilient professionals ready for an AI-integrated economy."
     </p>
 
-    <h2 style="font-size: 1.4rem; font-weight: 900; text-transform: uppercase; margin-top: 3.5rem; margin-bottom: 1.5rem; color: #0f172a; border-bottom: 2px solid #000; padding-bottom: 0.5rem;">
+    <h2 style="font-size: 1.4rem; font-weight: 900; text-transform: uppercase; margin-top: 3.5rem; margin-bottom: 1.5rem; color: #0f172a; padding-bottom: 0.5rem;">
       Detailed Analysis
     </h2>
     <p style="margin-bottom: 1.5rem; line-height: 1.9; color: #475569;">
@@ -256,7 +252,7 @@ const buildBodyHtml = (item: ContentItem, summary: string) => {
       Finally, we must consider the long-term career trajectories being forged in this new era. The traditional concept of a "job for life" has been replaced by a model of continuous, professional evolution. The most successful professionals of 2026 are those who treat their education as a lifelong endeavor, constantly updating their skills through micro-credentials and specialized certifications. This agility is the ultimate safeguard against the unpredictable shifts of an AI-driven global economy. As we move further into this decade, the ability to learn, unlearn, and relearn will remain the most valuable asset any student can possess.
     </p>
 
-    <h2 style="font-size: 1.4rem; font-weight: 900; text-transform: uppercase; margin-top: 3.5rem; margin-bottom: 1.5rem; color: #0f172a; border-bottom: 2px solid #000; padding-bottom: 0.5rem;">
+    <h2 style="font-size: 1.4rem; font-weight: 900; text-transform: uppercase; margin-top: 3.5rem; margin-bottom: 1.5rem; color: #0f172a; padding-bottom: 0.5rem;">
       The Bigger Picture
     </h2>
     <p style="margin-bottom: 1.5rem; line-height: 1.9; color: #475569;">
