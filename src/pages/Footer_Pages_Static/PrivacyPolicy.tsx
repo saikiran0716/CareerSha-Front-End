@@ -3,7 +3,11 @@ import StaticLayout from './StaticLayout';
 
 const PrivacyPolicy: React.FC = () => {
     return (
-        <StaticLayout title="Privacy Policy">
+        <StaticLayout
+            title="Privacy Policy | CareerSha"
+            description="Read CareerSha's Privacy Policy to understand how we collect, use, and protect your personal information and usage data."
+            canonical="https://www.careersha.com/privacy-policy"
+        >
             <h1>Privacy Policy</h1>
             <p>Last updated: March 27, 2026</p>
             <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>

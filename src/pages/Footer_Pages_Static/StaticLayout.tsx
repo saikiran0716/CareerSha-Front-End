@@ -4,15 +4,17 @@ import SEO from '../../components/SEO/SEO';
 
 interface StaticLayoutProps {
     title: string;
+    description?: string;
+    canonical?: string;
     children: React.ReactNode;
 }
 
-const StaticLayout: React.FC<StaticLayoutProps> = ({ title, children }) => {
+const StaticLayout: React.FC<StaticLayoutProps> = ({ title, description, canonical, children }) => {
     const navigate = useNavigate();
 
     return (
         <div className="min-h-screen bg-slate-50 transition-colors duration-300">
-            <SEO title={title} />
+            <SEO title={title} description={description} canonical={canonical} />
             {/* Header Section */}
             <div className="bg-white border-b border-slate-200 sticky top-0 z-20">
                 <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 h-16 flex items-center gap-4">
@@ -42,12 +44,12 @@ const StaticLayout: React.FC<StaticLayoutProps> = ({ title, children }) => {
                 <div 
                     className="prose prose-slate prose-sm md:prose-base max-w-none 
                     prose-headings:font-black prose-headings:text-slate-900
-                    prose-p:text-slate-700 prose-p:leading-[1.6] prose-p:text-[14px] md:text-[16px]
+                    prose-p:text-slate-700 prose-p:leading-[1.6] prose-p:text-[14px] prose-p:md:text-[16px]
                     prose-strong:text-slate-900 prose-strong:font-black
-                    prose-ul:list-disc prose-li:text-slate-700 prose-li:marker:text-[#b91c1c] prose-li:text-[14px] md:text-[16px]
-                    prose-h1:text-2xl md:text-3xl prose-h1:mb-6 prose-h1:tracking-tight
-                    prose-h2:text-xl md:text-2xl prose-h2:mt-10 prose-h2:mb-5 prose-h2:border-b prose-h2:pb-2 prose-h2:border-slate-200
-                    prose-h3:text-lg md:text-xl prose-h3:mt-8 prose-h3:mb-4"
+                    prose-ul:list-disc prose-li:text-slate-700 prose-li:marker:text-[#b91c1c] prose-li:text-[14px] prose-li:md:text-[16px]
+                    prose-h1:text-2xl prose-h1:md:text-3xl prose-h1:mb-6 prose-h1:tracking-tight
+                    prose-h2:text-xl prose-h2:md:text-2xl prose-h2:mt-10 prose-h2:mb-5 prose-h2:border-b prose-h2:pb-2 prose-h2:border-slate-200
+                    prose-h3:text-lg prose-h3:md:text-xl prose-h3:mt-8 prose-h3:mb-4"
                 >
                     {children}
                 </div>

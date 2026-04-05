@@ -6,7 +6,15 @@ import { Input } from '@/components/ui/input';
 import { BlogArticle, getBlogPath } from './blogData';
 import { fetchBlogArticleByIdentifier, fetchBlogArticles } from '@/services/blogService';
 
-const setArticleSeo = (title: string, description: string, keywords?: string, image?: string, canonicalUrl?: string) => {
+const setArticleSeo = (
+  title: string,
+  description: string,
+  keywords?: string,
+  image?: string,
+  canonicalUrl?: string,
+  author?: string,
+  publishedDate?: string
+) => {
   document.title = title;
 
   const ensureMeta = (selector: string, attribute: 'name' | 'property', value: string, content: string) => {
@@ -19,10 +27,13 @@ const setArticleSeo = (title: string, description: string, keywords?: string, im
     element.setAttribute('content', content);
   };
 
+  const fullCanonicalUrl = canonicalUrl || (window.location.origin + window.location.pathname);
+
   ensureMeta('meta[name="description"]', 'name', 'description', description);
   ensureMeta('meta[property="og:title"]', 'property', 'og:title', title);
   ensureMeta('meta[property="og:description"]', 'property', 'og:description', description);
   ensureMeta('meta[property="og:type"]', 'property', 'og:type', 'article');
+  ensureMeta('meta[property="og:url"]', 'property', 'og:url', fullCanonicalUrl);
 
   if (keywords) {
     ensureMeta('meta[name="keywords"]', 'name', 'keywords', keywords);
@@ -32,6 +43,14 @@ const setArticleSeo = (title: string, description: string, keywords?: string, im
     ensureMeta('meta[property="og:image"]', 'property', 'og:image', image);
   }
 
+  if (author) {
+    ensureMeta('meta[property="article:author"]', 'property', 'article:author', author);
+  }
+
+  if (publishedDate) {
+    ensureMeta('meta[property="article:published_time"]', 'property', 'article:published_time', publishedDate);
+  }
+
   // Handle Canonical Tag
   let canonical = document.head.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
   if (!canonical) {
@@ -39,7 +58,39 @@ const setArticleSeo = (title: string, description: string, keywords?: string, im
     canonical.setAttribute('rel', 'canonical');
     document.head.appendChild(canonical);
   }
-  canonical.setAttribute('href', canonicalUrl || (window.location.origin + window.location.pathname));
+  canonical.setAttribute('href', fullCanonicalUrl);
+
+  // Add JSON-LD Article Schema for better semantic understanding
+  if (title && description) {
+    let jsonLdScript = document.head.querySelector('script[type="application/ld+json"][data-article-schema]') as HTMLScriptElement | null;
+    if (!jsonLdScript) {
+      jsonLdScript = document.createElement('script');
+      jsonLdScript.setAttribute('type', 'application/ld+json');
+      jsonLdScript.setAttribute('data-article-schema', 'true');
+      document.head.appendChild(jsonLdScript);
+    }
+
+    const articleSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'NewsArticle',
+      headline: title,
+      description: description,
+      url: fullCanonicalUrl,
+      ...(image && { image: image }),
+      ...(author && { author: { '@type': 'Person', name: author } }),
+      ...(publishedDate && { datePublished: publishedDate }),
+      publisher: {
+        '@type': 'Organization',
+        name: 'CareerSha',
+        logo: {
+          '@type': 'ImageObject',
+          url: window.location.origin + '/careersha-logo.png'
+        }
+      }
+    };
+
+    jsonLdScript.textContent = JSON.stringify(articleSchema);
+  }
 };
 
 const BlogDetailPage: React.FC = () => {
@@ -236,7 +287,15 @@ const BlogDetailPage: React.FC = () => {
 
   useEffect(() => {
     if (article) {
-      setArticleSeo(article.seoTitle, article.seoDescription, article.seoKeywords, article.image, article.canonicalUrl);
+      setArticleSeo(
+        article.seoTitle,
+        article.seoDescription,
+        article.seoKeywords,
+        article.image,
+        article.canonicalUrl,
+        article.author,
+        article.publishedDate
+      );
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [article]);
@@ -416,8 +475,8 @@ const BlogDetailPage: React.FC = () => {
             </div>
           </article>
             
-          <aside className="lg:w-[400px] shrink-0 lg:border-l lg:border-slate-100 lg:pl-12 relative">
-            <div className="lg:sticky lg:bottom-10 lg:self-start space-y-16">
+          <aside className="lg:w-[400px] shrink-0 lg:border-l lg:border-slate-100 lg:pl-12 relative border-none">
+            <div className="lg:sticky lg:bottom-10 lg:self-start space-y-16 lg:mt-0 mt-16">
               <section className="space-y-6">
                 <h2 className="text-sm font-bold uppercase tracking-[0.15em] text-black">
                   {sidebarData.title ? sidebarData.title : 'Latest News'}

@@ -3,7 +3,11 @@ import StaticLayout from './StaticLayout';
 
 const TermsAndConditions: React.FC = () => {
     return (
-        <StaticLayout title="Terms & Conditions">
+        <StaticLayout
+            title="Terms and Conditions | CareerSha"
+            description="Review the Terms and Conditions for using CareerSha services, tools, and content across the website."
+            canonical="https://www.careersha.com/terms-and-conditions"
+        >
             <h1>Terms and Conditions</h1>
             <p>Last updated: March 27, 2026</p>
             <p>Please read these terms and conditions carefully before using Our Service.</p>

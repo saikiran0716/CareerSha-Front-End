@@ -30,12 +30,25 @@ const RoadmapView: React.FC<RoadmapViewProps> = ({ roadmap, onAskAI }) => {
         );
     }
 
+    const roadmapKeywords = [
+        `${roadmap.title} roadmap`,
+        `${roadmap.title} career roadmap 2026`,
+        `how to become ${roadmap.title.toLowerCase()}`,
+        `${roadmap.title} skills`,
+        `${roadmap.title} learning path`,
+        `${roadmap.title} certifications`,
+        `${roadmap.title} jobs in india`,
+        `${roadmap.title} salary in india`,
+        `${roadmap.title} interview preparation`,
+        'career roadmap india'
+    ].join(', ');
+
     return (
         <div className="max-w-[1440px] mx-auto pt-4 pb-12 px-6 sm:px-10 lg:px-16 animate-fade bg-slate-50/10 dark:bg-transparent">
             <SEO
                 title={`${roadmap.title} Career Roadmap 2026 | Step-by-Step Guide`}
                 description={`Master ${roadmap.title} with our specialized 2026 career roadmap. ${roadmap.description} Learn the skills, tools, and pathway to success.`}
-                keywords={`${roadmap.title} career, how to become a ${roadmap.title}, ${roadmap.title} roadmap 2026, professional guide`}
+                keywords={roadmapKeywords}
                 canonical={`https://www.careersha.com/roadmap/${roadmap.title.toLowerCase().replace(/\s+/g, '-')}`}
             />
             {/* Action Bar */}
@@ -139,7 +152,7 @@ const RoadmapView: React.FC<RoadmapViewProps> = ({ roadmap, onAskAI }) => {
                                 <div className="hidden md:block w-1/2" />
 
                                 {/* Trunk Node (Layered for Masking & Clarity) */}
-                                <div className="absolute top-0 left-1/2 w-6 h-6 rounded-full -translate-x-1/2 -translate-y-1/2 md:top-auto left-1/2 z-40 flex items-center justify-center timeline-node">
+                                <div className="absolute top-0 w-6 h-6 rounded-full -translate-x-1/2 -translate-y-1/2 md:top-auto z-40 flex items-center justify-center timeline-node" style={{ left: '50%' }}>
                                     {/* Pulse Animation */}
                                     <div className={`absolute w-full h-full rounded-full ${color.bg} opacity-25`} style={{ animationDuration: '4s' }} />
 

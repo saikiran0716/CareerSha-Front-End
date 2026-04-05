@@ -1,14 +1,13 @@
 import React from 'react';
 import StaticLayout from './StaticLayout';
-import SEO from '../../components/SEO/SEO';
 
 const AboutUs: React.FC = () => {
     return (
-        <StaticLayout title="About CareerSha">
-            <SEO 
-                title="About Us | India's Best Education Platform"
-                description="Learn about our mission to empower students with smart education tools, carrier guidance, and latest exam updates."
-            />
+        <StaticLayout
+            title="About Us | India's Best Education Platform"
+            description="Learn about our mission to empower students with smart education tools, career guidance, and latest exam updates."
+            canonical="https://www.careersha.com/about-us"
+        >
             <p><strong>CareerSha</strong> is a data-driven education intelligence platform built to simplify one of the most critical decisions in a student’s life — choosing the right career and college.</p>
             <p>Every year, millions of students in India face confusion due to scattered information, unpredictable cutoffs, and lack of personalized guidance. CareerSha solves this problem using advanced analytics, historical admission datasets, and predictive modeling systems.</p>
 

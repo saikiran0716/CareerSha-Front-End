@@ -19,7 +19,6 @@ import SearchPage from '../pages/SearchPage';
 import RankPredictorPage from '../pages/RankPredictorPage';
 import CollegeMatcherPage from '../pages/CollegeMatcherPage';
 import ExamsHubPage from '../pages/ExamsHubPage';
-import CareerLibraryPage from '../pages/CareerLibraryPage';
 import ResultsPage from '../pages/ResultsPage';
 import NewsPage from '../pages/NewsPage';
 import SEO from '../components/SEO/SEO';
@@ -101,7 +100,7 @@ const RoadmapRouters: React.FC<RoadmapRoutersProps> = ({ onAskAI, user, setIsAut
                 <Route path="/rank-estimator" element={<RankPredictorPage onAskAI={onAskAI} />} />
                 <Route path="/college-matcher" element={<CollegeMatcherPage onAskAI={onAskAI} />} />
                 <Route path="/exams" element={<ExamsHubPage />} />
-                <Route path="/career-library" element={<CareerLibraryPage />} />
+                <Route path="/career-library" element={<Navigate to="/roadmaps" replace />} />
                 <Route path="/results" element={<ResultsPage onAskAI={onAskAI} />} />
                 <Route path="/news" element={<NewsPage />} />
                 <Route path="/roadmaps" element={
@@ -109,7 +108,7 @@ const RoadmapRouters: React.FC<RoadmapRoutersProps> = ({ onAskAI, user, setIsAut
                         <SEO
                             title="Career Roadmaps 2026 | Step-by-Step Career Planning"
                             description="Plan your career journey with detailed, expert-verified roadmaps for over 40+ professions including AI, Software Engineering, and Management. Your step-by-step guide to career success in 2026."
-                            keywords="career roadmaps, career planning india, how to become a developer, ai engineer roadmap, product management career guide"
+                            keywords="career roadmap 2026 india, step by step career guide, software engineer roadmap, data scientist roadmap, ui ux designer roadmap, ai engineer roadmap, product manager roadmap, career planning for students, professional skill roadmap, best career paths after 12th"
                             canonical="https://www.careersha.com/roadmaps"
                         />
                         <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-8 text-center pt-8">Career Roadmaps</h1>
@@ -217,11 +216,9 @@ const RoadmapRouters: React.FC<RoadmapRoutersProps> = ({ onAskAI, user, setIsAut
                 <Route path="/disclaimer" element={<Disclaimer />} />
 
                 <Route path="/exams/:examId" element={<ExamDetailsPge />} />
-                <Route path="/latest-news" element={<NewsView />} />
+                <Route path="/latest-news" element={<Navigate to="/news" replace />} />
                 <Route path="/blog" element={<BlogListPage />} />
                 <Route path="/blog/category/:categorySlug" element={<BlogListPage />} />
-                <Route path="/blog/:id" element={<BlogDetailPage />} />
-                <Route path="/blog" element={<BlogListPage />} />
                 <Route path="/blog/:id" element={<BlogDetailPage />} />
                 <Route path="/recommended-colleges" element={<CollegeMatchResults />} />
                 {/* Global Redirects for Exams hitting /college/ path */}

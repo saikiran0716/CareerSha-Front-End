@@ -3,7 +3,11 @@ import StaticLayout from './StaticLayout';
 
 const Disclaimer: React.FC = () => {
     return (
-        <StaticLayout title="Disclaimer">
+        <StaticLayout
+            title="Disclaimer | CareerSha"
+            description="Read CareerSha's Disclaimer regarding content accuracy, liability limits, and external links for information published on this site."
+            canonical="https://www.careersha.com/disclaimer"
+        >
             <h1>Disclaimer</h1>
             <p>Last updated: March 27, 2026</p>
             

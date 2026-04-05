@@ -33,7 +33,7 @@ export const AIRoadmap: React.FC<AIRoadmapProps> = ({ onSelectRoadmap, selectedR
                 <SEO 
                     title="Career Roadmaps" 
                     description="Explore 20+ premium career roadmaps from 10th standard to professional entry. Step-by-step guides for Software Engineering, Data Science, UI/UX, and more."
-                    keywords="career roadmaps, software engineering roadmap, data science roadmap, career planning, student guidance"
+                    keywords="career roadmap india, career roadmap 2026, software engineering roadmap, data science roadmap, ui ux roadmap, ai engineer roadmap, career planning for students, step by step career guide"
                 />
             )}
             <style dangerouslySetInnerHTML={{

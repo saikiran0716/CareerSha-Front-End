@@ -31,6 +31,122 @@
         content="rank predictor, college matcher, jee main 2026 rank predictor, neet 2026 rank predictor, career guidance india, mbbs admission predictor, engineering colleges india">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.careersha.com/">
+    <script>
+        (function () {
+            var siteUrl = 'https://www.careersha.com';
+            var rawPath = window.location.pathname || '/';
+            var path = rawPath.replace(/\/+$/, '') || '/';
+
+            var routes = [
+                {
+                    test: /^\/$/,
+                    title: 'CareerSha | rank Predictor, College Predictor & Career Guidance 2026',
+                    description: 'CareerSha offers expert rank predictors, college matching tools, exam updates, and career guidance for JEE, NEET, MBA, Engineering, and Medical aspirants in India.'
+                },
+                {
+                    test: /^\/blog$/,
+                    title: 'CareerSha Blog - Education News, Career Tips & Exam Updates',
+                    description: 'Latest education news, exam updates, career tips and student guides in India.'
+                },
+                {
+                    test: /^\/exams$/,
+                    title: 'Entrance Exams 2026 India | JEE, NEET, EAMCET, CAT & GATE UPDATES',
+                    description: 'Stay updated with the latest entrance exam dates, syllabus changes, and result declarations for JEE, NEET, EAMCET, CAT, and GATE 2026 in India.'
+                },
+                {
+                    test: /^\/news$/,
+                    title: 'Latest Education News 2026 | JEE, NEET & Admission Updates',
+                    description: 'Stay up-to-date with the latest education news in India. Real-time updates on competitive exams, college admission notifications, and career news for 2026.'
+                },
+                {
+                    test: /^\/rank-estimator$/,
+                    title: 'Rank Predictor 2026 | JEE Main, NEET & EAMCET Rank Estimator',
+                    description: "Predict your entrance exam rank with CareerSha's advanced rank predictor tool for JEE Main, NEET, and EAMCET. Data-driven and accurate rank estimation for 2026."
+                },
+                {
+                    test: /^\/college-matcher$/,
+                    title: 'College Predictor 2026 | JEE, NEET & MBA College Matcher',
+                    description: "Find the best engineering, medical, or management colleges based on your rank and scores. CareerSha's smart college matcher for 2026 admissions."
+                },
+                {
+                    test: /^\/results$/,
+                    title: 'Exam Results 2026 - JEE, NEET, EAMCET Results | CareerSha',
+                    description: 'Check latest exam results for JEE, NEET, EAMCET and other entrance exams.'
+                },
+               
+            ];
+
+            var ensureMeta = function (selector, attribute, key, content) {
+                var element = document.head.querySelector(selector);
+                if (!element) {
+                    element = document.createElement('meta');
+                    element.setAttribute(attribute, key);
+                    document.head.appendChild(element);
+                }
+                element.setAttribute('content', content);
+            };
+
+            var setPageMetadata = function (title, description, canonicalUrl) {
+                document.title = title;
+                ensureMeta('meta[name="description"]', 'name', 'description', description);
+                ensureMeta('meta[property="og:title"]', 'property', 'og:title', title);
+                ensureMeta('meta[property="og:description"]', 'property', 'og:description', description);
+
+                var canonical = document.head.querySelector('link[rel="canonical"]');
+                if (!canonical) {
+                    canonical = document.createElement('link');
+                    canonical.setAttribute('rel', 'canonical');
+                    document.head.appendChild(canonical);
+                }
+                canonical.setAttribute('href', canonicalUrl);
+            };
+
+            // Check if this is a blog article route
+            var blogArticleMatch = /^\/blog\/([^/]+)$/.exec(path);
+            if (blogArticleMatch) {
+                var slug = blogArticleMatch[1];
+                var cmsApiUrl = 'https://api.careersha.com/api/content/blog/' + slug + '/';
+
+                // Attempt to fetch article metadata from CMS API
+                fetch(cmsApiUrl, { mode: 'cors' })
+                    .then(function (response) {
+                        if (!response.ok) throw new Error('Article not found');
+                        return response.json();
+                    })
+                    .then(function (article) {
+                        var seoTitle = article.seo_title || article.title || 'CareerSha Blog Article';
+                        var seoDescription = article.seo_description || article.summary || article.description || 'Read insights on education, exams and career guidance.';
+                        var canonicalUrl = article.canonical_url || (siteUrl + path);
+                        
+                        setPageMetadata(seoTitle, seoDescription, canonicalUrl);
+                    })
+                    .catch(function () {
+                        // Fallback to generic article metadata if API fails
+                        setPageMetadata(
+                            'CareerSha Blog Article | Education, Exams & Career Guidance',
+                            'Read detailed CareerSha blog insights on education news, exam updates, rank trends, admissions, and student career guidance in India.',
+                            siteUrl + path
+                        );
+                    });
+                return;
+            }
+
+            // Handle static routes
+            var match = null;
+            for (var i = 0; i < routes.length; i += 1) {
+                if (routes[i].test.test(path)) {
+                    match = routes[i];
+                    break;
+                }
+            }
+
+            if (!match) {
+                return;
+            }
+
+            setPageMetadata(match.title, match.description, siteUrl + (path === '/' ? '/' : path));
+        })();
+    </script>
     <meta name="google-site-verification" content="I1XPpoMg3mfURnXc0TlUfeaEgqo02MNBxY2Qm_2FxMk" />
     <meta name="theme-color" content="#4f46e5">
     <link rel="icon" type="image/png" href="/favicon.png">

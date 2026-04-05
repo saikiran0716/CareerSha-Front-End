@@ -1,14 +1,13 @@
 import React from 'react';
 import StaticLayout from './StaticLayout';
-import SEO from '../../components/SEO/SEO';
 
 const ContactUs: React.FC = () => {
     return (
-        <StaticLayout title="Contact CareerSha">
-            <SEO
-                title="Contact Us | Get in Touch with CareerSha"
-                description="Have questions? Contact our support team for help with colleges, exams, and career guidance."
-            />
+        <StaticLayout
+            title="Contact Us | Get in Touch with CareerSha"
+            description="Have questions? Contact our support team for help with colleges, exams, and career guidance."
+            canonical="https://www.careersha.com/contact-us"
+        >
             <p>We are committed to providing fast and reliable support for all our students and partners.</p>
 
             <h2>📧 SUPPORT EMAIL</h2>

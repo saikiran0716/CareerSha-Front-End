@@ -15,6 +15,8 @@ const setListPageSeo = (searchTerm: string, activeCategory: string) => {
     ? `Browse CareerSha blog results for ${searchTerm}.`
     : 'Latest education news, exam updates, career tips and student guides in India.';
 
+  const canonicalUrl = 'https://www.careersha.com/blog';
+
   document.title = title;
 
   const ensureMeta = (selector: string, attribute: 'name' | 'property', value: string, content: string) => {
@@ -30,6 +32,8 @@ const setListPageSeo = (searchTerm: string, activeCategory: string) => {
   ensureMeta('meta[name="description"]', 'name', 'description', description);
   ensureMeta('meta[property="og:title"]', 'property', 'og:title', title);
   ensureMeta('meta[property="og:description"]', 'property', 'og:description', description);
+  ensureMeta('meta[property="og:type"]', 'property', 'og:type', 'website');
+  ensureMeta('meta[property="og:url"]', 'property', 'og:url', canonicalUrl);
 
   // Handle Canonical Tag
   let canonical = document.head.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
@@ -38,7 +42,34 @@ const setListPageSeo = (searchTerm: string, activeCategory: string) => {
     canonical.setAttribute('rel', 'canonical');
     document.head.appendChild(canonical);
   }
-  canonical.setAttribute('href', 'https://www.careersha.com/blog');
+  canonical.setAttribute('href', canonicalUrl);
+
+  // Add JSON-LD CollectionPage Schema for better semantic understanding
+  let jsonLdScript = document.head.querySelector('script[type="application/ld+json"][data-collection-schema]') as HTMLScriptElement | null;
+  if (!jsonLdScript) {
+    jsonLdScript = document.createElement('script');
+    jsonLdScript.setAttribute('type', 'application/ld+json');
+    jsonLdScript.setAttribute('data-collection-schema', 'true');
+    document.head.appendChild(jsonLdScript);
+  }
+
+  const collectionSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: title,
+    description: description,
+    url: canonicalUrl,
+    publisher: {
+      '@type': 'Organization',
+      name: 'CareerSha',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://www.careersha.com/careersha-logo.png'
+      }
+    }
+  };
+
+  jsonLdScript.textContent = JSON.stringify(collectionSchema);
 };
 
 const BlogListPage: React.FC = () => {
