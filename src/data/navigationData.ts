@@ -81,8 +81,10 @@ export const navigationData = [
             {
                 heading: "Admission Tools",
                 links: [
-                    { name: "College Predictor", url: "/?tool=predictor" },
-                    { name: "Rank Predictor", url: "/?tool=rank" }
+                    { name: "Tools Hub", url: "/tools" },
+                    { name: "College Predictor", url: "/college-matcher" },
+                    { name: "Rank Estimator", url: "/rank-estimator" },
+                    { name: "Search", url: "/search" }
                 ]
             }
         ]

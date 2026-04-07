@@ -500,24 +500,71 @@ FOOTER_PAGES['tools-scholarship'] = { title: 'Scholarships', description: 'Finan
 FOOTER_PAGES['tools-hub'] = {
     title: 'Rank Predictor & College Predictor Tools | CareerSha',
     description: 'Use CareerSha tools like JEE, NEET, EAMCET rank predictors and college predictor.',
-    items: [],
+    items: [
+        {
+            title: 'College Predictor',
+            subtitle: 'Find matching colleges from your rank and category',
+            tags: ['Live Tool', 'Admissions'],
+            link: '/college-matcher',
+            stats: [
+                { label: 'Type', value: 'Predictor' },
+                { label: 'Status', value: 'Open' }
+            ]
+        },
+        {
+            title: 'Rank Estimator',
+            subtitle: 'Estimate your rank before counseling starts',
+            tags: ['Live Tool', 'Results'],
+            link: '/rank-estimator',
+            stats: [
+                { label: 'Type', value: 'Estimator' },
+                { label: 'Status', value: 'Open' }
+            ]
+        },
+        {
+            title: 'Exam Results',
+            subtitle: 'Check result guidance and next-step counseling info',
+            tags: ['Guidance', 'Updates'],
+            link: '/results',
+            stats: [
+                { label: 'Type', value: 'Results' },
+                { label: 'Status', value: 'Updated' }
+            ]
+        },
+        {
+            title: 'Career Roadmaps',
+            subtitle: 'Explore step-by-step roadmaps for top careers',
+            tags: ['Planning', 'Guides'],
+            link: '/roadmaps',
+            stats: [
+                { label: 'Type', value: 'Guide' },
+                { label: 'Status', value: 'Updated' }
+            ]
+        },
+        {
+            title: 'Search Colleges',
+            subtitle: 'Search colleges, exams, and courses in India',
+            tags: ['Search', 'Discovery'],
+            link: '/search',
+            stats: [
+                { label: 'Type', value: 'Search' },
+                { label: 'Status', value: 'Open' }
+            ]
+        },
+        {
+            title: 'Latest News',
+            subtitle: 'Read education news and admission updates',
+            tags: ['News', 'Alerts'],
+            link: '/news',
+            stats: [
+                { label: 'Type', value: 'News' },
+                { label: 'Status', value: 'Live' }
+            ]
+        }
+    ],
     type: 'generic',
-    content: `
-        <div class="prose prose-slate max-w-none">
-            <p><strong>CareerSha Admission Tools</strong> are designed to take the guesswork out of the complex admission process in India. By leveraging data from previous years' cutoffs and seat allocation patterns, our tools provide students with highly accurate predictions to help them plan their next steps.</p>
-            <p>Our <strong>Rank Predictors</strong> for exams like JEE Main, NEET, and EAMCET allow students to estimate their All India Rank (AIR) based on their expected or actual raw scores. This information is crucial for understanding which category of colleges—IITs, NITs, or Top Private Universities—might be within reach.</p>
-            <h3>Key Features of Our Tools</h3>
-            <ul>
-                <li><strong>College Matcher:</strong> Enter your rank and preferences (location, budget, branch) to find the best-fitting colleges.</li>
-                <li><strong>Cutoff Analysis:</strong> View historical cutoff trends for various categories including General, OBC, SC, ST, and EWS.</li>
-                <li><strong>Personalized Reports:</strong> Get a detailed PDF report of your admission chances and recommended roadmaps.</li>
-            </ul>
-            <h3>How for Use These Tools Effectively</h3>
-            <p>To get the best results, ensure you provide accurate details regarding your exam category and domicile status, as these significantly impact seat allocation in government-funded institutions. Cross-referencing our predictor results with the official JoSAA or MCC brochures will give you a 100% clear picture of your admission possibilities.</p>
-            <p>At CareerSha, we believe in empowering students with "Decision Intelligence." Our tools are constantly updated with the latest counseling rules and seat matrix changes for the 2026 academic year. Whether you are aiming for an IIM, an IIT, or an AIIMS, our predictor tools are your best companions during the counseling season.</p>
-            <p>Don't leave your career to chance. Use our data-driven tools today to discover your potential and secure a seat in your dream college.</p>
-        </div>
-    `,
+    content: `<p><strong>Access all CareerSha tools in one place:</strong> College Predictor, Rank Estimator, Results Checker, and News Hub for 2026 admissions. These AI-powered tools help you navigate the entire college admission journey—from exam scores to seat allotment.</p>
+    <p><strong>CareerSha Tools Hub</strong> brings the main admission tools together in one place. Each page below has a clear purpose: estimate your rank, match colleges, review results, and follow a career roadmap.</p><p>Use the dedicated pages rather than query-string shortcuts so the URLs remain stable, crawlable, and easy to index.</p>`,
     faqs: []
 };
 

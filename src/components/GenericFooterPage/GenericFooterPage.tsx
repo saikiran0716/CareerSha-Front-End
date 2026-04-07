@@ -91,30 +91,14 @@ const LogoWithFallback = ({ title, image, link }: { title: string, image?: strin
 const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData, onBack, onAskAI, pageId }) => {
     const navigate = useNavigate();
 
-    const toSlug = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-
-    const getExamFromTitle = (title: string): string => {
-        const lower = (title || '').toLowerCase();
-        if (lower.includes('JEE MAINS')) return 'JEE MAINS';
-        if (lower.includes('jee advanced')) return 'JEE Advanced';
-        if (lower.includes('neet')) return 'NEET';
-        if (lower.includes('cat')) return 'CAT';
-        if (lower.includes('gate')) return 'GATE';
-        if (lower.includes('ts eamcet') || lower.includes('eamcet')) return 'TS EAMCET';
-        if (lower.includes('kcet')) return 'KCET';
-        return '';
-    };
-
     const getToolRedirectUrl = (item: PageItem): string => {
         const normalizedPageId = (pageId || '').toLowerCase();
-        const exam = getExamFromTitle(item.title);
-        const examParam = exam ? `&exam=${toSlug(exam)}` : '';
 
         if (normalizedPageId.includes('tool-predictor') || normalizedPageId.includes('tools-predictor') || (item.title || '').toLowerCase().includes('predictor')) {
-            return `/?tool=predictor${examParam}`;
+            return '/college-matcher';
         }
         if (normalizedPageId.includes('tool-rank') || normalizedPageId.includes('tools-rank') || (item.title || '').toLowerCase().includes('rank estimator')) {
-            return `/?tool=rank${examParam}`;
+            return '/rank-estimator';
         }
         return '';
     };
@@ -248,7 +232,7 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
         setError(false);
 
         // If content is missing or items are placeholders, fetch real data
-        const isStaticPage = pageId.startsWith('legal-') || pageId.startsWith('company-') || pageId.startsWith('site-');
+        const isStaticPage = pageId.startsWith('legal-') || pageId.startsWith('company-') || pageId.startsWith('site-') || pageId === 'tools-hub';
         const shouldFetch = !isStaticPage;
 
         if (shouldFetch) {
@@ -549,6 +533,15 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
                                     <button
                                         key={idx}
                                         onClick={() => {
+                                            if (item.link && (item.link.startsWith('/') || item.link.startsWith('http'))) {
+                                                if (item.link.startsWith('/')) {
+                                                    navigate(item.link);
+                                                } else {
+                                                    window.open(item.link, '_blank', 'noopener,noreferrer');
+                                                }
+                                                return;
+                                            }
+
                                             const lowerTitle = (item.title || '').toLowerCase();
                                             const isExam = lowerTitle.includes('gate') || lowerTitle.includes('cat ') || lowerTitle === 'cat' || lowerTitle.includes('jee') || lowerTitle.includes('neet') || lowerTitle.includes('xat') || lowerTitle.includes('clat') || lowerTitle.includes('mat') || lowerTitle.includes('nift');
 

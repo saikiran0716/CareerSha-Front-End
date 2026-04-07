@@ -53,13 +53,13 @@ export const footerNavigation = [
     {
         title: "ADMISSION TOOLS",
         links: [
-            { name: "College Predictor", url: "/tools/predictor" },
-            { name: "Rank Estimator", url: "/tools/rank" },
-            { name: "College Reviews", url: "/tools/reviews" },
-            { name: "Compare Colleges", url: "/tools/compare" },
-            { name: "Education Loan", url: "/tools/loan" },
-            { name: "Scholarships", url: "/tools/scholarship" },
-            { name: "Study Abroad", url: "/tools/abroad" }
+            { name: "Tools Hub", url: "/tools" },
+            { name: "College Predictor", url: "/college-matcher" },
+            { name: "Rank Estimator", url: "/rank-estimator" },
+            { name: "Search", url: "/search" },
+            { name: "Exam Results", url: "/results" },
+            { name: "Career Roadmaps", url: "/roadmaps" },
+            { name: "Latest News", url: "/news" }
         ]
     }
 ];

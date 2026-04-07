@@ -26,7 +26,7 @@ const ResultsPage: React.FC<{ onAskAI: (topic: string) => void }> = ({ onAskAI }
           </ol>
 
           <h2>Understanding Your Rank and Percentile</h2>
-          <p>For exams like JEE Main, results are often declared in terms of <strong>NTA Percentile Scores</strong>. It is important to distinguish between your percentile and your actual All India Rank (AIR). Your percentile indicates the percentage of candidates who scored equal to or below you, while your AIR determines your seat allocation in the counseling process. Use our <a href="/?tool=rank" className="text-[#b91c1c] font-bold">Rank Predictor</a> to understand what your score means for your admission chances.</p>
+          <p>For exams like JEE Main, results are often declared in terms of <strong>NTA Percentile Scores</strong>. It is important to distinguish between your percentile and your actual All India Rank (AIR). Your percentile indicates the percentage of candidates who scored equal to or below you, while your AIR determines your seat allocation in the counseling process. Use our <a href="/rank-estimator" className="text-[#b91c1c] font-bold">Rank Predictor</a> to understand what your score means for your admission chances.</p>
 
           <h2>Next Steps After Results: Counseling and Admissions</h2>
           <p>Once your results are out, the next phase is <strong>Online Counseling</strong> (JoSAA, MCC, or State-level counseling). This is where you will fill in your choices for colleges and branches. Having your result handy and understanding your rank category (General, OBC, SC, ST, EWS) is vital for securing the best possible seat. CareerSha's <strong>College Matcher</strong> tool can help you identify which colleges aligned with your 2026 result.</p>

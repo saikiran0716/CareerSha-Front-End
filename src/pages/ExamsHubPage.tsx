@@ -19,6 +19,8 @@ const ExamsHubPage: React.FC = () => {
 
         {/* SEO Content Section */}
         <div className="prose prose-slate dark:prose-invert max-w-none mb-12">
+          <p>Stay updated on <strong>JEE, NEET, CAT, CLAT, and other entrance exam schedules, results, and announcements</strong> for 2026. Get exam-specific preparation guides, mock tests, official registration links, and expert tips from one centralized hub designed for Indian aspirants.</p>
+          
           <p>The landscape of <strong>Entrance Exams 2026 in India</strong> is highly competitive, serving as the primary gateway for students to enter prestigious national and state-level institutions. Whether you are aiming for Engineering, Medicine, Law, or Management, staying updated with the latest exam cycles is crucial for a successful admission journey.</p>
 
           <h2>Most Popular Entrance Exams in 2026</h2>

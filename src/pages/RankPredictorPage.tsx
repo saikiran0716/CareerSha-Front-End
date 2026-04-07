@@ -13,6 +13,13 @@ const RankPredictorPage: React.FC<{ onAskAI: (topic: string) => void }> = ({ onA
       />
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-8 text-center">Rank Estimator Tool</h1>
+        
+        {/* Unique SEO Content for Rank Predictor Page */}
+        <div className="prose prose-slate dark:prose-invert max-w-none mb-12">
+          <p>Predict your exact <strong>JEE Main, NEET, or EAMCET rank</strong> with CareerSha's advanced AI-powered rank calculator. Get personalized score analysis, counseling predictions, and actionable insights to secure your dream college.</p>
+          <p>Our Rank Estimator uses historical data from thousands of admission cycles to provide realistic rank predictions. Simply enter your expected score, and get instant feedback on your admission probability across different categories and quotas.</p>
+        </div>
+        
         <RankEstimator onAskAI={onAskAI} />
       </div>
     </div>

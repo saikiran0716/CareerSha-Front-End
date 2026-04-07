@@ -9,7 +9,7 @@ interface PredictorTagsProps {
 const PREDICTOR_DATA = [
     { id: 'rank', label: 'JEE MAINS Rank Predictor', tag: 'Popular', tagColor: 'bg-orange-500', url: '/rank/jee-main' },
     { id: 'rank', label: 'NEET Rank Predictor', tag: 'Popular', tagColor: 'bg-orange-500', url: '/rank/neet' },
-    { id: 'predictor', label: 'College Predictor', tag: 'Top Pick', tagColor: 'bg-indigo-500', url: '/?tool=predictor&exam=jee-main' },
+    { id: 'predictor', label: 'College Predictor', tag: 'Top Pick', tagColor: 'bg-indigo-500', url: '/college-matcher' },
     { id: 'rank', label: 'EAMCET Rank Predictor', tag: 'Trending', tagColor: 'bg-emerald-500', url: '/rank/ts-eamcet' },
     { id: 'results', label: 'Exam Results', tag: 'Most Viewed', tagColor: 'bg-[#ec4899]' },
     { id: 'library', label: 'Career Roadmaps', tag: 'Hot', tagColor: 'bg-[#8b5cf6]' }
