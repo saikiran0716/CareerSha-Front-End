@@ -107,29 +107,26 @@ const Header: React.FC<HeaderProps> = ({
 
   return (
     <>
-      <header className="sticky top-0 z-[100] bg-white/90 backdrop-blur-xl border-b border-slate-200/60 shadow-sm transition-all duration-300">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-start lg:gap-6 py-3 relative">
+      <header className="sticky top-0 z-[100] bg-white shadow-sm transition-all duration-300">
+        <div className="w-full">
+          <div className="mx-auto max-w-[1440px] px-6 flex items-center justify-between py-3">
 
-          {/* Mobile Menu Button - Wrapped for Centering Logic */}
-          <div className="flex-1 lg:flex-none flex justify-start lg:hidden">
+          {/* Left: Logo and Mobile Menu Button */}
+          <div className="flex items-center gap-4">
             <button
               className="lg:hidden p-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
-          </div>
-
-          {/* Centered Logo / Branding */}
-          <div className="absolute left-1/2 -translate-x-1/2 lg:relative lg:left-0 lg:translate-x-0 flex-none lg:flex-none flex justify-center">
-            <Link to="/" className="flex items-center gap-2 cursor-pointer group shrink-0 lg:pl-8">
-              <img src="https://japamantra.in/wp-content/uploads/2026/03/careersha.png" className="w-auto h-10 sm:h-12 object-contain" alt="CareerSha Logo" />
-              {/* Text hidden completely to prevent row crowding on navigation desktop rows */}
+            <Link to="/" className="flex items-center gap-2 cursor-pointer">
+              <GraduationCap className="w-7 h-7 text-blue-600 fill-blue-600/10" />
+              <span className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Careersha</span>
             </Link>
           </div>
 
-          {/* Desktop Categories Nav */}
-          <nav className="ml-auto hidden lg:flex lg:gap-1 xl:gap-2 items-center">
+          {/* Center: Navigation */}
+          <nav className="hidden lg:flex flex-1 justify-center items-center gap-3 xl:gap-5">
             {navigationData.map((cat) => (
               <div
                 key={cat.title}
@@ -138,10 +135,13 @@ const Header: React.FC<HeaderProps> = ({
                 className="relative py-2"
               >
                 <button
-                  className={`text-[11px] xl:text-[12px] font-bold uppercase tracking-widest transition-all flex items-center gap-1 xl:gap-2 py-2 px-2 xl:px-4 rounded-xl ${location.pathname.startsWith(`/${cat.slug}`)
-                    ? "bg-indigo-600 text-white shadow-lg shadow-indigo-200"
-                    : "text-slate-600 hover:text-indigo-600 hover:bg-indigo-50/50"
-                    }`}
+                  className={`text-[13px] font-semibold transition-all flex items-center gap-1 py-2 px-3 rounded-lg ${
+                    activeMenu === cat.title 
+                      ? 'text-blue-600 dark:text-blue-400' 
+                      : location.pathname.startsWith(`/${cat.slug}`) 
+                        ? 'text-blue-600 dark:text-blue-400 font-bold' 
+                        : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                  }`}
                 >
                   {cat.title}
                   <ChevronDown size={14} className={`transition-transform duration-300 ${activeMenu === cat.title ? "rotate-180" : ""}`} />
@@ -155,21 +155,33 @@ const Header: React.FC<HeaderProps> = ({
               </div>
             ))}
             <Link
-              to="/blog"
-              className={`text-[11px] xl:text-[12px] font-bold uppercase tracking-widest transition-all py-2 px-2 xl:px-4 rounded-xl ${location.pathname === '/blog'
-                ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200'
-                : 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50/50'
-                }`}
+              to="/"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="text-[13px] font-semibold py-2 px-3 rounded-lg text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all"
             >
-              BLOG
+              Community
+            </Link>
+            <Link 
+              to="/blog" 
+              className={`text-[13px] font-semibold py-2 px-3 rounded-lg flex items-center gap-1.5 transition-all ${
+                location.pathname === '/blog' 
+                  ? 'text-blue-600 dark:text-blue-400 font-bold' 
+                  : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+              }`}
+            >
+              Blog
+              <span className="text-[9px] font-extrabold px-1.5 py-0.5 rounded-full text-white bg-blue-600 uppercase tracking-wider">New</span>
             </Link>
           </nav>
 
           {/* Right Side Items (Search & Actions) */}
-          <div className="flex items-center gap-4 lg:gap-6 lg:mr-12 xl:mr-24">
+          <div className="flex items-center gap-4 lg:gap-6">
             {/* Search */}
-            <div className="hidden lg:flex relative w-[220px] xl:w-[280px] shrink-0 group">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-indigo-600 transition-colors" />
+            <div className="hidden lg:flex relative w-[260px] xl:w-[360px] shrink-0 group">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 transition-colors" style={{ color: 'rgb(var(--cs-primary))' }} />
               <input
                 type="text"
                 value={searchQuery}
@@ -178,7 +190,8 @@ const Header: React.FC<HeaderProps> = ({
                 onFocus={() => setIsSearchFocused(true)}
                 onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)}
                 placeholder="Search colleges, exams, courses..."
-                className="w-full pl-11 pr-4 py-2.5 rounded-xl border-2 border-slate-100 bg-slate-50/50 focus:bg-white transition-all shadow-sm focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none text-[12px] font-medium placeholder:text-slate-400"
+                className="w-full pl-11 pr-4 py-3 rounded-full border-2 border-slate-100 bg-white focus:bg-white transition-all shadow-sm outline-none text-[13px] font-medium placeholder:text-slate-400"
+                style={{ boxShadow: 'none' }}
               />
 
               {/* Desktop Search Dropdown */}
@@ -284,7 +297,8 @@ const Header: React.FC<HeaderProps> = ({
             </div>
           </div>
         </div>
-      </header>
+      </div>
+    </header>
 
       {/* Mobile Menu Overlay - Side Drawer Implementation */}
       {isMobileMenuOpen && (
@@ -293,16 +307,16 @@ const Header: React.FC<HeaderProps> = ({
           <div
             className="lg:hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[140] animate-fade"
             onClick={() => setIsMobileMenuOpen(false)}
-          />
+          ></div>
 
           {/* Drawer Content */}
           <div className="lg:hidden fixed inset-y-0 left-0 w-[80%] max-w-[320px] bg-white z-[150] shadow-2xl overflow-y-auto animate-slide-in flex flex-col">
             <div className="p-4 flex-1">
               {/* Drawer Header for mobile */}
               <div className="flex items-center justify-between mb-8 pb-4 border-b border-slate-100">
-                <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2">
-                  <img src="https://japamantra.in/wp-content/uploads/2026/03/careersha.png" className="w-auto h-9 object-contain" alt="CareerSha Logo" />
-                  {/* Text hidden completely for clean design consistency */}
+                <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2 cursor-pointer">
+                  <GraduationCap className="w-6 h-6 text-blue-600 fill-blue-600/10" />
+                  <span className="text-lg font-bold tracking-tight text-slate-900 dark:text-white">Careersha</span>
                 </Link>
                 <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 text-slate-400 hover:text-slate-600">
                   <X size={20} />
@@ -352,8 +366,18 @@ const Header: React.FC<HeaderProps> = ({
               {/* Mobile Categories */}
               <div className="space-y-1">
                 <Link
+                  to="/"
+                  className="block w-full p-4 text-sm font-bold text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl mb-1"
+                  onClick={(e) => {
+                    setIsMobileMenuOpen(false);
+                    document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  Community
+                </Link>
+                <Link
                   to="/blog"
-                  className="block w-full p-4 text-sm font-bold uppercase tracking-widest text-slate-800 hover:bg-slate-50 rounded-xl mb-2"
+                  className="block w-full p-4 text-sm font-bold text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl mb-2"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Blog
@@ -361,10 +385,10 @@ const Header: React.FC<HeaderProps> = ({
                 {navigationData.map((cat) => (
                   <div key={cat.title} className="rounded-xl overflow-hidden mb-1">
                     <button
-                      className={`w-full flex items-center justify-between p-4 text-sm font-bold transition-colors ${mobileExpandedCat === cat.title ? 'bg-indigo-50 text-indigo-600' : 'text-slate-800 hover:bg-slate-50'}`}
+                      className={`w-full flex items-center justify-between p-4 text-sm font-bold transition-colors ${mobileExpandedCat === cat.title ? 'bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400' : 'text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800'}`}
                       onClick={() => toggleMobileCategory(cat.title)}
                     >
-                      <span className="uppercase tracking-widest">{cat.title}</span>
+                      <span>{cat.title}</span>
                       <ChevronDown size={18} className={`transition-transform duration-300 ${mobileExpandedCat === cat.title ? "rotate-180" : ""}`} />
                     </button>
 

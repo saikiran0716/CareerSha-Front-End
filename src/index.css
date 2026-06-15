@@ -4,7 +4,23 @@
 
 :root {
     --border: 214.3 31.8% 91.4%;
+    /* CareerSha primary color tokens - change these to update site primary colors */
+    --cs-primary: 11,95,255; /* use as rgb() or with alpha */
+    --cs-primary-hex: #0b5fff;
+    --cs-primary-600: #2563eb;
+    --cs-primary-15: rgba(11,95,255,0.12);
+    --cs-accent: 6,182,212;
+    --cs-accent-15: rgba(6,182,212,0.12);
 }
+
+/* Primary color utilities (use these classes where you previously used Tailwind blues) */
+.text-cs-primary { color: var(--cs-primary-hex) !important; }
+.bg-cs-primary { background-color: var(--cs-primary-600) !important; }
+.bg-cs-primary-soft { background-color: var(--cs-primary-15) !important; }
+.ring-cs-primary { box-shadow: 0 0 0 6px rgba(var(--cs-primary), 0.12); }
+.border-cs-primary { border-color: var(--cs-primary-600) !important; }
+.hover\:bg-cs-primary:hover { background-color: var(--cs-primary-600) !important; }
+.hover\:text-cs-primary:hover { color: var(--cs-primary-hex) !important; }
 
 .dark {
     --border: 217.2 32.6% 17.5%;
@@ -267,4 +283,13 @@ html,
 body {
     max-width: 100%;
     overflow-x: hidden;
+}
+
+/* Override Tailwind lg:px-8 if you want to remove the horizontal padding globally
+   This neutralizes the utility's left/right padding at >=1024px screens. */
+@media (min-width: 1024px) {
+    .lg\:px-8 {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
 }

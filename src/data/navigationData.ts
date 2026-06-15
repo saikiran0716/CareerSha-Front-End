@@ -1,7 +1,7 @@
 export const navigationData = [
     {
-        title: "MBA",
-        slug: "mba",
+        title: "Explore Colleges",
+        slug: "colleges",
         sections: [
             {
                 heading: "Top MBA Colleges",
@@ -11,52 +11,32 @@ export const navigationData = [
                     { name: "MBA Colleges in Bangalore", url: "/mba/bangalore" },
                     { name: "MBA Colleges in Mumbai", url: "/mba/mumbai" },
                     { name: "Top IIMs in India", url: "/mba/iims" },
-                    { name: "Executive MBA Colleges", url: "/mba/executive" },
-                    { name: "Distance MBA Colleges", url: "/mba/distance" },
-                    { name: "Online MBA", url: "/mba/online" }
+                    { name: "Executive MBA Colleges", url: "/mba/executive" }
                 ]
-            }
-        ]
-    },
-    {
-        title: "ENGINEERING",
-        slug: "engineering",
-        sections: [
+            },
             {
-                heading: "Top Engineering",
+                heading: "Top Engineering Colleges",
                 links: [
                     { name: "B.Tech Colleges in India", url: "/eng/india" },
                     { name: "IITs in India", url: "/iits/india" },
                     { name: "NITs in India", url: "/nits/india" },
                     { name: "Engg Colleges in Hyderabad", url: "/eng/hyd" },
-                    { name: "Engg Colleges in Mumbai", url: "/eng/mumbai" },
-                    { name: "B.Arch Colleges", url: "/eng/arch" },
-                    { name: "Diploma in Engineering", url: "/eng/diploma" },
-                    { name: "M.Tech Colleges", url: "/eng/mtech" }
+                    { name: "Engg Colleges in Mumbai", url: "/eng/mumbai" }
                 ]
-            }
-        ]
-    },
-    {
-        title: "MEDICAL",
-        slug: "medical",
-        sections: [
+            },
             {
-                heading: "Top Medical",
+                heading: "Top Medical Colleges",
                 links: [
                     { name: "MBBS Colleges in India", url: "/mbbs/india" },
                     { name: "AIIMS Colleges", url: "/aiims/colleges" },
                     { name: "BDS Colleges in India", url: "/bds/india" },
-                    { name: "Medical Colleges in Kerala", url: "/med/kerala" },
-                    { name: "Medical Colleges in Karnataka", url: "/med/karnataka" },
-                    { name: "B.Pharma Colleges", url: "/pharma/india" },
-                    { name: "Nursing Colleges", url: "/nursing/india" }
+                    { name: "Medical Colleges in Kerala", url: "/med/kerala" }
                 ]
             }
         ]
     },
     {
-        title: "EXAMS",
+        title: "Exams",
         slug: "exams",
         sections: [
             {
@@ -75,15 +55,30 @@ export const navigationData = [
         ]
     },
     {
-        title: "TOOLS",
+        title: "Predictors",
+        slug: "predictors",
+        sections: [
+            {
+                heading: "College Predictors",
+                links: [
+                    { name: "College Matcher & Predictor", url: "/college-matcher" },
+                    { name: "JEE Main Rank Predictor", url: "/rank/jee-main" },
+                    { name: "NEET Rank Predictor", url: "/rank/neet" },
+                    { name: "TS EAMCET Rank Predictor", url: "/rank/ts-eamcet" }
+                ]
+            }
+        ]
+    },
+    {
+        title: "Tools",
         slug: "tools",
         sections: [
             {
                 heading: "Admission Tools",
                 links: [
                     { name: "Tools Hub", url: "/tools" },
-                    { name: "College Predictor", url: "/college-matcher" },
                     { name: "Rank Estimator", url: "/rank-estimator" },
+                    { name: "College Matcher", url: "/college-matcher" },
                     { name: "Search", url: "/search" }
                 ]
             }
