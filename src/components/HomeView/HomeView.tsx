@@ -596,11 +596,11 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                     key={idx}
                     className="flex items-start gap-3 p-2.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-100/60 dark:border-slate-800/60 shadow-sm"
                   >
-                    <img
-                      src={thread.avatarUrl}
-                      alt={thread.author}
-                      className="h-8.5 w-8.5 shrink-0 rounded-full object-cover border border-slate-100 dark:border-slate-800 shadow-sm"
-                    />
+                    <div
+                      className={`h-8.5 w-8.5 shrink-0 rounded-full flex items-center justify-center text-xs font-black shadow-sm ${thread.avatarBg}`}
+                    >
+                      {thread.avatar}
+                    </div>
                     <div className="min-w-0 flex-1 space-y-1">
                       <p className="text-xs font-extrabold text-slate-800 dark:text-slate-200 leading-snug line-clamp-2 hover:text-blue-600 dark:hover:text-blue-400 cursor-pointer">
                         {thread.title}
