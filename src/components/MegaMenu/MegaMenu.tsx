@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import college_image from "../../../public/college_images/college_image.jpg"
 interface NavLink {
     name: string;
     url: string;
@@ -19,11 +19,11 @@ interface MegaMenuProps {
 const MegaMenu: React.FC<MegaMenuProps> = ({ sections, onClose }) => {
     return (
         <div
-            className="animate-dropdown z-50 pt-2 relative"
+            className="animate-dropdown z-50 pt-2 relative "
             onMouseLeave={onClose}
             style={{ width: 'max-content', minWidth: '220px', maxWidth: '300px' }}
         >
-            <div className="bg-white/70 dark:bg-slate-900/70 backdrop-blur-2xl rounded-2xl shadow-xl border border-slate-200/50 dark:border-slate-800/50 p-5 relative overflow-y-auto max-h-[350px]">
+            <div className="bg-white dark:bg-slate-900/70 backdrop-blur-2xl rounded-2xl shadow-xl border border-slate-200/50 dark:border-slate-800/50 p-5 relative overflow-y-auto max-h-[350px]">
                 {sections.map((section, idx) => (
                     <div key={idx} className="mb-2 last:mb-0">
                         {section.heading && (

@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Routes, Route } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Footer from './components/Footer';
 import { authService, User } from './services/authService';
@@ -8,6 +8,7 @@ import RoadmapRouters from './AppRouters/RoadmapRouters';
 import AuthModal from './components/AuthModal/AuthModal';
 import ChatBot from './components/ChatBot/ChatBot';
 import { StudentProfile, Qualification, BudgetRange, CollegeType } from './types';
+import ExploreCollegesPage from './pages/ExploreColleges/ExploreCollegesPage';
 
 const App: React.FC = () => {
 
@@ -80,12 +81,12 @@ const App: React.FC = () => {
             }`
         }>
             {/* Global Background */}
-            <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-slate-50 dark:bg-slate-950">
+            {/* <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-slate-50 dark:bg-slate-950">
                 <div className="absolute inset-0 z-0 opacity-40 dark:opacity-30 mix-blend-multiply dark:mix-blend-overlay">
                     <div className="absolute top-[10%] right-[30%] w-[40%] h-[40%] bg-indigo-400/20 dark:bg-indigo-600/10 rounded-full blur-[100px] animate-blob"></div>
                     <div className="absolute bottom-[20%] left-[20%] w-[40%] h-[40%] bg-purple-400/20 dark:bg-purple-600/10 rounded-full blur-[100px] animate-blob animation-delay-2000"></div>
                 </div>
-            </div>
+            </div> */}
 
             <Header user={user}
                 onOpenAuth={
@@ -95,9 +96,14 @@ const App: React.FC = () => {
                 isDarkMode={isDarkMode}
                 onToggleDarkMode={toggleDarkMode} />
 
-            <RoadmapRouters onAskAI={handleAskAI}
-                user={user}
-                setIsAuthModalOpen={setIsAuthModalOpen} />
+            <Routes>
+                <Route path="/colleges" element={<ExploreCollegesPage />} />
+                <Route path="*" element={
+                    <RoadmapRouters onAskAI={handleAskAI}
+                        user={user}
+                        setIsAuthModalOpen={setIsAuthModalOpen} />
+                } />
+            </Routes>
 
             <AuthModal isOpen={isAuthModalOpen}
                 onClose={
@@ -110,13 +116,13 @@ const App: React.FC = () => {
             <Footer onPageRequest={
                 (path) => navigate(path)
             } />
-            
-            <ChatBot 
+
+            <ChatBot
                 profile={defaultProfile}
                 initialMessage={chatInitialMessage}
                 onMessageProcessed={() => setChatInitialMessage(null)}
             />
-            
+
             <ScrollToTop />
         </div>
     );

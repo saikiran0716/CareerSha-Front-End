@@ -86,11 +86,12 @@ const Header: React.FC<HeaderProps> = ({
                   className="relative py-2"
                 >
                   <button
+                    onClick={() => navigate(`/${cat.slug}`)}
                     className={`text-[13px] font-semibold transition-all flex items-center gap-1 py-2 px-3 rounded-lg ${activeMenu === cat.title
-                        ? 'text-blue-600 dark:text-blue-400'
-                        : location.pathname.startsWith(`/${cat.slug}`)
-                          ? 'text-blue-600 dark:text-blue-400 font-bold'
-                          : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                      ? 'text-blue-600 dark:text-blue-400'
+                      : location.pathname.startsWith(`/${cat.slug}`)
+                        ? 'text-blue-600 dark:text-blue-400 font-bold'
+                        : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
                       }`}
                   >
                     {cat.title}
@@ -98,7 +99,7 @@ const Header: React.FC<HeaderProps> = ({
                   </button>
 
                   {activeMenu === cat.title && (
-                    <div className="absolute left-0 top-full pt-1 z-50">
+                    <div className="absolute left-0 top-full pt-1 z-50 rounded-2xl">
                       <MegaMenu sections={cat.sections} onClose={() => setActiveMenu(null)} />
                     </div>
                   )}
@@ -117,8 +118,8 @@ const Header: React.FC<HeaderProps> = ({
               <Link
                 to="/blog"
                 className={`text-[13px] font-semibold py-2 px-3 rounded-lg flex items-center gap-1.5 transition-all ${location.pathname === '/blog'
-                    ? 'text-blue-600 dark:text-blue-400 font-bold'
-                    : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                  ? 'text-blue-600 dark:text-blue-400 font-bold'
+                  : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
                   }`}
               >
                 Blog
