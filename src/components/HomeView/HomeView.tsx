@@ -23,7 +23,8 @@ import {
   MessageSquare,
   TrendingUp,
   Send,
-  HelpCircle
+  HelpCircle,
+  Briefcase
 } from 'lucide-react';
 
 interface HomeViewProps {
@@ -142,10 +143,35 @@ const communityThreads = [
   { author: 'Rohit Verma', title: 'Which branch has the best future?', replies: 31, time: '6h ago', avatar: 'RV', avatarBg: 'bg-amber-600 text-white' },
 ];
 
+const jobOpenings = [
+  {
+    role: 'Junior Software Developer',
+    company: 'TCS Digital',
+    location: 'Bangalore / Remote',
+    type: 'Full-time',
+    color: 'text-indigo-600 bg-indigo-50 dark:bg-indigo-900/30 dark:text-indigo-400 border-indigo-200 dark:border-indigo-800'
+  },
+  {
+    role: 'Business Analyst',
+    company: 'Deloitte',
+    location: 'Mumbai',
+    type: 'Entry Level',
+    color: 'text-blue-600 bg-blue-50 dark:bg-blue-900/30 dark:text-blue-400 border-blue-200 dark:border-blue-800'
+  },
+  {
+    role: 'Clinical Data Trainee',
+    company: 'Sun Pharma',
+    location: 'Pune',
+    type: 'Internship',
+    color: 'text-emerald-600 bg-emerald-50 dark:bg-emerald-900/30 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800'
+  }
+];
+
 const personalizedMatches = [
   { name: 'IIT Bombay', course: 'Computer Science', match: 'Match 80%' },
   { name: 'NIT Trichy', course: 'Mechanical Engineering', match: 'Match 80%' },
   { name: 'DTU Delhi', course: 'Computer Engineering', match: 'Match 76%' },
+  { name: 'BITS Pilani', course: 'Electronics', match: 'Match 72%' },
 ];
 
 const collegeCollections = [
@@ -499,10 +525,58 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
               </div>
 
             </section>
+
+            {/* JOB OPENINGS */}
+            <section className="bg-white dark:bg-slate-900 rounded-[2rem] p-4 shadow-sm border border-slate-100/80 dark:border-slate-800/60 mt-4 premium-card">
+              <div className="flex items-center justify-between mb-3">
+                <div>
+                  <h2 className="text-sm sm:text-base font-black text-slate-900 dark:text-white flex items-center gap-1.5">
+                    <Briefcase className="h-4 w-4 text-blue-500" />
+                    Latest Job & Internship Openings
+                  </h2>
+                </div>
+                <button
+                  onClick={() => navigate('/jobs')}
+                  className="text-[10px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest hover:underline flex items-center gap-1"
+                >
+                  View all <ArrowRight className="h-3 w-3" />
+                </button>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                {jobOpenings.map((job, idx) => (
+                  <div
+                    key={idx}
+                    className={`group flex flex-col p-3 rounded-2xl border bg-white dark:bg-slate-900/50 hover:bg-slate-50 dark:hover:bg-slate-800 transition duration-300 hover:shadow-sm hover:-translate-y-0.5 ${job.color}`}
+                  >
+                    <div className="flex justify-between items-start mb-2">
+                      <span className="px-2 py-0.5 rounded-md text-[9px] font-black uppercase tracking-wider bg-white/60 dark:bg-slate-950/60 shadow-sm border border-inherit">
+                        {job.type}
+                      </span>
+                    </div>
+
+                    <div className="mb-2">
+                      <p className="text-[13px] font-black leading-tight mb-0.5 text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{job.role}</p>
+                      <p className="text-[9px] font-extrabold uppercase tracking-widest opacity-80">{job.company}</p>
+                    </div>
+
+                    <div className="mt-auto flex items-center justify-between">
+                      <div className="flex items-center gap-1 text-[10px] font-bold opacity-80">
+                        <MapPin className="h-3 w-3" />
+                        <span>{job.location}</span>
+                      </div>
+                      <div className="h-6 w-6 rounded-full bg-white dark:bg-slate-800 border border-inherit flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <ArrowRight className="h-3 w-3" />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
           </div>
 
           {/* RIGHT COLUMN: Sidebar Cards (Sticky) */}
-          <aside className="space-y-6 lg:sticky lg:top-24">
+          <aside className="space-y-6">
 
             {/* LIVE UPDATES */}
             <section className="bg-white dark:bg-slate-900 rounded-[2rem] p-5 shadow-sm border border-slate-100/80 dark:border-slate-800/60">
@@ -659,7 +733,7 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                     ? 'bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 border-rose-200/50 dark:border-rose-800/30'
                     : 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border-emerald-200/50 dark:border-emerald-800/30';
                   const badgeDotColorClass = isRed ? 'bg-rose-500' : 'bg-emerald-500';
-                  
+
                   const iconColorClass = isRed
                     ? 'bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 border-rose-100/30 dark:border-rose-900/30'
                     : isTrichy
