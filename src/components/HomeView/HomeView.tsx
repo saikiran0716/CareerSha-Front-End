@@ -38,6 +38,7 @@ type QuickTool = {
   href: string;
   bgClass: string;
   iconClass: string;
+  highlight?: boolean;
 };
 
 type UpdateItem = {
@@ -58,6 +59,7 @@ const quickTools: QuickTool[] = [
     href: '/college-matcher',
     bgClass: 'bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400',
     iconClass: 'text-blue-600 dark:text-blue-400',
+    highlight: true,
   },
   {
     title: 'Compare Colleges',
@@ -82,6 +84,7 @@ const quickTools: QuickTool[] = [
     href: '/rank-estimator',
     bgClass: 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400',
     iconClass: 'text-emerald-600 dark:text-emerald-400',
+    highlight: true,
   },
   {
     title: 'College Finder',
@@ -98,6 +101,7 @@ const quickTools: QuickTool[] = [
     href: '/college-matcher',
     bgClass: 'bg-orange-50 dark:bg-orange-950/40 text-orange-600 dark:text-orange-400',
     iconClass: 'text-orange-600 dark:text-orange-400',
+    highlight: true,
   },
 ];
 
@@ -340,16 +344,24 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
 
             {/* QUICK TOOLS GRID PANEL */}
             <section className="bg-white dark:bg-slate-900 rounded-[2rem] p-6 shadow-sm border border-slate-100/80 dark:border-slate-800/60">
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
                 {quickTools.map((tool) => {
                   const Icon = tool.icon;
                   return (
                     <button
                       key={tool.title}
                       onClick={() => navigate(tool.href)}
-                      className="group flex flex-col items-center text-center p-3 rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all duration-300"
+                      className={`group flex flex-col items-center text-center p-4 rounded-2xl transition-all duration-300 border relative ${tool.highlight
+                        ? 'bg-blue-50/30 dark:bg-blue-950/10 border-blue-200/80 dark:border-blue-800/50 shadow-[0_4px_12px_rgba(59,130,246,0.04)] hover:border-blue-400 dark:hover:border-blue-600 hover:shadow-[0_12px_24px_-8px_rgba(59,130,246,0.15)] hover:-translate-y-1'
+                        : 'bg-slate-50/30 dark:bg-slate-900/30 border-slate-100/70 dark:border-slate-800/40 hover:bg-white dark:hover:bg-slate-800/60 hover:border-slate-200 dark:hover:border-slate-700 hover:shadow-[0_12px_24px_-8px_rgba(0,0,0,0.06)] hover:-translate-y-1'
+                        }`}
                     >
-                      <div className={`mb-3 flex h-12 w-12 items-center justify-center rounded-full ${tool.bgClass} shadow-sm group-hover:scale-110 transition-transform duration-300`}>
+                      {tool.highlight && (
+                        <span className="absolute -top-2 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-wider bg-blue-600 text-white shadow-sm ring-1 ring-blue-500/20">
+                          Popular
+                        </span>
+                      )}
+                      <div className={`mb-3 flex h-11 w-11 items-center justify-center rounded-full ${tool.bgClass} shadow-sm group-hover:scale-110 transition-transform duration-300`}>
                         <Icon className="h-5 w-5" />
                       </div>
                       <p className="text-xs font-extrabold text-slate-900 dark:text-white leading-tight mb-1">{tool.title}</p>
@@ -580,8 +592,8 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                     key={tab}
                     onClick={() => setCommunityTab(tab)}
                     className={`px-3.5 py-1.5 rounded-lg border transition-all ${communityTab === tab
-                        ? 'bg-[#e0e9ff] dark:bg-blue-950/40 border-blue-200 dark:border-blue-800 text-blue-600 dark:text-blue-400'
-                        : 'bg-slate-50 dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
+                      ? 'bg-[#e0e9ff] dark:bg-blue-950/40 border-blue-200 dark:border-blue-800 text-blue-600 dark:text-blue-400'
+                      : 'bg-slate-50 dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
                       }`}
                   >
                     {tab}
@@ -642,22 +654,32 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
               <div className="space-y-3">
                 {personalizedMatches.map((match, idx) => {
                   const isRed = match.name === 'DTU Delhi';
+                  const isTrichy = match.name === 'NIT Trichy';
+                  const badgeColorClass = isRed
+                    ? 'bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 border-rose-200/50 dark:border-rose-800/30'
+                    : 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border-emerald-200/50 dark:border-emerald-800/30';
+                  const badgeDotColorClass = isRed ? 'bg-rose-500' : 'bg-emerald-500';
+                  
+                  const iconColorClass = isRed
+                    ? 'bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 border-rose-100/30 dark:border-rose-900/30'
+                    : isTrichy
+                      ? 'bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 border-indigo-100/30 dark:border-indigo-900/30'
+                      : 'bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 border-blue-100/30 dark:border-blue-900/30';
+
                   return (
                     <div
                       key={idx}
-                      className="flex items-center gap-3.5 p-3.5 rounded-2xl border border-slate-100/60 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm"
+                      className="group flex items-center gap-3.5 p-3.5 rounded-2xl border border-slate-100/60 dark:border-slate-800/50 bg-white dark:bg-slate-900 shadow-sm hover:shadow-md hover:border-blue-100 dark:hover:border-blue-900/40 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
                     >
-                      <div className={`flex h-9.5 w-9.5 shrink-0 items-center justify-center rounded-xl border ${isRed
-                          ? 'bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400 border-red-100/30'
-                          : 'bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 border-blue-100/30'
-                        }`}>
+                      <div className={`flex h-9.5 w-9.5 shrink-0 items-center justify-center rounded-xl border ${iconColorClass} group-hover:scale-105 transition-transform duration-300`}>
                         <Landmark className="h-4.5 w-4.5" />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="truncate text-xs font-extrabold text-slate-800 dark:text-slate-200 leading-tight">{match.name}</p>
-                        <p className="text-[10px] text-slate-500 dark:text-slate-400 font-bold leading-none mt-1">{match.course}</p>
+                        <p className="truncate text-xs font-black text-slate-800 dark:text-slate-200 leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{match.name}</p>
+                        <p className="text-[10px] text-slate-500 dark:text-slate-400 font-bold leading-none mt-1.5">{match.course}</p>
                       </div>
-                      <span className="shrink-0 rounded-md bg-[#eafaf1] dark:bg-emerald-950/40 px-2.5 py-1 text-[9px] font-black uppercase tracking-wider text-[#22c55e] dark:text-emerald-400 border border-emerald-100/10">
+                      <span className={`shrink-0 flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[9px] font-black uppercase tracking-wider border shadow-sm ${badgeColorClass}`}>
+                        <span className={`w-1.5 h-1.5 rounded-full ${badgeDotColorClass} animate-pulse`} />
                         {match.match}
                       </span>
                     </div>

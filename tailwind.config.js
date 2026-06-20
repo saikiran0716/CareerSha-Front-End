@@ -12,6 +12,19 @@ export default {
     extend: {
       colors: {
         border: "hsl(var(--border))",
+        blue: {
+          50: '#eef2f6',
+          100: '#d4def0',
+          200: '#aebde0',
+          300: '#8098cd',
+          400: '#5c78bb',
+          500: '#3f59a6',
+          600: '#30428d',
+          700: '#273471',
+          800: '#232c5e',
+          900: '#20274b',
+          950: '#13162d',
+        },
         indigo: {
           50: '#f8faff',
           100: '#f0f4ff',

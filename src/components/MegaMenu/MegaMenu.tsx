@@ -23,7 +23,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ sections, onClose }) => {
             onMouseLeave={onClose}
             style={{ width: 'max-content', minWidth: '220px', maxWidth: '300px' }}
         >
-            <div className="bg-white/95 backdrop-blur-2xl rounded-2xl shadow-xl border border-slate-200/50 p-5 relative overflow-hidden">
+            <div className="bg-white/70 dark:bg-slate-900/70 backdrop-blur-2xl rounded-2xl shadow-xl border border-slate-200/50 dark:border-slate-800/50 p-5 relative overflow-y-auto max-h-[350px]">
                 {sections.map((section, idx) => (
                     <div key={idx} className="mb-2 last:mb-0">
                         {section.heading && (

@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, ChevronDown, Search, User as UserIcon, Sun, Moon, TrendingUp, GraduationCap, Map, Award, LogOut } from "lucide-react";
+import { Menu, X, ChevronDown, User as UserIcon, Sun, Moon, GraduationCap, LogOut } from "lucide-react";
 import { User } from "../../services/authService";
 import { navigationData } from "../../data/navigationData";
 import MegaMenu from "../MegaMenu/MegaMenu";
@@ -13,12 +13,6 @@ interface HeaderProps {
   onToggleDarkMode: () => void;
 }
 
-const SEARCH_SUGGESTIONS = [
-  { id: "rank", title: "Rank Estimator", icon: TrendingUp, desc: "Predict your AIR globally" },
-  { id: "predictor", title: "College Predictor", icon: GraduationCap, desc: "Find matching institutions" },
-  { id: "library", title: "AI Roadmap", icon: Map, desc: "Step-by-step career path" },
-  { id: "results", title: "Exam Results", icon: Award, desc: "Analyze your test marks" }
-];
 
 const Header: React.FC<HeaderProps> = ({
   user,
@@ -28,8 +22,6 @@ const Header: React.FC<HeaderProps> = ({
   onToggleDarkMode,
 }) => {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mobileExpandedCat, setMobileExpandedCat] = useState<string | null>(null);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -59,47 +51,6 @@ const Header: React.FC<HeaderProps> = ({
     }, 180);
   };
 
-  const executeSearch = (query: string) => {
-    query = query.trim().toLowerCase();
-    if (!query) return;
-
-    let targetId = "";
-    if (["rank", "estimator", "air", "predict rank", "rank predictor"].some(k => query.includes(k))) {
-      targetId = "rank";
-    } else if (["college", "predict college", "match", "finder"].some(k => query.includes(k))) {
-      targetId = "predictor";
-    } else if (["roadmap", "journey", "path", "step", "premium"].some(k => query.includes(k))) {
-      targetId = "library";
-    } else if (["exam", "result", "mark", "test"].some(k => query.includes(k))) {
-      targetId = "results";
-    } else if (["dashboard", "portal", "home"].some(k => query.includes(k))) {
-      targetId = "dashboard";
-    }
-
-    if (targetId) {
-      if (location.pathname !== "/") {
-        navigate("/", { state: { scrollTo: targetId } });
-      } else {
-        document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth" });
-      }
-      setSearchQuery("");
-      setIsSearchFocused(false);
-      setIsMobileMenuOpen(false);
-    } else {
-      // Optional: Gentle feedback if nothing found.
-      alert(`No direct section found for "${query}". Try "rank", "college", "roadmap", or "exam".`);
-    }
-  };
-
-  const handleSearch = () => executeSearch(searchQuery);
-
-  const handleSuggestionClick = (query: string) => {
-    executeSearch(query);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") handleSearch();
-  };
 
   const toggleMobileCategory = (title: string) => {
     setMobileExpandedCat(mobileExpandedCat === title ? null : title);
@@ -111,194 +62,142 @@ const Header: React.FC<HeaderProps> = ({
         <div className="w-full">
           <div className="mx-auto max-w-[1440px] px-6 flex items-center justify-between py-3">
 
-          {/* Left: Logo and Mobile Menu Button */}
-          <div className="flex items-center gap-4">
-            <button
-              className="lg:hidden p-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-            <Link to="/" className="flex items-center gap-2 cursor-pointer">
-              <GraduationCap className="w-7 h-7 text-blue-600 fill-blue-600/10" />
-              <span className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Careersha</span>
-            </Link>
-          </div>
-
-          {/* Center: Navigation */}
-          <nav className="hidden lg:flex flex-1 justify-center items-center gap-3 xl:gap-5">
-            {navigationData.map((cat) => (
-              <div
-                key={cat.title}
-                onMouseEnter={() => handleEnter(cat.title)}
-                onMouseLeave={handleLeave}
-                className="relative py-2"
+            {/* Left: Logo and Mobile Menu Button */}
+            <div className="flex items-center gap-4 lg:flex-1">
+              <button
+                className="lg:hidden p-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               >
-                <button
-                  className={`text-[13px] font-semibold transition-all flex items-center gap-1 py-2 px-3 rounded-lg ${
-                    activeMenu === cat.title 
-                      ? 'text-blue-600 dark:text-blue-400' 
-                      : location.pathname.startsWith(`/${cat.slug}`) 
-                        ? 'text-blue-600 dark:text-blue-400 font-bold' 
-                        : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
-                  }`}
-                >
-                  {cat.title}
-                  <ChevronDown size={14} className={`transition-transform duration-300 ${activeMenu === cat.title ? "rotate-180" : ""}`} />
-                </button>
-
-                {activeMenu === cat.title && (
-                  <div className="absolute left-0 top-full pt-1 z-50">
-                    <MegaMenu sections={cat.sections} onClose={() => setActiveMenu(null)} />
-                  </div>
-                )}
-              </div>
-            ))}
-            <Link
-              to="/"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="text-[13px] font-semibold py-2 px-3 rounded-lg text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all"
-            >
-              Community
-            </Link>
-            <Link 
-              to="/blog" 
-              className={`text-[13px] font-semibold py-2 px-3 rounded-lg flex items-center gap-1.5 transition-all ${
-                location.pathname === '/blog' 
-                  ? 'text-blue-600 dark:text-blue-400 font-bold' 
-                  : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
-              }`}
-            >
-              Blog
-              <span className="text-[9px] font-extrabold px-1.5 py-0.5 rounded-full text-white bg-blue-600 uppercase tracking-wider">New</span>
-            </Link>
-          </nav>
-
-          {/* Right Side Items (Search & Actions) */}
-          <div className="flex items-center gap-4 lg:gap-6">
-            {/* Search */}
-            <div className="hidden lg:flex relative w-[260px] xl:w-[360px] shrink-0 group">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 transition-colors" style={{ color: 'rgb(var(--cs-primary))' }} />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyDown={handleKeyDown}
-                onFocus={() => setIsSearchFocused(true)}
-                onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)}
-                placeholder="Search colleges, exams, courses..."
-                className="w-full pl-11 pr-4 py-3 rounded-full border-2 border-slate-100 bg-white focus:bg-white transition-all shadow-sm outline-none text-[13px] font-medium placeholder:text-slate-400"
-                style={{ boxShadow: 'none' }}
-              />
-
-              {/* Desktop Search Dropdown */}
-              {isSearchFocused && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden z-50 animate-dropdown">
-                  <div className="p-2">
-                    <div className="px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-slate-400">
-                      Quick Links
-                    </div>
-                    {SEARCH_SUGGESTIONS.filter(item => item.title.toLowerCase().includes(searchQuery.toLowerCase())).map((item) => {
-                      const Icon = item.icon;
-                      return (
-                        <button
-                          key={item.id}
-                          onMouseDown={(e) => { e.preventDefault(); handleSuggestionClick(item.title); }}
-                          className="w-full flex items-center gap-3 px-3 py-2 hover:bg-slate-50 rounded-lg text-left transition-colors"
-                        >
-                          <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center flex-shrink-0 text-indigo-600">
-                            <Icon size={16} />
-                          </div>
-                          <div>
-                            <p className="text-[13px] font-bold text-slate-700">{item.title}</p>
-                            <p className="text-[11px] font-medium text-slate-500">{item.desc}</p>
-                          </div>
-                        </button>
-                      );
-                    })}
-                    {SEARCH_SUGGESTIONS.filter(item => item.title.toLowerCase().includes(searchQuery.toLowerCase())).length === 0 && (
-                      <div className="px-3 py-4 text-center text-slate-500 text-xs font-medium">
-                        No matching sections found.
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
+                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+              <Link to="/" className="flex items-center gap-2 cursor-pointer">
+                <GraduationCap className="w-7 h-7 text-blue-600 fill-blue-600/10" />
+                <span className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Careersha</span>
+              </Link>
             </div>
 
-            {/* Actions Section */}
-            <div className="flex items-center gap-2 sm:gap-3">
-              {/* Theme Toggle - Hidden on very small mobile to save space, visible in menu if needed */}
-              <button
-                onClick={onToggleDarkMode}
-                className="hidden sm:flex p-2 rounded-xl bg-slate-50 dark:bg-slate-900 text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all border border-slate-200 dark:border-slate-800 shadow-sm"
-                title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
-              >
-                {isDarkMode ? <Sun size={18} className="animate-pulse-slow" /> : <Moon size={18} />}
-              </button>
-
-              {user ? (
-                <div className="relative" ref={profileDropdownRef}>
+            {/* Center: Navigation */}
+            <nav className="hidden lg:flex justify-center items-center gap-3 xl:gap-5 shrink-0">
+              {navigationData.map((cat) => (
+                <div
+                  key={cat.title}
+                  onMouseEnter={() => handleEnter(cat.title)}
+                  onMouseLeave={handleLeave}
+                  className="relative py-2"
+                >
                   <button
-                    onClick={() => setIsProfileOpen(!isProfileOpen)}
-                    className="relative flex-shrink-0"
-                    title={`Signed in as ${user.name}`}
+                    className={`text-[13px] font-semibold transition-all flex items-center gap-1 py-2 px-3 rounded-lg ${activeMenu === cat.title
+                        ? 'text-blue-600 dark:text-blue-400'
+                        : location.pathname.startsWith(`/${cat.slug}`)
+                          ? 'text-blue-600 dark:text-blue-400 font-bold'
+                          : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                      }`}
                   >
-                    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 text-white font-bold text-sm flex items-center justify-center uppercase shadow-lg shadow-indigo-500/30 ring-2 ring-white dark:ring-slate-900 ring-offset-0 transition-all duration-200 hover:shadow-xl hover:shadow-indigo-500/40 hover:scale-110 cursor-pointer">
-                      {user.avatar ? (
-                        <img src={user.avatar} alt={user.name} className="w-full h-full object-cover rounded-full ring-2 ring-white dark:ring-slate-900" />
-                      ) : (
-                        <span>{user.name?.charAt(0) || user.email?.charAt(0)}</span>
-                      )}
-                    </div>
+                    {cat.title}
+                    <ChevronDown size={14} className={`transition-transform duration-300 ${activeMenu === cat.title ? "rotate-180" : ""}`} />
                   </button>
 
-                  {isProfileOpen && (
-                    <div className="absolute right-0 top-full mt-2 w-60 bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800 overflow-hidden z-50 animate-dropdown">
-                      <div className="flex items-center gap-3 px-4 py-3.5 border-b border-slate-100 dark:border-slate-800">
-                        <div className="relative flex-shrink-0">
-                          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 via-indigo-600 to-purple-600 text-white font-bold text-base flex items-center justify-center uppercase shadow-lg shadow-indigo-500/30 ring-3 ring-indigo-100 dark:ring-slate-800 transition-all duration-200">
-                            {user.avatar ? (
-                              <img src={user.avatar} alt={user.name} className="w-full h-full object-cover rounded-full ring-3 ring-white dark:ring-slate-900" />
-                            ) : (
-                              <span>{user.name?.charAt(0) || user.email?.charAt(0)}</span>
-                            )}
-                          </div>
-                        </div>
-                        <div className="min-w-0">
-                          <p className="text-[13px] font-black text-slate-800 dark:text-slate-100 truncate">{user.name}</p>
-                          <p className="text-[11px] text-slate-400 font-medium truncate">{user.email}</p>
-                        </div>
-                      </div>
-                      <div className="p-2">
-                        <button
-                          onClick={() => { onLogout(); setIsProfileOpen(false); }}
-                          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/20 text-red-500 dark:text-red-400 transition-colors text-[12px] font-bold"
-                        >
-                          <LogOut size={15} />
-                          Sign Out
-                        </button>
-                      </div>
+                  {activeMenu === cat.title && (
+                    <div className="absolute left-0 top-full pt-1 z-50">
+                      <MegaMenu sections={cat.sections} onClose={() => setActiveMenu(null)} />
                     </div>
                   )}
                 </div>
-              ) : (
+              ))}
+              <Link
+                to="/"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="text-[13px] font-semibold py-2 px-3 rounded-lg text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all"
+              >
+                Community
+              </Link>
+              <Link
+                to="/blog"
+                className={`text-[13px] font-semibold py-2 px-3 rounded-lg flex items-center gap-1.5 transition-all ${location.pathname === '/blog'
+                    ? 'text-blue-600 dark:text-blue-400 font-bold'
+                    : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                  }`}
+              >
+                Blog
+                <span className="text-[9px] font-extrabold px-1.5 py-0.5 rounded-full text-white bg-blue-600 uppercase tracking-wider">New</span>
+              </Link>
+            </nav>
+
+            {/* Right Side Items (Search & Actions) */}
+            <div className="flex items-center justify-end gap-4 lg:gap-6 lg:flex-1">
+              {/* Actions Section */}
+              <div className="flex items-center gap-2 sm:gap-3">
+                {/* Theme Toggle - Hidden on very small mobile to save space, visible in menu if needed */}
                 <button
-                  onClick={onOpenAuth}
-                  className="relative flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-indigo-600 to-indigo-700 text-white flex items-center justify-center shadow-lg shadow-indigo-500/30 ring-2 ring-white dark:ring-slate-900 hover:shadow-xl hover:shadow-indigo-500/40 hover:scale-110 transition-all duration-200"
-                  title="Sign In"
+                  onClick={onToggleDarkMode}
+                  className="hidden sm:flex p-2 rounded-xl bg-slate-50 dark:bg-slate-900 text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all border border-slate-200 dark:border-slate-800 shadow-sm"
+                  title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
                 >
-                  <UserIcon size={18} />
+                  {isDarkMode ? <Sun size={18} className="animate-pulse-slow" /> : <Moon size={18} />}
                 </button>
-              )}
+
+                {user ? (
+                  <div className="relative" ref={profileDropdownRef}>
+                    <button
+                      onClick={() => setIsProfileOpen(!isProfileOpen)}
+                      className="relative flex-shrink-0"
+                      title={`Signed in as ${user.name}`}
+                    >
+                      <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 text-white font-bold text-sm flex items-center justify-center uppercase shadow-lg shadow-indigo-500/30 ring-2 ring-white dark:ring-slate-900 ring-offset-0 transition-all duration-200 hover:shadow-xl hover:shadow-indigo-500/40 hover:scale-110 cursor-pointer">
+                        {user.avatar ? (
+                          <img src={user.avatar} alt={user.name} className="w-full h-full object-cover rounded-full ring-2 ring-white dark:ring-slate-900" />
+                        ) : (
+                          <span>{user.name?.charAt(0) || user.email?.charAt(0)}</span>
+                        )}
+                      </div>
+                    </button>
+
+                    {isProfileOpen && (
+                      <div className="absolute right-0 top-full mt-2 w-60 bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800 overflow-hidden z-50 animate-dropdown">
+                        <div className="flex items-center gap-3 px-4 py-3.5 border-b border-slate-100 dark:border-slate-800">
+                          <div className="relative flex-shrink-0">
+                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 via-indigo-600 to-purple-600 text-white font-bold text-base flex items-center justify-center uppercase shadow-lg shadow-indigo-500/30 ring-3 ring-indigo-100 dark:ring-slate-800 transition-all duration-200">
+                              {user.avatar ? (
+                                <img src={user.avatar} alt={user.name} className="w-full h-full object-cover rounded-full ring-3 ring-white dark:ring-slate-900" />
+                              ) : (
+                                <span>{user.name?.charAt(0) || user.email?.charAt(0)}</span>
+                              )}
+                            </div>
+                          </div>
+                          <div className="min-w-0">
+                            <p className="text-[13px] font-black text-slate-800 dark:text-slate-100 truncate">{user.name}</p>
+                            <p className="text-[11px] text-slate-400 font-medium truncate">{user.email}</p>
+                          </div>
+                        </div>
+                        <div className="p-2">
+                          <button
+                            onClick={() => { onLogout(); setIsProfileOpen(false); }}
+                            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/20 text-red-500 dark:text-red-400 transition-colors text-[12px] font-bold"
+                          >
+                            <LogOut size={15} />
+                            Sign Out
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <button
+                    onClick={onOpenAuth}
+                    className="relative flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-indigo-600 to-indigo-700 text-white flex items-center justify-center shadow-lg shadow-indigo-500/30 ring-2 ring-white dark:ring-slate-900 hover:shadow-xl hover:shadow-indigo-500/40 hover:scale-110 transition-all duration-200"
+                    title="Sign In"
+                  >
+                    <UserIcon size={18} />
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </header>
+      </header>
 
       {/* Mobile Menu Overlay - Side Drawer Implementation */}
       {isMobileMenuOpen && (
@@ -321,46 +220,6 @@ const Header: React.FC<HeaderProps> = ({
                 <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 text-slate-400 hover:text-slate-600">
                   <X size={20} />
                 </button>
-              </div>
-
-              {/* Mobile Search */}
-              <div className="relative mb-6">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  onFocus={() => setIsSearchFocused(true)}
-                  onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)}
-                  placeholder="Search colleges, exams..."
-                  className="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-indigo-500 outline-none text-sm transition-all relative z-10"
-                />
-
-                {/* Mobile Search Suggestions inside drawer */}
-                {isSearchFocused && (
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-slate-100 overflow-hidden z-20 animate-dropdown">
-                    <div className="p-2">
-                      {SEARCH_SUGGESTIONS.filter(item => item.title.toLowerCase().includes(searchQuery.toLowerCase())).map((item) => {
-                        const Icon = item.icon;
-                        return (
-                          <button
-                            key={item.id}
-                            onMouseDown={(e) => { e.preventDefault(); handleSuggestionClick(item.title); }}
-                            className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-slate-50 rounded-lg text-left"
-                          >
-                            <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center flex-shrink-0 text-indigo-600">
-                              <Icon size={16} />
-                            </div>
-                            <div>
-                              <p className="text-sm font-bold text-slate-700">{item.title}</p>
-                            </div>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
               </div>
 
               {/* Mobile Categories */}
