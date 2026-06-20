@@ -83,5 +83,37 @@ export const navigationData = [
                 ]
             }
         ]
+    },
+    {
+        title: "Jobs",
+        slug: "jobs",
+        sections: [
+            {
+                heading: "Corporate Jobs",
+                links: [
+                    { name: "IT & Software Jobs", url: "/jobs/it" },
+                    { name: "Business & Finance Jobs", url: "/jobs/finance" },
+                    { name: "Marketing & HR Jobs", url: "/jobs/marketing" },
+                    { name: "Remote Jobs", url: "/jobs/remote" }
+                ]
+            },
+            {
+                heading: "Competitive Jobs",
+                links: [
+                    { name: "UPSC & State PSC", url: "/jobs/upsc" },
+                    { name: "Banking & SSC", url: "/jobs/banking" },
+                    { name: "Railway Jobs (RRB)", url: "/jobs/railway" },
+                    { name: "Defence & Police", url: "/jobs/defence" }
+                ]
+            },
+            {
+                heading: "Internships & Fresher",
+                links: [
+                    { name: "Top Internships", url: "/jobs/internships" },
+                    { name: "Off-Campus Drives", url: "/jobs/off-campus" },
+                    { name: "Entry-Level Roles", url: "/jobs/fresher" }
+                ]
+            }
+        ]
     }
 ];
