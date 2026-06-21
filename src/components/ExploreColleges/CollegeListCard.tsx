@@ -1,5 +1,6 @@
 import React from 'react';
 import { MapPin, BadgeCheck, Shield } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { College } from '../../data/staticColleges';
 
 // Import the placeholder image
@@ -91,7 +92,7 @@ const CollegeListCard: React.FC<CollegeListCardProps> = ({ college }) => {
           </div>
           <div>
             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 whitespace-nowrap">Avg. Package</p>
-            <p className="text-base font-black text-slate-900 dark:text-white whitespace-nowrap">{college.avgPackage}</p>
+            <p className="text-base font-black text-slate-900 dark:text-white whitespace-nowrap">{college.highlights.avgPackage}</p>
           </div>
         </div>
 
@@ -99,9 +100,9 @@ const CollegeListCard: React.FC<CollegeListCardProps> = ({ college }) => {
           <button className="w-full py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold rounded-lg transition-colors">
             Compare
           </button>
-          <button className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition-colors shadow-sm">
+          <Link to={`/colleges/${college.id}`} className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition-colors shadow-sm text-center block leading-none flex items-center justify-center">
             View Details
-          </button>
+          </Link>
         </div>
       </div>
     </div>

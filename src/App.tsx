@@ -9,6 +9,7 @@ import AuthModal from './components/AuthModal/AuthModal';
 import ChatBot from './components/ChatBot/ChatBot';
 import { StudentProfile, Qualification, BudgetRange, CollegeType } from './types';
 import ExploreCollegesPage from './pages/ExploreColleges/ExploreCollegesPage';
+import CollegeDetailPage from './pages/CollegeDetail/CollegeDetailPage';
 
 const App: React.FC = () => {
 
@@ -98,6 +99,7 @@ const App: React.FC = () => {
 
             <Routes>
                 <Route path="/colleges" element={<ExploreCollegesPage />} />
+                <Route path="/colleges/:id" element={<CollegeDetailPage />} />
                 <Route path="*" element={
                     <RoadmapRouters onAskAI={handleAskAI}
                         user={user}
