@@ -108,12 +108,11 @@ const Header: React.FC<HeaderProps> = ({
                 </div>
               ))}
               <Link
-                to="/"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="text-[13px] font-semibold py-2 px-3 rounded-lg text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all"
+                to="/community"
+                className={`text-[13px] font-semibold py-2 px-3 rounded-lg transition-all ${location.pathname === '/community'
+                  ? 'text-blue-600 dark:text-blue-400 font-bold'
+                  : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                  }`}
               >
                 Community
               </Link>
@@ -228,12 +227,12 @@ const Header: React.FC<HeaderProps> = ({
               {/* Mobile Categories */}
               <div className="space-y-1">
                 <Link
-                  to="/"
-                  className="block w-full p-4 text-sm font-bold text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl mb-1"
-                  onClick={(e) => {
-                    setIsMobileMenuOpen(false);
-                    document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
+                  to="/community"
+                  className={`block w-full p-4 text-sm font-bold rounded-xl mb-1 ${location.pathname === '/community'
+                      ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
+                      : 'text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800'
+                    }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Community
                 </Link>

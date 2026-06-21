@@ -13,6 +13,8 @@ import JobsPage from './pages/JobsPage/JobsPage';
 import ExamsHubPage from './pages/ExamsHub/ExamsHubPage';
 import PredictorsHubPage from './pages/Predictors/PredictorsHubPage';
 
+const CommunityPage = React.lazy(() => import('./pages/Community/CommunityPage'));
+
 const App: React.FC = () => {
 
     const [isDarkMode, setIsDarkMode] = useState(() => localStorage.getItem('theme') === 'dark');
@@ -104,6 +106,11 @@ const App: React.FC = () => {
                 <Route path="/jobs" element={<JobsPage />} />
                 <Route path="/exams" element={<ExamsHubPage />} />
                 <Route path="/predictors" element={<PredictorsHubPage />} />
+                <Route path="/community" element={
+                    <React.Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+                        <CommunityPage />
+                    </React.Suspense>
+                } />
                 <Route path="*" element={
                     <RoadmapRouters onAskAI={handleAskAI}
                         user={user}
