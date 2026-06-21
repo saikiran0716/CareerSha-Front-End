@@ -80,10 +80,7 @@ const ContentCreatorRoadmap = lazy(() => import('../features/roadmaps/ContentCre
 const AnimatorRoadmap = lazy(() => import('../features/roadmaps/Animator/AnimatorRoadmap'));
 const MotionGraphicsRoadmap = lazy(() => import('../features/roadmaps/MotionGraphics/MotionGraphicsRoadmap'));
 
-// Rank Predictor Pages
-const JEEMainRank = lazy(() => import('../pages/Predictors/RankPredictors/JEEMainRank'));
-const NEETRank = lazy(() => import('../pages/Predictors/RankPredictors/NEETRank'));
-const EAMCETRank = lazy(() => import('../pages/Predictors/RankPredictors/EAMCETRank'));
+
 
 interface RoadmapRoutersProps {
     onAskAI: (topic: string) => void;
