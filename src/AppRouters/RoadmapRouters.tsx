@@ -16,8 +16,10 @@ const BlogListPage = lazy(() => import('../pages/Blog/BlogListPage'));
 const BlogDetailPage = lazy(() => import('../pages/Blog/BlogDetailPage'));
 import ExamDetailsPge from '../components/EXAMS/ExamDetailsPge';
 import SearchPage from '../pages/SearchPage';
-import RankPredictorPage from '../pages/RankPredictorPage';
-import CollegeMatcherPage from '../pages/CollegeMatcherPage';
+import RankPredictorPage from '../pages/Predictors/RankPredictorPage';
+import CollegeMatcherPage from '../pages/Predictors/CollegeMatcherPage';
+import AdmissionChancesPage from '../components/AdmissionChances/AdmissionChancesPage';
+import ScholarshipPredictorPage from '../components/ScholarshipPredictor/ScholarshipPredictorPage';
 import ExamsHubPage from '../pages/ExamsHubPage';
 import ResultsPage from '../pages/ResultsPage';
 import NewsPage from '../pages/NewsPage';
@@ -79,9 +81,9 @@ const AnimatorRoadmap = lazy(() => import('../features/roadmaps/Animator/Animato
 const MotionGraphicsRoadmap = lazy(() => import('../features/roadmaps/MotionGraphics/MotionGraphicsRoadmap'));
 
 // Rank Predictor Pages
-const JEEMainRank = lazy(() => import('../pages/RankPredictors/JEEMainRank'));
-const NEETRank = lazy(() => import('../pages/RankPredictors/NEETRank'));
-const EAMCETRank = lazy(() => import('../pages/RankPredictors/EAMCETRank'));
+const JEEMainRank = lazy(() => import('../pages/Predictors/RankPredictors/JEEMainRank'));
+const NEETRank = lazy(() => import('../pages/Predictors/RankPredictors/NEETRank'));
+const EAMCETRank = lazy(() => import('../pages/Predictors/RankPredictors/EAMCETRank'));
 
 interface RoadmapRoutersProps {
     onAskAI: (topic: string) => void;
@@ -99,6 +101,8 @@ const RoadmapRouters: React.FC<RoadmapRoutersProps> = ({ onAskAI, user, setIsAut
                 <Route path="/search" element={<SearchPage />} />
                 <Route path="/rank-estimator" element={<RankPredictorPage onAskAI={onAskAI} />} />
                 <Route path="/college-matcher" element={<CollegeMatcherPage onAskAI={onAskAI} />} />
+                <Route path="/predictors/admission-chances" element={<AdmissionChancesPage />} />
+                <Route path="/predictors/scholarship" element={<ScholarshipPredictorPage />} />
                 <Route path="/exams" element={<ExamsHubPage />} />
                 <Route path="/career-library" element={<Navigate to="/roadmaps" replace />} />
                 <Route path="/results" element={<ResultsPage onAskAI={onAskAI} />} />
@@ -161,11 +165,7 @@ const RoadmapRouters: React.FC<RoadmapRoutersProps> = ({ onAskAI, user, setIsAut
                 <Route path="/roadmap/animator" element={<AnimatorRoadmap onAskAI={onAskAI} />} />
                 <Route path="/roadmap/motion-graphics" element={<MotionGraphicsRoadmap onAskAI={onAskAI} />} />
 
-                {/* Rank Predictor Routes */}
-                <Route path="/rank/jee-main" element={<JEEMainRank />} />
-                <Route path="/rank/neet" element={<NEETRank />} />
-                <Route path="/rank/ts-eamcet" element={<EAMCETRank />} />
-
+                
                 {/* Master Category SEO Routes */}
                 <Route path="/mba" element={
                     <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 py-12">

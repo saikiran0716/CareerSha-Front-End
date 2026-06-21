@@ -1,6 +1,6 @@
 import React from 'react';
-import SEO from '../components/SEO/SEO';
-import { CollegePredictorView } from '../components/CollegeMatcher/CollegePredictor';
+import SEO from '../../components/SEO/SEO';
+import { CollegePredictorView } from '../../components/CollegeMatcher/CollegePredictor';
 
 const CollegeMatcherPage: React.FC<{ onAskAI: (topic: string) => void }> = ({ onAskAI }) => {
   return (

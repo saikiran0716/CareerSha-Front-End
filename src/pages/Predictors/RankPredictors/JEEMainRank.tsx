@@ -1,8 +1,8 @@
 import React from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { RankEstimator } from '../../components/RankEstimator/RankEstimator';
-import SEO from '../../components/SEO/SEO';
+import { RankEstimator } from '../../../components/RankEstimator/RankEstimator';
+import SEO from '../../../components/SEO/SEO';
 
 const JEEmainRank: React.FC = () => {
     const navigate = useNavigate();

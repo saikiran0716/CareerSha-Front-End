@@ -95,10 +95,12 @@ const Header: React.FC<HeaderProps> = ({
                       }`}
                   >
                     {cat.title}
-                    <ChevronDown size={14} className={`transition-transform duration-300 ${activeMenu === cat.title ? "rotate-180" : ""}`} />
+                    {cat.sections && cat.sections.length > 0 && (
+                        <ChevronDown size={14} className={`transition-transform duration-300 ${activeMenu === cat.title ? "rotate-180" : ""}`} />
+                    )}
                   </button>
 
-                  {activeMenu === cat.title && (
+                  {activeMenu === cat.title && cat.sections && cat.sections.length > 0 && (
                     <div className="absolute left-0 top-full pt-1 z-50 rounded-2xl">
                       <MegaMenu sections={cat.sections} onClose={() => setActiveMenu(null)} />
                     </div>
