@@ -21,7 +21,7 @@ import CollegeMatcherPage from '../pages/Predictors/CollegeMatcherPage';
 import AdmissionChancesPage from '../components/AdmissionChances/AdmissionChancesPage';
 import ScholarshipPredictorPage from '../components/ScholarshipPredictor/ScholarshipPredictorPage';
 import SalaryPredictorPage from '../components/SalaryPredictor/SalaryPredictorPage';
-import ExamsHubPage from '../pages/ExamsHubPage';
+import RoadmapsHubPage from '../pages/RoadmapsHubPage';
 import ResultsPage from '../pages/ResultsPage';
 import NewsPage from '../pages/NewsPage';
 import SEO from '../components/SEO/SEO';
@@ -102,7 +102,6 @@ const RoadmapRouters: React.FC<RoadmapRoutersProps> = ({ onAskAI, user, setIsAut
                 <Route path="/predictors/admission-chances" element={<AdmissionChancesPage />} />
                 <Route path="/predictors/scholarship" element={<ScholarshipPredictorPage />} />
                 <Route path="/predictors/salary" element={<SalaryPredictorPage />} />
-                <Route path="/exams" element={<ExamsHubPage />} />
                 <Route path="/career-library" element={<Navigate to="/roadmaps" replace />} />
                 <Route path="/results" element={<ResultsPage onAskAI={onAskAI} />} />
                 <Route path="/news" element={<NewsPage />} />

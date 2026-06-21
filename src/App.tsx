@@ -10,6 +10,7 @@ import ChatBot from './components/ChatBot/ChatBot';
 import { StudentProfile, Qualification, BudgetRange, CollegeType } from './types';
 import ExploreCollegesPage from './pages/ExploreColleges/ExploreCollegesPage';
 import JobsPage from './pages/JobsPage/JobsPage';
+import ExamsHubPage from './pages/ExamsHub/ExamsHubPage';
 
 const App: React.FC = () => {
 
@@ -100,6 +101,7 @@ const App: React.FC = () => {
             <Routes>
                 <Route path="/colleges" element={<ExploreCollegesPage />} />
                 <Route path="/jobs" element={<JobsPage />} />
+                <Route path="/exams" element={<ExamsHubPage />} />
                 <Route path="*" element={
                     <RoadmapRouters onAskAI={handleAskAI}
                         user={user}
