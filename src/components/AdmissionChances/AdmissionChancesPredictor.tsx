@@ -113,17 +113,9 @@ export const AdmissionChancesPredictor = () => {
                                 <h3 className="text-base font-bold text-slate-800">Predictors</h3>
                             </div>
                             <div className="flex flex-col p-2">
-                                <button onClick={() => navigate('/predictors/career')} className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 transition-colors text-sm font-medium w-full text-left">
-                                    <svg className="w-[18px] h-[18px] text-emerald-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
-                                    Career Predictor
-                                </button>
                                 <button onClick={() => navigate('/college-matcher')} className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 transition-colors text-sm font-medium w-full text-left">
                                     <svg className="w-[18px] h-[18px] text-blue-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
                                     College Predictor
-                                </button>
-                                <button onClick={() => navigate('/predictors/exam')} className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 transition-colors text-sm font-medium w-full text-left">
-                                    <svg className="w-[18px] h-[18px] text-indigo-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1" /><rect x="14" y="3" width="7" height="5" rx="1" /><rect x="14" y="12" width="7" height="9" rx="1" /><rect x="3" y="16" width="7" height="5" rx="1" /></svg>
-                                    Exam Predictor
                                 </button>
                                 <button onClick={() => navigate('/predictors/admission-chances')} className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-purple-50/60 text-purple-700 transition-colors text-sm font-bold w-full text-left border border-purple-100/50">
                                     <svg className="w-[18px] h-[18px] text-purple-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 7h.01M15 17h.01M19 5L5 19" /></svg>
