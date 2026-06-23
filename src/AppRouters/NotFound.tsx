@@ -55,12 +55,14 @@ const NotFound: React.FC = () => {
                             Go Back Home
                         </button>
 
+
+                        {/* TODO: we should redirect the user to the HomePage.*/}
                         <button
-                            onClick={() => navigate('/roadmaps')}
+                            onClick={() => navigate('/')}
                             className="group flex items-center justify-center gap-3 px-8 py-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 rounded-2xl text-[13px] font-black uppercase tracking-widest hover:border-indigo-500/50 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all active:scale-95"
                         >
                             <BookOpen size={18} />
-                            Explore Roadmaps
+                            Explore
                         </button>
                     </div>
 
@@ -85,7 +87,7 @@ const NotFound: React.FC = () => {
                                     <div className="w-28 h-28 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-3xl rotate-12 flex items-center justify-center shadow-indigo-500/30 shadow-2xl transition-transform duration-500 group-hover:rotate-0">
                                         <GraduationCap className="text-white w-14 h-14" />
                                     </div>
-                                    
+
                                     {/* Floating icons */}
                                     <div className="absolute -top-6 -right-6 w-14 h-14 bg-emerald-500 rounded-2xl flex items-center justify-center shadow-lg animate-bounce duration-3000">
                                         <BookOpen className="text-white w-6 h-6" />

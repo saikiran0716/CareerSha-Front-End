@@ -58,7 +58,7 @@ export const footerNavigation = [
             { name: "Rank Estimator", url: "/rank-estimator" },
             { name: "Search", url: "/search" },
             { name: "Exam Results", url: "/results" },
-            { name: "Career Roadmaps", url: "/roadmaps" },
+            // { name: "Career Roadmaps", url: "/roadmaps" },
             { name: "Latest News", url: "/news" }
         ]
     }

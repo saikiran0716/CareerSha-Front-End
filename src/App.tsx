@@ -1,13 +1,37 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Footer from './components/Footer';
 import { authService, User } from './services/authService';
 import ScrollToTop from './components/Scrollbutton/ScrollToTop';
-import RoadmapRouters from './AppRouters/RoadmapRouters';
 import AuthModal from './components/AuthModal/AuthModal';
 import ChatBot from './components/ChatBot/ChatBot';
 import { StudentProfile, Qualification, BudgetRange, CollegeType } from './types';
+import HomePage from './components/HomePage/HomePage';
+import AuthPage from './pages/AuthPage';
+import SearchPage from './pages/SearchPage';
+import RankPredictorPage from './pages/RankPredictorPage';
+import CollegeMatcherPage from './pages/CollegeMatcherPage';
+import ExamsHubPage from './pages/ExamsHubPage';
+import ResultsPage from './pages/ResultsPage';
+import NewsPage from './pages/NewsPage';
+import JEEmainRank from './pages/RankPredictors/JEEMainRank';
+import NEETRank from './pages/RankPredictors/NEETRank';
+import EAMCETRank from './pages/RankPredictors/EAMCETRank';
+import GenericFooterPage from './components/GenericFooterPage/GenericFooterPage';
+import { FOOTER_PAGES } from './data/footerData';
+import AboutUs from './pages/Footer_Pages_Static/AboutUs';
+import ContactUs from './pages/Footer_Pages_Static/ContactUs';
+import PrivacyPolicy from './pages/Footer_Pages_Static/PrivacyPolicy';
+import TermsAndConditions from './pages/Footer_Pages_Static/TermsAndConditions';
+import Disclaimer from './pages/Footer_Pages_Static/Disclaimer';
+import CollegeDetailPage from './components/CollegeMatcher/CollegeDetailPage';
+import CollegeMatchResults from './components/CollegeMatcher/CollegeMatchResults';
+import ExamDetailsPge from './components/EXAMS/ExamDetailsPge';
+import BlogDetailPage from './pages/Blog/BlogDetailPage';
+import BlogListPage from './pages/Blog/BlogListPage';
+import StaticInfoPage from './components/StaticInfoPage/StaticInfoPage';
+import NotFound from './AppRouters/NotFound';
 
 const App: React.FC = () => {
 
@@ -95,10 +119,6 @@ const App: React.FC = () => {
                 isDarkMode={isDarkMode}
                 onToggleDarkMode={toggleDarkMode} />
 
-            <RoadmapRouters onAskAI={handleAskAI}
-                user={user}
-                setIsAuthModalOpen={setIsAuthModalOpen} />
-
             <AuthModal isOpen={isAuthModalOpen}
                 onClose={
                     () => setIsAuthModalOpen(false)
@@ -107,17 +127,165 @@ const App: React.FC = () => {
                     (u) => setUser(u)
                 } />
 
+            {/* TODO: we need to define only the Routes in the App.tsx, we should not render the components directly. */}
+            <HomePage />
             <Footer onPageRequest={
                 (path) => navigate(path)
             } />
-            
-            <ChatBot 
+
+            <ChatBot
                 profile={defaultProfile}
                 initialMessage={chatInitialMessage}
                 onMessageProcessed={() => setChatInitialMessage(null)}
             />
-            
+
             <ScrollToTop />
+
+            <Routes>
+                <Route path="/" element={<HomePage user={user} setIsAuthModalOpen={setIsAuthModalOpen} onAskAI={handleAskAI} />} />
+                <Route path="/login" element={<AuthPage user={user} onAuthSuccess={(u) => setIsAuthModalOpen(false)} />} />
+                <Route path="/register" element={<AuthPage user={user} onAuthSuccess={(u) => setIsAuthModalOpen(false)} />} />
+                <Route path="/search" element={<SearchPage />} />
+                <Route path="/rank-estimator" element={<RankPredictorPage onAskAI={handleAskAI} />} />
+                <Route path="/college-matcher" element={<CollegeMatcherPage onAskAI={handleAskAI} />} />
+                <Route path="/exams" element={<ExamsHubPage />} />
+                {/* <Route path="/career-library" element={<Navigate to="/roadmaps" replace />} /> */}
+                <Route path="/results" element={<ResultsPage onAskAI={handleAskAI} />} />
+                <Route path="/news" element={<NewsPage />} />
+
+
+                {/* Rank Predictor Routes */}
+                <Route path="/rank/jee-main" element={<JEEmainRank />} />
+                <Route path="/rank/neet" element={<NEETRank />} />
+                <Route path="/rank/ts-eamcet" element={<EAMCETRank />} />
+
+
+                {/* Master Category SEO Routes */}
+                <Route path="/mba" element={
+                    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 py-12">
+                        <GenericFooterPage
+                            data={FOOTER_PAGES['mba-india']}
+                            onBack={() => window.history.back()}
+                            onAskAI={handleAskAI}
+                            pageId="mba-india"
+                        />
+                    </div>
+                } />
+                <Route path="/engineering" element={
+                    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 py-12">
+                        <GenericFooterPage
+                            data={FOOTER_PAGES['eng-india']}
+                            onBack={() => window.history.back()}
+                            onAskAI={handleAskAI}
+                            pageId="eng-india"
+                        />
+                    </div>
+                } />
+                <Route path="/medical" element={
+                    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 py-12">
+                        <GenericFooterPage
+                            data={FOOTER_PAGES['med-india']}
+                            onBack={() => window.history.back()}
+                            onAskAI={handleAskAI}
+                            pageId="med-india"
+                        />
+                    </div>
+                } />
+                <Route path="/tools" element={
+                    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 py-12">
+                        <GenericFooterPage
+                            data={FOOTER_PAGES['tools-hub']}
+                            onBack={() => window.history.back()}
+                            onAskAI={handleAskAI}
+                            pageId="tools-hub"
+                        />
+                    </div>
+                } />
+
+
+
+                {/* Static Content Routes */}
+                <Route path="/about-us" element={<AboutUs />} />
+                <Route path="/contact-us" element={<ContactUs />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+                <Route path="/disclaimer" element={<Disclaimer />} />
+
+                <Route path="/exams/:examId" element={<ExamDetailsPge />} />
+                <Route path="/latest-news" element={<Navigate to="/news" replace />} />
+                <Route path="/blog" element={<BlogListPage />} />
+                <Route path="/blog/category/:categorySlug" element={<BlogListPage />} />
+                <Route path="/blog/:id" element={<BlogDetailPage />} />
+                <Route path="/recommended-colleges" element={<CollegeMatchResults />} />
+                {/* Global Redirects for Exams hitting /college/ path */}
+                <Route path="/college/gate/*" element={<Navigate to="/exams/gate" replace />} />
+                <Route path="/college/cat/*" element={<Navigate to="/exams/cat" replace />} />
+                <Route path="/college/jee/*" element={<Navigate to="/exams/jee-main" replace />} />
+                <Route path="/college/neet/*" element={<Navigate to="/exams/neet" replace />} />
+                <Route path="/college/xat/*" element={<Navigate to="/exams/xat" replace />} />
+                <Route path="/college/clat/*" element={<Navigate to="/exams/clat" replace />} />
+                <Route path="/college/mat/*" element={<Navigate to="/exams/mat" replace />} />
+                <Route path="/college/nift/*" element={<Navigate to="/exams/nift" replace />} />
+
+                <Route path="/college/:collegeName" element={<CollegeDetailPage />} />
+
+                {/* Dynamic Footer Pages */}
+                {Object.keys(FOOTER_PAGES).map((slug) => {
+                    // Skip exam-related slugs here as they are handled by the static /exams/:examId route
+                    if (slug.startsWith('exam-') || slug.startsWith('exams-')) return null;
+
+                    const footerPageData = FOOTER_PAGES[slug];
+                    // Skip these specific slugs as they are now handled by dedicated components above
+                    const isDedicatedStatic = [
+                        'company-about', 'company-contact',
+                        'legal-privacy', 'legal-terms', 'legal-disclaimer'
+                    ].includes(slug);
+
+                    if (isDedicatedStatic) return null;
+
+                    let path = `/${slug.replace(/-/g, '/')}`;
+
+                    // Special override for consistency with navigationData urls
+                    if (slug === 'iits-india') path = '/iits/india';
+                    if (slug === 'nits-india') path = '/nits/india';
+                    if (slug === 'aiims-colleges') path = '/aiims/colleges';
+                    if (slug === 'btech-india') path = '/eng/india';
+                    if (slug === 'mbbs-india') path = '/mbbs/india';
+                    if (slug.startsWith('tool-')) path = `/tools/${slug.replace('tool-', '')}`;
+                    if (slug.startsWith('legal-')) path = `/legal/${slug.replace('legal-', '')}`;
+                    if (slug.startsWith('company-')) path = `/company/${slug.replace('company-', '')}`;
+                    if (slug.startsWith('site-')) path = `/site/${slug.replace('site-', '')}`;
+
+                    return (
+                        <Route
+                            key={slug}
+                            path={path}
+                            element={
+                                <div className="relative z-10">
+                                    {(slug.startsWith('legal-') || slug.startsWith('company-') || slug.startsWith('site-')) ? (
+                                        <StaticInfoPage
+                                            data={footerPageData}
+                                            onBack={() => window.history.back()}
+                                        />
+                                    ) : (
+                                        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 py-12">
+                                            <GenericFooterPage
+                                                data={footerPageData}
+                                                onBack={() => window.history.back()}
+                                                onAskAI={handleAskAI}
+                                                pageId={slug}
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                            }
+                        />
+                    );
+                })}
+
+                {/* Fallback for unmapped routes - Elite 404 Page */}
+                <Route path="*" element={<NotFound />} />
+            </Routes>
         </div>
     );
 };

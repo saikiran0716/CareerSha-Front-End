@@ -64,6 +64,7 @@
   <url><loc>https://www.careersha.com/rank/neet</loc></url>
   <url><loc>https://www.careersha.com/rank/ts-eamcet</loc></url>
 
+<!-- TODO: Remove the roadmap sitemaps too -->
   <!-- Top Roadmaps (keep only best pages first) -->
   <url><loc>https://www.careersha.com/roadmap/software-engineer</loc></url>
   <url><loc>https://www.careersha.com/roadmap/data-scientist</loc></url>

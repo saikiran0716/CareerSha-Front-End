@@ -15,9 +15,9 @@ import { getCareerGuidance } from '../../services/geminiService';
 import { saveReportLocally } from '../../services/storageService';
 
 interface HomePageProps {
-    user: any;
-    setIsAuthModalOpen: (isOpen: boolean) => void;
-    onAskAI: (topic: string) => void;
+    user?: any;
+    setIsAuthModalOpen?: (isOpen: boolean) => void;
+    onAskAI?: (topic: string) => void;
 }
 
 const HomePage: React.FC<HomePageProps> = ({ user, setIsAuthModalOpen, onAskAI }) => {
@@ -74,6 +74,8 @@ const HomePage: React.FC<HomePageProps> = ({ user, setIsAuthModalOpen, onAskAI }
 
     return (
         <main className="relative z-10 w-full flex flex-col gap-0 overflow-x-hidden px-0 pb-8 pt-0">
+
+            {/* We should remove the roadmap seo */}
             <SEO
                 title="CareerSha | Career Roadmap, College Predictor & Exam Guidance"
                 description="Explore colleges, exams, cutoffs and AI-powered guidance for JEE, NEET, MBA and more in one modern landing page."
