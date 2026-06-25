@@ -10,14 +10,15 @@ import { StudentProfile, Qualification, BudgetRange, CollegeType } from './types
 import HomePage from './components/HomePage/HomePage';
 import AuthPage from './pages/AuthPage';
 import SearchPage from './pages/SearchPage';
-import RankPredictorPage from './pages/RankPredictorPage';
-import CollegeMatcherPage from './pages/CollegeMatcherPage';
-import ExamsHubPage from './pages/ExamsHubPage';
+import RankPredictorPage from './pages/Predictors/RankPredictorPage';
+import CollegeMatcherPage from './pages/Predictors/CollegeMatcherPage';
+import ExamsHubPage from './pages/ExamsHub/ExamsHubPage';
+import ExploreCollegesPage from './pages/ExploreColleges/ExploreCollegesPage';
+import PredictorsHubPage from './pages/Predictors/PredictorsHubPage';
 import ResultsPage from './pages/ResultsPage';
 import NewsPage from './pages/NewsPage';
-import JEEmainRank from './pages/RankPredictors/JEEMainRank';
-import NEETRank from './pages/RankPredictors/NEETRank';
-import EAMCETRank from './pages/RankPredictors/EAMCETRank';
+import JobsPage from './pages/JobsPage/JobsPage';
+
 import GenericFooterPage from './components/GenericFooterPage/GenericFooterPage';
 import { FOOTER_PAGES } from './data/footerData';
 import AboutUs from './pages/Footer_Pages_Static/AboutUs';
@@ -31,6 +32,7 @@ import ExamDetailsPge from './components/EXAMS/ExamDetailsPge';
 import BlogDetailPage from './pages/Blog/BlogDetailPage';
 import BlogListPage from './pages/Blog/BlogListPage';
 import StaticInfoPage from './components/StaticInfoPage/StaticInfoPage';
+import CommunityPage from './pages/Community/CommunityPage';
 import NotFound from './AppRouters/NotFound';
 
 const App: React.FC = () => {
@@ -127,11 +129,7 @@ const App: React.FC = () => {
                     (u) => setUser(u)
                 } />
 
-            {/* TODO: we need to define only the Routes in the App.tsx, we should not render the components directly. */}
-            <HomePage />
-            <Footer onPageRequest={
-                (path) => navigate(path)
-            } />
+            {/* The routes will render the appropriate components based on the URL */}
 
             <ChatBot
                 profile={defaultProfile}
@@ -149,15 +147,18 @@ const App: React.FC = () => {
                 <Route path="/rank-estimator" element={<RankPredictorPage onAskAI={handleAskAI} />} />
                 <Route path="/college-matcher" element={<CollegeMatcherPage onAskAI={handleAskAI} />} />
                 <Route path="/exams" element={<ExamsHubPage />} />
+
+                {/* Header Top-Level Redirects */}
+                <Route path="/colleges" element={<ExploreCollegesPage />} />
+                <Route path="/predictors" element={<PredictorsHubPage />} />
+                <Route path="/jobs" element={<JobsPage />} />
+                <Route path="/community" element={<CommunityPage />} />
                 {/* <Route path="/career-library" element={<Navigate to="/roadmaps" replace />} /> */}
                 <Route path="/results" element={<ResultsPage onAskAI={handleAskAI} />} />
                 <Route path="/news" element={<NewsPage />} />
 
 
-                {/* Rank Predictor Routes */}
-                <Route path="/rank/jee-main" element={<JEEmainRank />} />
-                <Route path="/rank/neet" element={<NEETRank />} />
-                <Route path="/rank/ts-eamcet" element={<EAMCETRank />} />
+
 
 
                 {/* Master Category SEO Routes */}
@@ -286,6 +287,10 @@ const App: React.FC = () => {
                 {/* Fallback for unmapped routes - Elite 404 Page */}
                 <Route path="*" element={<NotFound />} />
             </Routes>
+
+            <Footer onPageRequest={
+                (path) => navigate(path)
+            } />
         </div>
     );
 };

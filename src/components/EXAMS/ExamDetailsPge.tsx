@@ -58,9 +58,9 @@ const ExamDetailsPage: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans selection:bg-indigo-500/30">
-            <SEO 
-                title={`${exam.title} 2026 Exam Date, Syllabus & Eligibility`} 
-                description={`Get full details of ${exam.title} 2026 including exam pattern, syllabus, and important dates. Stay updated with latest notifications.`} 
+            <SEO
+                title={`${exam.title} 2026 Exam Date, Syllabus & Eligibility`}
+                description={`Get full details of ${exam.title} 2026 including exam pattern, syllabus, and important dates. Stay updated with latest notifications.`}
                 keywords={`${exam.title}, ${exam.category} exam, ${exam.year} exams, eligibility, syllabus, 2026`}
             />
             {/* Top Navigation */}
@@ -243,8 +243,8 @@ const ExamDetailsPage: React.FC = () => {
                                                     </div>
                                                 </div>
                                                 <div className={`mt-3 sm:mt-0 px-4 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest text-center self-start sm:self-center ${item.status === 'ongoing' ? 'bg-emerald-100 text-emerald-700' :
-                                                        item.status === 'completed' ? 'bg-slate-200 text-slate-500' :
-                                                            'bg-amber-100 text-amber-700'
+                                                    item.status === 'completed' ? 'bg-slate-200 text-slate-500' :
+                                                        'bg-amber-100 text-amber-700'
                                                     }`}>
                                                     {item.status}
                                                 </div>
