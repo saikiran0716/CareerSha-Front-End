@@ -531,16 +531,17 @@ FOOTER_PAGES['tools-hub'] = {
                 { label: 'Status', value: 'Updated' }
             ]
         },
-        {
-            title: 'Career Roadmaps',
-            subtitle: 'Explore step-by-step roadmaps for top careers',
-            tags: ['Planning', 'Guides'],
-            link: '/roadmaps',
-            stats: [
-                { label: 'Type', value: 'Guide' },
-                { label: 'Status', value: 'Updated' }
-            ]
-        },
+        // TODO: remove the roadmaps content
+        // {
+        //     title: 'Career Roadmaps',
+        //     subtitle: 'Explore step-by-step roadmaps for top careers',
+        //     tags: ['Planning', 'Guides'],
+        //     link: '/roadmaps',
+        //     stats: [
+        //         { label: 'Type', value: 'Guide' },
+        //         { label: 'Status', value: 'Updated' }
+        //     ]
+        // },
         {
             title: 'Search Colleges',
             subtitle: 'Search colleges, exams, and courses in India',
@@ -563,6 +564,8 @@ FOOTER_PAGES['tools-hub'] = {
         }
     ],
     type: 'generic',
+
+    // {TODO: remove the roadmap conent}
     content: `<p><strong>Access all CareerSha tools in one place:</strong> College Predictor, Rank Estimator, Results Checker, and News Hub for 2026 admissions. These AI-powered tools help you navigate the entire college admission journey—from exam scores to seat allotment.</p>
     <p><strong>CareerSha Tools Hub</strong> brings the main admission tools together in one place. Each page below has a clear purpose: estimate your rank, match colleges, review results, and follow a career roadmap.</p><p>Use the dedicated pages rather than query-string shortcuts so the URLs remain stable, crawlable, and easy to index.</p>`,
     faqs: []

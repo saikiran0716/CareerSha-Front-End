@@ -271,6 +271,8 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                 <div className="space-y-4">
                   <h1 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-extrabold leading-[1.18] tracking-tight text-slate-900 dark:text-white">
                     Your Complete Career <br className="hidden sm:inline" />
+
+                    {/* TODO: remove the roadmap content */}
                     Roadmap for <span className="text-blue-600 dark:text-blue-400">Indian Education</span>
                   </h1>
                   <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm max-w-xl leading-relaxed">
