@@ -244,44 +244,18 @@ const Header: React.FC<HeaderProps> = ({
                   Blog
                 </Link>
                 {navigationData.map((cat) => (
-                  <div key={cat.title} className="rounded-xl overflow-hidden mb-1">
-                    <button
-                      className={`w-full flex items-center justify-between p-4 text-sm font-bold transition-colors ${mobileExpandedCat === cat.title ? 'bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400' : 'text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800'}`}
-                      onClick={() => toggleMobileCategory(cat.title)}
-                    >
-                      <span>{cat.title}</span>
-                      <ChevronDown size={18} className={`transition-transform duration-300 ${mobileExpandedCat === cat.title ? "rotate-180" : ""}`} />
-                    </button>
-
-                    {mobileExpandedCat === cat.title && (
-                      <div className="bg-slate-50/50 pb-4 px-4 space-y-6 pt-2">
-                        {cat.sections.map((section, idx) => (
-                          <div key={idx} className="animate-slide">
-                            {section.heading && (
-                              <h5 className="text-[10px] font-black uppercase tracking-widest text-indigo-600 mb-3 flex items-center gap-2">
-                                <span className="w-1 h-1 rounded-full bg-indigo-600"></span>
-                                {section.heading}
-                              </h5>
-                            )}
-                            <ul className="space-y-3">
-                              {section.links.map((link, lIdx) => (
-                                <li key={lIdx}>
-                                  <Link
-                                    to={link.url}
-                                    className="flex items-center gap-3 text-sm text-slate-600 hover:text-indigo-600 font-medium py-1"
-                                    onClick={() => setIsMobileMenuOpen(false)}
-                                  >
-                                    <span className="w-1.5 h-1.5 rounded-full border border-slate-300"></span>
-                                    {link.name}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+                  <Link
+                    key={cat.title}
+                    to={`/${cat.slug}`}
+                    className={`block w-full p-4 text-sm font-bold rounded-xl mb-1 transition-colors ${
+                      location.pathname === `/${cat.slug}` 
+                        ? 'bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400' 
+                        : 'text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800'
+                    }`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {cat.title}
+                  </Link>
                 ))}
               </div>
             </div>
