@@ -33,7 +33,7 @@ import BlogDetailPage from './pages/Blog/BlogDetailPage';
 import BlogListPage from './pages/Blog/BlogListPage';
 import StaticInfoPage from './components/StaticInfoPage/StaticInfoPage';
 import CommunityPage from './pages/Community/CommunityPage';
-import NotFound from './AppRouters/NotFound';
+import NotFound from './pages/NotFound';
 
 const App: React.FC = () => {
 
@@ -105,13 +105,6 @@ const App: React.FC = () => {
             `min-h-screen w-full max-w-full box-border bg-slate-50 dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 transition-colors duration-300 selection:bg-indigo-500/30 ${isDarkMode ? 'dark' : ''
             }`
         }>
-            {/* Global Background */}
-            {/* <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-slate-50 dark:bg-slate-950">
-                <div className="absolute inset-0 z-0 opacity-40 dark:opacity-30 mix-blend-multiply dark:mix-blend-overlay">
-                    <div className="absolute top-[10%] right-[30%] w-[40%] h-[40%] bg-indigo-400/20 dark:bg-indigo-600/10 rounded-full blur-[100px] animate-blob"></div>
-                    <div className="absolute bottom-[20%] left-[20%] w-[40%] h-[40%] bg-purple-400/20 dark:bg-purple-600/10 rounded-full blur-[100px] animate-blob animation-delay-2000"></div>
-                </div>
-            </div> */}
 
             <Header user={user}
                 onOpenAuth={
