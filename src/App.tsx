@@ -34,7 +34,25 @@ import BlogListPage from './pages/Blog/BlogListPage';
 import StaticInfoPage from './components/StaticInfoPage/StaticInfoPage';
 import CommunityPage from './pages/Community/CommunityPage';
 import NotFound from './pages/NotFound';
-
+import NEETPGRank from './components/Predictors/NeetPGPredictor/NEET/NEETPGRank';
+import NEETUGRank from './components/Predictors/NeetUGPredictor/NEET/NEETUGRank';
+import GATERank from './components/Predictors/GatePredictor/GATE/GATERank';
+import JEEMainRank from './components/Predictors/JeePredictor/JEE/JEEMainRank';
+import CUETRank from './components/Predictors/CuetPredictor/CUET/CUETRank';
+import CATRank from './components/Predictors/CatPredictor/CAT/CATRank';
+import MHTCETRank from './components/Predictors/MhtCetPredictor/MHTCET/MHTCETRank';
+import KCETRank from './components/Predictors/KcetPredictor/KCET/KCETRank';
+import APEAMCETRank from './components/Predictors/ApEamcetPredictor/APEAMCET/APEAMCETRank';
+import TSEAMCETRank from './components/Predictors/TsEamcetPredictor/TSEAMCET/TSEAMCETRank';
+import TSECETRank from './components/Predictors/TsEcetPredictor/TSECET/TSECETRank';
+import APECETRank from './components/Predictors/ApEcetPredictor/APECET/APECETRank';
+import LAWCETRank from './components/Predictors/LawcetPredictor/LAWCET/LAWCETRank';
+import BITSATRank from './components/Predictors/BitsatPredictor/BITSAT/BITSATRank';
+import VITEEERank from './components/Predictors/ViteeePredictor/VITEEE/VITEEERank';
+import SRMJEEERank from './components/Predictors/SrmjeeePredictor/SRMJEEE/SRMJEEERank';
+import JEEAdvancedRank from './components/Predictors/JeeAdvancedPredictor/JEEADV/JEEAdvancedRank';
+import CLATRank from './components/Predictors/ClatPredictor/CLAT/CLATRank';
+import NATARank from './components/Predictors/NataPredictor/NATA/NATARank';
 const App: React.FC = () => {
 
     const [isDarkMode, setIsDarkMode] = useState(() => localStorage.getItem('theme') === 'dark');
@@ -138,6 +156,25 @@ const App: React.FC = () => {
                 <Route path="/register" element={<AuthPage user={user} onAuthSuccess={(u) => setIsAuthModalOpen(false)} />} />
                 <Route path="/search" element={<SearchPage />} />
                 <Route path="/rank-estimator" element={<RankPredictorPage onAskAI={handleAskAI} />} />
+                <Route path="/rank-estimator/neet-ug" element={<NEETUGRank onAskAI={handleAskAI} />} />
+                <Route path="/rank-estimator/neet-pg" element={<NEETPGRank onAskAI={handleAskAI} />} />
+                <Route path="/rank-estimator/gate" element={<GATERank onAskAI={handleAskAI} />} />
+                <Route path="/rank-estimator/jee-main" element={<JEEMainRank onAskAI={handleAskAI} />} />
+                <Route path="/rank-estimator/cuet" element={<CUETRank onAskAI={handleAskAI} />} />
+                <Route path="/rank-estimator/cat" element={<CATRank onAskAI={handleAskAI} />} />
+                <Route path="/rank-estimator/mht-cet" element={<MHTCETRank onAskAI={handleAskAI} />} />
+                <Route path="/rank-estimator/kcet" element={<KCETRank onAskAI={handleAskAI} />} />
+                <Route path="/rank-estimator/ap-eamcet" element={<APEAMCETRank onAskAI={handleAskAI} />} />
+                <Route path="/rank-estimator/ts-eamcet" element={<TSEAMCETRank onAskAI={handleAskAI} />} />
+                <Route path="/rank-estimator/ts-ecet" element={<TSECETRank onAskAI={handleAskAI} />} />
+                <Route path="/rank-estimator/ap-ecet" element={<APECETRank onAskAI={handleAskAI} />} />
+                <Route path="/rank-estimator/lawcet" element={<LAWCETRank onAskAI={handleAskAI} />} />
+                <Route path="/rank-estimator/bitsat" element={<BITSATRank onAskAI={handleAskAI} />} />
+                <Route path="/rank-estimator/viteee" element={<VITEEERank onAskAI={handleAskAI} />} />
+                <Route path="/rank-estimator/srmjeee" element={<SRMJEEERank onAskAI={handleAskAI} />} />
+                <Route path="/rank-estimator/jee-advanced" element={<JEEAdvancedRank onAskAI={handleAskAI} />} />
+                <Route path="/rank-estimator/clat" element={<CLATRank onAskAI={handleAskAI} />} />
+                <Route path="/rank-estimator/nata" element={<NATARank onAskAI={handleAskAI} />} />
                 <Route path="/college-matcher" element={<CollegeMatcherPage onAskAI={handleAskAI} />} />
                 <Route path="/exams" element={<ExamsHubPage />} />
 

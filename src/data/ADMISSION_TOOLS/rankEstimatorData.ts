@@ -20,7 +20,7 @@ export const TOOLS_RANK: PageItem[] = [
             }
         ],
         "image": IMAGES.exam,
-        "link": "/?tool=rank&exam=jee-main"
+        "link": "/rank-estimator/jee-main"
     },
     {
         "title": "NEET Rank Estimator",
@@ -40,7 +40,7 @@ export const TOOLS_RANK: PageItem[] = [
             }
         ],
         "image": IMAGES.exam,
-        "link": "/?tool=rank&exam=neet"
+        "link": "/rank-estimator/neet-ug"
     },
     {
         "title": "KCET Rank Estimator",

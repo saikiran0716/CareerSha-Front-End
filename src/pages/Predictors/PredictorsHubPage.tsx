@@ -19,15 +19,7 @@ import {
 } from 'lucide-react';
 
 const PREDICTORS_DATA = [
-  {
-    id: 'career',
-    title: 'Career Predictor',
-    description: 'Find the best career options based on your interests & skills.',
-    icon: <User className="w-4 h-4 text-emerald-600" />,
-    iconBg: 'bg-emerald-50',
-    buttonColor: 'text-emerald-600 border-emerald-200 hover:bg-emerald-50',
-    route: '/roadmaps'
-  },
+ 
   {
     id: 'college',
     title: 'College Predictor',
@@ -38,67 +30,40 @@ const PREDICTORS_DATA = [
     route: '/college-matcher'
   },
   {
-    id: 'exam',
-    title: 'Exam Predictor',
-    description: 'Get a list of exams perfectly aligned with your career goals.',
-    icon: <ClipboardCheck className="w-4 h-4 text-purple-600" />,
-    iconBg: 'bg-purple-50',
-    buttonColor: 'text-purple-600 border-purple-200 hover:bg-purple-50',
-    route: '/exams'
-  },
-  {
-    id: 'admission',
-    title: 'Admission Chances',
-    description: 'Check AI-calculated admission probability for dream colleges.',
-    icon: <Percent className="w-4 h-4 text-amber-500" />,
-    iconBg: 'bg-amber-50',
-    buttonColor: 'text-amber-500 border-amber-200 hover:bg-amber-50',
-    route: '/predictors/admission-chances'
-  },
-  {
-    id: 'scholarship',
-    title: 'Scholarship Predictor',
-    description: 'Find government & private scholarships for your profile.',
-    icon: <IndianRupee className="w-4 h-4 text-pink-600" />,
-    iconBg: 'bg-pink-50',
-    buttonColor: 'text-pink-600 border-pink-200 hover:bg-pink-50',
-    route: '/predictors/scholarship'
-  },
-  {
-    id: 'salary',
-    title: 'Salary Predictor',
-    description: 'Explore role-wise salary trends and industry insights.',
-    icon: <TrendingUp className="w-4 h-4 text-teal-600" />,
-    iconBg: 'bg-teal-50',
-    buttonColor: 'text-teal-600 border-teal-200 hover:bg-teal-50',
-    route: '/predictors/salary'
-  },
-  {
     id: 'jee-rank',
-    title: 'JEE Main Predictor',
+    title: 'JEE Mains Predictor',
     description: 'Accurately estimate your expected rank and percentile.',
     icon: <Trophy className="w-4 h-4 text-orange-600" />,
     iconBg: 'bg-orange-50',
     buttonColor: 'text-orange-600 border-orange-200 hover:bg-orange-50',
-    route: '/rank-estimator'
+    route: '/rank-estimator/jee-main'
   },
   {
     id: 'neet-rank',
-    title: 'NEET Predictor',
-    description: 'Predict your NEET score and All India Rank easily.',
+    title: 'NEET UG Predictor',
+    description: 'Predict your NEET UG score and All India Rank easily.',
     icon: <HeartPulse className="w-4 h-4 text-rose-600" />,
     iconBg: 'bg-rose-50',
     buttonColor: 'text-rose-600 border-rose-200 hover:bg-rose-50',
-    route: '/rank-estimator'
+    route: '/rank-estimator/neet-ug'
+  },
+  {
+    id: 'neet-pg-rank',
+    title: 'NEET PG Predictor',
+    description: 'Estimate your NEET PG rank and admission chances.',
+    icon: <HeartPulse className="w-4 h-4 text-pink-600" />,
+    iconBg: 'bg-pink-50',
+    buttonColor: 'text-pink-600 border-pink-200 hover:bg-pink-50',
+    route: '/rank-estimator/neet-pg'
   },
   {
     id: 'gate-score',
-    title: 'GATE Predictor',
-    description: 'Estimate your GATE score and PSU job opportunities.',
+    title: 'GATE Rank Predictor',
+    description: 'Estimate your GATE rank and PSU job opportunities.',
     icon: <Cpu className="w-4 h-4 text-cyan-600" />,
     iconBg: 'bg-cyan-50',
     buttonColor: 'text-cyan-600 border-cyan-200 hover:bg-cyan-50',
-    route: '/rank-estimator'
+    route: '/rank-estimator/gate'
   },
   {
     id: 'cuet-rank',
@@ -107,7 +72,133 @@ const PREDICTORS_DATA = [
     icon: <GraduationCap className="w-4 h-4 text-indigo-600" />,
     iconBg: 'bg-indigo-50',
     buttonColor: 'text-indigo-600 border-indigo-200 hover:bg-indigo-50',
-    route: '/rank-estimator'
+    route: '/rank-estimator/cuet'
+  },
+  {
+    id: 'cat-score',
+    title: 'CAT Predictor',
+    description: 'Estimate your CAT percentile and IIM chances.',
+    icon: <TrendingUp className="w-4 h-4 text-emerald-600" />,
+    iconBg: 'bg-emerald-50',
+    buttonColor: 'text-emerald-600 border-emerald-200 hover:bg-emerald-50',
+    route: '/rank-estimator/cat'
+  },
+  {
+    id: 'mht-cet-rank',
+    title: 'MHT CET Predictor',
+    description: 'Predict your MHT CET rank for Maharashtra colleges.',
+    icon: <Flag className="w-4 h-4 text-yellow-600" />,
+    iconBg: 'bg-yellow-50',
+    buttonColor: 'text-yellow-600 border-yellow-200 hover:bg-yellow-50',
+    route: '/rank-estimator/mht-cet'
+  },
+  {
+    id: 'kcet-rank',
+    title: 'KCET Predictor',
+    description: 'Predict your KCET rank for Karnataka colleges.',
+    icon: <Flag className="w-4 h-4 text-teal-600" />,
+    iconBg: 'bg-teal-50',
+    buttonColor: 'text-teal-600 border-teal-200 hover:bg-teal-50',
+    route: '/rank-estimator/kcet'
+  },
+  {
+    id: 'ap-eamcet-rank',
+    title: 'AP EAMCET Predictor',
+    description: 'Predict your EAMCET rank for AP engineering colleges.',
+    icon: <Flag className="w-4 h-4 text-purple-600" />,
+    iconBg: 'bg-purple-50',
+    buttonColor: 'text-purple-600 border-purple-200 hover:bg-purple-50',
+    route: '/rank-estimator/ap-eamcet'
+  },
+  {
+    id: 'ts-eamcet-rank',
+    title: 'TS EAMCET Predictor',
+    description: 'Predict your TS EAMCET rank for Telangana engineering colleges.',
+    icon: <Flag className="w-4 h-4 text-blue-600" />,
+    iconBg: 'bg-blue-50',
+    buttonColor: 'text-blue-600 border-blue-200 hover:bg-blue-50',
+    route: '/rank-estimator/ts-eamcet'
+  },
+  {
+    id: 'ts-ecet-rank',
+    title: 'TS ECET Predictor',
+    description: 'Predict your TS ECET rank for Telangana lateral entry.',
+    icon: <Flag className="w-4 h-4 text-orange-600" />,
+    iconBg: 'bg-orange-50',
+    buttonColor: 'text-orange-600 border-orange-200 hover:bg-orange-50',
+    route: '/rank-estimator/ts-ecet'
+  },
+  {
+    id: 'ap-ecet-rank',
+    title: 'AP ECET Predictor',
+    description: 'Predict your AP ECET rank for AP lateral entry.',
+    icon: <Flag className="w-4 h-4 text-pink-600" />,
+    iconBg: 'bg-pink-50',
+    buttonColor: 'text-pink-600 border-pink-200 hover:bg-pink-50',
+    route: '/rank-estimator/ap-ecet'
+  },
+  {
+    id: 'lawcet-rank',
+    title: 'LAWCET Predictor',
+    description: 'Predict your LAWCET rank for law colleges.',
+    icon: <Library className="w-4 h-4 text-red-600" />,
+    iconBg: 'bg-red-50',
+    buttonColor: 'text-red-600 border-red-200 hover:bg-red-50',
+    route: '/rank-estimator/lawcet'
+  },
+  {
+    id: 'bitsat-score',
+    title: 'BITSAT Predictor',
+    description: 'Estimate your admission chances at BITS Pilani.',
+    icon: <TrendingUp className="w-4 h-4 text-sky-600" />,
+    iconBg: 'bg-sky-50',
+    buttonColor: 'text-sky-600 border-sky-200 hover:bg-sky-50',
+    route: '/rank-estimator/bitsat'
+  },
+  {
+    id: 'viteee-rank',
+    title: 'VITEEE Predictor',
+    description: 'Predict your VIT category and campus chances.',
+    icon: <ClipboardCheck className="w-4 h-4 text-indigo-600" />,
+    iconBg: 'bg-indigo-50',
+    buttonColor: 'text-indigo-600 border-indigo-200 hover:bg-indigo-50',
+    route: '/rank-estimator/viteee'
+  },
+  {
+    id: 'srmjeee-rank',
+    title: 'SRMJEEE Predictor',
+    description: 'Estimate your SRM rank and branch availability.',
+    icon: <Library className="w-4 h-4 text-emerald-600" />,
+    iconBg: 'bg-emerald-50',
+    buttonColor: 'text-emerald-600 border-emerald-200 hover:bg-emerald-50',
+    route: '/rank-estimator/srmjeee'
+  },
+  {
+    id: 'jee-advanced-rank',
+    title: 'JEE Advanced Predictor',
+    description: 'Predict your IIT rank based on advanced scores.',
+    icon: <Trophy className="w-4 h-4 text-rose-600" />,
+    iconBg: 'bg-rose-50',
+    buttonColor: 'text-rose-600 border-rose-200 hover:bg-rose-50',
+    route: '/rank-estimator/jee-advanced'
+  },
+  {
+    id: 'clat-rank',
+    title: 'CLAT Predictor',
+    description: 'Predict your NLU admission chances and rank.',
+    icon: <Library className="w-4 h-4 text-orange-600" />,
+    iconBg: 'bg-orange-50',
+    buttonColor: 'text-orange-600 border-orange-200 hover:bg-orange-50',
+    route: '/rank-estimator/clat'
+  },
+  {
+    id: 'nata-score',
+    title: 'NATA Predictor',
+    description: 'Estimate your B.Arch admission chances.',
+    icon: <ClipboardCheck className="w-4 h-4 text-indigo-600" />,
+    iconBg: 'bg-indigo-50',
+    buttonColor: 'text-indigo-600 border-indigo-200 hover:bg-indigo-50',
+    route: '/rank-estimator/nata'
   }
 ];
 
