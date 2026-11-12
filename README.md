@@ -16,7 +16,11 @@ Run these before every commit / PR — all must pass:
 npm run typecheck     # TypeScript, strict mode
 npm run lint          # ESLint (lint:fix to auto-fix)
 npm run format:check  # Prettier (format to auto-format)
+npm test              # Vitest + React Testing Library (test:watch while developing)
 ```
+
+Tests live next to the code they cover (`*.test.ts` / `*.test.tsx`). Helpers in `src/test/utils.tsx`:
+`renderAt(<Page />)` renders inside the router/providers, `signIn()` simulates a signed-in user.
 
 - **TypeScript strict mode** is on. Don't use `any`; ESLint treats it as an error. If one is truly unavoidable,
   add `// eslint-disable-next-line @typescript-eslint/no-explicit-any` with a short reason.
