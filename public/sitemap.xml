@@ -1,29 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-  <!-- Homepage -->
-  <url>
-    <loc>https://www.careersha.com/</loc>
-    <lastmod>2026-04-03</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-  </url>
-
-
-  <!-- Main Hubs -->
+  <url><loc>https://www.careersha.com/</loc><lastmod>2026-04-03</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
   <url><loc>https://www.careersha.com/mba</loc><lastmod>2026-04-03</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://www.careersha.com/engineering</loc><lastmod>2026-04-03</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://www.careersha.com/medical</loc><lastmod>2026-04-03</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://www.careersha.com/exams</loc><lastmod>2026-04-03</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>
   <url><loc>https://www.careersha.com/tools</loc><lastmod>2026-04-03</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>
   <url><loc>https://www.careersha.com/results</loc><lastmod>2026-04-03</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>
-  <url><loc>https://www.careersha.com/roadmaps</loc><lastmod>2026-04-03</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://www.careersha.com/news</loc><lastmod>2026-04-03</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.careersha.com/search</loc><lastmod>2026-04-07</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.careersha.com/college-matcher</loc><lastmod>2026-04-07</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>
   <url><loc>https://www.careersha.com/rank-estimator</loc><lastmod>2026-04-07</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>
-
-  <!-- MBA -->
   <url><loc>https://www.careersha.com/mba/india</loc></url>
   <url><loc>https://www.careersha.com/mba/delhi</loc></url>
   <url><loc>https://www.careersha.com/mba/bangalore</loc></url>
@@ -32,23 +18,17 @@
   <url><loc>https://www.careersha.com/mba/executive</loc><lastmod>2026-04-08</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.careersha.com/mba/distance</loc><lastmod>2026-04-08</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.careersha.com/mba/online</loc><lastmod>2026-04-08</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-
-  <!-- Engineering -->
   <url><loc>https://www.careersha.com/eng/india</loc></url>
   <url><loc>https://www.careersha.com/iits/india</loc></url>
   <url><loc>https://www.careersha.com/nits/india</loc></url>
   <url><loc>https://www.careersha.com/eng/hyd</loc></url>
   <url><loc>https://www.careersha.com/eng/mumbai</loc><lastmod>2026-04-08</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.careersha.com/eng/mtech</loc><lastmod>2026-04-08</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-
-  <!-- Medical -->
   <url><loc>https://www.careersha.com/mbbs/india</loc></url>
   <url><loc>https://www.careersha.com/aiims/colleges</loc></url>
   <url><loc>https://www.careersha.com/bds/india</loc><lastmod>2026-04-08</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.careersha.com/pharma/india</loc><lastmod>2026-04-08</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.careersha.com/nursing/india</loc><lastmod>2026-04-08</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-
-  <!-- Exams -->
   <url><loc>https://www.careersha.com/exams/cat</loc></url>
   <url><loc>https://www.careersha.com/exams/gate</loc></url>
   <url><loc>https://www.careersha.com/exams/jee-main</loc></url>
@@ -57,29 +37,31 @@
   <url><loc>https://www.careersha.com/exams/clat</loc><lastmod>2026-04-08</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.careersha.com/exams/mat</loc><lastmod>2026-04-08</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.careersha.com/exams/nift</loc><lastmod>2026-04-08</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-
-  <!-- Rank -->
-  <url><loc>https://www.careersha.com/rank/jee-main</loc></url>
-  <url><loc>https://www.careersha.com/rank/neet</loc></url>
-  <url><loc>https://www.careersha.com/rank/ts-eamcet</loc></url>
-
-<!-- TODO: Remove the roadmap sitemaps too -->
-  <!-- Top Roadmaps (keep only best pages first) -->
-  <url><loc>https://www.careersha.com/roadmap/software-engineer</loc></url>
-  <url><loc>https://www.careersha.com/roadmap/data-scientist</loc></url>
-  <url><loc>https://www.careersha.com/roadmap/ui-ux-designer</loc></url>
-  <url><loc>https://www.careersha.com/roadmap/ai-engineer</loc></url>
-  <url><loc>https://www.careersha.com/roadmap/devops-engineer</loc></url>
-  <url><loc>https://www.careersha.com/roadmap/full-stack-python</loc></url>
-  <url><loc>https://www.careersha.com/roadmap/data-analyst</loc></url>
-  <url><loc>https://www.careersha.com/roadmap/machine-learning-engineer</loc></url>
-
-  <!-- Static -->
   <url><loc>https://www.careersha.com/about-us</loc></url>
   <url><loc>https://www.careersha.com/contact-us</loc></url>
   <url><loc>https://www.careersha.com/privacy-policy</loc></url>
   <url><loc>https://www.careersha.com/terms-and-conditions</loc></url>
   <url><loc>https://www.careersha.com/disclaimer</loc><lastmod>2026-04-08</lastmod><changefreq>yearly</changefreq><priority>0.5</priority></url>
-
-
+  <url><loc>https://www.careersha.com/colleges</loc><lastmod>2026-11-12</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.careersha.com/predictors</loc><lastmod>2026-11-12</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.careersha.com/jobs</loc><lastmod>2026-11-12</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.careersha.com/rank-estimator/neet-ug</loc><lastmod>2026-11-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.careersha.com/rank-estimator/neet-pg</loc><lastmod>2026-11-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.careersha.com/rank-estimator/jee-main</loc><lastmod>2026-11-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.careersha.com/rank-estimator/jee-advanced</loc><lastmod>2026-11-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.careersha.com/rank-estimator/gate</loc><lastmod>2026-11-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.careersha.com/rank-estimator/bitsat</loc><lastmod>2026-11-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.careersha.com/rank-estimator/viteee</loc><lastmod>2026-11-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.careersha.com/rank-estimator/srmjeee</loc><lastmod>2026-11-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.careersha.com/rank-estimator/mht-cet</loc><lastmod>2026-11-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.careersha.com/rank-estimator/kcet</loc><lastmod>2026-11-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.careersha.com/rank-estimator/ap-eamcet</loc><lastmod>2026-11-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.careersha.com/rank-estimator/ts-eamcet</loc><lastmod>2026-11-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.careersha.com/rank-estimator/ap-ecet</loc><lastmod>2026-11-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.careersha.com/rank-estimator/ts-ecet</loc><lastmod>2026-11-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.careersha.com/rank-estimator/cat</loc><lastmod>2026-11-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.careersha.com/rank-estimator/clat</loc><lastmod>2026-11-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.careersha.com/rank-estimator/lawcet</loc><lastmod>2026-11-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.careersha.com/rank-estimator/cuet</loc><lastmod>2026-11-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.careersha.com/rank-estimator/nata</loc><lastmod>2026-11-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
 </urlset>

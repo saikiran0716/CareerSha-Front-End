@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Library, ClipboardCheck, TrendingUp, Trophy, HeartPulse, Cpu, GraduationCap, ArrowRight, ClipboardEdit, BarChart4, Target, Flag } from 'lucide-react';
+import SEO from '../../components/common/SEO';
 
 const PREDICTORS_DATA = [
  
@@ -188,6 +189,11 @@ const PREDICTORS_DATA = [
 const PredictorsHubPage = () => {
   return (
     <div className="bg-neutral-50 min-h-screen pb-20">
+      <SEO
+        title="Rank & College Predictors 2026 | JEE, NEET, CAT, GATE & More"
+        description="Use free rank predictors and college predictors for JEE Main, JEE Advanced, NEET, CAT, GATE, EAMCET and more. Estimate your rank and admission chances for 2026."
+        keywords="rank predictor, college predictor, jee rank predictor, neet rank predictor, cat percentile predictor, gate rank predictor"
+      />
       {/* Hero Section */}
       <div className="bg-white border-b border-neutral-200 pt-10 pb-10">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">

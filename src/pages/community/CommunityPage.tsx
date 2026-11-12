@@ -1,10 +1,16 @@
 import React from 'react';
 import { CommunityHero, LeftSidebar, Feed, RightSidebar } from '../../features/community';
+import SEO from '../../components/common/SEO';
 
 // Adding a comment to trigger IDE re-index of this file
 const CommunityPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 font-sans">
+      <SEO
+        title="Student Community | Ask Questions on Colleges, Exams & Careers"
+        description="Ask questions and get answers from students and experts about colleges, entrance exams, admissions and careers in India."
+        keywords="student community, college questions, exam doubts, admission help, career advice"
+      />
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <CommunityHero />
         

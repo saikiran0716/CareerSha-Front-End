@@ -1,23 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import SEO from '../components/common/SEO';
 import { Compass, GraduationCap, BookOpen, School, HelpCircle, Home } from 'lucide-react';
 
 const NotFound: React.FC = () => {
     const navigate = useNavigate();
 
-    useEffect(() => {
-        // SEO: Add noindex meta tag
-        const meta = document.createElement('meta');
-        meta.name = 'robots';
-        meta.content = 'noindex, nofollow';
-        document.head.appendChild(meta);
-        return () => {
-            document.head.removeChild(meta);
-        };
-    }, []);
-
     return (
         <div className="min-h-[80vh] relative flex items-center justify-center bg-white dark:bg-neutral-950 overflow-hidden font-sans pt-20 pb-32">
+            <SEO title="Page Not Found" robots="noindex, nofollow" />
             {/* Background elements */}
             <div className="absolute inset-0 z-0 pointer-events-none">
                 <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-secondary-50/50 dark:bg-secondary-900/10 rounded-full blur-[120px] -mr-96 -mt-96" />

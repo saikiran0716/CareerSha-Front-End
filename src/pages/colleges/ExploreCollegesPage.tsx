@@ -4,6 +4,7 @@ import ExploreSearchHeader from '../../features/colleges/ExploreSearchHeader';
 import ExploreFilters from '../../features/colleges/ExploreFilters';
 import CollegeListCard from '../../features/colleges/CollegeListCard';
 import { staticColleges } from '../../data/staticColleges';
+import SEO from '../../components/common/SEO';
 
 const ExploreCollegesPage: React.FC = () => {
   // Ensure the page starts at the top
@@ -13,6 +14,11 @@ const ExploreCollegesPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 font-sans">
+      <SEO
+        title="Explore Colleges in India 2026 | Fees, Cutoffs & Placements"
+        description="Discover and compare engineering, medical and management colleges across India. Filter by location, fees, rankings, cutoffs and placements on CareerSha."
+        keywords="explore colleges, colleges in india, college comparison, college fees, college cutoffs, college placements"
+      />
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 py-8">
 
         {/* Top Header Section */}

@@ -3,6 +3,7 @@ import { Search, MapPin, LayoutGrid, List, Briefcase } from 'lucide-react';
 import { JobsSidebarFilter } from '../../features/jobs/JobsSidebarFilter';
 import { JobsRightSidebar } from '../../features/jobs/JobsRightSidebar';
 import { JobCard, JobData } from '../../features/jobs/JobCard';
+import SEO from '../../components/common/SEO';
 
 // Mock Data
 const MOCK_JOBS: JobData[] = [
@@ -86,6 +87,11 @@ const JobsPage = () => {
 
     return (
         <div className="bg-neutral-50 min-h-screen pb-20">
+            <SEO
+              title="Jobs & Internships for Students and Freshers"
+              description="Find the latest jobs, internships and entry-level openings for students and fresh graduates in India, curated by CareerSha."
+              keywords="jobs for freshers, internships, entry level jobs, student jobs india, graduate jobs"
+            />
             {/* Hero Section */}
             <div className="bg-white border-b border-neutral-200 pt-8 pb-8">
                 <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
