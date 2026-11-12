@@ -377,7 +377,7 @@ const CollegeMatchResults: React.FC = () => {
                             onClick={() =>
                               navigate(`/college/${encodeURIComponent(college.name)}`, { state: { college } })
                             }
-                            className="w-full md:w-auto flex items-center justify-center gap-2 px-5 py-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-full text-xs font-bold uppercase tracking-widest transition-all shadow-sm shadow-primary-200 active:scale-95"
+                            className="w-full md:w-auto flex items-center justify-center gap-2 px-5 py-2.5 bg-primary-800 hover:bg-primary-700 text-white rounded-full text-xs font-bold uppercase tracking-widest transition-all shadow-sm shadow-primary-200 active:scale-95"
                           >
                             View Profile <ArrowRight size={12} />
                           </button>
@@ -485,7 +485,7 @@ const CollegeMatchResults: React.FC = () => {
 
                       <button
                         onClick={() => navigate(`/college/${encodeURIComponent(college.name)}`, { state: { college } })}
-                        className="w-full h-10 bg-primary-600 hover:bg-primary-700 text-white rounded-full flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-widest transition-all shadow-sm shadow-primary-200 active:scale-95 mt-auto"
+                        className="w-full h-10 bg-primary-800 hover:bg-primary-700 text-white rounded-full flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-widest transition-all shadow-sm shadow-primary-200 active:scale-95 mt-auto"
                       >
                         View Profile <ArrowRight size={12} />
                       </button>

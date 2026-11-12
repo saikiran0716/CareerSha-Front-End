@@ -189,7 +189,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
       <button
         type="submit"
         disabled={isLoading}
-        className="w-full bg-secondary-600 text-white py-2.5 rounded-lg font-semibold text-sm hover:bg-secondary-700 transition-all shadow-md hover:shadow-lg active:scale-95 disabled:opacity-50 mt-3"
+        className="w-full bg-primary-800 text-white py-2.5 rounded-lg font-semibold text-sm hover:bg-primary-700 transition-all shadow-md hover:shadow-lg active:scale-95 disabled:opacity-50 mt-3"
       >
         {isLoading ? (
           <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin mx-auto"></div>
@@ -274,7 +274,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
           <button
             type="submit"
             disabled={isLoading || twoFactorCode.some((d) => !d)}
-            className="w-full bg-secondary-600 text-white py-2.5 rounded-lg font-semibold text-sm hover:bg-secondary-700 transition-all shadow-md active:scale-95 disabled:opacity-50 flex items-center justify-center"
+            className="w-full bg-primary-800 text-white py-2.5 rounded-lg font-semibold text-sm hover:bg-primary-700 transition-all shadow-md active:scale-95 disabled:opacity-50 flex items-center justify-center"
           >
             {isLoading ? (
               <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
@@ -320,7 +320,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
         <div className="px-6 py-6">
           {!show2FA && (
             <div className="text-center mb-6">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-secondary-600 to-secondary-700 flex items-center justify-center mx-auto mb-3 shadow-lg shadow-secondary-500/30">
+              <div className="w-10 h-10 rounded-full bg-primary-800 flex items-center justify-center mx-auto mb-3 shadow-lg shadow-secondary-500/30">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5 text-white"

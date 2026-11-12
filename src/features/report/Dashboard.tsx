@@ -182,7 +182,7 @@ const Dashboard: React.FC<Props> = ({ data }) => {
         >
           Export PDF
         </button>
-        <button className="px-8 py-3 bg-secondary-600 text-white rounded-md font-semibold hover:bg-secondary-700">
+        <button className="px-8 py-3 bg-primary-800 text-white rounded-md font-semibold hover:bg-primary-700">
           Join Network →
         </button>
       </div>

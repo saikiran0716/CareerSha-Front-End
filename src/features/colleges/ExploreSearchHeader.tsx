@@ -33,7 +33,7 @@ const ExploreSearchHeader: React.FC = () => {
             placeholder="Search by college name, location, course or exam..."
             className="w-full py-3 px-3 bg-transparent text-sm text-neutral-900 dark:text-white focus:outline-none"
           />
-          <button className="bg-primary-600 hover:bg-primary-700 text-white text-sm font-semibold py-2 px-6 rounded-lg mr-1.5 transition-colors">
+          <button className="bg-primary-800 hover:bg-primary-700 text-white text-sm font-semibold py-2 px-6 rounded-lg mr-1.5 transition-colors">
             Search
           </button>
         </div>

@@ -40,7 +40,7 @@ const ReviewSearchBar: React.FC<{ search: ReviewSearch }> = ({ search }) => {
         <button
           onClick={() => handleReviewSearch(reviewSearch)}
           disabled={searchingReview}
-          className="px-6 py-2.5 bg-secondary-600 text-white rounded-xl text-sm font-bold hover:bg-secondary-700 disabled:opacity-50 transition-colors shadow-lg shadow-secondary-500/30 whitespace-nowrap z-[60]"
+          className="px-6 py-2.5 bg-primary-800 text-white rounded-xl text-sm font-bold hover:bg-primary-700 disabled:opacity-50 transition-colors shadow-lg shadow-secondary-500/30 whitespace-nowrap z-[60]"
         >
           {searchingReview ? 'Analyzing...' : 'Get Reviews'}
         </button>

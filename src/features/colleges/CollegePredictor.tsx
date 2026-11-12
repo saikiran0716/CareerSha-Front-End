@@ -543,7 +543,7 @@ export const CollegePredictorView = ({ profile }: { profile?: PredictorPrefill |
               <div className="flex flex-col items-center mt-6 mb-2">
                 <button
                   onClick={handlePredict}
-                  className="w-full sm:w-[380px] h-[48px] bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-bold text-[15px] transition-colors flex items-center justify-center gap-2 tracking-wide shadow-sm active:scale-95"
+                  className="w-full sm:w-[380px] h-[48px] bg-primary-800 hover:bg-primary-700 text-white rounded-xl font-bold text-[15px] transition-colors flex items-center justify-center gap-2 tracking-wide shadow-sm active:scale-95"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                     <circle cx="11" cy="11" r="8" />

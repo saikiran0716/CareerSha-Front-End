@@ -56,7 +56,7 @@ export const JobsRightSidebar = () => {
           <p className="text-[13px] text-neutral-600 mb-4">
             Create alerts and get notified when new jobs match your profile.
           </p>
-          <button className="w-full py-2.5 bg-secondary-600 hover:bg-secondary-700 text-white font-bold text-[13px] rounded-lg transition-colors shadow-sm">
+          <button className="w-full py-2.5 bg-primary-800 hover:bg-primary-700 text-white font-bold text-[13px] rounded-lg transition-colors shadow-sm">
             Create Alert
           </button>
         </div>

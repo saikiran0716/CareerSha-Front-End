@@ -18,7 +18,7 @@ const CollegeSidebar: React.FC<{ view: CollegeView; setActiveTab: (tab: CollegeT
     <div className="space-y-5">
       {/* Quick Apply Card */}
       <div className="bg-white rounded-2xl border border-neutral-200 overflow-hidden shadow-sm">
-        <div className="bg-gradient-to-r from-primary-600 to-secondary-600 px-5 py-4">
+        <div className="bg-primary-800 px-5 py-4">
           <p className="text-white text-[13px] font-bold">Applications for Admissions</p>
           <p className="text-primary-200 text-xs">{academicYear()} Academic Year</p>
         </div>
@@ -28,7 +28,7 @@ const CollegeSidebar: React.FC<{ view: CollegeView; setActiveTab: (tab: CollegeT
               href={`${website}/admissions`}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full flex items-center justify-center gap-2 py-2.5 bg-primary-600 hover:bg-primary-700 text-white text-[12px] font-bold rounded-lg transition-colors uppercase tracking-wide"
+              className="w-full flex items-center justify-center gap-2 py-2.5 bg-primary-800 hover:bg-primary-700 text-white text-[12px] font-bold rounded-lg transition-colors uppercase tracking-wide"
             >
               <GraduationCap size={13} /> Apply Now
             </a>

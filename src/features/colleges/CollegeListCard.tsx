@@ -108,7 +108,7 @@ const CollegeListCard: React.FC<CollegeListCardProps> = ({ college }) => {
           <button className="w-full py-2 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-300 text-xs font-bold rounded-lg transition-colors">
             Compare
           </button>
-          <button className="w-full py-2 bg-primary-600 hover:bg-primary-700 text-white text-xs font-bold rounded-lg transition-colors shadow-sm">
+          <button className="w-full py-2 bg-primary-800 hover:bg-primary-700 text-white text-xs font-bold rounded-lg transition-colors shadow-sm">
             View Details
           </button>
         </div>

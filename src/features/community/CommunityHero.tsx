@@ -23,7 +23,7 @@ const CommunityHero: React.FC = () => {
             placeholder="Search questions, topics or users..."
             className="w-full pl-12 pr-24 py-3 rounded-xl bg-neutral-50 dark:bg-neutral-800 border-none focus:ring-2 focus:ring-primary-500 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 font-medium outline-none transition-shadow"
           />
-          <button className="absolute right-2 px-6 py-2 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors shadow-md shadow-primary-500/20">
+          <button className="absolute right-2 px-6 py-2 bg-primary-800 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors shadow-md shadow-primary-500/20">
             Search
           </button>
         </div>

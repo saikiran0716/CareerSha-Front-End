@@ -138,10 +138,8 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({ defaultExam }) => 
           <div className="space-y-8 flex flex-col justify-center">
             <div className="space-y-4">
               <h2 className="text-4xl lg:text-[44px] font-extrabold tracking-tight leading-[1.1] text-neutral-900">
-                Estimate Your{' '}
-                <span className="bg-gradient-to-r from-secondary-600 to-accent-600 bg-clip-text text-transparent">
-                  All India Rank
-                </span>
+                Estimate Your <span className="text-primary-800">All India</span>{' '}
+                <span className="text-accent-600">Rank</span>
               </h2>
               <p className="text-[17px] leading-[1.7] max-w-[500px] text-neutral-500">
                 Get a precise prediction of your potential rank based on historical data and current trends.
@@ -208,7 +206,7 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({ defaultExam }) => 
                 <button
                   onClick={handleEstimate}
                   disabled={isEstimating}
-                  className="w-full h-14 rounded-2xl flex items-center justify-center gap-2.5 text-white text-sm font-black tracking-[0.06em] bg-gradient-to-br from-secondary-600 to-accent-600 shadow-[0_6px_20px] shadow-secondary-600/30 transition-[box-shadow,transform] duration-300 hover:-translate-y-px hover:shadow-[0_10px_32px] hover:shadow-secondary-600/40 disabled:bg-none disabled:bg-neutral-400 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+                  className="w-full h-14 rounded-2xl flex items-center justify-center gap-2.5 text-white text-sm font-black tracking-[0.06em] bg-primary-800 hover:bg-primary-700 shadow-[0_6px_20px] shadow-primary-800/25 transition-[box-shadow,transform] duration-300 hover:-translate-y-px hover:shadow-[0_10px_32px] hover:shadow-primary-800/35 disabled:bg-neutral-400 disabled:cursor-not-allowed disabled:hover:translate-y-0"
                 >
                   {isEstimating ? (
                     <>
@@ -262,7 +260,7 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({ defaultExam }) => 
                     <div className="flex justify-between items-start mb-6">
                       <div className="space-y-4 min-w-0 flex-1 pr-4">
                         <div className="min-w-0">
-                          <p className="text-xs uppercase tracking-[1px] text-neutral-500 mb-1">Predicted AIR</p>
+                          <p className="text-xs uppercase tracking-[1px] text-accent-600 mb-1">Predicted AIR</p>
                           <h4 className="text-[26px] font-black text-neutral-900 tracking-[-1.5px] leading-[1.1]">
                             #{result.predictedRank?.replace(/^#/, '') || 'N/A'}
                           </h4>

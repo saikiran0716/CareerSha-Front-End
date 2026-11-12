@@ -45,7 +45,7 @@ const AiAssistantCard: React.FC<{ onStartCounseling: () => void; onAskAI: (quest
         />
         <button
           onClick={submitAssistantPrompt}
-          className="h-8 w-8 shrink-0 flex items-center justify-center rounded-full bg-primary-600 text-white shadow-sm hover:bg-primary-700 transition"
+          className="h-8 w-8 shrink-0 flex items-center justify-center rounded-full bg-primary-800 text-white shadow-sm hover:bg-primary-700 transition"
           aria-label="Send query"
         >
           <ArrowRight className="h-4.5 w-4.5" />

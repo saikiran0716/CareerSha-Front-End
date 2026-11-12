@@ -31,7 +31,7 @@ const RankPredictor: React.FC<{ exam: ExamConfig }> = ({ exam }) => {
       <div className="bg-primary-50/50 dark:bg-primary-950/20 pt-12 pb-24 relative px-4 sm:px-6">
         <div className="max-w-3xl mx-auto space-y-6">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-neutral-900 dark:text-white tracking-tight leading-tight">
-            {name} Rank Predictor <span className="text-primary-500">{PREDICTOR_YEAR}</span>
+            {name} Rank Predictor <span className="text-accent-600">{PREDICTOR_YEAR}</span>
           </h1>
           <ul className="space-y-3">
             {highlights.map((text) => (

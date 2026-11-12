@@ -103,7 +103,7 @@ export const JobCard: React.FC<JobCardProps> = ({ job }) => {
       <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-3 mt-4 sm:mt-0 pt-4 sm:pt-0 border-t sm:border-t-0 border-neutral-100 shrink-0 min-w-[120px]">
         <span className="text-[12px] text-neutral-500 font-medium sm:hidden">{job.postedAt}</span>
         <div className="flex items-center gap-3 w-full sm:w-auto">
-          <button className="flex-1 sm:flex-none h-10 px-5 bg-primary-600 hover:bg-primary-700 text-white text-[13px] font-bold rounded-lg transition-colors shadow-sm active:scale-95">
+          <button className="flex-1 sm:flex-none h-10 px-5 bg-primary-800 hover:bg-primary-700 text-white text-[13px] font-bold rounded-lg transition-colors shadow-sm active:scale-95">
             Apply Now
           </button>
           <button

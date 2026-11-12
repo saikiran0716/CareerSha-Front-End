@@ -145,7 +145,7 @@ const PredictorForm: React.FC<{ exam: ExamConfig }> = ({ exam }) => {
         <button
           onClick={handleEstimate}
           disabled={isEstimating}
-          className="w-full h-12 bg-primary-500 hover:bg-primary-600 text-white font-bold rounded-lg text-[16px] transition-colors flex items-center justify-center gap-2 mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
+          className="w-full h-12 bg-primary-800 hover:bg-primary-700 text-white font-bold rounded-lg text-[16px] transition-colors flex items-center justify-center gap-2 mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
         >
           {isEstimating ? (
             <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -167,7 +167,7 @@ const PredictorForm: React.FC<{ exam: ExamConfig }> = ({ exam }) => {
             <div className="bg-primary-50 dark:bg-primary-900/20 rounded-xl p-6 border border-primary-200 dark:border-primary-800/50">
               <div className="flex flex-col sm:flex-row justify-between items-start gap-6 mb-6">
                 <div>
-                  <p className="text-[12px] font-bold text-primary-600 dark:text-primary-500 uppercase tracking-wide mb-1">
+                  <p className="text-[12px] font-bold text-accent-600 dark:text-primary-500 uppercase tracking-wide mb-1">
                     Expected AIR
                   </p>
                   <h4 className="text-4xl font-black text-neutral-900 dark:text-white">

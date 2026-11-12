@@ -145,7 +145,7 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                       className="relative flex-shrink-0"
                       title={user ? `Signed in as ${menuUser.name}` : 'Account (guest)'}
                     >
-                      <div className="w-9 h-9 rounded-full bg-gradient-to-br from-secondary-500 to-accent-600 text-white font-bold text-sm flex items-center justify-center uppercase shadow-lg shadow-secondary-500/30 ring-2 ring-white dark:ring-neutral-900 ring-offset-0 transition-all duration-200 hover:shadow-xl hover:shadow-secondary-500/40 hover:scale-110 cursor-pointer">
+                      <div className="w-9 h-9 rounded-full bg-primary-800 text-white font-bold text-sm flex items-center justify-center uppercase shadow-lg shadow-secondary-500/30 ring-2 ring-white dark:ring-neutral-900 ring-offset-0 transition-all duration-200 hover:shadow-xl hover:shadow-secondary-500/40 hover:scale-110 cursor-pointer">
                         {menuUser.avatar ? (
                           <img
                             src={menuUser.avatar}
@@ -162,7 +162,7 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                       <div className="absolute right-0 top-full mt-2 w-60 bg-white dark:bg-neutral-900 rounded-2xl shadow-xl border border-neutral-100 dark:border-neutral-800 overflow-hidden z-50 animate-dropdown">
                         <div className="flex items-center gap-3 px-4 py-3.5 border-b border-neutral-100 dark:border-neutral-800">
                           <div className="relative flex-shrink-0">
-                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-secondary-500 via-secondary-600 to-accent-600 text-white font-bold text-base flex items-center justify-center uppercase shadow-lg shadow-secondary-500/30 ring-3 ring-secondary-100 dark:ring-neutral-800 transition-all duration-200">
+                            <div className="w-12 h-12 rounded-full bg-primary-800 text-white font-bold text-base flex items-center justify-center uppercase shadow-lg shadow-secondary-500/30 ring-3 ring-secondary-100 dark:ring-neutral-800 transition-all duration-200">
                               {menuUser.avatar ? (
                                 <img
                                   src={menuUser.avatar}
@@ -227,7 +227,7 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                   <button
                     onClick={onOpenAuth}
                     aria-label="Sign in"
-                    className="relative flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-secondary-600 to-secondary-700 text-white flex items-center justify-center shadow-lg shadow-secondary-500/30 ring-2 ring-white dark:ring-neutral-900 hover:shadow-xl hover:shadow-secondary-500/40 hover:scale-110 transition-all duration-200"
+                    className="relative flex-shrink-0 w-10 h-10 rounded-full bg-primary-800 text-white flex items-center justify-center shadow-lg shadow-secondary-500/30 ring-2 ring-white dark:ring-neutral-900 hover:shadow-xl hover:shadow-secondary-500/40 hover:scale-110 transition-all duration-200"
                     title="Sign In"
                   >
                     <UserIcon size={18} />
@@ -351,7 +351,7 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                       onOpenAuth();
                       setIsMobileMenuOpen(false);
                     }}
-                    className="flex flex-col items-center justify-center p-3 rounded-2xl bg-secondary-600 text-white gap-1.5 hover:bg-secondary-700 shadow-lg shadow-secondary-100 transition-all"
+                    className="flex flex-col items-center justify-center p-3 rounded-2xl bg-primary-800 text-white gap-1.5 hover:bg-primary-700 shadow-lg shadow-secondary-100 transition-all"
                   >
                     <UserIcon size={18} />
                     <span className="text-xs font-bold uppercase tracking-wider">Sign In</span>

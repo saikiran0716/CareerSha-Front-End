@@ -42,8 +42,7 @@ const FooterBrand: React.FC = () => {
             {
               name: 'Instagram',
               baseColor: 'text-pink-500',
-              hoverColor:
-                'hover:bg-gradient-to-tr hover:from-orange-500 hover:via-pink-500 hover:to-accent-500 hover:text-white',
+              hoverColor: 'hover:bg-accent-600 hover:text-white',
               icon: true,
             },
             {

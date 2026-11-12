@@ -46,7 +46,7 @@ const CollegeDetailPage: React.FC = () => {
       {/* While loading, sections show skeleton placeholders */}
       <div>
         {/* ── TOP NAV ── */}
-        <div className="bg-gradient-to-r from-primary-800 to-secondary-800 sticky top-0 z-50">
+        <div className="bg-primary-900 sticky top-0 z-50">
           <div className="max-w-[1300px] mx-auto px-6 h-12 flex items-center justify-between">
             <button
               onClick={() => navigate(-1)}

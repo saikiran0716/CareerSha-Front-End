@@ -68,7 +68,7 @@ const CommunityCard: React.FC<{ onStartCounseling: () => void }> = ({ onStartCou
 
       <button
         onClick={onStartCounseling}
-        className="mt-4 w-full rounded-2xl bg-primary-600 hover:bg-primary-700 text-white text-xs font-black uppercase py-3.5 shadow-[0_8px_25px_rgba(37,99,235,0.2)] tracking-wider transition hover:scale-[1.01] active:scale-[0.99]"
+        className="mt-4 w-full rounded-2xl bg-primary-800 hover:bg-primary-700 text-white text-xs font-black uppercase py-3.5 shadow-[0_8px_25px_rgba(37,99,235,0.2)] tracking-wider transition hover:scale-[1.01] active:scale-[0.99]"
       >
         Ask a Doubt
       </button>

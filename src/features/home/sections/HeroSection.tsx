@@ -51,7 +51,7 @@ const HeroSection: React.FC = () => {
             />
             <button
               onClick={goToSearch}
-              className="h-10 w-10 shrink-0 flex items-center justify-center rounded-full bg-primary-600 text-white shadow-md hover:bg-primary-700 transition duration-200 hover:scale-105 active:scale-95"
+              className="h-10 w-10 shrink-0 flex items-center justify-center rounded-full bg-primary-800 text-white shadow-md hover:bg-primary-700 transition duration-200 hover:scale-105 active:scale-95"
               aria-label="Search"
             >
               <Search className="h-4 w-4" />

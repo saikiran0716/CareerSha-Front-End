@@ -67,7 +67,7 @@ const JobsPage = () => {
                         <option value="internship">Internship</option>
                       </select>
                     </div>
-                    <button className="w-full md:w-auto h-10 px-5 bg-secondary-600 hover:bg-secondary-700 text-white font-bold text-[13px] rounded-[10px] transition-colors shadow-sm md:ml-1 mt-1 md:mt-0 whitespace-nowrap">
+                    <button className="w-full md:w-auto h-10 px-5 bg-primary-800 hover:bg-primary-700 text-white font-bold text-[13px] rounded-[10px] transition-colors shadow-sm md:ml-1 mt-1 md:mt-0 whitespace-nowrap">
                       Search Jobs
                     </button>
                   </div>

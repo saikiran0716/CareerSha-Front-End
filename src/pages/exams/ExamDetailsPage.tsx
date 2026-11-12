@@ -42,7 +42,7 @@ const ExamDetailsPage: React.FC = () => {
         <p className="text-neutral-500 max-w-xs mb-8">The exam details you are looking for are not available.</p>
         <button
           onClick={() => navigate(-1)}
-          className="px-8 py-3 bg-secondary-600 text-white font-black uppercase tracking-widest text-xs rounded-2xl shadow-lg hover:bg-secondary-700 transition-all"
+          className="px-8 py-3 bg-primary-800 text-white font-black uppercase tracking-widest text-xs rounded-2xl shadow-lg hover:bg-primary-700 transition-all"
         >
           Go Back
         </button>
@@ -95,9 +95,7 @@ const ExamDetailsPage: React.FC = () => {
                 </div>
                 <h1 className="text-5xl lg:text-7xl font-black text-neutral-900 dark:text-white leading-[0.9] tracking-tighter">
                   {exam.title} <br />
-                  <span className="text-3xl lg:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-secondary-600 to-accent-600">
-                    {exam.year}
-                  </span>
+                  <span className="text-3xl lg:text-4xl text-accent-600">{exam.year}</span>
                 </h1>
               </div>
               <p className="text-lg text-neutral-500 dark:text-neutral-400 font-medium max-w-xl leading-relaxed mx-auto lg:mx-0">

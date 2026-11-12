@@ -296,7 +296,7 @@ const ChatBot: React.FC<Props> = ({ profile, initialMessage, onMessageProcessed 
                 <button
                   onClick={() => handleSend()}
                   disabled={!input.trim() || isLoading}
-                  className="w-10 h-10 bg-secondary-600 disabled:bg-neutral-200 dark:disabled:bg-neutral-800 text-white rounded-full hover:bg-secondary-700 transition-all shadow-md active:scale-95 flex items-center justify-center shrink-0"
+                  className="w-10 h-10 bg-primary-800 disabled:bg-neutral-200 dark:disabled:bg-neutral-800 text-white rounded-full hover:bg-primary-700 transition-all shadow-md active:scale-95 flex items-center justify-center shrink-0"
                 >
                   <svg
                     className="w-4 h-4 transform -rotate-45 translate-x-0.5"
@@ -319,7 +319,7 @@ const ChatBot: React.FC<Props> = ({ profile, initialMessage, onMessageProcessed 
           <button
             onClick={() => setIsOpen(true)}
             aria-label="Open AI career assistant chat"
-            className="group relative bg-secondary-600 text-white w-12 h-12 sm:w-14 sm:h-14 rounded-full shadow-lg shadow-secondary-500/30 hover:bg-secondary-700 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center z-[9999]"
+            className="group relative bg-primary-800 text-white w-12 h-12 sm:w-14 sm:h-14 rounded-full shadow-lg shadow-secondary-500/30 hover:bg-primary-700 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center z-[9999]"
           >
             <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path

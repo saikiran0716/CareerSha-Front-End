@@ -197,7 +197,7 @@ const StudentForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
               <button
                 type="button"
                 onClick={next}
-                className="text-xs px-4 py-1.5 bg-secondary-600 text-white rounded hover:bg-secondary-700"
+                className="text-xs px-4 py-1.5 bg-primary-800 text-white rounded hover:bg-primary-700"
               >
                 Next →
               </button>
@@ -205,7 +205,7 @@ const StudentForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="text-xs px-4 py-1.5 bg-secondary-600 text-white rounded hover:bg-secondary-700 disabled:opacity-50"
+                className="text-xs px-4 py-1.5 bg-primary-800 text-white rounded hover:bg-primary-700 disabled:opacity-50"
               >
                 {isLoading ? 'Processing...' : 'Generate'}
               </button>

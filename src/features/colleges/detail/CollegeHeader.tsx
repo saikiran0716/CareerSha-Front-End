@@ -31,7 +31,7 @@ const CollegeHeader: React.FC<{
   }, [d, pc]);
 
   return (
-    <div className="bg-gradient-to-br from-primary-700 via-primary-600 to-secondary-700">
+    <div className="bg-primary-800">
       <div className="max-w-[1300px] mx-auto px-6 py-8">
         <div className="flex flex-col sm:flex-row gap-6 items-start">
           {/* Logo */}
@@ -166,7 +166,7 @@ const CollegeHeader: React.FC<{
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-6 py-3.5 text-[12px] font-bold uppercase tracking-wider whitespace-nowrap border-b-2 transition-colors ${activeTab === tab ? 'border-white text-white' : 'border-transparent text-primary-200 hover:text-white hover:border-white/40'}`}
+              className={`px-6 py-3.5 text-[12px] font-bold uppercase tracking-wider whitespace-nowrap border-b-2 transition-colors ${activeTab === tab ? 'border-accent-500 text-white' : 'border-transparent text-primary-200 hover:text-white hover:border-white/40'}`}
             >
               {tab}
             </button>

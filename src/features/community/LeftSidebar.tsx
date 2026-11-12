@@ -41,7 +41,7 @@ const LeftSidebar: React.FC = () => {
   return (
     <div className="space-y-6 sticky top-24">
       {/* Ask Question Button */}
-      <button className="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-primary-600/20">
+      <button className="w-full bg-primary-800 hover:bg-primary-700 text-white font-bold py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-primary-600/20">
         <Plus size={20} />
         Ask a Question
       </button>

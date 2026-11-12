@@ -27,7 +27,7 @@ const PersonalizedReport: React.FC<PersonalizedReportProps> = ({ aiResponse, pro
           </button>
           <button
             onClick={onReset}
-            className="px-8 py-3 bg-secondary-600 text-white rounded-xl text-xs font-black uppercase tracking-widest hover:bg-secondary-700 transition-all shadow-lg"
+            className="px-8 py-3 bg-primary-800 text-white rounded-xl text-xs font-black uppercase tracking-widest hover:bg-primary-700 transition-all shadow-lg"
           >
             New Session
           </button>

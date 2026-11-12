@@ -47,7 +47,7 @@ const NotFound: React.FC = () => {
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
             <button
               onClick={() => navigate('/')}
-              className="group flex items-center justify-center gap-3 px-8 py-4 bg-secondary-600 hover:bg-secondary-700 text-white rounded-2xl text-[13px] font-black uppercase tracking-widest hover:shadow-2xl transition-all active:scale-95"
+              className="group flex items-center justify-center gap-3 px-8 py-4 bg-primary-800 hover:bg-primary-700 text-white rounded-2xl text-[13px] font-black uppercase tracking-widest hover:shadow-2xl transition-all active:scale-95"
             >
               <Home size={18} />
               Go Back Home
@@ -86,7 +86,7 @@ const NotFound: React.FC = () => {
               <div className="w-64 h-64 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl border border-white dark:border-neutral-800 rounded-[3rem] shadow-2xl flex items-center justify-center p-8 group-hover:scale-105 transition-transform duration-700">
                 <div className="relative">
                   {/* Cap icon or similar */}
-                  <div className="w-28 h-28 bg-gradient-to-br from-secondary-600 to-accent-600 rounded-3xl rotate-12 flex items-center justify-center shadow-secondary-500/30 shadow-2xl transition-transform duration-500 group-hover:rotate-0">
+                  <div className="w-28 h-28 bg-primary-800 rounded-3xl rotate-12 flex items-center justify-center shadow-secondary-500/30 shadow-2xl transition-transform duration-500 group-hover:rotate-0">
                     <GraduationCap className="text-white w-14 h-14" />
                   </div>
 

@@ -29,7 +29,7 @@ const ReviewResults: React.FC<{ search: ReviewSearch; items: PageItem[] }> = ({ 
 
             {/* User Info */}
             <div className="flex items-center gap-3 mb-3 relative z-10">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-secondary-500 to-accent-600 flex items-center justify-center text-white font-bold text-xs shadow-md">
+              <div className="w-8 h-8 rounded-full bg-primary-800 flex items-center justify-center text-white font-bold text-xs shadow-md">
                 {item.subtitle ? item.subtitle.charAt(0).toUpperCase() : 'U'}
               </div>
               <div>
