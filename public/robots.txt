@@ -4,4 +4,3 @@ Allow: /
 
 # Sitemaps
 Sitemap: https://www.careersha.com/sitemap.xml
-Sitemap: https://www.careersha.com/sitemap-blog.xml

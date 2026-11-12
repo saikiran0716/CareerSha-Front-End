@@ -21,8 +21,6 @@ const ResultsPage = lazy(() => import('../pages/results/ResultsPage'));
 const NewsPage = lazy(() => import('../pages/news/NewsPage'));
 const JobsPage = lazy(() => import('../pages/jobs/JobsPage'));
 const CommunityPage = lazy(() => import('../pages/community/CommunityPage'));
-const BlogListPage = lazy(() => import('../pages/blog/BlogListPage'));
-const BlogDetailPage = lazy(() => import('../pages/blog/BlogDetailPage'));
 const AboutUs = lazy(() => import('../pages/static/AboutUs'));
 const ContactUs = lazy(() => import('../pages/static/ContactUs'));
 const PrivacyPolicy = lazy(() => import('../pages/static/PrivacyPolicy'));
@@ -138,9 +136,8 @@ const AppRoutes: React.FC<AppRoutesProps> = ({ user, onOpenAuth, onAskAI }) => (
       {/* Content */}
       <Route path="/news" element={<NewsPage />} />
       <Route path="/latest-news" element={<Navigate to="/news" replace />} />
-      <Route path="/blog" element={<BlogListPage />} />
-      <Route path="/blog/category/:categorySlug" element={<BlogListPage />} />
-      <Route path="/blog/:id" element={<BlogDetailPage />} />
+      {/* Blog is disabled for now — send old blog links to News */}
+      <Route path="/blog/*" element={<Navigate to="/news" replace />} />
       <Route path="/jobs" element={<JobsPage />} />
       <Route path="/community" element={<CommunityPage />} />
 

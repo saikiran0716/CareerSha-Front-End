@@ -629,7 +629,7 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-sm font-black text-neutral-900 dark:text-white uppercase tracking-wider">Student Community</h2>
                 <button
-                  onClick={() => navigate('/blog')}
+                  onClick={() => navigate('/community')}
                   className="text-[11px] font-black text-primary-600 dark:text-primary-400 hover:underline uppercase tracking-widest"
                 >
                   View all

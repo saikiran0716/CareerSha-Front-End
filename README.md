@@ -17,20 +17,19 @@ src/
 ├── app/            App shell (App.tsx) and all routes (AppRoutes.tsx, lazy-loaded)
 ├── pages/          One file per route — thin, composes features
 │   ├── home/ auth/ search/ colleges/ exams/ predictors/
-│   ├── blog/ news/ jobs/ community/ results/ static/
+│   ├── news/ jobs/ community/ results/ static/
 │   └── NotFound.tsx
 ├── features/       Feature-specific components and logic
 │   ├── predictors/   Rank predictors (config-driven) + other predictor tools
 │   ├── colleges/ exams/ home/ news/ jobs/ community/ report/
-│   ├── auth/ chatbot/ content/ profile/ feedback/
+│   └── auth/ chatbot/ content/ profile/
 ├── components/     Shared, feature-agnostic UI
 │   ├── layout/       Header, MegaMenu, Footer, ScrollToTop, StaticLayout
-│   ├── common/       SEO, loaders
-│   └── ui/           shadcn/ui primitives
-├── services/       API layer (apiConfig, authService, aiService, blogService, …)
+│   └── common/       SEO, loaders
+├── services/       API layer (apiConfig, authService, aiService, …)
 ├── data/           Static content (engineering/, mba/, medical/, exams/, …)
 ├── hooks/          Reusable hooks (useDarkMode)
-├── lib/            Utilities (cn, theme helpers)
+├── lib/            Utilities (theme helpers)
 ├── styles/         theme.css — global color tokens
 └── types/          Shared TypeScript types
 ```
@@ -52,7 +51,7 @@ Use the semantic Tailwind tokens — never raw palette names (`blue-600`) or hex
 | `accent`    | Decorative third color — badges, gradients    |
 | `neutral`   | Text, backgrounds, borders, surfaces          |
 | `success` / `warning` / `danger` | Status states            |
-| `highlight` | Blog/News editorial red                       |
+| `highlight` | News/Results editorial red                    |
 
 Each has shades `50`–`950` and supports opacity: `bg-primary-600`, `text-neutral-500`, `border-success-200/50`.
 

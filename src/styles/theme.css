@@ -19,7 +19,7 @@
      success   – positive states (placements, "safe" chances, confirmations)
      warning   – caution states (moderate chances, notices)
      danger    – errors / destructive actions
-     highlight – editorial highlight used by Blog / News / Results pages
+     highlight – editorial highlight used by News / Results pages
 
    Quick re-brand example: to make the site green, replace the `primary`
    block below with a green scale (e.g. Tailwind's emerald values).
@@ -117,7 +117,7 @@
   --color-danger-900: 127 29 29;
   --color-danger-950: 69 10 10;
 
-  /* ---- highlight (Blog / News editorial red) ---- */
+  /* ---- highlight (News / Results editorial red) ---- */
   --color-highlight: 185 28 28;
 
   /* ---- page surfaces ---- */

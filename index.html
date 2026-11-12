@@ -44,11 +44,6 @@
                     description: 'CareerSha offers expert rank predictors, college matching tools, exam updates, and career guidance for JEE, NEET, MBA, Engineering, and Medical aspirants in India.'
                 },
                 {
-                    test: /^\/blog$/,
-                    title: 'CareerSha Blog - Education News, Career Tips & Exam Updates',
-                    description: 'Latest education news, exam updates, career tips and student guides in India.'
-                },
-                {
                     test: /^\/exams$/,
                     title: 'Entrance Exams 2026 India | JEE, NEET, EAMCET, CAT & GATE UPDATES',
                     description: 'Stay updated with the latest entrance exam dates, syllabus changes, and result declarations for JEE, NEET, EAMCET, CAT, and GATE 2026 in India.'
@@ -72,11 +67,6 @@
                     test: /^\/results$/,
                     title: 'Exam Results 2026 - JEE, NEET, EAMCET Results | CareerSha',
                     description: 'Check latest exam results for JEE, NEET, EAMCET and other entrance exams.'
-                },
-                {
-                    test: /^\/blog\//,
-                    title: 'CareerSha Blog - Expert Career & Admission Guidance',
-                    description: 'Read expert articles on college admissions, exam strategies, career guidance, and educational insights from industry experts on CareerSha Blog.'
                 },
                
             ];
@@ -105,36 +95,6 @@
                 }
                 canonical.setAttribute('href', canonicalUrl);
             };
-
-            // Check if this is a blog article route
-            var blogArticleMatch = /^\/blog\/([^/]+)$/.exec(path);
-            if (blogArticleMatch) {
-                var slug = blogArticleMatch[1];
-                var cmsApiUrl = 'https://api.careersha.com/api/content/blog/' + slug + '/';
-
-                // Attempt to fetch article metadata from CMS API
-                fetch(cmsApiUrl, { mode: 'cors' })
-                    .then(function (response) {
-                        if (!response.ok) throw new Error('Article not found');
-                        return response.json();
-                    })
-                    .then(function (article) {
-                        var seoTitle = article.seo_title || article.title || 'CareerSha Blog Article';
-                        var seoDescription = article.seo_description || article.summary || article.description || 'Read insights on education, exams and career guidance.';
-                        var canonicalUrl = article.canonical_url || (siteUrl + path);
-                        
-                        setPageMetadata(seoTitle, seoDescription, canonicalUrl);
-                    })
-                    .catch(function () {
-                        // Fallback to generic article metadata if API fails
-                        setPageMetadata(
-                            'CareerSha Blog Article | Education, Exams & Career Guidance',
-                            'Read detailed CareerSha blog insights on education news, exam updates, rank trends, admissions, and student career guidance in India.',
-                            siteUrl + path
-                        );
-                    });
-                return;
-            }
 
             // Handle static routes
             var match = null;

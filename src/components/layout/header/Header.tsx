@@ -103,16 +103,6 @@ const Header: React.FC<HeaderProps> = ({
                 </div>
               ))}
 
-              <Link
-                to="/blog"
-                className={`text-[13px] font-semibold py-2 px-3 rounded-lg flex items-center gap-1.5 transition-all ${location.pathname === '/blog'
-                  ? 'text-primary-600 dark:text-primary-400 font-bold'
-                  : 'text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white'
-                  }`}
-              >
-                Blog
-                <span className="text-[9px] font-extrabold px-1.5 py-0.5 rounded-full text-white bg-primary-600 uppercase tracking-wider">New</span>
-              </Link>
             </nav>
 
             {/* Right Side Items (Search & Actions) */}
@@ -214,13 +204,6 @@ const Header: React.FC<HeaderProps> = ({
               {/* Mobile Categories */}
               <div className="space-y-1">
 
-                <Link
-                  to="/blog"
-                  className="block w-full p-4 text-sm font-bold text-neutral-800 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-xl mb-2"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Blog
-                </Link>
                 {navigationData.map((cat) => (
                   <Link
                     key={cat.title}
