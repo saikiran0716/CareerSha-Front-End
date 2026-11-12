@@ -8,6 +8,25 @@ npm run dev      # http://localhost:3000  (proxies /api to VITE_DEV_API_PROXY_TA
 npm run build
 ```
 
+## Code quality
+
+Run these before every commit / PR — all must pass:
+
+```bash
+npm run typecheck     # TypeScript, strict mode
+npm run lint          # ESLint (lint:fix to auto-fix)
+npm run format:check  # Prettier (format to auto-format)
+```
+
+- **TypeScript strict mode** is on. Don't use `any`; ESLint treats it as an error. If one is truly unavoidable,
+  add `// eslint-disable-next-line @typescript-eslint/no-explicit-any` with a short reason.
+- **Prettier** owns formatting (`.prettierrc.json`); don't hand-format.
+- **Keep files small**: a page composes components; a component over ~250 lines is a sign to split it
+  (see `features/colleges/detail/` or `features/home/sections/` for the pattern).
+- **Data lives in `src/data/`**, not inside components.
+- `.git-blame-ignore-revs` hides the one-off Prettier commit from `git blame`:
+  `git config blame.ignoreRevsFile .git-blame-ignore-revs`
+
 Environment (`.env`): `VITE_API_BASE_URL`, `VITE_GOOGLE_CLIENT_ID`.
 
 ## Project structure

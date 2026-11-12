@@ -2,7 +2,7 @@ import React from 'react';
 import SEO from '../../components/common/SEO';
 import { CollegePredictorView } from '../../features/colleges/CollegePredictor';
 
-const CollegeMatcherPage: React.FC<{ onAskAI: (topic: string) => void }> = ({ onAskAI }) => {
+const CollegeMatcherPage: React.FC = () => {
   return (
     <div className="w-full bg-neutral-50 min-h-screen">
       <SEO
@@ -11,7 +11,7 @@ const CollegeMatcherPage: React.FC<{ onAskAI: (topic: string) => void }> = ({ on
         keywords="college predictor jee main, neet college matcher, iit admission predictor, nit college predictor, mba college matching tool"
         canonical="https://www.careersha.com/college-matcher"
       />
-      <CollegePredictorView onAskAI={onAskAI} profile={null} />
+      <CollegePredictorView />
     </div>
   );
 };

@@ -26,7 +26,24 @@ const persistUser = (user: User | null) => {
   }
 };
 
-const normalizeUser = (data: any): User => {
+/** Raw user payloads differ between login, register and Google endpoints. */
+interface RawUser {
+  id?: string | number;
+  pk?: string | number;
+  name?: string;
+  first_name?: string;
+  full_name?: string;
+  username?: string;
+  email?: string;
+  avatar?: string;
+  picture?: string;
+  photo_url?: string;
+  token?: string;
+  provider?: string;
+}
+type RawAuthPayload = RawUser & { user?: RawUser; access_token?: string };
+
+const normalizeUser = (data: RawAuthPayload | null | undefined): User => {
   const u = data?.user || data || {};
   return {
     id: u.id || u.pk || 'guest',
@@ -45,7 +62,7 @@ const safeFetch = async (url: string, options: RequestInit) => {
   try {
     const response = await fetch(url, options);
     return response;
-  } catch (err: any) {
+  } catch (err) {
     if (err instanceof TypeError && err.message.includes('fetch')) {
       const helpMsg = isLocalhost
         ? `Could not connect to the backend server at ${SERVER_ROOT}. Please ensure your Django/Python server is running on port 8000.`
@@ -61,7 +78,7 @@ const safeFetch = async (url: string, options: RequestInit) => {
 };
 
 const parseError = async (response: Response, fallbackCode: string, fallbackMessage: string) => {
-  let payload: any = null;
+  let payload: Record<string, unknown> | null = null;
   try {
     payload = await response.json();
   } catch {
@@ -70,7 +87,7 @@ const parseError = async (response: Response, fallbackCode: string, fallbackMess
 
   let message = fallbackMessage;
   if (payload?.error) {
-    message = payload.error;
+    message = String(payload.error);
   } else if (payload && typeof payload === 'object') {
     const firstError = Object.values(payload)[0];
     if (Array.isArray(firstError) && firstError[0]) {

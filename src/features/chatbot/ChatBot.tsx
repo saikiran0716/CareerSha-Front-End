@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { marked } from 'marked';
-import { chatWithCounselor, ChatResponse } from '../../services/aiService';
+import { chatWithCounselor, ChatResponse, ChatHistoryItem } from '../../services/aiService';
 import { StudentProfile } from '../../types';
 
 interface Message {
@@ -62,7 +62,7 @@ const ChatBot: React.FC<Props> = ({ profile, initialMessage, onMessageProcessed 
       // Keep only the last 4 messages as live history to save tokens
       const HISTORY_WINDOW = 4;
       const liveMessages = messages.slice(-HISTORY_WINDOW);
-      const historyForAI = liveMessages.map((m) => ({
+      const historyForAI: ChatHistoryItem[] = liveMessages.map((m) => ({
         role: m.role === 'user' ? 'user' : 'model',
         content: m.content,
       }));

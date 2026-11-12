@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import SEO from '../../components/common/SEO';
 import AuthModal from '../../features/auth/AuthModal';
+import type { User } from '../../services/authService';
 
 interface AuthPageProps {
-  user: any;
-  onAuthSuccess: (user: any) => void;
+  user: User | null;
+  onAuthSuccess: (user: User) => void;
 }
 
 const AuthPage: React.FC<AuthPageProps> = ({ user, onAuthSuccess }) => {

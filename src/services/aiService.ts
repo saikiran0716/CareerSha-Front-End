@@ -1,5 +1,7 @@
 import { StudentProfile, AIResponse, College, CollegeDetail } from '../types';
 import { buildApiUrl } from './apiConfig';
+import type { PageData } from '../data/types';
+export type { PageData };
 
 // Interfaces matching the original types
 export interface RankEstimation {
@@ -15,17 +17,8 @@ export interface ChatResponse {
   sources: { title: string; uri: string }[];
 }
 
-export interface PageData {
-  title: string;
-  description: string;
-  items: any[];
-  type: 'college' | 'exam' | 'generic' | 'review';
-  content?: string;
-  faqs?: { question: string; answer: string }[];
-}
-
 // Helper for Backend AI Calls
-const callBackendAI = async (endpoint: string, payload: any) => {
+const callBackendAI = async (endpoint: string, payload: unknown) => {
   const endpointUrl = buildApiUrl(`/ai/${endpoint}/`);
   console.log(`Calling Backend AI endpoint: ${endpointUrl}`);
 
@@ -96,8 +89,13 @@ export const resolveLiveResultLink = async (examName: string): Promise<string> =
   }
 };
 
+export interface ChatHistoryItem {
+  role: 'user' | 'model';
+  content: string;
+}
+
 export const chatWithCounselor = async (
-  history: any[],
+  history: ChatHistoryItem[],
   message: string,
   profile: StudentProfile,
   conversationSummary: string = '',

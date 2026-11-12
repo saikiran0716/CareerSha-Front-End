@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 import { authService, User } from '../../services/authService';
+import { getErrorCode, getErrorMessage } from '../../lib/errors';
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -44,13 +45,13 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
 
   if (!isOpen) return null;
 
-  const getFriendlyError = (err: any) => {
-    const code = err.code || '';
+  const getFriendlyError = (err: unknown) => {
+    const code = getErrorCode(err);
     if (code.includes('auth/invalid-credential')) return 'Invalid email or password.';
-    if (code.includes('auth/signup-failed')) return err.message || 'Signup failed.';
-    if (code.includes('auth/google-failed')) return err.message || 'Google sign-in failed.';
-    if (code.includes('auth/invalid-2fa')) return err.message || 'Incorrect verification code.';
-    return err.message || 'An authentication error occurred.';
+    if (code.includes('auth/signup-failed')) return getErrorMessage(err, 'Signup failed.');
+    if (code.includes('auth/google-failed')) return getErrorMessage(err, 'Google sign-in failed.');
+    if (code.includes('auth/invalid-2fa')) return getErrorMessage(err, 'Incorrect verification code.');
+    return getErrorMessage(err, 'An authentication error occurred.');
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -79,7 +80,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
           onClose();
         }
       }
-    } catch (err: any) {
+    } catch (err) {
       setError(getFriendlyError(err));
     } finally {
       setIsLoading(false);
@@ -97,7 +98,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
       const user = await authService.verify2FA(pendingToken, code);
       onAuthSuccess(user);
       onClose();
-    } catch (err: any) {
+    } catch (err) {
       setError(getFriendlyError(err));
       // Reset code on error
       setTwoFactorCode(['', '', '', '', '', '']);
@@ -139,7 +140,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
         onAuthSuccess(result.user);
         onClose();
       }
-    } catch (err: any) {
+    } catch (err) {
       setError(getFriendlyError(err));
     } finally {
       setIsLoading(false);

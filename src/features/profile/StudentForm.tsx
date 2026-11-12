@@ -60,7 +60,7 @@ const StudentForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
     setFormData((prev) => ({
       ...prev,
       [section]: {
-        ...(prev[section] as any),
+        ...(prev[section] as object),
         [field as string]: value,
       },
     }));

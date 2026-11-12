@@ -26,8 +26,8 @@ export default tseslint.config(
       // Unused code must be removed; allow `_name` for intentionally unused args
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
 
-      // Tightened gradually (see README → Code quality)
-      '@typescript-eslint/no-explicit-any': 'warn',
+      // Use real types; justify any exception with an eslint-disable comment
+      '@typescript-eslint/no-explicit-any': 'error',
 
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     },

@@ -3,6 +3,7 @@ import { estimateRank, RankEstimation } from '../../../services/aiService';
 import { Calculator, ChevronDown, MoveRight, TrendingUp, GraduationCap } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { getErrorMessage } from '../../../lib/errors';
 
 const EXAM_MAX_MARKS: Record<string, number> = {
   'JEE MAINS': 300,
@@ -110,9 +111,9 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({ defaultExam }) => 
       } else {
         throw new Error('Invalid response format from AI');
       }
-    } catch (e: any) {
+    } catch (e) {
       console.error('Estimation failed:', e);
-      setError(e.message || 'Something went wrong. Please try again.');
+      setError(getErrorMessage(e));
     } finally {
       setIsEstimating(false);
     }

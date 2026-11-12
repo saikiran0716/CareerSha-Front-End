@@ -26,11 +26,11 @@ import { ALL_NURSING } from './medical/nursingData';
 import { ALL_PARAMEDICAL } from './medical/paramedicalData';
 
 // Mock EXAMS Data to replace deleted files for footer functionality
-const EXAMS_MANAGEMENT: any[] = [];
-const EXAMS_ENGINEERING: any[] = [];
-const EXAMS_MEDICAL: any[] = [];
-const EXAMS_LAW: any[] = [];
-const EXAMS_DESIGN: any[] = [];
+const EXAMS_MANAGEMENT: PageItem[] = [];
+const EXAMS_ENGINEERING: PageItem[] = [];
+const EXAMS_MEDICAL: PageItem[] = [];
+const EXAMS_LAW: PageItem[] = [];
+const EXAMS_DESIGN: PageItem[] = [];
 import { TOOLS_LOAN } from './admission-tools/loanData';
 import { TOOLS_SCHOLARSHIP } from './admission-tools/scholarshipData';
 import { TOOLS_ABROAD } from './admission-tools/studyAbroadData';

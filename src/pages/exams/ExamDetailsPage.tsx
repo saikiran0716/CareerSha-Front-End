@@ -55,13 +55,13 @@ const ExamDetailsPage: React.FC = () => {
     { id: 'dates', label: 'Important Dates', icon: Calendar },
     { id: 'pattern', label: 'Exam Pattern', icon: Layout },
     { id: 'syllabus', label: 'Full Syllabus', icon: BookOpen },
-  ];
+  ] as const;
 
   return (
     <div className="min-h-screen bg-white dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 font-sans selection:bg-secondary-500/30">
       <SEO
-        title={`${exam.title} 2026 Exam Date, Syllabus & Eligibility`}
-        description={`Get full details of ${exam.title} 2026 including exam pattern, syllabus, and important dates. Stay updated with latest notifications.`}
+        title={`${exam.title} Exam Date, Syllabus & Eligibility`}
+        description={`Get full details of ${exam.title} including exam pattern, syllabus, and important dates. Stay updated with latest notifications.`}
         keywords={`${exam.title}, ${exam.category} exam, ${exam.year} exams, eligibility, syllabus, 2026`}
       />
       {/* Top Navigation */}
@@ -178,7 +178,7 @@ const ExamDetailsPage: React.FC = () => {
               return (
                 <button
                   key={sec.id}
-                  onClick={() => setActiveTab(sec.id as any)}
+                  onClick={() => setActiveTab(sec.id)}
                   className={`flex-1 min-w-[150px] flex flex-col items-center justify-center gap-3 py-6 transition-all relative ${isActive ? 'bg-secondary-50 dark:bg-secondary-900/20 text-secondary-600 dark:text-secondary-400' : 'text-neutral-500 hover:bg-neutral-50 dark:hover:bg-neutral-800'}`}
                 >
                   <Icon size={20} strokeWidth={isActive ? 3 : 2} />

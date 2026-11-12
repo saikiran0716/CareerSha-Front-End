@@ -82,6 +82,27 @@ interface CollegeResult {
 
 /* ---------------- COMPONENTS ---------------- */
 
+/** College as returned by the discover-colleges API (all fields optional). */
+interface ApiCollege {
+  name: string;
+  branch?: string;
+  generalCutoff?: string;
+  categoryCutoff?: string;
+  type?: string;
+  careerInsight?: string;
+  medianPackage?: string;
+  avgPackage?: string;
+  topRecruiters?: string[];
+  phone?: string;
+  location?: string;
+  feesRange?: string;
+  chance?: number;
+  website?: string;
+  logo?: string;
+  logoUrl?: string;
+  image?: string;
+}
+
 const CollegeMatchResults: React.FC = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -109,8 +130,8 @@ const CollegeMatchResults: React.FC = () => {
   });
   const [fetchingMore, setFetchingMore] = useState(false);
 
-  const mapColleges = (list: any[], offset: number): CollegeResult[] =>
-    list.map((c: any, index: number) => ({
+  const mapColleges = (list: ApiCollege[], offset: number): CollegeResult[] =>
+    list.map((c, index) => ({
       id: `ai-${offset + index}`,
       name: c.name,
       branch: c.branch || 'Computer Science',

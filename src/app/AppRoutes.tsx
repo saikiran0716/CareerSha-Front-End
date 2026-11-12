@@ -128,7 +128,7 @@ const AppRoutes: React.FC<AppRoutesProps> = ({ user, onOpenAuth, onAskAI }) => (
       <Route path="/predictors" element={<PredictorsHubPage />} />
       <Route path="/rank-estimator" element={<RankPredictorPage />} />
       <Route path="/rank-estimator/:examSlug" element={<ExamRankPredictorPage />} />
-      <Route path="/college-matcher" element={<CollegeMatcherPage onAskAI={onAskAI} />} />
+      <Route path="/college-matcher" element={<CollegeMatcherPage />} />
       <Route path="/recommended-colleges" element={<CollegeMatchResultsPage />} />
 
       {/* Exams */}

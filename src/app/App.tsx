@@ -20,7 +20,7 @@ const buildDefaultProfile = (name: string): StudentProfile => ({
     location: '',
     budget: BudgetRange.Medium,
     collegeType: CollegeType.Government,
-    careerGoal: '' as any,
+    careerGoal: '',
   },
 });
 

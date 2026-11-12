@@ -148,14 +148,16 @@ const Dashboard: React.FC<Props> = ({ data }) => {
 
       {/* Navigation */}
       <div className="flex justify-center gap-4">
-        {[
-          { id: 'predictor', label: 'Match 🎯' },
-          { id: 'analyzer', label: 'Stats 📊' },
-          { id: 'salary', label: 'ROI 💰' },
-        ].map((hub) => (
+        {(
+          [
+            { id: 'predictor', label: 'Match 🎯' },
+            { id: 'analyzer', label: 'Stats 📊' },
+            { id: 'salary', label: 'ROI 💰' },
+          ] as const
+        ).map((hub) => (
           <button
             key={hub.id}
-            onClick={() => setActiveHub(hub.id as any)}
+            onClick={() => setActiveHub(hub.id)}
             className={`px-6 py-2 rounded-full font-semibold transition ${
               activeHub === hub.id ? 'bg-secondary-600 text-white' : 'bg-neutral-100 hover:bg-secondary-50'
             }`}

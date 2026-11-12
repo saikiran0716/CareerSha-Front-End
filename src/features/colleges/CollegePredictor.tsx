@@ -43,6 +43,24 @@ const SPECIALIZATIONS = [
   'AI/ML',
 ];
 
+interface DropdownProps {
+  label: string;
+  value: string;
+  options: string[];
+  onSelect: (value: string) => void;
+  id: string;
+  error?: string;
+  required?: boolean;
+  openDropdown: string | null;
+  setOpenDropdown: (id: string | null) => void;
+}
+
+/** Optional values to pre-fill the form with. */
+interface PredictorPrefill {
+  exam?: { examName?: string; rank?: string; category?: string };
+  stream?: string;
+}
+
 // Pure HTML Dropdown component with SVG icon (no Lucide)
 const Dropdown = ({
   label,
@@ -54,7 +72,7 @@ const Dropdown = ({
   required = false,
   openDropdown,
   setOpenDropdown,
-}: any) => (
+}: DropdownProps) => (
   <div className="flex flex-col gap-1.5 relative w-full">
     <label className="text-[12px] font-bold text-neutral-700">
       {label} {required && <span className="text-danger-500">*</span>}
@@ -102,7 +120,7 @@ const Dropdown = ({
   </div>
 );
 
-export const CollegePredictorView = ({ profile }: any) => {
+export const CollegePredictorView = ({ profile }: { profile?: PredictorPrefill | null }) => {
   const navigate = useNavigate();
   const location = useLocation();
 

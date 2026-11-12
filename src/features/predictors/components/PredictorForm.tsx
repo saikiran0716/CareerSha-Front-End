@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { estimateRank, RankEstimation } from '../../../services/aiService';
 import { ExamConfig } from '../types';
 import { CATEGORIES } from '../exams';
+import { getErrorMessage } from '../../../lib/errors';
 
 const fieldClass =
   'w-full h-12 bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-600 rounded-lg px-4 text-[15px] font-medium text-neutral-900 dark:text-white focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none transition-all';
@@ -80,9 +81,9 @@ const PredictorForm: React.FC<{ exam: ExamConfig }> = ({ exam }) => {
       } else {
         throw new Error('Invalid response format from AI');
       }
-    } catch (e: any) {
+    } catch (e) {
       console.error('Estimation failed:', e);
-      setError(e.message || 'Something went wrong. Please try again.');
+      setError(getErrorMessage(e));
     } finally {
       setIsEstimating(false);
     }
