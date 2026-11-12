@@ -14,6 +14,7 @@ const CollegeMatcherPage = lazy(() => import('../pages/predictors/CollegeMatcher
 const PredictorsHubPage = lazy(() => import('../pages/predictors/PredictorsHubPage'));
 const ExamsHubPage = lazy(() => import('../pages/exams/ExamsHubPage'));
 const ExamDetailsPage = lazy(() => import('../pages/exams/ExamDetailsPage'));
+const GovtExamsPage = lazy(() => import('../pages/exams/GovtExamsPage'));
 const ExploreCollegesPage = lazy(() => import('../pages/colleges/ExploreCollegesPage'));
 const CollegeDetailPage = lazy(() => import('../pages/colleges/CollegeDetailPage'));
 const CollegeProfilePage = lazy(() => import('../pages/colleges/CollegeProfilePage'));
@@ -141,6 +142,7 @@ const AppRoutes: React.FC<AppRoutesProps> = ({ user, onOpenAuth, onAskAI }) => (
       {/* Exams */}
       <Route path="/exams" element={<ExamsHubPage />} />
       <Route path="/exams/:examId" element={<ExamDetailsPage />} />
+      <Route path="/govt-exams" element={<GovtExamsPage />} />
       <Route path="/results" element={<ResultsPage />} />
 
       {/* Colleges */}

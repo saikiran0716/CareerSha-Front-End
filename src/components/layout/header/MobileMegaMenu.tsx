@@ -53,7 +53,26 @@ const MobileMegaMenu: React.FC<{ onNavigate: () => void }> = ({ onNavigate }) =>
                           className={`text-neutral-500 transition-transform ${groupOpen ? 'rotate-180' : ''}`}
                         />
                       </button>
-                      {groupOpen && (
+                      {groupOpen &&
+                        g.sections?.map((s) => (
+                          <div key={s.title} className="pb-2 pl-3">
+                            <p className="px-3 pt-2 text-xs uppercase tracking-wide text-neutral-500">{s.title}</p>
+                            <ul>
+                              {[...s.links, ...(s.all ? [s.all] : [])].map((l) => (
+                                <li key={l.url + l.name}>
+                                  <Link
+                                    to={l.url}
+                                    onClick={onNavigate}
+                                    className="block px-3 py-2 text-sm text-neutral-600 hover:text-primary-700"
+                                  >
+                                    {l.name}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      {groupOpen && g.links.length > 0 && (
                         <ul className="pb-2 pl-3">
                           {g.links.map((l) => (
                             <li key={l.url + l.name}>

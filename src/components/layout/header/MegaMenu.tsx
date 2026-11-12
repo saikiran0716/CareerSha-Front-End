@@ -61,6 +61,37 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ category, onClose }) => {
       {/* Links of the selected group */}
       <div id={panelId} role="tabpanel" className="min-h-[360px] flex-1 bg-primary-50/40 px-7 py-5">
         <h3 className="sr-only">{group.title}</h3>
+        {group.sections && (
+          <div className="grid grid-cols-2 gap-x-8 gap-y-7 xl:grid-cols-3">
+            {group.sections.map((s) => (
+              <section key={s.title} aria-label={s.title}>
+                <h4 className="mb-2 text-[15px] text-neutral-900">{s.title}</h4>
+                <ul>
+                  {s.links.map((l) => (
+                    <li key={l.url + l.name}>
+                      <Link
+                        to={l.url}
+                        onClick={onClose}
+                        className="block py-1.5 text-sm text-neutral-700 hover:text-primary-800 hover:underline"
+                      >
+                        {l.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                {s.all && (
+                  <Link
+                    to={s.all.url}
+                    onClick={onClose}
+                    className="mt-1.5 inline-flex items-center gap-1 text-sm text-primary-700 hover:text-primary-900 hover:underline"
+                  >
+                    {s.all.name} <ChevronRight size={14} />
+                  </Link>
+                )}
+              </section>
+            ))}
+          </div>
+        )}
         <ul className="grid grid-cols-1 gap-x-8 gap-y-1 xl:grid-cols-2">
           {group.links.map((l) => (
             <li key={l.url + l.name}>

@@ -39,6 +39,8 @@ const STATIC = [
   '/jobs',
   '/community',
   '/tools',
+  '/govt-exams',
+  '/account/predictions',
 ];
 
 /** True when the URL is served by an existing route. */
@@ -55,16 +57,25 @@ const routeExists = (url: string) => {
 describe('mega menu data', () => {
   it('every link points to a page that exists', () => {
     const broken = navigationData.flatMap((cat) =>
-      [cat.url, ...cat.featured.map((f) => f.url), ...cat.groups.flatMap((g) => g.links.map((l) => l.url))].filter(
-        (u) => !routeExists(u),
-      ),
+      [
+        cat.url,
+        ...cat.featured.map((f) => f.url),
+        ...cat.groups.flatMap((g) => [
+          ...g.links.map((l) => l.url),
+          ...(g.sections ?? []).flatMap((s) => [...s.links, ...(s.all ? [s.all] : [])].map((l) => l.url)),
+        ]),
+      ].filter((u) => !routeExists(u)),
     );
     expect(broken).toEqual([]);
   });
 
   it('has no empty groups', () => {
     for (const cat of navigationData)
-      for (const g of cat.groups) expect(g.links.length, `${cat.title} › ${g.title}`).toBeGreaterThan(0);
+      for (const g of cat.groups) {
+        const count = g.links.length + (g.sections ?? []).reduce((n, s) => n + s.links.length, 0);
+        expect(count, `${cat.title} › ${g.title}`).toBeGreaterThan(0);
+        for (const s of g.sections ?? []) expect(s.links.length, `${g.title} › ${s.title}`).toBeGreaterThan(0);
+      }
   });
 });
 
@@ -97,6 +108,30 @@ describe('desktop mega menu', () => {
 
     expect(screen.getByTestId('location')).toHaveTextContent('/mba/delhi');
     expect(screen.queryByRole('region', { name: 'MBA menu' })).not.toBeInTheDocument();
+  });
+});
+
+describe('top-level items', () => {
+  it('has Predictors as its own item and no Design item', () => {
+    expect(navigationData.map((c) => c.title)).toEqual(['Engineering', 'Medical', 'MBA', 'Predictors', 'More']);
+  });
+
+  it('More shows Sarkari Exams in titled columns and opens the exam on the govt exams page', async () => {
+    renderHeader();
+    await userEvent.hover(screen.getByRole('button', { name: 'More' }));
+    const menu = screen.getByRole('region', { name: 'More menu' });
+    expect(within(menu).getByRole('tab', { name: 'Sarkari Exams' })).toHaveAttribute('aria-selected', 'true');
+
+    const banking = within(menu).getByRole('region', { name: 'Banking' });
+    expect(within(banking).getByRole('link', { name: 'All Banking Exams' })).toHaveAttribute(
+      'href',
+      '/govt-exams?category=banking',
+    );
+    for (const name of ['Teaching', 'SSC', 'Defence', 'Railway', 'All Exams'])
+      expect(within(menu).getByRole('region', { name })).toBeInTheDocument();
+
+    await userEvent.click(within(banking).getByRole('link', { name: 'IBPS PO' }));
+    expect(screen.getByTestId('location')).toHaveTextContent('/govt-exams');
   });
 });
 

@@ -1,6 +1,6 @@
 import { SAMPLE_COLLEGES } from './catalog/colleges';
 import { Stream } from './catalog/types';
-
+import { GOVT_EXAM_CATEGORIES, getGovtCategory, govtExamsUrl } from './exams/govtExams';
 /**
  * Header mega-menu. Each top-level category has groups (left column of the menu)
  * and each group has links (middle column). Every URL points to an existing CareerSha page.
@@ -11,9 +11,18 @@ export interface NavLink {
   url: string;
 }
 
-export interface NavGroup {
+/** A titled column inside a group, with an optional "All …" link at the bottom. */
+export interface NavSection {
   title: string;
   links: NavLink[];
+  all?: NavLink;
+}
+
+export interface NavGroup {
+  title: string;
+  /** Plain list of links — or use `sections` for titled columns (like the Sarkari Exams panel). */
+  links: NavLink[];
+  sections?: NavSection[];
 }
 
 export interface NavCategory {
@@ -226,62 +235,164 @@ export const navigationData: NavCategory[] = [
     ],
   },
   {
-    title: 'Law',
-    slug: 'law',
-    url: explore('Law'),
-    featured: featured('Law'),
+    title: 'Predictors',
+    slug: 'predictors',
+    url: '/predictors',
+    featured: [],
     groups: [
       {
-        title: 'Top Ranked Colleges',
-        links: [{ name: 'Top Law Colleges in India', url: explore('Law', '&sort=rank') }],
-      },
-      {
-        title: 'Exams',
-        links: [
-          { name: 'CLAT', url: '/exams/clat' },
-          { name: 'All Entrance Exams', url: '/exams' },
+        title: 'Rank Predictors',
+        links: [],
+        sections: [
+          {
+            title: 'Engineering',
+            links: [
+              predictor('jee-main', 'JEE Main'),
+              predictor('jee-advanced', 'JEE Advanced'),
+              predictor('bitsat', 'BITSAT'),
+              predictor('viteee', 'VITEEE'),
+              predictor('srmjeee', 'SRMJEEE'),
+            ],
+          },
+          {
+            title: 'State Engineering',
+            links: [
+              predictor('mht-cet', 'MHT CET'),
+              predictor('kcet', 'KCET'),
+              predictor('ap-eamcet', 'AP EAMCET'),
+              predictor('ts-eamcet', 'TS EAMCET'),
+              predictor('ap-ecet', 'AP ECET'),
+              predictor('ts-ecet', 'TS ECET'),
+            ],
+          },
+          {
+            title: 'Medical',
+            links: [predictor('neet-ug', 'NEET UG'), predictor('neet-pg', 'NEET PG')],
+          },
+          {
+            title: 'Postgraduate',
+            links: [predictor('gate', 'GATE'), predictor('cat', 'CAT')],
+          },
+          {
+            title: 'Law',
+            links: [predictor('clat', 'CLAT'), predictor('lawcet', 'LAWCET')],
+          },
+          {
+            title: 'Other',
+            links: [predictor('cuet', 'CUET'), predictor('nata', 'NATA')],
+            all: { name: 'All Predictors', url: '/predictors' },
+          },
         ],
       },
-      { title: 'Rank Predictors', links: [predictor('clat', 'CLAT'), predictor('lawcet', 'LAWCET')] },
-      COLLEGE_PREDICTOR,
-      { title: 'College Reviews', links: [reviews('nlsiu-bangalore', 'NLSIU Bengaluru')] },
-      COMMON_TOOLS,
-    ],
-  },
-  {
-    title: 'Design',
-    slug: 'design',
-    url: explore('Design'),
-    featured: featured('Design'),
-    groups: [
       {
-        title: 'Top Ranked Colleges',
-        links: [{ name: 'Top Design Colleges in India', url: explore('Design', '&sort=rank') }],
-      },
-      {
-        title: 'Exams',
+        title: 'College Predictor',
         links: [
-          { name: 'NIFT Entrance', url: '/exams/nift' },
-          { name: 'All Entrance Exams', url: '/exams' },
+          { name: 'Find colleges for your rank', url: '/college-matcher' },
+          { name: 'Rank Estimator', url: '/rank-estimator' },
+          { name: 'Compare Colleges', url: '/compare' },
         ],
       },
-      { title: 'Rank Predictors', links: [predictor('nata', 'NATA (Architecture)')] },
-      { title: 'College Reviews', links: [reviews('nift-delhi', 'NIFT Delhi')] },
-      COMMON_TOOLS,
+      {
+        title: 'My Predictions',
+        links: [{ name: 'Saved predictions', url: '/account/predictions' }],
+      },
     ],
   },
   {
     title: 'More',
     slug: 'more',
-    url: '/colleges',
+    url: govtExamsUrl(),
     featured: [],
     groups: [
+      {
+        title: 'Sarkari Exams',
+        links: [],
+        sections: [
+          ...['banking', 'teaching', 'ssc', 'defence', 'railway'].map((slug) => {
+            const c = getGovtCategory(slug)!;
+            return {
+              title: c.title,
+              links: c.exams.map((e) => ({ name: e.name, url: govtExamsUrl(c.slug, e.id) })),
+              all: { name: `All ${c.title} Exams`, url: govtExamsUrl(c.slug) },
+            };
+          }),
+          {
+            title: 'All Exams',
+            links: [
+              ...GOVT_EXAM_CATEGORIES.filter((c) => ['upsc', 'state-psc', 'insurance', 'police'].includes(c.slug)).map(
+                (c) => ({ name: `All ${c.title} Exams`, url: govtExamsUrl(c.slug) }),
+              ),
+              { name: 'All Scholarships', url: '/tools/scholarship' },
+              { name: 'All Sarkari Exams', url: govtExamsUrl() },
+            ],
+          },
+        ],
+      },
+      {
+        title: 'Law',
+        links: [],
+        sections: [
+          {
+            title: 'Colleges',
+            links: [
+              { name: 'Top Law Colleges in India', url: explore('Law', '&sort=rank') },
+              ...featured('Law'),
+              ...byState('Law'),
+            ],
+            all: { name: 'All Law Colleges', url: explore('Law') },
+          },
+          {
+            title: 'Exams',
+            links: [{ name: 'CLAT', url: '/exams/clat' }],
+            all: { name: 'All Entrance Exams', url: '/exams' },
+          },
+          {
+            title: 'Predictors & Reviews',
+            links: [
+              predictor('clat', 'CLAT'),
+              predictor('lawcet', 'LAWCET'),
+              reviews('nlsiu-bangalore', 'NLSIU Bengaluru'),
+            ],
+          },
+        ],
+      },
+      {
+        title: 'Design',
+        links: [],
+        sections: [
+          {
+            title: 'Colleges',
+            links: [
+              { name: 'Top Design Colleges in India', url: explore('Design', '&sort=rank') },
+              ...featured('Design'),
+              ...byState('Design'),
+            ],
+            all: { name: 'All Design Colleges', url: explore('Design') },
+          },
+          {
+            title: 'Exams',
+            links: [{ name: 'NIFT Entrance', url: '/exams/nift' }],
+            all: { name: 'All Entrance Exams', url: '/exams' },
+          },
+          {
+            title: 'Predictors & Reviews',
+            links: [predictor('nata', 'NATA (Architecture)'), reviews('nift-delhi', 'NIFT Delhi')],
+          },
+        ],
+      },
+      {
+        title: 'Study Abroad & Finance',
+        links: [
+          { name: 'Study Abroad Guide', url: '/tools/abroad' },
+          { name: 'Education Loan Guide', url: '/tools/loan' },
+          { name: 'Scholarships', url: '/tools/scholarship' },
+        ],
+      },
       {
         title: 'Explore',
         links: [
           { name: 'All Colleges', url: '/colleges' },
           { name: 'All Entrance Exams', url: '/exams' },
-          { name: 'All Predictors', url: '/predictors' },
           { name: 'Compare Colleges', url: '/compare' },
           { name: 'All Tools', url: '/tools' },
         ],
@@ -293,14 +404,6 @@ export const navigationData: NavCategory[] = [
           { name: 'Student Community', url: '/community' },
           { name: 'Latest News', url: '/news' },
           { name: 'Exam Results', url: '/results' },
-        ],
-      },
-      {
-        title: 'Tools',
-        links: [
-          { name: 'Education Loan Guide', url: '/tools/loan' },
-          { name: 'Scholarships', url: '/tools/scholarship' },
-          { name: 'Study Abroad', url: '/tools/abroad' },
           { name: 'AI Career Counsellor', url: '/tools/counselor' },
         ],
       },
