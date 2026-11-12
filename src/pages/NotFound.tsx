@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Compass, ArrowRight, GraduationCap, BookOpen, School, HelpCircle, Home } from 'lucide-react';
+import { Compass, GraduationCap, BookOpen, School, HelpCircle, Home } from 'lucide-react';
 
 const NotFound: React.FC = () => {
     const navigate = useNavigate();

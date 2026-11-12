@@ -55,14 +55,6 @@ const COLLEGES_MBA = ALL_MBA;
 const COLLEGES_ENGG = ALL_ENGG;
 const COLLEGES_MED = MED_INDIA;
 
-// Restored EXAMS array for internal footer logic
-const EXAMS = [
-    { title: 'CAT', subtitle: 'Common Admission Test', tags: ['MBA', 'Entrance'], image: IMAGES.exam },
-    { title: 'JEE MAINS', subtitle: 'Joint Entrance Exam', tags: ['Engineering', 'Entrance'], image: IMAGES.exam },
-    { title: 'NEET', subtitle: 'National Eligibility cum Entrance Test', tags: ['Medical', 'Entrance'], image: IMAGES.exam },
-    { title: 'GATE', subtitle: 'Graduate Aptitude Test in Engineering', tags: ['M.Tech', 'Entrance'], image: IMAGES.exam },
-    { title: 'CLAT', subtitle: 'Common Law Admission Test', tags: ['Law', 'Entrance'], image: IMAGES.exam }
-];
 
 const getCollegesByCity = (city: string): PageItem[] => {
     const all = [...ALL_MBA, ...ALL_ENGG, ...MED_INDIA];

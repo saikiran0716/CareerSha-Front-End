@@ -2,27 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { discoverCollegesLive } from "../../services/aiService";
 import SEO from "../../components/common/SEO";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-    School,
-    MapPin,
-    ArrowRight,
-    Activity,
-    TrendingUp,
-    Zap,
-    Building2,
-    LayoutGrid,
-    LayoutList,
-    Sparkles,
-    ShieldCheck,
-    Hash,
-    DollarSign,
-    Percent,
-    ChevronRight,
-    Star,
-    Users,
-    BookOpen
-} from "lucide-react";
+import { motion } from "framer-motion";
+import { School, MapPin, ArrowRight, Activity, TrendingUp, Building2, LayoutGrid, LayoutList, ShieldCheck, Hash, DollarSign } from "lucide-react";
 import GlassLoader from "../../components/common/loaders/GlassLoader";
 
 /* ---------------- COLLEGE LOGO COMPONENT ---------------- */

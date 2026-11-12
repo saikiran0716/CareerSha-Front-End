@@ -1,5 +1,4 @@
-import React from 'react';
-import { UploadCloud, Bell, Briefcase, FileText, TrendingUp, Compass, ArrowRight } from 'lucide-react';
+import { Bell, Briefcase, FileText, TrendingUp, Compass, ArrowRight } from 'lucide-react';
 
 const topCompanies = [
   { name: 'Google', openings: '256 Openings', logo: 'G', color: 'text-primary-500 bg-primary-50' },

@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  Qualification,
-  BudgetRange,
-  CollegeType,
-  CareerGoal,
-  StudentProfile,
-} from "../../types";
+import { Qualification, BudgetRange, CollegeType, StudentProfile } from "../../types";
 
 interface Props {
   onSubmit: (profile: StudentProfile) => void;

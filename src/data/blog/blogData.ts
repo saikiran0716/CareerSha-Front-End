@@ -1,10 +1,5 @@
 export const CATEGORIES = ["ALL NEWS", "ADMISSIONS", "EXAM UPDATES", "RESULTS", "JOBS PORTAL"];
 
-export interface BreakingNewsItem {
-  text: string;
-  path: string;
-}
-
 export interface ContentItem {
   id: number;
   type: "STORY" | "BRIEF" | "PERSPECTIVE";
@@ -80,14 +75,6 @@ const unescapeHtml = (value: string) => {
     .replace(/&#39;/g, "'");
 };
 
-const escapeHtml = (value: string) =>
-  value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/\"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-
 const formatDate = (value: Date) => {
   const month = MONTHS[value.getUTCMonth()];
   const day = String(value.getUTCDate()).padStart(2, "0");
@@ -95,54 +82,12 @@ const formatDate = (value: Date) => {
   return `${month} ${day}, ${year}`;
 };
 
-const getPublishedDate = (item: ContentItem) => {
-  if (item.date) {
-    return item.date;
-  }
-
-  if (!item.time) {
-    return formatDate(REFERENCE_DATE);
-  }
-
-  const match = item.time.match(/^(\d+)([mhd])\s+ago$/i);
-  if (!match) {
-    return formatDate(REFERENCE_DATE);
-  }
-
-  const amount = Number(match[1]);
-  const unit = match[2].toLowerCase();
-  const derivedDate = new Date(REFERENCE_DATE);
-
-  if (unit === "m") {
-    derivedDate.setUTCMinutes(derivedDate.getUTCMinutes() - amount);
-  } else if (unit === "h") {
-    derivedDate.setUTCHours(derivedDate.getUTCHours() - amount);
-  } else {
-    derivedDate.setUTCDate(derivedDate.getUTCDate() - amount);
-  }
-
-  return formatDate(derivedDate);
-};
-
-// Helper to strip HTML tags and get clean text
 const stripHtml = (html?: string) => {
   if (!html) return "";
   return html
     .replace(/<[^>]*>?/gm, "") // Remove tags
     .replace(/\s+/g, " ") // Normalize whitespace
     .trim();
-};
-
-const getSummary = (item: ContentItem) => {
-  if (item.description) {
-    return item.description;
-  }
-
-  if (item.type === "PERSPECTIVE") {
-    return `${item.author ?? "CareerSha Editorial Desk"} shares a focused perspective on ${item.title.toLowerCase()}`;
-  }
-
-  return `${item.title} This comprehensive report explores the latest developments and strategic implications for students and professionals in the 2026 academic landscape. Our editorial team provides deep-dive analysis into market shifts and institutional changes.`;
 };
 
 const getReadTime = (summary: string, type: ContentItem["type"]) => {
@@ -167,27 +112,6 @@ const removeSectionLines = (html: string) =>
     .replace(/border-(?:bottom|top|left):\s*[^;"']+;?/gi, '')
     .replace(/<hr\b[^>]*>/gi, '')
     .replace(/\s{2,}/g, ' ');
-
-const normalizeItem = (item: ContentItem): BlogArticle => {
-  const summary = getSummary(item);
-  const publishedDate = getPublishedDate(item);
-  const slug = `${slugify(item.title)}-${item.id}`;
-  const seoTitle = `${item.title} | CareerSha Blog`.slice(0, 60);
-  const seoDescription = summary.slice(0, 155);
-
-  return {
-    ...item,
-    slug,
-    summary,
-    publishedDate,
-    relativeTime: item.time,
-    readTime: getReadTime(summary, item.type),
-    seoTitle,
-    seoDescription,
-    seoKeywords: "", // Local fallback item doesn't have keywords
-    bodyHtml: buildBodyHtml(item, summary)
-  };
-};
 
 const toDisplayDate = (value?: string) => {
   if (!value) {
@@ -311,17 +235,5 @@ export const mapCmsBlogItemToArticle = (item: CmsBlogItem, fallbackId = 1): Blog
 export const mapCmsBlogItemsToArticles = (items: CmsBlogItem[]) =>
   items.map((item, index) => mapCmsBlogItemToArticle(item, index + 1));
 
-export const BLOG_ARTICLES: BlogArticle[] = [];
 
 export const getBlogPath = (item: Pick<BlogArticle, "slug">) => `/blog/${item.slug}`;
-
-export const getBlogByIdentifier = (identifier?: string) => {
-  if (!identifier) {
-    return null;
-  }
-
-  return BLOG_ARTICLES.find((item) => item.slug === identifier || String(item.id) === identifier) ?? null;
-};
-
-export const getRelatedBlogs = (currentId: number, limit = 4) =>
-  BLOG_ARTICLES.filter((item) => item.id !== currentId).slice(0, limit);

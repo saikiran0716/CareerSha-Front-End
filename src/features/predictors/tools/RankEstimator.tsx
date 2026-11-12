@@ -1,17 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { estimateRank, RankEstimation } from "../../../services/aiService";
-import {
-    Sparkles,
-    Calculator,
-    ChevronDown,
-    MoveRight,
-    MapPin,
-    TrendingUp,
-    GraduationCap,
-    CheckCircle2,
-    BarChart3,
-    BookOpen,
-} from "lucide-react";
+import { Calculator, ChevronDown, MoveRight, TrendingUp, GraduationCap } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const EXAM_MAX_MARKS: Record<string, number> = {

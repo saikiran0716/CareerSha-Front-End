@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, BadgeCheck, Shield } from 'lucide-react';
+import { MapPin, BadgeCheck } from 'lucide-react';
 import { College } from '../../data/staticColleges';
 
 // Import the placeholder image

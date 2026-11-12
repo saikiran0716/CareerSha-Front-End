@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { Activity, ChevronLeft, Clock, Search, Share2, User, X } from 'lucide-react';
+import { Activity, ChevronLeft, Search, Share2, User, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { BlogArticle, getBlogPath } from '../../data/blog/blogData';
@@ -241,7 +241,6 @@ const BlogDetailPage: React.FC = () => {
     return [];
   }, [allArticles]);
 
-  const nextArticle = sidebarData.latest[0];
 
   const sanitizedBodyHtml = useMemo(() => {
     if (!article) return '';

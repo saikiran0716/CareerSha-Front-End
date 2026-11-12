@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import SEO from '../../components/common/SEO';
-import {
-    ArrowLeft, Globe, Phone, Award, ExternalLink,
-    MapPin, Building2, Clock, School, Calendar, ChevronDown, ChevronUp,
-    Shield, Sparkles, Loader2, GraduationCap, Users, BookOpen,
-    TrendingUp, Mail, Star, CheckCircle2, ChevronRight,
-    Trophy, FlaskConical, Zap, Tent, UserCheck, Briefcase,
-    IndianRupee, Image, BarChart3, Lightbulb
-} from 'lucide-react';
+import { ArrowLeft, Globe, Phone, Award, ExternalLink, MapPin, Building2, Clock, School, Calendar, ChevronDown, ChevronUp, Shield, Sparkles, GraduationCap, Users, BookOpen, TrendingUp, Mail, Star, CheckCircle2, ChevronRight, Trophy, FlaskConical, Zap, Tent, UserCheck, Briefcase, IndianRupee, Image, BarChart3, Lightbulb } from 'lucide-react';
 import { getCollegeDetails } from '../../services/aiService';
 import { CollegeDetail } from '../../types';
 import GlassLoader from '../../components/common/loaders/GlassLoader';

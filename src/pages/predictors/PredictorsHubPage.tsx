@@ -1,22 +1,5 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  User, 
-  Library, 
-  ClipboardCheck, 
-  Percent, 
-  IndianRupee, 
-  TrendingUp, 
-  Trophy,
-  HeartPulse,
-  Cpu,
-  GraduationCap,
-  ArrowRight,
-  ClipboardEdit,
-  BarChart4,
-  Target,
-  Flag
-} from 'lucide-react';
+import { Library, ClipboardCheck, TrendingUp, Trophy, HeartPulse, Cpu, GraduationCap, ArrowRight, ClipboardEdit, BarChart4, Target, Flag } from 'lucide-react';
 
 const PREDICTORS_DATA = [
  

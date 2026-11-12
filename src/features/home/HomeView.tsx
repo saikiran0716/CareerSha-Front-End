@@ -1,31 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  ArrowRight,
-  BarChart3,
-  BadgeCheck,
-  Building2,
-  Calculator,
-  ChevronLeft,
-  ChevronRight,
-  GraduationCap,
-  IndianRupee,
-  Landmark,
-  LayoutGrid,
-  Search,
-  ShieldCheck,
-  Sparkles,
-  Star,
-  Target,
-  Trophy,
-  Users,
-  MapPin,
-  MessageSquare,
-  TrendingUp,
-  Send,
-  HelpCircle,
-  Briefcase
-} from 'lucide-react';
+import { ArrowRight, BarChart3, BadgeCheck, Building2, Calculator, ChevronLeft, ChevronRight, GraduationCap, Landmark, Search, ShieldCheck, Sparkles, Star, Target, MapPin, MessageSquare, Briefcase } from 'lucide-react';
 
 interface HomeViewProps {
   onStartCounseling: () => void;

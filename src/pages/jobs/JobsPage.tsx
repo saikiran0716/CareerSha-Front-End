@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Search, MapPin, LayoutGrid, List, Briefcase, UploadCloud } from 'lucide-react';
+import { useState } from 'react';
+import { Search, MapPin, LayoutGrid, List, Briefcase } from 'lucide-react';
 import { JobsSidebarFilter } from '../../features/jobs/JobsSidebarFilter';
 import { JobsRightSidebar } from '../../features/jobs/JobsRightSidebar';
 import { JobCard, JobData } from '../../features/jobs/JobCard';

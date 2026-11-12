@@ -4,13 +4,7 @@ import HomeView from '../../features/home/HomeView';
 import SEO from '../../components/common/SEO';
 import StudentForm from '../../features/profile/StudentForm';
 import PersonalizedReport from '../../features/report/PersonalizedReport';
-import {
-    StudentProfile,
-    AIResponse,
-    Qualification,
-    BudgetRange,
-    CollegeType
-} from '../../types';
+import { StudentProfile, AIResponse } from '../../types';
 import { getCareerGuidance } from '../../services/aiService';
 import { saveReportLocally } from '../../services/storageService';
 
@@ -48,29 +42,6 @@ const HomePage: React.FC<HomePageProps> = ({ user, setIsAuthModalOpen, onAskAI }
         setHomeViewMode('portal');
     };
 
-    const emptyProfile: StudentProfile = {
-        name: user?.name || 'Explorer',
-        academic: {
-            qualification: Qualification.Twelfth,
-            board: '',
-            year: '',
-            subjects: '',
-            marks: ''
-        },
-        exam: {
-            examName: '',
-            rank: '',
-            category: 'General',
-            quota: 'State'
-        },
-        preferences: {
-            stream: '',
-            location: '',
-            budget: BudgetRange.Medium,
-            collegeType: CollegeType.Government,
-            careerGoal: '' as any
-        }
-    };
 
     return (
         <main className="relative z-10 w-full flex flex-col gap-0 overflow-x-hidden px-0 pb-8 pt-0">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, Info, CheckCircle2, ShieldAlert, BadgeCheck, FileText } from 'lucide-react';
+import { ShieldCheck, CheckCircle2, BadgeCheck, FileText } from 'lucide-react';
 
 const RightSidebar: React.FC = () => {
   const topContributors = [

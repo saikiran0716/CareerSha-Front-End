@@ -23,7 +23,6 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [mobileExpandedCat, setMobileExpandedCat] = useState<string | null>(null);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const profileDropdownRef = useRef<HTMLDivElement>(null);
@@ -51,10 +50,6 @@ const Header: React.FC<HeaderProps> = ({
     }, 180);
   };
 
-
-  const toggleMobileCategory = (title: string) => {
-    setMobileExpandedCat(mobileExpandedCat === title ? null : title);
-  };
 
   return (
     <>

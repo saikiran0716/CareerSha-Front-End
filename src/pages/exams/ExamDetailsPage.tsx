@@ -1,21 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import SEO from '../../components/common/SEO';
-import {
-    ChevronLeft,
-    Calendar,
-    BookOpen,
-    CheckCircle,
-    Info,
-    ExternalLink,
-    Clock,
-    Shield,
-    Layout,
-    FileText,
-    User,
-    Wallet,
-    Award
-} from 'lucide-react';
+import { ChevronLeft, Calendar, BookOpen, CheckCircle, Info, Clock, Shield, Layout, FileText, User, Wallet, Award } from 'lucide-react';
 // Assuming your data structure remains similar
 import { ENTRANCE_EXAMS_DATA, EntranceExamInfo } from '../../data/exams/examDetailData';
 
