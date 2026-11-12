@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import HomeView from '../../features/home/HomeView';
 import SEO from '../../components/common/SEO';
 import StudentForm from '../../features/profile/StudentForm';
@@ -8,8 +7,7 @@ import { StudentProfile, AIResponse } from '../../types';
 import { getCareerGuidance } from '../../services/aiService';
 import { saveReportLocally } from '../../services/storageService';
 
-const HomePage: React.FC = () => {
-  const navigate = useNavigate();
+const HomePage: React.FC<{ onAskAI: (question: string) => void }> = ({ onAskAI }) => {
   const [homeViewMode, setHomeViewMode] = useState<'portal' | 'counseling'>('portal');
   const [profile, setProfile] = useState<StudentProfile | null>(null);
   const [aiResponse, setAiResponse] = useState<AIResponse | null>(null);
@@ -46,18 +44,7 @@ const HomePage: React.FC = () => {
         canonical="https://www.careersha.com/"
       />
       <div id="home">
-        <HomeView
-          onStartCounseling={() => setHomeViewMode('counseling')}
-          onNavigate={(id) => {
-            if (id === 'library') {
-              navigate('/roadmaps');
-              return;
-            }
-            if (id.startsWith('/')) {
-              navigate(id);
-            }
-          }}
-        />
+        <HomeView onStartCounseling={() => setHomeViewMode('counseling')} onAskAI={onAskAI} />
       </div>
 
       {homeViewMode === 'counseling' && (

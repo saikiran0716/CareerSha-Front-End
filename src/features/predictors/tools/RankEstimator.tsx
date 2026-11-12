@@ -4,6 +4,7 @@ import { Calculator, ChevronDown, MoveRight, TrendingUp, GraduationCap } from 'l
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { getErrorMessage } from '../../../lib/errors';
+import { userData } from '../../../services/userDataService';
 
 const EXAM_MAX_MARKS: Record<string, number> = {
   'JEE MAINS': 300,
@@ -108,6 +109,16 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({ defaultExam }) => 
       const data = await estimateRank(exam, score, category);
       if (data && (data.predictedRank || data.analysis)) {
         setResult(data);
+        userData.addPrediction({
+          exam,
+          score,
+          maxMarks,
+          category,
+          predictedRank: data.predictedRank,
+          categoryRank: data.categoryRank,
+          percentile: data.percentile,
+          path: '/rank-estimator',
+        });
       } else {
         throw new Error('Invalid response format from AI');
       }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { MapPin, BadgeCheck } from 'lucide-react';
 import { College } from '../../data/staticColleges';
+import SaveCollegeButton from '../account/SaveCollegeButton';
 
 // Import the placeholder image
 // Served from /public
@@ -37,6 +38,7 @@ const CollegeListCard: React.FC<CollegeListCardProps> = ({ college }) => {
       {/* Left: Image */}
       <div className="w-full md:w-[250px] h-[160px] rounded-xl overflow-hidden shrink-0 relative">
         <img src={college_image} alt={college.name} className="w-full h-full object-cover" />
+        <SaveCollegeButton college={college} className="absolute top-2 right-2" />
       </div>
 
       {/* Middle: Details */}

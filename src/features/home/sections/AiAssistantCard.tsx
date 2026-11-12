@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { ArrowRight, Search } from 'lucide-react';
 
-const AiAssistantCard: React.FC<{ onStartCounseling: () => void; onNavigate: (id: string) => void }> = ({
+const AiAssistantCard: React.FC<{ onStartCounseling: () => void; onAskAI: (question: string) => void }> = ({
   onStartCounseling,
-  onNavigate,
+  onAskAI,
 }) => {
   const [assistantPrompt, setAssistantPrompt] = useState('');
 
   const submitAssistantPrompt = () => {
     const prompt = assistantPrompt.trim();
     if (prompt) {
-      onNavigate('library');
+      onAskAI(prompt);
     } else {
       onStartCounseling();
     }

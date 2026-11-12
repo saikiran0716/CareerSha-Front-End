@@ -125,9 +125,16 @@ export const CollegePredictorView = ({ profile }: { profile?: PredictorPrefill |
   const location = useLocation();
 
   // Required Fields for API (Dynamic)
-  const [exam, setExam] = useState(profile?.exam?.examName || 'Select Exam');
+  const norm = (v: string) =>
+    v
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g, '')
+      .replace(/s$/, '');
+  const prefillExam = EXAMS.find((e) => profile?.exam?.examName && norm(e) === norm(profile.exam.examName));
+  const [exam, setExam] = useState(prefillExam || 'Select Exam');
   const [rank, setRank] = useState(profile?.exam?.rank || '');
-  const [category, setCategory] = useState(profile?.exam?.category || 'Select Category');
+  const prefillCategory = CATEGORIES.find((c) => c.toLowerCase() === (profile?.exam?.category || '').toLowerCase());
+  const [category, setCategory] = useState(prefillCategory || 'Select Category');
   const [stream, setStream] = useState(profile?.stream || 'Select Course / Stream');
 
   // Visual Only Fields (Statically updated state, not sent to API)

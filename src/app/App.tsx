@@ -7,22 +7,9 @@ import AuthModal from '../features/auth/AuthModal';
 import ChatBot from '../features/chatbot/ChatBot';
 import { authService, User } from '../services/authService';
 import { useDarkMode } from '../hooks/useDarkMode';
-import { BudgetRange, CollegeType, Qualification, StudentProfile } from '../types';
+import { useUserData } from '../hooks/useUserData';
+import { toStudentProfile, userData } from '../services/userDataService';
 import AppRoutes from './AppRoutes';
-
-/** Default profile handed to the chatbot until the student fills in their own. */
-const buildDefaultProfile = (name: string): StudentProfile => ({
-  name,
-  academic: { qualification: Qualification.Twelfth, board: '', year: '', subjects: '', marks: '' },
-  exam: { examName: '', rank: '', category: 'General', quota: 'State' },
-  preferences: {
-    stream: '',
-    location: '',
-    budget: BudgetRange.Medium,
-    collegeType: CollegeType.Government,
-    careerGoal: '',
-  },
-});
 
 const App: React.FC = () => {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
@@ -33,7 +20,15 @@ const App: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  useEffect(() => authService.onStateChange(setUser), []);
+  useEffect(
+    () =>
+      authService.onStateChange((u) => {
+        setUser(u);
+        // Anything saved while signed out moves into the account
+        if (u) userData.claimGuestData(u.id);
+      }),
+    [],
+  );
 
   // Scroll to top on route change
   useEffect(() => {
@@ -46,7 +41,12 @@ const App: React.FC = () => {
   };
 
   const handleAskAI = useCallback((topic: string) => setChatInitialMessage(topic), []);
-  const defaultProfile = useMemo(() => buildDefaultProfile(user?.name || 'Explorer'), [user?.name]);
+  // The AI counsellor uses the student's saved profile (Profile & Settings)
+  const savedProfile = useUserData(() => userData.getProfile());
+  const defaultProfile = useMemo(
+    () => toStudentProfile(user?.name || 'Explorer', savedProfile),
+    [user?.name, savedProfile],
+  );
 
   return (
     <div

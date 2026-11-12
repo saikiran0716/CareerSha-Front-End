@@ -27,6 +27,11 @@ const PrivacyPolicy = lazy(() => import('../pages/static/PrivacyPolicy'));
 const TermsAndConditions = lazy(() => import('../pages/static/TermsAndConditions'));
 const Disclaimer = lazy(() => import('../pages/static/Disclaimer'));
 const NotFound = lazy(() => import('../pages/NotFound'));
+const ProfilePage = lazy(() => import('../pages/account/ProfilePage'));
+const MyReportsPage = lazy(() => import('../pages/account/MyReportsPage'));
+const ReportDetailPage = lazy(() => import('../pages/account/ReportDetailPage'));
+const MyPredictionsPage = lazy(() => import('../pages/account/MyPredictionsPage'));
+const SavedCollegesPage = lazy(() => import('../pages/account/SavedCollegesPage'));
 const GenericFooterPage = lazy(() => import('../features/content/GenericFooterPage'));
 const StaticInfoPage = lazy(() => import('../features/content/StaticInfoPage'));
 
@@ -119,7 +124,7 @@ const footerRoutes = (onAskAI: (t: string) => void) =>
 const AppRoutes: React.FC<AppRoutesProps> = ({ user, onOpenAuth, onAskAI }) => (
   <Suspense fallback={<PageLoader />}>
     <Routes>
-      <Route path="/" element={<HomePage />} />
+      <Route path="/" element={<HomePage onAskAI={onAskAI} />} />
       <Route path="/login" element={<AuthPage user={user} onAuthSuccess={() => onOpenAuth(false)} />} />
       <Route path="/register" element={<AuthPage user={user} onAuthSuccess={() => onOpenAuth(false)} />} />
       <Route path="/search" element={<SearchPage />} />
@@ -155,6 +160,14 @@ const AppRoutes: React.FC<AppRoutesProps> = ({ user, onOpenAuth, onAskAI }) => (
       {Object.entries(CATEGORY_ROUTES).map(([path, pageId]) => (
         <Route key={path} path={path} element={<CategoryPage pageId={pageId} onAskAI={onAskAI} />} />
       ))}
+
+      {/* Account */}
+      <Route path="/account" element={<Navigate to="/account/profile" replace />} />
+      <Route path="/account/profile" element={<ProfilePage />} />
+      <Route path="/account/reports" element={<MyReportsPage />} />
+      <Route path="/account/reports/:reportId" element={<ReportDetailPage />} />
+      <Route path="/account/predictions" element={<MyPredictionsPage />} />
+      <Route path="/account/saved-colleges" element={<SavedCollegesPage />} />
 
       {/* Static pages */}
       <Route path="/about-us" element={<AboutUs />} />

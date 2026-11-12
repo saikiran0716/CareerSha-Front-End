@@ -5,6 +5,7 @@ import { estimateRank, RankEstimation } from '../../../services/aiService';
 import { ExamConfig } from '../types';
 import { CATEGORIES } from '../exams';
 import { getErrorMessage } from '../../../lib/errors';
+import { userData } from '../../../services/userDataService';
 
 const fieldClass =
   'w-full h-12 bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-600 rounded-lg px-4 text-[15px] font-medium text-neutral-900 dark:text-white focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none transition-all';
@@ -78,6 +79,17 @@ const PredictorForm: React.FC<{ exam: ExamConfig }> = ({ exam }) => {
       const data = await estimateRank(name, finalScore.toString(), enhancedCategory);
       if (data && (data.predictedRank || data.analysis)) {
         setResult(data);
+        userData.addPrediction({
+          exam: name,
+          score: finalScore.toString(),
+          maxMarks,
+          category,
+          detail: secondary,
+          predictedRank: data.predictedRank,
+          categoryRank: data.categoryRank,
+          percentile: data.percentile,
+          path: `/rank-estimator/${exam.slug}`,
+        });
       } else {
         throw new Error('Invalid response format from AI');
       }

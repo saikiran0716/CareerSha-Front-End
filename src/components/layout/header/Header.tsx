@@ -6,6 +6,7 @@ import { DARK_MODE_ENABLED } from '../../../hooks/useDarkMode';
 import { User } from '../../../services/authService';
 import { navigationData } from '../../../data/navigationData';
 import MegaMenu from './MegaMenu';
+import { ACCOUNT_LINKS } from '../../../features/account/accountNav';
 
 interface HeaderProps {
   user: User | null;
@@ -175,6 +176,19 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                             <p className="text-xs text-neutral-500 font-medium truncate">{user.email}</p>
                           </div>
                         </div>
+                        <nav aria-label="Account" className="p-2 border-b border-neutral-100 dark:border-neutral-800">
+                          {ACCOUNT_LINKS.map(({ to, label, icon: Icon }) => (
+                            <Link
+                              key={to}
+                              to={to}
+                              onClick={() => setIsProfileOpen(false)}
+                              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-neutral-700 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-800 hover:text-primary-700"
+                            >
+                              <Icon size={15} />
+                              {label}
+                            </Link>
+                          ))}
+                        </nav>
                         <div className="p-2">
                           <button
                             onClick={() => {
@@ -272,6 +286,21 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
               <h5 className="text-xs font-black uppercase tracking-widest text-neutral-500 mb-4 px-2">
                 Account & Settings
               </h5>
+              {user && (
+                <nav aria-label="Account" className="mb-3 grid grid-cols-2 gap-2">
+                  {ACCOUNT_LINKS.map(({ to, label, icon: Icon }) => (
+                    <Link
+                      key={to}
+                      to={to}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="flex items-center gap-2 rounded-xl border border-neutral-100 bg-white p-3 text-sm text-neutral-700 hover:border-primary-200 hover:text-primary-700"
+                    >
+                      <Icon size={16} />
+                      {label}
+                    </Link>
+                  ))}
+                </nav>
+              )}
               <div className={`grid gap-3 ${DARK_MODE_ENABLED ? 'grid-cols-2' : 'grid-cols-1'}`}>
                 {DARK_MODE_ENABLED && (
                   <button

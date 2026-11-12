@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Globe, Phone, MapPin, Building2, Clock, School, GraduationCap, Users } from 'lucide-react';
 import type { CollegeView } from './useCollegeDetail';
 import { TABS, CollegeTab } from './constants';
+import SaveCollegeButton from '../../account/SaveCollegeButton';
 
 const getLogoSrc = (apiLogo: string, website: string, passedLogo: string): string => {
   if (passedLogo) return passedLogo;
@@ -124,6 +125,7 @@ const CollegeHeader: React.FC<{
             )}
             {/* Action buttons */}
             <div className="flex flex-wrap gap-2.5 mt-4">
+              <SaveCollegeButton college={{ name, location: locVal }} variant="label" />
               {website && (
                 <a
                   href={website}

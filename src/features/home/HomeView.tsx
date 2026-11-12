@@ -11,11 +11,11 @@ import PersonalizedCard from './sections/PersonalizedCard';
 
 interface HomeViewProps {
   onStartCounseling: () => void;
-  onNavigate: (id: string) => void;
+  onAskAI: (question: string) => void;
 }
 
 /** Homepage layout: left column (hero, tools, collections, stats, jobs) and right sidebar. */
-const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) => {
+const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onAskAI }) => {
   return (
     <div className="relative min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-white transition-colors duration-300">
       {/* Background soft glow blobs */}
@@ -43,7 +43,7 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
           <aside className="space-y-6">
             <LiveUpdates />
 
-            <AiAssistantCard onStartCounseling={onStartCounseling} onNavigate={onNavigate} />
+            <AiAssistantCard onStartCounseling={onStartCounseling} onAskAI={onAskAI} />
 
             <CommunityCard onStartCounseling={onStartCounseling} />
 

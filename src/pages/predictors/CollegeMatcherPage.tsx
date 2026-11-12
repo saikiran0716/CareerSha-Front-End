@@ -1,8 +1,11 @@
 import React from 'react';
 import SEO from '../../components/common/SEO';
 import { CollegePredictorView } from '../../features/colleges/CollegePredictor';
+import { useUserData } from '../../hooks/useUserData';
+import { userData } from '../../services/userDataService';
 
 const CollegeMatcherPage: React.FC = () => {
+  const profile = useUserData(() => userData.getProfile());
   return (
     <div className="w-full bg-neutral-50 min-h-screen">
       <SEO
@@ -11,7 +14,12 @@ const CollegeMatcherPage: React.FC = () => {
         keywords="college predictor jee main, neet college matcher, iit admission predictor, nit college predictor, mba college matching tool"
         canonical="https://www.careersha.com/college-matcher"
       />
-      <CollegePredictorView />
+      <CollegePredictorView
+        profile={{
+          exam: { examName: profile.examName, rank: profile.rank, category: profile.category },
+          stream: profile.stream,
+        }}
+      />
     </div>
   );
 };
