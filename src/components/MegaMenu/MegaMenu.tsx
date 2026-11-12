@@ -23,12 +23,12 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ sections, onClose }) => {
             onMouseLeave={onClose}
             style={{ width: 'max-content', minWidth: '220px', maxWidth: '300px' }}
         >
-            <div className="bg-white dark:bg-slate-900/70 backdrop-blur-2xl rounded-2xl shadow-xl border border-slate-200/50 dark:border-slate-800/50 p-5 relative overflow-y-auto max-h-[350px]">
+            <div className="bg-white dark:bg-neutral-900/70 backdrop-blur-2xl rounded-2xl shadow-xl border border-neutral-200/50 dark:border-neutral-800/50 p-5 relative overflow-y-auto max-h-[350px]">
                 {sections.map((section, idx) => (
                     <div key={idx} className="mb-2 last:mb-0">
                         {section.heading && (
-                            <h4 className="font-bold text-slate-800 mb-3 text-[11px] uppercase tracking-wider border-b border-indigo-50 pb-2 flex items-center gap-2">
-                                <span className="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+                            <h4 className="font-bold text-neutral-800 mb-3 text-[11px] uppercase tracking-wider border-b border-secondary-50 pb-2 flex items-center gap-2">
+                                <span className="w-1.5 h-1.5 rounded-full bg-secondary-500"></span>
                                 {section.heading}
                             </h4>
                         )}
@@ -37,7 +37,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ sections, onClose }) => {
                                 <li key={linkIdx}>
                                     <Link
                                         to={link.url}
-                                        className="text-[12px] text-slate-600 hover:text-indigo-600 hover:bg-slate-50 block px-2 py-1.5 rounded-lg transition-all duration-200 font-medium whitespace-nowrap"
+                                        className="text-[12px] text-neutral-600 hover:text-secondary-600 hover:bg-neutral-50 block px-2 py-1.5 rounded-lg transition-all duration-200 font-medium whitespace-nowrap"
                                         onClick={onClose}
                                     >
                                         {link.name}

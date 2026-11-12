@@ -4,7 +4,7 @@ import { CommunityHero, LeftSidebar, Feed, RightSidebar } from './components';
 // Adding a comment to trigger IDE re-index of this file
 const CommunityPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 font-sans">
+    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 font-sans">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <CommunityHero />
         

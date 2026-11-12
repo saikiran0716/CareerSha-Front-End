@@ -22,7 +22,7 @@ const AuthPage: React.FC<AuthPageProps> = ({ user, onAuthSuccess }) => {
   if (user) return null;
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-950">
+    <div className="min-h-[80vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-neutral-50 dark:bg-neutral-950">
       <SEO 
         title={isLoginPage ? "Login to Your Account | Access Career Tools & Exams" : "Create Free Account | Start Your Career Journey"}
         description={isLoginPage ? "Login to access your dashboard, saved colleges, exam tools, and career guidance." : "Sign up to explore colleges, exams, rank predictors, and personalized career tools."}

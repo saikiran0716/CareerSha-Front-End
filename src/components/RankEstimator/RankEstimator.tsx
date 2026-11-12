@@ -120,7 +120,7 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({
 
     return (
         <section
-            className="w-full bg-[#F5F7FC] rounded-[32px] py-8 sm:py-16 mt-0 mb-6 font-sans relative overflow-hidden"
+            className="w-full bg-neutral-50 rounded-[32px] py-8 sm:py-16 mt-0 mb-6 font-sans relative overflow-hidden"
         >
             <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-8 animate-fade" style={{ position: "relative", zIndex: 1 }}>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
@@ -132,12 +132,12 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({
                             <div className="space-y-4">
                                 <h2
                                     className="text-4xl lg:text-[44px] font-extrabold tracking-tight leading-[1.1]"
-                                    style={{ color: "#0F172A" }}
+                                    style={{ color: "rgb(var(--color-neutral-900))" }}
                                 >
                                     Estimate Your{" "}
                                     <span
                                         style={{
-                                            background: "linear-gradient(90deg, #4B63D3, #7C3AED)",
+                                            background: "linear-gradient(90deg, rgb(var(--color-secondary-600)), rgb(var(--color-accent-600)))",
                                             WebkitBackgroundClip: "text",
                                             WebkitTextFillColor: "transparent",
                                             backgroundClip: "text",
@@ -146,7 +146,7 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({
                                         All India Rank
                                     </span>
                                 </h2>
-                                <p style={{ color: "#64748B", fontSize: "17px", maxWidth: "500px", lineHeight: "1.7" }}>
+                                <p style={{ color: "rgb(var(--color-neutral-500))", fontSize: "17px", maxWidth: "500px", lineHeight: "1.7" }}>
                                     Get a precise prediction of your potential rank based on
                                     historical data and current trends.
                                 </p>
@@ -158,15 +158,15 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({
                                 style={{
                                     background: "#ffffff",
                                     boxShadow: "0 4px 24px rgba(15,23,42,0.04)",
-                                    border: "1px solid #f1f5f9",
+                                    border: "1px solid rgb(var(--color-neutral-100))",
                                 }}
                             >
                                 <div className="space-y-5">
 
                                     {/* Exam select */}
                                     <div className="space-y-2">
-                                        <label className="flex items-center gap-2 text-[11px] font-black uppercase tracking-widest" style={{ color: "#94a3b8" }}>
-                                            <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#4B63D3", display: "inline-block", flexShrink: 0 }} />
+                                        <label className="flex items-center gap-2 text-[11px] font-black uppercase tracking-widest" style={{ color: "rgb(var(--color-neutral-400))" }}>
+                                            <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "rgb(var(--color-secondary-600))", display: "inline-block", flexShrink: 0 }} />
                                             Select Examination
                                         </label>
                                         <div className="relative">
@@ -176,22 +176,22 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({
                                                     setExam(e.target.value);
                                                     setScore("");
                                                 }}
-                                                className="w-full appearance-none cursor-pointer outline-none font-bold text-slate-800"
+                                                className="w-full appearance-none cursor-pointer outline-none font-bold text-neutral-800"
                                                 style={{
                                                     height: "52px",
-                                                    background: "#f8fafc",
-                                                    border: "2px solid #e2e8f0",
+                                                    background: "rgb(var(--color-neutral-50))",
+                                                    border: "2px solid rgb(var(--color-neutral-200))",
                                                     borderRadius: "16px",
                                                     padding: "0 20px",
                                                     fontSize: "15px",
                                                     transition: "border-color 0.2s, box-shadow 0.2s",
                                                 }}
                                                 onFocus={e => {
-                                                    e.target.style.borderColor = "#4B63D3";
+                                                    e.target.style.borderColor = "rgb(var(--color-secondary-600))";
                                                     e.target.style.boxShadow = "0 0 0 3px rgba(75,99,211,0.15)";
                                                 }}
                                                 onBlur={e => {
-                                                    e.target.style.borderColor = "#e2e8f0";
+                                                    e.target.style.borderColor = "rgb(var(--color-neutral-200))";
                                                     e.target.style.boxShadow = "none";
                                                 }}
                                             >
@@ -199,34 +199,34 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({
                                                     <option key={e}>{e}</option>
                                                 ))}
                                             </select>
-                                            <ChevronDown size={18} className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" style={{ color: "#94a3b8" }} />
+                                            <ChevronDown size={18} className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" style={{ color: "rgb(var(--color-neutral-400))" }} />
                                         </div>
                                     </div>
 
                                     {/* Marks input */}
                                     <div className="space-y-2">
-                                        <label className="flex items-center gap-2 text-[11px] font-black uppercase tracking-widest" style={{ color: "#94a3b8" }}>
-                                            <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#7C3AED", display: "inline-block", flexShrink: 0 }} />
+                                        <label className="flex items-center gap-2 text-[11px] font-black uppercase tracking-widest" style={{ color: "rgb(var(--color-neutral-400))" }}>
+                                            <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "rgb(var(--color-accent-600))", display: "inline-block", flexShrink: 0 }} />
                                             Your Marks
                                         </label>
                                         <div
                                             className="relative flex items-center overflow-hidden"
                                             style={{
                                                 height: "52px",
-                                                background: "#f8fafc",
-                                                border: "2px solid #e2e8f0",
+                                                background: "rgb(var(--color-neutral-50))",
+                                                border: "2px solid rgb(var(--color-neutral-200))",
                                                 borderRadius: "16px",
                                                 transition: "border-color 0.2s, box-shadow 0.2s",
                                             }}
                                             onFocusCapture={e => {
-                                                e.currentTarget.style.borderColor = "#4B63D3";
+                                                e.currentTarget.style.borderColor = "rgb(var(--color-secondary-600))";
                                                 e.currentTarget.style.boxShadow = "0 0 0 3px rgba(75,99,211,0.15)";
                                                 e.currentTarget.style.background = "#fff";
                                             }}
                                             onBlurCapture={e => {
-                                                e.currentTarget.style.borderColor = "#e2e8f0";
+                                                e.currentTarget.style.borderColor = "rgb(var(--color-neutral-200))";
                                                 e.currentTarget.style.boxShadow = "none";
-                                                e.currentTarget.style.background = "#f8fafc";
+                                                e.currentTarget.style.background = "rgb(var(--color-neutral-50))";
                                             }}
                                         >
                                             <input
@@ -243,45 +243,45 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({
                                                     }
                                                 }}
                                                 onKeyDown={(e) => e.key === "Enter" && handleEstimate()}
-                                                className="w-full h-full outline-none font-bold text-slate-800 bg-transparent flex-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                                className="w-full h-full outline-none font-bold text-neutral-800 bg-transparent flex-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                                 style={{
                                                     padding: "0 10px 0 20px",
                                                     fontSize: "15px",
                                                 }}
                                             />
-                                            <div className="font-bold text-slate-400 pr-12 flex-shrink-0 flex items-center h-full pointer-events-none">
+                                            <div className="font-bold text-neutral-400 pr-12 flex-shrink-0 flex items-center h-full pointer-events-none">
                                                 / {EXAM_MAX_MARKS[exam] || 300}
                                             </div>
-                                            <Calculator size={18} className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" style={{ color: "#cbd5e1" }} />
+                                            <Calculator size={18} className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" style={{ color: "rgb(var(--color-neutral-300))" }} />
                                         </div>
                                     </div>
 
                                     {/* Category select */}
                                     <div className="space-y-2">
-                                        <label className="flex items-center gap-2 text-[11px] font-black uppercase tracking-widest" style={{ color: "#94a3b8" }}>
-                                            <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#10b981", display: "inline-block", flexShrink: 0 }} />
+                                        <label className="flex items-center gap-2 text-[11px] font-black uppercase tracking-widest" style={{ color: "rgb(var(--color-neutral-400))" }}>
+                                            <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "rgb(var(--color-success-500))", display: "inline-block", flexShrink: 0 }} />
                                             Category
                                         </label>
                                         <div className="relative">
                                             <select
                                                 value={category}
                                                 onChange={(e) => setCategory(e.target.value)}
-                                                className="w-full appearance-none cursor-pointer outline-none font-bold text-slate-800"
+                                                className="w-full appearance-none cursor-pointer outline-none font-bold text-neutral-800"
                                                 style={{
                                                     height: "52px",
-                                                    background: "#f8fafc",
-                                                    border: "2px solid #e2e8f0",
+                                                    background: "rgb(var(--color-neutral-50))",
+                                                    border: "2px solid rgb(var(--color-neutral-200))",
                                                     borderRadius: "16px",
                                                     padding: "0 20px",
                                                     fontSize: "15px",
                                                     transition: "border-color 0.2s, box-shadow 0.2s",
                                                 }}
                                                 onFocus={e => {
-                                                    e.target.style.borderColor = "#4B63D3";
+                                                    e.target.style.borderColor = "rgb(var(--color-secondary-600))";
                                                     e.target.style.boxShadow = "0 0 0 3px rgba(75,99,211,0.15)";
                                                 }}
                                                 onBlur={e => {
-                                                    e.target.style.borderColor = "#e2e8f0";
+                                                    e.target.style.borderColor = "rgb(var(--color-neutral-200))";
                                                     e.target.style.boxShadow = "none";
                                                 }}
                                             >
@@ -293,7 +293,7 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({
                                                 <option>EWS</option>
                                                 <option>PwD</option>
                                             </select>
-                                            <ChevronDown size={18} className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" style={{ color: "#94a3b8" }} />
+                                            <ChevronDown size={18} className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" style={{ color: "rgb(var(--color-neutral-400))" }} />
                                         </div>
                                     </div>
 
@@ -305,8 +305,8 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({
                                         style={{
                                             height: "56px",
                                             background: isEstimating
-                                                ? "#94a3b8"
-                                                : "linear-gradient(135deg, #4B63D3 0%, #7C3AED 100%)",
+                                                ? "rgb(var(--color-neutral-400))"
+                                                : "linear-gradient(135deg, rgb(var(--color-secondary-600)) 0%, rgb(var(--color-accent-600)) 100%)",
                                             borderRadius: "16px",
                                             border: "none",
                                             color: "white",
@@ -349,10 +349,10 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({
                                             className="text-center text-[12px] font-bold"
                                             style={{
                                                 padding: "12px",
-                                                background: "#fef2f2",
-                                                border: "1px solid #fee2e2",
+                                                background: "rgb(var(--color-danger-50))",
+                                                border: "1px solid rgb(var(--color-danger-100))",
                                                 borderRadius: "12px",
-                                                color: "#ef4444",
+                                                color: "rgb(var(--color-danger-500))",
                                             }}
                                         >
                                             ⚠️ {error}
@@ -380,24 +380,24 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({
                                             background: "#ffffff",
                                             borderRadius: "24px",
                                             padding: "32px",
-                                            border: "1px solid #e2e8f0",
+                                            border: "1px solid rgb(var(--color-neutral-200))",
                                             boxShadow: "0 2px 12px rgba(15,23,42,0.03)",
                                             textAlign: "center",
                                         }}
                                     >
                                         <div style={{
                                             width: "60px", height: "60px",
-                                            background: "#f8fafc",
+                                            background: "rgb(var(--color-neutral-50))",
                                             borderRadius: "18px",
                                             display: "flex", alignItems: "center", justifyContent: "center",
                                             margin: "0 auto 20px",
                                         }}>
-                                            <TrendingUp size={28} style={{ color: "#94a3b8" }} />
+                                            <TrendingUp size={28} style={{ color: "rgb(var(--color-neutral-400))" }} />
                                         </div>
-                                        <h4 style={{ fontSize: "18px", fontWeight: 800, color: "#0F172A", marginBottom: "8px" }}>
+                                        <h4 style={{ fontSize: "18px", fontWeight: 800, color: "rgb(var(--color-neutral-900))", marginBottom: "8px" }}>
                                             Awaiting Rank Input
                                         </h4>
-                                        <p style={{ fontSize: "13px", color: "#64748B", lineHeight: "1.5", maxWidth: "260px", margin: "0 auto" }}>
+                                        <p style={{ fontSize: "13px", color: "rgb(var(--color-neutral-500))", lineHeight: "1.5", maxWidth: "260px", margin: "0 auto" }}>
                                             Enter your details to see your personalized analysis package.
                                         </p>
                                     </motion.div>
@@ -409,19 +409,19 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({
                                             background: "#ffffff",
                                             borderRadius: "20px",
                                             padding: "24px",
-                                            border: "1px solid #e2e8f0",
+                                            border: "1px solid rgb(var(--color-neutral-200))",
                                             boxShadow: "0 8px 30px rgba(15,23,42,0.04)",
                                         }}
                                     >
                                         <div className="flex justify-between items-start mb-6">
                                             <div className="space-y-4" style={{ minWidth: 0, flex: 1, paddingRight: "16px" }}>
                                                 <div style={{ minWidth: 0 }}>
-                                                    <p style={{ fontSize: "10px", fontWeight: 400, textTransform: "uppercase", letterSpacing: "1px", color: "#94a3b8", marginBottom: "4px" }}>Predicted AIR</p>
+                                                    <p style={{ fontSize: "10px", fontWeight: 400, textTransform: "uppercase", letterSpacing: "1px", color: "rgb(var(--color-neutral-400))", marginBottom: "4px" }}>Predicted AIR</p>
                                                     <h4
                                                         style={{
                                                             fontSize: "26px",
                                                             fontWeight: 900,
-                                                            color: "#0F172A",
+                                                            color: "rgb(var(--color-neutral-900))",
                                                             letterSpacing: "-1.5px",
                                                             lineHeight: 1.1,
                                                         }}
@@ -432,12 +432,12 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({
 
                                                 <div className="flex gap-6" style={{ minWidth: 0 }}>
                                                     <div style={{ flex: 1 }}>
-                                                        <p style={{ fontSize: "9px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.5px", color: "#94a3b8", marginBottom: "4px" }}>{category} Rank</p>
+                                                        <p style={{ fontSize: "9px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.5px", color: "rgb(var(--color-neutral-400))", marginBottom: "4px" }}>{category} Rank</p>
                                                         <p
                                                             style={{
                                                                 fontSize: "18px",
                                                                 fontWeight: 800,
-                                                                color: "#4B63D3",
+                                                                color: "rgb(var(--color-secondary-600))",
                                                                 lineHeight: 1.2
                                                             }}
                                                         >
@@ -445,12 +445,12 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({
                                                         </p>
                                                     </div>
                                                     <div style={{ flex: 1 }}>
-                                                        <p style={{ fontSize: "9px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.5px", color: "#94a3b8", marginBottom: "4px" }}>Percentile</p>
+                                                        <p style={{ fontSize: "9px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.5px", color: "rgb(var(--color-neutral-400))", marginBottom: "4px" }}>Percentile</p>
                                                         <p
                                                             style={{
                                                                 fontSize: "18px",
                                                                 fontWeight: 800,
-                                                                color: "#7C3AED",
+                                                                color: "rgb(var(--color-accent-600))",
                                                                 lineHeight: 1.2
                                                             }}
                                                         >
@@ -461,27 +461,27 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({
                                             </div>
 
                                             <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "10px", flexShrink: 0 }}>
-                                                <div style={{ background: "#f8fafc", padding: "6px 12px", borderRadius: "10px", border: "1px solid #e2e8f0", color: "#475569", fontSize: "11px", fontWeight: 800 }}>
+                                                <div style={{ background: "rgb(var(--color-neutral-50))", padding: "6px 12px", borderRadius: "10px", border: "1px solid rgb(var(--color-neutral-200))", color: "rgb(var(--color-neutral-600))", fontSize: "11px", fontWeight: 800 }}>
                                                     {exam}
                                                 </div>
                                                 <button
                                                     onClick={() => setResult(null)}
-                                                    style={{ background: "none", border: "none", color: "#94a3b8", fontSize: "10px", fontWeight: 700, cursor: "pointer", textDecoration: "none" }}
-                                                    className="hover:text-red-500 transition-colors"
+                                                    style={{ background: "none", border: "none", color: "rgb(var(--color-neutral-400))", fontSize: "10px", fontWeight: 700, cursor: "pointer", textDecoration: "none" }}
+                                                    className="hover:text-danger-500 transition-colors"
                                                 >
                                                     Clear results
                                                 </button>
                                             </div>
                                         </div>
 
-                                        <div style={{ background: "#f8fafc", padding: "16px", borderRadius: "14px", border: "1px solid #f1f5f9" }}>
+                                        <div style={{ background: "rgb(var(--color-neutral-50))", padding: "16px", borderRadius: "14px", border: "1px solid rgb(var(--color-neutral-100))" }}>
                                             <div className="flex items-center gap-2 mb-2">
                                             </div>
                                             <ul
                                                 className="list-disc pl-4 space-y-1.5"
                                                 style={{
                                                     fontSize: "13px",
-                                                    color: "#475569",
+                                                    color: "rgb(var(--color-neutral-600))",
                                                     lineHeight: "1.5",
                                                     fontWeight: 500,
                                                     margin: 0
@@ -509,24 +509,24 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({
                                     width: "100%",
                                     height: "52px",
                                     background: "#ffffff",
-                                    border: "1px solid #e2e8f0",
+                                    border: "1px solid rgb(var(--color-neutral-200))",
                                     borderRadius: "14px",
                                     display: "flex",
                                     alignItems: "center",
                                     justifyContent: "center",
                                     gap: "10px",
-                                    color: "#4B63D3",
+                                    color: "rgb(var(--color-secondary-600))",
                                     fontWeight: 700,
                                     fontSize: "14px",
                                     cursor: "pointer",
                                     transition: "all 0.2s",
                                 }}
                                 onMouseEnter={e => {
-                                    (e.currentTarget as HTMLElement).style.borderColor = "#4B63D3";
-                                    (e.currentTarget as HTMLElement).style.background = "#f8faff";
+                                    (e.currentTarget as HTMLElement).style.borderColor = "rgb(var(--color-secondary-600))";
+                                    (e.currentTarget as HTMLElement).style.background = "rgb(var(--color-secondary-50))";
                                 }}
                                 onMouseLeave={e => {
-                                    (e.currentTarget as HTMLElement).style.borderColor = "#e2e8f0";
+                                    (e.currentTarget as HTMLElement).style.borderColor = "rgb(var(--color-neutral-200))";
                                     (e.currentTarget as HTMLElement).style.background = "#ffffff";
                                 }}
                             >

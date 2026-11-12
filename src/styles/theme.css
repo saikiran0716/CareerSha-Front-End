@@ -1,0 +1,135 @@
+/* ==========================================================================
+   CareerSha — Global Color Theme
+   --------------------------------------------------------------------------
+   THIS IS THE ONLY PLACE COLORS SHOULD BE DEFINED.
+
+   Every color in the app (Tailwind classes like `bg-primary-600`,
+   `text-neutral-500`, `border-success-200`, plus the inline styles that use
+   `rgb(var(--color-primary-600))`) reads from the variables below.
+   Change a value here and it updates across the whole site.
+
+   Values are space-separated RGB channels (e.g. `63 89 166`) so Tailwind
+   opacity modifiers keep working: `bg-primary-600/20`, `text-neutral-900/80`.
+
+   Palette roles:
+     primary   – main brand color (buttons, links, key highlights)
+     secondary – supporting brand color (accents, gradients, active nav)
+     accent    – decorative third color (badges, gradients, charts)
+     neutral   – text, backgrounds, borders, surfaces
+     success   – positive states (placements, "safe" chances, confirmations)
+     warning   – caution states (moderate chances, notices)
+     danger    – errors / destructive actions
+     highlight – editorial highlight used by Blog / News / Results pages
+
+   Quick re-brand example: to make the site green, replace the `primary`
+   block below with a green scale (e.g. Tailwind's emerald values).
+   ========================================================================== */
+
+:root {
+  /* ---- primary (brand blue) ---- */
+  --color-primary-50: 238 242 246;
+  --color-primary-100: 212 222 240;
+  --color-primary-200: 174 189 224;
+  --color-primary-300: 128 152 205;
+  --color-primary-400: 92 120 187;
+  --color-primary-500: 63 89 166;
+  --color-primary-600: 48 66 141;
+  --color-primary-700: 39 52 113;
+  --color-primary-800: 35 44 94;
+  --color-primary-900: 32 39 75;
+  --color-primary-950: 19 22 45;
+
+  /* ---- secondary (brand indigo) ---- */
+  --color-secondary-50: 248 250 255;
+  --color-secondary-100: 240 244 255;
+  --color-secondary-200: 225 233 255;
+  --color-secondary-300: 194 209 255;
+  --color-secondary-400: 156 177 255;
+  --color-secondary-500: 117 142 255;
+  --color-secondary-600: 79 105 223;
+  --color-secondary-700: 58 78 179;
+  --color-secondary-800: 42 56 130;
+  --color-secondary-900: 29 39 94;
+  --color-secondary-950: 17 23 56;
+
+  /* ---- accent (purple) ---- */
+  --color-accent-50: 250 245 255;
+  --color-accent-100: 243 232 255;
+  --color-accent-200: 233 213 255;
+  --color-accent-300: 216 180 254;
+  --color-accent-400: 192 132 252;
+  --color-accent-500: 168 85 247;
+  --color-accent-600: 147 51 234;
+  --color-accent-700: 126 34 206;
+  --color-accent-800: 107 33 168;
+  --color-accent-900: 88 28 135;
+  --color-accent-950: 59 7 100;
+
+  /* ---- neutral (slate) ---- */
+  --color-neutral-50: 248 250 252;
+  --color-neutral-100: 241 245 249;
+  --color-neutral-200: 226 232 240;
+  --color-neutral-300: 203 213 225;
+  --color-neutral-400: 148 163 184;
+  --color-neutral-500: 100 116 139;
+  --color-neutral-600: 71 85 105;
+  --color-neutral-700: 51 65 85;
+  --color-neutral-800: 30 41 59;
+  --color-neutral-900: 15 23 42;
+  --color-neutral-950: 2 6 23;
+
+  /* ---- success (emerald) ---- */
+  --color-success-50: 236 253 245;
+  --color-success-100: 209 250 229;
+  --color-success-200: 167 243 208;
+  --color-success-300: 110 231 183;
+  --color-success-400: 52 211 153;
+  --color-success-500: 16 185 129;
+  --color-success-600: 5 150 105;
+  --color-success-700: 4 120 87;
+  --color-success-800: 6 95 70;
+  --color-success-900: 6 78 59;
+  --color-success-950: 2 44 34;
+
+  /* ---- warning (amber) ---- */
+  --color-warning-50: 255 251 235;
+  --color-warning-100: 254 243 199;
+  --color-warning-200: 253 230 138;
+  --color-warning-300: 252 211 77;
+  --color-warning-400: 251 191 36;
+  --color-warning-500: 245 158 11;
+  --color-warning-600: 217 119 6;
+  --color-warning-700: 180 83 9;
+  --color-warning-800: 146 64 14;
+  --color-warning-900: 120 53 15;
+  --color-warning-950: 69 26 3;
+
+  /* ---- danger (red) ---- */
+  --color-danger-50: 254 242 242;
+  --color-danger-100: 254 226 226;
+  --color-danger-200: 254 202 202;
+  --color-danger-300: 252 165 165;
+  --color-danger-400: 248 113 113;
+  --color-danger-500: 239 68 68;
+  --color-danger-600: 220 38 38;
+  --color-danger-700: 185 28 28;
+  --color-danger-800: 153 27 27;
+  --color-danger-900: 127 29 29;
+  --color-danger-950: 69 10 10;
+
+  /* ---- highlight (Blog / News editorial red) ---- */
+  --color-highlight: 185 28 28;
+
+  /* ---- page surfaces ---- */
+  --color-page-bg: 252 253 254;
+  --color-page-text: var(--color-neutral-900);
+
+  /* shadcn/ui border token (HSL, used by components/ui) */
+  --border: 214.3 31.8% 91.4%;
+}
+
+.dark {
+  --color-page-bg: var(--color-neutral-950);
+  --color-page-text: var(--color-neutral-100);
+  --border: 217.2 32.6% 17.5%;
+}

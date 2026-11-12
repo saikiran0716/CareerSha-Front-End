@@ -44,7 +44,7 @@ const SEO: React.FC<SEOProps> = ({
       <meta name="description" content={description || defaultDescription} />
       <meta name="keywords" content={keywords ? `${keywords}, ${defaultKeywords}` : defaultKeywords} />
       <meta name="robots" content={robots} />
-      <meta name="theme-color" content="#4f46e5" />
+      <meta name="theme-color" content="rgb(var(--color-secondary-600))" />
       {currentCanonical && <link rel="canonical" href={currentCanonical} />}
 
       {/* Open Graph / Facebook */}

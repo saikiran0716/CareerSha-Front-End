@@ -120,7 +120,7 @@ const App: React.FC = () => {
 
     return (
         <div className={
-            `min-h-screen w-full max-w-full box-border bg-slate-50 dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 transition-colors duration-300 selection:bg-indigo-500/30 ${isDarkMode ? 'dark' : ''
+            `min-h-screen w-full max-w-full box-border bg-neutral-50 dark:bg-neutral-950 font-sans text-neutral-900 dark:text-neutral-100 transition-colors duration-300 selection:bg-secondary-500/30 ${isDarkMode ? 'dark' : ''
             }`
         }>
 

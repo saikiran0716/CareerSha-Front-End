@@ -66,11 +66,11 @@ const LogoWithFallback = ({ title, image, link }: { title: string, image?: strin
     if (error || !imgSrc) {
         // Aesthetic Fallback: Initial with Color Gradient
         return (
-            <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-indigo-50 to-slate-100 dark:from-slate-800 dark:to-slate-900 border border-slate-100 dark:border-slate-700">
-                <div className="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center mb-1 text-indigo-600 dark:text-indigo-400">
+            <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-secondary-50 to-neutral-100 dark:from-neutral-800 dark:to-neutral-900 border border-neutral-100 dark:border-neutral-700">
+                <div className="w-8 h-8 rounded-full bg-secondary-100 dark:bg-secondary-900/30 flex items-center justify-center mb-1 text-secondary-600 dark:text-secondary-400">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
                 </div>
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider text-center px-1 line-clamp-1">
+                <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider text-center px-1 line-clamp-1">
                     {title.substring(0, 3)}
                 </span>
             </div>
@@ -334,22 +334,22 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
     };
 
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-black transition-colors duration-300">
+        <div className="min-h-screen bg-neutral-50 dark:bg-black transition-colors duration-300">
             <SEO title={data.title} description={data.description} />
             {/* Navigation / Header Area */}
-            <div className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50 shadow-sm/50 backdrop-blur-md bg-white/80 dark:bg-slate-900/80">
+            <div className="bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800 sticky top-0 z-50 shadow-sm/50 backdrop-blur-md bg-white/80 dark:bg-neutral-900/80">
                 <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 h-14 flex items-center justify-center relative">
                     {/* Back Button - Absolute Left */}
                     <button
                         onClick={onBack}
-                        className="absolute left-4 sm:left-6 lg:left-8 flex items-center gap-1.5 text-slate-500 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 transition-colors text-[10px] font-bold uppercase tracking-widest group bg-slate-50 dark:bg-slate-800 px-2.5 py-1.5 rounded-md border border-slate-200 dark:border-slate-700 hover:border-indigo-200"
+                        className="absolute left-4 sm:left-6 lg:left-8 flex items-center gap-1.5 text-neutral-500 hover:text-secondary-600 dark:text-neutral-400 dark:hover:text-secondary-400 transition-colors text-[10px] font-bold uppercase tracking-widest group bg-neutral-50 dark:bg-neutral-800 px-2.5 py-1.5 rounded-md border border-neutral-200 dark:border-neutral-700 hover:border-secondary-200"
                     >
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" /></svg>
                         <span className="hidden sm:inline">Back</span>
                     </button>
 
                     {/* Centered Title */}
-                    <h1 className="text-xl md:text-2xl font-black text-slate-900 dark:text-white tracking-tight leading-none text-center max-w-[60%] truncate">
+                    <h1 className="text-xl md:text-2xl font-black text-neutral-900 dark:text-white tracking-tight leading-none text-center max-w-[60%] truncate">
                         {data.title}
                     </h1>
                 </div>
@@ -360,22 +360,22 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
                 {/* Hero / description + search */}
                 <div className={`max-w-4xl mx-auto text-center ${data.type === 'review' ? 'mb-2' : 'mb-4'} animate-fade relative z-[9999]`}>
 
-                    <p className={`text-sm text-slate-500 dark:text-slate-400 font-medium leading-relaxed max-w-2xl mx-auto ${data.type === 'review' ? 'hidden' : 'block'}`}>
+                    <p className={`text-sm text-neutral-500 dark:text-neutral-400 font-medium leading-relaxed max-w-2xl mx-auto ${data.type === 'review' ? 'hidden' : 'block'}`}>
                         {data.description}
                     </p>
 
                     {/* Review Search Bar */}
                     {data.type === 'review' && (
                         <div ref={searchRef} className="mt-4 max-w-lg mx-auto relative group z-50">
-                            <div className="absolute inset-0 bg-indigo-500/20 rounded-2xl blur-xl group-hover:bg-indigo-500/30 transition-all duration-300"></div>
-                            <div className="relative bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xl overflow-visible flex items-center p-1 z-[60]">
-                                <div className="pl-4 text-slate-400">
+                            <div className="absolute inset-0 bg-secondary-500/20 rounded-2xl blur-xl group-hover:bg-secondary-500/30 transition-all duration-300"></div>
+                            <div className="relative bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-xl overflow-visible flex items-center p-1 z-[60]">
+                                <div className="pl-4 text-neutral-400">
                                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                                 </div>
                                 <input
                                     type="text"
                                     placeholder="Search any college (e.g., SRCC Delhi)..."
-                                    className="flex-grow px-4 py-3 bg-transparent outline-none text-slate-900 dark:text-white placeholder-slate-400 font-medium z-[60]"
+                                    className="flex-grow px-4 py-3 bg-transparent outline-none text-neutral-900 dark:text-white placeholder-neutral-400 font-medium z-[60]"
                                     value={reviewSearch}
                                     onChange={handleInputChange}
                                     onKeyDown={(e) => e.key === 'Enter' && handleReviewSearch(reviewSearch)}
@@ -384,21 +384,21 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
                                 <button
                                     onClick={() => handleReviewSearch(reviewSearch)}
                                     disabled={searchingReview}
-                                    className="px-6 py-2.5 bg-indigo-600 text-white rounded-xl text-sm font-bold hover:bg-indigo-700 disabled:opacity-50 transition-colors shadow-lg shadow-indigo-500/30 whitespace-nowrap z-[60]"
+                                    className="px-6 py-2.5 bg-secondary-600 text-white rounded-xl text-sm font-bold hover:bg-secondary-700 disabled:opacity-50 transition-colors shadow-lg shadow-secondary-500/30 whitespace-nowrap z-[60]"
                                 >
                                     {searchingReview ? 'Analyzing...' : 'Get Reviews'}
                                 </button>
 
                                 {/* Suggestions Dropdown */}
                                 {showSuggestions && suggestions.length > 0 && (
-                                    <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden z-[100] animate-slide-up origin-top max-h-60 overflow-y-auto custom-scrollbar">
+                                    <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 shadow-2xl overflow-hidden z-[100] animate-slide-up origin-top max-h-60 overflow-y-auto custom-scrollbar">
                                         {suggestions.map((college, idx) => (
                                             <button
                                                 key={idx}
                                                 onClick={() => selectSuggestion(college)}
-                                                className="w-full text-left px-5 py-3 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 text-slate-700 dark:text-slate-300 font-medium text-sm transition-colors border-b border-slate-100 dark:border-slate-800 last:border-0 flex items-center gap-3"
+                                                className="w-full text-left px-5 py-3 hover:bg-secondary-50 dark:hover:bg-secondary-900/30 text-neutral-700 dark:text-neutral-300 font-medium text-sm transition-colors border-b border-neutral-100 dark:border-neutral-800 last:border-0 flex items-center gap-3"
                                             >
-                                                <span className="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
+                                                <span className="w-1.5 h-1.5 rounded-full bg-secondary-400"></span>
                                                 {college}
                                             </button>
                                         ))}
@@ -412,9 +412,9 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
                 {/* Divider — only for non-review pages */}
                 {data.type !== 'review' && (
                     <div className="relative flex py-1 items-center mb-3">
-                        <div className="flex-grow border-t border-slate-200 dark:border-slate-800"></div>
-                        <span className="flex-shrink-0 mx-4 text-slate-400 uppercase text-[10px] font-bold tracking-[0.2em] opacity-70">Top Recommendations</span>
-                        <div className="flex-grow border-t border-slate-200 dark:border-slate-800"></div>
+                        <div className="flex-grow border-t border-neutral-200 dark:border-neutral-800"></div>
+                        <span className="flex-shrink-0 mx-4 text-neutral-400 uppercase text-[10px] font-bold tracking-[0.2em] opacity-70">Top Recommendations</span>
+                        <div className="flex-grow border-t border-neutral-200 dark:border-neutral-800"></div>
                     </div>
                 )}
 
@@ -424,15 +424,15 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
 
 
                         <BookLoader size="lg" text="Gathering Intelligence..." />
-                        <p className="text-xs text-slate-400 mt-1">Found 10 Top Colleges so far</p>
+                        <p className="text-xs text-neutral-400 mt-1">Found 10 Top Colleges so far</p>
                     </div>
                 )}
 
                 {/* Error State */}
                 {error && (
-                    <div className="flex flex-col items-center justify-center py-10 animate-fade text-red-500">
+                    <div className="flex flex-col items-center justify-center py-10 animate-fade text-danger-500">
                         <p className="font-bold">Failed to load data. Please try refreshing.</p>
-                        <button onClick={() => window.location.reload()} className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm">Retry</button>
+                        <button onClick={() => window.location.reload()} className="mt-4 px-4 py-2 bg-secondary-600 text-white rounded-lg text-sm">Retry</button>
                     </div>
                 )}
 
@@ -445,28 +445,28 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
                             /* SMART LOADER UI - BOOK VERSION */
                             <div className="flex flex-col items-center justify-center py-20 animate-fade">
                                 <BookLoader size="md" />
-                                <h3 className="text-xl font-bold text-slate-800 dark:text-white mb-2 animate-pulse">
+                                <h3 className="text-xl font-bold text-neutral-800 dark:text-white mb-2 animate-pulse">
                                     {LOADING_STEPS[loadingStage]}
                                 </h3>
-                                <p className="text-slate-500 text-sm">Consulting the archives for {reviewSearch}...</p>
+                                <p className="text-neutral-500 text-sm">Consulting the archives for {reviewSearch}...</p>
                             </div>
                         ) : (
                             /* RESULTS GRID - Lower Z-Index to stay behind dropdown */
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16 relative z-0 animate-slide-up">
                                 {data.items.slice(0, 6).map((item, idx) => (
-                                    <div key={idx} className="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
-                                        <div className="absolute top-0 right-0 w-16 h-16 bg-indigo-50 dark:bg-indigo-900/20 rounded-bl-[3rem] transition-colors group-hover:bg-indigo-100 dark:group-hover:bg-indigo-900/40"></div>
+                                    <div key={idx} className="bg-white dark:bg-neutral-900 rounded-xl p-5 border border-neutral-200 dark:border-neutral-800 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+                                        <div className="absolute top-0 right-0 w-16 h-16 bg-secondary-50 dark:bg-secondary-900/20 rounded-bl-[3rem] transition-colors group-hover:bg-secondary-100 dark:group-hover:bg-secondary-900/40"></div>
 
                                         {/* User Info */}
                                         <div className="flex items-center gap-3 mb-3 relative z-10">
-                                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-xs shadow-md">
+                                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-secondary-500 to-accent-600 flex items-center justify-center text-white font-bold text-xs shadow-md">
                                                 {item.subtitle ? item.subtitle.charAt(0).toUpperCase() : 'U'}
                                             </div>
                                             <div>
-                                                <h4 className="font-bold text-slate-900 dark:text-white text-xs">{item.subtitle || 'Verified Student'}</h4>
+                                                <h4 className="font-bold text-neutral-900 dark:text-white text-xs">{item.subtitle || 'Verified Student'}</h4>
                                                 <div className="flex text-yellow-400 text-[10px]">
                                                     {[...Array(5)].map((_, i) => (
-                                                        <svg key={i} className={`w-3 h-3 ${i < (item.stats?.[0]?.value ? parseInt(item.stats[0].value) : 4) ? 'fill-current' : 'text-slate-300 dark:text-slate-700'}`} viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                                                        <svg key={i} className={`w-3 h-3 ${i < (item.stats?.[0]?.value ? parseInt(item.stats[0].value) : 4) ? 'fill-current' : 'text-neutral-300 dark:text-neutral-700'}`} viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
                                                     ))}
                                                 </div>
                                             </div>
@@ -474,18 +474,18 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
 
                                         {/* Review Content */}
                                         < div className="relative z-10" >
-                                            <h3 className="font-bold text-slate-800 dark:text-slate-100 mb-2 line-clamp-1">{item.title}</h3>
-                                            <p className="text-sm text-slate-600 dark:text-slate-400 italic mb-4 line-clamp-4">
+                                            <h3 className="font-bold text-neutral-800 dark:text-neutral-100 mb-2 line-clamp-1">{item.title}</h3>
+                                            <p className="text-sm text-neutral-600 dark:text-neutral-400 italic mb-4 line-clamp-4">
                                                 "{item.content}"
                                             </p>
 
                                             {/* Parameter Ratings (if available in stats) */}
                                             {
                                                 item.stats && item.stats.length > 0 && (
-                                                    <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+                                                    <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-neutral-100 dark:border-neutral-800">
                                                         {item.stats.map((stat, i) => (
-                                                            <span key={i} className="text-[10px] uppercase font-bold px-2 py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-500">
-                                                                {stat.label}: <span className="text-indigo-600 dark:text-indigo-400">{stat.value}</span>
+                                                            <span key={i} className="text-[10px] uppercase font-bold px-2 py-1 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-500">
+                                                                {stat.label}: <span className="text-secondary-600 dark:text-secondary-400">{stat.value}</span>
                                                             </span>
                                                         ))}
                                                     </div>
@@ -499,11 +499,11 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
                     ) : (
                         /* Empty State Prompt */
                         <div className="flex flex-col items-center justify-center py-20 animate-fade">
-                            <div className="w-20 h-20 bg-indigo-50 dark:bg-indigo-900/20 rounded-full flex items-center justify-center mb-6">
-                                <svg className="w-10 h-10 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+                            <div className="w-20 h-20 bg-secondary-50 dark:bg-secondary-900/20 rounded-full flex items-center justify-center mb-6">
+                                <svg className="w-10 h-10 text-secondary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
                             </div>
-                            <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Search to see reviews</h3>
-                            <p className="text-sm text-slate-500 text-center max-w-sm">Enter a college name above to uncover real student feedback, placements, and campus truths.</p>
+                            <h3 className="text-lg font-bold text-neutral-900 dark:text-white mb-2">Search to see reviews</h3>
+                            <p className="text-sm text-neutral-500 text-center max-w-sm">Enter a college name above to uncover real student feedback, placements, and campus truths.</p>
                         </div>
                     )
                 ) : (
@@ -518,16 +518,16 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
                                             e.preventDefault();
                                             onAskAI && onAskAI(`I am interested in ${item.title}. Can you help me with this?`);
                                         }}
-                                        className="group flex items-center gap-3 px-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg hover:border-indigo-400 hover:shadow-sm transition-all w-full text-left"
+                                        className="group flex items-center gap-3 px-4 py-3 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg hover:border-secondary-400 hover:shadow-sm transition-all w-full text-left"
                                     >
-                                        <div className="w-10 h-10 shrink-0 rounded-lg bg-indigo-50 dark:bg-slate-800 flex items-center justify-center border border-indigo-100 dark:border-slate-700">
-                                            <svg className="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>
+                                        <div className="w-10 h-10 shrink-0 rounded-lg bg-secondary-50 dark:bg-neutral-800 flex items-center justify-center border border-secondary-100 dark:border-neutral-700">
+                                            <svg className="w-5 h-5 text-secondary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>
                                         </div>
                                         <div className="flex-1 min-w-0">
-                                            <p className="font-semibold text-slate-800 dark:text-white group-hover:text-indigo-600 text-sm leading-tight truncate">{item.title}</p>
-                                            <p className="text-[11px] text-slate-400 truncate mt-0.5">{item.subtitle || 'Ask AI'}</p>
+                                            <p className="font-semibold text-neutral-800 dark:text-white group-hover:text-secondary-600 text-sm leading-tight truncate">{item.title}</p>
+                                            <p className="text-[11px] text-neutral-400 truncate mt-0.5">{item.subtitle || 'Ask AI'}</p>
                                         </div>
-                                        <span className="text-[10px] bg-indigo-100 text-indigo-600 font-bold px-2 py-1 rounded shrink-0">Chat</span>
+                                        <span className="text-[10px] bg-secondary-100 text-secondary-600 font-bold px-2 py-1 rounded shrink-0">Chat</span>
                                     </button>
                                 ) : (
                                     <button
@@ -566,27 +566,27 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
                                             }
                                             navigate(`/college/${encodeURIComponent(item.title)}`, { state: { college: item } });
                                         }}
-                                        className="group flex items-start gap-3 px-4 py-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl hover:border-indigo-400 hover:shadow-md transition-all w-full text-left cursor-pointer overflow-hidden"
+                                        className="group flex items-start gap-3 px-4 py-4 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl hover:border-secondary-400 hover:shadow-md transition-all w-full text-left cursor-pointer overflow-hidden"
                                     >
                                         {/* Logo */}
-                                        <div className="w-10 h-10 shrink-0 rounded-lg bg-white border border-slate-200 overflow-hidden flex items-center justify-center p-1 shadow-sm mt-0.5">
+                                        <div className="w-10 h-10 shrink-0 rounded-lg bg-white border border-neutral-200 overflow-hidden flex items-center justify-center p-1 shadow-sm mt-0.5">
                                             <LogoWithFallback title={item.title} image={item.image} link={item.link} />
                                         </div>
 
                                         {/* All content stacked vertically */}
                                         <div className="flex-1 min-w-0 flex flex-col gap-1">
-                                            <h3 className="font-bold text-slate-800 dark:text-white group-hover:text-indigo-600 text-[14px] leading-tight truncate transition-colors">
+                                            <h3 className="font-bold text-neutral-800 dark:text-white group-hover:text-secondary-600 text-[14px] leading-tight truncate transition-colors">
                                                 {item.title}
                                             </h3>
                                             {item.subtitle && (
-                                                <p className="text-[11px] text-slate-400 line-clamp-2 leading-snug">
+                                                <p className="text-[11px] text-neutral-400 line-clamp-2 leading-snug">
                                                     {item.subtitle}
                                                 </p>
                                             )}
                                             {item.tags && item.tags.length > 0 && (
                                                 <div className="flex gap-1 mt-1 flex-wrap">
                                                     {item.tags.slice(0, 2).map((tag, tIdx) => (
-                                                        <span key={tIdx} className="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 border border-slate-200 dark:border-slate-700 leading-tight">
+                                                        <span key={tIdx} className="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-500 border border-neutral-200 dark:border-neutral-700 leading-tight">
                                                             {tag}
                                                         </span>
                                                     ))}
@@ -599,7 +599,7 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
                                                         return (
                                                             <span
                                                                 key={i}
-                                                                className={`text-[10px] font-bold px-2 py-0.5 rounded-md max-w-full break-words leading-snug ${isGreen ? 'bg-emerald-50 text-emerald-600 border border-emerald-100 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-800' : 'bg-slate-100 text-slate-600 border border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700'}`}
+                                                                className={`text-[10px] font-bold px-2 py-0.5 rounded-md max-w-full break-words leading-snug ${isGreen ? 'bg-success-50 text-success-600 border border-success-100 dark:bg-success-900/20 dark:text-success-400 dark:border-success-800' : 'bg-neutral-100 text-neutral-600 border border-neutral-200 dark:bg-neutral-800 dark:text-neutral-400 dark:border-neutral-700'}`}
                                                             >
                                                                 {isGreen ? <span className="mr-0.5">₹</span> : ''}{stat.value.replace('₹', '')}
                                                             </span>
@@ -616,13 +616,13 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
                         {/* LOAD MORE */}
                         <div className="flex flex-col items-center gap-2 mb-8">
                             {loadMoreMsg && (
-                                <p className="text-xs text-slate-400 font-medium">{loadMoreMsg}</p>
+                                <p className="text-xs text-neutral-400 font-medium">{loadMoreMsg}</p>
                             )}
                             {!noMoreData && (
                                 <button
                                     onClick={handleLoadMore}
                                     disabled={loadingMore}
-                                    className={`px-6 py-2 rounded-lg font-bold text-sm transition-all border ${loadingMore ? 'bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed' : 'bg-white border-slate-300 text-slate-600 hover:border-indigo-400 hover:text-indigo-600'}`}
+                                    className={`px-6 py-2 rounded-lg font-bold text-sm transition-all border ${loadingMore ? 'bg-neutral-100 text-neutral-400 border-neutral-200 cursor-not-allowed' : 'bg-white border-neutral-300 text-neutral-600 hover:border-secondary-400 hover:text-secondary-600'}`}
                                 >
                                     {loadingMore ? 'Loading...' : 'Load More'}
                                 </button>
@@ -636,21 +636,21 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
                 {/* FAQ Section */}
                 {data.faqs && data.faqs.length > 0 && (
                     <div className="max-w-4xl mx-auto mb-8">
-                        <h2 className="text-base font-black text-slate-800 dark:text-white mb-4 uppercase tracking-wide">Frequently Asked Questions</h2>
+                        <h2 className="text-base font-black text-neutral-800 dark:text-white mb-4 uppercase tracking-wide">Frequently Asked Questions</h2>
                         <div className="space-y-2">
                             {data.faqs.map((faq, idx) => (
-                                <div key={idx} className="rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden bg-white dark:bg-slate-900">
+                                <div key={idx} className="rounded-xl border border-neutral-200 dark:border-neutral-700 overflow-hidden bg-white dark:bg-neutral-900">
                                     <button
                                         onClick={() => toggleFaq(idx)}
-                                        className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                                        className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors"
                                     >
-                                        <span className="font-semibold text-slate-800 dark:text-white text-sm pr-6">{faq.question}</span>
+                                        <span className="font-semibold text-neutral-800 dark:text-white text-sm pr-6">{faq.question}</span>
                                         <span className={`transform transition-transform duration-200 shrink-0 ${activeFaq === idx ? 'rotate-180' : ''}`}>
-                                            <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                                            <svg className="w-4 h-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                                         </span>
                                     </button>
                                     {activeFaq === idx && (
-                                        <div className="px-5 pb-4 text-slate-600 dark:text-slate-300 text-sm leading-relaxed border-t border-slate-100 dark:border-slate-700 pt-3">
+                                        <div className="px-5 pb-4 text-neutral-600 dark:text-neutral-300 text-sm leading-relaxed border-t border-neutral-100 dark:border-neutral-700 pt-3">
                                             {faq.answer}
                                         </div>
                                     )}

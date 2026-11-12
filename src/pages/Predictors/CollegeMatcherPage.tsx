@@ -4,7 +4,7 @@ import { CollegePredictorView } from '../../components/CollegeMatcher/CollegePre
 
 const CollegeMatcherPage: React.FC<{ onAskAI: (topic: string) => void }> = ({ onAskAI }) => {
   return (
-    <div className="w-full bg-[#f8fafc] min-h-screen">
+    <div className="w-full bg-neutral-50 min-h-screen">
       <SEO
         title="College Predictor 2026 | JEE, NEET & MBA College Matcher"
         description="Find the best engineering, medical, or management colleges based on your rank and scores. CareerSha's smart college matcher for 2026 admissions."

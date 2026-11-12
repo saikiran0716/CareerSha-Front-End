@@ -71,7 +71,7 @@ const NATARank: React.FC<{ onAskAI?: (topic: string) => void }> = ({
     };
 
     return (
-        <div className="bg-[#f8fafd] dark:bg-slate-950 min-h-screen font-sans transition-colors duration-300">
+        <div className="bg-neutral-50 dark:bg-neutral-950 min-h-screen font-sans transition-colors duration-300">
             <SEO
                 title="NATA Rank Predictor 2024 | Calculate Your Architecture Rank"
                 description="Predict your NATA rank with CareerSha's advanced rank predictor tool. Enter your expected NATA marks to get accurate rank estimation for B.Arch admissions."
@@ -80,10 +80,10 @@ const NATARank: React.FC<{ onAskAI?: (topic: string) => void }> = ({
             />
             
             {/* HERO SECTION (Pale Blue) */}
-            <div className="bg-blue-50/50 dark:bg-blue-950/20 pt-12 pb-24 relative px-4 sm:px-6">
+            <div className="bg-primary-50/50 dark:bg-primary-950/20 pt-12 pb-24 relative px-4 sm:px-6">
                 <div className="max-w-3xl mx-auto space-y-6">
-                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
-                        NATA Rank Predictor <span className="text-blue-500">2024</span>
+                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-neutral-900 dark:text-white tracking-tight leading-tight">
+                        NATA Rank Predictor <span className="text-primary-500">2024</span>
                     </h1>
 
                     <ul className="space-y-3">
@@ -93,8 +93,8 @@ const NATARank: React.FC<{ onAskAI?: (topic: string) => void }> = ({
                             "Get personalized category & state quota analysis"
                         ].map((text, i) => (
                             <li key={i} className="flex items-start gap-3">
-                                <CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-500 flex-shrink-0 mt-0.5" />
-                                <span className="text-slate-700 dark:text-slate-300 font-medium text-[15px]">{text}</span>
+                                <CheckCircle2 className="w-5 h-5 text-success-600 dark:text-success-500 flex-shrink-0 mt-0.5" />
+                                <span className="text-neutral-700 dark:text-neutral-300 font-medium text-[15px]">{text}</span>
                             </li>
                         ))}
                     </ul>
@@ -103,15 +103,15 @@ const NATARank: React.FC<{ onAskAI?: (topic: string) => void }> = ({
 
             {/* FORM CARD (Overlapping Hero) */}
             <div className="max-w-3xl mx-auto px-4 sm:px-6 relative -mt-16 z-10 mb-16">
-                <div className="bg-white dark:bg-slate-900 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.4)] p-6 sm:p-8 border border-slate-200 dark:border-slate-800">
-                    <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6 text-center">
+                <div className="bg-white dark:bg-neutral-900 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.4)] p-6 sm:p-8 border border-neutral-200 dark:border-neutral-800">
+                    <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-6 text-center">
                         NATA Rank Predictor
                     </h3>
                     
                     <div className="space-y-5">
                         <div className="space-y-1.5">
-                            <label className="text-[13px] font-bold text-slate-700 dark:text-slate-300">
-                                NATA Score <span className="text-red-500">*</span>
+                            <label className="text-[13px] font-bold text-neutral-700 dark:text-neutral-300">
+                                NATA Score <span className="text-danger-500">*</span>
                             </label>
                             <input
                                 type="number"
@@ -119,19 +119,19 @@ const NATARank: React.FC<{ onAskAI?: (topic: string) => void }> = ({
                                 value={score}
                                 onChange={(e) => setScore(e.target.value)}
                                 onKeyDown={(e) => e.key === "Enter" && handleEstimate()}
-                                className="w-full h-12 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-4 text-[15px] font-medium text-slate-900 dark:text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                className="w-full h-12 bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-600 rounded-lg px-4 text-[15px] font-medium text-neutral-900 dark:text-white focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none transition-all [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                             />
                         </div>
 
                         <div className="space-y-1.5">
-                            <label className="text-[13px] font-bold text-slate-700 dark:text-slate-300">
-                                NATA Category <span className="text-red-500">*</span>
+                            <label className="text-[13px] font-bold text-neutral-700 dark:text-neutral-300">
+                                NATA Category <span className="text-danger-500">*</span>
                             </label>
                             <div className="relative">
                                 <select
                                     value={category}
                                     onChange={(e) => setCategory(e.target.value)}
-                                    className="w-full h-12 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-4 text-[15px] font-medium text-slate-900 dark:text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none appearance-none transition-all cursor-pointer"
+                                    className="w-full h-12 bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-600 rounded-lg px-4 text-[15px] font-medium text-neutral-900 dark:text-white focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none appearance-none transition-all cursor-pointer"
                                 >
                                     <option>UR (General)</option>
                                     <option>OBC</option>
@@ -142,28 +142,28 @@ const NATARank: React.FC<{ onAskAI?: (topic: string) => void }> = ({
                                     <option>SC-PWD</option>
                                     <option>ST-PWD</option>
                                 </select>
-                                <ChevronDown className="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                                <ChevronDown className="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" />
                             </div>
                         </div>
 
                         <div className="space-y-1.5">
-                            <label className="text-[13px] font-bold text-slate-700 dark:text-slate-300">
-                                NATA Paper / Branch <span className="text-red-500">*</span>
+                            <label className="text-[13px] font-bold text-neutral-700 dark:text-neutral-300">
+                                NATA Paper / Branch <span className="text-danger-500">*</span>
                             </label>
                             <div className="relative">
                                 <select
                                     value={branch}
                                     onChange={(e) => setBranch(e.target.value)}
-                                    className="w-full h-12 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-4 text-[15px] font-medium text-slate-900 dark:text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none appearance-none transition-all cursor-pointer"
+                                    className="w-full h-12 bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-600 rounded-lg px-4 text-[15px] font-medium text-neutral-900 dark:text-white focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none appearance-none transition-all cursor-pointer"
                                 >
                                     {NATA_STATES.map(s => <option key={s}>{s}</option>)}
                                 </select>
-                                <ChevronDown className="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                                <ChevronDown className="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" />
                             </div>
                         </div>
 
                         {error && (
-                            <div className="text-[13px] text-red-500 font-medium text-center bg-red-50 dark:bg-red-900/20 p-2 rounded-md">
+                            <div className="text-[13px] text-danger-500 font-medium text-center bg-danger-50 dark:bg-danger-900/20 p-2 rounded-md">
                                 {error}
                             </div>
                         )}
@@ -171,7 +171,7 @@ const NATARank: React.FC<{ onAskAI?: (topic: string) => void }> = ({
                         <button
                             onClick={handleEstimate}
                             disabled={isEstimating}
-                            className="w-full h-12 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-lg text-[16px] transition-colors flex items-center justify-center gap-2 mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                            className="w-full h-12 bg-primary-500 hover:bg-primary-600 text-white font-bold rounded-lg text-[16px] transition-colors flex items-center justify-center gap-2 mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
                         >
                             {isEstimating ? (
                                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -189,41 +189,41 @@ const NATARank: React.FC<{ onAskAI?: (topic: string) => void }> = ({
                                 initial={{ opacity: 0, height: 0 }}
                                 animate={{ opacity: 1, height: 'auto' }}
                                 exit={{ opacity: 0, height: 0 }}
-                                className="mt-8 pt-8 border-t border-slate-200 dark:border-slate-700 overflow-hidden"
+                                className="mt-8 pt-8 border-t border-neutral-200 dark:border-neutral-700 overflow-hidden"
                             >
-                                <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 border border-blue-200 dark:border-blue-200/50">
+                                <div className="bg-primary-50 dark:bg-primary-900/20 rounded-xl p-6 border border-primary-200 dark:border-primary-200/50">
                                     <div className="flex flex-col sm:flex-row justify-between items-start gap-6 mb-6">
                                         <div>
-                                            <p className="text-[12px] font-bold text-blue-600 dark:text-blue-500 uppercase tracking-wide mb-1">Expected AIR</p>
-                                            <h4 className="text-4xl font-black text-slate-900 dark:text-white">
+                                            <p className="text-[12px] font-bold text-primary-600 dark:text-primary-500 uppercase tracking-wide mb-1">Expected AIR</p>
+                                            <h4 className="text-4xl font-black text-neutral-900 dark:text-white">
                                                 #{result?.predictedRank?.replace(/^#/, '') || "N/A"}
                                             </h4>
                                         </div>
                                         <div className="flex gap-6 sm:text-right">
                                             <div>
-                                                <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-1">{category} Rank</p>
-                                                <p className="text-xl font-black text-slate-700 dark:text-slate-300">
+                                                <p className="text-[11px] font-bold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-1">{category} Rank</p>
+                                                <p className="text-xl font-black text-neutral-700 dark:text-neutral-300">
                                                     #{result?.categoryRank?.replace(/^#/, '') || "—"}
                                                 </p>
                                             </div>
                                             <div>
-                                                <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-1">Percentile</p>
-                                                <p className="text-xl font-black text-slate-700 dark:text-slate-300">
+                                                <p className="text-[11px] font-bold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-1">Percentile</p>
+                                                <p className="text-xl font-black text-neutral-700 dark:text-neutral-300">
                                                     {result?.percentile || "—"}
                                                 </p>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div className="bg-white dark:bg-slate-900 rounded-lg p-5 border border-blue-200 dark:border-blue-200/30">
-                                        <h5 className="text-[14px] font-bold text-slate-900 dark:text-white mb-3">Admission Analysis ({branch})</h5>
+                                    <div className="bg-white dark:bg-neutral-900 rounded-lg p-5 border border-primary-200 dark:border-primary-200/30">
+                                        <h5 className="text-[14px] font-bold text-neutral-900 dark:text-white mb-3">Admission Analysis ({branch})</h5>
                                         <ul className="space-y-2">
                                             {(result?.analysis || "Analysis generated.")
                                                 .split(/(?<=\.)\s+/)
                                                 .filter(s => s.trim().length > 0)
                                                 .map((sentence, idx) => (
-                                                    <li key={idx} className="flex items-start gap-2 text-[14px] text-slate-600 dark:text-slate-400">
-                                                        <TrendingUp className="w-4 h-4 text-blue-500 mt-0.5 flex-shrink-0" />
+                                                    <li key={idx} className="flex items-start gap-2 text-[14px] text-neutral-600 dark:text-neutral-400">
+                                                        <TrendingUp className="w-4 h-4 text-primary-500 mt-0.5 flex-shrink-0" />
                                                         <span>{sentence.trim()}</span>
                                                     </li>
                                                 ))}
@@ -241,25 +241,25 @@ const NATARank: React.FC<{ onAskAI?: (topic: string) => void }> = ({
                 
                 {/* Intro Section */}
                 <section className="space-y-4">
-                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+                    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">
                         NATA Rank Predictor 2024: Check your expected rank
                     </h2>
-                    <div className="text-[15px] text-slate-600 dark:text-slate-400 leading-relaxed space-y-4">
+                    <div className="text-[15px] text-neutral-600 dark:text-neutral-400 leading-relaxed space-y-4">
                         <p>
-                            Candidates who have appeared for the <span className="text-blue-500 font-medium cursor-pointer">NATA 2024 exam</span> can use our advanced rank predictor to estimate their All India Rank (AIR) before the official results are declared. The tool utilizes historical data, previous year cutoffs, and difficulty level analysis to provide a highly accurate prediction.
+                            Candidates who have appeared for the <span className="text-primary-500 font-medium cursor-pointer">NATA 2024 exam</span> can use our advanced rank predictor to estimate their All India Rank (AIR) before the official results are declared. The tool utilizes historical data, previous year cutoffs, and difficulty level analysis to provide a highly accurate prediction.
                         </p>
                         <p>
-                            Knowing your expected rank early helps you make informed decisions about your <span className="text-blue-500 font-medium cursor-pointer">B.Arch admissions</span> and shortlisting the right medical colleges during the MCC counselling process.
+                            Knowing your expected rank early helps you make informed decisions about your <span className="text-primary-500 font-medium cursor-pointer">B.Arch admissions</span> and shortlisting the right medical colleges during the MCC counselling process.
                         </p>
                     </div>
                 </section>
 
                 {/* How to use */}
                 <section className="space-y-4">
-                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+                    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">
                         How to use NATA Rank Predictor 2024?
                     </h2>
-                    <ul className="list-disc pl-5 text-[15px] text-slate-600 dark:text-slate-400 space-y-2 marker:text-blue-500">
+                    <ul className="list-disc pl-5 text-[15px] text-neutral-600 dark:text-neutral-400 space-y-2 marker:text-primary-500">
                         <li>Enter your estimated score out of 200 in the <strong>NATA Score</strong> field.</li>
                         <li>Select your category (UR, OBC, SC, ST, etc.) from the dropdown menu.</li>
                         <li>Select your domicile State to check state-quota specific chances.</li>
@@ -269,18 +269,18 @@ const NATARank: React.FC<{ onAskAI?: (topic: string) => void }> = ({
 
                 {/* Marks vs Rank Table 2024 */}
                 <section className="space-y-6">
-                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+                    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">
                         NATA Marks vs Rank 2024 (Expected)
                     </h2>
-                    <div className="overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-700">
+                    <div className="overflow-x-auto rounded-lg border border-neutral-200 dark:border-neutral-700">
                         <table className="w-full text-left border-collapse min-w-[500px]">
                             <thead>
-                                <tr className="bg-blue-500 text-white text-[14px]">
+                                <tr className="bg-primary-500 text-white text-[14px]">
                                     <th className="p-4 font-bold">Marks Range (Out of 200)</th>
                                     <th className="p-4 font-bold">Expected Rank (AIR)</th>
                                 </tr>
                             </thead>
-                            <tbody className="text-[14px] text-slate-700 dark:text-slate-300">
+                            <tbody className="text-[14px] text-neutral-700 dark:text-neutral-300">
                                 {[
                                     { marks: "700 - 200", rank: "1 - 50" },
                                     { marks: "650 - 699", rank: "51 - 500" },
@@ -290,9 +290,9 @@ const NATARank: React.FC<{ onAskAI?: (topic: string) => void }> = ({
                                     { marks: "450 - 499", rank: "18,001 - 35,000" },
                                     { marks: "400 - 449", rank: "35,001 - 55,000" }
                                 ].map((row, i) => (
-                                    <tr key={i} className={i % 2 === 0 ? "bg-blue-50/50 dark:bg-slate-800/50" : "bg-white dark:bg-slate-900"}>
-                                        <td className="p-4 border-b border-slate-200 dark:border-slate-800">{row.marks}</td>
-                                        <td className="p-4 border-b border-slate-200 dark:border-slate-800">{row.rank}</td>
+                                    <tr key={i} className={i % 2 === 0 ? "bg-primary-50/50 dark:bg-neutral-800/50" : "bg-white dark:bg-neutral-900"}>
+                                        <td className="p-4 border-b border-neutral-200 dark:border-neutral-800">{row.marks}</td>
+                                        <td className="p-4 border-b border-neutral-200 dark:border-neutral-800">{row.rank}</td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -302,18 +302,18 @@ const NATARank: React.FC<{ onAskAI?: (topic: string) => void }> = ({
 
                 {/* Marks vs Rank Table 2023 */}
                 <section className="space-y-6">
-                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+                    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">
                         NATA 2023 Marks vs Rank
                     </h2>
-                    <div className="overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-700">
+                    <div className="overflow-x-auto rounded-lg border border-neutral-200 dark:border-neutral-700">
                         <table className="w-full text-left border-collapse min-w-[500px]">
                             <thead>
-                                <tr className="bg-blue-500 text-white text-[14px]">
+                                <tr className="bg-primary-500 text-white text-[14px]">
                                     <th className="p-4 font-bold">Marks Range (Out of 200)</th>
                                     <th className="p-4 font-bold">Actual Rank (AIR)</th>
                                 </tr>
                             </thead>
-                            <tbody className="text-[14px] text-slate-700 dark:text-slate-300">
+                            <tbody className="text-[14px] text-neutral-700 dark:text-neutral-300">
                                 {[
                                     { marks: "710+", rank: "1 - 10" },
                                     { marks: "675 - 709", rank: "11 - 200" },
@@ -321,9 +321,9 @@ const NATARank: React.FC<{ onAskAI?: (topic: string) => void }> = ({
                                     { marks: "580 - 639", rank: "1,001 - 5,000" },
                                     { marks: "520 - 579", rank: "5,001 - 15,000" }
                                 ].map((row, i) => (
-                                    <tr key={i} className={i % 2 === 0 ? "bg-blue-50/50 dark:bg-slate-800/50" : "bg-white dark:bg-slate-900"}>
-                                        <td className="p-4 border-b border-slate-200 dark:border-slate-800">{row.marks}</td>
-                                        <td className="p-4 border-b border-slate-200 dark:border-slate-800">{row.rank}</td>
+                                    <tr key={i} className={i % 2 === 0 ? "bg-primary-50/50 dark:bg-neutral-800/50" : "bg-white dark:bg-neutral-900"}>
+                                        <td className="p-4 border-b border-neutral-200 dark:border-neutral-800">{row.marks}</td>
+                                        <td className="p-4 border-b border-neutral-200 dark:border-neutral-800">{row.rank}</td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -333,29 +333,29 @@ const NATARank: React.FC<{ onAskAI?: (topic: string) => void }> = ({
 
                 {/* Category Cutoffs Table */}
                 <section className="space-y-6">
-                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+                    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">
                         NATA Category-wise Cutoff (Qualifying Percentile)
                     </h2>
-                    <div className="overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-700">
+                    <div className="overflow-x-auto rounded-lg border border-neutral-200 dark:border-neutral-700">
                         <table className="w-full text-left border-collapse min-w-[500px]">
                             <thead>
-                                <tr className="bg-blue-500 text-white text-[14px]">
+                                <tr className="bg-primary-500 text-white text-[14px]">
                                     <th className="p-4 font-bold">Category</th>
                                     <th className="p-4 font-bold">Qualifying Percentile</th>
                                     <th className="p-4 font-bold">Cutoff Score (Expected)</th>
                                 </tr>
                             </thead>
-                            <tbody className="text-[14px] text-slate-700 dark:text-slate-300">
+                            <tbody className="text-[14px] text-neutral-700 dark:text-neutral-300">
                                 {[
                                     { cat: "General / EWS", percent: "50th Percentile", score: "164" },
                                     { cat: "General-PwBD", percent: "45th Percentile", score: "146" },
                                     { cat: "SC / ST / OBC", percent: "40th Percentile", score: "129" },
                                     { cat: "SC / ST / OBC-PwBD", percent: "40th Percentile", score: "129" }
                                 ].map((row, i) => (
-                                    <tr key={i} className={i % 2 === 0 ? "bg-blue-50/50 dark:bg-slate-800/50" : "bg-white dark:bg-slate-900"}>
-                                        <td className="p-4 border-b border-slate-200 dark:border-slate-800 font-medium">{row.cat}</td>
-                                        <td className="p-4 border-b border-slate-200 dark:border-slate-800">{row.percent}</td>
-                                        <td className="p-4 border-b border-slate-200 dark:border-slate-800">{row.score}</td>
+                                    <tr key={i} className={i % 2 === 0 ? "bg-primary-50/50 dark:bg-neutral-800/50" : "bg-white dark:bg-neutral-900"}>
+                                        <td className="p-4 border-b border-neutral-200 dark:border-neutral-800 font-medium">{row.cat}</td>
+                                        <td className="p-4 border-b border-neutral-200 dark:border-neutral-800">{row.percent}</td>
+                                        <td className="p-4 border-b border-neutral-200 dark:border-neutral-800">{row.score}</td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -365,19 +365,19 @@ const NATARank: React.FC<{ onAskAI?: (topic: string) => void }> = ({
 
                 {/* Top Architecture Colleges Table */}
                 <section className="space-y-6">
-                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+                    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">
                         Top Architecture Colleges Accepting NATA Scores 2024
                     </h2>
-                    <div className="overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-700">
+                    <div className="overflow-x-auto rounded-lg border border-neutral-200 dark:border-neutral-700">
                         <table className="w-full text-left border-collapse min-w-[500px]">
                             <thead>
-                                <tr className="bg-blue-500 text-white text-[14px]">
+                                <tr className="bg-primary-500 text-white text-[14px]">
                                     <th className="p-4 font-bold">Name of the College</th>
                                     <th className="p-4 font-bold">Average Fees (Total)</th>
                                     <th className="p-4 font-bold">Location</th>
                                 </tr>
                             </thead>
-                            <tbody className="text-[14px] text-slate-700 dark:text-slate-300">
+                            <tbody className="text-[14px] text-neutral-700 dark:text-neutral-300">
                                 {[
                                     { name: "Christian Architecture College (CMC)", fees: "₹1.5 L - ₹2 L", loc: "Vellore" },
                                     { name: "St. John's Architecture College", fees: "₹15 L - ₹25 L", loc: "Bangalore" },
@@ -385,10 +385,10 @@ const NATARank: React.FC<{ onAskAI?: (topic: string) => void }> = ({
                                     { name: "Kasturba Architecture College (KMC)", fees: "₹50 L - ₹65 L", loc: "Manipal" },
                                     { name: "All India Institute of Architecture Sciences (AIIMS)", fees: "₹1 L - ₹1.5 L", loc: "New Delhi" }
                                 ].map((row, i) => (
-                                    <tr key={i} className={i % 2 === 0 ? "bg-blue-50/50 dark:bg-slate-800/50" : "bg-white dark:bg-slate-900"}>
-                                        <td className="p-4 border-b border-slate-200 dark:border-slate-800 font-medium text-blue-600 dark:text-blue-400 cursor-pointer">{row.name}</td>
-                                        <td className="p-4 border-b border-slate-200 dark:border-slate-800">{row.fees}</td>
-                                        <td className="p-4 border-b border-slate-200 dark:border-slate-800">{row.loc}</td>
+                                    <tr key={i} className={i % 2 === 0 ? "bg-primary-50/50 dark:bg-neutral-800/50" : "bg-white dark:bg-neutral-900"}>
+                                        <td className="p-4 border-b border-neutral-200 dark:border-neutral-800 font-medium text-primary-600 dark:text-primary-400 cursor-pointer">{row.name}</td>
+                                        <td className="p-4 border-b border-neutral-200 dark:border-neutral-800">{row.fees}</td>
+                                        <td className="p-4 border-b border-neutral-200 dark:border-neutral-800">{row.loc}</td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -398,18 +398,18 @@ const NATARank: React.FC<{ onAskAI?: (topic: string) => void }> = ({
 
                 {/* Exam Pattern Table */}
                 <section className="space-y-6">
-                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+                    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">
                         NATA 2024 Exam Pattern Overview
                     </h2>
-                    <div className="overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-700">
+                    <div className="overflow-x-auto rounded-lg border border-neutral-200 dark:border-neutral-700">
                         <table className="w-full text-left border-collapse min-w-[500px]">
                             <thead>
-                                <tr className="bg-blue-500 text-white text-[14px]">
+                                <tr className="bg-primary-500 text-white text-[14px]">
                                     <th className="p-4 font-bold">Particulars</th>
                                     <th className="p-4 font-bold">Details</th>
                                 </tr>
                             </thead>
-                            <tbody className="text-[14px] text-slate-700 dark:text-slate-300">
+                            <tbody className="text-[14px] text-neutral-700 dark:text-neutral-300">
                                 {[
                                     { k: "Exam Mode", v: "Computer Based Test (CBT)" },
                                     { k: "Duration", v: "3 Hours 30 Minutes" },
@@ -417,9 +417,9 @@ const NATARank: React.FC<{ onAskAI?: (topic: string) => void }> = ({
                                     { k: "Total Marks", v: "200 Marks" },
                                     { k: "Marking Scheme", v: "+4 for Correct, -1 for Incorrect, 0 for Unattempted" }
                                 ].map((row, i) => (
-                                    <tr key={i} className={i % 2 === 0 ? "bg-blue-50/50 dark:bg-slate-800/50" : "bg-white dark:bg-slate-900"}>
-                                        <td className="p-4 border-b border-slate-200 dark:border-slate-800 font-bold">{row.k}</td>
-                                        <td className="p-4 border-b border-slate-200 dark:border-slate-800">{row.v}</td>
+                                    <tr key={i} className={i % 2 === 0 ? "bg-primary-50/50 dark:bg-neutral-800/50" : "bg-white dark:bg-neutral-900"}>
+                                        <td className="p-4 border-b border-neutral-200 dark:border-neutral-800 font-bold">{row.k}</td>
+                                        <td className="p-4 border-b border-neutral-200 dark:border-neutral-800">{row.v}</td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -429,19 +429,19 @@ const NATARank: React.FC<{ onAskAI?: (topic: string) => void }> = ({
 
                 {/* Factors & Tie Breaking */}
                 <section className="space-y-6">
-                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+                    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">
                         Factors Determining NATA Rank
                     </h2>
-                    <div className="text-[15px] text-slate-600 dark:text-slate-400 space-y-4 leading-relaxed">
+                    <div className="text-[15px] text-neutral-600 dark:text-neutral-400 space-y-4 leading-relaxed">
                         <p>Your final NATA All India Rank depends on multiple factors beyond just your absolute score:</p>
-                        <ul className="list-disc pl-5 space-y-2 marker:text-blue-500">
+                        <ul className="list-disc pl-5 space-y-2 marker:text-primary-500">
                             <li><strong>Difficulty of the Paper:</strong> If the exam is tougher compared to previous years, lower marks can fetch a higher rank.</li>
                             <li><strong>Total Candidates:</strong> The overall competition and total number of students appearing for the exam.</li>
                             <li><strong>Tie-Breaking Criteria:</strong> If two candidates score the exact same marks, NBE applies strict tie-breaking rules.</li>
                         </ul>
                         
-                        <h3 className="text-lg font-bold text-slate-900 dark:text-white mt-6 mb-2">NATA Tie-Breaking Rules</h3>
-                        <ol className="list-decimal pl-5 space-y-2 marker:text-blue-500">
+                        <h3 className="text-lg font-bold text-neutral-900 dark:text-white mt-6 mb-2">NATA Tie-Breaking Rules</h3>
+                        <ol className="list-decimal pl-5 space-y-2 marker:text-primary-500">
                             <li>Candidate with more number of <strong>Correct Responses</strong> is placed higher.</li>
                             <li>Candidate with fewer number of <strong>Negative Responses</strong> is placed higher.</li>
                             <li>Older candidate in age will be placed higher in merit.</li>
@@ -452,7 +452,7 @@ const NATARank: React.FC<{ onAskAI?: (topic: string) => void }> = ({
 
                 {/* FAQs Section */}
                 <section className="space-y-6 pt-4">
-                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+                    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">
                         Frequently Asked Questions (FAQs)
                     </h2>
                     <div className="space-y-4">
@@ -470,9 +470,9 @@ const NATARank: React.FC<{ onAskAI?: (topic: string) => void }> = ({
                                 a: "There are approximately 42,000+ PG medical seats in India (including MD, MS, and PG Diploma), across all government, private, and deemed universities."
                             }
                         ].map((faq, i) => (
-                            <div key={i} className="bg-slate-50 dark:bg-slate-800/30 p-5 rounded-xl border border-slate-200 dark:border-slate-700">
-                                <h4 className="text-[15px] font-bold text-slate-900 dark:text-white mb-2">Q: {faq.q}</h4>
-                                <p className="text-[14px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                            <div key={i} className="bg-neutral-50 dark:bg-neutral-800/30 p-5 rounded-xl border border-neutral-200 dark:border-neutral-700">
+                                <h4 className="text-[15px] font-bold text-neutral-900 dark:text-white mb-2">Q: {faq.q}</h4>
+                                <p className="text-[14px] text-neutral-600 dark:text-neutral-400 leading-relaxed">
                                     {faq.a}
                                 </p>
                             </div>

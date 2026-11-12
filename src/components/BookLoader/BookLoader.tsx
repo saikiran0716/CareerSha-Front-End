@@ -38,12 +38,12 @@ const BookLoader: React.FC<BookLoaderProps> = ({ size = 'md', className = '', te
             height: ${dim.pageHeight};
             background-color: #fff;
             background-image: ${isSmall ? 'none' : `
-              linear-gradient(90deg, transparent 5%, #e2e8f0 5%, #e2e8f0 10%, transparent 10%),
-              linear-gradient(#475569 1px, transparent 1px)
+              linear-gradient(90deg, transparent 5%, rgb(var(--color-neutral-200)) 5%, rgb(var(--color-neutral-200)) 10%, transparent 10%),
+              linear-gradient(rgb(var(--color-neutral-600)) 1px, transparent 1px)
             `};
             background-size: ${isSmall ? 'auto' : '100% 100%, 100% 8px'};
-            border: 1px solid ${isSmall ? '#c7d2fe' : '#cbd5e1'};
-            ${!isSmall ? 'border-left: 2px solid #94a3b8;' : ''}
+            border: 1px solid ${isSmall ? 'rgb(var(--color-secondary-200))' : 'rgb(var(--color-neutral-300))'};
+            ${!isSmall ? 'border-left: 2px solid rgb(var(--color-neutral-400));' : ''}
             transform-origin: left center;
             transform-style: preserve-3d;
             animation: book-flip-${size} ${isSmall ? '1.2s' : '2s'} infinite cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -58,8 +58,8 @@ const BookLoader: React.FC<BookLoaderProps> = ({ size = 'md', className = '', te
           
           @keyframes book-flip-${size} {
             0% { transform: rotateY(0deg); }
-            20% { transform: rotateY(-30deg); background-color: #f8fafc; }
-            50% { transform: rotateY(-180deg); background-color: #f1f5f9; }
+            20% { transform: rotateY(-30deg); background-color: rgb(var(--color-neutral-50)); }
+            50% { transform: rotateY(-180deg); background-color: rgb(var(--color-neutral-100)); }
             100% { transform: rotateY(-180deg); }
           }
           
@@ -82,11 +82,11 @@ const BookLoader: React.FC<BookLoaderProps> = ({ size = 'md', className = '', te
             <div className={`book-loader-container-${size}`}>
                 {/* Back Cover / Spine Base */}
                 <div
-                    className="absolute top-0 left-0 bg-indigo-700 rounded-l-md shadow-lg"
+                    className="absolute top-0 left-0 bg-secondary-700 rounded-l-md shadow-lg"
                     style={{ width: dim.pageWidth, height: dim.height }}
                 ></div>
                 <div
-                    className="absolute top-0 right-0 bg-indigo-50 border border-indigo-200 rounded-r-md -z-10 shadow-sm"
+                    className="absolute top-0 right-0 bg-secondary-50 border border-secondary-200 rounded-r-md -z-10 shadow-sm"
                     style={{ width: dim.pageWidth, height: dim.height }}
                 ></div>
 
@@ -98,14 +98,14 @@ const BookLoader: React.FC<BookLoaderProps> = ({ size = 'md', className = '', te
 
                 {/* Spine Detail */}
                 <div
-                    className="absolute top-0 bg-indigo-800 z-10 rounded-sm"
+                    className="absolute top-0 bg-secondary-800 z-10 rounded-sm"
                     style={{ left: `calc(${dim.pageLeft} - 2px)`, width: '4px', height: dim.height }}
                 ></div>
             </div>
 
             {text && (
                 <div className="mt-4 text-center">
-                    <p className="text-slate-500 font-medium animate-pulse">{text}</p>
+                    <p className="text-neutral-500 font-medium animate-pulse">{text}</p>
                 </div>
             )}
         </div>

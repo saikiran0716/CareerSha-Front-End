@@ -124,17 +124,17 @@ const NewsNotifications: React.FC = () => {
                 }
             `}} />
             <div className="max-w-[1440px] mx-auto px-2 sm:px-4 lg:px-6">
-                <div className="bg-white dark:bg-slate-900/80 backdrop-blur-sm rounded-[1.25rem] px-4 py-2 md:px-5 md:py-3 shadow-[0_4px_25px_rgba(0,0,0,0.03)] border border-slate-100 dark:border-slate-800/80 news-container-mobile">
+                <div className="bg-white dark:bg-neutral-900/80 backdrop-blur-sm rounded-[1.25rem] px-4 py-2 md:px-5 md:py-3 shadow-[0_4px_25px_rgba(0,0,0,0.03)] border border-neutral-100 dark:border-neutral-800/80 news-container-mobile">
                     <div className="flex justify-between items-center mb-3 px-1 news-header-mobile">
                         <div className="flex items-center gap-3">
                             <div className="w-1.5 h-6 bg-rose-600 rounded-full shadow-[0_0_10px_rgba(225,29,72,0.3)] news-pill-mobile" />
-                            <h2 className="text-[17px] md:text-xl font-black text-slate-800 dark:text-white uppercase tracking-tight news-title-mobile">
+                            <h2 className="text-[17px] md:text-xl font-black text-neutral-800 dark:text-white uppercase tracking-tight news-title-mobile">
                                 Latest News and Notifications
                             </h2>
                         </div>
                         <button
                             onClick={() => navigate('/blog')}
-                            className="text-indigo-600 dark:text-indigo-400 text-xs font-black uppercase tracking-widest flex items-center gap-1 hover:text-indigo-700 transition-colors group news-view-all"
+                            className="text-secondary-600 dark:text-secondary-400 text-xs font-black uppercase tracking-widest flex items-center gap-1 hover:text-secondary-700 transition-colors group news-view-all"
                         >
                             View All <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
                         </button>
@@ -144,7 +144,7 @@ const NewsNotifications: React.FC = () => {
                         {/* Premium Navigation Arrows */}
                         <button
                             onClick={() => scroll('left')}
-                            className="absolute -left-6 top-1/2 -translate-y-1/2 z-20 p-2.5 rounded-full bg-white dark:bg-slate-800 shadow-xl border border-slate-100 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all opacity-0 group-hover/carousel:opacity-100 hidden lg:flex items-center justify-center hover:scale-110 active:scale-90 border-r-0"
+                            className="absolute -left-6 top-1/2 -translate-y-1/2 z-20 p-2.5 rounded-full bg-white dark:bg-neutral-800 shadow-xl border border-neutral-100 dark:border-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-all opacity-0 group-hover/carousel:opacity-100 hidden lg:flex items-center justify-center hover:scale-110 active:scale-90 border-r-0"
                         >
                             <ChevronLeft size={22} className="stroke-[2.5]" />
                         </button>
@@ -161,9 +161,9 @@ const NewsNotifications: React.FC = () => {
                                         href={news.link}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="flex items-start gap-4 p-2 rounded-2xl w-full group cursor-pointer hover:bg-slate-50/80 dark:hover:bg-white/5 transition-all duration-300"
+                                        className="flex items-start gap-4 p-2 rounded-2xl w-full group cursor-pointer hover:bg-neutral-50/80 dark:hover:bg-white/5 transition-all duration-300"
                                     >
-                                        <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden flex-shrink-0 shadow-md ring-1 ring-slate-100 dark:ring-slate-800 news-image-mobile">
+                                        <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden flex-shrink-0 shadow-md ring-1 ring-neutral-100 dark:ring-neutral-800 news-image-mobile">
                                             <img
                                                 src={news.image}
                                                 alt={news.title}
@@ -180,16 +180,16 @@ const NewsNotifications: React.FC = () => {
                                             <span className="text-[9px] font-black text-rose-500 dark:text-rose-400 uppercase tracking-wider news-item-category">
                                                 {news.category}
                                             </span>
-                                            <h4 className="text-[13px] font-bold text-slate-800 dark:text-slate-100 leading-[1.3] line-clamp-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors news-item-title">
+                                            <h4 className="text-[13px] font-bold text-neutral-800 dark:text-neutral-100 leading-[1.3] line-clamp-2 group-hover:text-secondary-600 dark:group-hover:text-secondary-400 transition-colors news-item-title">
                                                 {news.title}
                                             </h4>
-                                            <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 mt-0.5 news-item-date">
+                                            <p className="text-[10px] font-bold text-neutral-400 dark:text-neutral-500 mt-0.5 news-item-date">
                                                 {news.date}
                                             </p>
                                         </div>
                                     </a>
                                     {index !== newsItems.length - 1 && (
-                                        <div className="h-12 w-[1px] bg-slate-100 dark:bg-slate-800 ml-4 hidden lg:block flex-shrink-0 opacity-60" />
+                                        <div className="h-12 w-[1px] bg-neutral-100 dark:bg-neutral-800 ml-4 hidden lg:block flex-shrink-0 opacity-60" />
                                     )}
                                 </div>
                             ))}
@@ -197,7 +197,7 @@ const NewsNotifications: React.FC = () => {
 
                         <button
                             onClick={() => scroll('right')}
-                            className="absolute -right-6 top-1/2 -translate-y-1/2 z-20 p-2.5 rounded-full bg-white dark:bg-slate-800 shadow-xl border border-slate-100 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all opacity-0 group-hover/carousel:opacity-100 flex items-center justify-center hover:scale-110 active:scale-90"
+                            className="absolute -right-6 top-1/2 -translate-y-1/2 z-20 p-2.5 rounded-full bg-white dark:bg-neutral-800 shadow-xl border border-neutral-100 dark:border-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-all opacity-0 group-hover/carousel:opacity-100 flex items-center justify-center hover:scale-110 active:scale-90"
                         >
                             <ChevronRight size={22} className="stroke-[2.5]" />
                         </button>

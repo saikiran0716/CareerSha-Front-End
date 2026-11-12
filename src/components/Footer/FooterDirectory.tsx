@@ -19,15 +19,15 @@ const FooterDirectory: React.FC<FooterDirectoryProps> = ({ onNavigate }) => {
                     const isOpen = openSection === category.title;
                     const isLast = index === footerNavigation.length - 1;
                     return (
-                        <div key={category.title} className={`${!isLast ? 'border-b border-gray-800/50' : ''} md:border-none pb-6 md:pb-0`}>
+                        <div key={category.title} className={`${!isLast ? 'border-b border-neutral-800/50' : ''} md:border-none pb-6 md:pb-0`}>
                             <button
                                 onClick={() => toggleSection(category.title)}
                                 className="w-full flex items-center justify-between md:cursor-default md:pointer-events-none group py-2 md:py-0"
                             >
-                                <h4 className="text-white font-black uppercase tracking-[0.2em] md:mb-6 md:pb-3 md:border-b md:border-gray-800/50 text-[10px] xs:text-[11px] ms:text-xs">
+                                <h4 className="text-white font-black uppercase tracking-[0.2em] md:mb-6 md:pb-3 md:border-b md:border-neutral-800/50 text-[10px] xs:text-[11px] ms:text-xs">
                                     {category.title}
                                 </h4>
-                                <span className={`md:hidden transition-transform duration-300 text-gray-500 ${isOpen ? 'rotate-180' : ''}`}>
+                                <span className={`md:hidden transition-transform duration-300 text-neutral-500 ${isOpen ? 'rotate-180' : ''}`}>
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                                         <polyline points="6 9 12 15 18 9"></polyline>
                                     </svg>
@@ -40,7 +40,7 @@ const FooterDirectory: React.FC<FooterDirectoryProps> = ({ onNavigate }) => {
                                         <li key={idx}>
                                             <button
                                                 onClick={() => onNavigate?.(link.url)}
-                                                className="text-gray-400 hover:text-indigo-400 hover:translate-x-1 transition-all duration-300 text-[10px] xs:text-[11px] ms:text-xs text-left w-full font-bold uppercase tracking-widest py-1 md:py-0"
+                                                className="text-neutral-400 hover:text-secondary-400 hover:translate-x-1 transition-all duration-300 text-[10px] xs:text-[11px] ms:text-xs text-left w-full font-bold uppercase tracking-widest py-1 md:py-0"
                                             >
                                                 {link.name}
                                             </button>
@@ -54,16 +54,16 @@ const FooterDirectory: React.FC<FooterDirectoryProps> = ({ onNavigate }) => {
             </div>
 
             {/* City Explorer */}
-            <div className="mb-12 pt-8 border-t border-gray-800/50">
+            <div className="mb-12 pt-8 border-t border-neutral-800/50">
                 <h4 className="text-white font-black uppercase tracking-[0.2em] mb-6 text-xs ms:text-sm text-center md:text-left">Explore Colleges By City</h4>
-                <div className="grid grid-cols-2 xs:grid-cols-3 gap-x-4 gap-y-3 ms:gap-x-6 ms:gap-y-4 text-gray-500 text-[10px] xs:text-[11px] ms:text-xs font-bold uppercase tracking-wider mb-6">
+                <div className="grid grid-cols-2 xs:grid-cols-3 gap-x-4 gap-y-3 ms:gap-x-6 ms:gap-y-4 text-neutral-500 text-[10px] xs:text-[11px] ms:text-xs font-bold uppercase tracking-wider mb-6">
                     {['New Delhi', 'Mumbai', 'Bangalore', 'Chennai', 'Hyderabad', 'Pune', 'Kolkata', 'Ahmedabad', 'Jaipur', 'Lucknow', 'Indore', 'Bhopal', 'Chandigarh', 'Coimbatore', 'Nagpur', 'Noids', 'Gurgaon'].map(city => {
                         const cityPath = `/city/${city.toLowerCase().replace(' ', '-')}`;
                         return (
                             <button
                                 key={city}
                                 onClick={() => onNavigate?.(cityPath)}
-                                className="hover:text-white transition-all duration-300 border-b border-transparent hover:border-indigo-500 pb-1 text-center md:text-left"
+                                className="hover:text-white transition-all duration-300 border-b border-transparent hover:border-secondary-500 pb-1 text-center md:text-left"
                             >
                                 {city}
                             </button>
@@ -71,7 +71,7 @@ const FooterDirectory: React.FC<FooterDirectoryProps> = ({ onNavigate }) => {
                     })}
                 </div>
                 <div className="text-center md:text-left">
-                    <button className="text-indigo-500 font-extrabold hover:text-indigo-400 transition-colors uppercase tracking-[0.2em] text-[10px] xs:text-[11px]">View All Cities &rarr;</button>
+                    <button className="text-secondary-500 font-extrabold hover:text-secondary-400 transition-colors uppercase tracking-[0.2em] text-[10px] xs:text-[11px]">View All Cities &rarr;</button>
                 </div>
             </div>
         </>

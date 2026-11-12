@@ -4,7 +4,7 @@ import { ScholarshipPredictor } from './ScholarshipPredictor';
 
 const ScholarshipPredictorPage: React.FC = () => {
   return (
-    <div className="w-full bg-[#f8fafc] min-h-screen">
+    <div className="w-full bg-neutral-50 min-h-screen">
       <SEO
         title="Scholarship Predictor 2026 | CareerSha"
         description="Find scholarships you're eligible for and plan your academic journey with confidence using our AI Scholarship Predictor."

@@ -9,10 +9,10 @@ interface PredictorTagsProps {
 const PREDICTOR_DATA = [
     { id: 'rank', label: 'JEE MAINS Rank Predictor', tag: 'Popular', tagColor: 'bg-orange-500', url: '/rank/jee-main' },
     { id: 'rank', label: 'NEET Rank Predictor', tag: 'Popular', tagColor: 'bg-orange-500', url: '/rank/neet' },
-    { id: 'predictor', label: 'College Predictor', tag: 'Top Pick', tagColor: 'bg-indigo-500', url: '/college-matcher' },
-    { id: 'rank', label: 'EAMCET Rank Predictor', tag: 'Trending', tagColor: 'bg-emerald-500', url: '/rank/ts-eamcet' },
+    { id: 'predictor', label: 'College Predictor', tag: 'Top Pick', tagColor: 'bg-secondary-500', url: '/college-matcher' },
+    { id: 'rank', label: 'EAMCET Rank Predictor', tag: 'Trending', tagColor: 'bg-success-500', url: '/rank/ts-eamcet' },
     { id: 'results', label: 'Exam Results', tag: 'Most Viewed', tagColor: 'bg-[#ec4899]' },
-    // { id: 'library', label: 'Career Roadmaps', tag: 'Hot', tagColor: 'bg-[#8b5cf6]' }
+    // { id: 'library', label: 'Career Roadmaps', tag: 'Hot', tagColor: 'bg-accent-500' }
 ];
 
 const PredictorTags: React.FC<PredictorTagsProps> = ({ onNavigate, onStartCounseling }) => {
@@ -31,8 +31,8 @@ const PredictorTags: React.FC<PredictorTagsProps> = ({ onNavigate, onStartCounse
                         height: auto !important;
                         min-height: 80px !important;
                         padding: 0.75rem 1rem !important;
-                        background-color: #f8fafc !important;
-                        border: 1px solid #e2e8f0 !important;
+                        background-color: rgb(var(--color-neutral-50)) !important;
+                        border: 1px solid rgb(var(--color-neutral-200)) !important;
                         box-shadow: none !important;
                         justify-content: center !important;
                         border-radius: 1rem !important;
@@ -42,7 +42,7 @@ const PredictorTags: React.FC<PredictorTagsProps> = ({ onNavigate, onStartCounse
                         font-size: 11px !important;
                         white-space: normal !important;
                         text-align: center !important;
-                        color: #334155 !important;
+                        color: rgb(var(--color-neutral-700)) !important;
                         overflow: visible !important;
                         text-transform: none !important;
                         letter-spacing: normal !important;
@@ -71,8 +71,8 @@ const PredictorTags: React.FC<PredictorTagsProps> = ({ onNavigate, onStartCounse
                             </span>
                             {(item.tag === 'Trending' || item.tag === 'Most Trending') && (
                                 <span className="flex h-1 w-1 translate-y-[-1px]">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-1 w-1 bg-amber-500"></span>
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-warning-400 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-1 w-1 bg-warning-500"></span>
                                 </span>
                             )}
                         </div>
@@ -88,7 +88,7 @@ const PredictorTags: React.FC<PredictorTagsProps> = ({ onNavigate, onStartCounse
                                 }
                                 onNavigate(item.id);
                             }}
-                            className="w-full px-5 py-4 bg-white/60 dark:bg-slate-900/40 backdrop-blur-2xl rounded-[1.25rem] border border-slate-300 dark:border-slate-700 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] hover:bg-white dark:hover:bg-slate-800/60 transition-all duration-300 flex items-center justify-center group/btn active:scale-[0.98] predictor-btn-1024 predictor-btn-mobile"
+                            className="w-full px-5 py-4 bg-white/60 dark:bg-neutral-900/40 backdrop-blur-2xl rounded-[1.25rem] border border-neutral-300 dark:border-neutral-700 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] hover:bg-white dark:hover:bg-neutral-800/60 transition-all duration-300 flex items-center justify-center group/btn active:scale-[0.98] predictor-btn-1024 predictor-btn-mobile"
                         >
                             <div className="flex-1 flex items-center justify-center min-w-0">
                                 <span className="text-[12px] font-bold tracking-[0.1em] uppercase predictor-label-1024 predictor-label-mobile">

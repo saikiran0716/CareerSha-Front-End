@@ -4,7 +4,7 @@ import { AdmissionChancesPredictor } from './AdmissionChancesPredictor';
 
 const AdmissionChancesPage: React.FC = () => {
   return (
-    <div className="w-full bg-[#f8fafc] min-h-screen">
+    <div className="w-full bg-neutral-50 min-h-screen">
       <SEO
         title="Admission Chances Predictor 2026 | CareerSha"
         description="Get an accurate idea of your admission chances in top colleges based on past year cutoffs, your profile and preferences."

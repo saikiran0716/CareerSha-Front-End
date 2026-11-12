@@ -1,53 +1,37 @@
+@import './styles/theme.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-    --border: 214.3 31.8% 91.4%;
-    /* CareerSha primary color tokens - change these to update site primary colors */
-    --cs-primary: 11,95,255; /* use as rgb() or with alpha */
-    --cs-primary-hex: #0b5fff;
-    --cs-primary-600: #2563eb;
-    --cs-primary-15: rgba(11,95,255,0.12);
-    --cs-accent: 6,182,212;
-    --cs-accent-15: rgba(6,182,212,0.12);
-}
+/* All colors live in ./styles/theme.css — edit that file to re-theme the site. */
 
-/* Primary color utilities (use these classes where you previously used Tailwind blues) */
-.text-cs-primary { color: var(--cs-primary-hex) !important; }
-.bg-cs-primary { background-color: var(--cs-primary-600) !important; }
-.bg-cs-primary-soft { background-color: var(--cs-primary-15) !important; }
-.ring-cs-primary { box-shadow: 0 0 0 6px rgba(var(--cs-primary), 0.12); }
-.border-cs-primary { border-color: var(--cs-primary-600) !important; }
-.hover\:bg-cs-primary:hover { background-color: var(--cs-primary-600) !important; }
-.hover\:text-cs-primary:hover { color: var(--cs-primary-hex) !important; }
-
-.dark {
-    --border: 217.2 32.6% 17.5%;
-}
+/* Legacy brand utilities, now backed by the global theme */
+.text-cs-primary { color: rgb(var(--color-primary-600)) !important; }
+.bg-cs-primary { background-color: rgb(var(--color-primary-600)) !important; }
+.bg-cs-primary-soft { background-color: rgb(var(--color-primary-600) / 0.12) !important; }
+.ring-cs-primary { box-shadow: 0 0 0 6px rgb(var(--color-primary-600) / 0.12); }
+.border-cs-primary { border-color: rgb(var(--color-primary-600)) !important; }
+.hover\:bg-cs-primary:hover { background-color: rgb(var(--color-primary-600)) !important; }
+.hover\:text-cs-primary:hover { color: rgb(var(--color-primary-600)) !important; }
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #fcfdfe;
-    color: #0f172a;
+    background-color: rgb(var(--color-page-bg));
+    color: rgb(var(--color-page-text));
     scroll-behavior: smooth;
-}
-
-.dark body {
-    background-color: #020617;
-    color: #f1f5f9;
 }
 
 .glass-nav {
     background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(16px) saturate(180%);
     -webkit-backdrop-filter: blur(16px) saturate(180%);
-    border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+    border-bottom: 1px solid rgb(var(--color-neutral-200) / 0.5);
 }
 
 .dark .glass-nav {
-    background: rgba(2, 6, 23, 0.7);
-    border-bottom: 1px solid rgba(30, 41, 59, 0.5);
+    background: rgb(var(--color-neutral-950) / 0.7);
+    border-bottom: 1px solid rgb(var(--color-neutral-800) / 0.5);
 }
 
 @keyframes fadeIn {
@@ -158,16 +142,16 @@ body {
 
 .premium-card {
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    border: 1px solid rgba(226, 232, 240, 0.8);
+    border: 1px solid rgb(var(--color-neutral-200) / 0.8);
 }
 
 .dark .premium-card {
-    border: 1px solid rgba(30, 41, 59, 0.8);
+    border: 1px solid rgb(var(--color-neutral-800) / 0.8);
 }
 
 .premium-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 40px -12px rgba(79, 105, 223, 0.15);
+    box-shadow: 0 20px 40px -12px rgb(var(--color-secondary-600) / 0.15);
 }
 
 .nav-link {
@@ -182,12 +166,12 @@ body {
     left: 0;
     width: 0;
     height: 2px;
-    background: #4f69df;
+    background: rgb(var(--color-secondary-600));
     transition: width 0.3s ease;
 }
 
 .nav-link.active {
-    color: #4f69df;
+    color: rgb(var(--color-secondary-600));
 }
 
 .nav-link.active::after {
@@ -201,28 +185,28 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background: rgba(226, 232, 240, 0.4);
+    background: rgb(var(--color-neutral-200) / 0.4);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
+    background: rgb(var(--color-neutral-300));
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
+    background: rgb(var(--color-neutral-400));
 }
 
 .dark ::-webkit-scrollbar-track {
-    background: rgba(30, 41, 59, 0.4);
+    background: rgb(var(--color-neutral-800) / 0.4);
 }
 
 .dark ::-webkit-scrollbar-thumb {
-    background: #475569;
+    background: rgb(var(--color-neutral-600));
 }
 
 .dark ::-webkit-scrollbar-thumb:hover {
-    background: #64748b;
+    background: rgb(var(--color-neutral-500));
 }
 
 /* Glassmorphism Utilities */

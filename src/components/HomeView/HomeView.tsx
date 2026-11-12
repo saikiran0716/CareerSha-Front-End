@@ -58,8 +58,8 @@ const quickTools: QuickTool[] = [
     description: 'Predict your admission based on rank',
     icon: GraduationCap,
     href: '/college-matcher',
-    bgClass: 'bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400',
-    iconClass: 'text-blue-600 dark:text-blue-400',
+    bgClass: 'bg-primary-50 dark:bg-primary-950/40 text-primary-600 dark:text-primary-400',
+    iconClass: 'text-primary-600 dark:text-primary-400',
     highlight: true,
   },
   {
@@ -67,24 +67,24 @@ const quickTools: QuickTool[] = [
     description: 'Compare fees, placements, cutoffs & more',
     icon: Building2,
     href: '/college-matcher',
-    bgClass: 'bg-purple-50 dark:bg-purple-950/40 text-purple-600 dark:text-purple-400',
-    iconClass: 'text-purple-600 dark:text-purple-400',
+    bgClass: 'bg-accent-50 dark:bg-accent-950/40 text-accent-600 dark:text-accent-400',
+    iconClass: 'text-accent-600 dark:text-accent-400',
   },
   {
     title: 'Cutoff Analyzer',
     description: 'Check previous year cutoffs',
     icon: BarChart3,
     href: '/results',
-    bgClass: 'bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400',
-    iconClass: 'text-amber-600 dark:text-amber-400',
+    bgClass: 'bg-warning-50 dark:bg-warning-950/40 text-warning-600 dark:text-warning-400',
+    iconClass: 'text-warning-600 dark:text-warning-400',
   },
   {
     title: 'Rank Converter',
     description: 'Convert ranks across exams',
     icon: Target,
     href: '/rank-estimator',
-    bgClass: 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400',
-    iconClass: 'text-emerald-600 dark:text-emerald-400',
+    bgClass: 'bg-success-50 dark:bg-success-950/40 text-success-600 dark:text-success-400',
+    iconClass: 'text-success-600 dark:text-success-400',
     highlight: true,
   },
   {
@@ -119,28 +119,28 @@ const liveUpdates: UpdateItem[] = [
     description: 'Round 1 registration open',
     time: '15m ago',
     icon: BadgeCheck,
-    tone: 'text-blue-600 bg-blue-50 dark:bg-blue-950/40 dark:text-blue-400',
+    tone: 'text-primary-600 bg-primary-50 dark:bg-primary-950/40 dark:text-primary-400',
   },
   {
     title: 'CUET 2024 Admissions',
     description: 'Registrations open now',
     time: '1h ago',
     icon: Landmark,
-    tone: 'text-purple-600 bg-purple-50 dark:bg-purple-950/40 dark:text-purple-400',
+    tone: 'text-accent-600 bg-accent-50 dark:bg-accent-950/40 dark:text-accent-400',
   },
   {
     title: 'UPSC Exam Notification',
     description: 'Apply before last date',
     time: '3h ago',
     icon: Sparkles,
-    tone: 'text-amber-600 bg-amber-50 dark:bg-amber-950/40 dark:text-amber-400',
+    tone: 'text-warning-600 bg-warning-50 dark:bg-warning-950/40 dark:text-warning-400',
   },
 ];
 
 const communityThreads = [
-  { author: 'Aman Kumar', title: 'Is CSE in Tier-2 college worth it in 2024?', replies: 23, time: '2h ago', avatar: 'AK', avatarBg: 'bg-indigo-600 text-white' },
+  { author: 'Aman Kumar', title: 'Is CSE in Tier-2 college worth it in 2024?', replies: 23, time: '2h ago', avatar: 'AK', avatarBg: 'bg-secondary-600 text-white' },
   { author: 'Neha Singh', title: 'Best colleges for biotechnology in India?', replies: 18, time: '4h ago', avatar: 'NS', avatarBg: 'bg-pink-600 text-white' },
-  { author: 'Rohit Verma', title: 'Which branch has the best future?', replies: 31, time: '6h ago', avatar: 'RV', avatarBg: 'bg-amber-600 text-white' },
+  { author: 'Rohit Verma', title: 'Which branch has the best future?', replies: 31, time: '6h ago', avatar: 'RV', avatarBg: 'bg-warning-600 text-white' },
 ];
 
 const jobOpenings = [
@@ -149,21 +149,21 @@ const jobOpenings = [
     company: 'TCS Digital',
     location: 'Bangalore / Remote',
     type: 'Full-time',
-    color: 'text-indigo-600 bg-indigo-50 dark:bg-indigo-900/30 dark:text-indigo-400 border-indigo-200 dark:border-indigo-800'
+    color: 'text-secondary-600 bg-secondary-50 dark:bg-secondary-900/30 dark:text-secondary-400 border-secondary-200 dark:border-secondary-800'
   },
   {
     role: 'Business Analyst',
     company: 'Deloitte',
     location: 'Mumbai',
     type: 'Entry Level',
-    color: 'text-blue-600 bg-blue-50 dark:bg-blue-900/30 dark:text-blue-400 border-blue-200 dark:border-blue-800'
+    color: 'text-primary-600 bg-primary-50 dark:bg-primary-900/30 dark:text-primary-400 border-primary-200 dark:border-primary-800'
   },
   {
     role: 'Clinical Data Trainee',
     company: 'Sun Pharma',
     location: 'Pune',
     type: 'Internship',
-    color: 'text-emerald-600 bg-emerald-50 dark:bg-emerald-900/30 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800'
+    color: 'text-success-600 bg-success-50 dark:bg-success-900/30 dark:text-success-400 border-success-200 dark:border-success-800'
   }
 ];
 
@@ -181,7 +181,7 @@ const collegeCollections = [
     count: '500+ Colleges',
     route: '/engineering',
     image: 'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=800&q=80',
-    color: 'from-blue-600/90 to-blue-900/90',
+    color: 'from-primary-600/90 to-primary-900/90',
   },
   {
     title: 'Best Medical Colleges',
@@ -189,7 +189,7 @@ const collegeCollections = [
     count: '200+ Colleges',
     route: '/medical',
     image: 'https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?auto=format&fit=crop&w=800&q=80',
-    color: 'from-red-600/90 to-red-900/90',
+    color: 'from-danger-600/90 to-danger-900/90',
   },
   {
     title: 'Top MBA Colleges',
@@ -197,7 +197,7 @@ const collegeCollections = [
     count: '150+ Colleges',
     route: '/mba',
     image: 'https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=800&q=80',
-    color: 'from-emerald-600/90 to-emerald-900/90',
+    color: 'from-success-600/90 to-success-900/90',
   },
   {
     title: 'Colleges Under ₹5 Lakhs',
@@ -205,7 +205,7 @@ const collegeCollections = [
     count: '300+ Colleges',
     route: '/search',
     image: 'https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=800&q=80',
-    color: 'from-amber-600/90 to-amber-900/90',
+    color: 'from-warning-600/90 to-warning-900/90',
   },
   {
     title: 'Top Government Colleges',
@@ -213,7 +213,7 @@ const collegeCollections = [
     count: '250+ Colleges',
     route: '/search',
     image: 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=800&q=80',
-    color: 'from-purple-600/90 to-purple-900/90',
+    color: 'from-accent-600/90 to-accent-900/90',
   },
 ];
 
@@ -251,11 +251,11 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
   };
 
   return (
-    <div className="relative min-h-screen bg-[#f8fafd] dark:bg-slate-950 text-slate-900 dark:text-white transition-colors duration-300">
+    <div className="relative min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-white transition-colors duration-300">
       {/* Background soft glow blobs */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-[5%] left-[10%] w-[35%] h-[35%] bg-[#06122c]/10 dark:bg-[#06122c]/20 rounded-full blur-[120px] animate-pulse-soft" />
-        <div className="absolute top-[20%] right-[10%] w-[30%] h-[30%] bg-[#0a192f]/10 dark:bg-[#0a192f]/20 rounded-full blur-[100px]" />
+        <div className="absolute top-[5%] left-[10%] w-[35%] h-[35%] bg-primary-950/10 dark:bg-primary-950/20 rounded-full blur-[120px] animate-pulse-soft" />
+        <div className="absolute top-[20%] right-[10%] w-[30%] h-[30%] bg-primary-950/10 dark:bg-primary-950/20 rounded-full blur-[100px]" />
       </div>
 
       <main className="mx-auto max-w-[1440px] px-6 py-6">
@@ -269,21 +269,21 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
               {/* Hero Left Info */}
               <div className="space-y-8">
                 <div className="space-y-4">
-                  <h1 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-extrabold leading-[1.18] tracking-tight text-slate-900 dark:text-white">
+                  <h1 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-extrabold leading-[1.18] tracking-tight text-neutral-900 dark:text-white">
                     Your Complete Career <br className="hidden sm:inline" />
 
                     {/* TODO: remove the roadmap content */}
-                    Roadmap for <span className="text-blue-600 dark:text-blue-400">Indian Education</span>
+                    Roadmap for <span className="text-primary-600 dark:text-primary-400">Indian Education</span>
                   </h1>
-                  <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm max-w-xl leading-relaxed">
+                  <p className="text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm max-w-xl leading-relaxed">
                     Explore 50K+ colleges, 200+ entrance exams, cutoffs, placements, and get personalized AI-powered guidance to shape your future.
                   </p>
                 </div>
 
                 {/* Hero Search Bar */}
                 <div className="max-w-xl">
-                  <div className="relative flex items-center bg-white dark:bg-slate-900 rounded-full px-4 py-2.5 shadow-[0_12px_30px_rgba(15,23,42,0.05)] border border-slate-100 dark:border-slate-800 transition-all focus-within:ring-2 focus-within:ring-blue-500/20">
-                    <Search className="h-5 w-5 text-slate-400 dark:text-slate-500 shrink-0" />
+                  <div className="relative flex items-center bg-white dark:bg-neutral-900 rounded-full px-4 py-2.5 shadow-[0_12px_30px_rgba(15,23,42,0.05)] border border-neutral-100 dark:border-neutral-800 transition-all focus-within:ring-2 focus-within:ring-primary-500/20">
+                    <Search className="h-5 w-5 text-neutral-400 dark:text-neutral-500 shrink-0" />
                     <input
                       type="text"
                       value={searchQuery}
@@ -295,11 +295,11 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                         }
                       }}
                       placeholder="Search colleges, exams, courses (e.g. IIT, NEET, MBA)..."
-                      className="mx-3 w-full bg-transparent text-sm text-slate-800 dark:text-slate-200 outline-none placeholder:text-slate-400 dark:placeholder:text-slate-500 font-medium"
+                      className="mx-3 w-full bg-transparent text-sm text-neutral-800 dark:text-neutral-200 outline-none placeholder:text-neutral-400 dark:placeholder:text-neutral-500 font-medium"
                     />
                     <button
                       onClick={goToSearch}
-                      className="h-10 w-10 shrink-0 flex items-center justify-center rounded-full bg-blue-600 text-white shadow-md hover:bg-blue-700 transition duration-200 hover:scale-105 active:scale-95"
+                      className="h-10 w-10 shrink-0 flex items-center justify-center rounded-full bg-primary-600 text-white shadow-md hover:bg-primary-700 transition duration-200 hover:scale-105 active:scale-95"
                       aria-label="Search"
                     >
                       <Search className="h-4 w-4" />
@@ -308,12 +308,12 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
 
                   {/* Trending tags */}
                   <div className="mt-4 flex flex-wrap items-center gap-2 text-xs">
-                    <span className="font-extrabold text-slate-500 dark:text-slate-400 uppercase tracking-wider mr-1">Trending:</span>
+                    <span className="font-extrabold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mr-1">Trending:</span>
                     {trendingTopics.map((topic) => (
                       <button
                         key={topic}
                         onClick={() => handleTrendingClick(topic)}
-                        className="rounded-full border border-slate-200/60 dark:border-slate-800 bg-white dark:bg-slate-900 px-3.5 py-1.5 font-bold text-slate-700 dark:text-slate-300 shadow-sm transition hover:border-blue-400 hover:text-blue-600 dark:hover:text-blue-400 dark:hover:border-blue-500"
+                        className="rounded-full border border-neutral-200/60 dark:border-neutral-800 bg-white dark:bg-neutral-900 px-3.5 py-1.5 font-bold text-neutral-700 dark:text-neutral-300 shadow-sm transition hover:border-primary-400 hover:text-primary-600 dark:hover:text-primary-400 dark:hover:border-primary-500"
                       >
                         {topic}
                       </button>
@@ -329,41 +329,41 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                   <img
                     src="/assets/images/college-study-elite.png"
                     alt="Students studying"
-                    className="w-full h-full object-cover rounded-[2rem] shadow-[0_20px_50px_rgba(15,23,42,0.1)] border border-white/80 dark:border-slate-800"
+                    className="w-full h-full object-cover rounded-[2rem] shadow-[0_20px_50px_rgba(15,23,42,0.1)] border border-white/80 dark:border-neutral-800"
                   />
-                  <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-tr from-slate-900/10 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-tr from-neutral-900/10 via-transparent to-transparent pointer-events-none" />
 
                   {/* Overlay 1: AI Recommendation */}
-                  <div className="absolute -top-4 -left-6 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-3.5 py-2.5 rounded-2xl shadow-xl border border-slate-100/50 dark:border-slate-800/50 flex items-center gap-3 animate-float transition-all hover:scale-[1.02]">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400">
+                  <div className="absolute -top-4 -left-6 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md px-3.5 py-2.5 rounded-2xl shadow-xl border border-neutral-100/50 dark:border-neutral-800/50 flex items-center gap-3 animate-float transition-all hover:scale-[1.02]">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-primary-50 dark:bg-primary-950/40 text-primary-600 dark:text-primary-400">
                       <Sparkles className="h-4.5 w-4.5" />
                     </div>
                     <div>
-                      <p className="text-[10px] font-black uppercase tracking-[0.15em] text-blue-600 dark:text-blue-400 leading-none mb-1">AI Recommendation</p>
-                      <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 leading-none">Find best colleges for you</p>
+                      <p className="text-[10px] font-black uppercase tracking-[0.15em] text-primary-600 dark:text-primary-400 leading-none mb-1">AI Recommendation</p>
+                      <p className="text-[11px] font-bold text-neutral-500 dark:text-neutral-400 leading-none">Find best colleges for you</p>
                     </div>
                   </div>
 
                   {/* Overlay 2: Admission Chance */}
-                  <div className="absolute top-1/4 -right-8 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-4 py-3 rounded-2xl shadow-xl border border-slate-100/50 dark:border-slate-800/50 text-center transition-all hover:scale-[1.02]">
+                  <div className="absolute top-1/4 -right-8 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md px-4 py-3 rounded-2xl shadow-xl border border-neutral-100/50 dark:border-neutral-800/50 text-center transition-all hover:scale-[1.02]">
                     <div className="flex items-center gap-1.5 justify-center mb-1">
-                      <Star className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400 fill-current" />
-                      <p className="text-[9px] font-black uppercase tracking-[0.1em] text-slate-500 dark:text-slate-400">Predict Admission Chance</p>
+                      <Star className="h-3.5 w-3.5 text-primary-600 dark:text-primary-400 fill-current" />
+                      <p className="text-[9px] font-black uppercase tracking-[0.1em] text-neutral-500 dark:text-neutral-400">Predict Admission Chance</p>
                     </div>
                     <div className="flex items-baseline justify-center gap-1">
-                      <span className="text-3xl font-black text-slate-900 dark:text-white leading-none">87%</span>
-                      <span className="text-emerald-500 text-xs font-black">&uarr;</span>
+                      <span className="text-3xl font-black text-neutral-900 dark:text-white leading-none">87%</span>
+                      <span className="text-success-500 text-xs font-black">&uarr;</span>
                     </div>
                   </div>
 
                   {/* Overlay 3: Cutoff Predictor */}
-                  <div className="absolute -bottom-4 left-6 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-4 py-3 rounded-2xl shadow-xl border border-slate-100/50 dark:border-slate-800/50 flex items-center gap-3 transition-all hover:scale-[1.02]">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400">
+                  <div className="absolute -bottom-4 left-6 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md px-4 py-3 rounded-2xl shadow-xl border border-neutral-100/50 dark:border-neutral-800/50 flex items-center gap-3 transition-all hover:scale-[1.02]">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-secondary-50 dark:bg-secondary-950/40 text-secondary-600 dark:text-secondary-400">
                       <Target className="h-4.5 w-4.5" />
                     </div>
                     <div>
-                      <p className="text-[10px] font-black uppercase tracking-[0.15em] text-slate-900 dark:text-white leading-none mb-1">Cutoff Predictor</p>
-                      <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 leading-none">Check previous year cutoffs</p>
+                      <p className="text-[10px] font-black uppercase tracking-[0.15em] text-neutral-900 dark:text-white leading-none mb-1">Cutoff Predictor</p>
+                      <p className="text-[11px] font-bold text-neutral-500 dark:text-neutral-400 leading-none">Check previous year cutoffs</p>
                     </div>
                   </div>
                 </div>
@@ -371,7 +371,7 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
             </section>
 
             {/* QUICK TOOLS GRID PANEL */}
-            <section className="bg-white dark:bg-slate-900 rounded-[2rem] p-6 shadow-sm border border-slate-100/80 dark:border-slate-800/60">
+            <section className="bg-white dark:bg-neutral-900 rounded-[2rem] p-6 shadow-sm border border-neutral-100/80 dark:border-neutral-800/60">
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
                 {quickTools.map((tool) => {
                   const Icon = tool.icon;
@@ -380,20 +380,20 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                       key={tool.title}
                       onClick={() => navigate(tool.href)}
                       className={`group flex flex-col items-center text-center p-4 rounded-2xl transition-all duration-300 border relative ${tool.highlight
-                        ? 'bg-blue-50/30 dark:bg-blue-950/10 border-blue-200/80 dark:border-blue-800/50 shadow-[0_4px_12px_rgba(59,130,246,0.04)] hover:border-blue-400 dark:hover:border-blue-600 hover:shadow-[0_12px_24px_-8px_rgba(59,130,246,0.15)] hover:-translate-y-1'
-                        : 'bg-slate-50/30 dark:bg-slate-900/30 border-slate-100/70 dark:border-slate-800/40 hover:bg-white dark:hover:bg-slate-800/60 hover:border-slate-200 dark:hover:border-slate-700 hover:shadow-[0_12px_24px_-8px_rgba(0,0,0,0.06)] hover:-translate-y-1'
+                        ? 'bg-primary-50/30 dark:bg-primary-950/10 border-primary-200/80 dark:border-primary-800/50 shadow-[0_4px_12px_rgba(59,130,246,0.04)] hover:border-primary-400 dark:hover:border-primary-600 hover:shadow-[0_12px_24px_-8px_rgba(59,130,246,0.15)] hover:-translate-y-1'
+                        : 'bg-neutral-50/30 dark:bg-neutral-900/30 border-neutral-100/70 dark:border-neutral-800/40 hover:bg-white dark:hover:bg-neutral-800/60 hover:border-neutral-200 dark:hover:border-neutral-700 hover:shadow-[0_12px_24px_-8px_rgba(0,0,0,0.06)] hover:-translate-y-1'
                         }`}
                     >
                       {tool.highlight && (
-                        <span className="absolute -top-2 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-wider bg-blue-600 text-white shadow-sm ring-1 ring-blue-500/20">
+                        <span className="absolute -top-2 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-wider bg-primary-600 text-white shadow-sm ring-1 ring-primary-500/20">
                           Popular
                         </span>
                       )}
                       <div className={`mb-3 flex h-11 w-11 items-center justify-center rounded-full ${tool.bgClass} shadow-sm group-hover:scale-110 transition-transform duration-300`}>
                         <Icon className="h-5 w-5" />
                       </div>
-                      <p className="text-xs font-extrabold text-slate-900 dark:text-white leading-tight mb-1">{tool.title}</p>
-                      <p className="text-[10px] text-slate-500 dark:text-slate-400 leading-snug">{tool.description}</p>
+                      <p className="text-xs font-extrabold text-neutral-900 dark:text-white leading-tight mb-1">{tool.title}</p>
+                      <p className="text-[10px] text-neutral-500 dark:text-neutral-400 leading-snug">{tool.description}</p>
                     </button>
                   );
                 })}
@@ -404,12 +404,12 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
             <section className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white">Top College Collections</h2>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">Browse the most searched categories in one place.</p>
+                  <h2 className="text-lg sm:text-xl font-black text-neutral-900 dark:text-white">Top College Collections</h2>
+                  <p className="text-xs text-neutral-500 dark:text-neutral-400">Browse the most searched categories in one place.</p>
                 </div>
                 <button
                   onClick={() => navigate('/search')}
-                  className="text-xs font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest hover:underline flex items-center gap-1"
+                  className="text-xs font-black text-primary-600 dark:text-primary-400 uppercase tracking-widest hover:underline flex items-center gap-1"
                 >
                   View all <ChevronRight className="h-3.5 w-3.5" />
                 </button>
@@ -420,7 +420,7 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                 {/* Left trigger arrow */}
                 <button
                   onClick={() => scrollCollections('left')}
-                  className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 hidden sm:flex h-10 w-10 items-center justify-center rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 shadow-md hover:bg-slate-50 dark:hover:bg-slate-800 transition hover:scale-105 active:scale-95 opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 hidden sm:flex h-10 w-10 items-center justify-center rounded-full bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 shadow-md hover:bg-neutral-50 dark:hover:bg-neutral-800 transition hover:scale-105 active:scale-95 opacity-0 group-hover:opacity-100 transition-opacity"
                   aria-label="Previous"
                 >
                   <ChevronLeft className="h-5 w-5" />
@@ -434,7 +434,7 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                     <button
                       key={collection.title}
                       onClick={() => navigate(collection.route)}
-                      className="group/card relative min-w-[240px] max-w-[240px] aspect-[4/5] overflow-hidden rounded-2xl text-left shadow-sm border border-slate-100 dark:border-slate-800 transition hover:shadow-md hover:-translate-y-1"
+                      className="group/card relative min-w-[240px] max-w-[240px] aspect-[4/5] overflow-hidden rounded-2xl text-left shadow-sm border border-neutral-100 dark:border-neutral-800 transition hover:shadow-md hover:-translate-y-1"
                     >
                       <img
                         src={collection.image}
@@ -442,7 +442,7 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                         className="h-full w-full object-cover transition-transform duration-500 group-hover/card:scale-105"
                       />
                       {/* Gradient overlay matching the visual card */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/30 to-transparent" />
 
                       <div className="absolute inset-x-0 bottom-0 p-4 space-y-2.5">
                         <span className="inline-flex rounded-full bg-white/20 dark:bg-black/25 backdrop-blur px-2.5 py-1 text-[9px] font-black uppercase tracking-widest text-white">
@@ -460,7 +460,7 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                 {/* Right trigger arrow */}
                 <button
                   onClick={() => scrollCollections('right')}
-                  className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 hidden sm:flex h-10 w-10 items-center justify-center rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 shadow-md hover:bg-slate-50 dark:hover:bg-slate-800 transition hover:scale-105 active:scale-95 opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 hidden sm:flex h-10 w-10 items-center justify-center rounded-full bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 shadow-md hover:bg-neutral-50 dark:hover:bg-neutral-800 transition hover:scale-105 active:scale-95 opacity-0 group-hover:opacity-100 transition-opacity"
                   aria-label="Next"
                 >
                   <ChevronRight className="h-5 w-5" />
@@ -472,14 +472,14 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
             <section className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
 
               {/* Exams Covered Card (Lavender/Purple) */}
-              <div className="relative overflow-hidden rounded-[2rem] p-6 bg-gradient-to-br from-indigo-50/80 to-white dark:from-indigo-950/15 dark:to-slate-900 border border-indigo-100/30 dark:border-slate-800 flex justify-between items-center shadow-sm">
+              <div className="relative overflow-hidden rounded-[2rem] p-6 bg-gradient-to-br from-secondary-50/80 to-white dark:from-secondary-950/15 dark:to-neutral-900 border border-secondary-100/30 dark:border-neutral-800 flex justify-between items-center shadow-sm">
                 <div className="space-y-1">
-                  <p className="text-[11px] font-black uppercase tracking-wider text-indigo-500 dark:text-indigo-400">Exams Covered</p>
-                  <p className="text-3xl font-black text-slate-900 dark:text-white">200+</p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 font-bold">National & State Exams</p>
+                  <p className="text-[11px] font-black uppercase tracking-wider text-secondary-500 dark:text-secondary-400">Exams Covered</p>
+                  <p className="text-3xl font-black text-neutral-900 dark:text-white">200+</p>
+                  <p className="text-xs text-neutral-500 dark:text-neutral-400 font-bold">National & State Exams</p>
                 </div>
                 {/* SVG Illustration of Graduation Cap on Book */}
-                <svg className="w-16 h-16 opacity-85 text-indigo-500 dark:text-indigo-400" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg className="w-16 h-16 opacity-85 text-secondary-500 dark:text-secondary-400" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
                   <path d="M6 17H58V50H6V17Z" strokeWidth="1.5" fill="currentColor" fillOpacity="0.05" />
                   <path d="M6 50A2.5 2.5 0 0 0 8.5 52.5H54" />
@@ -491,14 +491,14 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
               </div>
 
               {/* Colleges Listed Card (Green) */}
-              <div className="relative overflow-hidden rounded-[2rem] p-6 bg-gradient-to-br from-emerald-50/80 to-white dark:from-emerald-950/15 dark:to-slate-900 border border-emerald-100/30 dark:border-slate-800 flex justify-between items-center shadow-sm">
+              <div className="relative overflow-hidden rounded-[2rem] p-6 bg-gradient-to-br from-success-50/80 to-white dark:from-success-950/15 dark:to-neutral-900 border border-success-100/30 dark:border-neutral-800 flex justify-between items-center shadow-sm">
                 <div className="space-y-1">
-                  <p className="text-[11px] font-black uppercase tracking-wider text-emerald-500 dark:text-emerald-400">Colleges Listed</p>
-                  <p className="text-3xl font-black text-slate-900 dark:text-white">50,000+</p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 font-bold">Colleges Across India</p>
+                  <p className="text-[11px] font-black uppercase tracking-wider text-success-500 dark:text-success-400">Colleges Listed</p>
+                  <p className="text-3xl font-black text-neutral-900 dark:text-white">50,000+</p>
+                  <p className="text-xs text-neutral-500 dark:text-neutral-400 font-bold">Colleges Across India</p>
                 </div>
                 {/* SVG Illustration of School Building */}
-                <svg className="w-16 h-16 opacity-85 text-emerald-500 dark:text-emerald-400" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg className="w-16 h-16 opacity-85 text-success-500 dark:text-success-400" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M32 6 L6 20 V56 H58 V20 Z" fill="currentColor" fillOpacity="0.05" />
                   <path d="M6 20 L32 30 L58 20" />
                   <path d="M26 44 H38 V56 H26 Z" fill="currentColor" fillOpacity="0.1" />
@@ -511,14 +511,14 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
               </div>
 
               {/* Students Trust Us Card (Orange) */}
-              <div className="relative overflow-hidden rounded-[2rem] p-6 bg-gradient-to-br from-amber-50/80 to-white dark:from-amber-950/15 dark:to-slate-900 border border-amber-100/30 dark:border-slate-800 flex justify-between items-center shadow-sm">
+              <div className="relative overflow-hidden rounded-[2rem] p-6 bg-gradient-to-br from-warning-50/80 to-white dark:from-warning-950/15 dark:to-neutral-900 border border-warning-100/30 dark:border-neutral-800 flex justify-between items-center shadow-sm">
                 <div className="space-y-1">
-                  <p className="text-[11px] font-black uppercase tracking-wider text-amber-500 dark:text-amber-400">Students Trust Us</p>
-                  <p className="text-3xl font-black text-slate-900 dark:text-white">10 Lakh+</p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 font-bold">Happy Students</p>
+                  <p className="text-[11px] font-black uppercase tracking-wider text-warning-500 dark:text-warning-400">Students Trust Us</p>
+                  <p className="text-3xl font-black text-neutral-900 dark:text-white">10 Lakh+</p>
+                  <p className="text-xs text-neutral-500 dark:text-neutral-400 font-bold">Happy Students</p>
                 </div>
                 {/* SVG Illustration of Students */}
-                <svg className="w-16 h-16 opacity-85 text-amber-500 dark:text-amber-400" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg className="w-16 h-16 opacity-85 text-warning-500 dark:text-warning-400" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M18 28 C23.5 28 28 23.5 28 18 C28 12.5 23.5 8 18 8 C12.5 8 8 12.5 8 18 C8 23.5 12.5 28 18 28 Z" fill="currentColor" fillOpacity="0.05" />
                   <path d="M18 32 C10 32 4 38 4 46 V52 H32 V46 C32 38 26 32 18 32 Z" fill="currentColor" fillOpacity="0.1" />
                   <path d="M46 28 C51.5 28 56 23.5 56 18 C56 12.5 51.5 8 46 8 C40.5 8 36 12.5 36 18 C36 23.5 40.5 28 46 28 Z" fill="currentColor" fillOpacity="0.05" />
@@ -529,17 +529,17 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
             </section>
 
             {/* JOB OPENINGS */}
-            <section className="bg-white dark:bg-slate-900 rounded-[2rem] p-4 shadow-sm border border-slate-100/80 dark:border-slate-800/60 mt-4 premium-card">
+            <section className="bg-white dark:bg-neutral-900 rounded-[2rem] p-4 shadow-sm border border-neutral-100/80 dark:border-neutral-800/60 mt-4 premium-card">
               <div className="flex items-center justify-between mb-3">
                 <div>
-                  <h2 className="text-sm sm:text-base font-black text-slate-900 dark:text-white flex items-center gap-1.5">
-                    <Briefcase className="h-4 w-4 text-blue-500" />
+                  <h2 className="text-sm sm:text-base font-black text-neutral-900 dark:text-white flex items-center gap-1.5">
+                    <Briefcase className="h-4 w-4 text-primary-500" />
                     Latest Job & Internship Openings
                   </h2>
                 </div>
                 <button
                   onClick={() => navigate('/jobs')}
-                  className="text-[10px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest hover:underline flex items-center gap-1"
+                  className="text-[10px] font-black text-primary-600 dark:text-primary-400 uppercase tracking-widest hover:underline flex items-center gap-1"
                 >
                   View all <ArrowRight className="h-3 w-3" />
                 </button>
@@ -549,16 +549,16 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                 {jobOpenings.map((job, idx) => (
                   <div
                     key={idx}
-                    className={`group flex flex-col p-3 rounded-2xl border bg-white dark:bg-slate-900/50 hover:bg-slate-50 dark:hover:bg-slate-800 transition duration-300 hover:shadow-sm hover:-translate-y-0.5 ${job.color}`}
+                    className={`group flex flex-col p-3 rounded-2xl border bg-white dark:bg-neutral-900/50 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition duration-300 hover:shadow-sm hover:-translate-y-0.5 ${job.color}`}
                   >
                     <div className="flex justify-between items-start mb-2">
-                      <span className="px-2 py-0.5 rounded-md text-[9px] font-black uppercase tracking-wider bg-white/60 dark:bg-slate-950/60 shadow-sm border border-inherit">
+                      <span className="px-2 py-0.5 rounded-md text-[9px] font-black uppercase tracking-wider bg-white/60 dark:bg-neutral-950/60 shadow-sm border border-inherit">
                         {job.type}
                       </span>
                     </div>
 
                     <div className="mb-2">
-                      <p className="text-[13px] font-black leading-tight mb-0.5 text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{job.role}</p>
+                      <p className="text-[13px] font-black leading-tight mb-0.5 text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">{job.role}</p>
                       <p className="text-[9px] font-extrabold uppercase tracking-widest opacity-80">{job.company}</p>
                     </div>
 
@@ -567,7 +567,7 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                         <MapPin className="h-3 w-3" />
                         <span>{job.location}</span>
                       </div>
-                      <div className="h-6 w-6 rounded-full bg-white dark:bg-slate-800 border border-inherit flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <div className="h-6 w-6 rounded-full bg-white dark:bg-neutral-800 border border-inherit flex items-center justify-center group-hover:scale-110 transition-transform">
                         <ArrowRight className="h-3 w-3" />
                       </div>
                     </div>
@@ -581,12 +581,12 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
           <aside className="space-y-6">
 
             {/* LIVE UPDATES */}
-            <section className="bg-white dark:bg-slate-900 rounded-[2rem] p-5 shadow-sm border border-slate-100/80 dark:border-slate-800/60">
+            <section className="bg-white dark:bg-neutral-900 rounded-[2rem] p-5 shadow-sm border border-neutral-100/80 dark:border-neutral-800/60">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-wider">Live Updates</h2>
+                <h2 className="text-sm font-black text-neutral-900 dark:text-white uppercase tracking-wider">Live Updates</h2>
                 <button
                   onClick={() => navigate('/news')}
-                  className="text-[11px] font-black text-blue-600 dark:text-blue-400 hover:underline uppercase tracking-widest"
+                  className="text-[11px] font-black text-primary-600 dark:text-primary-400 hover:underline uppercase tracking-widest"
                 >
                   View all
                 </button>
@@ -598,18 +598,18 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                   return (
                     <div
                       key={idx}
-                      className="flex items-center gap-3.5 p-3 rounded-2xl border border-slate-50 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 hover:bg-slate-50 dark:hover:bg-slate-800 transition duration-200"
+                      className="flex items-center gap-3.5 p-3 rounded-2xl border border-neutral-50 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/50 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition duration-200"
                     >
                       <div className={`relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full ${item.tone} shadow-sm`}>
                         <Icon className="h-5 w-5" />
-                        <span className="absolute top-0 right-0 block h-2.5 w-2.5 rounded-full bg-red-500 ring-2 ring-white dark:ring-slate-900" />
+                        <span className="absolute top-0 right-0 block h-2.5 w-2.5 rounded-full bg-danger-500 ring-2 ring-white dark:ring-neutral-900" />
                       </div>
                       <div className="min-w-0 flex-1">
                         <div className="flex items-start justify-between gap-2">
-                          <p className="truncate text-xs font-extrabold text-slate-800 dark:text-slate-200 leading-tight">{item.title}</p>
-                          <span className="whitespace-nowrap text-[9px] font-bold text-slate-400 shrink-0">{item.time}</span>
+                          <p className="truncate text-xs font-extrabold text-neutral-800 dark:text-neutral-200 leading-tight">{item.title}</p>
+                          <span className="whitespace-nowrap text-[9px] font-bold text-neutral-400 shrink-0">{item.time}</span>
                         </div>
-                        <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium leading-snug mt-0.5">{item.description}</p>
+                        <p className="text-[10px] text-neutral-500 dark:text-neutral-400 font-medium leading-snug mt-0.5">{item.description}</p>
                       </div>
                     </div>
                   );
@@ -618,14 +618,14 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
             </section>
 
             {/* AI CAREER ASSISTANT */}
-            <section className="bg-white dark:bg-slate-900 rounded-[2rem] p-5 shadow-sm border border-slate-100/80 dark:border-slate-800/60">
+            <section className="bg-white dark:bg-neutral-900 rounded-[2rem] p-5 shadow-sm border border-neutral-100/80 dark:border-neutral-800/60">
               <div className="space-y-1 mb-4">
-                <p className="text-[10px] font-black uppercase tracking-[0.15em] text-blue-600 dark:text-blue-400">AI Career Assistant</p>
-                <p className="text-xs text-slate-500 dark:text-slate-400 font-bold leading-tight">Ask anything about colleges, exams, courses & careers.</p>
+                <p className="text-[10px] font-black uppercase tracking-[0.15em] text-primary-600 dark:text-primary-400">AI Career Assistant</p>
+                <p className="text-xs text-neutral-500 dark:text-neutral-400 font-bold leading-tight">Ask anything about colleges, exams, courses & careers.</p>
               </div>
 
-              <div className="relative flex items-center bg-slate-50 dark:bg-slate-950 rounded-full px-3 py-1.5 border border-slate-100 dark:border-slate-800">
-                <Search className="h-4.5 w-4.5 text-slate-400 dark:text-slate-500 shrink-0 ml-1" />
+              <div className="relative flex items-center bg-neutral-50 dark:bg-neutral-950 rounded-full px-3 py-1.5 border border-neutral-100 dark:border-neutral-800">
+                <Search className="h-4.5 w-4.5 text-neutral-400 dark:text-neutral-500 shrink-0 ml-1" />
                 <input
                   type="text"
                   value={assistantPrompt}
@@ -637,11 +637,11 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                     }
                   }}
                   placeholder="Ask me anything..."
-                  className="mx-2 w-full bg-transparent text-xs text-slate-800 dark:text-slate-200 outline-none placeholder:text-slate-400 dark:placeholder:text-slate-600 font-medium"
+                  className="mx-2 w-full bg-transparent text-xs text-neutral-800 dark:text-neutral-200 outline-none placeholder:text-neutral-400 dark:placeholder:text-neutral-600 font-medium"
                 />
                 <button
                   onClick={submitAssistantPrompt}
-                  className="h-8 w-8 shrink-0 flex items-center justify-center rounded-full bg-blue-600 text-white shadow-sm hover:bg-blue-700 transition"
+                  className="h-8 w-8 shrink-0 flex items-center justify-center rounded-full bg-primary-600 text-white shadow-sm hover:bg-primary-700 transition"
                   aria-label="Send query"
                 >
                   <ArrowRight className="h-4.5 w-4.5" />
@@ -650,12 +650,12 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
             </section>
 
             {/* STUDENT COMMUNITY */}
-            <section className="bg-white dark:bg-slate-900 rounded-[2rem] p-5 shadow-sm border border-slate-100/80 dark:border-slate-800/60">
+            <section className="bg-white dark:bg-neutral-900 rounded-[2rem] p-5 shadow-sm border border-neutral-100/80 dark:border-neutral-800/60">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-wider">Student Community</h2>
+                <h2 className="text-sm font-black text-neutral-900 dark:text-white uppercase tracking-wider">Student Community</h2>
                 <button
                   onClick={() => navigate('/blog')}
-                  className="text-[11px] font-black text-blue-600 dark:text-blue-400 hover:underline uppercase tracking-widest"
+                  className="text-[11px] font-black text-primary-600 dark:text-primary-400 hover:underline uppercase tracking-widest"
                 >
                   View all
                 </button>
@@ -668,8 +668,8 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                     key={tab}
                     onClick={() => setCommunityTab(tab)}
                     className={`px-3.5 py-1.5 rounded-lg border transition-all ${communityTab === tab
-                      ? 'bg-[#e0e9ff] dark:bg-blue-950/40 border-blue-200 dark:border-blue-800 text-blue-600 dark:text-blue-400'
-                      : 'bg-slate-50 dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
+                      ? 'bg-secondary-200 dark:bg-primary-950/40 border-primary-200 dark:border-primary-800 text-primary-600 dark:text-primary-400'
+                      : 'bg-neutral-50 dark:bg-neutral-900 border-neutral-100 dark:border-neutral-800 text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300'
                       }`}
                   >
                     {tab}
@@ -682,7 +682,7 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                 {communityThreads.map((thread, idx) => (
                   <div
                     key={idx}
-                    className="flex items-start gap-3 p-2.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-100/60 dark:border-slate-800/60 shadow-sm"
+                    className="flex items-start gap-3 p-2.5 rounded-2xl bg-white dark:bg-neutral-900 border border-neutral-100/60 dark:border-neutral-800/60 shadow-sm"
                   >
                     <div
                       className={`h-8.5 w-8.5 shrink-0 rounded-full flex items-center justify-center text-xs font-black shadow-sm ${thread.avatarBg}`}
@@ -690,16 +690,16 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                       {thread.avatar}
                     </div>
                     <div className="min-w-0 flex-1 space-y-1">
-                      <p className="text-xs font-extrabold text-slate-800 dark:text-slate-200 leading-snug line-clamp-2 hover:text-blue-600 dark:hover:text-blue-400 cursor-pointer">
+                      <p className="text-xs font-extrabold text-neutral-800 dark:text-neutral-200 leading-snug line-clamp-2 hover:text-primary-600 dark:hover:text-primary-400 cursor-pointer">
                         {thread.title}
                       </p>
-                      <div className="flex items-center gap-1.5 text-[9px] text-slate-400 font-extrabold uppercase">
-                        <span className="text-blue-600 dark:text-blue-400 font-black">{thread.author}</span>
+                      <div className="flex items-center gap-1.5 text-[9px] text-neutral-400 font-extrabold uppercase">
+                        <span className="text-primary-600 dark:text-primary-400 font-black">{thread.author}</span>
                         <span>•</span>
                         <span>{thread.time}</span>
                       </div>
                     </div>
-                    <div className="flex items-center gap-1.5 text-[10px] font-bold text-slate-400 shrink-0 self-center">
+                    <div className="flex items-center gap-1.5 text-[10px] font-bold text-neutral-400 shrink-0 self-center">
                       <MessageSquare className="h-3.5 w-3.5" />
                       <span>{thread.replies}</span>
                     </div>
@@ -709,19 +709,19 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
 
               <button
                 onClick={onStartCounseling}
-                className="mt-4 w-full rounded-2xl bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-black uppercase py-3.5 shadow-[0_8px_25px_rgba(37,99,235,0.2)] tracking-wider transition hover:scale-[1.01] active:scale-[0.99]"
+                className="mt-4 w-full rounded-2xl bg-primary-600 hover:bg-primary-700 text-white text-[11px] font-black uppercase py-3.5 shadow-[0_8px_25px_rgba(37,99,235,0.2)] tracking-wider transition hover:scale-[1.01] active:scale-[0.99]"
               >
                 Ask a Doubt
               </button>
             </section>
 
             {/* PERSONALIZED FOR YOU */}
-            <section className="bg-white dark:bg-slate-900 rounded-[2rem] p-5 shadow-sm border border-slate-100/80 dark:border-slate-800/60">
+            <section className="bg-white dark:bg-neutral-900 rounded-[2rem] p-5 shadow-sm border border-neutral-100/80 dark:border-neutral-800/60">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-wider">Personalized For You</h2>
+                <h2 className="text-sm font-black text-neutral-900 dark:text-white uppercase tracking-wider">Personalized For You</h2>
                 <button
                   onClick={() => navigate('/college-matcher')}
-                  className="text-[11px] font-black text-blue-600 dark:text-blue-400 hover:underline uppercase tracking-widest"
+                  className="text-[11px] font-black text-primary-600 dark:text-primary-400 hover:underline uppercase tracking-widest"
                 >
                   View all
                 </button>
@@ -733,26 +733,26 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                   const isTrichy = match.name === 'NIT Trichy';
                   const badgeColorClass = isRed
                     ? 'bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 border-rose-200/50 dark:border-rose-800/30'
-                    : 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border-emerald-200/50 dark:border-emerald-800/30';
-                  const badgeDotColorClass = isRed ? 'bg-rose-500' : 'bg-emerald-500';
+                    : 'bg-success-50 dark:bg-success-950/40 text-success-600 dark:text-success-400 border-success-200/50 dark:border-success-800/30';
+                  const badgeDotColorClass = isRed ? 'bg-rose-500' : 'bg-success-500';
 
                   const iconColorClass = isRed
                     ? 'bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 border-rose-100/30 dark:border-rose-900/30'
                     : isTrichy
-                      ? 'bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 border-indigo-100/30 dark:border-indigo-900/30'
-                      : 'bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 border-blue-100/30 dark:border-blue-900/30';
+                      ? 'bg-secondary-50 dark:bg-secondary-950/40 text-secondary-600 dark:text-secondary-400 border-secondary-100/30 dark:border-secondary-900/30'
+                      : 'bg-primary-50 dark:bg-primary-950/40 text-primary-600 dark:text-primary-400 border-primary-100/30 dark:border-primary-900/30';
 
                   return (
                     <div
                       key={idx}
-                      className="group flex items-center gap-3.5 p-3.5 rounded-2xl border border-slate-100/60 dark:border-slate-800/50 bg-white dark:bg-slate-900 shadow-sm hover:shadow-md hover:border-blue-100 dark:hover:border-blue-900/40 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
+                      className="group flex items-center gap-3.5 p-3.5 rounded-2xl border border-neutral-100/60 dark:border-neutral-800/50 bg-white dark:bg-neutral-900 shadow-sm hover:shadow-md hover:border-primary-100 dark:hover:border-primary-900/40 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
                     >
                       <div className={`flex h-9.5 w-9.5 shrink-0 items-center justify-center rounded-xl border ${iconColorClass} group-hover:scale-105 transition-transform duration-300`}>
                         <Landmark className="h-4.5 w-4.5" />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="truncate text-xs font-black text-slate-800 dark:text-slate-200 leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{match.name}</p>
-                        <p className="text-[10px] text-slate-500 dark:text-slate-400 font-bold leading-none mt-1.5">{match.course}</p>
+                        <p className="truncate text-xs font-black text-neutral-800 dark:text-neutral-200 leading-tight group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">{match.name}</p>
+                        <p className="text-[10px] text-neutral-500 dark:text-neutral-400 font-bold leading-none mt-1.5">{match.course}</p>
                       </div>
                       <span className={`shrink-0 flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[9px] font-black uppercase tracking-wider border shadow-sm ${badgeColorClass}`}>
                         <span className={`w-1.5 h-1.5 rounded-full ${badgeDotColorClass} animate-pulse`} />

@@ -94,24 +94,24 @@ const StudentForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
 
   return (
     <div className="py-10 px-4">
-      <div className="max-w-md mx-auto bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+      <div className="max-w-md mx-auto bg-white rounded-xl shadow-lg border border-neutral-200 p-6">
 
         {/* Stepper */}
         <div className="flex justify-between items-center mb-6 relative">
-          <div className="absolute top-1/2 left-0 w-full h-[2px] bg-gray-200 -z-10 -translate-y-1/2" />
+          <div className="absolute top-1/2 left-0 w-full h-[2px] bg-neutral-200 -z-10 -translate-y-1/2" />
           {[1, 2, 3].map((s) => (
             <div key={s} className="flex flex-col items-center">
               <div
                 className={`w-8 h-8 flex items-center justify-center rounded-full text-xs font-semibold ${step === s
-                  ? "bg-indigo-600 text-white"
+                  ? "bg-secondary-600 text-white"
                   : step > s
-                    ? "bg-green-500 text-white"
-                    : "bg-gray-200 text-gray-500"
+                    ? "bg-success-500 text-white"
+                    : "bg-neutral-200 text-neutral-500"
                   }`}
               >
                 {step > s ? "✓" : s}
               </div>
-              <span className="text-[10px] mt-1 text-gray-400 uppercase">
+              <span className="text-[10px] mt-1 text-neutral-400 uppercase">
                 {s === 1 ? "Academic" : s === 2 ? "Exams" : "Future"}
               </span>
             </div>
@@ -120,7 +120,7 @@ const StudentForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
 
         {/* Errors */}
         {errors.length > 0 && (
-          <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded text-red-600 text-xs">
+          <div className="mb-4 p-3 bg-danger-50 border border-danger-200 rounded text-danger-600 text-xs">
             <ul className="list-disc list-inside space-y-1">
               {errors.map((e, i) => (
                 <li key={i}>{e}</li>
@@ -133,7 +133,7 @@ const StudentForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
 
           {step === 1 && (
             <>
-              <h2 className="text-lg font-semibold text-gray-800">
+              <h2 className="text-lg font-semibold text-neutral-800">
                 Academic Profile
               </h2>
 
@@ -173,7 +173,7 @@ const StudentForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
 
           {step === 2 && (
             <>
-              <h2 className="text-lg font-semibold text-gray-800">
+              <h2 className="text-lg font-semibold text-neutral-800">
                 Exam Details
               </h2>
 
@@ -197,7 +197,7 @@ const StudentForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
 
           {step === 3 && (
             <>
-              <h2 className="text-lg font-semibold text-gray-800">
+              <h2 className="text-lg font-semibold text-neutral-800">
                 Future Goals
               </h2>
 
@@ -220,12 +220,12 @@ const StudentForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
           )}
 
           {/* Buttons */}
-          <div className="flex justify-between pt-4 border-t border-gray-100">
+          <div className="flex justify-between pt-4 border-t border-neutral-100">
             {step > 1 ? (
               <button
                 type="button"
                 onClick={prev}
-                className="text-xs px-3 py-1.5 bg-gray-100 rounded hover:bg-gray-200"
+                className="text-xs px-3 py-1.5 bg-neutral-100 rounded hover:bg-neutral-200"
               >
                 Back
               </button>
@@ -237,7 +237,7 @@ const StudentForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
               <button
                 type="button"
                 onClick={next}
-                className="text-xs px-4 py-1.5 bg-indigo-600 text-white rounded hover:bg-indigo-700"
+                className="text-xs px-4 py-1.5 bg-secondary-600 text-white rounded hover:bg-secondary-700"
               >
                 Next →
               </button>
@@ -245,7 +245,7 @@ const StudentForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="text-xs px-4 py-1.5 bg-indigo-600 text-white rounded hover:bg-indigo-700 disabled:opacity-50"
+                className="text-xs px-4 py-1.5 bg-secondary-600 text-white rounded hover:bg-secondary-700 disabled:opacity-50"
               >
                 {isLoading ? "Processing..." : "Generate"}
               </button>
@@ -271,14 +271,14 @@ const Input: React.FC<InputProps> = ({
   type = "text",
 }) => (
   <div>
-    <label className="block text-xs font-medium text-gray-600 mb-1">
+    <label className="block text-xs font-medium text-neutral-600 mb-1">
       {label}
     </label>
     <input
       type={type}
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
+      className="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm focus:ring-1 focus:ring-secondary-500 focus:border-secondary-500 outline-none"
     />
   </div>
 );

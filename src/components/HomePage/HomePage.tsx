@@ -98,11 +98,11 @@ const HomePage: React.FC<HomePageProps> = ({ user, setIsAuthModalOpen, onAskAI }
             </div>
 
             {homeViewMode === 'counseling' && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 p-4 backdrop-blur-md">
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-neutral-950/70 p-4 backdrop-blur-md">
                     <div className="relative max-h-[90vh] w-full max-w-4xl overflow-auto">
                         <button
                             onClick={() => setHomeViewMode('portal')}
-                            className="absolute right-4 top-4 z-50 rounded-full bg-white p-2 text-slate-900 shadow-lg transition-transform hover:scale-110"
+                            className="absolute right-4 top-4 z-50 rounded-full bg-white p-2 text-neutral-900 shadow-lg transition-transform hover:scale-110"
                         >
                             <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />

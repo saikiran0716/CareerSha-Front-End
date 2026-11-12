@@ -18,13 +18,13 @@ const NewsView: React.FC = () => {
     }, []);
 
     return (
-        <div className="w-full min-h-screen bg-[#f8faff] dark:bg-slate-950 animate-fade">
+        <div className="w-full min-h-screen bg-secondary-50 dark:bg-neutral-950 animate-fade">
             {/* Professional Header */}
-            <header className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-slate-100 dark:border-slate-800">
+            <header className="sticky top-0 z-50 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl border-b border-neutral-100 dark:border-neutral-800">
                 <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 h-20 flex items-center justify-between">
                     <button
                         onClick={() => navigate('/')}
-                        className="flex items-center gap-2 text-slate-600 dark:text-slate-400 font-bold hover:text-slate-900 dark:hover:text-white transition-colors group"
+                        className="flex items-center gap-2 text-neutral-600 dark:text-neutral-400 font-bold hover:text-neutral-900 dark:hover:text-white transition-colors group"
                     >
                         <ChevronLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
                         Back to Home
@@ -39,19 +39,19 @@ const NewsView: React.FC = () => {
                             <span className="w-2 h-2 bg-rose-600 rounded-full animate-pulse" />
                             Live Updates
                         </div>
-                        <h1 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white uppercase tracking-tighter leading-none">
-                            Latest News & <span className="text-indigo-600">Notifications</span>
+                        <h1 className="text-4xl md:text-5xl font-black text-neutral-900 dark:text-white uppercase tracking-tighter leading-none">
+                            Latest News & <span className="text-secondary-600">Notifications</span>
                         </h1>
-                        <p className="text-slate-500 dark:text-slate-400 font-medium text-lg">
+                        <p className="text-neutral-500 dark:text-neutral-400 font-medium text-lg">
                             Real-time information about exams, results, and admissions for 2026.
                         </p>
                     </div>
 
-                    <div className="flex bg-white dark:bg-slate-900 p-1.5 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm">
+                    <div className="flex bg-white dark:bg-neutral-900 p-1.5 rounded-2xl border border-neutral-100 dark:border-neutral-800 shadow-sm">
                         {['All News'].map((tab, i) => (
                             <button
                                 key={tab}
-                                className={`px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${i === 0 ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-400 hover:text-slate-600 dark:hover:text-slate-200'}`}
+                                className={`px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${i === 0 ? 'bg-secondary-600 text-white shadow-lg' : 'text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200'}`}
                             >
                                 {tab}
                             </button>
@@ -66,9 +66,9 @@ const NewsView: React.FC = () => {
                             href={news.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-start gap-4 p-4 rounded-[2rem] bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-white/5 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] dark:hover:shadow-none transition-all duration-300 group cursor-pointer"
+                            className="flex items-start gap-4 p-4 rounded-[2rem] bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-white/5 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] dark:hover:shadow-none transition-all duration-300 group cursor-pointer"
                         >
-                            <div className="relative w-24 h-24 rounded-2xl overflow-hidden flex-shrink-0 shadow-sm ring-1 ring-slate-100 dark:ring-slate-800">
+                            <div className="relative w-24 h-24 rounded-2xl overflow-hidden flex-shrink-0 shadow-sm ring-1 ring-neutral-100 dark:ring-neutral-800">
                                 <img
                                     src={news.image}
                                     alt={news.title}
@@ -85,10 +85,10 @@ const NewsView: React.FC = () => {
                                 <span className="text-[9px] font-black text-rose-500 dark:text-rose-400 uppercase tracking-[0.15em]">
                                     {news.category}
                                 </span>
-                                <h4 className="text-[14px] font-bold text-slate-800 dark:text-slate-100 leading-[1.35] line-clamp-3 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                                <h4 className="text-[14px] font-bold text-neutral-800 dark:text-neutral-100 leading-[1.35] line-clamp-3 group-hover:text-secondary-600 dark:group-hover:text-secondary-400 transition-colors">
                                     {news.title}
                                 </h4>
-                                <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 mt-auto uppercase tracking-wider">
+                                <p className="text-[10px] font-bold text-neutral-400 dark:text-neutral-500 mt-auto uppercase tracking-wider">
                                     {news.date}
                                 </p>
                             </div>

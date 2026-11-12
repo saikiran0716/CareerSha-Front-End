@@ -304,8 +304,8 @@ const BlogDetailPage: React.FC = () => {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center space-y-4">
-          <Activity className="mx-auto text-[#b91c1c] animate-pulse" size={48} />
-          <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Loading Broadsheet...</p>
+          <Activity className="mx-auto text-highlight animate-pulse" size={48} />
+          <p className="text-[10px] font-black uppercase tracking-widest text-neutral-500">Loading Broadsheet...</p>
         </div>
       </div>
     );
@@ -315,10 +315,10 @@ const BlogDetailPage: React.FC = () => {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center space-y-6 max-w-md px-4">
-          <X className="mx-auto text-slate-300" size={64} />
+          <X className="mx-auto text-neutral-300" size={64} />
           <div className="space-y-2">
             <h2 className="text-xl font-bold uppercase tracking-tight">Article Not Found</h2>
-            <p className="text-sm text-slate-500">The story you are looking for might have been moved or archived.</p>
+            <p className="text-sm text-neutral-500">The story you are looking for might have been moved or archived.</p>
           </div>
           <Button onClick={() => navigate('/blog')} variant="outline" className="rounded-none uppercase text-[10px] font-black tracking-widest">
             Return to Hub
@@ -331,8 +331,8 @@ const BlogDetailPage: React.FC = () => {
   if (!article) return null;
 
   return (
-    <div className="min-h-screen bg-white text-[#1a1c1e] selection:bg-[#b91c1c] selection:text-white relative z-10">
-      <div className="bg-[#b91c1c] text-white h-11 flex items-center overflow-hidden border-b border-[#b91c1c] relative z-50">
+    <div className="min-h-screen bg-white text-neutral-900 selection:bg-highlight selection:text-white relative z-10">
+      <div className="bg-highlight text-white h-11 flex items-center overflow-hidden border-b border-highlight relative z-50">
         <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-16 flex items-center h-full w-full">
           <div className="text-[10px] font-black pr-3 sm:pr-6 flex items-center gap-1.5 sm:gap-2 border-r border-white/20 h-full mr-3 sm:mr-6 shrink-0 uppercase tracking-[0.2em]">
             <Activity size={14} className="animate-pulse" />
@@ -372,7 +372,7 @@ const BlogDetailPage: React.FC = () => {
         }}
       />
 
-      <header className="border-b border-slate-100 bg-white sticky top-0 z-40 shadow-sm">
+      <header className="border-b border-neutral-100 bg-white sticky top-0 z-40 shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-16 h-16 flex items-center justify-between">
           <Button
             variant="ghost"
@@ -384,19 +384,19 @@ const BlogDetailPage: React.FC = () => {
           </Button>
 
           <div className="flex items-center gap-4">
-            <div className="relative group w-48 lg:w-64 border-b border-slate-100 focus-within:border-[#b91c1c] transition-colors duration-300">
-              <Search className="absolute left-0 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-[#b91c1c] transition-colors" size={13} />
+            <div className="relative group w-48 lg:w-64 border-b border-neutral-100 focus-within:border-highlight transition-colors duration-300">
+              <Search className="absolute left-0 top-1/2 -translate-y-1/2 text-neutral-300 group-focus-within:text-highlight transition-colors" size={13} />
               <Input
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 onKeyDown={handleSearchEnter}
                 placeholder="Search..."
-                className="pl-6 pr-6 rounded-none border-none bg-transparent h-8 w-full text-[10px] font-medium tracking-widest focus-visible:ring-0 placeholder:text-slate-400"
+                className="pl-6 pr-6 rounded-none border-none bg-transparent h-8 w-full text-[10px] font-medium tracking-widest focus-visible:ring-0 placeholder:text-neutral-400"
               />
               {searchTerm && (
                 <button
                   onClick={() => setSearchTerm('')}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 text-slate-300 hover:text-[#b91c1c] transition-colors"
+                  className="absolute right-0 top-1/2 -translate-y-1/2 text-neutral-300 hover:text-highlight transition-colors"
                 >
                   <X size={12} />
                 </button>
@@ -405,7 +405,7 @@ const BlogDetailPage: React.FC = () => {
 
             <button
               onClick={handleShare}
-              className="p-2 hover:bg-slate-50 rounded-full transition-colors text-slate-400 hover:text-[#b91c1c]"
+              className="p-2 hover:bg-neutral-50 rounded-full transition-colors text-neutral-400 hover:text-highlight"
               aria-label="Share article"
             >
               <Share2 size={18} />
@@ -416,13 +416,13 @@ const BlogDetailPage: React.FC = () => {
 
       <main className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-16 pt-12 pb-0 relative z-20">
         {loadError && (
-          <div className="mb-6 border border-amber-200 bg-amber-50 text-amber-700 px-4 py-3 text-sm">
+          <div className="mb-6 border border-warning-200 bg-warning-50 text-warning-700 px-4 py-3 text-sm">
             {loadError}
           </div>
         )}
 
         {isLoading && (
-          <div className="mb-6 border border-slate-200 bg-slate-50 text-slate-600 px-4 py-3 text-sm">
+          <div className="mb-6 border border-neutral-200 bg-neutral-50 text-neutral-600 px-4 py-3 text-sm">
             Loading please wait...
           </div>
         )}
@@ -430,7 +430,7 @@ const BlogDetailPage: React.FC = () => {
         <div className="flex flex-col lg:flex-row gap-16 items-stretch">
           <article className="flex-1 min-w-0 space-y-12">
             <header className="space-y-8">
-              <span className="bg-[#b91c1c] text-white rounded-none text-[9px] font-bold tracking-[0.2em] px-3 py-1 uppercase border-0 w-fit">
+              <span className="bg-highlight text-white rounded-none text-[9px] font-bold tracking-[0.2em] px-3 py-1 uppercase border-0 w-fit">
                 {article.tag}
               </span>
 
@@ -440,28 +440,28 @@ const BlogDetailPage: React.FC = () => {
 
               <div className="flex items-center justify-between gap-4 flex-wrap">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-slate-900 border-2 border-slate-800 flex items-center justify-center text-white font-black text-lg shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-neutral-900 border-2 border-neutral-800 flex items-center justify-center text-white font-black text-lg shrink-0">
                     <User size={20} />
                   </div>
                   <div>
                     <p className="text-[12px] md:text-[16px] lg:text-[18px] font-bold uppercase tracking-wider text-black">
                       {article.author ?? 'CareerSha'}
                     </p>
-                    <p className="text-[10px] md:text-[12px] text-slate-400 uppercase tracking-widest">
+                    <p className="text-[10px] md:text-[12px] text-neutral-400 uppercase tracking-widest">
                       {article.role ?? 'Team CareerSha'}
                     </p>
                   </div>
                 </div>
 
                 {formattedDate && (
-                  <div className="text-[10px] md:text-[12px] text-slate-400 uppercase tracking-widest">
+                  <div className="text-[10px] md:text-[12px] text-neutral-400 uppercase tracking-widest">
                     {formattedDate}
                   </div>
                 )}
               </div>
 
               {article.image && (
-                <div className="w-full bg-slate-100 overflow-hidden border border-slate-200">
+                <div className="w-full bg-neutral-100 overflow-hidden border border-neutral-200">
                   <img src={article.image} alt={article.title} className="w-full h-auto object-contain" />
                 </div>
               )}
@@ -469,13 +469,13 @@ const BlogDetailPage: React.FC = () => {
 
 
             <div className="bg-white pb-10">
-              <div className="space-y-8 text-[#334155] text-base md:text-lg leading-relaxed font-normal transition-colors">
+              <div className="space-y-8 text-neutral-700 text-base md:text-lg leading-relaxed font-normal transition-colors">
                 <div dangerouslySetInnerHTML={{ __html: sanitizedBodyHtml }} />
               </div>
             </div>
           </article>
             
-          <aside className="lg:w-[400px] shrink-0 lg:border-l lg:border-slate-100 lg:pl-12 relative border-none">
+          <aside className="lg:w-[400px] shrink-0 lg:border-l lg:border-neutral-100 lg:pl-12 relative border-none">
             <div className="lg:sticky lg:bottom-10 lg:self-start space-y-16 lg:mt-0 mt-16">
               <section className="space-y-6">
                 <h2 className="text-sm font-bold uppercase tracking-[0.15em] text-black">
@@ -488,8 +488,8 @@ const BlogDetailPage: React.FC = () => {
                       to={sidebarData.title ? `${getBlogPath(news)}?q=${encodeURIComponent(searchQuery)}` : getBlogPath(news)}
                       className="flex gap-3 items-start group"
                     >
-                      <span className="w-1 h-4 bg-[#b91c1c] shrink-0 mt-1" />
-                      <p className="text-[11px] font-bold leading-relaxed text-slate-800 uppercase tracking-tight group-hover:text-[#b91c1c] transition-colors">
+                      <span className="w-1 h-4 bg-highlight shrink-0 mt-1" />
+                      <p className="text-[11px] font-bold leading-relaxed text-neutral-800 uppercase tracking-tight group-hover:text-highlight transition-colors">
                         {news.title}
                       </p>
                     </Link>
@@ -509,16 +509,16 @@ const BlogDetailPage: React.FC = () => {
                       className="group flex gap-4 p-0 bg-transparent border-0 transition-all"
                     >
                       {item.image && (
-                        <div className="w-20 h-16 bg-white shrink-0 overflow-hidden border border-slate-100">
+                        <div className="w-20 h-16 bg-white shrink-0 overflow-hidden border border-neutral-100">
                           <img src={item.image} className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" alt={item.title} />
                         </div>
                       )}
 
                       <div className="flex flex-col flex-1 justify-center space-y-1">
                         <div className="flex flex-wrap items-center gap-2">
-                          <span className="text-[8px] font-bold text-[#b91c1c] uppercase tracking-wider">{item.tag}</span>
+                          <span className="text-[8px] font-bold text-highlight uppercase tracking-wider">{item.tag}</span>
                         </div>
-                        <h4 className="text-[10px] font-bold leading-tight group-hover:text-[#b91c1c] transition-colors line-clamp-2 uppercase text-black">
+                        <h4 className="text-[10px] font-bold leading-tight group-hover:text-highlight transition-colors line-clamp-2 uppercase text-black">
                           {item.title}
                         </h4>
                       </div>
@@ -535,12 +535,12 @@ const BlogDetailPage: React.FC = () => {
                       <Link
                         key={item.id}
                         to={getBlogPath(item)}
-                        className="block group border-b border-slate-100 pb-4 last:border-0"
+                        className="block group border-b border-neutral-100 pb-4 last:border-0"
                       >
                         <div className="flex items-center gap-2 mb-1">
-                          <span className="text-[8px] font-bold text-[#b91c1c] uppercase">{item.tag}</span>
+                          <span className="text-[8px] font-bold text-highlight uppercase">{item.tag}</span>
                         </div>
-                        <h4 className="text-[11px] font-bold leading-snug group-hover:text-[#b91c1c] transition-colors uppercase text-black">
+                        <h4 className="text-[11px] font-bold leading-snug group-hover:text-highlight transition-colors uppercase text-black">
                           {item.title}
                         </h4>
                       </Link>

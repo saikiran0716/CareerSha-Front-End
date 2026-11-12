@@ -14,7 +14,7 @@ const Feed: React.FC = () => {
       author: {
         name: 'Rahul Sharma',
         avatarInitials: 'R',
-        avatarBg: 'bg-emerald-500'
+        avatarBg: 'bg-success-500'
       },
       examTag: 'IIT JEE',
       timeAgo: '2h ago',
@@ -30,7 +30,7 @@ const Feed: React.FC = () => {
       author: {
         name: 'Priya Verma',
         avatarInitials: 'P',
-        avatarBg: 'bg-purple-500'
+        avatarBg: 'bg-accent-500'
       },
       examTag: 'BITSAT',
       timeAgo: '4h ago',
@@ -46,7 +46,7 @@ const Feed: React.FC = () => {
       author: {
         name: 'Ankit Yadav',
         avatarInitials: 'A',
-        avatarBg: 'bg-amber-500'
+        avatarBg: 'bg-warning-500'
       },
       examTag: 'College Life',
       timeAgo: '6h ago',
@@ -62,15 +62,15 @@ const Feed: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Tabs */}
-      <div className="bg-white dark:bg-slate-900 rounded-2xl p-2 border border-slate-100 dark:border-slate-800 flex overflow-x-auto hide-scrollbar shadow-sm">
+      <div className="bg-white dark:bg-neutral-900 rounded-2xl p-2 border border-neutral-100 dark:border-neutral-800 flex overflow-x-auto hide-scrollbar shadow-sm">
         {tabs.map(tab => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
             className={`px-6 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap transition-all ${
               activeTab === tab
-                ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800'
+                ? 'bg-primary-600 text-white shadow-md shadow-primary-500/20'
+                : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-50 dark:hover:bg-neutral-800'
             }`}
           >
             {tab}
@@ -87,7 +87,7 @@ const Feed: React.FC = () => {
 
       {/* Load More */}
       <div className="flex justify-center pt-4">
-        <button className="flex items-center gap-2 px-6 py-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors shadow-sm">
+        <button className="flex items-center gap-2 px-6 py-3 rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 font-bold hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors shadow-sm">
           Load More
           <ChevronDown size={18} />
         </button>

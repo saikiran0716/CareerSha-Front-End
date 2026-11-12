@@ -12,7 +12,7 @@ const RankPredictorPage: React.FC<{ onAskAI: (topic: string) => void }> = ({ onA
         canonical="https://www.careersha.com/rank-estimator"
       />
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-8 text-center">Rank Estimator Tool</h1>
+        <h1 className="text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-white mb-8 text-center">Rank Estimator Tool</h1>
 
         {/* Unique SEO Content for Rank Predictor Page */}
         <div className="prose prose-slate dark:prose-invert max-w-none mb-12">

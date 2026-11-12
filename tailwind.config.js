@@ -1,58 +1,42 @@
 /** @type {import('tailwindcss').Config} */
+
+// All colors come from CSS variables defined in src/styles/theme.css.
+// To change a color site-wide, edit that file — not this one.
+const SHADES = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
+const scale = (name) =>
+  Object.fromEntries(
+    SHADES.map((s) => [s, `rgb(var(--color-${name}-${s}) / <alpha-value>)`])
+  );
+
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-    "./App.tsx",
-    "./index.tsx",
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        border: "hsl(var(--border))",
-        blue: {
-          50: '#eef2f6',
-          100: '#d4def0',
-          200: '#aebde0',
-          300: '#8098cd',
-          400: '#5c78bb',
-          500: '#3f59a6',
-          600: '#30428d',
-          700: '#273471',
-          800: '#232c5e',
-          900: '#20274b',
-          950: '#13162d',
+        border: 'hsl(var(--border))',
+        primary: scale('primary'),
+        secondary: scale('secondary'),
+        accent: scale('accent'),
+        neutral: scale('neutral'),
+        success: scale('success'),
+        warning: scale('warning'),
+        danger: scale('danger'),
+        highlight: 'rgb(var(--color-highlight) / <alpha-value>)',
+        page: {
+          bg: 'rgb(var(--color-page-bg) / <alpha-value>)',
+          text: 'rgb(var(--color-page-text) / <alpha-value>)',
         },
-        indigo: {
-          50: '#f8faff',
-          100: '#f0f4ff',
-          200: '#e1e9ff',
-          300: '#c2d1ff',
-          400: '#9cb1ff',
-          500: '#758eff',
-          600: '#4f69df',
-          700: '#3a4eb3',
-          800: '#2a3882',
-          900: '#1d275e',
-          950: '#111738',
-        },
-        slate: {
-          950: '#020617',
-        }
       },
       screens: {
-        'xs': '375px',
-        'ms': '475px',
-        'fhd': '1440px',
+        xs: '375px',
+        ms: '475px',
+        fhd: '1440px',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
-      }
+      },
     },
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-  ],
-}
+  plugins: [require('@tailwindcss/typography')],
+};

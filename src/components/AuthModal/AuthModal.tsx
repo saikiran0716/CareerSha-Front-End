@@ -150,36 +150,36 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
     <form onSubmit={handleSubmit} className="space-y-2.5">
       {!isLogin && (
         <div className="animate-slideUp">
-          <label className="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Full Name</label>
+          <label className="block text-xs font-semibold text-neutral-600 dark:text-neutral-300 mb-1">Full Name</label>
           <input
             type="text"
             required
             placeholder="John Doe"
-            className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all text-sm dark:text-white"
+            className="w-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg px-3 py-2 outline-none focus:border-secondary-500 focus:ring-1 focus:ring-secondary-500 transition-all text-sm dark:text-white"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
         </div>
       )}
       <div className="animate-slideUp delay-100">
-        <label className="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Email Address</label>
+        <label className="block text-xs font-semibold text-neutral-600 dark:text-neutral-300 mb-1">Email Address</label>
         <input
           type="email"
           required
           placeholder="you@example.com"
-          className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all text-sm dark:text-white"
+          className="w-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg px-3 py-2 outline-none focus:border-secondary-500 focus:ring-1 focus:ring-secondary-500 transition-all text-sm dark:text-white"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
 
       <div className="animate-slideUp delay-200">
-        <label className="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Password</label>
+        <label className="block text-xs font-semibold text-neutral-600 dark:text-neutral-300 mb-1">Password</label>
         <input
           type="password"
           required
           placeholder="••••••••"
-          className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all text-sm dark:text-white"
+          className="w-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg px-3 py-2 outline-none focus:border-secondary-500 focus:ring-1 focus:ring-secondary-500 transition-all text-sm dark:text-white"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
@@ -188,7 +188,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
       <button
         type="submit"
         disabled={isLoading}
-        className="w-full bg-indigo-600 text-white py-2.5 rounded-lg font-semibold text-sm hover:bg-indigo-700 transition-all shadow-md hover:shadow-lg active:scale-95 disabled:opacity-50 mt-3"
+        className="w-full bg-secondary-600 text-white py-2.5 rounded-lg font-semibold text-sm hover:bg-secondary-700 transition-all shadow-md hover:shadow-lg active:scale-95 disabled:opacity-50 mt-3"
       >
         {isLoading ? (
           <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin mx-auto"></div>
@@ -196,9 +196,9 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
       </button>
 
       <div className="my-2.5 flex items-center gap-2">
-        <div className="flex-1 h-px bg-slate-200 dark:bg-slate-700"></div>
-        <span className="text-xs font-medium text-slate-400">or</span>
-        <div className="flex-1 h-px bg-slate-200 dark:bg-slate-700"></div>
+        <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-700"></div>
+        <span className="text-xs font-medium text-neutral-400">or</span>
+        <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-700"></div>
       </div>
 
       {isGoogleConfigured ? (
@@ -220,7 +220,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
           />
         </div>
       ) : (
-        <div className="w-full bg-slate-100 dark:bg-slate-800 border border-dashed border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-300 py-2.5 rounded-lg text-center text-xs font-medium">
+        <div className="w-full bg-neutral-100 dark:bg-neutral-800 border border-dashed border-neutral-300 dark:border-neutral-700 text-neutral-500 dark:text-neutral-300 py-2.5 rounded-lg text-center text-xs font-medium">
           Set VITE_GOOGLE_CLIENT_ID to enable Google sign-in.
         </div>
       )}
@@ -229,7 +229,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
         <button
           type="button"
           onClick={() => setIsLogin(!isLogin)}
-          className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:underline transition-all"
+          className="text-xs font-semibold text-secondary-600 dark:text-secondary-400 hover:underline transition-all"
         >
           {isLogin ? "Don't have an account? Sign up" : "Already have an account? Sign in"}
         </button>
@@ -240,8 +240,8 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
   const render2FAForm = () => (
     <div className="animate-fadeIn">
       <div className="text-center mb-5">
-        <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1">Two-Factor Auth</h3>
-        <p className="text-slate-500 dark:text-slate-400 text-xs font-normal">
+        <h3 className="text-lg font-bold text-neutral-900 dark:text-white mb-1">Two-Factor Auth</h3>
+        <p className="text-neutral-500 dark:text-neutral-400 text-xs font-normal">
           Enter the 6-digit code sent to {verificationTarget || 'your email'}.
         </p>
       </div>
@@ -258,7 +258,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
               value={digit}
               onChange={(e) => handleCodeChange(idx, e.target.value)}
               onKeyDown={(e) => handleKeyDown(idx, e)}
-              className="w-10 h-10 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-center text-lg font-bold text-indigo-600 dark:text-indigo-400 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all"
+              className="w-10 h-10 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg text-center text-lg font-bold text-secondary-600 dark:text-secondary-400 focus:border-secondary-500 focus:ring-1 focus:ring-secondary-500 outline-none transition-all"
             />
           ))}
         </div>
@@ -267,7 +267,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
           <button
             type="submit"
             disabled={isLoading || twoFactorCode.some(d => !d)}
-            className="w-full bg-indigo-600 text-white py-2.5 rounded-lg font-semibold text-sm hover:bg-indigo-700 transition-all shadow-md active:scale-95 disabled:opacity-50 flex items-center justify-center"
+            className="w-full bg-secondary-600 text-white py-2.5 rounded-lg font-semibold text-sm hover:bg-secondary-700 transition-all shadow-md active:scale-95 disabled:opacity-50 flex items-center justify-center"
           >
             {isLoading ? (
               <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
@@ -280,13 +280,13 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
               setShow2FA(false);
               setTwoFactorCode(['', '', '', '', '', '']);
             }}
-            className="w-full text-slate-400 hover:text-indigo-600 transition-colors text-xs font-semibold"
+            className="w-full text-neutral-400 hover:text-secondary-600 transition-colors text-xs font-semibold"
           >
             Back
           </button>
         </div>
 
-        <p className="text-center text-xs text-slate-500 dark:text-slate-400 font-normal">
+        <p className="text-center text-xs text-neutral-500 dark:text-neutral-400 font-normal">
           Check your email inbox or the backend console mail output in development.
         </p>
       </form>
@@ -296,14 +296,14 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
   return (
     <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
       <div
-        className="absolute inset-0 bg-slate-950/60 backdrop-blur-md animate-fadeIn"
+        className="absolute inset-0 bg-neutral-950/60 backdrop-blur-md animate-fadeIn"
         onClick={onClose}
       ></div>
 
-      <div className="bg-white dark:bg-slate-900 w-full max-w-md rounded-2xl shadow-2xl relative z-10 overflow-hidden animate-scaleIn border border-slate-100/50 dark:border-slate-800/50">
+      <div className="bg-white dark:bg-neutral-900 w-full max-w-md rounded-2xl shadow-2xl relative z-10 overflow-hidden animate-scaleIn border border-neutral-100/50 dark:border-neutral-800/50">
         <button 
           onClick={onClose}
-          className="absolute top-4 right-4 z-20 p-1 rounded-full text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
+          className="absolute top-4 right-4 z-20 p-1 rounded-full text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all"
           aria-label="Close modal"
         >
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -314,16 +314,16 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
         <div className="px-6 py-6">
           {!show2FA && (
             <div className="text-center mb-6">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-600 to-indigo-700 flex items-center justify-center mx-auto mb-3 shadow-lg shadow-indigo-500/30">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-secondary-600 to-secondary-700 flex items-center justify-center mx-auto mb-3 shadow-lg shadow-secondary-500/30">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
                 </svg>
               </div>
-              <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-1">
+              <h2 className="text-xl font-bold text-neutral-900 dark:text-white mb-1">
                 {isLogin ? 'Welcome Back' : 'Create Profile'}
               </h2>
-              <p className="text-slate-500 dark:text-slate-400 text-xs font-normal">
+              <p className="text-neutral-500 dark:text-neutral-400 text-xs font-normal">
                 Real-time career planning starts here.
               </p>
             </div>

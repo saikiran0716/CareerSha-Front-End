@@ -184,7 +184,7 @@ const CollegeMatchResults: React.FC = () => {
     const hasMore = !loading && results.length > 0;
 
     return (
-        <div className="min-h-screen bg-[#EEF2F7] font-sans relative pb-20">
+        <div className="min-h-screen bg-primary-50 font-sans relative pb-20">
             <SEO
                 title={`Colleges for ${exam.toUpperCase()} Rank ${rank} | College Matcher`}
                 description={`View recommended colleges and universities for your ${exam} rank of ${rank}. Get personalized admission insights and placement data.`}
@@ -197,20 +197,20 @@ const CollegeMatchResults: React.FC = () => {
             {/* Main Content Wrapper (Blurred while loading) */}
             <div className={`transition-all duration-1000 ease-out pointer-events-auto ${loading ? 'blur-md opacity-40 scale-[0.98]' : 'blur-0 opacity-100 scale-100'}`}>
                 {/* SLIM TOP NAV */}
-                <header className="sticky top-0 z-[100] bg-white border-b border-slate-200 shadow-sm">
+                <header className="sticky top-0 z-[100] bg-white border-b border-neutral-200 shadow-sm">
                     <div className="max-w-[1400px] mx-auto px-8 flex items-center justify-between h-14">
                         <button
                             onClick={() => navigate(-1)}
-                            className="w-8 h-8 bg-slate-100 hover:bg-slate-200 rounded-lg text-slate-600 transition-all flex items-center justify-center active:scale-95"
+                            className="w-8 h-8 bg-neutral-100 hover:bg-neutral-200 rounded-lg text-neutral-600 transition-all flex items-center justify-center active:scale-95"
                         >
                             <ArrowRight size={15} className="rotate-180" />
                         </button>
                         <div className="hidden md:flex items-center gap-2">
-                            <div className="flex bg-slate-100 p-0.5 rounded-lg border border-slate-200 gap-0.5">
-                                <button onClick={() => setViewMode('list')} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${viewMode === 'list' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-400 hover:text-slate-700'}`}>
+                            <div className="flex bg-neutral-100 p-0.5 rounded-lg border border-neutral-200 gap-0.5">
+                                <button onClick={() => setViewMode('list')} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${viewMode === 'list' ? 'bg-white text-primary-600 shadow-sm' : 'text-neutral-400 hover:text-neutral-700'}`}>
                                     <LayoutList size={12} /> List
                                 </button>
-                                <button onClick={() => setViewMode('grid')} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${viewMode === 'grid' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-400 hover:text-slate-700'}`}>
+                                <button onClick={() => setViewMode('grid')} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${viewMode === 'grid' ? 'bg-white text-primary-600 shadow-sm' : 'text-neutral-400 hover:text-neutral-700'}`}>
                                     <LayoutGrid size={12} /> Grid
                                 </button>
                             </div>
@@ -222,27 +222,27 @@ const CollegeMatchResults: React.FC = () => {
 
                     {/* PAGE TITLE + CHIPS */}
                     <div className="flex flex-wrap items-end justify-between gap-4 mb-6">
-                        <h1 className="text-2xl sm:text-[38px] font-black text-slate-900 tracking-tight leading-none uppercase">Matched Institutions</h1>
+                        <h1 className="text-2xl sm:text-[38px] font-black text-neutral-900 tracking-tight leading-none uppercase">Matched Institutions</h1>
                         <div className="flex items-center gap-2 flex-wrap">
-                            <span className="px-4 py-1.5 bg-white border border-slate-200 text-slate-700 rounded-lg text-[10px] font-bold tracking-widest uppercase shadow-sm">Rank #{rank}</span>
-                            <span className="px-4 py-1.5 bg-blue-600 text-white rounded-lg text-[10px] font-bold tracking-widest uppercase shadow-sm">{category}</span>
-                            <span className="px-4 py-1.5 bg-white border border-slate-200 text-slate-700 rounded-lg text-[10px] font-bold tracking-widest uppercase shadow-sm">{exam.toUpperCase()}</span>
+                            <span className="px-4 py-1.5 bg-white border border-neutral-200 text-neutral-700 rounded-lg text-[10px] font-bold tracking-widest uppercase shadow-sm">Rank #{rank}</span>
+                            <span className="px-4 py-1.5 bg-primary-600 text-white rounded-lg text-[10px] font-bold tracking-widest uppercase shadow-sm">{category}</span>
+                            <span className="px-4 py-1.5 bg-white border border-neutral-200 text-neutral-700 rounded-lg text-[10px] font-bold tracking-widest uppercase shadow-sm">{exam.toUpperCase()}</span>
                         </div>
                     </div>
 
                     {error ? (
                         <div className="flex flex-col items-center justify-center min-h-[60vh] py-12 space-y-8 text-center px-4">
-                            <div className="w-20 h-20 bg-red-100 dark:bg-red-900/20 rounded-full flex items-center justify-center text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800 animate-bounce">
+                            <div className="w-20 h-20 bg-danger-100 dark:bg-danger-900/20 rounded-full flex items-center justify-center text-danger-600 dark:text-danger-400 border border-danger-200 dark:border-danger-800 animate-bounce">
                                 <Activity size={32} />
                             </div>
                             <div className="max-w-md space-y-4">
-                                <h3 className="text-xl font-black text-slate-800 dark:text-white uppercase tracking-tighter">Matches Unreachable</h3>
-                                <p className="text-sm font-medium text-slate-500 dark:text-slate-400 tracking-tight leading-relaxed">
+                                <h3 className="text-xl font-black text-neutral-800 dark:text-white uppercase tracking-tighter">Matches Unreachable</h3>
+                                <p className="text-sm font-medium text-neutral-500 dark:text-neutral-400 tracking-tight leading-relaxed">
                                     {error}
                                 </p>
                                 <button
                                     onClick={() => { setLoading(true); sessionStorage.removeItem(cacheKey); }}
-                                    className="mt-4 px-8 py-3 bg-indigo-600 hover:bg-slate-900 text-white rounded-xl text-xs font-bold uppercase tracking-widest transition-all shadow-lg active:scale-95"
+                                    className="mt-4 px-8 py-3 bg-secondary-600 hover:bg-neutral-900 text-white rounded-xl text-xs font-bold uppercase tracking-widest transition-all shadow-lg active:scale-95"
                                 >
                                     Retry Discovery
                                 </button>
@@ -252,9 +252,9 @@ const CollegeMatchResults: React.FC = () => {
                         <div>
                             {viewMode === 'list' ? (
                                 /* ── LIST / TABLE VIEW ── */
-                                <div className="rounded-2xl overflow-hidden shadow-sm border border-slate-200">
+                                <div className="rounded-2xl overflow-hidden shadow-sm border border-neutral-200">
                                     {/* TABLE HEADER */}
-                                    <div className="hidden md:grid bg-blue-700 grid-cols-[1fr_160px_200px_160px] px-6 py-4">
+                                    <div className="hidden md:grid bg-primary-700 grid-cols-[1fr_160px_200px_160px] px-6 py-4">
                                         <span className="text-[10px] font-bold text-white/80 uppercase tracking-widest">Institutional Profile</span>
                                         <span className="text-[10px] font-bold text-white/80 uppercase tracking-widest">Type</span>
                                         <span className="text-[10px] font-bold text-white/80 uppercase tracking-widest">Expected Rank</span>
@@ -262,41 +262,41 @@ const CollegeMatchResults: React.FC = () => {
                                     </div>
 
                                     {/* TABLE ROWS */}
-                                    <div className="divide-y divide-slate-100 bg-white">
+                                    <div className="divide-y divide-neutral-100 bg-white">
                                         {currentItems.map((college, idx) => (
                                             <motion.div
                                                 key={college.id}
                                                 initial={{ opacity: 0, y: 10 }}
                                                 animate={{ opacity: 1, y: 0 }}
                                                 transition={{ delay: idx * 0.03, duration: 0.25 }}
-                                                className="flex flex-col md:grid md:grid-cols-[1fr_160px_200px_160px] px-6 py-5 hover:bg-blue-50/40 transition-colors group items-center gap-4 md:gap-0"
+                                                className="flex flex-col md:grid md:grid-cols-[1fr_160px_200px_160px] px-6 py-5 hover:bg-primary-50/40 transition-colors group items-center gap-4 md:gap-0"
                                             >
                                                 {/* COL 1: PROFILE */}
                                                 <div className="flex items-start gap-4 pr-6 w-full">
-                                                    <div className="w-12 h-12 rounded-full flex-shrink-0 flex items-center justify-center overflow-hidden border-2 border-slate-200 bg-white shadow-sm">
+                                                    <div className="w-12 h-12 rounded-full flex-shrink-0 flex items-center justify-center overflow-hidden border-2 border-neutral-200 bg-white shadow-sm">
                                                         <CollegeLogo logoUrl={college.logoUrl} website={college.website} name={college.name} iconSize={22} />
                                                     </div>
                                                     <div className="min-w-0">
-                                                        <h4 className="text-[15px] font-black text-slate-900 uppercase tracking-tight leading-tight">{college.name}</h4>
+                                                        <h4 className="text-[15px] font-black text-neutral-900 uppercase tracking-tight leading-tight">{college.name}</h4>
                                                         <div className="flex items-center gap-2 mt-1 flex-wrap">
-                                                            <span className="text-[9px] font-bold text-blue-600 uppercase tracking-widest">{college.branch}</span>
+                                                            <span className="text-[9px] font-bold text-primary-600 uppercase tracking-widest">{college.branch}</span>
                                                             {college.location && (
                                                                 <>
-                                                                    <span className="text-slate-300">·</span>
-                                                                    <span className="flex items-center gap-1 text-[9px] text-slate-400 font-semibold uppercase tracking-wide">
+                                                                    <span className="text-neutral-300">·</span>
+                                                                    <span className="flex items-center gap-1 text-[9px] text-neutral-400 font-semibold uppercase tracking-wide">
                                                                         <MapPin size={8} /> {college.location}
                                                                     </span>
                                                                 </>
                                                             )}
                                                         </div>
-                                                        <p className="text-[11px] text-slate-500 mt-1.5 leading-relaxed line-clamp-2">{college.careerInsight}</p>
+                                                        <p className="text-[11px] text-neutral-500 mt-1.5 leading-relaxed line-clamp-2">{college.careerInsight}</p>
                                                     </div>
                                                 </div>
                                                 {/* WRAPPER FOR MOBILE ROW */}
                                                 <div className="flex items-center justify-between w-full md:contents">
                                                     {/* COL 2: TYPE */}
                                                     <div>
-                                                        <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[9px] font-extrabold uppercase tracking-widest border ${college.type === 'GOVERNMENT' ? 'bg-[#FFFBEB] border-[#FEF3C7] text-[#D97706]' : 'bg-[#F8FAFC] border-[#E2E8F0] text-[#475569]'}`}>
+                                                        <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[9px] font-extrabold uppercase tracking-widest border ${college.type === 'GOVERNMENT' ? 'bg-warning-50 border-warning-100 text-warning-600' : 'bg-neutral-50 border-neutral-200 text-neutral-600'}`}>
                                                             {college.type === 'GOVERNMENT' ? <ShieldCheck size={10} /> : <Building2 size={10} />}
                                                             {college.type}
                                                         </span>
@@ -305,8 +305,8 @@ const CollegeMatchResults: React.FC = () => {
                                                     {/* COL 3: RANK */}
                                                     <div>
                                                         <div className="flex items-center gap-1">
-                                                            <Hash size={14} className="text-blue-500 flex-shrink-0" />
-                                                            <span className="text-[15px] font-black text-blue-600 tracking-tight leading-none">{college.categoryCutoff}</span>
+                                                            <Hash size={14} className="text-primary-500 flex-shrink-0" />
+                                                            <span className="text-[15px] font-black text-primary-600 tracking-tight leading-none">{college.categoryCutoff}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -315,7 +315,7 @@ const CollegeMatchResults: React.FC = () => {
                                                 <div className="flex justify-end w-full md:w-auto">
                                                     <button
                                                         onClick={() => navigate(`/college/${encodeURIComponent(college.name)}`, { state: { college } })}
-                                                        className="w-full md:w-auto flex items-center justify-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm shadow-blue-200 active:scale-95"
+                                                        className="w-full md:w-auto flex items-center justify-center gap-2 px-5 py-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-full text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm shadow-primary-200 active:scale-95"
                                                     >
                                                         View Profile <ArrowRight size={12} />
                                                     </button>
@@ -333,20 +333,20 @@ const CollegeMatchResults: React.FC = () => {
                                             initial={{ opacity: 0, scale: 0.96 }}
                                             animate={{ opacity: 1, scale: 1 }}
                                             transition={{ delay: idx * 0.04, duration: 0.3 }}
-                                            className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all group flex flex-col"
+                                            className="bg-white border border-neutral-200 rounded-2xl p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all group flex flex-col"
                                         >
                                             {/* TOP ROW */}
                                             <div className="flex items-start justify-between mb-4">
-                                                <div className="w-12 h-12 rounded-full flex items-center justify-center overflow-hidden border-2 border-slate-200 bg-white shadow-sm flex-shrink-0">
+                                                <div className="w-12 h-12 rounded-full flex items-center justify-center overflow-hidden border-2 border-neutral-200 bg-white shadow-sm flex-shrink-0">
                                                     <CollegeLogo logoUrl={college.logoUrl} website={college.website} name={college.name} iconSize={20} />
                                                 </div>
                                                 <div className="flex flex-col items-end gap-1.5">
-                                                    <span className={`px-2 py-1 rounded-lg text-[8px] font-extrabold uppercase tracking-widest flex items-center gap-1 border ${college.type === 'GOVERNMENT' ? 'bg-[#FFFBEB] border-[#FEF3C7] text-[#D97706]' : 'bg-[#F8FAFC] border-[#E2E8F0] text-[#475569]'}`}>
+                                                    <span className={`px-2 py-1 rounded-lg text-[8px] font-extrabold uppercase tracking-widest flex items-center gap-1 border ${college.type === 'GOVERNMENT' ? 'bg-warning-50 border-warning-100 text-warning-600' : 'bg-neutral-50 border-neutral-200 text-neutral-600'}`}>
                                                         {college.type === 'GOVERNMENT' ? <ShieldCheck size={9} /> : <Building2 size={9} />}
                                                         {college.type}
                                                     </span>
                                                     {college.chance !== undefined && (
-                                                        <span className={`px-2.5 py-1 rounded-full text-[8px] font-bold uppercase tracking-wider ${college.chance >= 70 ? 'bg-emerald-100 text-emerald-700' : college.chance >= 40 ? 'bg-amber-100 text-amber-700' : 'bg-red-100 text-red-600'}`}>
+                                                        <span className={`px-2.5 py-1 rounded-full text-[8px] font-bold uppercase tracking-wider ${college.chance >= 70 ? 'bg-success-100 text-success-700' : college.chance >= 40 ? 'bg-warning-100 text-warning-700' : 'bg-danger-100 text-danger-600'}`}>
                                                             {college.chance}% match
                                                         </span>
                                                     )}
@@ -355,51 +355,51 @@ const CollegeMatchResults: React.FC = () => {
 
                                             {/* NAME */}
                                             <div className="mb-3">
-                                                <h4 className="text-[14px] font-black text-slate-900 uppercase tracking-tight leading-snug line-clamp-2">{college.name}</h4>
-                                                <p className="text-[9px] font-bold text-blue-600 uppercase tracking-widest mt-1">{college.branch}</p>
-                                                <span className="flex items-center gap-1 text-[9px] text-slate-400 font-semibold uppercase mt-1">
+                                                <h4 className="text-[14px] font-black text-neutral-900 uppercase tracking-tight leading-snug line-clamp-2">{college.name}</h4>
+                                                <p className="text-[9px] font-bold text-primary-600 uppercase tracking-widest mt-1">{college.branch}</p>
+                                                <span className="flex items-center gap-1 text-[9px] text-neutral-400 font-semibold uppercase mt-1">
                                                     <MapPin size={8} /> {college.location || "India"}
                                                 </span>
                                             </div>
 
                                             {/* STATS */}
                                             <div className="grid grid-cols-2 gap-2 mb-3">
-                                                <div className="bg-slate-50 rounded-xl p-2.5 border border-slate-100">
+                                                <div className="bg-neutral-50 rounded-xl p-2.5 border border-neutral-100">
                                                     <div className="flex items-center gap-0.5 mt-0.5">
-                                                        <Hash size={11} className="text-blue-500" />
-                                                        <span className="text-[12px] font-black text-blue-600 leading-none">{college.categoryCutoff}</span>
+                                                        <Hash size={11} className="text-primary-500" />
+                                                        <span className="text-[12px] font-black text-primary-600 leading-none">{college.categoryCutoff}</span>
                                                     </div>
                                                 </div>
-                                                <div className="bg-slate-50 rounded-xl p-2.5 border border-slate-100">
-                                                    <p className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Median Pkg</p>
+                                                <div className="bg-neutral-50 rounded-xl p-2.5 border border-neutral-100">
+                                                    <p className="text-[8px] font-bold text-neutral-400 uppercase tracking-widest">Median Pkg</p>
                                                     <div className="flex items-center gap-1 mt-0.5">
-                                                        <TrendingUp size={11} className="text-emerald-500" />
-                                                        <span className="text-[13px] font-black text-slate-900 leading-none">{college.medianPackage || "N/A"}</span>
+                                                        <TrendingUp size={11} className="text-success-500" />
+                                                        <span className="text-[13px] font-black text-neutral-900 leading-none">{college.medianPackage || "N/A"}</span>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             {college.fees && (
-                                                <div className="flex items-center gap-1.5 px-3 py-2 bg-slate-50 border border-slate-100 rounded-xl mb-3">
-                                                    <DollarSign size={11} className="text-violet-500" />
-                                                    <span className="text-[10px] font-bold text-slate-700">{college.fees}</span>
-                                                    <span className="text-[8px] text-slate-400 uppercase ml-auto">per year</span>
+                                                <div className="flex items-center gap-1.5 px-3 py-2 bg-neutral-50 border border-neutral-100 rounded-xl mb-3">
+                                                    <DollarSign size={11} className="text-accent-500" />
+                                                    <span className="text-[10px] font-bold text-neutral-700">{college.fees}</span>
+                                                    <span className="text-[8px] text-neutral-400 uppercase ml-auto">per year</span>
                                                 </div>
                                             )}
 
-                                            <p className="text-[10.5px] text-slate-500 leading-relaxed line-clamp-2 flex-1 mb-4">{college.careerInsight}</p>
+                                            <p className="text-[10.5px] text-neutral-500 leading-relaxed line-clamp-2 flex-1 mb-4">{college.careerInsight}</p>
 
                                             {college.recruiters?.length > 0 && (
                                                 <div className="flex flex-wrap gap-1 mb-4">
                                                     {college.recruiters.slice(0, 3).map(r => (
-                                                        <span key={r} className="px-2 py-0.5 bg-slate-100 text-slate-500 rounded-md text-[8px] font-semibold border border-slate-200">{r}</span>
+                                                        <span key={r} className="px-2 py-0.5 bg-neutral-100 text-neutral-500 rounded-md text-[8px] font-semibold border border-neutral-200">{r}</span>
                                                     ))}
                                                 </div>
                                             )}
 
                                             <button
                                                 onClick={() => navigate(`/college/${encodeURIComponent(college.name)}`, { state: { college } })}
-                                                className="w-full h-10 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center gap-2 text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm shadow-blue-200 active:scale-95 mt-auto"
+                                                className="w-full h-10 bg-primary-600 hover:bg-primary-700 text-white rounded-full flex items-center justify-center gap-2 text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm shadow-primary-200 active:scale-95 mt-auto"
                                             >
                                                 View Profile <ArrowRight size={12} />
                                             </button>
@@ -414,7 +414,7 @@ const CollegeMatchResults: React.FC = () => {
                                     <button
                                         onClick={handleLoadMore}
                                         disabled={fetchingMore}
-                                        className="flex items-center gap-2 px-10 py-3 bg-white border border-slate-200 text-slate-700 text-[11px] font-bold uppercase tracking-widest rounded-full hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all shadow-sm active:scale-95 disabled:opacity-60 disabled:pointer-events-none"
+                                        className="flex items-center gap-2 px-10 py-3 bg-white border border-neutral-200 text-neutral-700 text-[11px] font-bold uppercase tracking-widest rounded-full hover:bg-primary-600 hover:text-white hover:border-primary-600 transition-all shadow-sm active:scale-95 disabled:opacity-60 disabled:pointer-events-none"
                                     >
                                         {fetchingMore ? (
                                             <>
@@ -430,14 +430,14 @@ const CollegeMatchResults: React.FC = () => {
                         </div>
                     ) : (
                         <div className="py-48 text-center space-y-6">
-                            <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto text-slate-300 border-2 border-slate-200 shadow-inner">
+                            <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto text-neutral-300 border-2 border-neutral-200 shadow-inner">
                                 <Building2 size={44} />
                             </div>
                             <div className="space-y-3">
-                                <h3 className="text-xl font-black text-slate-800 uppercase tracking-widest">No Matches Found</h3>
-                                <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest max-w-sm mx-auto">Try adjusting your rank, exam, or category filters.</p>
+                                <h3 className="text-xl font-black text-neutral-800 uppercase tracking-widest">No Matches Found</h3>
+                                <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest max-w-sm mx-auto">Try adjusting your rank, exam, or category filters.</p>
                             </div>
-                            <button onClick={() => navigate(-1)} className="px-10 py-4 bg-slate-900 text-white rounded-full text-[11px] font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl">Refine Search</button>
+                            <button onClick={() => navigate(-1)} className="px-10 py-4 bg-neutral-900 text-white rounded-full text-[11px] font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl">Refine Search</button>
                         </div>
                     )}
                 </main>

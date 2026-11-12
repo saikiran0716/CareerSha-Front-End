@@ -4,7 +4,7 @@ import { SalaryPredictor } from './SalaryPredictor';
 
 const SalaryPredictorPage: React.FC = () => {
   return (
-    <div className="w-full bg-[#f8fafc] min-h-screen">
+    <div className="w-full bg-neutral-50 min-h-screen">
       <SEO
         title="Salary Predictor 2026 | CareerSha"
         description="Predict your future salary based on your education, skills, experience and profile. Get insights into average salary, salary growth and best career options."

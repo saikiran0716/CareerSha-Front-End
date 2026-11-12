@@ -15,7 +15,7 @@ const ExamsHubPage: React.FC = () => {
         canonical="https://www.careersha.com/exams"
       />
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-8 text-center">Entrance Exams 2026 in India</h1>
+        <h1 className="text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-white mb-8 text-center">Entrance Exams 2026 in India</h1>
 
         {/* SEO Content Section */}
         <div className="prose prose-slate dark:prose-invert max-w-none mb-12">
@@ -46,10 +46,10 @@ const ExamsHubPage: React.FC = () => {
             <Link
               key={exam.url}
               to={exam.url}
-              className="p-6 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl hover:shadow-lg transition-all"
+              className="p-6 bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-2xl hover:shadow-lg transition-all"
             >
-              <h3 className="font-bold text-slate-900 dark:text-white mb-2">{exam.name}</h3>
-              <p className="text-sm text-slate-500">View Pattern, Syllabus & Dates</p>
+              <h3 className="font-bold text-neutral-900 dark:text-white mb-2">{exam.name}</h3>
+              <p className="text-sm text-neutral-500">View Pattern, Syllabus & Dates</p>
             </Link>
           ))}
         </div>
