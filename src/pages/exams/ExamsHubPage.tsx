@@ -4,7 +4,7 @@ import { navigationData } from '../../data/navigationData';
 import { Link } from 'react-router-dom';
 
 const ExamsHubPage: React.FC = () => {
-  const exams = navigationData.find(n => n.slug === 'exams')?.sections[0].links || [];
+  const exams = navigationData.find(n => n.slug === 'exams')?.sections[0]?.links || [];
 
   return (
     <div className="pt-8">

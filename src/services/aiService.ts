@@ -101,7 +101,7 @@ export const getFooterPageContent = async (topic: string, type: string, excludeT
       const uniqueItems = new Map();
       const normalizedExcludes = new Set(excludeTitles.map(t => t.trim().toLowerCase()));
 
-      data.items.forEach(item => {
+      data.items.forEach((item: { title: string }) => {
         const normalizedTitle = item.title.trim().toLowerCase();
         if (!uniqueItems.has(normalizedTitle) && !normalizedExcludes.has(normalizedTitle)) {
           uniqueItems.set(normalizedTitle, item);

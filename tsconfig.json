@@ -12,9 +12,8 @@
     "jsx": "react-jsx",
     "skipLibCheck": true,
     "noEmit": true,
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src", "vite-env.d.ts", "vite.config.ts"]

@@ -1,4 +1,20 @@
-export const navigationData = [
+export interface NavLink {
+    name: string;
+    url: string;
+}
+
+export interface NavSection {
+    heading: string;
+    links: NavLink[];
+}
+
+export interface NavCategory {
+    title: string;
+    slug: string;
+    sections: NavSection[];
+}
+
+export const navigationData: NavCategory[] = [
     {
         title: "Explore Colleges",
         slug: "colleges",

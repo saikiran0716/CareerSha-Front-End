@@ -1,14 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-interface NavLink {
-    name: string;
-    url: string;
-}
-
-interface NavSection {
-    heading: string;
-    links: NavLink[];
-}
+import { NavSection } from "../../../data/navigationData";
 
 interface MegaMenuProps {
     sections: NavSection[];
