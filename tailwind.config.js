@@ -31,7 +31,17 @@ export default {
         fhd: '1440px',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-sans)'],
+        heading: ['var(--font-heading)'],
+      },
+      // Weights come from theme.css so only headings render bold (see "Typography" there)
+      fontWeight: {
+        semibold: 'var(--fw-semibold)',
+        bold: 'var(--fw-bold)',
+        extrabold: 'var(--fw-extrabold)',
+        black: 'var(--fw-black)',
+        // Always bold (logo wordmark), regardless of the headings-only rule
+        brand: '800',
       },
     },
   },

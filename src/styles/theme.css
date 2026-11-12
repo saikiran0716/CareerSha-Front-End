@@ -133,3 +133,39 @@
   --color-page-text: var(--color-neutral-100);
   --border: 217.2 32.6% 17.5%;
 }
+
+/* ==========================================================================
+   Typography
+   --------------------------------------------------------------------------
+   Font: change --font-sans / --font-heading (and the Google Fonts <link> in
+   index.html) to switch the font for the whole site.
+
+   Weight rule: only headings (h1–h6) are bold; all other text is regular.
+   Tailwind's font-semibold / font-bold / font-extrabold / font-black read the
+   variables below, so the same class is bold inside a heading and regular
+   everywhere else. To make body text bold again, set the :root values to
+   600 / 700 / 800 / 900.
+   ========================================================================== */
+
+:root {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-heading: var(--font-sans);
+
+  --fw-semibold: 400;
+  --fw-bold: 400;
+  --fw-extrabold: 400;
+  --fw-black: 400;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-extrabold: 800;
+  --fw-black: 800;
+  font-family: var(--font-heading);
+}

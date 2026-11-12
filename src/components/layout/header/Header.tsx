@@ -58,7 +58,7 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
               </button>
               <Link to="/" className="flex items-center gap-2 cursor-pointer">
                 <GraduationCap className="w-7 h-7 text-primary-600 fill-primary-600/10" />
-                <span className="text-xl font-bold tracking-tight text-neutral-900 dark:text-white">Careersha</span>
+                <span className="text-xl font-brand tracking-tight text-neutral-900 dark:text-white">Careersha</span>
               </Link>
             </div>
 
@@ -217,7 +217,7 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                   className="flex items-center gap-2 cursor-pointer"
                 >
                   <GraduationCap className="w-6 h-6 text-primary-600 fill-primary-600/10" />
-                  <span className="text-lg font-bold tracking-tight text-neutral-900 dark:text-white">Careersha</span>
+                  <span className="text-lg font-brand tracking-tight text-neutral-900 dark:text-white">Careersha</span>
                 </Link>
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}

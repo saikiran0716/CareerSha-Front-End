@@ -80,6 +80,15 @@ For inline styles or chart libraries, use the helpers in `src/lib/theme.ts`:
 
 Third-party brand colors (WhatsApp, LinkedIn, YouTube, …) intentionally stay as hex.
 
+## Typography
+
+- **Font:** Plus Jakarta Sans. To change it, edit `--font-sans` / `--font-heading` in `src/styles/theme.css`
+  and the Google Fonts `<link>` in `index.html`.
+- **Weight rule:** only headings (`h1`–`h6`) are bold; all other text is regular. `font-semibold`, `font-bold`,
+  `font-extrabold` and `font-black` are bold inside headings and regular everywhere else (controlled by the
+  `--fw-*` variables in `theme.css`). Use a real heading tag when text should be bold.
+- **Exception:** `font-brand` is always bold (logo wordmark).
+
 ## Adding a rank predictor
 
 Every `/rank-estimator/:examSlug` page is generated from one entry in
