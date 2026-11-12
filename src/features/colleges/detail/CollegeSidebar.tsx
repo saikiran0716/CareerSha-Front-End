@@ -3,6 +3,12 @@ import { Globe, Phone, MapPin, Shield, GraduationCap, Mail, ChevronRight } from 
 import type { CollegeView } from './useCollegeDetail';
 import type { CollegeTab } from './constants';
 
+/** Admissions open for the academic year starting this year (e.g. "2026 – 27"). */
+const academicYear = () => {
+  const y = new Date().getFullYear();
+  return `${y} – ${String(y + 1).slice(-2)}`;
+};
+
 const CollegeSidebar: React.FC<{ view: CollegeView; setActiveTab: (tab: CollegeTab) => void }> = ({
   view,
   setActiveTab,
@@ -14,7 +20,7 @@ const CollegeSidebar: React.FC<{ view: CollegeView; setActiveTab: (tab: CollegeT
       <div className="bg-white rounded-2xl border border-neutral-200 overflow-hidden shadow-sm">
         <div className="bg-gradient-to-r from-primary-600 to-secondary-600 px-5 py-4">
           <p className="text-white text-[13px] font-bold">Applications for Admissions</p>
-          <p className="text-primary-200 text-[11px]">2025 – 26 Academic Year</p>
+          <p className="text-primary-200 text-xs">{academicYear()} Academic Year</p>
         </div>
         <div className="p-5 space-y-3">
           {website && (
@@ -51,12 +57,12 @@ const CollegeSidebar: React.FC<{ view: CollegeView; setActiveTab: (tab: CollegeT
       {/* Key Stats - sidebar */}
       {!loading && d?.stats && d.stats.length > 0 && (
         <div className="bg-white rounded-2xl border border-neutral-200 p-5 shadow-sm">
-          <h3 className="text-[11px] font-extrabold text-neutral-500 uppercase tracking-widest mb-3">Key Statistics</h3>
+          <h3 className="text-xs font-extrabold text-neutral-500 uppercase tracking-widest mb-3">Key Statistics</h3>
           <div className="grid grid-cols-2 gap-2.5">
             {d.stats.slice(0, 6).map((s, i) => (
               <div key={i} className="p-3 bg-neutral-50 border border-neutral-100 rounded-xl text-center">
                 <p className="text-[18px] font-extrabold text-neutral-900 leading-tight">{s.value}</p>
-                <p className="text-[9px] font-bold text-neutral-400 uppercase tracking-wider mt-0.5">{s.label}</p>
+                <p className="text-xs font-bold text-neutral-500 uppercase tracking-wider mt-0.5">{s.label}</p>
               </div>
             ))}
           </div>
@@ -65,25 +71,23 @@ const CollegeSidebar: React.FC<{ view: CollegeView; setActiveTab: (tab: CollegeT
 
       {/* Contact Info */}
       <div className="bg-white rounded-2xl border border-neutral-200 p-5 shadow-sm">
-        <h3 className="text-[11px] font-extrabold text-neutral-500 uppercase tracking-widest mb-4">
-          Contact Information
-        </h3>
+        <h3 className="text-xs font-extrabold text-neutral-500 uppercase tracking-widest mb-4">Contact Information</h3>
         <div className="space-y-3">
           {address_ && (
             <div className="flex items-start gap-2.5 text-[12.5px] text-neutral-600">
-              <MapPin size={13} className="text-neutral-400 mt-0.5 shrink-0" />
+              <MapPin size={13} className="text-neutral-500 mt-0.5 shrink-0" />
               <span className="leading-relaxed">{address_}</span>
             </div>
           )}
           {phone_ && (
             <div className="flex items-center gap-2.5 text-[12.5px] text-neutral-600">
-              <Phone size={13} className="text-neutral-400 shrink-0" />
+              <Phone size={13} className="text-neutral-500 shrink-0" />
               <span className="font-semibold">{phone_}</span>
             </div>
           )}
           {email_ && (
             <div className="flex items-center gap-2.5 text-[12.5px] text-neutral-600">
-              <Mail size={13} className="text-neutral-400 shrink-0" />
+              <Mail size={13} className="text-neutral-500 shrink-0" />
               <a href={`mailto:${email_}`} className="hover:text-primary-600 transition-colors">
                 {email_}
               </a>
@@ -95,7 +99,7 @@ const CollegeSidebar: React.FC<{ view: CollegeView; setActiveTab: (tab: CollegeT
       {/* Official Links */}
       {!loading && d?.directLinks && d.directLinks.length > 0 && (
         <div className="bg-white rounded-2xl border border-neutral-200 p-5 shadow-sm">
-          <h3 className="text-[11px] font-extrabold text-neutral-500 uppercase tracking-widest mb-3">
+          <h3 className="text-xs font-extrabold text-neutral-500 uppercase tracking-widest mb-3">
             Official Portal Links
           </h3>
           <div className="space-y-0.5">
@@ -120,7 +124,7 @@ const CollegeSidebar: React.FC<{ view: CollegeView; setActiveTab: (tab: CollegeT
       {/* Accreditations */}
       {!loading && d?.accreditations && d.accreditations.length > 0 && (
         <div className="bg-white rounded-2xl border border-neutral-200 p-5 shadow-sm">
-          <h3 className="text-[11px] font-extrabold text-neutral-500 uppercase tracking-widest mb-3 flex items-center gap-1.5">
+          <h3 className="text-xs font-extrabold text-neutral-500 uppercase tracking-widest mb-3 flex items-center gap-1.5">
             <Shield size={12} className="text-success-500" /> Accreditations
           </h3>
           <div className="flex flex-wrap gap-2">
@@ -139,7 +143,7 @@ const CollegeSidebar: React.FC<{ view: CollegeView; setActiveTab: (tab: CollegeT
       {/* Latest Cutoffs quick-view */}
       {!loading && d?.branchCutoffs && d.branchCutoffs.length > 0 && (
         <div className="bg-white rounded-2xl border border-neutral-200 p-5 shadow-sm">
-          <h3 className="text-[11px] font-extrabold text-neutral-500 uppercase tracking-widest mb-3">
+          <h3 className="text-xs font-extrabold text-neutral-500 uppercase tracking-widest mb-3">
             Latest Cutoffs (Open)
           </h3>
           <div className="space-y-2">
@@ -155,7 +159,7 @@ const CollegeSidebar: React.FC<{ view: CollegeView; setActiveTab: (tab: CollegeT
           {d.branchCutoffs.length > 4 && (
             <button
               onClick={() => setActiveTab('Admissions')}
-              className="w-full mt-2 text-[11px] text-primary-600 hover:underline font-semibold"
+              className="w-full mt-2 text-xs text-primary-600 hover:underline font-semibold"
             >
               View all cutoffs →
             </button>

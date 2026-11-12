@@ -18,7 +18,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ sections, onClose }) => {
         {sections.map((section, idx) => (
           <div key={idx} className="mb-2 last:mb-0">
             {section.heading && (
-              <h4 className="font-bold text-neutral-800 mb-3 text-[11px] uppercase tracking-wider border-b border-secondary-50 pb-2 flex items-center gap-2">
+              <h4 className="font-bold text-neutral-800 mb-3 text-xs uppercase tracking-wider border-b border-secondary-50 pb-2 flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-secondary-500"></span>
                 {section.heading}
               </h4>

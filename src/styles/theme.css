@@ -169,3 +169,14 @@ h6 {
   --fw-black: 800;
   font-family: var(--font-heading);
 }
+
+/* Interactive text (buttons, form labels, nav links) uses medium weight so it still
+   reads as clickable under the headings-only bold rule. Plain text inside them is unaffected. */
+button,
+label,
+nav a {
+  --fw-semibold: 500;
+  --fw-bold: 500;
+  --fw-extrabold: 500;
+  --fw-black: 500;
+}

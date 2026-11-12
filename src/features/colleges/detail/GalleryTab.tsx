@@ -31,7 +31,7 @@ const GalleryTab: React.FC<{ view: CollegeView }> = ({ view }) => {
                   />
                   {img.caption && (
                     <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-3 py-2">
-                      <p className="text-[11px] text-white font-semibold leading-tight">{img.caption}</p>
+                      <p className="text-xs text-white font-semibold leading-tight">{img.caption}</p>
                     </div>
                   )}
                 </div>

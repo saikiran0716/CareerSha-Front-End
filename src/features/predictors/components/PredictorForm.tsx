@@ -27,7 +27,7 @@ const Select: React.FC<{ value: string; onChange: (v: string) => void; options: 
         <option key={o}>{o}</option>
       ))}
     </select>
-    <ChevronDown className="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" />
+    <ChevronDown className="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-neutral-500 pointer-events-none" />
   </div>
 );
 
@@ -164,7 +164,7 @@ const PredictorForm: React.FC<{ exam: ExamConfig }> = ({ exam }) => {
                 </div>
                 <div className="flex gap-6 sm:text-right">
                   <div>
-                    <p className="text-[11px] font-bold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-1">
+                    <p className="text-xs font-bold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-1">
                       {category} Rank
                     </p>
                     <p className="text-xl font-black text-neutral-700 dark:text-neutral-300">
@@ -172,7 +172,7 @@ const PredictorForm: React.FC<{ exam: ExamConfig }> = ({ exam }) => {
                     </p>
                   </div>
                   <div>
-                    <p className="text-[11px] font-bold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-1">
+                    <p className="text-xs font-bold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-1">
                       Percentile
                     </p>
                     <p className="text-xl font-black text-neutral-700 dark:text-neutral-300">
@@ -201,6 +201,9 @@ const PredictorForm: React.FC<{ exam: ExamConfig }> = ({ exam }) => {
                     ))}
                 </ul>
               </div>
+              <p className="mt-3 text-xs text-neutral-500">
+                This is an estimate based on previous years' trends. Actual ranks and cutoffs can differ.
+              </p>
             </div>
           </motion.div>
         )}

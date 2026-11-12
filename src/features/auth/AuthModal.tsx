@@ -202,7 +202,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
 
       <div className="my-2.5 flex items-center gap-2">
         <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-700"></div>
-        <span className="text-xs font-medium text-neutral-400">or</span>
+        <span className="text-xs font-medium text-neutral-500">or</span>
         <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-700"></div>
       </div>
 
@@ -289,7 +289,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
               setShow2FA(false);
               setTwoFactorCode(['', '', '', '', '', '']);
             }}
-            className="w-full text-neutral-400 hover:text-secondary-600 transition-colors text-xs font-semibold"
+            className="w-full text-neutral-500 hover:text-secondary-600 transition-colors text-xs font-semibold"
           >
             Back
           </button>
@@ -309,7 +309,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
       <div className="bg-white dark:bg-neutral-900 w-full max-w-md rounded-2xl shadow-2xl relative z-10 overflow-hidden animate-scaleIn border border-neutral-100/50 dark:border-neutral-800/50">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-20 p-1 rounded-full text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all"
+          className="absolute top-4 right-4 z-20 p-1 rounded-full text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all"
           aria-label="Close modal"
         >
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

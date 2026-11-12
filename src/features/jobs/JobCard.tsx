@@ -45,12 +45,12 @@ export const JobCard: React.FC<JobCardProps> = ({ job }) => {
             <div className="flex items-center gap-2 mb-1.5">
               <h3 className="text-base font-bold text-neutral-900">{job.role}</h3>
               {job.isNew && (
-                <span className="px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-success-700 bg-success-100 rounded-full">
+                <span className="px-2 py-0.5 text-xs font-black uppercase tracking-wider text-success-700 bg-success-100 rounded-full">
                   New
                 </span>
               )}
               {job.isHot && (
-                <span className="px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-orange-700 bg-orange-100 rounded-full">
+                <span className="px-2 py-0.5 text-xs font-black uppercase tracking-wider text-orange-700 bg-orange-100 rounded-full">
                   Hot
                 </span>
               )}
@@ -59,27 +59,27 @@ export const JobCard: React.FC<JobCardProps> = ({ job }) => {
               <span className="text-neutral-800 font-bold">{job.company}</span>
               <span className="w-1 h-1 rounded-full bg-neutral-300"></span>
               <span className="flex items-center gap-1">
-                <MapPin className="w-3.5 h-3.5 text-neutral-400" />
+                <MapPin className="w-3.5 h-3.5 text-neutral-500" />
                 {job.location}
               </span>
             </div>
           </div>
-          <span className="text-[12px] text-neutral-400 font-medium hidden sm:block">{job.postedAt}</span>
+          <span className="text-[12px] text-neutral-500 font-medium hidden sm:block">{job.postedAt}</span>
         </div>
 
         {/* Badges Row */}
         <div className="flex flex-wrap items-center gap-3">
           <div className="flex items-center gap-1.5 text-[12px] font-medium text-neutral-600">
-            <Briefcase className="w-3.5 h-3.5 text-neutral-400" /> {job.type}
+            <Briefcase className="w-3.5 h-3.5 text-neutral-500" /> {job.type}
           </div>
           <div className="flex items-center gap-1.5 text-[12px] font-medium text-neutral-600">
-            <Clock className="w-3.5 h-3.5 text-neutral-400" /> {job.experience}
+            <Clock className="w-3.5 h-3.5 text-neutral-500" /> {job.experience}
           </div>
           <div className="flex items-center gap-1.5 text-[12px] font-medium text-neutral-600">
-            <IndianRupee className="w-3.5 h-3.5 text-neutral-400" /> {job.salary}
+            <IndianRupee className="w-3.5 h-3.5 text-neutral-500" /> {job.salary}
           </div>
           <div className="flex items-center gap-1.5 text-[12px] font-medium text-neutral-600">
-            <MapPin className="w-3.5 h-3.5 text-neutral-400" /> {job.workModel}
+            <MapPin className="w-3.5 h-3.5 text-neutral-500" /> {job.workModel}
           </div>
         </div>
 
@@ -88,12 +88,12 @@ export const JobCard: React.FC<JobCardProps> = ({ job }) => {
           {job.tags.map((tag, idx) => (
             <span
               key={idx}
-              className="px-2.5 py-1 rounded-md text-[11px] font-bold text-primary-700 bg-primary-50 border border-primary-100/50"
+              className="px-2.5 py-1 rounded-md text-xs font-bold text-primary-700 bg-primary-50 border border-primary-100/50"
             >
               {tag}
             </span>
           ))}
-          <span className="px-2 py-1 rounded-md text-[11px] font-bold text-neutral-500 bg-neutral-50 border border-neutral-200">
+          <span className="px-2 py-1 rounded-md text-xs font-bold text-neutral-500 bg-neutral-50 border border-neutral-200">
             +2
           </span>
         </div>
@@ -101,13 +101,13 @@ export const JobCard: React.FC<JobCardProps> = ({ job }) => {
 
       {/* Actions */}
       <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-3 mt-4 sm:mt-0 pt-4 sm:pt-0 border-t sm:border-t-0 border-neutral-100 shrink-0 min-w-[120px]">
-        <span className="text-[12px] text-neutral-400 font-medium sm:hidden">{job.postedAt}</span>
+        <span className="text-[12px] text-neutral-500 font-medium sm:hidden">{job.postedAt}</span>
         <div className="flex items-center gap-3 w-full sm:w-auto">
           <button className="flex-1 sm:flex-none h-10 px-5 bg-primary-600 hover:bg-primary-700 text-white text-[13px] font-bold rounded-lg transition-colors shadow-sm active:scale-95">
             Apply Now
           </button>
           <button
-            className="h-10 px-3 text-neutral-400 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors flex items-center justify-center border border-neutral-200 hover:border-primary-200"
+            className="h-10 px-3 text-neutral-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors flex items-center justify-center border border-neutral-200 hover:border-primary-200"
             title="Save Job"
           >
             <Bookmark className="w-4 h-4" />

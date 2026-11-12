@@ -100,7 +100,7 @@ const StudentForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
               >
                 {step > s ? '✓' : s}
               </div>
-              <span className="text-[10px] mt-1 text-neutral-400 uppercase">
+              <span className="text-xs mt-1 text-neutral-500 uppercase">
                 {s === 1 ? 'Academic' : s === 2 ? 'Exams' : 'Future'}
               </span>
             </div>

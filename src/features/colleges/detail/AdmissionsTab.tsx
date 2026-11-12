@@ -18,18 +18,18 @@ const AdmissionsTab: React.FC<{ view: CollegeView }> = ({ view }) => {
               <h2 className="text-[14px] font-extrabold text-neutral-800">
                 Branch-wise Cutoffs (JEE/{d.branchCutoffs[0]?.year || '2024'})
               </h2>
-              <p className="text-[11px] text-neutral-400 mt-0.5">Closing ranks — lower is better</p>
+              <p className="text-xs text-neutral-500 mt-0.5">Closing ranks — lower is better</p>
             </div>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-primary-600 text-white">
-                  <th className="px-5 py-3 text-left text-[11px] font-bold uppercase tracking-wide">Branch</th>
-                  <th className="px-5 py-3 text-center text-[11px] font-bold uppercase tracking-wide">Open</th>
-                  <th className="px-5 py-3 text-center text-[11px] font-bold uppercase tracking-wide">OBC-NCL</th>
-                  <th className="px-5 py-3 text-center text-[11px] font-bold uppercase tracking-wide">SC</th>
-                  <th className="px-5 py-3 text-center text-[11px] font-bold uppercase tracking-wide">ST</th>
+                  <th className="px-5 py-3 text-left text-xs font-bold uppercase tracking-wide">Branch</th>
+                  <th className="px-5 py-3 text-center text-xs font-bold uppercase tracking-wide">Open</th>
+                  <th className="px-5 py-3 text-center text-xs font-bold uppercase tracking-wide">OBC-NCL</th>
+                  <th className="px-5 py-3 text-center text-xs font-bold uppercase tracking-wide">SC</th>
+                  <th className="px-5 py-3 text-center text-xs font-bold uppercase tracking-wide">ST</th>
                 </tr>
               </thead>
               <tbody>
@@ -68,13 +68,13 @@ const AdmissionsTab: React.FC<{ view: CollegeView }> = ({ view }) => {
           {d.admissionTimeline.map((item, i) => (
             <div key={i} className="flex gap-4">
               <div className="flex flex-col items-center">
-                <div className="w-7 h-7 rounded-full bg-primary-600 text-white flex items-center justify-center text-[10px] font-extrabold shrink-0">
+                <div className="w-7 h-7 rounded-full bg-primary-600 text-white flex items-center justify-center text-xs font-extrabold shrink-0">
                   {i + 1}
                 </div>
                 {i < d.admissionTimeline.length - 1 && <div className="w-px flex-1 bg-neutral-200 my-1" />}
               </div>
               <div className="pb-5 pt-0.5">
-                <p className="text-[10px] font-bold text-primary-500 uppercase tracking-widest">{item.date}</p>
+                <p className="text-xs font-bold text-primary-500 uppercase tracking-widest">{item.date}</p>
                 <p className="text-sm font-semibold text-neutral-700 mt-0.5">{item.event}</p>
               </div>
             </div>
@@ -90,7 +90,7 @@ const AdmissionsTab: React.FC<{ view: CollegeView }> = ({ view }) => {
               <div key={i} className="p-4 bg-success-50 border border-success-100 rounded-xl">
                 <div className="flex items-start justify-between gap-3">
                   <p className="text-[13px] font-bold text-success-800">{s.name}</p>
-                  <span className="text-[11px] font-extrabold bg-success-100 text-success-700 rounded-full px-2.5 py-0.5 shrink-0">
+                  <span className="text-xs font-extrabold bg-success-100 text-success-700 rounded-full px-2.5 py-0.5 shrink-0">
                     {s.amount}
                   </span>
                 </div>
@@ -117,7 +117,7 @@ const AdmissionsTab: React.FC<{ view: CollegeView }> = ({ view }) => {
                   {openFaq === i ? (
                     <ChevronUp size={15} className="shrink-0 text-primary-500" />
                   ) : (
-                    <ChevronDown size={15} className="shrink-0 text-neutral-400" />
+                    <ChevronDown size={15} className="shrink-0 text-neutral-500" />
                   )}
                 </button>
                 {openFaq === i && (

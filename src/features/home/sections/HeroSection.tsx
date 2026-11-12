@@ -35,7 +35,7 @@ const HeroSection: React.FC = () => {
         {/* Hero Search Bar */}
         <div className="max-w-xl">
           <div className="relative flex items-center bg-white dark:bg-neutral-900 rounded-full px-4 py-2.5 shadow-[0_12px_30px_rgba(15,23,42,0.05)] border border-neutral-100 dark:border-neutral-800 transition-all focus-within:ring-2 focus-within:ring-primary-500/20">
-            <Search className="h-5 w-5 text-neutral-400 dark:text-neutral-500 shrink-0" />
+            <Search className="h-5 w-5 text-neutral-500 dark:text-neutral-500 shrink-0" />
             <input
               type="text"
               value={searchQuery}
@@ -46,7 +46,7 @@ const HeroSection: React.FC = () => {
                   goToSearch();
                 }
               }}
-              placeholder="Search colleges, exams, courses (e.g. IIT, NEET, MBA)..."
+              placeholder="Search colleges, exams, courses"
               className="mx-3 w-full bg-transparent text-sm text-neutral-800 dark:text-neutral-200 outline-none placeholder:text-neutral-400 dark:placeholder:text-neutral-500 font-medium"
             />
             <button
@@ -59,7 +59,7 @@ const HeroSection: React.FC = () => {
           </div>
 
           {/* Trending tags */}
-          <div className="mt-4 flex flex-wrap items-center gap-2 text-xs">
+          <div className="mt-4 flex flex-nowrap items-center gap-2 text-xs overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             <span className="font-extrabold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mr-1">
               Trending:
             </span>
@@ -67,7 +67,7 @@ const HeroSection: React.FC = () => {
               <button
                 key={topic}
                 onClick={() => handleTrendingClick(topic)}
-                className="rounded-full border border-neutral-200/60 dark:border-neutral-800 bg-white dark:bg-neutral-900 px-3.5 py-1.5 font-bold text-neutral-700 dark:text-neutral-300 shadow-sm transition hover:border-primary-400 hover:text-primary-600 dark:hover:text-primary-400 dark:hover:border-primary-500"
+                className="shrink-0 rounded-full border border-neutral-200/60 dark:border-neutral-800 bg-white dark:bg-neutral-900 px-3.5 py-1.5 font-bold text-neutral-700 dark:text-neutral-300 shadow-sm transition hover:border-primary-400 hover:text-primary-600 dark:hover:text-primary-400 dark:hover:border-primary-500"
               >
                 {topic}
               </button>
@@ -107,8 +107,11 @@ const HeroSection: React.FC = () => {
             <div className="flex items-center gap-1.5 justify-center mb-1">
               <Star className="h-3.5 w-3.5 text-primary-600 dark:text-primary-400 fill-current" />
               <p className="text-[9px] font-black uppercase tracking-[0.1em] text-neutral-500 dark:text-neutral-400">
-                Predict Admission Chance
+                Admission Chance
               </p>
+              <span className="rounded-full bg-neutral-100 px-1.5 py-0.5 text-[9px] font-bold uppercase text-neutral-500">
+                Example
+              </span>
             </div>
             <div className="flex items-baseline justify-center gap-1">
               <span className="text-3xl font-black text-neutral-900 dark:text-white leading-none">87%</span>

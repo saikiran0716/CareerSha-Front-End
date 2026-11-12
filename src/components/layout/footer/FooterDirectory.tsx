@@ -27,7 +27,7 @@ const FooterDirectory: React.FC<FooterDirectoryProps> = ({ onNavigate }) => {
                 onClick={() => toggleSection(category.title)}
                 className="w-full flex items-center justify-between md:cursor-default md:pointer-events-none group py-2 md:py-0"
               >
-                <h4 className="text-white font-black uppercase tracking-[0.2em] md:mb-6 md:pb-3 md:border-b md:border-neutral-800/50 text-[10px] xs:text-[11px] ms:text-xs">
+                <h4 className="text-white font-black uppercase tracking-[0.2em] md:mb-6 md:pb-3 md:border-b md:border-neutral-800/50 text-xs xs:text-xs ms:text-xs">
                   {category.title}
                 </h4>
                 <span
@@ -56,7 +56,7 @@ const FooterDirectory: React.FC<FooterDirectoryProps> = ({ onNavigate }) => {
                     <li key={idx}>
                       <button
                         onClick={() => onNavigate?.(link.url)}
-                        className="text-neutral-400 hover:text-secondary-400 hover:translate-x-1 transition-all duration-300 text-[10px] xs:text-[11px] ms:text-xs text-left w-full font-bold uppercase tracking-widest py-1 md:py-0"
+                        className="text-neutral-500 hover:text-secondary-400 hover:translate-x-1 transition-all duration-300 text-xs xs:text-xs ms:text-xs text-left w-full font-bold uppercase tracking-widest py-1 md:py-0"
                       >
                         {link.name}
                       </button>
@@ -74,7 +74,7 @@ const FooterDirectory: React.FC<FooterDirectoryProps> = ({ onNavigate }) => {
         <h4 className="text-white font-black uppercase tracking-[0.2em] mb-6 text-xs ms:text-sm text-center md:text-left">
           Explore Colleges By City
         </h4>
-        <div className="grid grid-cols-2 xs:grid-cols-3 gap-x-4 gap-y-3 ms:gap-x-6 ms:gap-y-4 text-neutral-500 text-[10px] xs:text-[11px] ms:text-xs font-bold uppercase tracking-wider mb-6">
+        <div className="grid grid-cols-2 xs:grid-cols-3 gap-x-4 gap-y-3 ms:gap-x-6 ms:gap-y-4 text-neutral-500 text-xs xs:text-xs ms:text-xs font-bold uppercase tracking-wider mb-6">
           {[
             'New Delhi',
             'Mumbai',
@@ -107,7 +107,7 @@ const FooterDirectory: React.FC<FooterDirectoryProps> = ({ onNavigate }) => {
           })}
         </div>
         <div className="text-center md:text-left">
-          <button className="text-secondary-500 font-extrabold hover:text-secondary-400 transition-colors uppercase tracking-[0.2em] text-[10px] xs:text-[11px]">
+          <button className="text-secondary-500 font-extrabold hover:text-secondary-400 transition-colors uppercase tracking-[0.2em] text-xs xs:text-xs">
             View All Cities &rarr;
           </button>
         </div>

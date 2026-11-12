@@ -60,7 +60,7 @@ const ExamResultsPage: React.FC<ExamResultsPageProps> = ({ compact = false }) =>
             {resolvingFor ? (
               <div className="flex items-center gap-2">
                 <div className="w-2.5 h-2.5 border-2 border-neutral-200 border-t-neutral-800 dark:border-neutral-800 dark:border-t-white rounded-full animate-spin" />
-                <span className="text-[9px] font-bold text-neutral-600 dark:text-neutral-300 uppercase tracking-widest animate-pulse">
+                <span className="text-xs font-bold text-neutral-600 dark:text-neutral-300 uppercase tracking-widest animate-pulse">
                   Syncing Live API...
                 </span>
               </div>
@@ -77,8 +77,8 @@ const ExamResultsPage: React.FC<ExamResultsPageProps> = ({ compact = false }) =>
           return (
             <div key={idx} className="space-y-3">
               <div className="flex items-center gap-2 pl-1 border-l-2 border-neutral-200 dark:border-neutral-800 py-1">
-                <CategoryIcon className="w-4 h-4 text-neutral-400" />
-                <h3 className="text-[10px] font-bold text-neutral-500 dark:text-neutral-400 uppercase tracking-widest leading-none">
+                <CategoryIcon className="w-4 h-4 text-neutral-500" />
+                <h3 className="text-xs font-bold text-neutral-500 dark:text-neutral-400 uppercase tracking-widest leading-none">
                   {category.title}
                 </h3>
               </div>

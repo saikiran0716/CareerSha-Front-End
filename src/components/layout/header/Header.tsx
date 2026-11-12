@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, ChevronDown, User as UserIcon, Sun, Moon, GraduationCap, LogOut } from 'lucide-react';
+import { Menu, X, ChevronDown, User as UserIcon, Sun, Moon, LogOut } from 'lucide-react';
+import Logo from '../../common/Logo';
+import { DARK_MODE_ENABLED } from '../../../hooks/useDarkMode';
 import { User } from '../../../services/authService';
 import { navigationData } from '../../../data/navigationData';
 import MegaMenu from './MegaMenu';
@@ -53,11 +55,13 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
               <button
                 className="lg:hidden p-2 text-neutral-600 hover:bg-neutral-100 rounded-lg transition-colors"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+                aria-expanded={isMobileMenuOpen}
               >
                 {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
               <Link to="/" className="flex items-center gap-2 cursor-pointer">
-                <GraduationCap className="w-7 h-7 text-primary-600 fill-primary-600/10" />
+                <Logo className="w-8 h-8" />
                 <span className="text-xl font-brand tracking-tight text-neutral-900 dark:text-white">Careersha</span>
               </Link>
             </div>
@@ -116,18 +120,22 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
               {/* Actions Section */}
               <div className="flex items-center gap-2 sm:gap-3">
                 {/* Theme Toggle - Hidden on very small mobile to save space, visible in menu if needed */}
-                <button
-                  onClick={onToggleDarkMode}
-                  className="hidden sm:flex p-2 rounded-xl bg-neutral-50 dark:bg-neutral-900 text-neutral-500 dark:text-neutral-400 hover:text-secondary-600 dark:hover:text-secondary-400 transition-all border border-neutral-200 dark:border-neutral-800 shadow-sm"
-                  title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-                >
-                  {isDarkMode ? <Sun size={18} className="animate-pulse-slow" /> : <Moon size={18} />}
-                </button>
+                {DARK_MODE_ENABLED && (
+                  <button
+                    onClick={onToggleDarkMode}
+                    aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+                    className="hidden sm:flex p-2 rounded-xl bg-neutral-50 dark:bg-neutral-900 text-neutral-500 dark:text-neutral-400 hover:text-secondary-600 dark:hover:text-secondary-400 transition-all border border-neutral-200 dark:border-neutral-800 shadow-sm"
+                    title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+                  >
+                    {isDarkMode ? <Sun size={18} className="animate-pulse-slow" /> : <Moon size={18} />}
+                  </button>
+                )}
 
                 {user ? (
                   <div className="relative" ref={profileDropdownRef}>
                     <button
                       onClick={() => setIsProfileOpen(!isProfileOpen)}
+                      aria-label="Account menu"
                       className="relative flex-shrink-0"
                       title={`Signed in as ${user.name}`}
                     >
@@ -164,7 +172,7 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                             <p className="text-[13px] font-black text-neutral-800 dark:text-neutral-100 truncate">
                               {user.name}
                             </p>
-                            <p className="text-[11px] text-neutral-400 font-medium truncate">{user.email}</p>
+                            <p className="text-xs text-neutral-500 font-medium truncate">{user.email}</p>
                           </div>
                         </div>
                         <div className="p-2">
@@ -185,6 +193,7 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                 ) : (
                   <button
                     onClick={onOpenAuth}
+                    aria-label="Sign in"
                     className="relative flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-secondary-600 to-secondary-700 text-white flex items-center justify-center shadow-lg shadow-secondary-500/30 ring-2 ring-white dark:ring-neutral-900 hover:shadow-xl hover:shadow-secondary-500/40 hover:scale-110 transition-all duration-200"
                     title="Sign In"
                   >
@@ -216,12 +225,13 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="flex items-center gap-2 cursor-pointer"
                 >
-                  <GraduationCap className="w-6 h-6 text-primary-600 fill-primary-600/10" />
+                  <Logo className="w-7 h-7" />
                   <span className="text-lg font-brand tracking-tight text-neutral-900 dark:text-white">Careersha</span>
                 </Link>
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="p-2 text-neutral-400 hover:text-neutral-600"
+                  aria-label="Close menu"
+                  className="p-2 text-neutral-500 hover:text-neutral-600"
                 >
                   <X size={20} />
                 </button>
@@ -259,23 +269,23 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
 
             {/* Mobile Quick Actions Section - Stuck to bottom */}
             <div className="p-4 border-t border-neutral-100 bg-neutral-50/30 pb-8">
-              <h5 className="text-[10px] font-black uppercase tracking-widest text-neutral-400 mb-4 px-2">
+              <h5 className="text-xs font-black uppercase tracking-widest text-neutral-500 mb-4 px-2">
                 Account & Settings
               </h5>
-              <div className="grid grid-cols-2 gap-3">
-                <button
-                  onClick={onToggleDarkMode}
-                  className="flex flex-col items-center justify-center p-3 rounded-2xl bg-white border border-neutral-100 text-neutral-600 gap-1.5 hover:bg-secondary-50 hover:border-secondary-100 transition-all shadow-sm"
-                >
-                  {isDarkMode ? (
-                    <Sun size={18} className="text-secondary-500" />
-                  ) : (
-                    <Moon size={18} className="text-neutral-500" />
-                  )}
-                  <span className="text-[10px] font-bold uppercase tracking-wider">
-                    {isDarkMode ? 'Light' : 'Dark'}
-                  </span>
-                </button>
+              <div className={`grid gap-3 ${DARK_MODE_ENABLED ? 'grid-cols-2' : 'grid-cols-1'}`}>
+                {DARK_MODE_ENABLED && (
+                  <button
+                    onClick={onToggleDarkMode}
+                    className="flex flex-col items-center justify-center p-3 rounded-2xl bg-white border border-neutral-100 text-neutral-600 gap-1.5 hover:bg-secondary-50 hover:border-secondary-100 transition-all shadow-sm"
+                  >
+                    {isDarkMode ? (
+                      <Sun size={18} className="text-secondary-500" />
+                    ) : (
+                      <Moon size={18} className="text-neutral-500" />
+                    )}
+                    <span className="text-xs font-bold uppercase tracking-wider">{isDarkMode ? 'Light' : 'Dark'}</span>
+                  </button>
+                )}
                 {user ? (
                   <button
                     onClick={() => {
@@ -285,7 +295,7 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                     className="flex flex-col items-center justify-center p-3 rounded-2xl bg-white border border-danger-100 text-danger-500 gap-1.5 hover:bg-danger-50 transition-all shadow-sm"
                   >
                     <LogOut size={18} />
-                    <span className="text-[10px] font-bold uppercase tracking-wider">Sign Out</span>
+                    <span className="text-xs font-bold uppercase tracking-wider">Sign Out</span>
                   </button>
                 ) : (
                   <button
@@ -296,7 +306,7 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                     className="flex flex-col items-center justify-center p-3 rounded-2xl bg-secondary-600 text-white gap-1.5 hover:bg-secondary-700 shadow-lg shadow-secondary-100 transition-all"
                   >
                     <UserIcon size={18} />
-                    <span className="text-[10px] font-bold uppercase tracking-wider">Sign In</span>
+                    <span className="text-xs font-bold uppercase tracking-wider">Sign In</span>
                   </button>
                 )}
               </div>

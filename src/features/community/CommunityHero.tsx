@@ -17,7 +17,7 @@ const CommunityHero: React.FC = () => {
 
         {/* Search Bar */}
         <div className="relative flex items-center">
-          <Search className="absolute left-4 text-neutral-400 w-5 h-5" />
+          <Search className="absolute left-4 text-neutral-500 w-5 h-5" />
           <input
             type="text"
             placeholder="Search questions, topics or users..."
@@ -37,7 +37,7 @@ const CommunityHero: React.FC = () => {
             <Users size={24} />
           </div>
           <div className="text-xl font-bold text-neutral-900 dark:text-white">25.6K+</div>
-          <div className="text-[11px] font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide">
+          <div className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide">
             Active Members
           </div>
         </div>
@@ -48,7 +48,7 @@ const CommunityHero: React.FC = () => {
             <HelpCircle size={24} />
           </div>
           <div className="text-xl font-bold text-neutral-900 dark:text-white">12.4K+</div>
-          <div className="text-[11px] font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide">
+          <div className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide">
             Questions Asked
           </div>
         </div>
@@ -59,7 +59,7 @@ const CommunityHero: React.FC = () => {
             <MessageSquare size={24} />
           </div>
           <div className="text-xl font-bold text-neutral-900 dark:text-white">48.7K+</div>
-          <div className="text-[11px] font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide">
+          <div className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide">
             Answers Given
           </div>
         </div>
@@ -70,7 +70,7 @@ const CommunityHero: React.FC = () => {
             <GraduationCap size={24} />
           </div>
           <div className="text-xl font-bold text-neutral-900 dark:text-white">200+</div>
-          <div className="text-[11px] font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide">
+          <div className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide">
             Colleges Discussed
           </div>
         </div>

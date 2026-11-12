@@ -49,9 +49,9 @@ const ItemGrid: React.FC<ItemGridProps> = ({ page, pageId, onAskAI }) => {
                 <p className="font-semibold text-neutral-800 dark:text-white group-hover:text-secondary-600 text-sm leading-tight truncate">
                   {item.title}
                 </p>
-                <p className="text-[11px] text-neutral-400 truncate mt-0.5">{item.subtitle || 'Ask AI'}</p>
+                <p className="text-xs text-neutral-500 truncate mt-0.5">{item.subtitle || 'Ask AI'}</p>
               </div>
-              <span className="text-[10px] bg-secondary-100 text-secondary-600 font-bold px-2 py-1 rounded shrink-0">
+              <span className="text-xs bg-secondary-100 text-secondary-600 font-bold px-2 py-1 rounded shrink-0">
                 Chat
               </span>
             </button>
@@ -71,15 +71,13 @@ const ItemGrid: React.FC<ItemGridProps> = ({ page, pageId, onAskAI }) => {
                 <h3 className="font-bold text-neutral-800 dark:text-white group-hover:text-secondary-600 text-[14px] leading-tight truncate transition-colors">
                   {item.title}
                 </h3>
-                {item.subtitle && (
-                  <p className="text-[11px] text-neutral-400 line-clamp-2 leading-snug">{item.subtitle}</p>
-                )}
+                {item.subtitle && <p className="text-xs text-neutral-500 line-clamp-2 leading-snug">{item.subtitle}</p>}
                 {item.tags && item.tags.length > 0 && (
                   <div className="flex gap-1 mt-1 flex-wrap">
                     {item.tags.slice(0, 2).map((tag, tIdx) => (
                       <span
                         key={tIdx}
-                        className="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-500 border border-neutral-200 dark:border-neutral-700 leading-tight"
+                        className="text-xs uppercase font-bold px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-500 border border-neutral-200 dark:border-neutral-700 leading-tight"
                       >
                         {tag}
                       </span>
@@ -94,7 +92,7 @@ const ItemGrid: React.FC<ItemGridProps> = ({ page, pageId, onAskAI }) => {
                       return (
                         <span
                           key={i}
-                          className={`text-[10px] font-bold px-2 py-0.5 rounded-md max-w-full break-words leading-snug ${isGreen ? 'bg-success-50 text-success-600 border border-success-100 dark:bg-success-900/20 dark:text-success-400 dark:border-success-800' : 'bg-neutral-100 text-neutral-600 border border-neutral-200 dark:bg-neutral-800 dark:text-neutral-400 dark:border-neutral-700'}`}
+                          className={`text-xs font-bold px-2 py-0.5 rounded-md max-w-full break-words leading-snug ${isGreen ? 'bg-success-50 text-success-600 border border-success-100 dark:bg-success-900/20 dark:text-success-400 dark:border-success-800' : 'bg-neutral-100 text-neutral-600 border border-neutral-200 dark:bg-neutral-800 dark:text-neutral-400 dark:border-neutral-700'}`}
                         >
                           {isGreen ? <span className="mr-0.5">₹</span> : ''}
                           {stat.value.replace('₹', '')}
@@ -111,12 +109,12 @@ const ItemGrid: React.FC<ItemGridProps> = ({ page, pageId, onAskAI }) => {
 
       {/* LOAD MORE */}
       <div className="flex flex-col items-center gap-2 mb-8">
-        {loadMoreMsg && <p className="text-xs text-neutral-400 font-medium">{loadMoreMsg}</p>}
+        {loadMoreMsg && <p className="text-xs text-neutral-500 font-medium">{loadMoreMsg}</p>}
         {!noMoreData && (
           <button
             onClick={handleLoadMore}
             disabled={loadingMore}
-            className={`px-6 py-2 rounded-lg font-bold text-sm transition-all border ${loadingMore ? 'bg-neutral-100 text-neutral-400 border-neutral-200 cursor-not-allowed' : 'bg-white border-neutral-300 text-neutral-600 hover:border-secondary-400 hover:text-secondary-600'}`}
+            className={`px-6 py-2 rounded-lg font-bold text-sm transition-all border ${loadingMore ? 'bg-neutral-100 text-neutral-500 border-neutral-200 cursor-not-allowed' : 'bg-white border-neutral-300 text-neutral-600 hover:border-secondary-400 hover:text-secondary-600'}`}
           >
             {loadingMore ? 'Loading...' : 'Load More'}
           </button>

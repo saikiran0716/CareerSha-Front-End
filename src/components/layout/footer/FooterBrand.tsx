@@ -1,21 +1,20 @@
 import React from 'react';
+import Logo from '../../common/Logo';
 
 const FooterBrand: React.FC = () => {
   return (
     <div className="flex flex-col lg:flex-row justify-between items-start gap-12 mb-12 border-b border-neutral-800/50 pb-12">
       <div className="max-w-2xl space-y-6">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-xl shadow-white/5 transition-transform hover:scale-105 cursor-pointer">
-            <span className="font-black text-neutral-950 text-2xl tracking-tighter">CS</span>
-          </div>
+          <Logo className="w-12 h-12 rounded-xl ring-1 ring-white/15 shadow-xl" />
           <div>
             <h3 className="text-2xl font-black text-white tracking-tight uppercase leading-none">CAREERSHA</h3>
-            <p className="text-[10px] font-bold text-secondary-500 uppercase tracking-[0.3em] mt-1.5">
+            <p className="text-xs font-bold text-secondary-500 uppercase tracking-[0.3em] mt-1.5">
               The Admission Intelligence Platform
             </p>
           </div>
         </div>
-        <p className="text-neutral-400 font-medium text-sm md:text-base leading-relaxed md:max-w-xl lg:max-w-2xl">
+        <p className="text-neutral-500 font-medium text-sm md:text-base leading-relaxed md:max-w-xl lg:max-w-2xl">
           CAREERSHA is India’s advanced education guidance platform, powered by millions of real admission data points.
           From accurate rank prediction to smart college matching, we help students make confident decisions and turn
           their career goals into reality.
@@ -23,7 +22,7 @@ const FooterBrand: React.FC = () => {
       </div>
 
       <div className="flex flex-col items-center lg:items-end gap-5 w-full lg:w-auto">
-        <p className="text-[11px] font-black text-white uppercase tracking-[0.2em] opacity-80 mb-1">
+        <p className="text-xs font-black text-white uppercase tracking-[0.2em] opacity-80 mb-1">
           Connect with our community
         </p>
         <div className="flex flex-wrap gap-3 justify-center lg:justify-end">

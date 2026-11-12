@@ -35,7 +35,7 @@ const NewsView: React.FC = () => {
       <main className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 pt-4 pb-12">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div className="space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-rose-50 dark:bg-rose-950/30 rounded-full text-rose-600 dark:text-rose-400 text-[10px] font-black uppercase tracking-[0.2em]">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-rose-50 dark:bg-rose-950/30 rounded-full text-rose-600 dark:text-rose-400 text-xs font-black uppercase tracking-[0.2em]">
               <span className="w-2 h-2 bg-rose-600 rounded-full animate-pulse" />
               Live Updates
             </div>
@@ -51,7 +51,7 @@ const NewsView: React.FC = () => {
             {['All News'].map((tab, i) => (
               <button
                 key={tab}
-                className={`px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${i === 0 ? 'bg-secondary-600 text-white shadow-lg' : 'text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200'}`}
+                className={`px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${i === 0 ? 'bg-secondary-600 text-white shadow-lg' : 'text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-200'}`}
               >
                 {tab}
               </button>
@@ -82,13 +82,13 @@ const NewsView: React.FC = () => {
                 )}
               </div>
               <div className="flex flex-col gap-1.5 flex-1 min-w-0 py-0.5">
-                <span className="text-[9px] font-black text-rose-500 dark:text-rose-400 uppercase tracking-[0.15em]">
+                <span className="text-xs font-black text-rose-500 dark:text-rose-400 uppercase tracking-[0.15em]">
                   {news.category}
                 </span>
                 <h4 className="text-[14px] font-bold text-neutral-800 dark:text-neutral-100 leading-[1.35] line-clamp-3 group-hover:text-secondary-600 dark:group-hover:text-secondary-400 transition-colors">
                   {news.title}
                 </h4>
-                <p className="text-[10px] font-bold text-neutral-400 dark:text-neutral-500 mt-auto uppercase tracking-wider">
+                <p className="text-xs font-bold text-neutral-500 dark:text-neutral-500 mt-auto uppercase tracking-wider">
                   {news.date}
                 </p>
               </div>

@@ -8,10 +8,10 @@ const FooterBottom: React.FC<FooterBottomProps> = ({ onNavigate }) => {
   return (
     <div className="border-t border-neutral-800/50 mt-8 pt-8 pb-4 flex flex-col md:flex-row justify-between items-center gap-6 fhd:max-w-[1440px] fhd:mx-auto">
       <div className="flex flex-col items-center md:items-start space-y-1">
-        <p className="text-neutral-400 font-black uppercase tracking-[0.2em] text-[10px] xs:text-[11px] ms:text-xs">
+        <p className="text-neutral-500 font-black uppercase tracking-[0.2em] text-xs xs:text-xs ms:text-xs">
           © 2026 CAREERSHA
         </p>
-        <p className="text-neutral-600 font-medium text-[9px] xs:text-[10px] ms:text-[11px]">
+        <p className="text-neutral-600 font-medium text-xs xs:text-xs ms:text-xs">
           Made with excellence in India for the World.
         </p>
       </div>
@@ -37,7 +37,7 @@ const FooterBottom: React.FC<FooterBottomProps> = ({ onNavigate }) => {
               const path = pathMap[link.id] || `/${link.id.replace('legal-', '').replace('company-', '')}`;
               onNavigate?.(path);
             }}
-            className="text-neutral-500 hover:text-white transition-all duration-300 text-[10px] ms:text-[11px] font-bold uppercase tracking-widest text-center sm:text-left"
+            className="text-neutral-500 hover:text-white transition-all duration-300 text-xs ms:text-xs font-bold uppercase tracking-widest text-center sm:text-left"
           >
             {link.label}
           </button>

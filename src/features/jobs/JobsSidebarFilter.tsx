@@ -73,7 +73,7 @@ export const JobsSidebarFilter = () => {
                 onChange={() => toggleFilter(type.id)}
               />
               <span className="text-[13px] text-neutral-600 flex-1">{type.label}</span>
-              <span className="text-[12px] text-neutral-400">({type.count})</span>
+              <span className="text-[12px] text-neutral-500">({type.count})</span>
             </label>
           ))}
         </div>
@@ -110,7 +110,7 @@ export const JobsSidebarFilter = () => {
                 onChange={() => toggleFilter(level.id)}
               />
               <span className="text-[13px] text-neutral-600 flex-1">{level.label}</span>
-              <span className="text-[12px] text-neutral-400">({level.count})</span>
+              <span className="text-[12px] text-neutral-500">({level.count})</span>
             </label>
           ))}
         </div>
@@ -122,7 +122,7 @@ export const JobsSidebarFilter = () => {
       <div className="flex flex-col gap-3">
         <h4 className="text-[13px] font-bold text-neutral-800">Location</h4>
         <div className="relative">
-          <Search className="w-4 h-4 text-neutral-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-neutral-500 absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Search location"
@@ -155,7 +155,7 @@ export const JobsSidebarFilter = () => {
                 onChange={() => toggleFilter(loc.id)}
               />
               <span className="text-[13px] text-neutral-600 flex-1">{loc.label}</span>
-              <span className="text-[12px] text-neutral-400">({loc.count})</span>
+              <span className="text-[12px] text-neutral-500">({loc.count})</span>
             </label>
           ))}
           <button className="text-[12px] font-bold text-primary-600 hover:text-primary-700 text-left mt-1 flex items-center gap-1">
@@ -191,7 +191,7 @@ export const JobsSidebarFilter = () => {
             style={{ left: `calc(${(salary / 50) * 100}% - 8px)` }}
           ></div>
         </div>
-        <div className="flex items-center justify-between text-[11px] font-bold text-neutral-500 mt-1">
+        <div className="flex items-center justify-between text-xs font-bold text-neutral-500 mt-1">
           <span>₹0</span>
           <span>₹50 LPA+</span>
         </div>

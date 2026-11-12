@@ -69,13 +69,13 @@ const ExamDetailsPage: React.FC = () => {
         <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-16 h-16 flex items-center justify-between">
           <button
             onClick={() => navigate(-1)}
-            className="flex items-center gap-2 text-neutral-400 hover:text-secondary-600 font-bold text-[10px] uppercase tracking-[0.2em] transition-all -ml-1"
+            className="flex items-center gap-2 text-neutral-500 hover:text-secondary-600 font-bold text-xs uppercase tracking-[0.2em] transition-all -ml-1"
           >
             <ChevronLeft size={14} />
             Back to Exams
           </button>
           <div className="flex items-center gap-4">
-            <span className="hidden sm:inline-flex items-center gap-2 px-3 py-1 bg-success-50 dark:bg-success-950/30 rounded-full text-success-600 dark:text-success-400 text-[10px] font-black uppercase tracking-widest">
+            <span className="hidden sm:inline-flex items-center gap-2 px-3 py-1 bg-success-50 dark:bg-success-950/30 rounded-full text-success-600 dark:text-success-400 text-xs font-black uppercase tracking-widest">
               <span className="w-1.5 h-1.5 bg-success-600 rounded-full animate-pulse" />
               Status: {exam.currentStatus}
             </span>
@@ -89,7 +89,7 @@ const ExamDetailsPage: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-10 text-center lg:text-left">
               <div className="space-y-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-secondary-600 text-white rounded-lg text-[10px] font-black uppercase tracking-[0.2em] shadow-lg shadow-secondary-500/20">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-secondary-600 text-white rounded-lg text-xs font-black uppercase tracking-[0.2em] shadow-lg shadow-secondary-500/20">
                   <Award size={12} />
                   {exam.category} Level Exam
                 </div>
@@ -107,7 +107,7 @@ const ExamDetailsPage: React.FC = () => {
                 {exam.keyPoints.map((point, i) => (
                   <div
                     key={i}
-                    className="px-4 py-2 bg-white dark:bg-neutral-800 border border-neutral-100 dark:border-neutral-700/50 rounded-2xl text-[11px] font-bold text-neutral-600 dark:text-neutral-300 shadow-sm"
+                    className="px-4 py-2 bg-white dark:bg-neutral-800 border border-neutral-100 dark:border-neutral-700/50 rounded-2xl text-xs font-bold text-neutral-600 dark:text-neutral-300 shadow-sm"
                   >
                     {point}
                   </div>
@@ -121,7 +121,7 @@ const ExamDetailsPage: React.FC = () => {
                 <div className="absolute top-0 right-0 w-32 h-32 bg-secondary-50 dark:bg-secondary-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
                 <div className="relative space-y-8">
                   <div>
-                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary-600 mb-2">
+                    <p className="text-xs font-black uppercase tracking-[0.2em] text-secondary-600 mb-2">
                       Conducted By
                     </p>
                     <h3 className="text-2xl font-black text-neutral-800 dark:text-white leading-tight uppercase tracking-tight">
@@ -130,11 +130,11 @@ const ExamDetailsPage: React.FC = () => {
                   </div>
                   <div className="grid grid-cols-2 gap-8 pt-4 border-t border-neutral-50 dark:border-neutral-800">
                     <div className="space-y-1">
-                      <p className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest">Exam Year</p>
+                      <p className="text-xs font-bold text-neutral-500 uppercase tracking-widest">Exam Year</p>
                       <p className="text-xl font-black text-neutral-800 dark:text-white italic">{exam.year}</p>
                     </div>
                     <div className="space-y-1">
-                      <p className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest">Status</p>
+                      <p className="text-xs font-bold text-neutral-500 uppercase tracking-widest">Status</p>
                       <div className="flex items-center gap-2">
                         <span className="w-2 h-2 bg-success-500 rounded-full animate-pulse"></span>
                         <p className="text-xl font-black text-success-600 dark:text-success-400 italic">Live</p>
@@ -155,7 +155,7 @@ const ExamDetailsPage: React.FC = () => {
                           />
                         </div>
                       ))}
-                      <div className="h-8 px-3 rounded-full border-2 border-white dark:border-neutral-900 bg-secondary-600 flex items-center justify-center text-[10px] font-black text-white">
+                      <div className="h-8 px-3 rounded-full border-2 border-white dark:border-neutral-900 bg-secondary-600 flex items-center justify-center text-xs font-black text-white">
                         +85k Following
                       </div>
                     </div>
@@ -182,7 +182,7 @@ const ExamDetailsPage: React.FC = () => {
                   className={`flex-1 min-w-[150px] flex flex-col items-center justify-center gap-3 py-6 transition-all relative ${isActive ? 'bg-secondary-50 dark:bg-secondary-900/20 text-secondary-600 dark:text-secondary-400' : 'text-neutral-500 hover:bg-neutral-50 dark:hover:bg-neutral-800'}`}
                 >
                   <Icon size={20} strokeWidth={isActive ? 3 : 2} />
-                  <span className="text-[11px] font-black uppercase tracking-widest">{sec.label}</span>
+                  <span className="text-xs font-black uppercase tracking-widest">{sec.label}</span>
                   {isActive && (
                     <div className="absolute bottom-0 left-0 w-full h-1 bg-secondary-600 rounded-t-full"></div>
                   )}
@@ -199,7 +199,7 @@ const ExamDetailsPage: React.FC = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
                   <div className="space-y-8">
                     <div>
-                      <h4 className="text-[10px] font-black text-secondary-600 uppercase tracking-widest mb-2">
+                      <h4 className="text-xs font-black text-secondary-600 uppercase tracking-widest mb-2">
                         Who can apply?
                       </h4>
                       <h2 className="text-3xl font-black text-neutral-800 dark:text-white uppercase tracking-tighter">
@@ -223,7 +223,7 @@ const ExamDetailsPage: React.FC = () => {
 
                   <div className="space-y-8">
                     <div>
-                      <h4 className="text-[10px] font-black text-secondary-600 uppercase tracking-widest mb-2">
+                      <h4 className="text-xs font-black text-secondary-600 uppercase tracking-widest mb-2">
                         Quick Facts
                       </h4>
                       <h2 className="text-3xl font-black text-neutral-800 dark:text-white uppercase tracking-tighter">
@@ -234,15 +234,13 @@ const ExamDetailsPage: React.FC = () => {
                       {/* You can map these from your data file, hardcoded here for layout structure */}
                       <div className="p-6 rounded-2xl bg-secondary-50 dark:bg-secondary-900/20 border border-secondary-100 dark:border-secondary-800/50">
                         <User className="text-secondary-600 mb-3" size={24} />
-                        <p className="text-[10px] font-black text-neutral-500 uppercase tracking-widest mb-1">
-                          Age Limit
-                        </p>
+                        <p className="text-xs font-black text-neutral-500 uppercase tracking-widest mb-1">Age Limit</p>
                         <p className="text-lg font-bold text-neutral-800 dark:text-white">18 - 25 Years</p>
                         <p className="text-xs text-neutral-500 mt-1">*Relaxation applicable as per rules</p>
                       </div>
                       <div className="p-6 rounded-2xl bg-rose-50 dark:bg-rose-900/20 border border-rose-100 dark:border-rose-800/50">
                         <Wallet className="text-rose-600 mb-3" size={24} />
-                        <p className="text-[10px] font-black text-neutral-500 uppercase tracking-widest mb-1">
+                        <p className="text-xs font-black text-neutral-500 uppercase tracking-widest mb-1">
                           Application Fee
                         </p>
                         <p className="text-lg font-bold text-neutral-800 dark:text-white">General: ₹100</p>
@@ -272,7 +270,7 @@ const ExamDetailsPage: React.FC = () => {
                       >
                         <div className="flex items-center gap-4">
                           <div
-                            className={`w-10 h-10 rounded-xl flex items-center justify-center font-black ${item.status === 'completed' ? 'bg-neutral-200 text-neutral-400' : 'bg-secondary-600 text-white'}`}
+                            className={`w-10 h-10 rounded-xl flex items-center justify-center font-black ${item.status === 'completed' ? 'bg-neutral-200 text-neutral-500' : 'bg-secondary-600 text-white'}`}
                           >
                             <Calendar size={18} />
                           </div>
@@ -284,7 +282,7 @@ const ExamDetailsPage: React.FC = () => {
                           </div>
                         </div>
                         <div
-                          className={`mt-3 sm:mt-0 px-4 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest text-center self-start sm:self-center ${
+                          className={`mt-3 sm:mt-0 px-4 py-1.5 rounded-lg text-xs font-black uppercase tracking-widest text-center self-start sm:self-center ${
                             item.status === 'ongoing'
                               ? 'bg-success-100 text-success-700'
                               : item.status === 'completed'
@@ -326,7 +324,7 @@ const ExamDetailsPage: React.FC = () => {
                         >
                           <Icon size={20} className="text-secondary-600" />
                           <div>
-                            <p className="text-[10px] font-black text-neutral-500 uppercase tracking-widest">
+                            <p className="text-xs font-black text-neutral-500 uppercase tracking-widest">
                               {item.label}
                             </p>
                             <p className="text-sm font-bold text-neutral-800 dark:text-white mt-1">{item.value}</p>
@@ -363,7 +361,7 @@ const ExamDetailsPage: React.FC = () => {
                           {sub.topics.map((t, idx) => (
                             <span
                               key={idx}
-                              className="px-3 py-1.5 bg-neutral-50 dark:bg-neutral-800 text-[11px] font-bold text-neutral-600 dark:text-neutral-400 rounded-lg border border-neutral-100 dark:border-neutral-700"
+                              className="px-3 py-1.5 bg-neutral-50 dark:bg-neutral-800 text-xs font-bold text-neutral-600 dark:text-neutral-400 rounded-lg border border-neutral-100 dark:border-neutral-700"
                             >
                               {t}
                             </span>

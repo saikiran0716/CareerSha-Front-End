@@ -31,7 +31,7 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
           {/* Back Button - Absolute Left */}
           <button
             onClick={onBack}
-            className="absolute left-4 sm:left-6 lg:left-8 flex items-center gap-1.5 text-neutral-500 hover:text-secondary-600 dark:text-neutral-400 dark:hover:text-secondary-400 transition-colors text-[10px] font-bold uppercase tracking-widest group bg-neutral-50 dark:bg-neutral-800 px-2.5 py-1.5 rounded-md border border-neutral-200 dark:border-neutral-700 hover:border-secondary-200"
+            className="absolute left-4 sm:left-6 lg:left-8 flex items-center gap-1.5 text-neutral-500 hover:text-secondary-600 dark:text-neutral-400 dark:hover:text-secondary-400 transition-colors text-xs font-bold uppercase tracking-widest group bg-neutral-50 dark:bg-neutral-800 px-2.5 py-1.5 rounded-md border border-neutral-200 dark:border-neutral-700 hover:border-secondary-200"
           >
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
@@ -66,7 +66,7 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
         {data.type !== 'review' && (
           <div className="relative flex py-1 items-center mb-3">
             <div className="flex-grow border-t border-neutral-200 dark:border-neutral-800"></div>
-            <span className="flex-shrink-0 mx-4 text-neutral-400 uppercase text-[10px] font-bold tracking-[0.2em] opacity-70">
+            <span className="flex-shrink-0 mx-4 text-neutral-500 uppercase text-xs font-bold tracking-[0.2em] opacity-70">
               Top Recommendations
             </span>
             <div className="flex-grow border-t border-neutral-200 dark:border-neutral-800"></div>
@@ -77,7 +77,7 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
         {loading && (
           <div className="flex flex-col items-center justify-center py-20 animate-fade">
             <BookLoader size="lg" text="Gathering Intelligence..." />
-            <p className="text-xs text-neutral-400 mt-1">Found 10 Top Colleges so far</p>
+            <p className="text-xs text-neutral-500 mt-1">Found 10 Top Colleges so far</p>
           </div>
         )}
 

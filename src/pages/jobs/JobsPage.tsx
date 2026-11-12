@@ -42,7 +42,7 @@ const JobsPage = () => {
                 <div className="flex-1 w-full max-w-[780px]">
                   <div className="bg-white rounded-[14px] shadow-sm border border-neutral-200/80 p-1 flex flex-col md:flex-row items-center w-full relative z-20">
                     <div className="flex-[1.2] flex items-center gap-2 px-3 h-10 w-full hover:bg-neutral-50/80 rounded-xl transition-colors cursor-text">
-                      <Search className="w-4 h-4 text-neutral-400 shrink-0" />
+                      <Search className="w-4 h-4 text-neutral-500 shrink-0" />
                       <input
                         type="text"
                         placeholder="Job title, role or keyword"
@@ -51,7 +51,7 @@ const JobsPage = () => {
                     </div>
                     <div className="hidden md:block w-px h-5 bg-neutral-200 mx-1"></div>
                     <div className="flex-[0.8] flex items-center gap-2 px-3 h-10 w-full hover:bg-neutral-50/80 rounded-xl transition-colors border-t md:border-t-0 border-neutral-100 cursor-text">
-                      <MapPin className="w-4 h-4 text-neutral-400 shrink-0" />
+                      <MapPin className="w-4 h-4 text-neutral-500 shrink-0" />
                       <input
                         type="text"
                         placeholder="Location"
@@ -74,11 +74,11 @@ const JobsPage = () => {
 
                   {/* Popular Searches */}
                   <div className="flex items-center gap-2 mt-3 flex-wrap">
-                    <span className="text-[11px] font-bold text-neutral-700 mr-1">Popular:</span>
+                    <span className="text-xs font-bold text-neutral-700 mr-1">Popular:</span>
                     {['Software Engineer', 'Data Analyst', 'Marketing', 'UX Designer'].map((term, idx) => (
                       <span
                         key={idx}
-                        className="px-2.5 py-1 text-[10px] font-bold text-neutral-600 bg-neutral-50 border border-neutral-200 rounded-full cursor-pointer hover:bg-neutral-100 transition-colors"
+                        className="px-2.5 py-1 text-xs font-bold text-neutral-600 bg-neutral-50 border border-neutral-200 rounded-full cursor-pointer hover:bg-neutral-100 transition-colors"
                       >
                         {term}
                       </span>
@@ -166,13 +166,13 @@ const JobsPage = () => {
                 <div className="flex items-center bg-white border border-neutral-200 rounded-lg p-0.5 shadow-sm">
                   <button
                     onClick={() => setViewMode('list')}
-                    className={`p-1.5 rounded-md transition-colors ${viewMode === 'list' ? 'bg-neutral-100 text-neutral-800' : 'text-neutral-400 hover:text-neutral-600'}`}
+                    className={`p-1.5 rounded-md transition-colors ${viewMode === 'list' ? 'bg-neutral-100 text-neutral-800' : 'text-neutral-500 hover:text-neutral-600'}`}
                   >
                     <List className="w-4 h-4" />
                   </button>
                   <button
                     onClick={() => setViewMode('grid')}
-                    className={`p-1.5 rounded-md transition-colors ${viewMode === 'grid' ? 'bg-neutral-100 text-neutral-800' : 'text-neutral-400 hover:text-neutral-600'}`}
+                    className={`p-1.5 rounded-md transition-colors ${viewMode === 'grid' ? 'bg-neutral-100 text-neutral-800' : 'text-neutral-500 hover:text-neutral-600'}`}
                   >
                     <LayoutGrid className="w-4 h-4" />
                   </button>
@@ -189,7 +189,7 @@ const JobsPage = () => {
 
             {/* Pagination */}
             <div className="flex items-center justify-center gap-2 mt-6">
-              <button className="w-9 h-9 flex items-center justify-center rounded-lg border border-neutral-200 text-neutral-400 hover:bg-neutral-50 transition-colors">
+              <button className="w-9 h-9 flex items-center justify-center rounded-lg border border-neutral-200 text-neutral-500 hover:bg-neutral-50 transition-colors">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
                 </svg>
@@ -203,7 +203,7 @@ const JobsPage = () => {
               <button className="w-9 h-9 flex items-center justify-center rounded-lg border border-neutral-200 text-neutral-600 hover:bg-neutral-50 transition-colors font-bold text-[14px]">
                 3
               </button>
-              <span className="w-6 text-center text-neutral-400">...</span>
+              <span className="w-6 text-center text-neutral-500">...</span>
               <button className="w-9 h-9 flex items-center justify-center rounded-lg border border-neutral-200 text-neutral-600 hover:bg-neutral-50 transition-colors font-bold text-[14px]">
                 50
               </button>

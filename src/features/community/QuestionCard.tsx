@@ -41,7 +41,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
         <div className="flex flex-col">
           <div className="flex items-center gap-2">
             <span className="font-bold text-neutral-900 dark:text-white text-sm">{author.name}</span>
-            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-secondary-50 dark:bg-secondary-900/30 text-secondary-600 dark:text-secondary-400">
+            <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-secondary-50 dark:bg-secondary-900/30 text-secondary-600 dark:text-secondary-400">
               {examTag}
             </span>
           </div>
@@ -85,7 +85,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
           </button>
         </div>
 
-        <div className="flex items-center gap-4 text-neutral-400 text-sm font-medium">
+        <div className="flex items-center gap-4 text-neutral-500 text-sm font-medium">
           <span className="flex items-center gap-1.5">
             <Eye size={16} />
             {views} views

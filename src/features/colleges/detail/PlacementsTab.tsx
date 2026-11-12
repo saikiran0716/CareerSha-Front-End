@@ -28,7 +28,7 @@ const PlacementsTab: React.FC<{ view: CollegeView }> = ({ view }) => {
           </div>
           {mergedRecruiters.length > 0 ? (
             <div>
-              <p className="text-[11px] font-bold text-neutral-500 uppercase tracking-widest mb-3">Top Recruiters</p>
+              <p className="text-xs font-bold text-neutral-500 uppercase tracking-widest mb-3">Top Recruiters</p>
               <div className="flex flex-wrap gap-2">
                 {mergedRecruiters.map((r: string, i: number) => (
                   <span
@@ -54,10 +54,10 @@ const PlacementsTab: React.FC<{ view: CollegeView }> = ({ view }) => {
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-primary-600 text-white">
-                <th className="px-5 py-3 text-left text-[11px] font-bold uppercase tracking-wide">Branch</th>
-                <th className="px-5 py-3 text-center text-[11px] font-bold uppercase tracking-wide">Placed %</th>
-                <th className="px-5 py-3 text-center text-[11px] font-bold uppercase tracking-wide">Avg CTC</th>
-                <th className="px-5 py-3 text-center text-[11px] font-bold uppercase tracking-wide">Top CTC</th>
+                <th className="px-5 py-3 text-left text-xs font-bold uppercase tracking-wide">Branch</th>
+                <th className="px-5 py-3 text-center text-xs font-bold uppercase tracking-wide">Placed %</th>
+                <th className="px-5 py-3 text-center text-xs font-bold uppercase tracking-wide">Avg CTC</th>
+                <th className="px-5 py-3 text-center text-xs font-bold uppercase tracking-wide">Top CTC</th>
               </tr>
             </thead>
             <tbody>
@@ -94,23 +94,23 @@ const PlacementsTab: React.FC<{ view: CollegeView }> = ({ view }) => {
                 key={i}
                 className="flex items-start gap-4 p-4 bg-neutral-50 border border-neutral-200 rounded-xl hover:border-primary-200 hover:bg-primary-50 transition-colors"
               >
-                <div className="w-10 h-10 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center text-[11px] font-extrabold shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center text-xs font-extrabold shrink-0">
                   {pd.company.slice(0, 2).toUpperCase()}
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
                     <p className="text-[14px] font-bold text-neutral-800">{pd.company}</p>
-                    <span className="text-[10px] font-bold bg-primary-100 text-primary-700 rounded-full px-2 py-0.5">
+                    <span className="text-xs font-bold bg-primary-100 text-primary-700 rounded-full px-2 py-0.5">
                       {pd.year}
                     </span>
                   </div>
                   <p className="text-[12px] text-neutral-500 mt-0.5">{pd.role}</p>
                   <div className="flex items-center gap-3 mt-1.5 flex-wrap">
-                    <span className="text-[11px] font-bold text-success-700 bg-success-50 border border-success-100 rounded-full px-2.5 py-0.5">
+                    <span className="text-xs font-bold text-success-700 bg-success-50 border border-success-100 rounded-full px-2.5 py-0.5">
                       CTC: {pd.package}
                     </span>
                     {pd.studentsHired && (
-                      <span className="text-[11px] font-bold text-neutral-500 bg-neutral-100 rounded-full px-2.5 py-0.5">
+                      <span className="text-xs font-bold text-neutral-500 bg-neutral-100 rounded-full px-2.5 py-0.5">
                         {pd.studentsHired} hired
                       </span>
                     )}

@@ -20,7 +20,7 @@ const StaticLayout: React.FC<StaticLayoutProps> = ({ title, description, canonic
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 h-16 flex items-center gap-4">
           <button
             onClick={() => navigate('/')}
-            className="flex-shrink-0 flex items-center gap-1.5 text-neutral-500 hover:text-highlight transition-all duration-300 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.1em] sm:tracking-[0.2em]"
+            className="flex-shrink-0 flex items-center gap-1.5 text-neutral-500 hover:text-highlight transition-all duration-300 text-xs sm:text-xs font-black uppercase tracking-[0.1em] sm:tracking-[0.2em]"
           >
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
@@ -29,7 +29,7 @@ const StaticLayout: React.FC<StaticLayoutProps> = ({ title, description, canonic
             <span className="xs:hidden">Back</span>
           </button>
           <div className="flex-1 min-w-0 flex justify-center">
-            <h1 className="text-[11px] sm:text-xs md:text-sm font-black text-neutral-900 uppercase tracking-[0.15em] sm:tracking-[0.3em] truncate text-center">
+            <h1 className="text-xs sm:text-xs md:text-sm font-black text-neutral-900 uppercase tracking-[0.15em] sm:tracking-[0.3em] truncate text-center">
               {title}
             </h1>
           </div>

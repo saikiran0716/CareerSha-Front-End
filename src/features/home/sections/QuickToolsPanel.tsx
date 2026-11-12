@@ -31,7 +31,7 @@ const QuickToolsPanel: React.FC = () => {
                 <Icon className="h-5 w-5" />
               </div>
               <p className="text-xs font-extrabold text-neutral-900 dark:text-white leading-tight mb-1">{tool.title}</p>
-              <p className="text-[10px] text-neutral-500 dark:text-neutral-400 leading-snug">{tool.description}</p>
+              <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-snug">{tool.description}</p>
             </button>
           );
         })}

@@ -51,20 +51,20 @@ const CollegeHeader: React.FC<{
             <div className="flex flex-wrap items-center gap-2 mb-2">
               {typeVal && (
                 <span
-                  className={`text-[10px] font-extrabold rounded-full px-3 py-1 uppercase tracking-wider ${isGovt ? 'bg-warning-400 text-warning-900' : 'bg-white/20 text-white'}`}
+                  className={`text-xs font-extrabold rounded-full px-3 py-1 uppercase tracking-wider ${isGovt ? 'bg-warning-400 text-warning-900' : 'bg-white/20 text-white'}`}
                 >
                   {typeVal}
                 </span>
               )}
               {nirf && (
-                <span className="text-[10px] font-extrabold bg-warning-400 text-warning-900 rounded-full px-3 py-1 uppercase tracking-wider">
+                <span className="text-xs font-extrabold bg-warning-400 text-warning-900 rounded-full px-3 py-1 uppercase tracking-wider">
                   NIRF #{nirf}
                 </span>
               )}
               {d?.accreditations?.slice(0, 3).map((a, i) => (
                 <span
                   key={i}
-                  className="text-[10px] font-bold bg-success-500/20 text-success-200 border border-success-400/30 rounded-full px-2.5 py-0.5"
+                  className="text-xs font-bold bg-success-500/20 text-success-200 border border-success-400/30 rounded-full px-2.5 py-0.5"
                 >
                   {a}
                 </span>
@@ -101,22 +101,22 @@ const CollegeHeader: React.FC<{
             {(d?.placementRate || d?.avgPackage || d?.highestPackage || pc?.medianPackage) && (
               <div className="flex flex-wrap gap-2 mt-3">
                 {d?.placementRate && (
-                  <span className="bg-success-500/20 border border-success-400/30 text-success-200 text-[11px] font-bold px-3 py-1 rounded-full">
+                  <span className="bg-success-500/20 border border-success-400/30 text-success-200 text-xs font-bold px-3 py-1 rounded-full">
                     📊 {d.placementRate} Placed
                   </span>
                 )}
                 {d?.avgPackage && (
-                  <span className="bg-primary-400/20 border border-primary-300/30 text-primary-200 text-[11px] font-bold px-3 py-1 rounded-full">
+                  <span className="bg-primary-400/20 border border-primary-300/30 text-primary-200 text-xs font-bold px-3 py-1 rounded-full">
                     💼 {d.avgPackage} Avg CTC
                   </span>
                 )}
                 {pc?.medianPackage && pc.medianPackage !== d?.avgPackage && (
-                  <span className="bg-primary-400/20 border border-primary-300/30 text-primary-200 text-[11px] font-bold px-3 py-1 rounded-full">
+                  <span className="bg-primary-400/20 border border-primary-300/30 text-primary-200 text-xs font-bold px-3 py-1 rounded-full">
                     💼 {pc.medianPackage} Median CTC
                   </span>
                 )}
                 {d?.highestPackage && (
-                  <span className="bg-accent-400/20 border border-accent-300/30 text-accent-200 text-[11px] font-bold px-3 py-1 rounded-full">
+                  <span className="bg-accent-400/20 border border-accent-300/30 text-accent-200 text-xs font-bold px-3 py-1 rounded-full">
                     🚀 {d.highestPackage} Top CTC
                   </span>
                 )}

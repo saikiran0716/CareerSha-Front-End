@@ -25,7 +25,7 @@ const ExploreSearchHeader: React.FC = () => {
       {/* Search and Compare Row */}
       <div className="flex flex-col md:flex-row items-center gap-4 mb-6">
         <div className="relative flex-1 w-full flex items-center bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 shadow-sm focus-within:ring-2 focus-within:ring-primary-500/50 focus-within:border-primary-500 overflow-hidden">
-          <div className="pl-4 text-neutral-400">
+          <div className="pl-4 text-neutral-500">
             <Search size={18} />
           </div>
           <input

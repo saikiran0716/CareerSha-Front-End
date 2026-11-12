@@ -28,7 +28,7 @@ const NotFound: React.FC = () => {
           <div className="space-y-4">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary-50 dark:bg-secondary-500/10 rounded-full">
               <Compass className="w-4 h-4 text-secondary-600 dark:text-secondary-400" />
-              <span className="text-[10px] font-black text-secondary-600 dark:text-secondary-400 uppercase tracking-widest">
+              <span className="text-xs font-black text-secondary-600 dark:text-secondary-400 uppercase tracking-widest">
                 Page Not Found
               </span>
             </div>

@@ -20,7 +20,7 @@ const AiAssistantCard: React.FC<{ onStartCounseling: () => void; onNavigate: (id
   return (
     <section className="bg-white dark:bg-neutral-900 rounded-[2rem] p-5 shadow-sm border border-neutral-100/80 dark:border-neutral-800/60">
       <div className="space-y-1 mb-4">
-        <p className="text-[10px] font-black uppercase tracking-[0.15em] text-primary-600 dark:text-primary-400">
+        <p className="text-xs font-black uppercase tracking-[0.15em] text-primary-600 dark:text-primary-400">
           AI Career Assistant
         </p>
         <p className="text-xs text-neutral-500 dark:text-neutral-400 font-bold leading-tight">
@@ -29,7 +29,7 @@ const AiAssistantCard: React.FC<{ onStartCounseling: () => void; onNavigate: (id
       </div>
 
       <div className="relative flex items-center bg-neutral-50 dark:bg-neutral-950 rounded-full px-3 py-1.5 border border-neutral-100 dark:border-neutral-800">
-        <Search className="h-4.5 w-4.5 text-neutral-400 dark:text-neutral-500 shrink-0 ml-1" />
+        <Search className="h-4.5 w-4.5 text-neutral-500 dark:text-neutral-500 shrink-0 ml-1" />
         <input
           type="text"
           value={assistantPrompt}

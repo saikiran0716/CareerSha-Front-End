@@ -89,7 +89,7 @@ const RightSidebar: React.FC = () => {
                   <span className="font-bold text-neutral-900 dark:text-white text-sm group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors cursor-pointer">
                     {contributor.name}
                   </span>
-                  <span className="text-[10px] font-semibold text-primary-600 dark:text-primary-400">
+                  <span className="text-xs font-semibold text-primary-600 dark:text-primary-400">
                     {contributor.title}
                   </span>
                 </div>
@@ -100,7 +100,7 @@ const RightSidebar: React.FC = () => {
                     size={14}
                     className={`
                     ${contributor.name === 'Aditya Raj' ? 'text-warning-500' : ''}
-                    ${contributor.name === 'Neha Joshi' ? 'text-neutral-400' : ''}
+                    ${contributor.name === 'Neha Joshi' ? 'text-neutral-500' : ''}
                     ${contributor.name === 'Sarthak Gupta' ? 'text-warning-500' : ''}
                   `}
                   />

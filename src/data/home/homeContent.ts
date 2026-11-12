@@ -1,16 +1,5 @@
 import type React from 'react';
-import {
-  BarChart3,
-  BadgeCheck,
-  Building2,
-  Calculator,
-  GraduationCap,
-  Landmark,
-  ShieldCheck,
-  Sparkles,
-  Target,
-  MapPin,
-} from 'lucide-react';
+import { BarChart3, Building2, Calculator, GraduationCap, Target, MapPin } from 'lucide-react';
 
 /** Static content for the homepage sections (features/home/sections). */
 
@@ -24,15 +13,7 @@ export type QuickTool = {
   highlight?: boolean;
 };
 
-export type UpdateItem = {
-  title: string;
-  description: string;
-  time: string;
-  icon: React.ComponentType<{ className?: string }>;
-  tone: string;
-};
-
-export const trendingTopics = ['JEE Main', 'NEET', 'CUET', 'BTech', 'MBA', 'UPSC'];
+export const trendingTopics = ['JEE Main', 'NEET', 'CUET', 'BTech', 'MBA'];
 
 export const quickTools: QuickTool[] = [
   {
@@ -67,7 +48,6 @@ export const quickTools: QuickTool[] = [
     href: '/rank-estimator',
     bgClass: 'bg-success-50 dark:bg-success-950/40 text-success-600 dark:text-success-400',
     iconClass: 'text-success-600 dark:text-success-400',
-    highlight: true,
   },
   {
     title: 'College Finder',
@@ -84,45 +64,13 @@ export const quickTools: QuickTool[] = [
     href: '/college-matcher',
     bgClass: 'bg-orange-50 dark:bg-orange-950/40 text-orange-600 dark:text-orange-400',
     iconClass: 'text-orange-600 dark:text-orange-400',
-    highlight: true,
-  },
-];
-
-export const liveUpdates: UpdateItem[] = [
-  {
-    title: 'JEE Main 2024 Results Out',
-    description: 'Check your percentile',
-    time: '2m ago',
-    icon: ShieldCheck,
-    tone: 'text-rose-600 bg-rose-50 dark:bg-rose-950/40 dark:text-rose-400',
-  },
-  {
-    title: 'NEET UG Counselling Started',
-    description: 'Round 1 registration open',
-    time: '15m ago',
-    icon: BadgeCheck,
-    tone: 'text-primary-600 bg-primary-50 dark:bg-primary-950/40 dark:text-primary-400',
-  },
-  {
-    title: 'CUET 2024 Admissions',
-    description: 'Registrations open now',
-    time: '1h ago',
-    icon: Landmark,
-    tone: 'text-accent-600 bg-accent-50 dark:bg-accent-950/40 dark:text-accent-400',
-  },
-  {
-    title: 'UPSC Exam Notification',
-    description: 'Apply before last date',
-    time: '3h ago',
-    icon: Sparkles,
-    tone: 'text-warning-600 bg-warning-50 dark:bg-warning-950/40 dark:text-warning-400',
   },
 ];
 
 export const communityThreads = [
   {
     author: 'Aman Kumar',
-    title: 'Is CSE in Tier-2 college worth it in 2024?',
+    title: 'Is CSE in a Tier-2 college worth it?',
     replies: 23,
     time: '2h ago',
     avatar: 'AK',
@@ -171,13 +119,6 @@ export const jobOpenings = [
     color:
       'text-success-600 bg-success-50 dark:bg-success-900/30 dark:text-success-400 border-success-200 dark:border-success-800',
   },
-];
-
-export const personalizedMatches = [
-  { name: 'IIT Bombay', course: 'Computer Science', match: 'Match 80%' },
-  { name: 'NIT Trichy', course: 'Mechanical Engineering', match: 'Match 80%' },
-  { name: 'DTU Delhi', course: 'Computer Engineering', match: 'Match 76%' },
-  { name: 'BITS Pilani', course: 'Electronics', match: 'Match 72%' },
 ];
 
 export const collegeCollections = [

@@ -18,7 +18,7 @@ const ReviewSearchBar: React.FC<{ search: ReviewSearch }> = ({ search }) => {
     <div ref={searchRef} className="mt-4 max-w-lg mx-auto relative group z-50">
       <div className="absolute inset-0 bg-secondary-500/20 rounded-2xl blur-xl group-hover:bg-secondary-500/30 transition-all duration-300"></div>
       <div className="relative bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-xl overflow-visible flex items-center p-1 z-[60]">
-        <div className="pl-4 text-neutral-400">
+        <div className="pl-4 text-neutral-500">
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               strokeLinecap="round"

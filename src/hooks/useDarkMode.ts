@@ -2,7 +2,14 @@ import { useCallback, useEffect, useState } from 'react';
 
 const STORAGE_KEY = 'theme';
 
+/**
+ * Dark mode is switched off until every page has dark styles.
+ * Set to true to bring back the toggle (Header) and the saved preference.
+ */
+export const DARK_MODE_ENABLED = false;
+
 const readStored = () => {
+  if (!DARK_MODE_ENABLED) return false;
   try {
     return localStorage.getItem(STORAGE_KEY) === 'dark';
   } catch {

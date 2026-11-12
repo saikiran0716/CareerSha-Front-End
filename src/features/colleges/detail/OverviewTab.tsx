@@ -63,8 +63,8 @@ const OverviewTab: React.FC<{ view: CollegeView }> = ({ view }) => {
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-primary-600 text-white text-left">
-                <th className="px-5 py-3 text-[11px] font-bold uppercase tracking-wide w-[42%]">Parameter</th>
-                <th className="px-5 py-3 text-[11px] font-bold uppercase tracking-wide">Details</th>
+                <th className="px-5 py-3 text-xs font-bold uppercase tracking-wide w-[42%]">Parameter</th>
+                <th className="px-5 py-3 text-xs font-bold uppercase tracking-wide">Details</th>
               </tr>
             </thead>
             <tbody>
@@ -88,7 +88,7 @@ const OverviewTab: React.FC<{ view: CollegeView }> = ({ view }) => {
                         {(d?.entranceExams || pc?.entranceExams || []).map((e: string, j: number) => (
                           <span
                             key={j}
-                            className="px-2 py-0.5 bg-secondary-50 text-secondary-700 border border-secondary-100 rounded text-[11px] font-bold"
+                            className="px-2 py-0.5 bg-secondary-50 text-secondary-700 border border-secondary-100 rounded text-xs font-bold"
                           >
                             {e}
                           </span>
@@ -145,8 +145,8 @@ const OverviewTab: React.FC<{ view: CollegeView }> = ({ view }) => {
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-primary-600 text-white">
-                <th className="px-6 py-3 text-left text-[11px] font-bold uppercase tracking-wide">Program</th>
-                <th className="px-6 py-3 text-right text-[11px] font-bold uppercase tracking-wide">Annual Fees</th>
+                <th className="px-6 py-3 text-left text-xs font-bold uppercase tracking-wide">Program</th>
+                <th className="px-6 py-3 text-right text-xs font-bold uppercase tracking-wide">Annual Fees</th>
               </tr>
             </thead>
             <tbody>
@@ -209,7 +209,7 @@ const OverviewTab: React.FC<{ view: CollegeView }> = ({ view }) => {
                 .join('');
               return (
                 <div key={i} className="flex items-start gap-3 p-3.5 bg-teal-50 border border-teal-100 rounded-xl">
-                  <div className="w-9 h-9 rounded-full bg-teal-600 text-white flex items-center justify-center text-[11px] font-extrabold shrink-0">
+                  <div className="w-9 h-9 rounded-full bg-teal-600 text-white flex items-center justify-center text-xs font-extrabold shrink-0">
                     {initials}
                   </div>
                   <div>

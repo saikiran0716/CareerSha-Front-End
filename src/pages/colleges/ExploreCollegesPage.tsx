@@ -60,7 +60,7 @@ const ExploreCollegesPage: React.FC = () => {
 
             {/* Pagination */}
             <div className="mt-8 flex items-center justify-center gap-2">
-              <button className="flex items-center gap-1 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-neutral-400 dark:text-neutral-500 py-2 px-4 rounded-xl transition-colors shadow-sm cursor-not-allowed">
+              <button className="flex items-center gap-1 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-neutral-500 dark:text-neutral-500 py-2 px-4 rounded-xl transition-colors shadow-sm cursor-not-allowed">
                 <ChevronLeft size={16} />
                 Prev
               </button>
@@ -75,7 +75,7 @@ const ExploreCollegesPage: React.FC = () => {
                 <button className="w-8 h-8 flex items-center justify-center rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300  hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors shadow-sm">
                   3
                 </button>
-                <span className="w-8 flex items-center justify-center text-neutral-400 ">...</span>
+                <span className="w-8 flex items-center justify-center text-neutral-500 ">...</span>
                 <button className="w-8 h-8 flex items-center justify-center rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300  hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors shadow-sm">
                   10
                 </button>

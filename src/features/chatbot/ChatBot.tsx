@@ -188,7 +188,7 @@ const ChatBot: React.FC<Props> = ({ profile, initialMessage, onMessageProcessed 
                   </span>
                   <div className="flex items-center gap-1.5">
                     <span className="block w-1.5 h-1.5 rounded-full bg-success-500"></span>
-                    <span className="text-[10px] font-medium text-neutral-500 dark:text-neutral-400">Assistant</span>
+                    <span className="text-xs font-medium text-neutral-500 dark:text-neutral-400">Assistant</span>
                   </div>
                 </div>
               </div>
@@ -202,7 +202,8 @@ const ChatBot: React.FC<Props> = ({ profile, initialMessage, onMessageProcessed 
                     e.stopPropagation();
                     setIsOpen(false);
                   }}
-                  className="w-8 h-8 flex items-center justify-center hover:bg-danger-50 dark:hover:bg-danger-900/20 rounded-full transition-colors text-neutral-400 hover:text-danger-500"
+                  aria-label="Close chat"
+                  className="w-8 h-8 flex items-center justify-center hover:bg-danger-50 dark:hover:bg-danger-900/20 rounded-full transition-colors text-neutral-500 hover:text-danger-500"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -223,7 +224,7 @@ const ChatBot: React.FC<Props> = ({ profile, initialMessage, onMessageProcessed 
                   style={{ animationDelay: `${i * 0.03}s` }}
                 >
                   {msg.role === 'assistant' && (
-                    <div className="w-6 h-6 rounded-full bg-white dark:bg-neutral-800 border border-secondary-100 dark:border-secondary-900 flex-shrink-0 mr-2 mt-1 flex items-center justify-center text-secondary-600 dark:text-secondary-400 text-[10px] font-bold shadow-sm">
+                    <div className="w-6 h-6 rounded-full bg-white dark:bg-neutral-800 border border-secondary-100 dark:border-secondary-900 flex-shrink-0 mr-2 mt-1 flex items-center justify-center text-secondary-600 dark:text-secondary-400 text-xs font-bold shadow-sm">
                       C
                     </div>
                   )}
@@ -249,7 +250,7 @@ const ChatBot: React.FC<Props> = ({ profile, initialMessage, onMessageProcessed 
                                 href={normalizeSourceUri(src.uri)}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="text-[9px] font-bold text-secondary-600 dark:text-secondary-400 bg-secondary-50 dark:bg-secondary-900/20 px-2 py-1 rounded-md hover:bg-secondary-600 hover:text-white transition-all flex items-center gap-1"
+                                className="text-xs font-bold text-secondary-600 dark:text-secondary-400 bg-secondary-50 dark:bg-secondary-900/20 px-2 py-1 rounded-md hover:bg-secondary-600 hover:text-white transition-all flex items-center gap-1"
                               >
                                 <span className="truncate max-w-[120px]">{src.title || `Source ${idx + 1}`}</span>
                               </a>
@@ -317,6 +318,7 @@ const ChatBot: React.FC<Props> = ({ profile, initialMessage, onMessageProcessed 
         ) : (
           <button
             onClick={() => setIsOpen(true)}
+            aria-label="Open AI career assistant chat"
             className="group relative bg-secondary-600 text-white w-12 h-12 sm:w-14 sm:h-14 rounded-full shadow-lg shadow-secondary-500/30 hover:bg-secondary-700 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center z-[9999]"
           >
             <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

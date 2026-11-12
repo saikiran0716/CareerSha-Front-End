@@ -16,7 +16,7 @@ const StaticInfoPage: React.FC<StaticInfoPageProps> = ({ data, onBack }) => {
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 h-10 flex items-center justify-center relative uppercase">
           <button
             onClick={onBack}
-            className="absolute left-4 sm:left-6 lg:left-8 flex items-center gap-1 text-neutral-400 hover:text-secondary-600 dark:hover:text-secondary-400 transition-colors text-[10px] font-bold tracking-widest uppercase"
+            className="absolute left-4 sm:left-6 lg:left-8 flex items-center gap-1 text-neutral-500 hover:text-secondary-600 dark:hover:text-secondary-400 transition-colors text-xs font-bold tracking-widest uppercase"
           >
             <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />

@@ -71,7 +71,7 @@ const LogoWithFallback = ({ title, image, link }: { title: string; image?: strin
             />
           </svg>
         </div>
-        <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider text-center px-1 line-clamp-1">
+        <span className="text-xs font-bold text-neutral-500 uppercase tracking-wider text-center px-1 line-clamp-1">
           {title.substring(0, 3)}
         </span>
       </div>

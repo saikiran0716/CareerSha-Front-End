@@ -36,7 +36,7 @@ const ReviewResults: React.FC<{ search: ReviewSearch; items: PageItem[] }> = ({ 
                 <h4 className="font-bold text-neutral-900 dark:text-white text-xs">
                   {item.subtitle || 'Verified Student'}
                 </h4>
-                <div className="flex text-yellow-400 text-[10px]">
+                <div className="flex text-yellow-400 text-xs">
                   {[...Array(5)].map((_, i) => (
                     <svg
                       key={i}
@@ -63,7 +63,7 @@ const ReviewResults: React.FC<{ search: ReviewSearch; items: PageItem[] }> = ({ 
                   {item.stats.map((stat, i) => (
                     <span
                       key={i}
-                      className="text-[10px] uppercase font-bold px-2 py-1 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-500"
+                      className="text-xs uppercase font-bold px-2 py-1 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-500"
                     >
                       {stat.label}: <span className="text-secondary-600 dark:text-secondary-400">{stat.value}</span>
                     </span>

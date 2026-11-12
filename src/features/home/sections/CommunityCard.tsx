@@ -10,19 +10,17 @@ const CommunityCard: React.FC<{ onStartCounseling: () => void }> = ({ onStartCou
   return (
     <section className="bg-white dark:bg-neutral-900 rounded-[2rem] p-5 shadow-sm border border-neutral-100/80 dark:border-neutral-800/60">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-sm font-black text-neutral-900 dark:text-white uppercase tracking-wider">
-          Student Community
-        </h2>
+        <h2 className="text-base font-bold text-neutral-900 dark:text-white">Student Community</h2>
         <button
           onClick={() => navigate('/community')}
-          className="text-[11px] font-black text-primary-600 dark:text-primary-400 hover:underline uppercase tracking-widest"
+          className="text-xs font-black text-primary-600 dark:text-primary-400 hover:underline uppercase tracking-widest"
         >
           View all
         </button>
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-2 mb-4 text-[10px] font-black uppercase tracking-wider">
+      <div className="flex gap-2 mb-4 text-xs font-black uppercase tracking-wider">
         {(['trending', 'recent', 'unanswered'] as const).map((tab) => (
           <button
             key={tab}
@@ -54,13 +52,13 @@ const CommunityCard: React.FC<{ onStartCounseling: () => void }> = ({ onStartCou
               <p className="text-xs font-extrabold text-neutral-800 dark:text-neutral-200 leading-snug line-clamp-2 hover:text-primary-600 dark:hover:text-primary-400 cursor-pointer">
                 {thread.title}
               </p>
-              <div className="flex items-center gap-1.5 text-[9px] text-neutral-400 font-extrabold uppercase">
+              <div className="flex items-center gap-1.5 text-xs text-neutral-500 font-extrabold uppercase">
                 <span className="text-primary-600 dark:text-primary-400 font-black">{thread.author}</span>
                 <span>•</span>
                 <span>{thread.time}</span>
               </div>
             </div>
-            <div className="flex items-center gap-1.5 text-[10px] font-bold text-neutral-400 shrink-0 self-center">
+            <div className="flex items-center gap-1.5 text-xs font-bold text-neutral-500 shrink-0 self-center">
               <MessageSquare className="h-3.5 w-3.5" />
               <span>{thread.replies}</span>
             </div>
@@ -70,7 +68,7 @@ const CommunityCard: React.FC<{ onStartCounseling: () => void }> = ({ onStartCou
 
       <button
         onClick={onStartCounseling}
-        className="mt-4 w-full rounded-2xl bg-primary-600 hover:bg-primary-700 text-white text-[11px] font-black uppercase py-3.5 shadow-[0_8px_25px_rgba(37,99,235,0.2)] tracking-wider transition hover:scale-[1.01] active:scale-[0.99]"
+        className="mt-4 w-full rounded-2xl bg-primary-600 hover:bg-primary-700 text-white text-xs font-black uppercase py-3.5 shadow-[0_8px_25px_rgba(37,99,235,0.2)] tracking-wider transition hover:scale-[1.01] active:scale-[0.99]"
       >
         Ask a Doubt
       </button>

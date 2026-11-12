@@ -31,7 +31,7 @@ export const StatBadge: React.FC<{ label: string; value: string; color?: string 
     className={`flex flex-col items-center justify-center p-4 rounded-xl border text-center ${STAT_COLORS[color] || STAT_COLORS.blue}`}
   >
     <p className="text-[20px] font-extrabold leading-tight">{value}</p>
-    <p className="text-[10px] font-bold uppercase tracking-wide mt-1 opacity-70">{label}</p>
+    <p className="text-xs font-bold uppercase tracking-wide mt-1 opacity-70">{label}</p>
   </div>
 );
 

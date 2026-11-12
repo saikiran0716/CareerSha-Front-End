@@ -234,13 +234,13 @@ const CollegeMatchResults: React.FC = () => {
               <div className="flex bg-neutral-100 p-0.5 rounded-lg border border-neutral-200 gap-0.5">
                 <button
                   onClick={() => setViewMode('list')}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${viewMode === 'list' ? 'bg-white text-primary-600 shadow-sm' : 'text-neutral-400 hover:text-neutral-700'}`}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-bold uppercase tracking-wider transition-all ${viewMode === 'list' ? 'bg-white text-primary-600 shadow-sm' : 'text-neutral-500 hover:text-neutral-700'}`}
                 >
                   <LayoutList size={12} /> List
                 </button>
                 <button
                   onClick={() => setViewMode('grid')}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${viewMode === 'grid' ? 'bg-white text-primary-600 shadow-sm' : 'text-neutral-400 hover:text-neutral-700'}`}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-bold uppercase tracking-wider transition-all ${viewMode === 'grid' ? 'bg-white text-primary-600 shadow-sm' : 'text-neutral-500 hover:text-neutral-700'}`}
                 >
                   <LayoutGrid size={12} /> Grid
                 </button>
@@ -256,13 +256,13 @@ const CollegeMatchResults: React.FC = () => {
               Matched Institutions
             </h1>
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="px-4 py-1.5 bg-white border border-neutral-200 text-neutral-700 rounded-lg text-[10px] font-bold tracking-widest uppercase shadow-sm">
+              <span className="px-4 py-1.5 bg-white border border-neutral-200 text-neutral-700 rounded-lg text-xs font-bold tracking-widest uppercase shadow-sm">
                 Rank #{rank}
               </span>
-              <span className="px-4 py-1.5 bg-primary-600 text-white rounded-lg text-[10px] font-bold tracking-widest uppercase shadow-sm">
+              <span className="px-4 py-1.5 bg-primary-600 text-white rounded-lg text-xs font-bold tracking-widest uppercase shadow-sm">
                 {category}
               </span>
-              <span className="px-4 py-1.5 bg-white border border-neutral-200 text-neutral-700 rounded-lg text-[10px] font-bold tracking-widest uppercase shadow-sm">
+              <span className="px-4 py-1.5 bg-white border border-neutral-200 text-neutral-700 rounded-lg text-xs font-bold tracking-widest uppercase shadow-sm">
                 {exam.toUpperCase()}
               </span>
             </div>
@@ -298,14 +298,12 @@ const CollegeMatchResults: React.FC = () => {
                 <div className="rounded-2xl overflow-hidden shadow-sm border border-neutral-200">
                   {/* TABLE HEADER */}
                   <div className="hidden md:grid bg-primary-700 grid-cols-[1fr_160px_200px_160px] px-6 py-4">
-                    <span className="text-[10px] font-bold text-white/80 uppercase tracking-widest">
+                    <span className="text-xs font-bold text-white/80 uppercase tracking-widest">
                       Institutional Profile
                     </span>
-                    <span className="text-[10px] font-bold text-white/80 uppercase tracking-widest">Type</span>
-                    <span className="text-[10px] font-bold text-white/80 uppercase tracking-widest">Expected Rank</span>
-                    <span className="text-[10px] font-bold text-white/80 uppercase tracking-widest text-right">
-                      Action
-                    </span>
+                    <span className="text-xs font-bold text-white/80 uppercase tracking-widest">Type</span>
+                    <span className="text-xs font-bold text-white/80 uppercase tracking-widest">Expected Rank</span>
+                    <span className="text-xs font-bold text-white/80 uppercase tracking-widest text-right">Action</span>
                   </div>
 
                   {/* TABLE ROWS */}
@@ -333,19 +331,19 @@ const CollegeMatchResults: React.FC = () => {
                               {college.name}
                             </h4>
                             <div className="flex items-center gap-2 mt-1 flex-wrap">
-                              <span className="text-[9px] font-bold text-primary-600 uppercase tracking-widest">
+                              <span className="text-xs font-bold text-primary-600 uppercase tracking-widest">
                                 {college.branch}
                               </span>
                               {college.location && (
                                 <>
                                   <span className="text-neutral-300">·</span>
-                                  <span className="flex items-center gap-1 text-[9px] text-neutral-400 font-semibold uppercase tracking-wide">
+                                  <span className="flex items-center gap-1 text-xs text-neutral-500 font-semibold uppercase tracking-wide">
                                     <MapPin size={8} /> {college.location}
                                   </span>
                                 </>
                               )}
                             </div>
-                            <p className="text-[11px] text-neutral-500 mt-1.5 leading-relaxed line-clamp-2">
+                            <p className="text-xs text-neutral-500 mt-1.5 leading-relaxed line-clamp-2">
                               {college.careerInsight}
                             </p>
                           </div>
@@ -355,7 +353,7 @@ const CollegeMatchResults: React.FC = () => {
                           {/* COL 2: TYPE */}
                           <div>
                             <span
-                              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[9px] font-extrabold uppercase tracking-widest border ${college.type === 'GOVERNMENT' ? 'bg-warning-50 border-warning-100 text-warning-600' : 'bg-neutral-50 border-neutral-200 text-neutral-600'}`}
+                              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-extrabold uppercase tracking-widest border ${college.type === 'GOVERNMENT' ? 'bg-warning-50 border-warning-100 text-warning-600' : 'bg-neutral-50 border-neutral-200 text-neutral-600'}`}
                             >
                               {college.type === 'GOVERNMENT' ? <ShieldCheck size={10} /> : <Building2 size={10} />}
                               {college.type}
@@ -379,7 +377,7 @@ const CollegeMatchResults: React.FC = () => {
                             onClick={() =>
                               navigate(`/college/${encodeURIComponent(college.name)}`, { state: { college } })
                             }
-                            className="w-full md:w-auto flex items-center justify-center gap-2 px-5 py-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-full text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm shadow-primary-200 active:scale-95"
+                            className="w-full md:w-auto flex items-center justify-center gap-2 px-5 py-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-full text-xs font-bold uppercase tracking-widest transition-all shadow-sm shadow-primary-200 active:scale-95"
                           >
                             View Profile <ArrowRight size={12} />
                           </button>
@@ -431,10 +429,10 @@ const CollegeMatchResults: React.FC = () => {
                         <h4 className="text-[14px] font-black text-neutral-900 uppercase tracking-tight leading-snug line-clamp-2">
                           {college.name}
                         </h4>
-                        <p className="text-[9px] font-bold text-primary-600 uppercase tracking-widest mt-1">
+                        <p className="text-xs font-bold text-primary-600 uppercase tracking-widest mt-1">
                           {college.branch}
                         </p>
-                        <span className="flex items-center gap-1 text-[9px] text-neutral-400 font-semibold uppercase mt-1">
+                        <span className="flex items-center gap-1 text-xs text-neutral-500 font-semibold uppercase mt-1">
                           <MapPin size={8} /> {college.location || 'India'}
                         </span>
                       </div>
@@ -450,7 +448,7 @@ const CollegeMatchResults: React.FC = () => {
                           </div>
                         </div>
                         <div className="bg-neutral-50 rounded-xl p-2.5 border border-neutral-100">
-                          <p className="text-[8px] font-bold text-neutral-400 uppercase tracking-widest">Median Pkg</p>
+                          <p className="text-[8px] font-bold text-neutral-500 uppercase tracking-widest">Median Pkg</p>
                           <div className="flex items-center gap-1 mt-0.5">
                             <TrendingUp size={11} className="text-success-500" />
                             <span className="text-[13px] font-black text-neutral-900 leading-none">
@@ -463,8 +461,8 @@ const CollegeMatchResults: React.FC = () => {
                       {college.fees && (
                         <div className="flex items-center gap-1.5 px-3 py-2 bg-neutral-50 border border-neutral-100 rounded-xl mb-3">
                           <DollarSign size={11} className="text-accent-500" />
-                          <span className="text-[10px] font-bold text-neutral-700">{college.fees}</span>
-                          <span className="text-[8px] text-neutral-400 uppercase ml-auto">per year</span>
+                          <span className="text-xs font-bold text-neutral-700">{college.fees}</span>
+                          <span className="text-[8px] text-neutral-500 uppercase ml-auto">per year</span>
                         </div>
                       )}
 
@@ -487,7 +485,7 @@ const CollegeMatchResults: React.FC = () => {
 
                       <button
                         onClick={() => navigate(`/college/${encodeURIComponent(college.name)}`, { state: { college } })}
-                        className="w-full h-10 bg-primary-600 hover:bg-primary-700 text-white rounded-full flex items-center justify-center gap-2 text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm shadow-primary-200 active:scale-95 mt-auto"
+                        className="w-full h-10 bg-primary-600 hover:bg-primary-700 text-white rounded-full flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-widest transition-all shadow-sm shadow-primary-200 active:scale-95 mt-auto"
                       >
                         View Profile <ArrowRight size={12} />
                       </button>
@@ -502,7 +500,7 @@ const CollegeMatchResults: React.FC = () => {
                   <button
                     onClick={handleLoadMore}
                     disabled={fetchingMore}
-                    className="flex items-center gap-2 px-10 py-3 bg-white border border-neutral-200 text-neutral-700 text-[11px] font-bold uppercase tracking-widest rounded-full hover:bg-primary-600 hover:text-white hover:border-primary-600 transition-all shadow-sm active:scale-95 disabled:opacity-60 disabled:pointer-events-none"
+                    className="flex items-center gap-2 px-10 py-3 bg-white border border-neutral-200 text-neutral-700 text-xs font-bold uppercase tracking-widest rounded-full hover:bg-primary-600 hover:text-white hover:border-primary-600 transition-all shadow-sm active:scale-95 disabled:opacity-60 disabled:pointer-events-none"
                   >
                     {fetchingMore ? (
                       <>
@@ -525,13 +523,13 @@ const CollegeMatchResults: React.FC = () => {
               </div>
               <div className="space-y-3">
                 <h3 className="text-xl font-black text-neutral-800 uppercase tracking-widest">No Matches Found</h3>
-                <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest max-w-sm mx-auto">
+                <p className="text-xs font-semibold text-neutral-500 uppercase tracking-widest max-w-sm mx-auto">
                   Try adjusting your rank, exam, or category filters.
                 </p>
               </div>
               <button
                 onClick={() => navigate(-1)}
-                className="px-10 py-4 bg-neutral-900 text-white rounded-full text-[11px] font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl"
+                className="px-10 py-4 bg-neutral-900 text-white rounded-full text-xs font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl"
               >
                 Refine Search
               </button>

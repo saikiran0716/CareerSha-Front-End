@@ -63,10 +63,7 @@ const CollegeListCard: React.FC<CollegeListCardProps> = ({ college }) => {
           {/* Tags */}
           <div className="flex flex-wrap gap-2 mt-4 mb-3">
             {college.tags.map((tag, idx) => (
-              <span
-                key={idx}
-                className={`text-[11px] font-bold px-2.5 py-0.5 rounded border ${getTagStyle(tag.label)}`}
-              >
+              <span key={idx} className={`text-xs font-bold px-2.5 py-0.5 rounded border ${getTagStyle(tag.label)}`}>
                 {tag.label}
               </span>
             ))}
@@ -82,7 +79,7 @@ const CollegeListCard: React.FC<CollegeListCardProps> = ({ college }) => {
       <div className="w-full md:w-[300px] flex flex-col justify-between shrink-0 md:border-l border-neutral-100 dark:border-neutral-800 md:pl-6">
         <div className="flex justify-between items-start gap-3 mb-4 md:mb-0">
           <div>
-            <p className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider mb-1 whitespace-nowrap">
+            <p className="text-xs font-bold text-neutral-500 uppercase tracking-wider mb-1 whitespace-nowrap">
               NIRF Ranking
             </p>
             <p className="text-base font-black text-neutral-900 dark:text-white whitespace-nowrap">
@@ -90,13 +87,13 @@ const CollegeListCard: React.FC<CollegeListCardProps> = ({ college }) => {
             </p>
           </div>
           <div>
-            <p className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider mb-1 whitespace-nowrap">
+            <p className="text-xs font-bold text-neutral-500 uppercase tracking-wider mb-1 whitespace-nowrap">
               Est. Year
             </p>
             <p className="text-base font-black text-neutral-900 dark:text-white whitespace-nowrap">{college.estYear}</p>
           </div>
           <div>
-            <p className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider mb-1 whitespace-nowrap">
+            <p className="text-xs font-bold text-neutral-500 uppercase tracking-wider mb-1 whitespace-nowrap">
               Avg. Package
             </p>
             <p className="text-base font-black text-neutral-900 dark:text-white whitespace-nowrap">

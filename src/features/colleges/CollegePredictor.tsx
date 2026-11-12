@@ -85,7 +85,7 @@ const Dropdown = ({
     >
       <span className="truncate">{value || `Select`}</span>
       <svg
-        className={`w-4 h-4 text-neutral-400 transition-transform duration-200 ${openDropdown === id ? 'rotate-180 text-primary-600' : ''}`}
+        className={`w-4 h-4 text-neutral-500 transition-transform duration-200 ${openDropdown === id ? 'rotate-180 text-primary-600' : ''}`}
         fill="none"
         stroke="currentColor"
         strokeWidth="2.5"
@@ -116,7 +116,7 @@ const Dropdown = ({
         </div>
       </>
     )}
-    {error && <span className="text-[10px] text-danger-500 font-medium absolute -bottom-4">{error}</span>}
+    {error && <span className="text-xs text-danger-500 font-medium absolute -bottom-4">{error}</span>}
   </div>
 );
 
@@ -418,7 +418,7 @@ export const CollegePredictorView = ({ profile }: { profile?: PredictorPrefill |
                                         ${errors.rank ? 'border-danger-300 focus:border-danger-400' : 'border-neutral-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-600/20'}`}
                   />
                   {errors.rank && (
-                    <span className="text-[10px] text-danger-500 font-medium absolute -bottom-4">{errors.rank}</span>
+                    <span className="text-xs text-danger-500 font-medium absolute -bottom-4">{errors.rank}</span>
                   )}
                 </div>
 
@@ -587,7 +587,7 @@ export const CollegePredictorView = ({ profile }: { profile?: PredictorPrefill |
                   </svg>
                   Predict My Colleges &rarr;
                 </button>
-                <p className="text-xs text-neutral-400 mt-3 font-medium">
+                <p className="text-xs text-neutral-500 mt-3 font-medium">
                   Get personalized college recommendations in seconds!
                 </p>
               </div>

@@ -172,7 +172,7 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({ defaultExam }) => 
                       onKeyDown={(e) => e.key === 'Enter' && handleEstimate()}
                       className="w-full h-full outline-none font-bold text-[15px] text-neutral-800 bg-transparent flex-1 pl-5 pr-2.5 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                     />
-                    <div className="font-bold text-neutral-400 pr-12 flex-shrink-0 flex items-center h-full pointer-events-none">
+                    <div className="font-bold text-neutral-500 pr-12 flex-shrink-0 flex items-center h-full pointer-events-none">
                       / {maxMarks}
                     </div>
                     <Calculator size={18} className={`${ICON} text-neutral-300`} />
@@ -235,7 +235,7 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({ defaultExam }) => 
                     className="bg-white rounded-3xl p-8 border border-neutral-200 shadow-[0_2px_12px_rgba(15,23,42,0.03)] text-center"
                   >
                     <div className="w-[60px] h-[60px] mx-auto mb-5 rounded-[18px] bg-neutral-50 flex items-center justify-center">
-                      <TrendingUp size={28} className="text-neutral-400" />
+                      <TrendingUp size={28} className="text-neutral-500" />
                     </div>
                     <h4 className="text-lg font-extrabold text-neutral-900 mb-2">Awaiting Rank Input</h4>
                     <p className="text-[13px] leading-normal text-neutral-500 max-w-[260px] mx-auto">
@@ -251,7 +251,7 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({ defaultExam }) => 
                     <div className="flex justify-between items-start mb-6">
                       <div className="space-y-4 min-w-0 flex-1 pr-4">
                         <div className="min-w-0">
-                          <p className="text-[10px] uppercase tracking-[1px] text-neutral-400 mb-1">Predicted AIR</p>
+                          <p className="text-xs uppercase tracking-[1px] text-neutral-500 mb-1">Predicted AIR</p>
                           <h4 className="text-[26px] font-black text-neutral-900 tracking-[-1.5px] leading-[1.1]">
                             #{result.predictedRank?.replace(/^#/, '') || 'N/A'}
                           </h4>
@@ -268,12 +268,12 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({ defaultExam }) => 
                       </div>
 
                       <div className="flex flex-col items-end gap-2.5 flex-shrink-0">
-                        <div className="px-3 py-1.5 rounded-[10px] bg-neutral-50 border border-neutral-200 text-neutral-600 text-[11px] font-extrabold">
+                        <div className="px-3 py-1.5 rounded-[10px] bg-neutral-50 border border-neutral-200 text-neutral-600 text-xs font-extrabold">
                           {exam}
                         </div>
                         <button
                           onClick={() => setResult(null)}
-                          className="text-[10px] font-bold text-neutral-400 hover:text-danger-500 transition-colors"
+                          className="text-xs font-bold text-neutral-500 hover:text-danger-500 transition-colors"
                         >
                           Clear results
                         </button>
@@ -292,6 +292,9 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({ defaultExam }) => 
                           ))}
                       </ul>
                     </div>
+                    <p className="mt-3 text-xs text-neutral-500">
+                      This is an estimate based on previous years' trends. Actual ranks and cutoffs can differ.
+                    </p>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -315,11 +318,11 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({ defaultExam }) => 
 /** Shared look for the three form controls */
 const FIELD =
   'w-full h-[52px] rounded-2xl outline-none font-bold text-[15px] text-neutral-800 bg-neutral-50 border-2 border-neutral-200 transition-[border-color,box-shadow,background-color] duration-200 focus:border-secondary-600 focus:ring-[3px] focus:ring-secondary-600/15 focus-within:border-secondary-600 focus-within:ring-[3px] focus-within:ring-secondary-600/15';
-const ICON = 'absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-neutral-400';
+const ICON = 'absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-neutral-500';
 
 const Field: React.FC<{ label: string; dot: string; children: React.ReactNode }> = ({ label, dot, children }) => (
   <div className="space-y-2">
-    <label className="flex items-center gap-2 text-[11px] font-black uppercase tracking-widest text-neutral-400">
+    <label className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-neutral-500">
       <span className={`inline-block w-1.5 h-1.5 rounded-full flex-shrink-0 ${dot}`} />
       {label}
     </label>
@@ -333,7 +336,7 @@ const Stat: React.FC<{ label: string; className: string; children: React.ReactNo
   children,
 }) => (
   <div className="flex-1">
-    <p className="text-[9px] font-extrabold uppercase tracking-[0.5px] text-neutral-400 mb-1">{label}</p>
+    <p className="text-xs font-extrabold uppercase tracking-[0.5px] text-neutral-500 mb-1">{label}</p>
     <p className={`text-lg font-extrabold leading-[1.2] ${className}`}>{children}</p>
   </div>
 );

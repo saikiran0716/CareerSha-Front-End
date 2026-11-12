@@ -42,11 +42,11 @@ const PredictorsHubPage = () => {
               </div>
 
               {/* Description */}
-              <p className="text-[11px] text-neutral-500 leading-relaxed mb-4 flex-1">{item.description}</p>
+              <p className="text-xs text-neutral-500 leading-relaxed mb-4 flex-1">{item.description}</p>
 
               {/* Action Link Footer */}
               <div className="flex items-center justify-between mt-auto pt-3 border-t border-neutral-50">
-                <span className={`text-[11px] font-bold ${item.buttonColor.split(' ')[0]}`}>Explore now</span>
+                <span className={`text-xs font-bold ${item.buttonColor.split(' ')[0]}`}>Explore now</span>
                 <div className={`w-6 h-6 rounded-full flex items-center justify-center ${item.iconBg}`}>
                   <ArrowRight className={`w-3 h-3 ${item.buttonColor.split(' ')[0]}`} />
                 </div>
@@ -75,12 +75,12 @@ const PredictorsHubPage = () => {
                   <ClipboardEdit className="w-4 h-4" />
                 </div>
                 <div className="flex items-center justify-start md:justify-center gap-2 mb-1.5">
-                  <span className="w-4 h-4 rounded-full bg-primary-100 text-primary-600 text-[10px] font-bold flex items-center justify-center shrink-0">
+                  <span className="w-4 h-4 rounded-full bg-primary-100 text-primary-600 text-xs font-bold flex items-center justify-center shrink-0">
                     1
                   </span>
                   <h4 className="font-bold text-[13px] text-neutral-900">Answer Questions</h4>
                 </div>
-                <p className="text-[11px] text-neutral-500 max-w-[160px] leading-relaxed">
+                <p className="text-xs text-neutral-500 max-w-[160px] leading-relaxed">
                   Fill out a short questionnaire about your interests, skills and goals.
                 </p>
               </div>
@@ -91,12 +91,12 @@ const PredictorsHubPage = () => {
                   <BarChart4 className="w-4 h-4" />
                 </div>
                 <div className="flex items-center justify-start md:justify-center gap-2 mb-1.5">
-                  <span className="w-4 h-4 rounded-full bg-secondary-100 text-secondary-600 text-[10px] font-bold flex items-center justify-center shrink-0">
+                  <span className="w-4 h-4 rounded-full bg-secondary-100 text-secondary-600 text-xs font-bold flex items-center justify-center shrink-0">
                     2
                   </span>
                   <h4 className="font-bold text-[13px] text-neutral-900">AI Analysis</h4>
                 </div>
-                <p className="text-[11px] text-neutral-500 max-w-[160px] leading-relaxed">
+                <p className="text-xs text-neutral-500 max-w-[160px] leading-relaxed">
                   Our AI analyzes your profile and matches it with thousands of data points.
                 </p>
               </div>
@@ -107,12 +107,12 @@ const PredictorsHubPage = () => {
                   <Target className="w-4 h-4" />
                 </div>
                 <div className="flex items-center justify-start md:justify-center gap-2 mb-1.5">
-                  <span className="w-4 h-4 rounded-full bg-accent-100 text-accent-600 text-[10px] font-bold flex items-center justify-center shrink-0">
+                  <span className="w-4 h-4 rounded-full bg-accent-100 text-accent-600 text-xs font-bold flex items-center justify-center shrink-0">
                     3
                   </span>
                   <h4 className="font-bold text-[13px] text-neutral-900">Get Results</h4>
                 </div>
-                <p className="text-[11px] text-neutral-500 max-w-[160px] leading-relaxed">
+                <p className="text-xs text-neutral-500 max-w-[160px] leading-relaxed">
                   Receive personalized recommendations and detailed insights.
                 </p>
               </div>
@@ -123,12 +123,12 @@ const PredictorsHubPage = () => {
                   <Flag className="w-4 h-4" />
                 </div>
                 <div className="flex items-center justify-start md:justify-center gap-2 mb-1.5">
-                  <span className="w-4 h-4 rounded-full bg-success-100 text-success-600 text-[10px] font-bold flex items-center justify-center shrink-0">
+                  <span className="w-4 h-4 rounded-full bg-success-100 text-success-600 text-xs font-bold flex items-center justify-center shrink-0">
                     4
                   </span>
                   <h4 className="font-bold text-[13px] text-neutral-900">Plan Your Future</h4>
                 </div>
-                <p className="text-[11px] text-neutral-500 max-w-[160px] leading-relaxed">
+                <p className="text-xs text-neutral-500 max-w-[160px] leading-relaxed">
                   Use insights to take confident decisions about your career and education.
                 </p>
               </div>

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useParams, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import SEO from '../../components/common/SEO';
-import GlassLoader from '../../components/common/loaders/GlassLoader';
 import { useCollegeDetail } from '../../features/colleges/detail/useCollegeDetail';
 import type { CollegeTab } from '../../features/colleges/detail/constants';
 import CollegeHeader from '../../features/colleges/detail/CollegeHeader';
@@ -44,12 +43,8 @@ const CollegeDetailPage: React.FC = () => {
         keywords={`${name}, ${locVal}, ${typeVal}, college details, placements, admissions, 2026`}
       />
 
-      {loading && <GlassLoader />}
-
-      {/* Content is blurred while loading */}
-      <div
-        className={`transition-all duration-1000 ease-out pointer-events-auto ${loading ? 'blur-md opacity-40 scale-[0.98]' : 'blur-0 opacity-100 scale-100'}`}
-      >
+      {/* While loading, sections show skeleton placeholders */}
+      <div>
         {/* ── TOP NAV ── */}
         <div className="bg-gradient-to-r from-primary-800 to-secondary-800 sticky top-0 z-50">
           <div className="max-w-[1300px] mx-auto px-6 h-12 flex items-center justify-between">

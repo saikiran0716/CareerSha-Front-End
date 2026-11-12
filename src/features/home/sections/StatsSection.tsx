@@ -6,7 +6,7 @@ const StatsSection: React.FC = () => {
       {/* Exams Covered Card (Lavender/Purple) */}
       <div className="relative overflow-hidden rounded-[2rem] p-6 bg-gradient-to-br from-secondary-50/80 to-white dark:from-secondary-950/15 dark:to-neutral-900 border border-secondary-100/30 dark:border-neutral-800 flex justify-between items-center shadow-sm">
         <div className="space-y-1">
-          <p className="text-[11px] font-black uppercase tracking-wider text-secondary-500 dark:text-secondary-400">
+          <p className="text-xs font-black uppercase tracking-wider text-secondary-500 dark:text-secondary-400">
             Exams Covered
           </p>
           <p className="text-3xl font-black text-neutral-900 dark:text-white">200+</p>
@@ -35,7 +35,7 @@ const StatsSection: React.FC = () => {
       {/* Colleges Listed Card (Green) */}
       <div className="relative overflow-hidden rounded-[2rem] p-6 bg-gradient-to-br from-success-50/80 to-white dark:from-success-950/15 dark:to-neutral-900 border border-success-100/30 dark:border-neutral-800 flex justify-between items-center shadow-sm">
         <div className="space-y-1">
-          <p className="text-[11px] font-black uppercase tracking-wider text-success-500 dark:text-success-400">
+          <p className="text-xs font-black uppercase tracking-wider text-success-500 dark:text-success-400">
             Colleges Listed
           </p>
           <p className="text-3xl font-black text-neutral-900 dark:text-white">50,000+</p>
@@ -65,7 +65,7 @@ const StatsSection: React.FC = () => {
       {/* Students Trust Us Card (Orange) */}
       <div className="relative overflow-hidden rounded-[2rem] p-6 bg-gradient-to-br from-warning-50/80 to-white dark:from-warning-950/15 dark:to-neutral-900 border border-warning-100/30 dark:border-neutral-800 flex justify-between items-center shadow-sm">
         <div className="space-y-1">
-          <p className="text-[11px] font-black uppercase tracking-wider text-warning-500 dark:text-warning-400">
+          <p className="text-xs font-black uppercase tracking-wider text-warning-500 dark:text-warning-400">
             Students Trust Us
           </p>
           <p className="text-3xl font-black text-neutral-900 dark:text-white">10 Lakh+</p>

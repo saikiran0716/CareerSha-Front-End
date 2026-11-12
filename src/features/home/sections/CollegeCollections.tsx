@@ -61,12 +61,12 @@ const CollegeCollections: React.FC = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/30 to-transparent" />
 
               <div className="absolute inset-x-0 bottom-0 p-4 space-y-2.5">
-                <span className="inline-flex rounded-full bg-white/20 dark:bg-black/25 backdrop-blur px-2.5 py-1 text-[9px] font-black uppercase tracking-widest text-white">
+                <span className="inline-flex rounded-full bg-white/20 dark:bg-black/25 backdrop-blur px-2.5 py-1 text-xs font-black uppercase tracking-widest text-white">
                   {collection.tag}
                 </span>
                 <div>
                   <h3 className="text-sm font-black text-white leading-tight">{collection.title}</h3>
-                  <p className="text-[11px] text-white/80 font-bold mt-0.5">{collection.count}</p>
+                  <p className="text-xs text-white/80 font-bold mt-0.5">{collection.count}</p>
                 </div>
               </div>
             </button>

@@ -291,12 +291,3 @@ body {
   max-width: 100%;
   overflow-x: hidden;
 }
-
-/* Override Tailwind lg:px-8 if you want to remove the horizontal padding globally
-   This neutralizes the utility's left/right padding at >=1024px screens. */
-@media (min-width: 1024px) {
-  .lg\:px-8 {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-}

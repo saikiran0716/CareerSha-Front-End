@@ -186,13 +186,13 @@ const NewsNotifications: React.FC = () => {
                       )}
                     </div>
                     <div className="flex flex-col gap-1.5 flex-1 min-w-0 py-0.5">
-                      <span className="text-[9px] font-black text-rose-500 dark:text-rose-400 uppercase tracking-wider news-item-category">
+                      <span className="text-xs font-black text-rose-500 dark:text-rose-400 uppercase tracking-wider news-item-category">
                         {news.category}
                       </span>
                       <h4 className="text-[13px] font-bold text-neutral-800 dark:text-neutral-100 leading-[1.3] line-clamp-2 group-hover:text-secondary-600 dark:group-hover:text-secondary-400 transition-colors news-item-title">
                         {news.title}
                       </h4>
-                      <p className="text-[10px] font-bold text-neutral-400 dark:text-neutral-500 mt-0.5 news-item-date">
+                      <p className="text-xs font-bold text-neutral-500 dark:text-neutral-500 mt-0.5 news-item-date">
                         {news.date}
                       </p>
                     </div>

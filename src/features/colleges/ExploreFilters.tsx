@@ -23,7 +23,7 @@ const ExploreFilters: React.FC = () => {
             placeholder="Enter city or state"
             className="w-full pl-3 pr-10 py-2 text-sm bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500/50"
           />
-          <MapPin size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400" />
+          <MapPin size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500" />
         </div>
       </div>
 
@@ -31,7 +31,7 @@ const ExploreFilters: React.FC = () => {
       <div className="mb-6">
         <div className="flex items-center justify-between mb-3">
           <h4 className="text-sm font-semibold text-neutral-800 dark:text-neutral-200">Course Stream</h4>
-          <ChevronUp size={16} className="text-neutral-400" />
+          <ChevronUp size={16} className="text-neutral-500" />
         </div>
         <div className="space-y-2.5">
           {['Engineering', 'Management', 'Medical', 'Law', 'Science'].map((course, idx) => (
@@ -60,7 +60,7 @@ const ExploreFilters: React.FC = () => {
       <div className="mb-6">
         <div className="flex items-center justify-between mb-3">
           <h4 className="text-sm font-semibold text-neutral-800 dark:text-neutral-200">Exam Accepted</h4>
-          <ChevronUp size={16} className="text-neutral-400" />
+          <ChevronUp size={16} className="text-neutral-500" />
         </div>
         <div className="space-y-2.5">
           {['JEE Main', 'NEET', 'CUET', 'CAT', 'MAT'].map((exam, idx) => (
@@ -89,7 +89,7 @@ const ExploreFilters: React.FC = () => {
       <div className="mb-8">
         <div className="flex items-center justify-between mb-3">
           <h4 className="text-sm font-semibold text-neutral-800 dark:text-neutral-200">College Type</h4>
-          <ChevronUp size={16} className="text-neutral-400" />
+          <ChevronUp size={16} className="text-neutral-500" />
         </div>
         <div className="space-y-2.5">
           {['Government', 'Private', 'Deemed University', 'Autonomous'].map((type, idx) => (

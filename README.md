@@ -88,6 +88,12 @@ Third-party brand colors (WhatsApp, LinkedIn, YouTube, …) intentionally stay a
   `font-extrabold` and `font-black` are bold inside headings and regular everywhere else (controlled by the
   `--fw-*` variables in `theme.css`). Use a real heading tag when text should be bold.
 - **Exception:** `font-brand` is always bold (logo wordmark).
+- Buttons, form labels and nav links use medium weight (500).
+
+## Dark mode
+
+Switched off until every page has dark styles: `DARK_MODE_ENABLED` in `src/hooks/useDarkMode.ts`.
+Setting it to `true` brings back the header toggle.
 
 ## Adding a rank predictor
 

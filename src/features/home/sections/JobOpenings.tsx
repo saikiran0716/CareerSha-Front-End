@@ -17,7 +17,7 @@ const JobOpenings: React.FC = () => {
         </div>
         <button
           onClick={() => navigate('/jobs')}
-          className="text-[10px] font-black text-primary-600 dark:text-primary-400 uppercase tracking-widest hover:underline flex items-center gap-1"
+          className="text-xs font-black text-primary-600 dark:text-primary-400 uppercase tracking-widest hover:underline flex items-center gap-1"
         >
           View all <ArrowRight className="h-3 w-3" />
         </button>
@@ -30,7 +30,7 @@ const JobOpenings: React.FC = () => {
             className={`group flex flex-col p-3 rounded-2xl border bg-white dark:bg-neutral-900/50 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition duration-300 hover:shadow-sm hover:-translate-y-0.5 ${job.color}`}
           >
             <div className="flex justify-between items-start mb-2">
-              <span className="px-2 py-0.5 rounded-md text-[9px] font-black uppercase tracking-wider bg-white/60 dark:bg-neutral-950/60 shadow-sm border border-inherit">
+              <span className="px-2 py-0.5 rounded-md text-xs font-black uppercase tracking-wider bg-white/60 dark:bg-neutral-950/60 shadow-sm border border-inherit">
                 {job.type}
               </span>
             </div>
@@ -39,11 +39,11 @@ const JobOpenings: React.FC = () => {
               <p className="text-[13px] font-black leading-tight mb-0.5 text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                 {job.role}
               </p>
-              <p className="text-[9px] font-extrabold uppercase tracking-widest opacity-80">{job.company}</p>
+              <p className="text-xs font-extrabold uppercase tracking-widest opacity-80">{job.company}</p>
             </div>
 
             <div className="mt-auto flex items-center justify-between">
-              <div className="flex items-center gap-1 text-[10px] font-bold opacity-80">
+              <div className="flex items-center gap-1 text-xs font-bold opacity-80">
                 <MapPin className="h-3 w-3" />
                 <span>{job.location}</span>
               </div>

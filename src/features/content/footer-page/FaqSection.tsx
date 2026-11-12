@@ -23,7 +23,7 @@ const FaqSection: React.FC<{ faqs: { question: string; answer: string }[] }> = (
               <span
                 className={`transform transition-transform duration-200 shrink-0 ${activeFaq === idx ? 'rotate-180' : ''}`}
               >
-                <svg className="w-4 h-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </span>
