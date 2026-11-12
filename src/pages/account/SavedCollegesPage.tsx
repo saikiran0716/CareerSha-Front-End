@@ -24,7 +24,7 @@ const SavedCollegesPage: React.FC = () => {
           {colleges.map((c) => (
             <li key={c.name} className="flex items-center gap-3 rounded-2xl border border-neutral-200 bg-white p-4">
               <Link
-                to={`/college/${encodeURIComponent(c.name)}`}
+                to={c.slug ? `/colleges/${c.slug}` : `/college/${encodeURIComponent(c.name)}`}
                 className="group flex min-w-0 flex-1 items-center gap-3"
               >
                 <div className="min-w-0">

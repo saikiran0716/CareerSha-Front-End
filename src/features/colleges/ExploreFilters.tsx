@@ -1,116 +1,106 @@
-import React, { useState } from 'react';
-import { MapPin, ChevronDown, ChevronUp } from 'lucide-react';
+import React from 'react';
+import { ENTRANCE_EXAMS_DATA } from '../../data/exams/examDetailData';
 
-const ExploreFilters: React.FC = () => {
-  const [expandedCourse, setExpandedCourse] = useState(false);
-  const [expandedExam, setExpandedExam] = useState(false);
+export interface ExploreFilterValues {
+  streams: string[];
+  ownership: string[];
+  states: string[];
+  exam: string;
+}
 
-  return (
-    <div className="w-full bg-white dark:bg-neutral-900 rounded-xl shadow-sm border border-neutral-200 dark:border-neutral-800 p-5 hidden lg:block sticky top-[90px]">
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="font-bold text-neutral-900 dark:text-white">Filters</h3>
-        <button className="text-xs text-primary-600 dark:text-primary-400 font-semibold hover:underline">
-          Clear All
-        </button>
-      </div>
+interface ExploreFiltersProps {
+  values: ExploreFilterValues;
+  options: { streams: string[]; ownership: string[]; states: string[] };
+  onChange: (values: ExploreFilterValues) => void;
+}
 
-      {/* Search Location */}
-      <div className="mb-6">
-        <h4 className="text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-3">Search Location</h4>
-        <div className="relative">
+const EXAM_OPTIONS: [id: string, label: string][] = [
+  ['jee-main', 'JEE Main'],
+  ['jee-advanced', 'JEE Advanced'],
+  ['neet', 'NEET'],
+  ['cat', 'CAT'],
+  ['gate', 'GATE'],
+  ['clat', 'CLAT'],
+  ['nift', 'NIFT'],
+].map(([id, fallback]) => [id, ENTRANCE_EXAMS_DATA[id]?.title.replace(/\s*\d{4}$/, '') ?? fallback]);
+
+const CheckboxGroup: React.FC<{
+  legend: string;
+  options: string[];
+  selected: string[];
+  onChange: (next: string[]) => void;
+}> = ({ legend, options, selected, onChange }) => (
+  <fieldset className="border-b border-neutral-100 pb-5">
+    <legend className="mb-3 text-sm text-neutral-900">{legend}</legend>
+    <div className="space-y-2.5">
+      {options.map((opt) => (
+        <label key={opt} className="flex cursor-pointer items-center gap-3 text-sm text-neutral-700">
           <input
-            type="text"
-            placeholder="Enter city or state"
-            className="w-full pl-3 pr-10 py-2 text-sm bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500/50"
+            type="checkbox"
+            checked={selected.includes(opt)}
+            onChange={() => onChange(selected.includes(opt) ? selected.filter((s) => s !== opt) : [...selected, opt])}
+            className="h-4 w-4 rounded border-neutral-300 accent-primary-800"
           />
-          <MapPin size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500" />
-        </div>
-      </div>
-
-      {/* Course Stream */}
-      <div className="mb-6">
-        <div className="flex items-center justify-between mb-3">
-          <h4 className="text-sm font-semibold text-neutral-800 dark:text-neutral-200">Course Stream</h4>
-          <ChevronUp size={16} className="text-neutral-500" />
-        </div>
-        <div className="space-y-2.5">
-          {['Engineering', 'Management', 'Medical', 'Law', 'Science'].map((course, idx) => (
-            <label key={idx} className="flex items-center gap-3 cursor-pointer group">
-              <input
-                type="checkbox"
-                className="w-4 h-4 rounded border-neutral-300 text-primary-600 focus:ring-primary-500"
-              />
-              <span className="text-sm text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors">
-                {course}
-              </span>
-            </label>
-          ))}
-          {!expandedCourse && (
-            <button
-              onClick={() => setExpandedCourse(true)}
-              className="text-xs text-primary-600 dark:text-primary-400 font-medium flex items-center gap-1 mt-2"
-            >
-              Show more <ChevronDown size={12} />
-            </button>
-          )}
-        </div>
-      </div>
-
-      {/* Exam Accepted */}
-      <div className="mb-6">
-        <div className="flex items-center justify-between mb-3">
-          <h4 className="text-sm font-semibold text-neutral-800 dark:text-neutral-200">Exam Accepted</h4>
-          <ChevronUp size={16} className="text-neutral-500" />
-        </div>
-        <div className="space-y-2.5">
-          {['JEE Main', 'NEET', 'CUET', 'CAT', 'MAT'].map((exam, idx) => (
-            <label key={idx} className="flex items-center gap-3 cursor-pointer group">
-              <input
-                type="checkbox"
-                className="w-4 h-4 rounded border-neutral-300 text-primary-600 focus:ring-primary-500"
-              />
-              <span className="text-sm text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors">
-                {exam}
-              </span>
-            </label>
-          ))}
-          {!expandedExam && (
-            <button
-              onClick={() => setExpandedExam(true)}
-              className="text-xs text-primary-600 dark:text-primary-400 font-medium flex items-center gap-1 mt-2"
-            >
-              Show more <ChevronDown size={12} />
-            </button>
-          )}
-        </div>
-      </div>
-
-      {/* College Type */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between mb-3">
-          <h4 className="text-sm font-semibold text-neutral-800 dark:text-neutral-200">College Type</h4>
-          <ChevronUp size={16} className="text-neutral-500" />
-        </div>
-        <div className="space-y-2.5">
-          {['Government', 'Private', 'Deemed University', 'Autonomous'].map((type, idx) => (
-            <label key={idx} className="flex items-center gap-3 cursor-pointer group">
-              <input
-                type="checkbox"
-                className="w-4 h-4 rounded border-neutral-300 text-primary-600 focus:ring-primary-500"
-              />
-              <span className="text-sm text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors">
-                {type}
-              </span>
-            </label>
-          ))}
-        </div>
-      </div>
-
-      {/* Apply Filters Button */}
-      <button className="w-full py-2.5 rounded-lg border-2 border-primary-600 text-primary-600 dark:text-primary-400 font-semibold text-sm hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors">
-        Apply Filters
-      </button>
+          {opt}
+        </label>
+      ))}
     </div>
+  </fieldset>
+);
+
+const ExploreFilters: React.FC<ExploreFiltersProps> = ({ values, options, onChange }) => {
+  const active = values.streams.length + values.ownership.length + values.states.length + (values.exam ? 1 : 0);
+  return (
+    <aside aria-label="Filters" className="space-y-5 rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
+      <div className="flex items-center justify-between">
+        <h2 className="text-base text-neutral-900">Filters</h2>
+        {active > 0 && (
+          <button
+            onClick={() => onChange({ streams: [], ownership: [], states: [], exam: '' })}
+            className="text-xs text-primary-700 hover:underline"
+          >
+            Clear all ({active})
+          </button>
+        )}
+      </div>
+
+      <CheckboxGroup
+        legend="Stream"
+        options={options.streams}
+        selected={values.streams}
+        onChange={(streams) => onChange({ ...values, streams })}
+      />
+
+      <fieldset className="border-b border-neutral-100 pb-5">
+        <legend className="mb-3 text-sm text-neutral-900">Exam accepted</legend>
+        <select
+          aria-label="Exam accepted"
+          value={values.exam}
+          onChange={(e) => onChange({ ...values, exam: e.target.value })}
+          className="w-full rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm"
+        >
+          <option value="">Any exam</option>
+          {EXAM_OPTIONS.map(([id, label]) => (
+            <option key={id} value={id}>
+              {label}
+            </option>
+          ))}
+        </select>
+      </fieldset>
+
+      <CheckboxGroup
+        legend="Ownership"
+        options={options.ownership}
+        selected={values.ownership}
+        onChange={(ownership) => onChange({ ...values, ownership })}
+      />
+      <CheckboxGroup
+        legend="State"
+        options={options.states}
+        selected={values.states}
+        onChange={(states) => onChange({ ...values, states })}
+      />
+    </aside>
   );
 };
 

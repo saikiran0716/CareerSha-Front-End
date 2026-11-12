@@ -9,3 +9,11 @@
  *         when the user signs in.
  */
 export const ACCOUNT_REQUIRES_SIGN_IN = false;
+
+/**
+ * SHOW_SAMPLE_DATA_NOTICE
+ *   true (now): college detail, compare, exam cutoff/result and review/Q&A sections use SAMPLE
+ *   data (src/data/catalog). A notice tells visitors the numbers are illustrative.
+ *   Set to false once the catalog is served from the backend with real data.
+ */
+export const SHOW_SAMPLE_DATA_NOTICE = true;

@@ -37,6 +37,8 @@ export interface PredictionRecord {
 export interface SavedCollege {
   name: string;
   location?: string;
+  /** catalog slug when saved from a /colleges/:slug page or Explore card */
+  slug?: string;
   savedAt: string;
 }
 
@@ -163,14 +165,17 @@ export const userData = {
   // ---- saved colleges ----
   getSavedColleges: () => read<SavedCollege[]>('savedColleges', []),
   isCollegeSaved: (name: string) => read<SavedCollege[]>('savedColleges', []).some((c) => c.name === name),
-  toggleSavedCollege(college: { name: string; location?: string }): boolean {
+  toggleSavedCollege(college: { name: string; location?: string; slug?: string }): boolean {
     const list = read<SavedCollege[]>('savedColleges', []);
     const exists = list.some((c) => c.name === college.name);
     write(
       'savedColleges',
       exists
         ? list.filter((c) => c.name !== college.name)
-        : [{ name: college.name, location: college.location, savedAt: new Date().toISOString() }, ...list],
+        : [
+            { name: college.name, location: college.location, slug: college.slug, savedAt: new Date().toISOString() },
+            ...list,
+          ],
     );
     return !exists;
   },

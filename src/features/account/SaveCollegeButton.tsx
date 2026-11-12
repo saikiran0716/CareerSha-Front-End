@@ -7,7 +7,7 @@ import { useCurrentUser } from '../../hooks/useCurrentUser';
 import { ACCOUNT_REQUIRES_SIGN_IN } from '../../config/features';
 
 interface SaveCollegeButtonProps {
-  college: { name: string; location?: string };
+  college: { name: string; location?: string; slug?: string };
   /** "icon" = round icon button (cards), "label" = button with text (college page) */
   variant?: 'icon' | 'label';
   className?: string;

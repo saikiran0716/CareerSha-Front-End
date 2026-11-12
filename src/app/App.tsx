@@ -10,6 +10,7 @@ import { useDarkMode } from '../hooks/useDarkMode';
 import { useUserData } from '../hooks/useUserData';
 import { toStudentProfile, userData } from '../services/userDataService';
 import AppRoutes from './AppRoutes';
+import CompareTray from '../features/compare/CompareTray';
 
 const App: React.FC = () => {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
@@ -69,6 +70,7 @@ const App: React.FC = () => {
       />
 
       <ScrollToTop />
+      <CompareTray />
 
       <AppRoutes user={user} onOpenAuth={setIsAuthModalOpen} onAskAI={handleAskAI} />
 

@@ -1,58 +1,86 @@
-import React from 'react';
-import { Search, ChevronRight, Copy } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { ChevronRight, Copy, Search } from 'lucide-react';
+import { Stream } from '../../data/catalog/types';
 
-const ExploreSearchHeader: React.FC = () => {
+interface ExploreSearchHeaderProps {
+  search: string;
+  onSearch: (value: string) => void;
+  onPickStream: (stream: Stream) => void;
+  compareCount: number;
+}
+
+const POPULAR: { label: string; stream: Stream }[] = [
+  { label: 'Engineering Colleges', stream: 'Engineering' },
+  { label: 'MBA Colleges', stream: 'Management' },
+  { label: 'Medical Colleges', stream: 'Medical' },
+  { label: 'Law Colleges', stream: 'Law' },
+  { label: 'Design Colleges', stream: 'Design' },
+];
+
+const ExploreSearchHeader: React.FC<ExploreSearchHeaderProps> = ({ search, onSearch, onPickStream, compareCount }) => {
+  const [text, setText] = useState(search);
+  useEffect(() => setText(search), [search]);
+
   return (
-    <div className="w-full mb-8">
-      {/* Breadcrumbs */}
-      <div className="flex items-center gap-2 text-xs font-medium text-neutral-500 mb-4">
-        <Link to="/" className="hover:text-primary-600 dark:hover:text-primary-400">
+    <div className="mb-8 w-full">
+      <nav aria-label="Breadcrumb" className="mb-4 flex items-center gap-2 text-xs text-neutral-500">
+        <Link to="/" className="hover:text-primary-600">
           Home
         </Link>
         <ChevronRight size={14} />
-        <span className="text-neutral-800 dark:text-neutral-200">Explore Colleges</span>
-      </div>
+        <span className="text-neutral-800">Explore Colleges</span>
+      </nav>
 
-      {/* Header text */}
       <div className="mb-6">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-neutral-900 dark:text-white mb-2">Explore Colleges</h1>
-        <p className="text-sm md:text-base text-neutral-600 dark:text-neutral-400">
-          Discover and compare 50,000+ colleges across India. Find the best fit for your career.
+        <h1 className="mb-2 text-3xl md:text-4xl text-neutral-900">Explore Colleges</h1>
+        <p className="text-sm md:text-base text-neutral-600">
+          Compare fees, cutoffs, placements and student reviews to find the right college for you.
         </p>
       </div>
 
-      {/* Search and Compare Row */}
-      <div className="flex flex-col md:flex-row items-center gap-4 mb-6">
-        <div className="relative flex-1 w-full flex items-center bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 shadow-sm focus-within:ring-2 focus-within:ring-primary-500/50 focus-within:border-primary-500 overflow-hidden">
-          <div className="pl-4 text-neutral-500">
-            <Search size={18} />
-          </div>
+      <div className="mb-6 flex flex-col items-center gap-4 md:flex-row">
+        <form
+          role="search"
+          onSubmit={(e) => {
+            e.preventDefault();
+            onSearch(text.trim());
+          }}
+          className="relative flex w-full flex-1 items-center rounded-xl border border-neutral-200 bg-white shadow-sm focus-within:ring-2 focus-within:ring-primary-600/20"
+        >
+          <Search size={18} className="ml-4 text-neutral-500" aria-hidden="true" />
           <input
-            type="text"
-            placeholder="Search by college name, location, course or exam..."
-            className="w-full py-3 px-3 bg-transparent text-sm text-neutral-900 dark:text-white focus:outline-none"
+            type="search"
+            aria-label="Search colleges"
+            placeholder="Search by college name, city, state or stream…"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            className="w-full bg-transparent px-3 py-3 text-sm text-neutral-900 focus:outline-none"
           />
-          <button className="bg-primary-800 hover:bg-primary-700 text-white text-sm font-semibold py-2 px-6 rounded-lg mr-1.5 transition-colors">
+          <button
+            type="submit"
+            className="mr-1.5 rounded-lg bg-primary-800 px-6 py-2 text-sm text-white hover:bg-primary-700"
+          >
             Search
           </button>
-        </div>
-
-        <button className="w-full md:w-auto flex items-center justify-center gap-2 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300 py-3 px-6 rounded-xl font-semibold text-sm transition-colors shadow-sm whitespace-nowrap">
-          <Copy size={16} />
-          Compare (0)
-        </button>
+        </form>
+        <Link
+          to="/compare"
+          className="flex w-full items-center justify-center gap-2 rounded-xl border border-neutral-200 bg-white px-5 py-3 text-sm text-neutral-700 shadow-sm hover:bg-neutral-50 md:w-auto"
+        >
+          <Copy size={16} /> Compare ({compareCount})
+        </Link>
       </div>
 
-      {/* Popular Searches */}
       <div className="flex flex-wrap items-center gap-2 md:gap-3">
-        <span className="text-xs font-semibold text-neutral-700 dark:text-neutral-300 mr-1">Popular Searches:</span>
-        {['Engineering Colleges', 'MBA Colleges', 'Medical Colleges', 'DU Colleges', 'IIT Colleges'].map((tag, idx) => (
+        <span className="mr-1 text-xs text-neutral-700">Popular:</span>
+        {POPULAR.map(({ label, stream }) => (
           <button
-            key={idx}
-            className="px-3 py-1.5 bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-primary-900/40 text-xs font-semibold rounded-full transition-colors"
+            key={label}
+            onClick={() => onPickStream(stream)}
+            className="rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-xs text-neutral-700 hover:border-primary-300 hover:text-primary-700"
           >
-            {tag}
+            {label}
           </button>
         ))}
       </div>

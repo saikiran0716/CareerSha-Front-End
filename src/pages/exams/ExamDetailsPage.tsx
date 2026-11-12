@@ -14,15 +14,32 @@ import {
   User,
   Wallet,
   Award,
+  BarChart3,
+  Trophy,
+  School,
+  MessageCircle,
 } from 'lucide-react';
 // Assuming your data structure remains similar
 import { ENTRANCE_EXAMS_DATA, EntranceExamInfo } from '../../data/exams/examDetailData';
+import { ExamCollegesTab, ExamCutoffsTab, ExamResultsTab } from '../../features/exams/ExamExtraTabs';
+import QnaSection from '../../features/community/QnaSection';
+
+const SECTIONS = [
+  { id: 'overview', label: 'Eligibility & Info', icon: Info },
+  { id: 'dates', label: 'Important Dates', icon: Calendar },
+  { id: 'pattern', label: 'Exam Pattern', icon: Layout },
+  { id: 'syllabus', label: 'Full Syllabus', icon: BookOpen },
+  { id: 'cutoffs', label: 'Cutoffs', icon: BarChart3 },
+  { id: 'results', label: 'Results', icon: Trophy },
+  { id: 'colleges', label: 'Colleges', icon: School },
+  { id: 'qna', label: 'Q&A', icon: MessageCircle },
+] as const;
 
 const ExamDetailsPage: React.FC = () => {
   const { examId } = useParams<{ examId: string }>();
   const navigate = useNavigate();
   const [exam, setExam] = useState<EntranceExamInfo | null>(null);
-  const [activeTab, setActiveTab] = useState<'overview' | 'syllabus' | 'dates' | 'pattern'>('overview');
+  const [activeTab, setActiveTab] = useState<(typeof SECTIONS)[number]['id']>('overview');
 
   useEffect(() => {
     if (examId && ENTRANCE_EXAMS_DATA[examId]) {
@@ -49,13 +66,6 @@ const ExamDetailsPage: React.FC = () => {
       </div>
     );
   }
-
-  const sections = [
-    { id: 'overview', label: 'Eligibility & Info', icon: Info },
-    { id: 'dates', label: 'Important Dates', icon: Calendar },
-    { id: 'pattern', label: 'Exam Pattern', icon: Layout },
-    { id: 'syllabus', label: 'Full Syllabus', icon: BookOpen },
-  ] as const;
 
   return (
     <div className="min-h-screen bg-white dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 font-sans selection:bg-secondary-500/30">
@@ -170,7 +180,7 @@ const ExamDetailsPage: React.FC = () => {
         <div className="bg-white dark:bg-neutral-900 rounded-[3rem] shadow-2xl shadow-neutral-200/50 dark:shadow-none border border-neutral-100 dark:border-neutral-800 overflow-hidden">
           {/* Navigation Tabs */}
           <div className="flex items-center border-b border-neutral-50 dark:border-neutral-800 overflow-x-auto no-scrollbar">
-            {sections.map((sec) => {
+            {SECTIONS.map((sec) => {
               const Icon = sec.icon;
               const isActive = activeTab === sec.id;
               return (
@@ -369,6 +379,13 @@ const ExamDetailsPage: React.FC = () => {
                     ))}
                   </div>
                 </div>
+              )}
+
+              {activeTab === 'cutoffs' && <ExamCutoffsTab exam={exam} />}
+              {activeTab === 'results' && <ExamResultsTab exam={exam} />}
+              {activeTab === 'colleges' && <ExamCollegesTab exam={exam} />}
+              {activeTab === 'qna' && (
+                <QnaSection target={{ type: 'exam', id: exam.id }} subject={exam.title.replace(/\s*\d{4}$/, '')} />
               )}
             </div>
           </div>

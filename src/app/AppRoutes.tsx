@@ -16,6 +16,8 @@ const ExamsHubPage = lazy(() => import('../pages/exams/ExamsHubPage'));
 const ExamDetailsPage = lazy(() => import('../pages/exams/ExamDetailsPage'));
 const ExploreCollegesPage = lazy(() => import('../pages/colleges/ExploreCollegesPage'));
 const CollegeDetailPage = lazy(() => import('../pages/colleges/CollegeDetailPage'));
+const CollegeProfilePage = lazy(() => import('../pages/colleges/CollegeProfilePage'));
+const ComparePage = lazy(() => import('../pages/colleges/ComparePage'));
 const CollegeMatchResultsPage = lazy(() => import('../pages/colleges/CollegeMatchResultsPage'));
 const ResultsPage = lazy(() => import('../pages/results/ResultsPage'));
 const NewsPage = lazy(() => import('../pages/news/NewsPage'));
@@ -143,6 +145,8 @@ const AppRoutes: React.FC<AppRoutesProps> = ({ user, onOpenAuth, onAskAI }) => (
 
       {/* Colleges */}
       <Route path="/colleges" element={<ExploreCollegesPage />} />
+      <Route path="/colleges/:slug" element={<CollegeProfilePage />} />
+      <Route path="/compare" element={<ComparePage />} />
       {Object.entries(EXAM_REDIRECTS).map(([from, to]) => (
         <Route key={from} path={`/college/${from}/*`} element={<Navigate to={`/exams/${to}`} replace />} />
       ))}
