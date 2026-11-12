@@ -62,7 +62,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ category, onClose }) => {
       <div id={panelId} role="tabpanel" className="min-h-[360px] flex-1 bg-primary-50/40 px-7 py-5">
         <h3 className="sr-only">{group.title}</h3>
         {group.sections && (
-          <div className="grid grid-cols-2 gap-x-8 gap-y-7 xl:grid-cols-3">
+          <div className={`grid grid-cols-2 gap-x-8 gap-y-7 ${category.featured.length ? '' : 'xl:grid-cols-3'}`}>
             {group.sections.map((s) => (
               <section key={s.title} aria-label={s.title}>
                 <h4 className="mb-2 text-[15px] text-neutral-900">{s.title}</h4>

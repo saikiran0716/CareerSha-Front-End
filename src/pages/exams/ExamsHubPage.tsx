@@ -1,11 +1,8 @@
 import React from 'react';
 import SEO from '../../components/common/SEO';
-import { ENTRANCE_EXAMS_DATA } from '../../data/exams/examDetailData';
-import { Link } from 'react-router-dom';
+import ExamDirectory from '../../features/exams/ExamDirectory';
 
 const ExamsHubPage: React.FC = () => {
-  const exams = Object.values(ENTRANCE_EXAMS_DATA).map((e) => ({ name: e.title, url: `/exams/${e.id}` }));
-
   return (
     <div className="pt-8">
       <SEO
@@ -18,6 +15,8 @@ const ExamsHubPage: React.FC = () => {
         <h1 className="text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-white mb-8 text-center">
           Entrance Exams 2026 in India
         </h1>
+
+        <ExamDirectory />
 
         {/* SEO Content Section */}
         <div className="prose prose-slate dark:prose-invert max-w-none mb-12">
@@ -80,19 +79,6 @@ const ExamsHubPage: React.FC = () => {
             important dates for the 2026 session. Let CareerSha be your guide to choosing the right exam and securing
             your future.
           </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {exams.map((exam) => (
-            <Link
-              key={exam.url}
-              to={exam.url}
-              className="p-6 bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-2xl hover:shadow-lg transition-all"
-            >
-              <h3 className="font-bold text-neutral-900 dark:text-white mb-2">{exam.name}</h3>
-              <p className="text-sm text-neutral-500">View Pattern, Syllabus & Dates</p>
-            </Link>
-          ))}
         </div>
       </div>
     </div>

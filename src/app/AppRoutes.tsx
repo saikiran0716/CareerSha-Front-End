@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { User } from '../services/authService';
 import { FOOTER_PAGES } from '../data/footerData';
 import PageLoader from '../components/common/loaders/PageLoader';
+import { GENERIC_FOOTER_SLUGS, footerSlugToPath } from './footerRoutePaths';
 
 // Pages are lazy-loaded so each route downloads only its own code.
 const HomePage = lazy(() => import('../pages/home/HomePage'));
@@ -73,56 +74,24 @@ const EXAM_REDIRECTS: Record<string, string> = {
   nift: 'nift',
 };
 
-/** Footer slugs rendered by dedicated components instead of the generic page. */
-const DEDICATED_FOOTER_SLUGS = new Set([
-  'company-about',
-  'company-contact',
-  'legal-privacy',
-  'legal-terms',
-  'legal-disclaimer',
-]);
-
-/** Maps a FOOTER_PAGES slug to its URL path. */
-const footerSlugToPath = (slug: string): string => {
-  const overrides: Record<string, string> = {
-    'iits-india': '/iits/india',
-    'nits-india': '/nits/india',
-    'aiims-colleges': '/aiims/colleges',
-    'btech-india': '/eng/india',
-    'mbbs-india': '/mbbs/india',
-  };
-  if (overrides[slug]) return overrides[slug];
-  for (const prefix of ['tool', 'legal', 'company', 'site']) {
-    if (slug.startsWith(`${prefix}-`)) {
-      const base = prefix === 'tool' ? 'tools' : prefix;
-      return `/${base}/${slug.slice(prefix.length + 1)}`;
-    }
-  }
-  return `/${slug.replace(/-/g, '/')}`;
-};
-
 const isInfoSlug = (slug: string) => /^(legal|company|site)-/.test(slug);
 
 const footerRoutes = (onAskAI: (t: string) => void) =>
-  Object.keys(FOOTER_PAGES)
-    // exam slugs are served by /exams/:examId
-    .filter((slug) => !slug.startsWith('exam-') && !slug.startsWith('exams-'))
-    .filter((slug) => !DEDICATED_FOOTER_SLUGS.has(slug))
-    .map((slug) => (
-      <Route
-        key={slug}
-        path={footerSlugToPath(slug)}
-        element={
-          <div className="relative z-10">
-            {isInfoSlug(slug) ? (
-              <StaticInfoPage data={FOOTER_PAGES[slug]} onBack={goBack} />
-            ) : (
-              <CategoryPage pageId={slug} onAskAI={onAskAI} />
-            )}
-          </div>
-        }
-      />
-    ));
+  GENERIC_FOOTER_SLUGS.map((slug) => (
+    <Route
+      key={slug}
+      path={footerSlugToPath(slug)}
+      element={
+        <div className="relative z-10">
+          {isInfoSlug(slug) ? (
+            <StaticInfoPage data={FOOTER_PAGES[slug]} onBack={goBack} />
+          ) : (
+            <CategoryPage pageId={slug} onAskAI={onAskAI} />
+          )}
+        </div>
+      }
+    />
+  ));
 
 const AppRoutes: React.FC<AppRoutesProps> = ({ user, onOpenAuth, onAskAI }) => (
   <Suspense fallback={<PageLoader />}>

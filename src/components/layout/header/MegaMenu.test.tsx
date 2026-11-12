@@ -6,7 +6,9 @@ import { renderAt } from '../../../test/utils';
 import { navigationData } from '../../../data/navigationData';
 import { SAMPLE_COLLEGES } from '../../../data/catalog/colleges';
 import { ENTRANCE_EXAMS_DATA } from '../../../data/exams/examDetailData';
-import { FOOTER_PAGES } from '../../../data/footerData';
+import { GENERIC_FOOTER_SLUGS, footerSlugToPath } from '../../../app/footerRoutePaths';
+import { getStreamExams } from '../../../data/exams/streamExams';
+import { getGovtCategory } from '../../../data/exams/govtExams';
 import { EXAMS } from '../../../features/predictors/exams';
 
 const renderHeader = () =>
@@ -14,19 +16,8 @@ const renderHeader = () =>
     <Header user={null} onOpenAuth={vi.fn()} onLogout={vi.fn()} isDarkMode={false} onToggleDarkMode={vi.fn()} />,
   );
 
-/** Paths of the data-driven footer/category pages (same rule as AppRoutes). */
-const footerPaths = new Set(
-  Object.keys(FOOTER_PAGES).map((slug) => {
-    const overrides: Record<string, string> = {
-      'iits-india': '/iits/india',
-      'nits-india': '/nits/india',
-      'aiims-colleges': '/aiims/colleges',
-    };
-    if (overrides[slug]) return overrides[slug];
-    if (slug.startsWith('tool-')) return `/tools/${slug.slice(5)}`;
-    return `/${slug.replace(/-/g, '/')}`;
-  }),
-);
+/** Paths served by the data-driven footer/category pages (same rule as AppRoutes). */
+const footerPaths = new Set(GENERIC_FOOTER_SLUGS.map(footerSlugToPath));
 const STATIC = [
   '/colleges',
   '/compare',
@@ -45,7 +36,16 @@ const STATIC = [
 
 /** True when the URL is served by an existing route. */
 const routeExists = (url: string) => {
-  const { pathname } = new URL(url, 'https://x');
+  const { pathname, searchParams, hash } = new URL(url, 'https://x');
+  const anchor = hash.slice(1);
+  if (pathname === '/exams' && searchParams.has('stream')) {
+    const s = getStreamExams(searchParams.get('stream'));
+    return !!s && (!anchor || s.groups.some((g) => g.exams.some((x) => x.id === anchor)));
+  }
+  if (pathname === '/govt-exams' && searchParams.has('category')) {
+    const c = getGovtCategory(searchParams.get('category'));
+    return !!c && (!anchor || c.exams.some((x) => x.id === anchor));
+  }
   if (STATIC.includes(pathname) || footerPaths.has(pathname)) return true;
   const [, a, b] = pathname.split('/');
   if (a === 'colleges') return SAMPLE_COLLEGES.some((c) => c.slug === b);

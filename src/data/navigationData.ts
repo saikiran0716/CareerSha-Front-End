@@ -1,6 +1,7 @@
 import { SAMPLE_COLLEGES } from './catalog/colleges';
 import { Stream } from './catalog/types';
 import { GOVT_EXAM_CATEGORIES, getGovtCategory, govtExamsUrl } from './exams/govtExams';
+import { ExamStream, getStreamExams, streamExamUrl } from './exams/streamExams';
 /**
  * Header mega-menu. Each top-level category has groups (left column of the menu)
  * and each group has links (middle column). Every URL points to an existing CareerSha page.
@@ -59,25 +60,45 @@ const byState = (stream: Stream): NavLink[] =>
     url: explore(stream, `&state=${encodeURIComponent(state)}`),
   }));
 
-const COMMON_TOOLS: NavGroup = {
+/** Exams of a stream as menu columns (National / State / …), each exam linking to its page. */
+const examSections = (stream: ExamStream): NavSection[] => {
+  const data = getStreamExams(stream)!;
+  return data.groups.map((g, i) => ({
+    title: g.title,
+    links: g.exams.map((x) => ({ name: x.name, url: streamExamUrl(stream, x) })),
+    ...(i === data.groups.length - 1
+      ? { all: { name: `All ${data.title} Exams`, url: `/exams?stream=${stream}` } }
+      : {}),
+  }));
+};
+
+/** Stream-specific resources plus the shared money/career guides. */
+const resources = (specific: NavLink[]): NavGroup => ({
   title: 'Resources',
   links: [
-    { name: 'Latest Education News', url: '/news' },
+    ...specific,
     { name: 'Exam Results', url: '/results' },
     { name: 'Education Loan Guide', url: '/tools/loan' },
     { name: 'Scholarships', url: '/tools/scholarship' },
     { name: 'AI Career Counsellor', url: '/tools/counselor' },
   ],
-};
+});
 
-const COLLEGE_PREDICTOR: NavGroup = {
+const collegePredictor = (label: string, rankExams: NavLink[]): NavGroup => ({
   title: 'College Predictor',
   links: [
-    { name: 'College Predictor (by rank)', url: '/college-matcher' },
-    { name: 'Rank Estimator', url: '/rank-estimator' },
+    { name: `Find ${label} colleges for your rank`, url: '/college-matcher' },
+    ...rankExams,
     { name: 'All Predictors', url: '/predictors' },
   ],
-};
+});
+
+const compareGroup = (label: string, pairs: NavLink[]): NavGroup => ({
+  title: 'Compare Colleges',
+  links: [{ name: `Compare ${label} Colleges`, url: '/compare' }, ...pairs],
+});
+
+const REVIEWS_ALL: NavLink = { name: 'Read reviews of any college', url: '/tools/reviews' };
 
 export const navigationData: NavCategory[] = [
   {
@@ -88,74 +109,131 @@ export const navigationData: NavCategory[] = [
     groups: [
       {
         title: 'Top Ranked Colleges',
-        links: [
-          { name: 'Top Engineering Colleges in India', url: explore('Engineering', '&sort=rank') },
+        links: [],
+        sections: [
           {
-            name: 'Top Government Engineering Colleges',
-            url: explore('Engineering', '&ownership=Government&sort=rank'),
+            title: 'By Ranking',
+            links: [
+              { name: 'Top Engineering Colleges', url: '/eng/top/colleges' },
+              { name: 'Engineering Colleges by NIRF Rank', url: explore('Engineering', '&sort=rank') },
+              { name: 'Top Government Colleges', url: explore('Engineering', '&ownership=Government&sort=rank') },
+              { name: 'Top Deemed Universities', url: explore('Engineering', '&ownership=Deemed&sort=rank') },
+            ],
           },
-          { name: 'Top Deemed Engineering Universities', url: explore('Engineering', '&ownership=Deemed&sort=rank') },
-          { name: 'Top IITs in India', url: '/iits/india' },
-          { name: 'Top NITs in India', url: '/nits/india' },
-          { name: 'Top Engineering Colleges in Hyderabad', url: '/eng/hyd' },
-          { name: 'Top Engineering Colleges in Bangalore', url: '/eng/bangalore' },
-          { name: 'Top Engineering Colleges in Mumbai', url: '/eng/mumbai' },
-          { name: 'Top Engineering Colleges in Delhi', url: '/eng/delhi' },
+          {
+            title: 'Institutes',
+            links: [
+              { name: 'Top IITs in India', url: '/iits/india' },
+              { name: 'Top NITs in India', url: '/nits/india' },
+              { name: 'Engineering Colleges in India', url: '/eng/india' },
+            ],
+          },
+          {
+            title: 'By City',
+            links: [
+              { name: 'Engineering Colleges in Hyderabad', url: '/eng/hyd' },
+              { name: 'Engineering Colleges in Bangalore', url: '/eng/bangalore' },
+              { name: 'Engineering Colleges in Mumbai', url: '/eng/mumbai' },
+              { name: 'Engineering Colleges in Delhi', url: '/eng/delhi' },
+            ],
+            all: { name: 'All Engineering Colleges', url: explore('Engineering') },
+          },
         ],
       },
       {
         title: 'Popular Courses',
-        links: [
-          { name: 'B.Tech / B.E. Colleges in India', url: '/eng/india' },
-          { name: 'M.Tech Colleges in India', url: '/eng/mtech' },
-          { name: 'Colleges accepting JEE Main', url: explore('Engineering', '&exam=jee-main') },
-          { name: 'Colleges accepting JEE Advanced', url: explore('Engineering', '&exam=jee-advanced') },
-          { name: 'Colleges accepting GATE', url: explore('Engineering', '&exam=gate') },
+        links: [],
+        sections: [
+          {
+            title: 'B.Tech / B.E.',
+            links: [
+              { name: 'B.Tech Colleges in India', url: '/eng/india' },
+              { name: 'Computer Science (CSE)', url: '/eng/cse' },
+              { name: 'Electronics (ECE)', url: '/eng/ece' },
+              { name: 'Mechanical Engineering', url: '/eng/mechanical' },
+            ],
+          },
+          {
+            title: 'Other Programs',
+            links: [
+              { name: 'M.Tech Colleges', url: '/eng/mtech' },
+              { name: 'B.Arch (Architecture)', url: '/eng/arch' },
+              { name: 'Diploma in Engineering', url: '/eng/diploma' },
+            ],
+          },
+          {
+            title: 'By Exam Accepted',
+            links: [
+              { name: 'Colleges accepting JEE Main', url: explore('Engineering', '&exam=jee-main') },
+              { name: 'Colleges accepting JEE Advanced', url: explore('Engineering', '&exam=jee-advanced') },
+              { name: 'Colleges accepting GATE', url: explore('Engineering', '&exam=gate') },
+            ],
+          },
         ],
       },
+      { title: 'Exams', links: [], sections: examSections('engineering') },
       {
-        title: 'Exams',
+        title: 'Colleges By Location',
         links: [
-          { name: 'JEE Main', url: '/exams/jee-main' },
-          { name: 'GATE', url: '/exams/gate' },
-          { name: 'All Entrance Exams', url: '/exams' },
+          { name: 'Engineering Colleges in Hyderabad', url: '/eng/hyd' },
+          { name: 'Engineering Colleges in Bangalore', url: '/eng/bangalore' },
+          { name: 'Engineering Colleges in Mumbai', url: '/eng/mumbai' },
+          { name: 'Engineering Colleges in Delhi', url: '/eng/delhi' },
+          ...byState('Engineering'),
         ],
       },
-      { title: 'Colleges By Location', links: byState('Engineering') },
       {
         title: 'Rank Predictors',
-        links: [
-          predictor('jee-main', 'JEE Main'),
-          predictor('jee-advanced', 'JEE Advanced'),
-          predictor('gate', 'GATE'),
-          predictor('bitsat', 'BITSAT'),
-          predictor('viteee', 'VITEEE'),
-          predictor('mht-cet', 'MHT CET'),
-          predictor('kcet', 'KCET'),
-          predictor('ap-eamcet', 'AP EAMCET'),
-          predictor('ts-eamcet', 'TS EAMCET'),
+        links: [],
+        sections: [
+          {
+            title: 'National',
+            links: [
+              predictor('jee-main', 'JEE Main'),
+              predictor('jee-advanced', 'JEE Advanced'),
+              predictor('gate', 'GATE'),
+            ],
+          },
+          {
+            title: 'Private University',
+            links: [predictor('bitsat', 'BITSAT'), predictor('viteee', 'VITEEE'), predictor('srmjeee', 'SRMJEEE')],
+          },
+          {
+            title: 'State',
+            links: [
+              predictor('mht-cet', 'MHT CET'),
+              predictor('kcet', 'KCET'),
+              predictor('ap-eamcet', 'AP EAPCET'),
+              predictor('ts-eamcet', 'TS EAPCET'),
+              predictor('ap-ecet', 'AP ECET'),
+              predictor('ts-ecet', 'TS ECET'),
+            ],
+            all: { name: 'All Predictors', url: '/predictors' },
+          },
         ],
       },
-      COLLEGE_PREDICTOR,
-      {
-        title: 'Compare Colleges',
-        links: [
-          { name: 'Compare Colleges', url: '/compare' },
-          { name: 'IIT Delhi vs IIT Bombay', url: '/compare?c=iit-delhi,iit-bombay' },
-          { name: 'NIT Trichy vs NIT Warangal', url: '/compare?c=nit-trichy,nit-warangal' },
-          { name: 'IIIT Hyderabad vs BITS Pilani', url: '/compare?c=iiit-hyderabad,bits-pilani' },
-        ],
-      },
+      collegePredictor('Engineering', [{ name: 'JEE Main Rank Estimator', url: '/rank-estimator/jee-main' }]),
+      compareGroup('Engineering', [
+        { name: 'IIT Delhi vs IIT Bombay', url: '/compare?c=iit-delhi,iit-bombay' },
+        { name: 'NIT Trichy vs NIT Warangal', url: '/compare?c=nit-trichy,nit-warangal' },
+        { name: 'IIIT Hyderabad vs BITS Pilani', url: '/compare?c=iiit-hyderabad,bits-pilani' },
+      ]),
       {
         title: 'College Reviews',
         links: [
           reviews('iit-delhi', 'IIT Delhi'),
+          reviews('iit-bombay', 'IIT Bombay'),
           reviews('nit-warangal', 'NIT Warangal'),
           reviews('iiit-hyderabad', 'IIIT Hyderabad'),
-          { name: 'Read reviews of any college', url: '/tools/reviews' },
+          reviews('bits-pilani', 'BITS Pilani'),
+          REVIEWS_ALL,
         ],
       },
-      COMMON_TOOLS,
+      resources([
+        { name: 'JEE Main Pattern & Syllabus', url: '/exams/jee-main' },
+        { name: 'GATE Pattern & Syllabus', url: '/exams/gate' },
+        { name: 'Engineering Jobs & Internships', url: '/jobs' },
+      ]),
     ],
   },
   {
@@ -166,28 +244,82 @@ export const navigationData: NavCategory[] = [
     groups: [
       {
         title: 'Top Ranked Colleges',
-        links: [
-          { name: 'Top Medical Colleges in India', url: '/med/india' },
-          { name: 'Top AIIMS Colleges', url: '/aiims/colleges' },
-          { name: 'Top Medical PG Colleges', url: '/med/pg' },
-          { name: 'Medical Colleges by NIRF Rank', url: explore('Medical', '&sort=rank') },
+        links: [],
+        sections: [
+          {
+            title: 'By Ranking',
+            links: [
+              { name: 'Top Medical Colleges', url: '/med/top/colleges' },
+              { name: 'Medical Colleges by NIRF Rank', url: explore('Medical', '&sort=rank') },
+              { name: 'Top Government Medical Colleges', url: '/med/government' },
+            ],
+          },
+          {
+            title: 'Institutes',
+            links: [
+              { name: 'All AIIMS in India', url: '/aiims/colleges' },
+              { name: 'Medical Colleges in India', url: '/med/india' },
+              { name: 'Medical PG Colleges', url: '/med/pg' },
+            ],
+          },
+          {
+            title: 'By State',
+            links: [
+              { name: 'Medical Colleges in Kerala', url: '/med/kerala' },
+              { name: 'Medical Colleges in Karnataka', url: '/med/karnataka' },
+            ],
+            all: { name: 'All Medical Colleges', url: explore('Medical') },
+          },
         ],
       },
       {
-        title: 'Exams',
-        links: [
-          { name: 'NEET UG', url: '/exams/neet' },
-          { name: 'All Entrance Exams', url: '/exams' },
+        title: 'Popular Courses',
+        links: [],
+        sections: [
+          {
+            title: 'Undergraduate',
+            links: [
+              { name: 'MBBS Colleges', url: '/mbbs/india' },
+              { name: 'BDS (Dental) Colleges', url: '/bds/india' },
+              { name: 'B.Sc Nursing Colleges', url: '/nursing/india' },
+            ],
+          },
+          {
+            title: 'Allied Health',
+            links: [
+              { name: 'B.Pharm (Pharmacy) Colleges', url: '/pharma/india' },
+              { name: 'Paramedical Colleges', url: '/paramedical/india' },
+            ],
+          },
+          {
+            title: 'Postgraduate',
+            links: [{ name: 'MD / MS Colleges', url: '/med/pg' }],
+          },
         ],
       },
-      { title: 'Colleges By Location', links: byState('Medical') },
-      { title: 'Rank Predictors', links: [predictor('neet-ug', 'NEET UG'), predictor('neet-pg', 'NEET PG')] },
-      COLLEGE_PREDICTOR,
+      { title: 'Exams', links: [], sections: examSections('medical') },
+      {
+        title: 'Colleges By Location',
+        links: [
+          { name: 'Medical Colleges in Kerala', url: '/med/kerala' },
+          { name: 'Medical Colleges in Karnataka', url: '/med/karnataka' },
+          ...byState('Medical'),
+        ],
+      },
+      {
+        title: 'Rank Predictors',
+        links: [predictor('neet-ug', 'NEET UG'), predictor('neet-pg', 'NEET PG')],
+      },
+      collegePredictor('MBBS', [{ name: 'NEET UG Rank Estimator', url: '/rank-estimator/neet-ug' }]),
+      compareGroup('Medical', []),
       {
         title: 'College Reviews',
-        links: [reviews('aiims-delhi', 'AIIMS Delhi'), { name: 'Read reviews of any college', url: '/tools/reviews' }],
+        links: [reviews('aiims-delhi', 'AIIMS Delhi'), REVIEWS_ALL],
       },
-      COMMON_TOOLS,
+      resources([
+        { name: 'NEET UG Pattern & Syllabus', url: '/exams/neet' },
+        { name: 'Study MBBS Abroad', url: '/tools/abroad' },
+      ]),
     ],
   },
   {
@@ -198,40 +330,75 @@ export const navigationData: NavCategory[] = [
     groups: [
       {
         title: 'Top Ranked Colleges',
-        links: [
-          { name: 'Top MBA Colleges in India', url: '/mba/india' },
-          { name: 'Top MBA Colleges in Delhi', url: '/mba/delhi' },
-          { name: 'Top MBA Colleges in Bangalore', url: '/mba/bangalore' },
-          { name: 'Top MBA Colleges in Mumbai', url: '/mba/mumbai' },
-          { name: 'MBA Colleges by NIRF Rank', url: explore('Management', '&sort=rank') },
-        ],
-      },
-      {
-        title: 'Exams',
-        links: [
-          { name: 'CAT', url: '/exams/cat' },
-          { name: 'XAT', url: '/exams/xat' },
-          { name: 'MAT', url: '/exams/mat' },
-          { name: 'All Entrance Exams', url: '/exams' },
+        links: [],
+        sections: [
+          {
+            title: 'By Ranking',
+            links: [
+              { name: 'Top 10 MBA Colleges', url: '/mba/top/colleges' },
+              { name: 'Top MBA Colleges in India', url: '/mba/india' },
+              { name: 'MBA Colleges by NIRF Rank', url: explore('Management', '&sort=rank') },
+            ],
+          },
+          {
+            title: 'Institutes',
+            links: [{ name: 'Top IIMs in India', url: '/mba/iims' }],
+          },
+          {
+            title: 'By City',
+            links: [
+              { name: 'Top MBA Colleges in Delhi', url: '/mba/delhi' },
+              { name: 'Top MBA Colleges in Bangalore', url: '/mba/bangalore' },
+              { name: 'Top MBA Colleges in Mumbai', url: '/mba/mumbai' },
+            ],
+            all: { name: 'All MBA Colleges', url: explore('Management') },
+          },
         ],
       },
       {
         title: 'Popular Courses',
+        links: [],
+        sections: [
+          {
+            title: 'Full-time',
+            links: [
+              { name: 'MBA / PGDM Colleges', url: '/mba/india' },
+              { name: 'Colleges accepting CAT', url: '/colleges?exam=cat' },
+            ],
+          },
+          {
+            title: 'For Working Professionals',
+            links: [
+              { name: 'Executive MBA', url: '/mba/executive' },
+              { name: 'Online MBA', url: '/mba/online' },
+              { name: 'Distance MBA', url: '/mba/distance' },
+            ],
+          },
+        ],
+      },
+      { title: 'Exams', links: [], sections: examSections('management') },
+      {
+        title: 'Colleges By Location',
         links: [
-          { name: 'Colleges accepting CAT', url: '/colleges?exam=cat' },
-          { name: 'MBA at IITs and NITs', url: '/colleges?stream=Engineering&exam=cat' },
+          { name: 'MBA Colleges in Delhi', url: '/mba/delhi' },
+          { name: 'MBA Colleges in Bangalore', url: '/mba/bangalore' },
+          { name: 'MBA Colleges in Mumbai', url: '/mba/mumbai' },
+          ...byState('Management'),
         ],
       },
       { title: 'Rank Predictors', links: [predictor('cat', 'CAT')] },
-      COLLEGE_PREDICTOR,
+      collegePredictor('MBA', [{ name: 'CAT Percentile Estimator', url: '/rank-estimator/cat' }]),
+      compareGroup('MBA', []),
       {
         title: 'College Reviews',
-        links: [
-          reviews('iim-ahmedabad', 'IIM Ahmedabad'),
-          { name: 'Read reviews of any college', url: '/tools/reviews' },
-        ],
+        links: [reviews('iim-ahmedabad', 'IIM Ahmedabad'), REVIEWS_ALL],
       },
-      COMMON_TOOLS,
+      resources([
+        { name: 'CAT Pattern & Syllabus', url: '/exams/cat' },
+        { name: 'XAT Pattern & Syllabus', url: '/exams/xat' },
+        { name: 'MBA Abroad Guide', url: '/tools/abroad' },
+        { name: 'Management Jobs', url: '/jobs' },
+      ]),
     ],
   },
   {
@@ -335,17 +502,14 @@ export const navigationData: NavCategory[] = [
           {
             title: 'Colleges',
             links: [
-              { name: 'Top Law Colleges in India', url: explore('Law', '&sort=rank') },
+              { name: 'Top Law Colleges in India', url: '/law/top/colleges' },
+              { name: 'Law Colleges by NIRF Rank', url: explore('Law', '&sort=rank') },
               ...featured('Law'),
               ...byState('Law'),
             ],
             all: { name: 'All Law Colleges', url: explore('Law') },
           },
-          {
-            title: 'Exams',
-            links: [{ name: 'CLAT', url: '/exams/clat' }],
-            all: { name: 'All Entrance Exams', url: '/exams' },
-          },
+          ...examSections('law'),
           {
             title: 'Predictors & Reviews',
             links: [
@@ -363,20 +527,43 @@ export const navigationData: NavCategory[] = [
           {
             title: 'Colleges',
             links: [
-              { name: 'Top Design Colleges in India', url: explore('Design', '&sort=rank') },
+              { name: 'Top Design Colleges', url: '/design/top/colleges' },
+              { name: 'NID Campuses', url: '/design/nid' },
+              { name: 'NIFT Campuses', url: '/design/nift' },
               ...featured('Design'),
-              ...byState('Design'),
             ],
             all: { name: 'All Design Colleges', url: explore('Design') },
           },
           {
-            title: 'Exams',
-            links: [{ name: 'NIFT Entrance', url: '/exams/nift' }],
-            all: { name: 'All Entrance Exams', url: '/exams' },
+            title: 'Courses',
+            links: [
+              { name: 'Fashion Design', url: '/design/fashion' },
+              { name: 'Interior Design', url: '/design/interior' },
+              { name: 'Graphic Design', url: '/design/graphic' },
+              { name: 'B.Arch (Architecture)', url: '/eng/arch' },
+            ],
           },
+          ...examSections('design'),
           {
             title: 'Predictors & Reviews',
             links: [predictor('nata', 'NATA (Architecture)'), reviews('nift-delhi', 'NIFT Delhi')],
+          },
+        ],
+      },
+      {
+        title: 'Commerce & Hospitality',
+        links: [],
+        sections: [
+          {
+            title: 'Commerce',
+            links: [
+              { name: 'Top Commerce Colleges', url: '/commerce/top/colleges' },
+              { name: 'CUET Rank Predictor', url: '/rank-estimator/cuet' },
+            ],
+          },
+          {
+            title: 'Hospitality',
+            links: [{ name: 'Top Hotel Management Colleges', url: '/hospitality/top/colleges' }],
           },
         ],
       },
