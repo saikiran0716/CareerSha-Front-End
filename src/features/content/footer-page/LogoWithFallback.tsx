@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 /** College logo: explicit image → Clearbit → Google favicon → initials placeholder. */
 const LogoWithFallback = ({ title, image, link }: { title: string; image?: string; link?: string }) => {

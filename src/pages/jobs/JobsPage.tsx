@@ -2,85 +2,11 @@ import { useState } from 'react';
 import { Search, MapPin, LayoutGrid, List, Briefcase } from 'lucide-react';
 import { JobsSidebarFilter } from '../../features/jobs/JobsSidebarFilter';
 import { JobsRightSidebar } from '../../features/jobs/JobsRightSidebar';
-import { JobCard, JobData } from '../../features/jobs/JobCard';
+import { JobCard } from '../../features/jobs/JobCard';
 import SEO from '../../components/common/SEO';
+import { MOCK_JOBS } from '../../data/jobs/jobsData';
 
 // Mock Data
-const MOCK_JOBS: JobData[] = [
-  {
-    id: '1',
-    company: 'Google',
-    role: 'Software Engineer',
-    isNew: true,
-    location: 'Bengaluru, Karnataka',
-    type: 'Full-time',
-    experience: '2-4 Yrs',
-    salary: '₹18 - 28 LPA',
-    workModel: 'Hybrid',
-    tags: ['Java', 'Data Structures', 'System Design'],
-    postedAt: '2h ago',
-    logoBg: 'bg-white text-primary-500 font-bold text-2xl',
-    logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg',
-  },
-  {
-    id: '2',
-    company: 'Microsoft',
-    role: 'Data Analyst',
-    isNew: true,
-    location: 'Hyderabad, Telangana',
-    type: 'Full-time',
-    experience: '1-3 Yrs',
-    salary: '₹10 - 16 LPA',
-    workModel: 'Hybrid',
-    tags: ['SQL', 'Excel', 'Power BI', 'Python'],
-    postedAt: '3h ago',
-    logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg',
-  },
-  {
-    id: '3',
-    company: 'Amazon',
-    role: 'Product Manager',
-    isHot: true,
-    location: 'Bengaluru, Karnataka',
-    type: 'Full-time',
-    experience: '3-5 Yrs',
-    salary: '₹25 - 40 LPA',
-    workModel: 'On-site',
-    tags: ['Product Strategy', 'Analytics', 'SQL', 'Roadmap'],
-    postedAt: '1d ago',
-    logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg',
-  },
-  {
-    id: '4',
-    company: 'Swiggy',
-    role: 'UX Designer',
-    isNew: true,
-    location: 'Pune, Maharashtra',
-    type: 'Full-time',
-    experience: '2-5 Yrs',
-    salary: '₹12 - 20 LPA',
-    workModel: 'Hybrid',
-    tags: ['Figma', 'User Research', 'Wireframing', 'Prototyping'],
-    postedAt: '2d ago',
-    logoBg: 'bg-orange-500 text-white font-bold',
-    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/1/12/Swiggy_logo.svg',
-  },
-  {
-    id: '5',
-    company: 'Deloitte',
-    role: 'Business Analyst',
-    isNew: true,
-    location: 'Gurugram, Haryana',
-    type: 'Full-time',
-    experience: '1-3 Yrs',
-    salary: '₹8 - 14 LPA',
-    workModel: 'Hybrid',
-    tags: ['Excel', 'SQL', 'Requirement Gathering', 'Business Analysis'],
-    postedAt: '2d ago',
-    logoBg: 'bg-black text-white font-bold',
-  },
-];
-
 const JobsPage = () => {
   const [activeTab, setActiveTab] = useState('all');
   const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
