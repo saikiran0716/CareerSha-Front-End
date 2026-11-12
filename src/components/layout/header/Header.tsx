@@ -73,6 +73,17 @@ const Header: React.FC<HeaderProps> = ({
 
             {/* Center: Navigation */}
             <nav className="hidden lg:flex justify-center items-center gap-3 xl:gap-5 shrink-0">
+              <div className="relative py-2">
+                <Link
+                  to="/"
+                  className={`text-[13px] font-semibold transition-all flex items-center gap-1 py-2 px-3 rounded-lg ${location.pathname === '/'
+                    ? 'text-primary-600 dark:text-primary-400 font-bold'
+                    : 'text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white'
+                    }`}
+                >
+                  Home
+                </Link>
+              </div>
               {navigationData.map((cat) => (
                 <div
                   key={cat.title}
@@ -203,7 +214,17 @@ const Header: React.FC<HeaderProps> = ({
 
               {/* Mobile Categories */}
               <div className="space-y-1">
-
+                <Link
+                  to="/"
+                  className={`block w-full p-4 text-sm font-bold rounded-xl mb-1 transition-colors ${
+                    location.pathname === '/'
+                      ? 'bg-secondary-50 dark:bg-secondary-950/40 text-secondary-600 dark:text-secondary-400'
+                      : 'text-neutral-800 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-800'
+                  }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Home
+                </Link>
                 {navigationData.map((cat) => (
                   <Link
                     key={cat.title}
