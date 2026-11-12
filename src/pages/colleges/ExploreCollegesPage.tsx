@@ -20,13 +20,11 @@ const ExploreCollegesPage: React.FC = () => {
         keywords="explore colleges, colleges in india, college comparison, college fees, college cutoffs, college placements"
       />
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 py-8">
-
         {/* Top Header Section */}
         <ExploreSearchHeader />
 
         {/* Main Content Area */}
         <div className="flex flex-col lg:flex-row gap-8">
-
           {/* Left Sidebar - Filters */}
           <div className="w-full lg:w-[280px] shrink-0">
             <ExploreFilters />
@@ -37,7 +35,8 @@ const ExploreCollegesPage: React.FC = () => {
             {/* Results Header */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
               <p className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">
-                Showing <span className="text-neutral-900 dark:text-white font-bold">1-{staticColleges.length}</span> of 50,000+ colleges
+                Showing <span className="text-neutral-900 dark:text-white font-bold">1-{staticColleges.length}</span> of
+                50,000+ colleges
               </p>
 
               <div className="flex items-center gap-4">
@@ -91,7 +90,6 @@ const ExploreCollegesPage: React.FC = () => {
               </button>
             </div>
           </div>
-
         </div>
       </div>
     </div>

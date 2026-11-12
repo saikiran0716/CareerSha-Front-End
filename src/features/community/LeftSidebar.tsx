@@ -1,5 +1,21 @@
 import React from 'react';
-import { Plus, Home, Heart, TrendingUp, Clock, Settings, Briefcase, BookOpen, Building2, GraduationCap, Plane, Target, Compass, MessageCircle, ArrowRight } from 'lucide-react';
+import {
+  Plus,
+  Home,
+  Heart,
+  TrendingUp,
+  Clock,
+  Settings,
+  Briefcase,
+  BookOpen,
+  Building2,
+  GraduationCap,
+  Plane,
+  Target,
+  Compass,
+  MessageCircle,
+  ArrowRight,
+} from 'lucide-react';
 
 const LeftSidebar: React.FC = () => {
   const navItems = [
@@ -39,8 +55,8 @@ const LeftSidebar: React.FC = () => {
               <button
                 key={item.name}
                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-semibold transition-all ${
-                  item.active 
-                    ? 'bg-neutral-100 dark:bg-neutral-800 text-primary-600 dark:text-primary-400' 
+                  item.active
+                    ? 'bg-neutral-100 dark:bg-neutral-800 text-primary-600 dark:text-primary-400'
                     : 'text-neutral-600 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 hover:text-neutral-900 dark:hover:text-neutral-200'
                 }`}
               >
@@ -61,7 +77,9 @@ const LeftSidebar: React.FC = () => {
             return (
               <li key={topic.name}>
                 <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-neutral-50 dark:hover:bg-neutral-800/50 text-neutral-700 dark:text-neutral-300 font-medium transition-colors group">
-                  <div className={`p-1.5 rounded-lg bg-neutral-50 dark:bg-neutral-800 group-hover:bg-white dark:group-hover:bg-neutral-700 ${topic.color} transition-colors`}>
+                  <div
+                    className={`p-1.5 rounded-lg bg-neutral-50 dark:bg-neutral-800 group-hover:bg-white dark:group-hover:bg-neutral-700 ${topic.color} transition-colors`}
+                  >
                     <Icon size={16} />
                   </div>
                   {topic.name}

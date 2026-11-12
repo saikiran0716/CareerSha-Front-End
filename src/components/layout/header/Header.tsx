@@ -1,9 +1,9 @@
-import React, { useState, useRef } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, ChevronDown, User as UserIcon, Sun, Moon, GraduationCap, LogOut } from "lucide-react";
-import { User } from "../../../services/authService";
-import { navigationData } from "../../../data/navigationData";
-import MegaMenu from "./MegaMenu";
+import React, { useState, useRef } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Menu, X, ChevronDown, User as UserIcon, Sun, Moon, GraduationCap, LogOut } from 'lucide-react';
+import { User } from '../../../services/authService';
+import { navigationData } from '../../../data/navigationData';
+import MegaMenu from './MegaMenu';
 
 interface HeaderProps {
   user: User | null;
@@ -13,14 +13,7 @@ interface HeaderProps {
   onToggleDarkMode: () => void;
 }
 
-
-const Header: React.FC<HeaderProps> = ({
-  user,
-  onOpenAuth,
-  onLogout,
-  isDarkMode,
-  onToggleDarkMode,
-}) => {
+const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode, onToggleDarkMode }) => {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -50,13 +43,11 @@ const Header: React.FC<HeaderProps> = ({
     }, 180);
   };
 
-
   return (
     <>
       <header className="sticky top-0 z-[100] bg-white shadow-sm transition-all duration-300">
         <div className="w-full">
           <div className="mx-auto max-w-[1440px] px-6 flex items-center justify-between py-3">
-
             {/* Left: Logo and Mobile Menu Button */}
             <div className="flex items-center gap-4 lg:flex-1">
               <button
@@ -76,10 +67,11 @@ const Header: React.FC<HeaderProps> = ({
               <div className="relative py-2">
                 <Link
                   to="/"
-                  className={`text-[13px] font-semibold transition-all flex items-center gap-1 py-2 px-3 rounded-lg ${location.pathname === '/'
-                    ? 'text-primary-600 dark:text-primary-400 font-bold'
-                    : 'text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white'
-                    }`}
+                  className={`text-[13px] font-semibold transition-all flex items-center gap-1 py-2 px-3 rounded-lg ${
+                    location.pathname === '/'
+                      ? 'text-primary-600 dark:text-primary-400 font-bold'
+                      : 'text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white'
+                  }`}
                 >
                   Home
                 </Link>
@@ -93,16 +85,20 @@ const Header: React.FC<HeaderProps> = ({
                 >
                   <button
                     onClick={() => navigate(`/${cat.slug}`)}
-                    className={`text-[13px] font-semibold transition-all flex items-center gap-1 py-2 px-3 rounded-lg ${activeMenu === cat.title
-                      ? 'text-primary-600 dark:text-primary-400'
-                      : location.pathname.startsWith(`/${cat.slug}`)
-                        ? 'text-primary-600 dark:text-primary-400 font-bold'
-                        : 'text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white'
-                      }`}
+                    className={`text-[13px] font-semibold transition-all flex items-center gap-1 py-2 px-3 rounded-lg ${
+                      activeMenu === cat.title
+                        ? 'text-primary-600 dark:text-primary-400'
+                        : location.pathname.startsWith(`/${cat.slug}`)
+                          ? 'text-primary-600 dark:text-primary-400 font-bold'
+                          : 'text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white'
+                    }`}
                   >
                     {cat.title}
                     {cat.sections && cat.sections.length > 0 && (
-                        <ChevronDown size={14} className={`transition-transform duration-300 ${activeMenu === cat.title ? "rotate-180" : ""}`} />
+                      <ChevronDown
+                        size={14}
+                        className={`transition-transform duration-300 ${activeMenu === cat.title ? 'rotate-180' : ''}`}
+                      />
                     )}
                   </button>
 
@@ -113,7 +109,6 @@ const Header: React.FC<HeaderProps> = ({
                   )}
                 </div>
               ))}
-
             </nav>
 
             {/* Right Side Items (Search & Actions) */}
@@ -124,7 +119,7 @@ const Header: React.FC<HeaderProps> = ({
                 <button
                   onClick={onToggleDarkMode}
                   className="hidden sm:flex p-2 rounded-xl bg-neutral-50 dark:bg-neutral-900 text-neutral-500 dark:text-neutral-400 hover:text-secondary-600 dark:hover:text-secondary-400 transition-all border border-neutral-200 dark:border-neutral-800 shadow-sm"
-                  title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                  title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
                 >
                   {isDarkMode ? <Sun size={18} className="animate-pulse-slow" /> : <Moon size={18} />}
                 </button>
@@ -138,7 +133,11 @@ const Header: React.FC<HeaderProps> = ({
                     >
                       <div className="w-9 h-9 rounded-full bg-gradient-to-br from-secondary-500 to-accent-600 text-white font-bold text-sm flex items-center justify-center uppercase shadow-lg shadow-secondary-500/30 ring-2 ring-white dark:ring-neutral-900 ring-offset-0 transition-all duration-200 hover:shadow-xl hover:shadow-secondary-500/40 hover:scale-110 cursor-pointer">
                         {user.avatar ? (
-                          <img src={user.avatar} alt={user.name} className="w-full h-full object-cover rounded-full ring-2 ring-white dark:ring-neutral-900" />
+                          <img
+                            src={user.avatar}
+                            alt={user.name}
+                            className="w-full h-full object-cover rounded-full ring-2 ring-white dark:ring-neutral-900"
+                          />
                         ) : (
                           <span>{user.name?.charAt(0) || user.email?.charAt(0)}</span>
                         )}
@@ -151,20 +150,29 @@ const Header: React.FC<HeaderProps> = ({
                           <div className="relative flex-shrink-0">
                             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-secondary-500 via-secondary-600 to-accent-600 text-white font-bold text-base flex items-center justify-center uppercase shadow-lg shadow-secondary-500/30 ring-3 ring-secondary-100 dark:ring-neutral-800 transition-all duration-200">
                               {user.avatar ? (
-                                <img src={user.avatar} alt={user.name} className="w-full h-full object-cover rounded-full ring-3 ring-white dark:ring-neutral-900" />
+                                <img
+                                  src={user.avatar}
+                                  alt={user.name}
+                                  className="w-full h-full object-cover rounded-full ring-3 ring-white dark:ring-neutral-900"
+                                />
                               ) : (
                                 <span>{user.name?.charAt(0) || user.email?.charAt(0)}</span>
                               )}
                             </div>
                           </div>
                           <div className="min-w-0">
-                            <p className="text-[13px] font-black text-neutral-800 dark:text-neutral-100 truncate">{user.name}</p>
+                            <p className="text-[13px] font-black text-neutral-800 dark:text-neutral-100 truncate">
+                              {user.name}
+                            </p>
                             <p className="text-[11px] text-neutral-400 font-medium truncate">{user.email}</p>
                           </div>
                         </div>
                         <div className="p-2">
                           <button
-                            onClick={() => { onLogout(); setIsProfileOpen(false); }}
+                            onClick={() => {
+                              onLogout();
+                              setIsProfileOpen(false);
+                            }}
                             className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-danger-50 dark:hover:bg-danger-900/20 text-danger-500 dark:text-danger-400 transition-colors text-[12px] font-bold"
                           >
                             <LogOut size={15} />
@@ -203,11 +211,18 @@ const Header: React.FC<HeaderProps> = ({
             <div className="p-4 flex-1">
               {/* Drawer Header for mobile */}
               <div className="flex items-center justify-between mb-8 pb-4 border-b border-neutral-100">
-                <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2 cursor-pointer">
+                <Link
+                  to="/"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-2 cursor-pointer"
+                >
                   <GraduationCap className="w-6 h-6 text-primary-600 fill-primary-600/10" />
                   <span className="text-lg font-bold tracking-tight text-neutral-900 dark:text-white">Careersha</span>
                 </Link>
-                <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 text-neutral-400 hover:text-neutral-600">
+                <button
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="p-2 text-neutral-400 hover:text-neutral-600"
+                >
                   <X size={20} />
                 </button>
               </div>
@@ -230,8 +245,8 @@ const Header: React.FC<HeaderProps> = ({
                     key={cat.title}
                     to={`/${cat.slug}`}
                     className={`block w-full p-4 text-sm font-bold rounded-xl mb-1 transition-colors ${
-                      location.pathname === `/${cat.slug}` 
-                        ? 'bg-secondary-50 dark:bg-secondary-950/40 text-secondary-600 dark:text-secondary-400' 
+                      location.pathname === `/${cat.slug}`
+                        ? 'bg-secondary-50 dark:bg-secondary-950/40 text-secondary-600 dark:text-secondary-400'
                         : 'text-neutral-800 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-800'
                     }`}
                     onClick={() => setIsMobileMenuOpen(false)}
@@ -244,18 +259,29 @@ const Header: React.FC<HeaderProps> = ({
 
             {/* Mobile Quick Actions Section - Stuck to bottom */}
             <div className="p-4 border-t border-neutral-100 bg-neutral-50/30 pb-8">
-              <h5 className="text-[10px] font-black uppercase tracking-widest text-neutral-400 mb-4 px-2">Account & Settings</h5>
+              <h5 className="text-[10px] font-black uppercase tracking-widest text-neutral-400 mb-4 px-2">
+                Account & Settings
+              </h5>
               <div className="grid grid-cols-2 gap-3">
                 <button
                   onClick={onToggleDarkMode}
                   className="flex flex-col items-center justify-center p-3 rounded-2xl bg-white border border-neutral-100 text-neutral-600 gap-1.5 hover:bg-secondary-50 hover:border-secondary-100 transition-all shadow-sm"
                 >
-                  {isDarkMode ? <Sun size={18} className="text-secondary-500" /> : <Moon size={18} className="text-neutral-500" />}
-                  <span className="text-[10px] font-bold uppercase tracking-wider">{isDarkMode ? "Light" : "Dark"}</span>
+                  {isDarkMode ? (
+                    <Sun size={18} className="text-secondary-500" />
+                  ) : (
+                    <Moon size={18} className="text-neutral-500" />
+                  )}
+                  <span className="text-[10px] font-bold uppercase tracking-wider">
+                    {isDarkMode ? 'Light' : 'Dark'}
+                  </span>
                 </button>
                 {user ? (
                   <button
-                    onClick={() => { onLogout(); setIsMobileMenuOpen(false); }}
+                    onClick={() => {
+                      onLogout();
+                      setIsMobileMenuOpen(false);
+                    }}
                     className="flex flex-col items-center justify-center p-3 rounded-2xl bg-white border border-danger-100 text-danger-500 gap-1.5 hover:bg-danger-50 transition-all shadow-sm"
                   >
                     <LogOut size={18} />
@@ -263,7 +289,10 @@ const Header: React.FC<HeaderProps> = ({
                   </button>
                 ) : (
                   <button
-                    onClick={() => { onOpenAuth(); setIsMobileMenuOpen(false); }}
+                    onClick={() => {
+                      onOpenAuth();
+                      setIsMobileMenuOpen(false);
+                    }}
                     className="flex flex-col items-center justify-center p-3 rounded-2xl bg-secondary-600 text-white gap-1.5 hover:bg-secondary-700 shadow-lg shadow-secondary-100 transition-all"
                   >
                     <UserIcon size={18} />

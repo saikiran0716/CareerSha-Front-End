@@ -1,26 +1,47 @@
 import React from 'react';
 
 interface BookLoaderProps {
-    size?: 'sm' | 'md' | 'lg';
-    className?: string;
-    text?: string;
+  size?: 'sm' | 'md' | 'lg';
+  className?: string;
+  text?: string;
 }
 
 const BookLoader: React.FC<BookLoaderProps> = ({ size = 'md', className = '', text }) => {
-    // Size mappings
-    const dimensions = {
-        sm: { width: '24px', height: '16px', pageLeft: '12px', pageWidth: '12px', pageHeight: '16px', perspective: '400px' },
-        md: { width: '60px', height: '40px', pageLeft: '30px', pageWidth: '30px', pageHeight: '40px', perspective: '1000px' },
-        lg: { width: '100px', height: '70px', pageLeft: '50px', pageWidth: '50px', pageHeight: '70px', perspective: '1500px' }
-    };
+  // Size mappings
+  const dimensions = {
+    sm: {
+      width: '24px',
+      height: '16px',
+      pageLeft: '12px',
+      pageWidth: '12px',
+      pageHeight: '16px',
+      perspective: '400px',
+    },
+    md: {
+      width: '60px',
+      height: '40px',
+      pageLeft: '30px',
+      pageWidth: '30px',
+      pageHeight: '40px',
+      perspective: '1000px',
+    },
+    lg: {
+      width: '100px',
+      height: '70px',
+      pageLeft: '50px',
+      pageWidth: '50px',
+      pageHeight: '70px',
+      perspective: '1500px',
+    },
+  };
 
-    const dim = dimensions[size];
-    const isSmall = size === 'sm';
+  const dim = dimensions[size];
+  const isSmall = size === 'sm';
 
-    return (
-        <div className={`flex flex-col items-center justify-center ${className}`}>
-            <style>
-                {`
+  return (
+    <div className={`flex flex-col items-center justify-center ${className}`}>
+      <style>
+        {`
           .book-loader-container-${size} {
             position: relative;
             width: ${dim.width};
@@ -37,10 +58,14 @@ const BookLoader: React.FC<BookLoaderProps> = ({ size = 'md', className = '', te
             width: ${dim.pageWidth};
             height: ${dim.pageHeight};
             background-color: #fff;
-            background-image: ${isSmall ? 'none' : `
+            background-image: ${
+              isSmall
+                ? 'none'
+                : `
               linear-gradient(90deg, transparent 5%, rgb(var(--color-neutral-200)) 5%, rgb(var(--color-neutral-200)) 10%, transparent 10%),
               linear-gradient(rgb(var(--color-neutral-600)) 1px, transparent 1px)
-            `};
+            `
+            };
             background-size: ${isSmall ? 'auto' : '100% 100%, 100% 8px'};
             border: 1px solid ${isSmall ? 'rgb(var(--color-secondary-200))' : 'rgb(var(--color-neutral-300))'};
             ${!isSmall ? 'border-left: 2px solid rgb(var(--color-neutral-400));' : ''}
@@ -64,7 +89,9 @@ const BookLoader: React.FC<BookLoaderProps> = ({ size = 'md', className = '', te
           }
           
           /* Corner Curl Effect (Pseudo-element) */
-          ${!isSmall ? `
+          ${
+            !isSmall
+              ? `
           .book-page-${size}::after {
             content: '';
             position: absolute;
@@ -75,41 +102,43 @@ const BookLoader: React.FC<BookLoaderProps> = ({ size = 'md', className = '', te
             background: linear-gradient(135deg, transparent 40%, rgba(0,0,0,0.1) 45%, rgba(0,0,0,0.05) 50%, #fff 55%);
             z-index: 10;
           }
-          ` : ''}
+          `
+              : ''
+          }
         `}
-            </style>
+      </style>
 
-            <div className={`book-loader-container-${size}`}>
-                {/* Back Cover / Spine Base */}
-                <div
-                    className="absolute top-0 left-0 bg-secondary-700 rounded-l-md shadow-lg"
-                    style={{ width: dim.pageWidth, height: dim.height }}
-                ></div>
-                <div
-                    className="absolute top-0 right-0 bg-secondary-50 border border-secondary-200 rounded-r-md -z-10 shadow-sm"
-                    style={{ width: dim.pageWidth, height: dim.height }}
-                ></div>
+      <div className={`book-loader-container-${size}`}>
+        {/* Back Cover / Spine Base */}
+        <div
+          className="absolute top-0 left-0 bg-secondary-700 rounded-l-md shadow-lg"
+          style={{ width: dim.pageWidth, height: dim.height }}
+        ></div>
+        <div
+          className="absolute top-0 right-0 bg-secondary-50 border border-secondary-200 rounded-r-md -z-10 shadow-sm"
+          style={{ width: dim.pageWidth, height: dim.height }}
+        ></div>
 
-                {/* Pages */}
-                <div className={`book-page-${size}`}></div>
-                <div className={`book-page-${size}`}></div>
-                <div className={`book-page-${size}`}></div>
-                <div className={`book-page-${size}`}></div>
+        {/* Pages */}
+        <div className={`book-page-${size}`}></div>
+        <div className={`book-page-${size}`}></div>
+        <div className={`book-page-${size}`}></div>
+        <div className={`book-page-${size}`}></div>
 
-                {/* Spine Detail */}
-                <div
-                    className="absolute top-0 bg-secondary-800 z-10 rounded-sm"
-                    style={{ left: `calc(${dim.pageLeft} - 2px)`, width: '4px', height: dim.height }}
-                ></div>
-            </div>
+        {/* Spine Detail */}
+        <div
+          className="absolute top-0 bg-secondary-800 z-10 rounded-sm"
+          style={{ left: `calc(${dim.pageLeft} - 2px)`, width: '4px', height: dim.height }}
+        ></div>
+      </div>
 
-            {text && (
-                <div className="mt-4 text-center">
-                    <p className="text-neutral-500 font-medium animate-pulse">{text}</p>
-                </div>
-            )}
+      {text && (
+        <div className="mt-4 text-center">
+          <p className="text-neutral-500 font-medium animate-pulse">{text}</p>
         </div>
-    );
+      )}
+    </div>
+  );
 };
 
 export default BookLoader;

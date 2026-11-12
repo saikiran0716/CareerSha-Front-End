@@ -38,11 +38,7 @@ const ORGANIZATION_SCHEMA = {
     contactType: 'customer service',
     email: 'support@careersha.com',
   },
-  sameAs: [
-    'https://facebook.com/careersha',
-    'https://twitter.com/careersha',
-    'https://instagram.com/careersha',
-  ],
+  sameAs: ['https://facebook.com/careersha', 'https://twitter.com/careersha', 'https://instagram.com/careersha'],
 };
 
 const WEBSITE_SCHEMA = {

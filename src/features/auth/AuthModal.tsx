@@ -46,11 +46,11 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
 
   const getFriendlyError = (err: any) => {
     const code = err.code || '';
-    if (code.includes('auth/invalid-credential')) return "Invalid email or password.";
-    if (code.includes('auth/signup-failed')) return err.message || "Signup failed.";
-    if (code.includes('auth/google-failed')) return err.message || "Google sign-in failed.";
-    if (code.includes('auth/invalid-2fa')) return err.message || "Incorrect verification code.";
-    return err.message || "An authentication error occurred.";
+    if (code.includes('auth/invalid-credential')) return 'Invalid email or password.';
+    if (code.includes('auth/signup-failed')) return err.message || 'Signup failed.';
+    if (code.includes('auth/google-failed')) return err.message || 'Google sign-in failed.';
+    if (code.includes('auth/invalid-2fa')) return err.message || 'Incorrect verification code.';
+    return err.message || 'An authentication error occurred.';
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -192,7 +192,11 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
       >
         {isLoading ? (
           <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin mx-auto"></div>
-        ) : isLogin ? 'Sign In' : 'Create Account'}
+        ) : isLogin ? (
+          'Sign In'
+        ) : (
+          'Create Account'
+        )}
       </button>
 
       <div className="my-2.5 flex items-center gap-2">
@@ -231,7 +235,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
           onClick={() => setIsLogin(!isLogin)}
           className="text-xs font-semibold text-secondary-600 dark:text-secondary-400 hover:underline transition-all"
         >
-          {isLogin ? "Don't have an account? Sign up" : "Already have an account? Sign in"}
+          {isLogin ? "Don't have an account? Sign up" : 'Already have an account? Sign in'}
         </button>
       </div>
     </form>
@@ -251,7 +255,9 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
           {twoFactorCode.map((digit, idx) => (
             <input
               key={idx}
-              ref={el => { codeInputs.current[idx] = el; }}
+              ref={(el) => {
+                codeInputs.current[idx] = el;
+              }}
               type="text"
               inputMode="numeric"
               maxLength={1}
@@ -266,12 +272,14 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
         <div className="space-y-2">
           <button
             type="submit"
-            disabled={isLoading || twoFactorCode.some(d => !d)}
+            disabled={isLoading || twoFactorCode.some((d) => !d)}
             className="w-full bg-secondary-600 text-white py-2.5 rounded-lg font-semibold text-sm hover:bg-secondary-700 transition-all shadow-md active:scale-95 disabled:opacity-50 flex items-center justify-center"
           >
             {isLoading ? (
               <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-            ) : 'Verify'}
+            ) : (
+              'Verify'
+            )}
           </button>
 
           <button
@@ -295,19 +303,16 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
 
   return (
     <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
-      <div
-        className="absolute inset-0 bg-neutral-950/60 backdrop-blur-md animate-fadeIn"
-        onClick={onClose}
-      ></div>
+      <div className="absolute inset-0 bg-neutral-950/60 backdrop-blur-md animate-fadeIn" onClick={onClose}></div>
 
       <div className="bg-white dark:bg-neutral-900 w-full max-w-md rounded-2xl shadow-2xl relative z-10 overflow-hidden animate-scaleIn border border-neutral-100/50 dark:border-neutral-800/50">
-        <button 
+        <button
           onClick={onClose}
           className="absolute top-4 right-4 z-20 p-1 rounded-full text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all"
           aria-label="Close modal"
         >
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
 
@@ -315,9 +320,20 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess })
           {!show2FA && (
             <div className="text-center mb-6">
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-secondary-600 to-secondary-700 flex items-center justify-center mx-auto mb-3 shadow-lg shadow-secondary-500/30">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
+                  />
                 </svg>
               </div>
               <h2 className="text-xl font-bold text-neutral-900 dark:text-white mb-1">

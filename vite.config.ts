@@ -13,14 +13,14 @@ export default defineConfig(({ mode }) => {
           target: env.VITE_DEV_API_PROXY_TARGET || 'http://localhost:8000',
           changeOrigin: true,
           secure: false,
-        }
-      }
+        },
+      },
     },
     plugins: [react()],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),
-      }
-    }
+      },
+    },
   };
 });

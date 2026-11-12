@@ -36,12 +36,20 @@ const ExploreFilters: React.FC = () => {
         <div className="space-y-2.5">
           {['Engineering', 'Management', 'Medical', 'Law', 'Science'].map((course, idx) => (
             <label key={idx} className="flex items-center gap-3 cursor-pointer group">
-              <input type="checkbox" className="w-4 h-4 rounded border-neutral-300 text-primary-600 focus:ring-primary-500" />
-              <span className="text-sm text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors">{course}</span>
+              <input
+                type="checkbox"
+                className="w-4 h-4 rounded border-neutral-300 text-primary-600 focus:ring-primary-500"
+              />
+              <span className="text-sm text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors">
+                {course}
+              </span>
             </label>
           ))}
           {!expandedCourse && (
-            <button onClick={() => setExpandedCourse(true)} className="text-xs text-primary-600 dark:text-primary-400 font-medium flex items-center gap-1 mt-2">
+            <button
+              onClick={() => setExpandedCourse(true)}
+              className="text-xs text-primary-600 dark:text-primary-400 font-medium flex items-center gap-1 mt-2"
+            >
               Show more <ChevronDown size={12} />
             </button>
           )}
@@ -57,12 +65,20 @@ const ExploreFilters: React.FC = () => {
         <div className="space-y-2.5">
           {['JEE Main', 'NEET', 'CUET', 'CAT', 'MAT'].map((exam, idx) => (
             <label key={idx} className="flex items-center gap-3 cursor-pointer group">
-              <input type="checkbox" className="w-4 h-4 rounded border-neutral-300 text-primary-600 focus:ring-primary-500" />
-              <span className="text-sm text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors">{exam}</span>
+              <input
+                type="checkbox"
+                className="w-4 h-4 rounded border-neutral-300 text-primary-600 focus:ring-primary-500"
+              />
+              <span className="text-sm text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors">
+                {exam}
+              </span>
             </label>
           ))}
           {!expandedExam && (
-            <button onClick={() => setExpandedExam(true)} className="text-xs text-primary-600 dark:text-primary-400 font-medium flex items-center gap-1 mt-2">
+            <button
+              onClick={() => setExpandedExam(true)}
+              className="text-xs text-primary-600 dark:text-primary-400 font-medium flex items-center gap-1 mt-2"
+            >
               Show more <ChevronDown size={12} />
             </button>
           )}
@@ -78,8 +94,13 @@ const ExploreFilters: React.FC = () => {
         <div className="space-y-2.5">
           {['Government', 'Private', 'Deemed University', 'Autonomous'].map((type, idx) => (
             <label key={idx} className="flex items-center gap-3 cursor-pointer group">
-              <input type="checkbox" className="w-4 h-4 rounded border-neutral-300 text-primary-600 focus:ring-primary-500" />
-              <span className="text-sm text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors">{type}</span>
+              <input
+                type="checkbox"
+                className="w-4 h-4 rounded border-neutral-300 text-primary-600 focus:ring-primary-500"
+              />
+              <span className="text-sm text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors">
+                {type}
+              </span>
             </label>
           ))}
         </div>

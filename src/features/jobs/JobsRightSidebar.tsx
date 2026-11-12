@@ -18,7 +18,6 @@ const careerResources = [
 export const JobsRightSidebar = () => {
   return (
     <div className="flex flex-col gap-6">
-
       {/* Top Companies Hiring */}
       <div className="bg-white rounded-2xl shadow-sm border border-neutral-200 p-5">
         <div className="flex items-center justify-between mb-4">
@@ -32,9 +31,13 @@ export const JobsRightSidebar = () => {
                 <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-[15px] ${company.color}`}>
                   {company.logo}
                 </div>
-                <span className="text-[13px] font-bold text-neutral-800 group-hover:text-primary-600 transition-colors">{company.name}</span>
+                <span className="text-[13px] font-bold text-neutral-800 group-hover:text-primary-600 transition-colors">
+                  {company.name}
+                </span>
               </div>
-              <span className="text-[12px] text-primary-600 font-medium bg-primary-50 px-2 py-0.5 rounded text-right">{company.openings}</span>
+              <span className="text-[12px] text-primary-600 font-medium bg-primary-50 px-2 py-0.5 rounded text-right">
+                {company.openings}
+              </span>
             </div>
           ))}
         </div>
@@ -50,7 +53,9 @@ export const JobsRightSidebar = () => {
             </div>
             <h3 className="font-bold text-neutral-800 text-[15px]">Get Job Alerts</h3>
           </div>
-          <p className="text-[13px] text-neutral-600 mb-4">Create alerts and get notified when new jobs match your profile.</p>
+          <p className="text-[13px] text-neutral-600 mb-4">
+            Create alerts and get notified when new jobs match your profile.
+          </p>
           <button className="w-full py-2.5 bg-secondary-600 hover:bg-secondary-700 text-white font-bold text-[13px] rounded-lg transition-colors shadow-sm">
             Create Alert
           </button>
@@ -69,7 +74,9 @@ export const JobsRightSidebar = () => {
                   <Icon className="w-4 h-4" />
                 </div>
                 <div>
-                  <h4 className="text-[13px] font-bold text-neutral-800 group-hover:text-primary-600 transition-colors">{resource.title}</h4>
+                  <h4 className="text-[13px] font-bold text-neutral-800 group-hover:text-primary-600 transition-colors">
+                    {resource.title}
+                  </h4>
                   <p className="text-[12px] text-neutral-500">{resource.desc}</p>
                 </div>
               </div>
@@ -93,19 +100,18 @@ export const JobsRightSidebar = () => {
             f
           </div>
           <div>
-            <h4 className="text-[13px] font-bold text-neutral-900 group-hover:text-primary-600 transition-colors">Senior Software Engineer</h4>
+            <h4 className="text-[13px] font-bold text-neutral-900 group-hover:text-primary-600 transition-colors">
+              Senior Software Engineer
+            </h4>
             <div className="flex items-center gap-2 text-[12px] text-neutral-500 mt-1">
               <span>Flipkart</span>
               <span className="w-1 h-1 rounded-full bg-neutral-300"></span>
               <span>Bengaluru</span>
             </div>
-            <div className="text-[12px] font-medium text-neutral-600 mt-1">
-              ₹ 20 - 35 LPA
-            </div>
+            <div className="text-[12px] font-medium text-neutral-600 mt-1">₹ 20 - 35 LPA</div>
           </div>
         </div>
       </div>
-
     </div>
   );
 };

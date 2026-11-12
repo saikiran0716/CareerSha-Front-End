@@ -18,7 +18,10 @@ interface Props {
 const ChatBot: React.FC<Props> = ({ profile, initialMessage, onMessageProcessed }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'assistant', content: `Hello! I am CareerSha's Lead AI Counselor. I have access to real-time admission and exam data. How can I help you today?` }
+    {
+      role: 'assistant',
+      content: `Hello! I am CareerSha's Lead AI Counselor. I have access to real-time admission and exam data. How can I help you today?`,
+    },
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -30,7 +33,7 @@ const ChatBot: React.FC<Props> = ({ profile, initialMessage, onMessageProcessed 
     if (scrollRef.current) {
       scrollRef.current.scrollTo({
         top: scrollRef.current.scrollHeight,
-        behavior: 'smooth'
+        behavior: 'smooth',
       });
     }
   }, []);
@@ -51,7 +54,7 @@ const ChatBot: React.FC<Props> = ({ profile, initialMessage, onMessageProcessed 
     if (!userMsg.trim() || isLoading) return;
 
     if (!customMessage) setInput('');
-    setMessages(prev => [...prev, { role: 'user', content: userMsg }]);
+    setMessages((prev) => [...prev, { role: 'user', content: userMsg }]);
     setIsLoading(true);
     setIsOpen(true);
 
@@ -59,9 +62,9 @@ const ChatBot: React.FC<Props> = ({ profile, initialMessage, onMessageProcessed 
       // Keep only the last 4 messages as live history to save tokens
       const HISTORY_WINDOW = 4;
       const liveMessages = messages.slice(-HISTORY_WINDOW);
-      const historyForAI = liveMessages.map(m => ({
+      const historyForAI = liveMessages.map((m) => ({
         role: m.role === 'user' ? 'user' : 'model',
-        content: m.content
+        content: m.content,
       }));
 
       // Build compressed summary from messages older than the window (skip initial greeting at index 0)
@@ -73,7 +76,10 @@ const ChatBot: React.FC<Props> = ({ profile, initialMessage, onMessageProcessed 
           const a = olderMessages[i + 1];
           if (u && a) {
             summaryLines.push(
-              `Q: ${u.content.substring(0, 100).replace(/\n/g, ' ')} | A: ${a.content.replace(/[#*`_]/g, '').substring(0, 150).replace(/\n/g, ' ')}`
+              `Q: ${u.content.substring(0, 100).replace(/\n/g, ' ')} | A: ${a.content
+                .replace(/[#*`_]/g, '')
+                .substring(0, 150)
+                .replace(/\n/g, ' ')}`,
             );
           }
         }
@@ -81,17 +87,23 @@ const ChatBot: React.FC<Props> = ({ profile, initialMessage, onMessageProcessed 
       }
 
       const chatResponse: ChatResponse = await chatWithCounselor(
-        historyForAI, userMsg, profile, conversationSummaryRef.current
+        historyForAI,
+        userMsg,
+        profile,
+        conversationSummaryRef.current,
       );
 
-      setMessages(prev => [...prev, {
-        role: 'assistant',
-        content: chatResponse.text,
-        sources: chatResponse.sources
-      }]);
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: 'assistant',
+          content: chatResponse.text,
+          sources: chatResponse.sources,
+        },
+      ]);
     } catch (error) {
       console.error(error);
-      setMessages(prev => [...prev, { role: 'assistant', content: "Error connecting to AI. Please try again." }]);
+      setMessages((prev) => [...prev, { role: 'assistant', content: 'Error connecting to AI. Please try again.' }]);
     } finally {
       setIsLoading(false);
     }
@@ -148,23 +160,32 @@ const ChatBot: React.FC<Props> = ({ profile, initialMessage, onMessageProcessed 
         }
       `}</style>
 
-      <div className={`fixed z-[9999] transition-all duration-500 cubic-bezier(0.19, 1, 0.22, 1) ${isOpen
-        ? 'bottom-2 right-2 sm:bottom-10 sm:right-10 w-[260px] sm:w-[340px] max-w-[calc(100%-1rem)] h-[340px] sm:h-[450px] max-h-[calc(100vh-1.5rem)] sm:max-h-[calc(100vh-8rem)]'
-        : 'bottom-4 right-4 sm:bottom-10 sm:right-10 w-auto h-auto'
-        }`}>
+      <div
+        className={`fixed z-[9999] transition-all duration-500 cubic-bezier(0.19, 1, 0.22, 1) ${
+          isOpen
+            ? 'bottom-2 right-2 sm:bottom-10 sm:right-10 w-[260px] sm:w-[340px] max-w-[calc(100%-1rem)] h-[340px] sm:h-[450px] max-h-[calc(100vh-1.5rem)] sm:max-h-[calc(100vh-8rem)]'
+            : 'bottom-4 right-4 sm:bottom-10 sm:right-10 w-auto h-auto'
+        }`}
+      >
         {isOpen ? (
           <div className="flex flex-col h-full bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md rounded-[1.5rem] shadow-[0_8px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)] overflow-hidden border border-white/20 dark:border-neutral-700 ring-1 ring-black/5 dark:ring-white/5 animate-scaleIn origin-bottom-right transition-all duration-500">
-
             {/* Header */}
             <div className="px-5 py-3.5 bg-white/50 dark:bg-neutral-900/50 border-b border-neutral-100 dark:border-neutral-800 flex justify-between items-center shrink-0">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 bg-secondary-50 dark:bg-secondary-900/30 rounded-full flex items-center justify-center border border-secondary-100 dark:border-secondary-800">
-                  <svg className="w-4 h-4 text-secondary-600 dark:text-secondary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg
+                    className="w-4 h-4 text-secondary-600 dark:text-secondary-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
                 <div>
-                  <span className="font-bold block text-sm text-neutral-900 dark:text-white leading-tight">CareerSha</span>
+                  <span className="font-bold block text-sm text-neutral-900 dark:text-white leading-tight">
+                    CareerSha
+                  </span>
                   <div className="flex items-center gap-1.5">
                     <span className="block w-1.5 h-1.5 rounded-full bg-success-500"></span>
                     <span className="text-[10px] font-medium text-neutral-500 dark:text-neutral-400">Assistant</span>
@@ -177,7 +198,10 @@ const ChatBot: React.FC<Props> = ({ profile, initialMessage, onMessageProcessed 
 
                 {/* Close Button */}
                 <button
-                  onClick={(e) => { e.stopPropagation(); setIsOpen(false); }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsOpen(false);
+                  }}
                   className="w-8 h-8 flex items-center justify-center hover:bg-danger-50 dark:hover:bg-danger-900/20 rounded-full transition-colors text-neutral-400 hover:text-danger-500"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -188,17 +212,29 @@ const ChatBot: React.FC<Props> = ({ profile, initialMessage, onMessageProcessed 
             </div>
 
             {/* Chat Area */}
-            <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-5 bg-neutral-50/30 dark:bg-neutral-950/30 scroll-smooth chat-scroll-container">
+            <div
+              ref={scrollRef}
+              className="flex-1 overflow-y-auto p-4 space-y-5 bg-neutral-50/30 dark:bg-neutral-950/30 scroll-smooth chat-scroll-container"
+            >
               {messages.map((msg, i) => (
-                <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-slideUp`} style={{ animationDelay: `${i * 0.03}s` }}>
+                <div
+                  key={i}
+                  className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-slideUp`}
+                  style={{ animationDelay: `${i * 0.03}s` }}
+                >
                   {msg.role === 'assistant' && (
-                    <div className="w-6 h-6 rounded-full bg-white dark:bg-neutral-800 border border-secondary-100 dark:border-secondary-900 flex-shrink-0 mr-2 mt-1 flex items-center justify-center text-secondary-600 dark:text-secondary-400 text-[10px] font-bold shadow-sm">C</div>
+                    <div className="w-6 h-6 rounded-full bg-white dark:bg-neutral-800 border border-secondary-100 dark:border-secondary-900 flex-shrink-0 mr-2 mt-1 flex items-center justify-center text-secondary-600 dark:text-secondary-400 text-[10px] font-bold shadow-sm">
+                      C
+                    </div>
                   )}
 
-                  <div className={`max-w-[90%] p-3 shadow-sm relative text-sm ${msg.role === 'user'
-                    ? 'bg-secondary-600 text-white rounded-2xl rounded-br-sm'
-                    : 'bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 rounded-2xl rounded-bl-sm border border-neutral-100 dark:border-neutral-800'
-                    }`}>
+                  <div
+                    className={`max-w-[90%] p-3 shadow-sm relative text-sm ${
+                      msg.role === 'user'
+                        ? 'bg-secondary-600 text-white rounded-2xl rounded-br-sm'
+                        : 'bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 rounded-2xl rounded-bl-sm border border-neutral-100 dark:border-neutral-800'
+                    }`}
+                  >
                     {msg.role === 'assistant' ? (
                       <>
                         <div
@@ -261,13 +297,22 @@ const ChatBot: React.FC<Props> = ({ profile, initialMessage, onMessageProcessed 
                   disabled={!input.trim() || isLoading}
                   className="w-10 h-10 bg-secondary-600 disabled:bg-neutral-200 dark:disabled:bg-neutral-800 text-white rounded-full hover:bg-secondary-700 transition-all shadow-md active:scale-95 flex items-center justify-center shrink-0"
                 >
-                  <svg className="w-4 h-4 transform -rotate-45 translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                  <svg
+                    className="w-4 h-4 transform -rotate-45 translate-x-0.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2.5}
+                      d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                    />
                   </svg>
                 </button>
               </div>
             </div>
-
           </div>
         ) : (
           <button
@@ -275,7 +320,12 @@ const ChatBot: React.FC<Props> = ({ profile, initialMessage, onMessageProcessed 
             className="group relative bg-secondary-600 text-white w-12 h-12 sm:w-14 sm:h-14 rounded-full shadow-lg shadow-secondary-500/30 hover:bg-secondary-700 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center z-[9999]"
           >
             <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+              />
             </svg>
             <div className="absolute -top-1 -right-1 w-3 sm:w-3.5 h-3 sm:h-3.5 bg-success-500 border-2 border-white dark:border-neutral-900 rounded-full animate-pulse"></div>
           </button>

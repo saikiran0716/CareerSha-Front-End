@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Qualification, BudgetRange, CollegeType, StudentProfile } from "../../types";
+import React, { useState } from 'react';
+import { Qualification, BudgetRange, CollegeType, StudentProfile } from '../../types';
 
 interface Props {
   onSubmit: (profile: StudentProfile) => void;
@@ -11,26 +11,26 @@ const StudentForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
   const [errors, setErrors] = useState<string[]>([]);
 
   const [formData, setFormData] = useState<StudentProfile>({
-    name: "",
+    name: '',
     academic: {
       qualification: Qualification.Twelfth,
-      board: "CBSE",
-      year: "2024",
-      subjects: "",
-      marks: "",
+      board: 'CBSE',
+      year: '2024',
+      subjects: '',
+      marks: '',
     },
     exam: {
-      examName: "JEE MAINS",
-      rank: "",
-      category: "General",
-      quota: "State",
+      examName: 'JEE MAINS',
+      rank: '',
+      category: 'General',
+      quota: 'State',
     },
     preferences: {
-      stream: "",
-      location: "",
+      stream: '',
+      location: '',
       budget: BudgetRange.Medium,
       collegeType: CollegeType.Government,
-      careerGoal: "",
+      careerGoal: '',
     },
   });
 
@@ -38,26 +38,21 @@ const StudentForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
     const newErrors: string[] = [];
 
     if (current === 1) {
-      if (!formData.name.trim()) newErrors.push("Full Name required");
-      if (!formData.academic.marks.trim()) newErrors.push("Score required");
-      if (!formData.academic.subjects.trim())
-        newErrors.push("Stream required");
+      if (!formData.name.trim()) newErrors.push('Full Name required');
+      if (!formData.academic.marks.trim()) newErrors.push('Score required');
+      if (!formData.academic.subjects.trim()) newErrors.push('Stream required');
     }
 
     if (current === 2) {
-      if (!formData.exam.rank.trim()) newErrors.push("Rank required");
+      if (!formData.exam.rank.trim()) newErrors.push('Rank required');
     }
 
     setErrors(newErrors);
     return newErrors.length === 0;
   };
 
-  const handleChange = (
-    section: keyof StudentProfile | "name",
-    field: string | null,
-    value: string
-  ) => {
-    if (section === "name") {
+  const handleChange = (section: keyof StudentProfile | 'name', field: string | null, value: string) => {
+    if (section === 'name') {
       setFormData((prev) => ({ ...prev, name: value }));
       return;
     }
@@ -89,24 +84,24 @@ const StudentForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
   return (
     <div className="py-10 px-4">
       <div className="max-w-md mx-auto bg-white rounded-xl shadow-lg border border-neutral-200 p-6">
-
         {/* Stepper */}
         <div className="flex justify-between items-center mb-6 relative">
           <div className="absolute top-1/2 left-0 w-full h-[2px] bg-neutral-200 -z-10 -translate-y-1/2" />
           {[1, 2, 3].map((s) => (
             <div key={s} className="flex flex-col items-center">
               <div
-                className={`w-8 h-8 flex items-center justify-center rounded-full text-xs font-semibold ${step === s
-                  ? "bg-secondary-600 text-white"
-                  : step > s
-                    ? "bg-success-500 text-white"
-                    : "bg-neutral-200 text-neutral-500"
-                  }`}
+                className={`w-8 h-8 flex items-center justify-center rounded-full text-xs font-semibold ${
+                  step === s
+                    ? 'bg-secondary-600 text-white'
+                    : step > s
+                      ? 'bg-success-500 text-white'
+                      : 'bg-neutral-200 text-neutral-500'
+                }`}
               >
-                {step > s ? "✓" : s}
+                {step > s ? '✓' : s}
               </div>
               <span className="text-[10px] mt-1 text-neutral-400 uppercase">
-                {s === 1 ? "Academic" : s === 2 ? "Exams" : "Future"}
+                {s === 1 ? 'Academic' : s === 2 ? 'Exams' : 'Future'}
               </span>
             </div>
           ))}
@@ -124,91 +119,62 @@ const StudentForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
         )}
 
         <form onSubmit={submit} className="space-y-4">
-
           {step === 1 && (
             <>
-              <h2 className="text-lg font-semibold text-neutral-800">
-                Academic Profile
-              </h2>
+              <h2 className="text-lg font-semibold text-neutral-800">Academic Profile</h2>
 
-              <Input
-                label="Full Name"
-                value={formData.name}
-                onChange={(v) => handleChange("name", null, v)}
-              />
+              <Input label="Full Name" value={formData.name} onChange={(v) => handleChange('name', null, v)} />
 
               <div className="grid grid-cols-2 gap-4">
                 <Input
                   label="Year"
                   type="number"
                   value={formData.academic.year}
-                  onChange={(v) =>
-                    handleChange("academic", "year", v)
-                  }
+                  onChange={(v) => handleChange('academic', 'year', v)}
                 />
                 <Input
                   label="Score"
                   value={formData.academic.marks}
-                  onChange={(v) =>
-                    handleChange("academic", "marks", v)
-                  }
+                  onChange={(v) => handleChange('academic', 'marks', v)}
                 />
               </div>
 
               <Input
                 label="Stream"
                 value={formData.academic.subjects}
-                onChange={(v) =>
-                  handleChange("academic", "subjects", v)
-                }
+                onChange={(v) => handleChange('academic', 'subjects', v)}
               />
             </>
           )}
 
           {step === 2 && (
             <>
-              <h2 className="text-lg font-semibold text-neutral-800">
-                Exam Details
-              </h2>
+              <h2 className="text-lg font-semibold text-neutral-800">Exam Details</h2>
 
               <Input
                 label="Exam"
                 value={formData.exam.examName}
-                onChange={(v) =>
-                  handleChange("exam", "examName", v)
-                }
+                onChange={(v) => handleChange('exam', 'examName', v)}
               />
 
-              <Input
-                label="Rank"
-                value={formData.exam.rank}
-                onChange={(v) =>
-                  handleChange("exam", "rank", v)
-                }
-              />
+              <Input label="Rank" value={formData.exam.rank} onChange={(v) => handleChange('exam', 'rank', v)} />
             </>
           )}
 
           {step === 3 && (
             <>
-              <h2 className="text-lg font-semibold text-neutral-800">
-                Future Goals
-              </h2>
+              <h2 className="text-lg font-semibold text-neutral-800">Future Goals</h2>
 
               <Input
                 label="Preferred Location"
                 value={formData.preferences.location}
-                onChange={(v) =>
-                  handleChange("preferences", "location", v)
-                }
+                onChange={(v) => handleChange('preferences', 'location', v)}
               />
 
               <Input
                 label="Desired Stream"
                 value={formData.preferences.stream}
-                onChange={(v) =>
-                  handleChange("preferences", "stream", v)
-                }
+                onChange={(v) => handleChange('preferences', 'stream', v)}
               />
             </>
           )}
@@ -241,7 +207,7 @@ const StudentForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
                 disabled={isLoading}
                 className="text-xs px-4 py-1.5 bg-secondary-600 text-white rounded hover:bg-secondary-700 disabled:opacity-50"
               >
-                {isLoading ? "Processing..." : "Generate"}
+                {isLoading ? 'Processing...' : 'Generate'}
               </button>
             )}
           </div>
@@ -258,16 +224,9 @@ interface InputProps {
   type?: string;
 }
 
-const Input: React.FC<InputProps> = ({
-  label,
-  value,
-  onChange,
-  type = "text",
-}) => (
+const Input: React.FC<InputProps> = ({ label, value, onChange, type = 'text' }) => (
   <div>
-    <label className="block text-xs font-medium text-neutral-600 mb-1">
-      {label}
-    </label>
+    <label className="block text-xs font-medium text-neutral-600 mb-1">{label}</label>
     <input
       type={type}
       value={value}

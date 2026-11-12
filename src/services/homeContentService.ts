@@ -10,7 +10,6 @@ export interface NewsItem {
   category: string;
 }
 
-
 const toImageUrl = (path?: string) => {
   if (!path) return '';
   if (path.startsWith('http')) return path;
@@ -42,13 +41,14 @@ export const getLatestNewsItems = async (): Promise<NewsItem[]> => {
 
     return data.map((item: NewsApiItem) => {
       // Basic normalization of date if it's a timestamp
-      const dateStr = new Date(item.created_at).toLocaleDateString('en-US', {
-        month: 'long',
-        day: 'numeric',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      }) + ' IST';
+      const dateStr =
+        new Date(item.created_at).toLocaleDateString('en-US', {
+          month: 'long',
+          day: 'numeric',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+        }) + ' IST';
 
       return {
         id: item.id,

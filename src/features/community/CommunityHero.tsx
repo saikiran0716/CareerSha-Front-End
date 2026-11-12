@@ -4,7 +4,6 @@ import { Search, MessageSquare, HelpCircle, GraduationCap, Users } from 'lucide-
 const CommunityHero: React.FC = () => {
   return (
     <div className="w-full bg-white dark:bg-neutral-900 rounded-3xl p-8 shadow-sm flex flex-col md:flex-row items-center justify-between gap-8 border border-neutral-100 dark:border-neutral-800">
-      
       {/* Left side: Welcome text & Search */}
       <div className="flex-1 space-y-6 max-w-xl">
         <div>
@@ -19,9 +18,9 @@ const CommunityHero: React.FC = () => {
         {/* Search Bar */}
         <div className="relative flex items-center">
           <Search className="absolute left-4 text-neutral-400 w-5 h-5" />
-          <input 
-            type="text" 
-            placeholder="Search questions, topics or users..." 
+          <input
+            type="text"
+            placeholder="Search questions, topics or users..."
             className="w-full pl-12 pr-24 py-3 rounded-xl bg-neutral-50 dark:bg-neutral-800 border-none focus:ring-2 focus:ring-primary-500 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 font-medium outline-none transition-shadow"
           />
           <button className="absolute right-2 px-6 py-2 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors shadow-md shadow-primary-500/20">
@@ -38,7 +37,9 @@ const CommunityHero: React.FC = () => {
             <Users size={24} />
           </div>
           <div className="text-xl font-bold text-neutral-900 dark:text-white">25.6K+</div>
-          <div className="text-[11px] font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide">Active Members</div>
+          <div className="text-[11px] font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide">
+            Active Members
+          </div>
         </div>
 
         {/* Questions Asked */}
@@ -47,7 +48,9 @@ const CommunityHero: React.FC = () => {
             <HelpCircle size={24} />
           </div>
           <div className="text-xl font-bold text-neutral-900 dark:text-white">12.4K+</div>
-          <div className="text-[11px] font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide">Questions Asked</div>
+          <div className="text-[11px] font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide">
+            Questions Asked
+          </div>
         </div>
 
         {/* Answers Given */}
@@ -56,7 +59,9 @@ const CommunityHero: React.FC = () => {
             <MessageSquare size={24} />
           </div>
           <div className="text-xl font-bold text-neutral-900 dark:text-white">48.7K+</div>
-          <div className="text-[11px] font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide">Answers Given</div>
+          <div className="text-[11px] font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide">
+            Answers Given
+          </div>
         </div>
 
         {/* Colleges Discussed */}
@@ -65,7 +70,9 @@ const CommunityHero: React.FC = () => {
             <GraduationCap size={24} />
           </div>
           <div className="text-xl font-bold text-neutral-900 dark:text-white">200+</div>
-          <div className="text-[11px] font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide">Colleges Discussed</div>
+          <div className="text-[11px] font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide">
+            Colleges Discussed
+          </div>
         </div>
       </div>
 

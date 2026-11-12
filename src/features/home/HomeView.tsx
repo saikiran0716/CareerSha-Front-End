@@ -1,6 +1,24 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, BarChart3, BadgeCheck, Building2, Calculator, ChevronLeft, ChevronRight, GraduationCap, Landmark, Search, ShieldCheck, Sparkles, Star, Target, MapPin, MessageSquare, Briefcase } from 'lucide-react';
+import {
+  ArrowRight,
+  BarChart3,
+  BadgeCheck,
+  Building2,
+  Calculator,
+  ChevronLeft,
+  ChevronRight,
+  GraduationCap,
+  Landmark,
+  Search,
+  ShieldCheck,
+  Sparkles,
+  Star,
+  Target,
+  MapPin,
+  MessageSquare,
+  Briefcase,
+} from 'lucide-react';
 
 interface HomeViewProps {
   onStartCounseling: () => void;
@@ -113,9 +131,30 @@ const liveUpdates: UpdateItem[] = [
 ];
 
 const communityThreads = [
-  { author: 'Aman Kumar', title: 'Is CSE in Tier-2 college worth it in 2024?', replies: 23, time: '2h ago', avatar: 'AK', avatarBg: 'bg-secondary-600 text-white' },
-  { author: 'Neha Singh', title: 'Best colleges for biotechnology in India?', replies: 18, time: '4h ago', avatar: 'NS', avatarBg: 'bg-pink-600 text-white' },
-  { author: 'Rohit Verma', title: 'Which branch has the best future?', replies: 31, time: '6h ago', avatar: 'RV', avatarBg: 'bg-warning-600 text-white' },
+  {
+    author: 'Aman Kumar',
+    title: 'Is CSE in Tier-2 college worth it in 2024?',
+    replies: 23,
+    time: '2h ago',
+    avatar: 'AK',
+    avatarBg: 'bg-secondary-600 text-white',
+  },
+  {
+    author: 'Neha Singh',
+    title: 'Best colleges for biotechnology in India?',
+    replies: 18,
+    time: '4h ago',
+    avatar: 'NS',
+    avatarBg: 'bg-pink-600 text-white',
+  },
+  {
+    author: 'Rohit Verma',
+    title: 'Which branch has the best future?',
+    replies: 31,
+    time: '6h ago',
+    avatar: 'RV',
+    avatarBg: 'bg-warning-600 text-white',
+  },
 ];
 
 const jobOpenings = [
@@ -124,22 +163,25 @@ const jobOpenings = [
     company: 'TCS Digital',
     location: 'Bangalore / Remote',
     type: 'Full-time',
-    color: 'text-secondary-600 bg-secondary-50 dark:bg-secondary-900/30 dark:text-secondary-400 border-secondary-200 dark:border-secondary-800'
+    color:
+      'text-secondary-600 bg-secondary-50 dark:bg-secondary-900/30 dark:text-secondary-400 border-secondary-200 dark:border-secondary-800',
   },
   {
     role: 'Business Analyst',
     company: 'Deloitte',
     location: 'Mumbai',
     type: 'Entry Level',
-    color: 'text-primary-600 bg-primary-50 dark:bg-primary-900/30 dark:text-primary-400 border-primary-200 dark:border-primary-800'
+    color:
+      'text-primary-600 bg-primary-50 dark:bg-primary-900/30 dark:text-primary-400 border-primary-200 dark:border-primary-800',
   },
   {
     role: 'Clinical Data Trainee',
     company: 'Sun Pharma',
     location: 'Pune',
     type: 'Internship',
-    color: 'text-success-600 bg-success-50 dark:bg-success-900/30 dark:text-success-400 border-success-200 dark:border-success-800'
-  }
+    color:
+      'text-success-600 bg-success-50 dark:bg-success-900/30 dark:text-success-400 border-success-200 dark:border-success-800',
+  },
 ];
 
 const personalizedMatches = [
@@ -235,10 +277,8 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
 
       <main className="mx-auto max-w-[1440px] px-6 py-6">
         <div className="grid grid-cols-1 xl:grid-cols-[1fr_352px] gap-12 items-start">
-
           {/* LEFT COLUMN: Hero, Quick Tools, Collections, Stats */}
           <div className="space-y-8 min-w-0">
-
             {/* HERO SECTION */}
             <section className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-8 items-center pt-2 sm:pt-4">
               {/* Hero Left Info */}
@@ -246,12 +286,12 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                 <div className="space-y-4">
                   <h1 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-extrabold leading-[1.18] tracking-tight text-neutral-900 dark:text-white">
                     Your Complete Career <br className="hidden sm:inline" />
-
                     {/* TODO: remove the roadmap content */}
                     Roadmap for <span className="text-primary-600 dark:text-primary-400">Indian Education</span>
                   </h1>
                   <p className="text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm max-w-xl leading-relaxed">
-                    Explore 50K+ colleges, 200+ entrance exams, cutoffs, placements, and get personalized AI-powered guidance to shape your future.
+                    Explore 50K+ colleges, 200+ entrance exams, cutoffs, placements, and get personalized AI-powered
+                    guidance to shape your future.
                   </p>
                 </div>
 
@@ -283,7 +323,9 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
 
                   {/* Trending tags */}
                   <div className="mt-4 flex flex-wrap items-center gap-2 text-xs">
-                    <span className="font-extrabold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mr-1">Trending:</span>
+                    <span className="font-extrabold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mr-1">
+                      Trending:
+                    </span>
                     {trendingTopics.map((topic) => (
                       <button
                         key={topic}
@@ -314,8 +356,12 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                       <Sparkles className="h-4.5 w-4.5" />
                     </div>
                     <div>
-                      <p className="text-[10px] font-black uppercase tracking-[0.15em] text-primary-600 dark:text-primary-400 leading-none mb-1">AI Recommendation</p>
-                      <p className="text-[11px] font-bold text-neutral-500 dark:text-neutral-400 leading-none">Find best colleges for you</p>
+                      <p className="text-[10px] font-black uppercase tracking-[0.15em] text-primary-600 dark:text-primary-400 leading-none mb-1">
+                        AI Recommendation
+                      </p>
+                      <p className="text-[11px] font-bold text-neutral-500 dark:text-neutral-400 leading-none">
+                        Find best colleges for you
+                      </p>
                     </div>
                   </div>
 
@@ -323,7 +369,9 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                   <div className="absolute top-1/4 -right-8 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md px-4 py-3 rounded-2xl shadow-xl border border-neutral-100/50 dark:border-neutral-800/50 text-center transition-all hover:scale-[1.02]">
                     <div className="flex items-center gap-1.5 justify-center mb-1">
                       <Star className="h-3.5 w-3.5 text-primary-600 dark:text-primary-400 fill-current" />
-                      <p className="text-[9px] font-black uppercase tracking-[0.1em] text-neutral-500 dark:text-neutral-400">Predict Admission Chance</p>
+                      <p className="text-[9px] font-black uppercase tracking-[0.1em] text-neutral-500 dark:text-neutral-400">
+                        Predict Admission Chance
+                      </p>
                     </div>
                     <div className="flex items-baseline justify-center gap-1">
                       <span className="text-3xl font-black text-neutral-900 dark:text-white leading-none">87%</span>
@@ -337,8 +385,12 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                       <Target className="h-4.5 w-4.5" />
                     </div>
                     <div>
-                      <p className="text-[10px] font-black uppercase tracking-[0.15em] text-neutral-900 dark:text-white leading-none mb-1">Cutoff Predictor</p>
-                      <p className="text-[11px] font-bold text-neutral-500 dark:text-neutral-400 leading-none">Check previous year cutoffs</p>
+                      <p className="text-[10px] font-black uppercase tracking-[0.15em] text-neutral-900 dark:text-white leading-none mb-1">
+                        Cutoff Predictor
+                      </p>
+                      <p className="text-[11px] font-bold text-neutral-500 dark:text-neutral-400 leading-none">
+                        Check previous year cutoffs
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -354,21 +406,28 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                     <button
                       key={tool.title}
                       onClick={() => navigate(tool.href)}
-                      className={`group flex flex-col items-center text-center p-4 rounded-2xl transition-all duration-300 border relative ${tool.highlight
-                        ? 'bg-primary-50/30 dark:bg-primary-950/10 border-primary-200/80 dark:border-primary-800/50 shadow-[0_4px_12px_rgba(59,130,246,0.04)] hover:border-primary-400 dark:hover:border-primary-600 hover:shadow-[0_12px_24px_-8px_rgba(59,130,246,0.15)] hover:-translate-y-1'
-                        : 'bg-neutral-50/30 dark:bg-neutral-900/30 border-neutral-100/70 dark:border-neutral-800/40 hover:bg-white dark:hover:bg-neutral-800/60 hover:border-neutral-200 dark:hover:border-neutral-700 hover:shadow-[0_12px_24px_-8px_rgba(0,0,0,0.06)] hover:-translate-y-1'
-                        }`}
+                      className={`group flex flex-col items-center text-center p-4 rounded-2xl transition-all duration-300 border relative ${
+                        tool.highlight
+                          ? 'bg-primary-50/30 dark:bg-primary-950/10 border-primary-200/80 dark:border-primary-800/50 shadow-[0_4px_12px_rgba(59,130,246,0.04)] hover:border-primary-400 dark:hover:border-primary-600 hover:shadow-[0_12px_24px_-8px_rgba(59,130,246,0.15)] hover:-translate-y-1'
+                          : 'bg-neutral-50/30 dark:bg-neutral-900/30 border-neutral-100/70 dark:border-neutral-800/40 hover:bg-white dark:hover:bg-neutral-800/60 hover:border-neutral-200 dark:hover:border-neutral-700 hover:shadow-[0_12px_24px_-8px_rgba(0,0,0,0.06)] hover:-translate-y-1'
+                      }`}
                     >
                       {tool.highlight && (
                         <span className="absolute -top-2 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-wider bg-primary-600 text-white shadow-sm ring-1 ring-primary-500/20">
                           Popular
                         </span>
                       )}
-                      <div className={`mb-3 flex h-11 w-11 items-center justify-center rounded-full ${tool.bgClass} shadow-sm group-hover:scale-110 transition-transform duration-300`}>
+                      <div
+                        className={`mb-3 flex h-11 w-11 items-center justify-center rounded-full ${tool.bgClass} shadow-sm group-hover:scale-110 transition-transform duration-300`}
+                      >
                         <Icon className="h-5 w-5" />
                       </div>
-                      <p className="text-xs font-extrabold text-neutral-900 dark:text-white leading-tight mb-1">{tool.title}</p>
-                      <p className="text-[10px] text-neutral-500 dark:text-neutral-400 leading-snug">{tool.description}</p>
+                      <p className="text-xs font-extrabold text-neutral-900 dark:text-white leading-tight mb-1">
+                        {tool.title}
+                      </p>
+                      <p className="text-[10px] text-neutral-500 dark:text-neutral-400 leading-snug">
+                        {tool.description}
+                      </p>
                     </button>
                   );
                 })}
@@ -379,8 +438,12 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
             <section className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-lg sm:text-xl font-black text-neutral-900 dark:text-white">Top College Collections</h2>
-                  <p className="text-xs text-neutral-500 dark:text-neutral-400">Browse the most searched categories in one place.</p>
+                  <h2 className="text-lg sm:text-xl font-black text-neutral-900 dark:text-white">
+                    Top College Collections
+                  </h2>
+                  <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                    Browse the most searched categories in one place.
+                  </p>
                 </div>
                 <button
                   onClick={() => navigate('/search')}
@@ -445,16 +508,25 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
 
             {/* STATS SECTION */}
             <section className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
-
               {/* Exams Covered Card (Lavender/Purple) */}
               <div className="relative overflow-hidden rounded-[2rem] p-6 bg-gradient-to-br from-secondary-50/80 to-white dark:from-secondary-950/15 dark:to-neutral-900 border border-secondary-100/30 dark:border-neutral-800 flex justify-between items-center shadow-sm">
                 <div className="space-y-1">
-                  <p className="text-[11px] font-black uppercase tracking-wider text-secondary-500 dark:text-secondary-400">Exams Covered</p>
+                  <p className="text-[11px] font-black uppercase tracking-wider text-secondary-500 dark:text-secondary-400">
+                    Exams Covered
+                  </p>
                   <p className="text-3xl font-black text-neutral-900 dark:text-white">200+</p>
                   <p className="text-xs text-neutral-500 dark:text-neutral-400 font-bold">National & State Exams</p>
                 </div>
                 {/* SVG Illustration of Graduation Cap on Book */}
-                <svg className="w-16 h-16 opacity-85 text-secondary-500 dark:text-secondary-400" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg
+                  className="w-16 h-16 opacity-85 text-secondary-500 dark:text-secondary-400"
+                  viewBox="0 0 64 64"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
                   <path d="M6 17H58V50H6V17Z" strokeWidth="1.5" fill="currentColor" fillOpacity="0.05" />
                   <path d="M6 50A2.5 2.5 0 0 0 8.5 52.5H54" />
@@ -468,12 +540,22 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
               {/* Colleges Listed Card (Green) */}
               <div className="relative overflow-hidden rounded-[2rem] p-6 bg-gradient-to-br from-success-50/80 to-white dark:from-success-950/15 dark:to-neutral-900 border border-success-100/30 dark:border-neutral-800 flex justify-between items-center shadow-sm">
                 <div className="space-y-1">
-                  <p className="text-[11px] font-black uppercase tracking-wider text-success-500 dark:text-success-400">Colleges Listed</p>
+                  <p className="text-[11px] font-black uppercase tracking-wider text-success-500 dark:text-success-400">
+                    Colleges Listed
+                  </p>
                   <p className="text-3xl font-black text-neutral-900 dark:text-white">50,000+</p>
                   <p className="text-xs text-neutral-500 dark:text-neutral-400 font-bold">Colleges Across India</p>
                 </div>
                 {/* SVG Illustration of School Building */}
-                <svg className="w-16 h-16 opacity-85 text-success-500 dark:text-success-400" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg
+                  className="w-16 h-16 opacity-85 text-success-500 dark:text-success-400"
+                  viewBox="0 0 64 64"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <path d="M32 6 L6 20 V56 H58 V20 Z" fill="currentColor" fillOpacity="0.05" />
                   <path d="M6 20 L32 30 L58 20" />
                   <path d="M26 44 H38 V56 H26 Z" fill="currentColor" fillOpacity="0.1" />
@@ -488,19 +570,44 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
               {/* Students Trust Us Card (Orange) */}
               <div className="relative overflow-hidden rounded-[2rem] p-6 bg-gradient-to-br from-warning-50/80 to-white dark:from-warning-950/15 dark:to-neutral-900 border border-warning-100/30 dark:border-neutral-800 flex justify-between items-center shadow-sm">
                 <div className="space-y-1">
-                  <p className="text-[11px] font-black uppercase tracking-wider text-warning-500 dark:text-warning-400">Students Trust Us</p>
+                  <p className="text-[11px] font-black uppercase tracking-wider text-warning-500 dark:text-warning-400">
+                    Students Trust Us
+                  </p>
                   <p className="text-3xl font-black text-neutral-900 dark:text-white">10 Lakh+</p>
                   <p className="text-xs text-neutral-500 dark:text-neutral-400 font-bold">Happy Students</p>
                 </div>
                 {/* SVG Illustration of Students */}
-                <svg className="w-16 h-16 opacity-85 text-warning-500 dark:text-warning-400" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M18 28 C23.5 28 28 23.5 28 18 C28 12.5 23.5 8 18 8 C12.5 8 8 12.5 8 18 C8 23.5 12.5 28 18 28 Z" fill="currentColor" fillOpacity="0.05" />
-                  <path d="M18 32 C10 32 4 38 4 46 V52 H32 V46 C32 38 26 32 18 32 Z" fill="currentColor" fillOpacity="0.1" />
-                  <path d="M46 28 C51.5 28 56 23.5 56 18 C56 12.5 51.5 8 46 8 C40.5 8 36 12.5 36 18 C36 23.5 40.5 28 46 28 Z" fill="currentColor" fillOpacity="0.05" />
-                  <path d="M46 32 C38 32 32 38 32 46 V52 H60 V46 C60 38 54 32 46 32 Z" fill="currentColor" fillOpacity="0.1" />
+                <svg
+                  className="w-16 h-16 opacity-85 text-warning-500 dark:text-warning-400"
+                  viewBox="0 0 64 64"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path
+                    d="M18 28 C23.5 28 28 23.5 28 18 C28 12.5 23.5 8 18 8 C12.5 8 8 12.5 8 18 C8 23.5 12.5 28 18 28 Z"
+                    fill="currentColor"
+                    fillOpacity="0.05"
+                  />
+                  <path
+                    d="M18 32 C10 32 4 38 4 46 V52 H32 V46 C32 38 26 32 18 32 Z"
+                    fill="currentColor"
+                    fillOpacity="0.1"
+                  />
+                  <path
+                    d="M46 28 C51.5 28 56 23.5 56 18 C56 12.5 51.5 8 46 8 C40.5 8 36 12.5 36 18 C36 23.5 40.5 28 46 28 Z"
+                    fill="currentColor"
+                    fillOpacity="0.05"
+                  />
+                  <path
+                    d="M46 32 C38 32 32 38 32 46 V52 H60 V46 C60 38 54 32 46 32 Z"
+                    fill="currentColor"
+                    fillOpacity="0.1"
+                  />
                 </svg>
               </div>
-
             </section>
 
             {/* JOB OPENINGS */}
@@ -533,7 +640,9 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                     </div>
 
                     <div className="mb-2">
-                      <p className="text-[13px] font-black leading-tight mb-0.5 text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">{job.role}</p>
+                      <p className="text-[13px] font-black leading-tight mb-0.5 text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                        {job.role}
+                      </p>
                       <p className="text-[9px] font-extrabold uppercase tracking-widest opacity-80">{job.company}</p>
                     </div>
 
@@ -554,11 +663,12 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
 
           {/* RIGHT COLUMN: Sidebar Cards (Sticky) */}
           <aside className="space-y-6">
-
             {/* LIVE UPDATES */}
             <section className="bg-white dark:bg-neutral-900 rounded-[2rem] p-5 shadow-sm border border-neutral-100/80 dark:border-neutral-800/60">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-sm font-black text-neutral-900 dark:text-white uppercase tracking-wider">Live Updates</h2>
+                <h2 className="text-sm font-black text-neutral-900 dark:text-white uppercase tracking-wider">
+                  Live Updates
+                </h2>
                 <button
                   onClick={() => navigate('/news')}
                   className="text-[11px] font-black text-primary-600 dark:text-primary-400 hover:underline uppercase tracking-widest"
@@ -575,16 +685,24 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                       key={idx}
                       className="flex items-center gap-3.5 p-3 rounded-2xl border border-neutral-50 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/50 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition duration-200"
                     >
-                      <div className={`relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full ${item.tone} shadow-sm`}>
+                      <div
+                        className={`relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full ${item.tone} shadow-sm`}
+                      >
                         <Icon className="h-5 w-5" />
                         <span className="absolute top-0 right-0 block h-2.5 w-2.5 rounded-full bg-danger-500 ring-2 ring-white dark:ring-neutral-900" />
                       </div>
                       <div className="min-w-0 flex-1">
                         <div className="flex items-start justify-between gap-2">
-                          <p className="truncate text-xs font-extrabold text-neutral-800 dark:text-neutral-200 leading-tight">{item.title}</p>
-                          <span className="whitespace-nowrap text-[9px] font-bold text-neutral-400 shrink-0">{item.time}</span>
+                          <p className="truncate text-xs font-extrabold text-neutral-800 dark:text-neutral-200 leading-tight">
+                            {item.title}
+                          </p>
+                          <span className="whitespace-nowrap text-[9px] font-bold text-neutral-400 shrink-0">
+                            {item.time}
+                          </span>
                         </div>
-                        <p className="text-[10px] text-neutral-500 dark:text-neutral-400 font-medium leading-snug mt-0.5">{item.description}</p>
+                        <p className="text-[10px] text-neutral-500 dark:text-neutral-400 font-medium leading-snug mt-0.5">
+                          {item.description}
+                        </p>
                       </div>
                     </div>
                   );
@@ -595,8 +713,12 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
             {/* AI CAREER ASSISTANT */}
             <section className="bg-white dark:bg-neutral-900 rounded-[2rem] p-5 shadow-sm border border-neutral-100/80 dark:border-neutral-800/60">
               <div className="space-y-1 mb-4">
-                <p className="text-[10px] font-black uppercase tracking-[0.15em] text-primary-600 dark:text-primary-400">AI Career Assistant</p>
-                <p className="text-xs text-neutral-500 dark:text-neutral-400 font-bold leading-tight">Ask anything about colleges, exams, courses & careers.</p>
+                <p className="text-[10px] font-black uppercase tracking-[0.15em] text-primary-600 dark:text-primary-400">
+                  AI Career Assistant
+                </p>
+                <p className="text-xs text-neutral-500 dark:text-neutral-400 font-bold leading-tight">
+                  Ask anything about colleges, exams, courses & careers.
+                </p>
               </div>
 
               <div className="relative flex items-center bg-neutral-50 dark:bg-neutral-950 rounded-full px-3 py-1.5 border border-neutral-100 dark:border-neutral-800">
@@ -627,7 +749,9 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
             {/* STUDENT COMMUNITY */}
             <section className="bg-white dark:bg-neutral-900 rounded-[2rem] p-5 shadow-sm border border-neutral-100/80 dark:border-neutral-800/60">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-sm font-black text-neutral-900 dark:text-white uppercase tracking-wider">Student Community</h2>
+                <h2 className="text-sm font-black text-neutral-900 dark:text-white uppercase tracking-wider">
+                  Student Community
+                </h2>
                 <button
                   onClick={() => navigate('/community')}
                   className="text-[11px] font-black text-primary-600 dark:text-primary-400 hover:underline uppercase tracking-widest"
@@ -642,10 +766,11 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                   <button
                     key={tab}
                     onClick={() => setCommunityTab(tab)}
-                    className={`px-3.5 py-1.5 rounded-lg border transition-all ${communityTab === tab
-                      ? 'bg-secondary-200 dark:bg-primary-950/40 border-primary-200 dark:border-primary-800 text-primary-600 dark:text-primary-400'
-                      : 'bg-neutral-50 dark:bg-neutral-900 border-neutral-100 dark:border-neutral-800 text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300'
-                      }`}
+                    className={`px-3.5 py-1.5 rounded-lg border transition-all ${
+                      communityTab === tab
+                        ? 'bg-secondary-200 dark:bg-primary-950/40 border-primary-200 dark:border-primary-800 text-primary-600 dark:text-primary-400'
+                        : 'bg-neutral-50 dark:bg-neutral-900 border-neutral-100 dark:border-neutral-800 text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300'
+                    }`}
                   >
                     {tab}
                   </button>
@@ -693,7 +818,9 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
             {/* PERSONALIZED FOR YOU */}
             <section className="bg-white dark:bg-neutral-900 rounded-[2rem] p-5 shadow-sm border border-neutral-100/80 dark:border-neutral-800/60">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-sm font-black text-neutral-900 dark:text-white uppercase tracking-wider">Personalized For You</h2>
+                <h2 className="text-sm font-black text-neutral-900 dark:text-white uppercase tracking-wider">
+                  Personalized For You
+                </h2>
                 <button
                   onClick={() => navigate('/college-matcher')}
                   className="text-[11px] font-black text-primary-600 dark:text-primary-400 hover:underline uppercase tracking-widest"
@@ -722,14 +849,22 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                       key={idx}
                       className="group flex items-center gap-3.5 p-3.5 rounded-2xl border border-neutral-100/60 dark:border-neutral-800/50 bg-white dark:bg-neutral-900 shadow-sm hover:shadow-md hover:border-primary-100 dark:hover:border-primary-900/40 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
                     >
-                      <div className={`flex h-9.5 w-9.5 shrink-0 items-center justify-center rounded-xl border ${iconColorClass} group-hover:scale-105 transition-transform duration-300`}>
+                      <div
+                        className={`flex h-9.5 w-9.5 shrink-0 items-center justify-center rounded-xl border ${iconColorClass} group-hover:scale-105 transition-transform duration-300`}
+                      >
                         <Landmark className="h-4.5 w-4.5" />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="truncate text-xs font-black text-neutral-800 dark:text-neutral-200 leading-tight group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">{match.name}</p>
-                        <p className="text-[10px] text-neutral-500 dark:text-neutral-400 font-bold leading-none mt-1.5">{match.course}</p>
+                        <p className="truncate text-xs font-black text-neutral-800 dark:text-neutral-200 leading-tight group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                          {match.name}
+                        </p>
+                        <p className="text-[10px] text-neutral-500 dark:text-neutral-400 font-bold leading-none mt-1.5">
+                          {match.course}
+                        </p>
                       </div>
-                      <span className={`shrink-0 flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[9px] font-black uppercase tracking-wider border shadow-sm ${badgeColorClass}`}>
+                      <span
+                        className={`shrink-0 flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[9px] font-black uppercase tracking-wider border shadow-sm ${badgeColorClass}`}
+                      >
                         <span className={`w-1.5 h-1.5 rounded-full ${badgeDotColorClass} animate-pulse`} />
                         {match.match}
                       </span>
@@ -738,7 +873,6 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onNavigate }) =>
                 })}
               </div>
             </section>
-
           </aside>
         </div>
       </main>

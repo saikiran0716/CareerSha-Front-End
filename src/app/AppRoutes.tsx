@@ -55,13 +55,23 @@ const CATEGORY_ROUTES: Record<string, string> = {
 
 /** Legacy /college/<exam> URLs that should point to exam pages. */
 const EXAM_REDIRECTS: Record<string, string> = {
-  gate: 'gate', cat: 'cat', jee: 'jee-main', neet: 'neet',
-  xat: 'xat', clat: 'clat', mat: 'mat', nift: 'nift',
+  gate: 'gate',
+  cat: 'cat',
+  jee: 'jee-main',
+  neet: 'neet',
+  xat: 'xat',
+  clat: 'clat',
+  mat: 'mat',
+  nift: 'nift',
 };
 
 /** Footer slugs rendered by dedicated components instead of the generic page. */
 const DEDICATED_FOOTER_SLUGS = new Set([
-  'company-about', 'company-contact', 'legal-privacy', 'legal-terms', 'legal-disclaimer',
+  'company-about',
+  'company-contact',
+  'legal-privacy',
+  'legal-terms',
+  'legal-disclaimer',
 ]);
 
 /** Maps a FOOTER_PAGES slug to its URL path. */

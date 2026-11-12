@@ -15,7 +15,7 @@ type AuthListener = (user: User | null) => void;
 const listeners: Set<AuthListener> = new Set();
 
 const notifyListeners = (user: User | null) => {
-  listeners.forEach(callback => callback(user));
+  listeners.forEach((callback) => callback(user));
 };
 
 const persistUser = (user: User | null) => {
@@ -47,13 +47,13 @@ const safeFetch = async (url: string, options: RequestInit) => {
     return response;
   } catch (err: any) {
     if (err instanceof TypeError && err.message.includes('fetch')) {
-      const helpMsg = isLocalhost 
+      const helpMsg = isLocalhost
         ? `Could not connect to the backend server at ${SERVER_ROOT}. Please ensure your Django/Python server is running on port 8000.`
         : `Could not reach the production API at ${SERVER_ROOT}. Please check your internet connection or server status.`;
-      
+
       throw {
         code: 'auth/network-error',
-        message: helpMsg
+        message: helpMsg,
       };
     }
     throw err;
@@ -261,5 +261,5 @@ export const authService = {
     }
     persistUser(null);
     notifyListeners(null);
-  }
+  },
 };

@@ -35,6 +35,7 @@ src/
 ```
 
 Rules of thumb:
+
 - A file rendered directly by a route goes in `pages/`. Everything it's built from goes in `features/<feature>/` or, if used across features, `components/`.
 - Folders are lowercase (`kebab-case`); component files are `PascalCase.tsx`.
 
@@ -44,14 +45,14 @@ Rules of thumb:
 
 Use the semantic Tailwind tokens — never raw palette names (`blue-600`) or hex values:
 
-| Token       | Use for                                       |
-|-------------|-----------------------------------------------|
-| `primary`   | Main brand color — buttons, links, highlights |
-| `secondary` | Supporting brand color — accents, active nav  |
-| `accent`    | Decorative third color — badges, gradients    |
-| `neutral`   | Text, backgrounds, borders, surfaces          |
-| `success` / `warning` / `danger` | Status states            |
-| `highlight` | News/Results editorial red                    |
+| Token                            | Use for                                       |
+| -------------------------------- | --------------------------------------------- |
+| `primary`                        | Main brand color — buttons, links, highlights |
+| `secondary`                      | Supporting brand color — accents, active nav  |
+| `accent`                         | Decorative third color — badges, gradients    |
+| `neutral`                        | Text, backgrounds, borders, surfaces          |
+| `success` / `warning` / `danger` | Status states                                 |
+| `highlight`                      | News/Results editorial red                    |
 
 Each has shades `50`–`950` and supports opacity: `bg-primary-600`, `text-neutral-500`, `border-success-200/50`.
 

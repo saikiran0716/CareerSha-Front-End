@@ -7,273 +7,284 @@
 /* All colors live in ./styles/theme.css — edit that file to re-theme the site. */
 
 /* Legacy brand utilities, now backed by the global theme */
-.text-cs-primary { color: rgb(var(--color-primary-600)) !important; }
-.bg-cs-primary { background-color: rgb(var(--color-primary-600)) !important; }
-.bg-cs-primary-soft { background-color: rgb(var(--color-primary-600) / 0.12) !important; }
-.ring-cs-primary { box-shadow: 0 0 0 6px rgb(var(--color-primary-600) / 0.12); }
-.border-cs-primary { border-color: rgb(var(--color-primary-600)) !important; }
-.hover\:bg-cs-primary:hover { background-color: rgb(var(--color-primary-600)) !important; }
-.hover\:text-cs-primary:hover { color: rgb(var(--color-primary-600)) !important; }
+.text-cs-primary {
+  color: rgb(var(--color-primary-600)) !important;
+}
+.bg-cs-primary {
+  background-color: rgb(var(--color-primary-600)) !important;
+}
+.bg-cs-primary-soft {
+  background-color: rgb(var(--color-primary-600) / 0.12) !important;
+}
+.ring-cs-primary {
+  box-shadow: 0 0 0 6px rgb(var(--color-primary-600) / 0.12);
+}
+.border-cs-primary {
+  border-color: rgb(var(--color-primary-600)) !important;
+}
+.hover\:bg-cs-primary:hover {
+  background-color: rgb(var(--color-primary-600)) !important;
+}
+.hover\:text-cs-primary:hover {
+  color: rgb(var(--color-primary-600)) !important;
+}
 
 body {
-    font-family: 'Inter', sans-serif;
-    background-color: rgb(var(--color-page-bg));
-    color: rgb(var(--color-page-text));
-    scroll-behavior: smooth;
+  font-family: 'Inter', sans-serif;
+  background-color: rgb(var(--color-page-bg));
+  color: rgb(var(--color-page-text));
+  scroll-behavior: smooth;
 }
 
 .glass-nav {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
-    border-bottom: 1px solid rgb(var(--color-neutral-200) / 0.5);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-bottom: 1px solid rgb(var(--color-neutral-200) / 0.5);
 }
 
 .dark .glass-nav {
-    background: rgb(var(--color-neutral-950) / 0.7);
-    border-bottom: 1px solid rgb(var(--color-neutral-800) / 0.5);
+  background: rgb(var(--color-neutral-950) / 0.7);
+  border-bottom: 1px solid rgb(var(--color-neutral-800) / 0.5);
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
+  from {
+    opacity: 0;
+  }
 
-    to {
-        opacity: 1;
-    }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes slideLeftToRight {
-    from {
-        opacity: 0;
-        transform: translateX(-30px);
-    }
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
 
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes slideRightToLeft {
-    from {
-        opacity: 0;
-        transform: translateX(30px);
-    }
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
 
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(2deg);
+  }
 
-    0%,
-    100% {
-        transform: translateY(0) rotate(2deg);
-    }
-
-    50% {
-        transform: translateY(-8px) rotate(2deg);
-    }
+  50% {
+    transform: translateY(-8px) rotate(2deg);
+  }
 }
 
 @keyframes progressFill {
-    from {
-        width: 0;
-    }
+  from {
+    width: 0;
+  }
 }
 
 @keyframes softPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 
-    0%,
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-
-    50% {
-        transform: scale(1.05);
-        opacity: 0.8;
-    }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
 }
 
 .animate-fade {
-    animation: fadeIn 0.5s ease-out forwards;
+  animation: fadeIn 0.5s ease-out forwards;
 }
 
 .animate-slide {
-    animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-slide-left-to-right {
-    animation: slideLeftToRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slideLeftToRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-slide-right-to-left {
-    animation: slideRightToLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slideRightToLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-float {
-    animation: float 4s ease-in-out infinite;
+  animation: float 4s ease-in-out infinite;
 }
 
 .animate-progress-fill {
-    animation: progressFill 1.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  animation: progressFill 1.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
 }
 
 .animate-pulse-soft {
-    animation: softPulse 3s ease-in-out infinite;
+  animation: softPulse 3s ease-in-out infinite;
 }
 
 .premium-card {
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    border: 1px solid rgb(var(--color-neutral-200) / 0.8);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgb(var(--color-neutral-200) / 0.8);
 }
 
 .dark .premium-card {
-    border: 1px solid rgb(var(--color-neutral-800) / 0.8);
+  border: 1px solid rgb(var(--color-neutral-800) / 0.8);
 }
 
 .premium-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px -12px rgb(var(--color-secondary-600) / 0.15);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px -12px rgb(var(--color-secondary-600) / 0.15);
 }
 
 .nav-link {
-    position: relative;
-    transition: color 0.3s ease;
+  position: relative;
+  transition: color 0.3s ease;
 }
 
 .nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: rgb(var(--color-secondary-600));
-    transition: width 0.3s ease;
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: rgb(var(--color-secondary-600));
+  transition: width 0.3s ease;
 }
 
 .nav-link.active {
-    color: rgb(var(--color-secondary-600));
+  color: rgb(var(--color-secondary-600));
 }
 
 .nav-link.active::after {
-    width: 100%;
+  width: 100%;
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: rgb(var(--color-neutral-200) / 0.4);
+  background: rgb(var(--color-neutral-200) / 0.4);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgb(var(--color-neutral-300));
-    border-radius: 10px;
+  background: rgb(var(--color-neutral-300));
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: rgb(var(--color-neutral-400));
+  background: rgb(var(--color-neutral-400));
 }
 
 .dark ::-webkit-scrollbar-track {
-    background: rgb(var(--color-neutral-800) / 0.4);
+  background: rgb(var(--color-neutral-800) / 0.4);
 }
 
 .dark ::-webkit-scrollbar-thumb {
-    background: rgb(var(--color-neutral-600));
+  background: rgb(var(--color-neutral-600));
 }
 
 .dark ::-webkit-scrollbar-thumb:hover {
-    background: rgb(var(--color-neutral-500));
+  background: rgb(var(--color-neutral-500));
 }
 
 /* Glassmorphism Utilities */
 .glass {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
-
 
 /* Responsive Breakpoints */
 
 /* Large Desktop (1440px) */
 @media (max-width: 1440px) {
-    .max-w-1440 {
-        max-width: 1440px;
-    }
+  .max-w-1440 {
+    max-width: 1440px;
+  }
 }
 
 /* Laptop / Small Desktop (1024px) */
 @media (max-width: 1024px) {
-    .max-w-1024 {
-        max-width: 1024px;
-    }
+  .max-w-1024 {
+    max-width: 1024px;
+  }
 }
 
 /* Tablet (768px) */
 @media (max-width: 768px) {
-    .section-padding {
-        padding-top: 3rem;
-        padding-bottom: 3rem;
-    }
+  .section-padding {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
 }
 
 /* Large Mobile (425px) */
 @media (max-width: 425px) {
-    .section-padding-mobile {
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-    }
+  .section-padding-mobile {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
 }
 
 /* Small Mobile (375px) */
 @media (max-width: 375px) {
-    .section-padding-small {
-        padding-top: 1.5rem;
-        padding-bottom: 1.5rem;
-    }
+  .section-padding-small {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
 
-    .text-balance {
-        text-wrap: balance;
-    }
+  .text-balance {
+    text-wrap: balance;
+  }
 }
 
 /* Prevent horizontal scroll globally */
 html,
 body {
-    max-width: 100%;
-    overflow-x: hidden;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* Override Tailwind lg:px-8 if you want to remove the horizontal padding globally
    This neutralizes the utility's left/right padding at >=1024px screens. */
 @media (min-width: 1024px) {
-    .lg\:px-8 {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-    }
+  .lg\:px-8 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
 }

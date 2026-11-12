@@ -1,6 +1,6 @@
-import { StudentProfile, AIResponse } from "../types";
-import { authService } from "./authService";
-import { buildApiUrl } from "./apiConfig";
+import { StudentProfile, AIResponse } from '../types';
+import { authService } from './authService';
+import { buildApiUrl } from './apiConfig';
 
 export interface SavedReport {
   id: string; // ID from DB or temp
@@ -23,21 +23,21 @@ export const saveReportLocally = async (profile: StudentProfile, response: AIRes
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Token ${user.token}`
+          Authorization: `Token ${user.token}`,
         },
         body: JSON.stringify({
           profile: profile,
-          recommendation: response
-        })
+          recommendation: response,
+        }),
       });
 
       if (res.ok) {
         const data = await res.json();
-        console.log("Report saved to database:", data.id);
+        console.log('Report saved to database:', data.id);
         return data.id;
       }
     } catch (e) {
-      console.error("Failed to save to DB, falling back to local:", e);
+      console.error('Failed to save to DB, falling back to local:', e);
     }
   }
 
@@ -57,10 +57,10 @@ export const saveReportLocally = async (profile: StudentProfile, response: AIRes
 
     reports.unshift(newReport);
     localStorage.setItem(REPORTS_KEY, JSON.stringify(reports.slice(0, 10)));
-    console.log("Report saved locally (Guest).");
+    console.log('Report saved locally (Guest).');
     return newReport.id;
   } catch (e) {
-    console.error("Local storage error:", e);
+    console.error('Local storage error:', e);
     return null;
   }
 };

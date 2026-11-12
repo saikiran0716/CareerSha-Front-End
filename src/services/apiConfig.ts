@@ -7,14 +7,12 @@ export const isLocalhost = SERVER_ROOT.includes('localhost') || SERVER_ROOT.incl
 
 if (import.meta.env.PROD && isLocalhost) {
   console.warn(
-    "%c[CareerSha] PRODUCTION WARNING: App is connecting to LOCALHOST in production. Auth will fail.",
-    "color: white; background: red; font-weight: bold; padding: 4px; border-radius: 4px;"
+    '%c[CareerSha] PRODUCTION WARNING: App is connecting to LOCALHOST in production. Auth will fail.',
+    'color: white; background: red; font-weight: bold; padding: 4px; border-radius: 4px;',
   );
 }
 
-export const API_ROOT = SERVER_ROOT
-  ? `${SERVER_ROOT}/api`
-  : '/api';
+export const API_ROOT = SERVER_ROOT ? `${SERVER_ROOT}/api` : '/api';
 
 export const buildApiUrl = (path: string) => {
   const normalizedPath = path.startsWith('/') ? path : `/${path}`;

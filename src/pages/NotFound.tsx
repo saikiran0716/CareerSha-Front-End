@@ -4,104 +4,115 @@ import SEO from '../components/common/SEO';
 import { Compass, GraduationCap, BookOpen, School, HelpCircle, Home } from 'lucide-react';
 
 const NotFound: React.FC = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    return (
-        <div className="min-h-[80vh] relative flex items-center justify-center bg-white dark:bg-neutral-950 overflow-hidden font-sans pt-20 pb-32">
-            <SEO title="Page Not Found" robots="noindex, nofollow" />
-            {/* Background elements */}
-            <div className="absolute inset-0 z-0 pointer-events-none">
-                <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-secondary-50/50 dark:bg-secondary-900/10 rounded-full blur-[120px] -mr-96 -mt-96" />
-                <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-accent-50/40 dark:bg-accent-900/10 rounded-full blur-[120px] -ml-80" />
-                <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]"
-                    style={{ backgroundImage: 'radial-gradient(rgb(var(--color-secondary-600)) 0.5px, transparent 0.5px)', backgroundSize: '32px 32px' }}
-                />
+  return (
+    <div className="min-h-[80vh] relative flex items-center justify-center bg-white dark:bg-neutral-950 overflow-hidden font-sans pt-20 pb-32">
+      <SEO title="Page Not Found" robots="noindex, nofollow" />
+      {/* Background elements */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-secondary-50/50 dark:bg-secondary-900/10 rounded-full blur-[120px] -mr-96 -mt-96" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-accent-50/40 dark:bg-accent-900/10 rounded-full blur-[120px] -ml-80" />
+        <div
+          className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]"
+          style={{
+            backgroundImage: 'radial-gradient(rgb(var(--color-secondary-600)) 0.5px, transparent 0.5px)',
+            backgroundSize: '32px 32px',
+          }}
+        />
+      </div>
+
+      <div className="relative z-10 max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        {/* Left Side: Messaging */}
+        <div className="space-y-8 animate-slide">
+          <div className="space-y-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary-50 dark:bg-secondary-500/10 rounded-full">
+              <Compass className="w-4 h-4 text-secondary-600 dark:text-secondary-400" />
+              <span className="text-[10px] font-black text-secondary-600 dark:text-secondary-400 uppercase tracking-widest">
+                Page Not Found
+              </span>
             </div>
 
-            <div className="relative z-10 max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                {/* Left Side: Messaging */}
-                <div className="space-y-8 animate-slide">
-                    <div className="space-y-4">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary-50 dark:bg-secondary-500/10 rounded-full">
-                            <Compass className="w-4 h-4 text-secondary-600 dark:text-secondary-400" />
-                            <span className="text-[10px] font-black text-secondary-600 dark:text-secondary-400 uppercase tracking-widest">Page Not Found</span>
-                        </div>
+            <h1 className="text-5xl md:text-6xl font-extrabold text-neutral-900 dark:text-white tracking-tight leading-[1.1]">
+              Lost in <br />
+              <span className="text-secondary-600 dark:text-secondary-400">Preparation?</span>
+            </h1>
+          </div>
 
-                        <h1 className="text-5xl md:text-6xl font-extrabold text-neutral-900 dark:text-white tracking-tight leading-[1.1]">
-                            Lost in <br />
-                            <span className="text-secondary-600 dark:text-secondary-400">Preparation?</span>
-                        </h1>
-                    </div>
+          <p className="text-lg text-neutral-500 dark:text-neutral-400 font-medium max-w-md leading-relaxed">
+            We couldn't find the coordinates for this specific path. It might have been archived, renamed, or typed
+            incorrectly. Let's get you back on track!
+          </p>
 
-                    <p className="text-lg text-neutral-500 dark:text-neutral-400 font-medium max-w-md leading-relaxed">
-                        We couldn't find the coordinates for this specific path. It might have been archived, renamed, or typed incorrectly. Let's get you back on track!
-                    </p>
+          <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <button
+              onClick={() => navigate('/')}
+              className="group flex items-center justify-center gap-3 px-8 py-4 bg-secondary-600 hover:bg-secondary-700 text-white rounded-2xl text-[13px] font-black uppercase tracking-widest hover:shadow-2xl transition-all active:scale-95"
+            >
+              <Home size={18} />
+              Go Back Home
+            </button>
 
-                    <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                        <button
-                            onClick={() => navigate('/')}
-                            className="group flex items-center justify-center gap-3 px-8 py-4 bg-secondary-600 hover:bg-secondary-700 text-white rounded-2xl text-[13px] font-black uppercase tracking-widest hover:shadow-2xl transition-all active:scale-95"
-                        >
-                            <Home size={18} />
-                            Go Back Home
-                        </button>
+            {/* TODO: we should redirect the user to the HomePage.*/}
+            <button
+              onClick={() => navigate('/')}
+              className="group flex items-center justify-center gap-3 px-8 py-4 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-2xl text-[13px] font-black uppercase tracking-widest hover:border-secondary-500/50 hover:text-secondary-600 dark:hover:text-secondary-400 transition-all active:scale-95"
+            >
+              <BookOpen size={18} />
+              Explore
+            </button>
+          </div>
 
+          <div className="flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400 pt-2">
+            <HelpCircle size={16} className="text-secondary-500" />
+            <span>
+              Need help?{' '}
+              <a href="mailto:support@careersha.com" className="text-secondary-600 hover:underline font-bold">
+                Contact Support
+              </a>
+            </span>
+          </div>
+        </div>
 
-                        {/* TODO: we should redirect the user to the HomePage.*/}
-                        <button
-                            onClick={() => navigate('/')}
-                            className="group flex items-center justify-center gap-3 px-8 py-4 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-2xl text-[13px] font-black uppercase tracking-widest hover:border-secondary-500/50 hover:text-secondary-600 dark:hover:text-secondary-400 transition-all active:scale-95"
-                        >
-                            <BookOpen size={18} />
-                            Explore
-                        </button>
-                    </div>
-
-                    <div className="flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400 pt-2">
-                        <HelpCircle size={16} className="text-secondary-500" />
-                        <span>Need help? <a href="mailto:support@careersha.com" className="text-secondary-600 hover:underline font-bold">Contact Support</a></span>
-                    </div>
-                </div>
-
-                {/* Right Side: Visual Element (Education Theme) */}
-                <div className="hidden lg:flex items-center justify-center relative group">
-                    <div className="relative">
-                        <div className="text-[18rem] font-black text-neutral-900/5 dark:text-white/5 tracking-tighter transition-all duration-700 group-hover:tracking-normal select-none">
-                            404
-                        </div>
-
-                        {/* Centered Graphic Component */}
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="w-64 h-64 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl border border-white dark:border-neutral-800 rounded-[3rem] shadow-2xl flex items-center justify-center p-8 group-hover:scale-105 transition-transform duration-700">
-                                <div className="relative">
-                                    {/* Cap icon or similar */}
-                                    <div className="w-28 h-28 bg-gradient-to-br from-secondary-600 to-accent-600 rounded-3xl rotate-12 flex items-center justify-center shadow-secondary-500/30 shadow-2xl transition-transform duration-500 group-hover:rotate-0">
-                                        <GraduationCap className="text-white w-14 h-14" />
-                                    </div>
-
-                                    {/* Floating icons */}
-                                    <div className="absolute -top-6 -right-6 w-14 h-14 bg-success-500 rounded-2xl flex items-center justify-center shadow-lg animate-bounce duration-3000">
-                                        <BookOpen className="text-white w-6 h-6" />
-                                    </div>
-
-                                    <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-warning-500 rounded-full flex items-center justify-center shadow-lg animate-pulse">
-                                        <School className="text-white w-5 h-5" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        {/* Right Side: Visual Element (Education Theme) */}
+        <div className="hidden lg:flex items-center justify-center relative group">
+          <div className="relative">
+            <div className="text-[18rem] font-black text-neutral-900/5 dark:text-white/5 tracking-tighter transition-all duration-700 group-hover:tracking-normal select-none">
+              404
             </div>
 
-            <style>
-                {`
+            {/* Centered Graphic Component */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-64 h-64 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl border border-white dark:border-neutral-800 rounded-[3rem] shadow-2xl flex items-center justify-center p-8 group-hover:scale-105 transition-transform duration-700">
+                <div className="relative">
+                  {/* Cap icon or similar */}
+                  <div className="w-28 h-28 bg-gradient-to-br from-secondary-600 to-accent-600 rounded-3xl rotate-12 flex items-center justify-center shadow-secondary-500/30 shadow-2xl transition-transform duration-500 group-hover:rotate-0">
+                    <GraduationCap className="text-white w-14 h-14" />
+                  </div>
+
+                  {/* Floating icons */}
+                  <div className="absolute -top-6 -right-6 w-14 h-14 bg-success-500 rounded-2xl flex items-center justify-center shadow-lg animate-bounce duration-3000">
+                    <BookOpen className="text-white w-6 h-6" />
+                  </div>
+
+                  <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-warning-500 rounded-full flex items-center justify-center shadow-lg animate-pulse">
+                    <School className="text-white w-5 h-5" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style>
+        {`
                 @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
                 .animate-slide { animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
                 `}
-            </style>
-        </div>
-    );
+      </style>
+    </div>
+  );
 };
 
 export default NotFound;

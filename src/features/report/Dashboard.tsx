@@ -2,15 +2,7 @@ import React, { useState } from 'react';
 import SEO from '../../components/common/SEO';
 import { CHART_TOKENS, themeColor } from '../../lib/theme';
 import { AIResponse, College } from '../../types';
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  Cell
-} from 'recharts';
+import { BarChart, Bar, XAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 
 interface Props {
   data: AIResponse;
@@ -24,9 +16,9 @@ const Dashboard: React.FC<Props> = ({ data }) => {
   const [selectedForComparison, setSelectedForComparison] = useState<College[]>([]);
 
   const toggleComparison = (college: College) => {
-    setSelectedForComparison(prev => {
-      const exists = prev.find(c => c.name === college.name);
-      if (exists) return prev.filter(c => c.name !== college.name);
+    setSelectedForComparison((prev) => {
+      const exists = prev.find((c) => c.name === college.name);
+      if (exists) return prev.filter((c) => c.name !== college.name);
       if (prev.length >= 3) return prev;
       return [...prev, college];
     });
@@ -35,13 +27,14 @@ const Dashboard: React.FC<Props> = ({ data }) => {
   /* ===================== COLLEGE CARD ===================== */
 
   const renderCollegeCard = (college: College, idx: number) => {
-    const isSelected = selectedForComparison.find(c => c.name === college.name);
+    const isSelected = selectedForComparison.find((c) => c.name === college.name);
 
     return (
       <div
         key={idx}
-        className={`bg-white border rounded-xl p-6 shadow-sm transition ${isSelected ? 'border-secondary-600 ring-2 ring-secondary-200' : 'border-neutral-200 hover:shadow-md'
-          }`}
+        className={`bg-white border rounded-xl p-6 shadow-sm transition ${
+          isSelected ? 'border-secondary-600 ring-2 ring-secondary-200' : 'border-neutral-200 hover:shadow-md'
+        }`}
       >
         <div className="flex justify-between mb-4">
           <div>
@@ -67,10 +60,9 @@ const Dashboard: React.FC<Props> = ({ data }) => {
 
         <button
           onClick={() => toggleComparison(college)}
-          className={`w-full py-2 rounded-md text-sm font-semibold transition ${isSelected
-            ? 'bg-secondary-600 text-white'
-            : 'bg-neutral-100 hover:bg-secondary-50 text-neutral-700'
-            }`}
+          className={`w-full py-2 rounded-md text-sm font-semibold transition ${
+            isSelected ? 'bg-secondary-600 text-white' : 'bg-neutral-100 hover:bg-secondary-50 text-neutral-700'
+          }`}
         >
           {isSelected ? 'In Comparison' : 'Compare'}
         </button>
@@ -82,7 +74,6 @@ const Dashboard: React.FC<Props> = ({ data }) => {
 
   const renderAnalyzer = () => (
     <div className="space-y-10">
-
       <div className="bg-secondary-600 text-white p-8 rounded-xl">
         <h2 className="text-2xl font-bold mb-4">Rank Analysis</h2>
         <p className="text-5xl font-bold">{data.rankAnalysis.predictedRank}</p>
@@ -117,9 +108,7 @@ const Dashboard: React.FC<Props> = ({ data }) => {
         <div key={idx}>
           <h3 className="text-2xl font-bold mb-6">{rec.title}</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {rec.colleges.map((college, cIdx) =>
-              renderCollegeCard(college, cIdx)
-            )}
+            {rec.colleges.map((college, cIdx) => renderCollegeCard(college, cIdx))}
           </div>
         </div>
       ))}
@@ -135,15 +124,11 @@ const Dashboard: React.FC<Props> = ({ data }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-center">
         <div>
           <p className="text-sm uppercase opacity-80">Entry Salary</p>
-          <p className="text-4xl font-bold">
-            {data.recommendations[0]?.estimatedSalary.entry}
-          </p>
+          <p className="text-4xl font-bold">{data.recommendations[0]?.estimatedSalary.entry}</p>
         </div>
         <div>
           <p className="text-sm uppercase opacity-80">Senior Salary</p>
-          <p className="text-4xl font-bold">
-            {data.recommendations[0]?.estimatedSalary.senior}
-          </p>
+          <p className="text-4xl font-bold">{data.recommendations[0]?.estimatedSalary.senior}</p>
         </div>
       </div>
     </div>
@@ -153,10 +138,7 @@ const Dashboard: React.FC<Props> = ({ data }) => {
 
   return (
     <div className="w-full py-12 space-y-16">
-      <SEO 
-        title="My Dashboard | CareerSha" 
-        robots="noindex, nofollow" 
-      />
+      <SEO title="My Dashboard | CareerSha" robots="noindex, nofollow" />
 
       {/* Summary */}
       <section className="bg-white p-8 rounded-xl border border-neutral-200">
@@ -169,15 +151,14 @@ const Dashboard: React.FC<Props> = ({ data }) => {
         {[
           { id: 'predictor', label: 'Match 🎯' },
           { id: 'analyzer', label: 'Stats 📊' },
-          { id: 'salary', label: 'ROI 💰' }
-        ].map(hub => (
+          { id: 'salary', label: 'ROI 💰' },
+        ].map((hub) => (
           <button
             key={hub.id}
             onClick={() => setActiveHub(hub.id as any)}
-            className={`px-6 py-2 rounded-full font-semibold transition ${activeHub === hub.id
-              ? 'bg-secondary-600 text-white'
-              : 'bg-neutral-100 hover:bg-secondary-50'
-              }`}
+            className={`px-6 py-2 rounded-full font-semibold transition ${
+              activeHub === hub.id ? 'bg-secondary-600 text-white' : 'bg-neutral-100 hover:bg-secondary-50'
+            }`}
           >
             {hub.label}
           </button>

@@ -31,9 +31,9 @@ export const JobsSidebarFilter = () => {
   const [salary, setSalary] = useState(0);
 
   const toggleFilter = (id: string) => {
-    setSelectedFilters(prev => ({
+    setSelectedFilters((prev) => ({
       ...prev,
-      [id]: !prev[id]
+      [id]: !prev[id],
     }));
   };
 
@@ -48,17 +48,30 @@ export const JobsSidebarFilter = () => {
       <div className="flex flex-col gap-3">
         <h4 className="text-[13px] font-bold text-neutral-800">Job Type</h4>
         <div className="flex flex-col gap-2.5">
-          {jobTypes.map(type => (
+          {jobTypes.map((type) => (
             <label key={type.id} className="flex items-center gap-2.5 cursor-pointer group">
-              <div className={`w-4 h-4 rounded border flex items-center justify-center transition-colors
-                ${selectedFilters[type.id] ? 'bg-primary-600 border-primary-600' : 'border-neutral-300 group-hover:border-primary-600'}`}>
+              <div
+                className={`w-4 h-4 rounded border flex items-center justify-center transition-colors
+                ${selectedFilters[type.id] ? 'bg-primary-600 border-primary-600' : 'border-neutral-300 group-hover:border-primary-600'}`}
+              >
                 {selectedFilters[type.id] && (
-                  <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                  <svg
+                    className="w-3 h-3 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    viewBox="0 0 24 24"
+                  >
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
                 )}
               </div>
-              <input type="checkbox" className="hidden" checked={!!selectedFilters[type.id]} onChange={() => toggleFilter(type.id)} />
+              <input
+                type="checkbox"
+                className="hidden"
+                checked={!!selectedFilters[type.id]}
+                onChange={() => toggleFilter(type.id)}
+              />
               <span className="text-[13px] text-neutral-600 flex-1">{type.label}</span>
               <span className="text-[12px] text-neutral-400">({type.count})</span>
             </label>
@@ -72,17 +85,30 @@ export const JobsSidebarFilter = () => {
       <div className="flex flex-col gap-3">
         <h4 className="text-[13px] font-bold text-neutral-800">Experience Level</h4>
         <div className="flex flex-col gap-2.5">
-          {experienceLevels.map(level => (
+          {experienceLevels.map((level) => (
             <label key={level.id} className="flex items-center gap-2.5 cursor-pointer group">
-              <div className={`w-4 h-4 rounded border flex items-center justify-center transition-colors
-                ${selectedFilters[level.id] ? 'bg-primary-600 border-primary-600' : 'border-neutral-300 group-hover:border-primary-600'}`}>
+              <div
+                className={`w-4 h-4 rounded border flex items-center justify-center transition-colors
+                ${selectedFilters[level.id] ? 'bg-primary-600 border-primary-600' : 'border-neutral-300 group-hover:border-primary-600'}`}
+              >
                 {selectedFilters[level.id] && (
-                  <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                  <svg
+                    className="w-3 h-3 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    viewBox="0 0 24 24"
+                  >
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
                 )}
               </div>
-              <input type="checkbox" className="hidden" checked={!!selectedFilters[level.id]} onChange={() => toggleFilter(level.id)} />
+              <input
+                type="checkbox"
+                className="hidden"
+                checked={!!selectedFilters[level.id]}
+                onChange={() => toggleFilter(level.id)}
+              />
               <span className="text-[13px] text-neutral-600 flex-1">{level.label}</span>
               <span className="text-[12px] text-neutral-400">({level.count})</span>
             </label>
@@ -104,24 +130,39 @@ export const JobsSidebarFilter = () => {
           />
         </div>
         <div className="flex flex-col gap-2.5 mt-1">
-          {locations.map(loc => (
+          {locations.map((loc) => (
             <label key={loc.id} className="flex items-center gap-2.5 cursor-pointer group">
-              <div className={`w-4 h-4 rounded border flex items-center justify-center transition-colors
-                ${selectedFilters[loc.id] ? 'bg-primary-600 border-primary-600' : 'border-neutral-300 group-hover:border-primary-600'}`}>
+              <div
+                className={`w-4 h-4 rounded border flex items-center justify-center transition-colors
+                ${selectedFilters[loc.id] ? 'bg-primary-600 border-primary-600' : 'border-neutral-300 group-hover:border-primary-600'}`}
+              >
                 {selectedFilters[loc.id] && (
-                  <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                  <svg
+                    className="w-3 h-3 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    viewBox="0 0 24 24"
+                  >
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
                 )}
               </div>
-              <input type="checkbox" className="hidden" checked={!!selectedFilters[loc.id]} onChange={() => toggleFilter(loc.id)} />
+              <input
+                type="checkbox"
+                className="hidden"
+                checked={!!selectedFilters[loc.id]}
+                onChange={() => toggleFilter(loc.id)}
+              />
               <span className="text-[13px] text-neutral-600 flex-1">{loc.label}</span>
               <span className="text-[12px] text-neutral-400">({loc.count})</span>
             </label>
           ))}
           <button className="text-[12px] font-bold text-primary-600 hover:text-primary-700 text-left mt-1 flex items-center gap-1">
             Show more
-            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
           </button>
         </div>
       </div>
@@ -132,28 +173,33 @@ export const JobsSidebarFilter = () => {
       <div className="flex flex-col gap-4">
         <h4 className="text-[13px] font-bold text-neutral-800">Salary Range</h4>
         <div className="px-1 relative pb-2">
-            <input 
-                type="range" 
-                min="0" 
-                max="50" 
-                value={salary} 
-                onChange={(e) => setSalary(parseInt(e.target.value))}
-                className="w-full h-1 bg-neutral-200 rounded-lg appearance-none cursor-pointer accent-primary-600"
-            />
-            {/* Custom slider thumb styled via CSS if needed, but standard accent-color works well enough for mockups */}
-            <div className="absolute top-0 left-0 h-1 bg-primary-600 rounded-l-lg pointer-events-none" style={{ width: `${(salary / 50) * 100}%` }}></div>
-            <div className="absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-white border-2 border-primary-600 rounded-full shadow-sm pointer-events-none" style={{ left: `calc(${(salary / 50) * 100}% - 8px)` }}></div>
+          <input
+            type="range"
+            min="0"
+            max="50"
+            value={salary}
+            onChange={(e) => setSalary(parseInt(e.target.value))}
+            className="w-full h-1 bg-neutral-200 rounded-lg appearance-none cursor-pointer accent-primary-600"
+          />
+          {/* Custom slider thumb styled via CSS if needed, but standard accent-color works well enough for mockups */}
+          <div
+            className="absolute top-0 left-0 h-1 bg-primary-600 rounded-l-lg pointer-events-none"
+            style={{ width: `${(salary / 50) * 100}%` }}
+          ></div>
+          <div
+            className="absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-white border-2 border-primary-600 rounded-full shadow-sm pointer-events-none"
+            style={{ left: `calc(${(salary / 50) * 100}% - 8px)` }}
+          ></div>
         </div>
         <div className="flex items-center justify-between text-[11px] font-bold text-neutral-500 mt-1">
-            <span>₹0</span>
-            <span>₹50 LPA+</span>
+          <span>₹0</span>
+          <span>₹50 LPA+</span>
         </div>
       </div>
 
       <button className="w-full py-2.5 bg-primary-50 text-primary-700 font-bold text-[13px] rounded-lg border border-primary-100 hover:bg-primary-100 transition-colors mt-2">
         Show Results (12,450)
       </button>
-
     </div>
   );
 };

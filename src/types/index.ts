@@ -1,4 +1,3 @@
-
 export enum Qualification {
   Tenth = '10th Standard (SSC/CBSE/ICSE)',
   Twelfth = '12th Standard / Intermediate (MPC/BiPC/CEC)',
@@ -16,26 +15,26 @@ export enum Qualification {
   MCA = 'MCA',
   MSc = 'M.Sc',
   MA = 'M.A',
-  PhD = 'PhD / Research'
+  PhD = 'PhD / Research',
 }
 
 export enum BudgetRange {
   Low = 'Low (Govt Fees)',
   Medium = 'Medium (Affordable Private)',
-  High = 'High (Premium/International)'
+  High = 'High (Premium/International)',
 }
 
 export enum CollegeType {
   Government = 'Government / Public',
   Private = 'Private / Self-Financed',
   Deemed = 'Deemed University',
-  Autonomous = 'Autonomous Institute'
+  Autonomous = 'Autonomous Institute',
 }
 
 export enum CareerGoal {
   Job = 'Immediate Placement',
   HigherStudies = 'Higher Education / Research',
-  Entrepreneurship = 'Startup / Business'
+  Entrepreneurship = 'Startup / Business',
 }
 
 export interface AcademicDetails {

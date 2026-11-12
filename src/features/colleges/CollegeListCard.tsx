@@ -11,7 +11,6 @@ interface CollegeListCardProps {
 }
 
 const CollegeListCard: React.FC<CollegeListCardProps> = ({ college }) => {
-
   const getTagStyle = (label: string) => {
     switch (label) {
       case 'Engineering':
@@ -83,16 +82,26 @@ const CollegeListCard: React.FC<CollegeListCardProps> = ({ college }) => {
       <div className="w-full md:w-[300px] flex flex-col justify-between shrink-0 md:border-l border-neutral-100 dark:border-neutral-800 md:pl-6">
         <div className="flex justify-between items-start gap-3 mb-4 md:mb-0">
           <div>
-            <p className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider mb-1 whitespace-nowrap">NIRF Ranking</p>
-            <p className="text-base font-black text-neutral-900 dark:text-white whitespace-nowrap">{college.nirfRanking}</p>
+            <p className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider mb-1 whitespace-nowrap">
+              NIRF Ranking
+            </p>
+            <p className="text-base font-black text-neutral-900 dark:text-white whitespace-nowrap">
+              {college.nirfRanking}
+            </p>
           </div>
           <div>
-            <p className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider mb-1 whitespace-nowrap">Est. Year</p>
+            <p className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider mb-1 whitespace-nowrap">
+              Est. Year
+            </p>
             <p className="text-base font-black text-neutral-900 dark:text-white whitespace-nowrap">{college.estYear}</p>
           </div>
           <div>
-            <p className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider mb-1 whitespace-nowrap">Avg. Package</p>
-            <p className="text-base font-black text-neutral-900 dark:text-white whitespace-nowrap">{college.avgPackage}</p>
+            <p className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider mb-1 whitespace-nowrap">
+              Avg. Package
+            </p>
+            <p className="text-base font-black text-neutral-900 dark:text-white whitespace-nowrap">
+              {college.avgPackage}
+            </p>
           </div>
         </div>
 

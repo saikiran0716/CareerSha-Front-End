@@ -23,19 +23,23 @@ const AuthPage: React.FC<AuthPageProps> = ({ user, onAuthSuccess }) => {
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-neutral-50 dark:bg-neutral-950">
-      <SEO 
-        title={isLoginPage ? "Login to Your Account | Access Career Tools & Exams" : "Create Free Account | Start Your Career Journey"}
-        description={isLoginPage ? "Login to access your dashboard, saved colleges, exam tools, and career guidance." : "Sign up to explore colleges, exams, rank predictors, and personalized career tools."}
+      <SEO
+        title={
+          isLoginPage
+            ? 'Login to Your Account | Access Career Tools & Exams'
+            : 'Create Free Account | Start Your Career Journey'
+        }
+        description={
+          isLoginPage
+            ? 'Login to access your dashboard, saved colleges, exam tools, and career guidance.'
+            : 'Sign up to explore colleges, exams, rank predictors, and personalized career tools.'
+        }
         robots="noindex, nofollow"
       />
       <div className="w-full max-w-md">
         {/* We use AuthModal here but we need it to be always open or integrated */}
         {/* For now, we'll just render the content of AuthModal or similar logic */}
-        <AuthModal 
-          isOpen={true} 
-          onClose={() => navigate('/')} 
-          onAuthSuccess={onAuthSuccess} 
-        />
+        <AuthModal isOpen={true} onClose={() => navigate('/')} onAuthSuccess={onAuthSuccess} />
       </div>
     </div>
   );

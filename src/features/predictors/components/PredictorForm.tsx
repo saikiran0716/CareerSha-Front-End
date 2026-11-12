@@ -11,14 +11,20 @@ const labelClass = 'text-[13px] font-bold text-neutral-700 dark:text-neutral-300
 
 const Required = () => <span className="text-danger-500">*</span>;
 
-const Select: React.FC<{ value: string; onChange: (v: string) => void; options: string[] }> = ({ value, onChange, options }) => (
+const Select: React.FC<{ value: string; onChange: (v: string) => void; options: string[] }> = ({
+  value,
+  onChange,
+  options,
+}) => (
   <div className="relative">
     <select
       value={value}
       onChange={(e) => onChange(e.target.value)}
       className={`${fieldClass} appearance-none cursor-pointer`}
     >
-      {options.map((o) => <option key={o}>{o}</option>)}
+      {options.map((o) => (
+        <option key={o}>{o}</option>
+      ))}
     </select>
     <ChevronDown className="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" />
   </div>
@@ -86,13 +92,13 @@ const PredictorForm: React.FC<{ exam: ExamConfig }> = ({ exam }) => {
 
   return (
     <div className="bg-white dark:bg-neutral-900 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.4)] p-6 sm:p-8 border border-neutral-100 dark:border-neutral-800">
-      <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-6 text-center">
-        {name} Rank Predictor
-      </h3>
+      <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-6 text-center">{name} Rank Predictor</h3>
 
       <div className="space-y-5">
         <div className="space-y-1.5">
-          <label className={labelClass}>{name} Score <Required /></label>
+          <label className={labelClass}>
+            {name} Score <Required />
+          </label>
           <input
             type="number"
             placeholder={`Enter Score (Out of ${maxMarks})`}
@@ -104,12 +110,16 @@ const PredictorForm: React.FC<{ exam: ExamConfig }> = ({ exam }) => {
         </div>
 
         <div className="space-y-1.5">
-          <label className={labelClass}>{name} Category <Required /></label>
+          <label className={labelClass}>
+            {name} Category <Required />
+          </label>
           <Select value={category} onChange={setCategory} options={CATEGORIES} />
         </div>
 
         <div className="space-y-1.5">
-          <label className={labelClass}>{secondaryField.label} <Required /></label>
+          <label className={labelClass}>
+            {secondaryField.label} <Required />
+          </label>
           <Select value={secondary} onChange={setSecondary} options={secondaryField.options} />
         </div>
 
@@ -144,33 +154,46 @@ const PredictorForm: React.FC<{ exam: ExamConfig }> = ({ exam }) => {
             <div className="bg-primary-50 dark:bg-primary-900/20 rounded-xl p-6 border border-primary-200 dark:border-primary-800/50">
               <div className="flex flex-col sm:flex-row justify-between items-start gap-6 mb-6">
                 <div>
-                  <p className="text-[12px] font-bold text-primary-600 dark:text-primary-500 uppercase tracking-wide mb-1">Expected AIR</p>
+                  <p className="text-[12px] font-bold text-primary-600 dark:text-primary-500 uppercase tracking-wide mb-1">
+                    Expected AIR
+                  </p>
                   <h4 className="text-4xl font-black text-neutral-900 dark:text-white">
                     #{result.predictedRank?.replace(/^#/, '') || 'N/A'}
                   </h4>
                 </div>
                 <div className="flex gap-6 sm:text-right">
                   <div>
-                    <p className="text-[11px] font-bold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-1">{category} Rank</p>
+                    <p className="text-[11px] font-bold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-1">
+                      {category} Rank
+                    </p>
                     <p className="text-xl font-black text-neutral-700 dark:text-neutral-300">
                       #{result.categoryRank?.replace(/^#/, '') || '—'}
                     </p>
                   </div>
                   <div>
-                    <p className="text-[11px] font-bold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-1">Percentile</p>
-                    <p className="text-xl font-black text-neutral-700 dark:text-neutral-300">{result.percentile || '—'}</p>
+                    <p className="text-[11px] font-bold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-1">
+                      Percentile
+                    </p>
+                    <p className="text-xl font-black text-neutral-700 dark:text-neutral-300">
+                      {result.percentile || '—'}
+                    </p>
                   </div>
                 </div>
               </div>
 
               <div className="bg-white dark:bg-neutral-900 rounded-lg p-5 border border-primary-100 dark:border-primary-800/30">
-                <h5 className="text-[14px] font-bold text-neutral-900 dark:text-white mb-3">Admission Analysis ({analysisHeading})</h5>
+                <h5 className="text-[14px] font-bold text-neutral-900 dark:text-white mb-3">
+                  Admission Analysis ({analysisHeading})
+                </h5>
                 <ul className="space-y-2">
                   {(result.analysis || 'Analysis generated.')
                     .split(/(?<=\.)\s+/)
                     .filter((s) => s.trim().length > 0)
                     .map((sentence, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-[14px] text-neutral-600 dark:text-neutral-400">
+                      <li
+                        key={idx}
+                        className="flex items-start gap-2 text-[14px] text-neutral-600 dark:text-neutral-400"
+                      >
                         <TrendingUp className="w-4 h-4 text-primary-500 mt-0.5 flex-shrink-0" />
                         <span>{sentence.trim()}</span>
                       </li>
