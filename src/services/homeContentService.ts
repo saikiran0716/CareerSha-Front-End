@@ -1,5 +1,5 @@
 import { buildApiUrl, SERVER_ROOT } from './apiConfig';
-import { CoursoalItem, coursoalData } from '../assets/coursoal/data';
+import { CarouselItem, carouselData } from '../data/carouselData';
 
 export interface NewsItem {
   id: number;
@@ -29,7 +29,7 @@ type CarouselApiItem = {
   buttonText?: string;
 };
 
-export const getHomepageCarouselItems = async (): Promise<CoursoalItem[]> => {
+export const getHomepageCarouselItems = async (): Promise<CarouselItem[]> => {
   try {
     const response = await fetch(buildApiUrl('/content/homepage-carousel/'));
     if (!response.ok) {
@@ -38,7 +38,7 @@ export const getHomepageCarouselItems = async (): Promise<CoursoalItem[]> => {
 
     const data = await response.json();
     if (!Array.isArray(data) || data.length === 0) {
-      return coursoalData;
+      return carouselData;
     }
 
     return data.map((item: CarouselApiItem) => {
@@ -54,7 +54,7 @@ export const getHomepageCarouselItems = async (): Promise<CoursoalItem[]> => {
     });
   } catch (error) {
     console.error('Failed to load homepage carousel items:', error);
-    return coursoalData;
+    return carouselData;
   }
 };
 

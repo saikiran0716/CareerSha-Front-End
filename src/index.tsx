@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import {BrowserRouter} from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import App from './App';
+import App from './app/App';
 
 const rootElement = document.getElementById('root');
 if (! rootElement) {

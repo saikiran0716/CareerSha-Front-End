@@ -6,7 +6,7 @@ import {
   mapCmsBlogItemToArticle,
   mapCmsBlogItemsToArticles,
   slugify,
-} from '@/pages/Blog/blogData';
+} from '@/data/blog/blogData';
 
 type CmsListResponse = CmsBlogItem[] | { items?: CmsBlogItem[]; results?: CmsBlogItem[] };
 
