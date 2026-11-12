@@ -17,6 +17,9 @@ const EXAMS = [
   'WBJEE',
   'COMEDK',
 ];
+/** This year and the two before it, newest first (e.g. 2026, 2025, 2024). */
+const EXAM_YEARS = [0, 1, 2].map((n) => String(new Date().getFullYear() - n));
+
 const CATEGORIES = ['General', 'OBC', 'SC', 'ST', 'EWS', 'PWD'];
 const STREAMS = ['Engineering', 'Medical', 'Management', 'Science', 'Architecture'];
 const STATES = [
@@ -138,7 +141,7 @@ export const CollegePredictorView = ({ profile }: { profile?: PredictorPrefill |
   const [stream, setStream] = useState(profile?.stream || 'Select Course / Stream');
 
   // Visual Only Fields (Statically updated state, not sent to API)
-  const [examYear, setExamYear] = useState('2024');
+  const [examYear, setExamYear] = useState(EXAM_YEARS[0]);
   const [percentage, setPercentage] = useState('');
   const [prefLocation, setPrefLocation] = useState('Select Location');
   const [prefState, setPrefState] = useState('Select State');
@@ -246,52 +249,6 @@ export const CollegePredictorView = ({ profile }: { profile?: PredictorPrefill |
                   </svg>
                   College Predictor
                 </button>
-                <button
-                  onClick={() => navigate('/predictors/admission-chances')}
-                  className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-neutral-600 hover:bg-neutral-50 transition-colors text-sm font-medium w-full text-left"
-                >
-                  <svg
-                    className="w-[18px] h-[18px] text-warning-500"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 7h.01M15 17h.01M19 5L5 19" />
-                  </svg>
-                  Admission Chances
-                </button>
-                <button
-                  onClick={() => navigate('/predictors/scholarship')}
-                  className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-neutral-600 hover:bg-neutral-50 transition-colors text-sm font-medium w-full text-left"
-                >
-                  <svg
-                    className="w-[18px] h-[18px] text-pink-500"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle cx="12" cy="8" r="7" />
-                    <path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12" />
-                  </svg>
-                  Scholarship Predictor
-                </button>
-                <button
-                  onClick={() => navigate('/predictors/salary')}
-                  className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-neutral-600 hover:bg-neutral-50 transition-colors text-sm font-medium w-full text-left"
-                >
-                  <svg
-                    className="w-[18px] h-[18px] text-teal-500"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 3v18h18M18.7 8l-5.1 5.2-2.8-2.7L7 14.3" />
-                  </svg>
-                  Salary Predictor
-                </button>
               </div>
             </div>
 
@@ -392,7 +349,7 @@ export const CollegePredictorView = ({ profile }: { profile?: PredictorPrefill |
                   id="examYear"
                   label="Exam Year"
                   value={examYear}
-                  options={['2024', '2023', '2022']}
+                  options={EXAM_YEARS}
                   onSelect={setExamYear}
                   required={true}
                   openDropdown={openDropdown}
