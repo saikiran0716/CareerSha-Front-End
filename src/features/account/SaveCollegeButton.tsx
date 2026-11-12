@@ -4,6 +4,7 @@ import { Bookmark } from 'lucide-react';
 import { userData } from '../../services/userDataService';
 import { useUserData } from '../../hooks/useUserData';
 import { useCurrentUser } from '../../hooks/useCurrentUser';
+import { ACCOUNT_REQUIRES_SIGN_IN } from '../../config/features';
 
 interface SaveCollegeButtonProps {
   college: { name: string; location?: string };
@@ -21,7 +22,7 @@ const SaveCollegeButton: React.FC<SaveCollegeButtonProps> = ({ college, variant 
   const toggle = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (!user) {
+    if (!user && ACCOUNT_REQUIRES_SIGN_IN) {
       navigate('/login');
       return;
     }

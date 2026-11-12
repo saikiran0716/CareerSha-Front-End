@@ -4,6 +4,7 @@ import AccountLayout from '../../features/account/AccountLayout';
 import { useCurrentUser } from '../../hooks/useCurrentUser';
 import { AccountProfile, userData } from '../../services/userDataService';
 import { BudgetRange, CollegeType, Qualification } from '../../types';
+import { ACCOUNT_REQUIRES_SIGN_IN } from '../../config/features';
 
 const CATEGORIES = ['General', 'EWS', 'OBC', 'SC', 'ST', 'PwD'];
 
@@ -49,21 +50,23 @@ const ProfilePage: React.FC = () => {
       title="Profile & Settings"
       description="Your details pre-fill the predictors and help the AI counsellor give better answers."
     >
-      {user && (
+      {(user || !ACCOUNT_REQUIRES_SIGN_IN) && (
         <div className="space-y-6">
           {/* Account (from sign-in) */}
           <div className="flex items-center gap-4 rounded-2xl border border-neutral-200 bg-white p-5">
             <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-full bg-primary-800 text-xl uppercase text-white">
-              {user.avatar ? (
-                <img src={user.avatar} alt="" className="h-full w-full object-cover" />
+              {user?.avatar ? (
+                <img src={user?.avatar} alt="" className="h-full w-full object-cover" />
               ) : (
-                (user.name || user.email).charAt(0)
+                (user?.name || user?.email || 'G').charAt(0)
               )}
             </div>
             <div className="min-w-0">
-              <h2 className="truncate text-lg text-neutral-900">{user.name}</h2>
-              <p className="truncate text-sm text-neutral-500">{user.email}</p>
-              {user.provider && user.provider !== 'local' && (
+              <h2 className="truncate text-lg text-neutral-900">{user?.name ?? 'Guest'}</h2>
+              <p className="truncate text-sm text-neutral-500">
+                {user?.email ?? 'Not signed in — saved in this browser'}
+              </p>
+              {user?.provider && user.provider !== 'local' && (
                 <p className="mt-0.5 text-xs capitalize text-neutral-500">Signed in with {user.provider}</p>
               )}
             </div>

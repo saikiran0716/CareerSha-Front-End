@@ -9,6 +9,9 @@ import { renderAt, signIn } from '../../test/utils';
 import { EMPTY_PROFILE, toStudentProfile, userData } from '../../services/userDataService';
 import { AIResponse } from '../../types';
 
+// These tests cover the sign-in-required mode (switch on)
+vi.mock('../../config/features', () => ({ ACCOUNT_REQUIRES_SIGN_IN: true }));
+
 describe('account pages — signed out', () => {
   it.each([
     ['Profile & Settings', <ProfilePage />],

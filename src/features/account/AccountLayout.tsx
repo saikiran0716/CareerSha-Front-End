@@ -4,6 +4,7 @@ import { LogIn } from 'lucide-react';
 import { ACCOUNT_LINKS } from './accountNav';
 import SEO from '../../components/common/SEO';
 import { useCurrentUser } from '../../hooks/useCurrentUser';
+import { ACCOUNT_REQUIRES_SIGN_IN } from '../../config/features';
 
 interface AccountLayoutProps {
   title: string;
@@ -16,6 +17,7 @@ interface AccountLayoutProps {
 /** Shell for /account/* pages: side navigation + a sign-in gate. */
 const AccountLayout: React.FC<AccountLayoutProps> = ({ title, description, actions, children }) => {
   const user = useCurrentUser();
+  const allowed = Boolean(user) || !ACCOUNT_REQUIRES_SIGN_IN;
 
   return (
     <div className="min-h-[70vh] bg-neutral-50">
@@ -46,10 +48,10 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({ title, description, actio
               <h1 className="text-2xl sm:text-3xl text-neutral-900">{title}</h1>
               {description && <p className="mt-1 text-sm text-neutral-500">{description}</p>}
             </div>
-            {user && actions}
+            {allowed && actions}
           </div>
 
-          {user ? (
+          {allowed ? (
             children
           ) : (
             <div className="rounded-2xl border border-neutral-200 bg-white p-10 text-center">

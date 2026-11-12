@@ -4,6 +4,9 @@ import userEvent from '@testing-library/user-event';
 import Header from './Header';
 import { renderAt, TEST_USER } from '../../../test/utils';
 
+// These tests cover the sign-in-required mode (switch on)
+vi.mock('../../../config/features', () => ({ ACCOUNT_REQUIRES_SIGN_IN: true }));
+
 const renderHeader = (user = TEST_USER, handlers = {}) =>
   renderAt(
     <Header

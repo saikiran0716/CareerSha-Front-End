@@ -7,6 +7,7 @@ import { User } from '../../../services/authService';
 import { navigationData } from '../../../data/navigationData';
 import MegaMenu from './MegaMenu';
 import { ACCOUNT_LINKS } from '../../../features/account/accountNav';
+import { ACCOUNT_REQUIRES_SIGN_IN } from '../../../config/features';
 
 interface HeaderProps {
   user: User | null;
@@ -45,6 +46,10 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
       setActiveMenu(null);
     }, 180);
   };
+
+  // While ACCOUNT_REQUIRES_SIGN_IN is off, signed-out visitors get the account menu as "Guest"
+  const menuUser: User | null =
+    user ?? (ACCOUNT_REQUIRES_SIGN_IN ? null : { id: 'guest', name: 'Guest', email: 'Not signed in' });
 
   return (
     <>
@@ -132,23 +137,23 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                   </button>
                 )}
 
-                {user ? (
+                {menuUser ? (
                   <div className="relative" ref={profileDropdownRef}>
                     <button
                       onClick={() => setIsProfileOpen(!isProfileOpen)}
                       aria-label="Account menu"
                       className="relative flex-shrink-0"
-                      title={`Signed in as ${user.name}`}
+                      title={user ? `Signed in as ${menuUser.name}` : 'Account (guest)'}
                     >
                       <div className="w-9 h-9 rounded-full bg-gradient-to-br from-secondary-500 to-accent-600 text-white font-bold text-sm flex items-center justify-center uppercase shadow-lg shadow-secondary-500/30 ring-2 ring-white dark:ring-neutral-900 ring-offset-0 transition-all duration-200 hover:shadow-xl hover:shadow-secondary-500/40 hover:scale-110 cursor-pointer">
-                        {user.avatar ? (
+                        {menuUser.avatar ? (
                           <img
-                            src={user.avatar}
-                            alt={user.name}
+                            src={menuUser.avatar}
+                            alt={menuUser.name}
                             className="w-full h-full object-cover rounded-full ring-2 ring-white dark:ring-neutral-900"
                           />
                         ) : (
-                          <span>{user.name?.charAt(0) || user.email?.charAt(0)}</span>
+                          <span>{menuUser.name?.charAt(0) || menuUser.email?.charAt(0)}</span>
                         )}
                       </div>
                     </button>
@@ -158,22 +163,22 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                         <div className="flex items-center gap-3 px-4 py-3.5 border-b border-neutral-100 dark:border-neutral-800">
                           <div className="relative flex-shrink-0">
                             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-secondary-500 via-secondary-600 to-accent-600 text-white font-bold text-base flex items-center justify-center uppercase shadow-lg shadow-secondary-500/30 ring-3 ring-secondary-100 dark:ring-neutral-800 transition-all duration-200">
-                              {user.avatar ? (
+                              {menuUser.avatar ? (
                                 <img
-                                  src={user.avatar}
-                                  alt={user.name}
+                                  src={menuUser.avatar}
+                                  alt={menuUser.name}
                                   className="w-full h-full object-cover rounded-full ring-3 ring-white dark:ring-neutral-900"
                                 />
                               ) : (
-                                <span>{user.name?.charAt(0) || user.email?.charAt(0)}</span>
+                                <span>{menuUser.name?.charAt(0) || menuUser.email?.charAt(0)}</span>
                               )}
                             </div>
                           </div>
                           <div className="min-w-0">
                             <p className="text-[13px] font-black text-neutral-800 dark:text-neutral-100 truncate">
-                              {user.name}
+                              {menuUser.name}
                             </p>
-                            <p className="text-xs text-neutral-500 font-medium truncate">{user.email}</p>
+                            <p className="text-xs text-neutral-500 font-medium truncate">{menuUser.email}</p>
                           </div>
                         </div>
                         <nav aria-label="Account" className="p-2 border-b border-neutral-100 dark:border-neutral-800">
@@ -190,16 +195,30 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                           ))}
                         </nav>
                         <div className="p-2">
-                          <button
-                            onClick={() => {
-                              onLogout();
-                              setIsProfileOpen(false);
-                            }}
-                            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-danger-50 dark:hover:bg-danger-900/20 text-danger-500 dark:text-danger-400 transition-colors text-[12px] font-bold"
-                          >
-                            <LogOut size={15} />
-                            Sign Out
-                          </button>
+                          {!user && (
+                            <button
+                              onClick={() => {
+                                onOpenAuth();
+                                setIsProfileOpen(false);
+                              }}
+                              className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-primary-700 hover:bg-primary-50"
+                            >
+                              <UserIcon size={15} />
+                              Sign in
+                            </button>
+                          )}
+                          {user && (
+                            <button
+                              onClick={() => {
+                                onLogout();
+                                setIsProfileOpen(false);
+                              }}
+                              className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-danger-50 dark:hover:bg-danger-900/20 text-danger-500 dark:text-danger-400 transition-colors text-[12px] font-bold"
+                            >
+                              <LogOut size={15} />
+                              Sign Out
+                            </button>
+                          )}
                         </div>
                       </div>
                     )}
@@ -286,7 +305,7 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
               <h5 className="text-xs font-black uppercase tracking-widest text-neutral-500 mb-4 px-2">
                 Account & Settings
               </h5>
-              {user && (
+              {menuUser && (
                 <nav aria-label="Account" className="mb-3 grid grid-cols-2 gap-2">
                   {ACCOUNT_LINKS.map(({ to, label, icon: Icon }) => (
                     <Link

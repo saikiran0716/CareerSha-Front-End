@@ -1,9 +1,12 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import SaveCollegeButton from './SaveCollegeButton';
 import { renderAt, signIn } from '../../test/utils';
 import { userData } from '../../services/userDataService';
+
+// These tests cover the sign-in-required mode (switch on)
+vi.mock('../../config/features', () => ({ ACCOUNT_REQUIRES_SIGN_IN: true }));
 
 const college = { name: 'NIT Warangal', location: 'Warangal, Telangana' };
 
