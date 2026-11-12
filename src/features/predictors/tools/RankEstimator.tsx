@@ -26,12 +26,10 @@ const normalizeExamLabel = (value: string): string => {
 };
 
 interface RankEstimatorProps {
-    onAskAI: (topic: string) => void;
     defaultExam?: string;
 }
 
 export const RankEstimator: React.FC<RankEstimatorProps> = ({
-    onAskAI,
     defaultExam,
 }) => {
     const [exam, setExam] = useState("JEE MAINS");

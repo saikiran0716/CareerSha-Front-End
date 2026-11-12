@@ -8,13 +8,7 @@ import { StudentProfile, AIResponse } from '../../types';
 import { getCareerGuidance } from '../../services/aiService';
 import { saveReportLocally } from '../../services/storageService';
 
-interface HomePageProps {
-    user?: any;
-    setIsAuthModalOpen?: (isOpen: boolean) => void;
-    onAskAI?: (topic: string) => void;
-}
-
-const HomePage: React.FC<HomePageProps> = ({ user, setIsAuthModalOpen, onAskAI }) => {
+const HomePage: React.FC = () => {
     const navigate = useNavigate();
     const [homeViewMode, setHomeViewMode] = useState<'portal' | 'counseling'>('portal');
     const [profile, setProfile] = useState<StudentProfile | null>(null);

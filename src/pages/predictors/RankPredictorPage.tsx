@@ -2,7 +2,7 @@ import React from 'react';
 import SEO from '../../components/common/SEO';
 import RankEstimator from '../../features/predictors/tools/RankEstimator';
 
-const RankPredictorPage: React.FC<{ onAskAI: (topic: string) => void }> = ({ onAskAI }) => {
+const RankPredictorPage: React.FC = () => {
   return (
     <div className="pt-8">
       <SEO
@@ -20,7 +20,7 @@ const RankPredictorPage: React.FC<{ onAskAI: (topic: string) => void }> = ({ onA
           <p>Our Rank Estimator uses historical data from thousands of admission cycles to provide realistic rank predictions. Simply enter your expected score, and get instant feedback on your admission probability across different categories and quotas.</p>
         </div>
 
-        <RankEstimator onAskAI={onAskAI} />
+        <RankEstimator />
       </div>
     </div>
   );

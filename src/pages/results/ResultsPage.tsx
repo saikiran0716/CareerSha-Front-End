@@ -1,8 +1,8 @@
 import React from 'react';
 import SEO from '../../components/common/SEO';
-import { ResultsView } from '../../features/exams/ExploreViews';
+import ExamResultsView from '../../features/exams/ExamResultsView';
 
-const ResultsPage: React.FC<{ onAskAI: (topic: string) => void }> = ({ onAskAI }) => {
+const ResultsPage: React.FC = () => {
   return (
     <div className="pt-8">
       <SEO
@@ -34,7 +34,7 @@ const ResultsPage: React.FC<{ onAskAI: (topic: string) => void }> = ({ onAskAI }
           <p>Stay tuned to this page for real-time updates on result announcement dates and direct links to official portals. We wish all 2026 aspirants the very best of luck with their results!</p>
         </div>
 
-        <ResultsView onAskAI={onAskAI} />
+        <ExamResultsView />
       </div>
     </div>
   );

@@ -97,12 +97,19 @@ const ChatBot: React.FC<Props> = ({ profile, initialMessage, onMessageProcessed 
     }
   };
 
+  // Keep the latest callbacks without re-running the effect when they change
+  const handleSendRef = useRef(handleSend);
+  handleSendRef.current = handleSend;
+  const onMessageProcessedRef = useRef(onMessageProcessed);
+  onMessageProcessedRef.current = onMessageProcessed;
+
+  // Open the chat and send a message when another part of the app asks the AI something
   useEffect(() => {
     if (initialMessage) {
       setIsOpen(true);
       const timeout = setTimeout(() => {
-        handleSend(initialMessage);
-        if (onMessageProcessed) onMessageProcessed();
+        handleSendRef.current(initialMessage);
+        onMessageProcessedRef.current?.();
       }, 150);
       return () => clearTimeout(timeout);
     }

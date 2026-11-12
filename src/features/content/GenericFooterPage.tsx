@@ -31,14 +31,14 @@ const LogoWithFallback = ({ title, image, link }: { title: string, image?: strin
         // 2. Derive from Link
         if (link) {
             try {
-                let domain = link.toLowerCase().replace(/^(https?:\/\/)?(www\.)?/, '').split('/')[0];
+                const domain = link.toLowerCase().replace(/^(https?:\/\/)?(www\.)?/, '').split('/')[0];
                 if (domain) {
                     // Try Clearbit first
                     setImgSrc(`https://logo.clearbit.com/${domain}`);
                 } else {
                     setError(true);
                 }
-            } catch (e) {
+            } catch {
                 setError(true);
             }
         } else {
@@ -130,6 +130,9 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
     const [searchingReview, setSearchingReview] = useState(false);
     const [suggestions, setSuggestions] = useState<string[]>([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
+    // Latest value for the debounced effect below, without re-running it on every open/close
+    const showSuggestionsRef = useRef(showSuggestions);
+    showSuggestionsRef.current = showSuggestions;
     const [hasSearched, setHasSearched] = useState(false);
     const searchRef = useRef<HTMLDivElement>(null);
     const isTyping = useRef(false); // Track if update is from user typing
@@ -148,7 +151,7 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
     // Debounced API Call for Autocomplete
     useEffect(() => {
         const fetchSuggestions = async () => {
-            if (reviewSearch.length > 2 && !showSuggestions && isTyping.current) {
+            if (reviewSearch.length > 2 && !showSuggestionsRef.current && isTyping.current) {
                 // Only search if user typed > 2 chars, dropdown isn't open (or needs update), AND it's a typed update
                 try {
                     const results = await getCollegeSuggestions(reviewSearch);
@@ -516,7 +519,7 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
                                         key={idx}
                                         onClick={(e) => {
                                             e.preventDefault();
-                                            onAskAI && onAskAI(`I am interested in ${item.title}. Can you help me with this?`);
+                                            onAskAI?.(`I am interested in ${item.title}. Can you help me with this?`);
                                         }}
                                         className="group flex items-center gap-3 px-4 py-3 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg hover:border-secondary-400 hover:shadow-sm transition-all w-full text-left"
                                     >

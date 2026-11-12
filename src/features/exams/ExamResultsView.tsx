@@ -153,11 +153,10 @@ const EXAM_CATEGORIES = [
 ];
 
 interface ExamResultsPageProps {
-    onAskAI: (topic: string) => void;
     compact?: boolean;
 }
 
-const ExamResultsPage: React.FC<ExamResultsPageProps> = ({ onAskAI, compact = false }) => {
+const ExamResultsPage: React.FC<ExamResultsPageProps> = ({ compact = false }) => {
     const [resolvingFor, setResolvingFor] = useState<{ name: string; categoryIdx: number } | null>(null);
     const [is1024, setIs1024] = useState(window.innerWidth >= 1024 && window.innerWidth < 1280);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 640);

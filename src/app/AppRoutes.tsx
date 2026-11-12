@@ -109,14 +109,14 @@ const footerRoutes = (onAskAI: (t: string) => void) =>
 const AppRoutes: React.FC<AppRoutesProps> = ({ user, onOpenAuth, onAskAI }) => (
   <Suspense fallback={<PageLoader />}>
     <Routes>
-      <Route path="/" element={<HomePage user={user} setIsAuthModalOpen={onOpenAuth} onAskAI={onAskAI} />} />
+      <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<AuthPage user={user} onAuthSuccess={() => onOpenAuth(false)} />} />
       <Route path="/register" element={<AuthPage user={user} onAuthSuccess={() => onOpenAuth(false)} />} />
       <Route path="/search" element={<SearchPage />} />
 
       {/* Predictors */}
       <Route path="/predictors" element={<PredictorsHubPage />} />
-      <Route path="/rank-estimator" element={<RankPredictorPage onAskAI={onAskAI} />} />
+      <Route path="/rank-estimator" element={<RankPredictorPage />} />
       <Route path="/rank-estimator/:examSlug" element={<ExamRankPredictorPage />} />
       <Route path="/college-matcher" element={<CollegeMatcherPage onAskAI={onAskAI} />} />
       <Route path="/recommended-colleges" element={<CollegeMatchResultsPage />} />
@@ -124,7 +124,7 @@ const AppRoutes: React.FC<AppRoutesProps> = ({ user, onOpenAuth, onAskAI }) => (
       {/* Exams */}
       <Route path="/exams" element={<ExamsHubPage />} />
       <Route path="/exams/:examId" element={<ExamDetailsPage />} />
-      <Route path="/results" element={<ResultsPage onAskAI={onAskAI} />} />
+      <Route path="/results" element={<ResultsPage />} />
 
       {/* Colleges */}
       <Route path="/colleges" element={<ExploreCollegesPage />} />

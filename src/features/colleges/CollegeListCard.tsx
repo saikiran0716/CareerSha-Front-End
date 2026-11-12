@@ -12,7 +12,7 @@ interface CollegeListCardProps {
 
 const CollegeListCard: React.FC<CollegeListCardProps> = ({ college }) => {
 
-  const getTagStyle = (label: string, type: string) => {
+  const getTagStyle = (label: string) => {
     switch (label) {
       case 'Engineering':
       case 'Medical':
@@ -66,7 +66,7 @@ const CollegeListCard: React.FC<CollegeListCardProps> = ({ college }) => {
             {college.tags.map((tag, idx) => (
               <span
                 key={idx}
-                className={`text-[11px] font-bold px-2.5 py-0.5 rounded border ${getTagStyle(tag.label, tag.type)}`}
+                className={`text-[11px] font-bold px-2.5 py-0.5 rounded border ${getTagStyle(tag.label)}`}
               >
                 {tag.label}
               </span>
