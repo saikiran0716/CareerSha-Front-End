@@ -22,13 +22,13 @@ const HeroSection: React.FC = () => {
       <div className="space-y-8">
         <div className="space-y-4">
           <h1 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-extrabold leading-[1.18] tracking-tight text-neutral-900 dark:text-white">
-            Find the <span className="text-primary-600 dark:text-primary-400">Right College</span>{' '}
-            <br className="hidden sm:inline" />
-            for Your Rank
+            Your Complete Career <br className="hidden sm:inline" />
+            {/* TODO: remove the roadmap content */}
+            Roadmap for <span className="text-primary-600 dark:text-primary-400">Indian Education</span>
           </h1>
-          <p className="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base max-w-xl leading-relaxed">
-            Predict your rank, see the colleges it can get you into, and compare them on fees, cutoffs and placements —
-            for JEE, NEET, CAT, CLAT and 35+ other entrance exams.
+          <p className="text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm max-w-xl leading-relaxed">
+            Explore 50K+ colleges, 200+ entrance exams, cutoffs, placements, and get personalized AI-powered guidance to
+            shape your future.
           </p>
         </div>
 

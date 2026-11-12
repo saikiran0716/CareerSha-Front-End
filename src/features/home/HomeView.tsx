@@ -8,16 +8,13 @@ import LiveUpdates from './sections/LiveUpdates';
 import AiAssistantCard from './sections/AiAssistantCard';
 import CommunityCard from './sections/CommunityCard';
 import PersonalizedCard from './sections/PersonalizedCard';
-import ExploreByStream from './sections/ExploreByStream';
-import HowItWorks from './sections/HowItWorks';
-import GovtExamsCard from './sections/GovtExamsCard';
 
 interface HomeViewProps {
   onStartCounseling: () => void;
   onAskAI: (question: string) => void;
 }
 
-/** Homepage layout: left column (hero, tools, collections, streams, stats, jobs, how it works) and right sidebar. */
+/** Homepage layout: left column (hero, tools, collections, stats, jobs) and right sidebar. */
 const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onAskAI }) => {
   return (
     <div className="relative min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-white transition-colors duration-300">
@@ -37,13 +34,9 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onAskAI }) => {
 
             <CollegeCollections />
 
-            <ExploreByStream />
-
             <StatsSection />
 
             <JobOpenings />
-
-            <HowItWorks />
           </div>
 
           {/* RIGHT COLUMN: Sidebar Cards (Sticky) */}
@@ -55,8 +48,6 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onAskAI }) => {
             <CommunityCard onStartCounseling={onStartCounseling} />
 
             <PersonalizedCard />
-
-            <GovtExamsCard />
           </aside>
         </div>
       </main>
