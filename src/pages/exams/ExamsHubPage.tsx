@@ -1,10 +1,10 @@
 import React from 'react';
 import SEO from '../../components/common/SEO';
-import { navigationData } from '../../data/navigationData';
+import { ENTRANCE_EXAMS_DATA } from '../../data/exams/examDetailData';
 import { Link } from 'react-router-dom';
 
 const ExamsHubPage: React.FC = () => {
-  const exams = navigationData.find((n) => n.slug === 'exams')?.sections[0]?.links || [];
+  const exams = Object.values(ENTRANCE_EXAMS_DATA).map((e) => ({ name: e.title, url: `/exams/${e.id}` }));
 
   return (
     <div className="pt-8">

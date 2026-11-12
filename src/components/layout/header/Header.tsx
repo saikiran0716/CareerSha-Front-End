@@ -6,6 +6,7 @@ import { DARK_MODE_ENABLED } from '../../../hooks/useDarkMode';
 import { User } from '../../../services/authService';
 import { navigationData } from '../../../data/navigationData';
 import MegaMenu from './MegaMenu';
+import MobileMegaMenu from './MobileMegaMenu';
 import { ACCOUNT_LINKS } from '../../../features/account/accountNav';
 import { ACCOUNT_REQUIRES_SIGN_IN } from '../../../config/features';
 
@@ -86,39 +87,48 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                   Home
                 </Link>
               </div>
-              {navigationData.map((cat) => (
-                <div
-                  key={cat.title}
-                  onMouseEnter={() => handleEnter(cat.title)}
-                  onMouseLeave={handleLeave}
-                  className="relative py-2"
-                >
-                  <button
-                    onClick={() => navigate(`/${cat.slug}`)}
-                    className={`text-[13px] font-semibold transition-all flex items-center gap-1 py-2 px-3 rounded-lg ${
-                      activeMenu === cat.title
-                        ? 'text-primary-600 dark:text-primary-400'
-                        : location.pathname.startsWith(`/${cat.slug}`)
-                          ? 'text-primary-600 dark:text-primary-400 font-bold'
-                          : 'text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white'
-                    }`}
+              {navigationData.map((cat) => {
+                const open = activeMenu === cat.title;
+                const current = location.pathname + location.search === cat.url;
+                return (
+                  <div
+                    key={cat.title}
+                    onMouseEnter={() => handleEnter(cat.title)}
+                    onMouseLeave={handleLeave}
+                    onFocus={() => handleEnter(cat.title)}
+                    onBlur={(e) => {
+                      if (!e.currentTarget.contains(e.relatedTarget as Node)) handleLeave();
+                    }}
+                    className="py-2"
                   >
-                    {cat.title}
-                    {cat.sections && cat.sections.length > 0 && (
+                    <button
+                      onClick={() => {
+                        setActiveMenu(null);
+                        navigate(cat.url);
+                      }}
+                      aria-expanded={open}
+                      aria-haspopup="true"
+                      className={`text-[13px] font-semibold transition-all flex items-center gap-1 py-2 px-3 rounded-lg border-b-2 ${
+                        open || current
+                          ? 'text-primary-700 border-accent-500'
+                          : 'text-neutral-700 border-transparent hover:text-neutral-900'
+                      }`}
+                    >
+                      {cat.title}
                       <ChevronDown
                         size={14}
-                        className={`transition-transform duration-300 ${activeMenu === cat.title ? 'rotate-180' : ''}`}
+                        className={`transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
                       />
-                    )}
-                  </button>
+                    </button>
 
-                  {activeMenu === cat.title && cat.sections && cat.sections.length > 0 && (
-                    <div className="absolute left-0 top-full pt-1 z-50 rounded-2xl">
-                      <MegaMenu sections={cat.sections} onClose={() => setActiveMenu(null)} />
-                    </div>
-                  )}
-                </div>
-              ))}
+                    {open && (
+                      <div className="absolute left-1/2 top-full z-50 -translate-x-1/2">
+                        <MegaMenu category={cat} onClose={() => setActiveMenu(null)} />
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </nav>
 
             {/* Right Side Items (Search & Actions) */}
@@ -283,20 +293,7 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                 >
                   Home
                 </Link>
-                {navigationData.map((cat) => (
-                  <Link
-                    key={cat.title}
-                    to={`/${cat.slug}`}
-                    className={`block w-full p-4 text-sm font-bold rounded-xl mb-1 transition-colors ${
-                      location.pathname === `/${cat.slug}`
-                        ? 'bg-secondary-50 dark:bg-secondary-950/40 text-secondary-600 dark:text-secondary-400'
-                        : 'text-neutral-800 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-800'
-                    }`}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {cat.title}
-                  </Link>
-                ))}
+                <MobileMegaMenu onNavigate={() => setIsMobileMenuOpen(false)} />
               </div>
             </div>
 
