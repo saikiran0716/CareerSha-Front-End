@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Newspaper } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ChevronRight, Newspaper } from 'lucide-react';
 import { getLatestNewsItems, NewsItem } from '../../../services/homeContentService';
 
 const MAX_ITEMS = 4;
+
+/** Shown when the news service has nothing (or is unreachable), so the card is never empty. */
+const POPULAR_EXAMS = [
+  { name: 'JEE Main', note: 'Engineering · Pattern, syllabus & dates', url: '/exams/jee-main' },
+  { name: 'NEET UG', note: 'Medical · Pattern, syllabus & dates', url: '/exams/neet' },
+  { name: 'CAT', note: 'MBA · Pattern, syllabus & dates', url: '/exams/cat' },
+  { name: 'CLAT', note: 'Law · Pattern, syllabus & dates', url: '/exams/clat' },
+];
 
 /** Latest items from the news API (same source as the News page). */
 const LiveUpdates: React.FC = () => {
@@ -23,9 +31,11 @@ const LiveUpdates: React.FC = () => {
   return (
     <section className="bg-white dark:bg-neutral-900 rounded-[2rem] p-5 shadow-sm border border-neutral-100/80 dark:border-neutral-800/60">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-base font-bold text-neutral-900 dark:text-white">Live Updates</h2>
+        <h2 className="text-base font-bold text-neutral-900 dark:text-white">
+          {items?.length === 0 ? 'Popular Exams' : 'Live Updates'}
+        </h2>
         <button
-          onClick={() => navigate('/news')}
+          onClick={() => navigate(items?.length === 0 ? '/exams' : '/news')}
           className="text-xs font-black text-primary-600 dark:text-primary-400 hover:underline uppercase tracking-widest"
         >
           View all
@@ -44,14 +54,23 @@ const LiveUpdates: React.FC = () => {
             </div>
           ))}
 
-        {items?.length === 0 && (
-          <p className="text-sm text-neutral-500 py-4 text-center">
-            No live updates right now.{' '}
-            <button onClick={() => navigate('/news')} className="text-primary-600 hover:underline">
-              See all news
-            </button>
-          </p>
-        )}
+        {items?.length === 0 &&
+          POPULAR_EXAMS.map((exam) => (
+            <Link
+              key={exam.url}
+              to={exam.url}
+              className="flex items-center gap-3.5 p-3 rounded-2xl border border-neutral-50 bg-neutral-50/50 hover:bg-neutral-50 transition duration-200"
+            >
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-50 text-sm font-bold text-primary-700">
+                {exam.name.slice(0, 2)}
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="text-sm font-bold text-neutral-800">{exam.name}</p>
+                <p className="text-xs text-neutral-500 mt-0.5 truncate">{exam.note}</p>
+              </div>
+              <ChevronRight className="h-4 w-4 text-neutral-400" />
+            </Link>
+          ))}
 
         {items?.map((item) => (
           <a

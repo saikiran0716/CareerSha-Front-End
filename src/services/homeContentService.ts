@@ -29,7 +29,8 @@ type NewsApiItem = {
 
 export const getLatestNewsItems = async (): Promise<NewsItem[]> => {
   try {
-    const response = await fetch(buildApiUrl('/content/latest-news/'));
+    // Give up after a few seconds so the homepage never shows an endless loader.
+    const response = await fetch(buildApiUrl('/content/latest-news/'), { signal: AbortSignal.timeout(6000) });
     if (!response.ok) {
       throw new Error(`Failed to fetch latest news: ${response.status}`);
     }
