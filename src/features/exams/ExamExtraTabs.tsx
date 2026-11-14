@@ -108,7 +108,7 @@ export const ExamCollegesTab: React.FC<{ exam: EntranceExamInfo }> = ({ exam }) 
                 <span className="text-base text-neutral-900">{c.name}</span>
                 <span className="mt-1 flex items-center gap-1 text-sm text-neutral-500">
                   <MapPin size={13} /> {[c.city, c.state].filter(Boolean).join(', ') || 'India'}
-                  {c.nirfRank ? ` · NIRF #${c.nirfRank}` : ''}
+                  {c.nirfRank ? ` · NIRF ${c.nirfRank}` : ''}
                 </span>
                 <span className="mt-1 block text-sm text-neutral-600">
                   {c.courses

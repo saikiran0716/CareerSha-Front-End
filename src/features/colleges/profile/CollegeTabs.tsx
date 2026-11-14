@@ -75,10 +75,7 @@ const quickFacts = (c: CatalogCollege): Fact[] => {
     ],
     !!c.locationType && ['Area', c.locationType],
     !!c.established && ['Established', c.established],
-    !!c.nirfRank && [
-      'NIRF rank',
-      `#${c.nirfRank} (${c.nirfCategory ?? c.stream}${c.nirfYear ? ` ${c.nirfYear}` : ''})`,
-    ],
+    !!c.nirfRank && ['NIRF rank', `${c.nirfRank} (${c.nirfCategory ?? c.stream}${c.nirfYear ? ` ${c.nirfYear}` : ''})`],
     !!c.campusAcres && ['Campus', `${c.campusAcres} acres`],
     c.accreditation.length > 0 && ['Approvals', c.accreditation.join(', ')],
     !!c.website && [

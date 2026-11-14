@@ -257,7 +257,7 @@ const CollegeMatchResults: React.FC = () => {
             </h1>
             <div className="flex items-center gap-2 flex-wrap">
               <span className="px-4 py-1.5 bg-white border border-neutral-200 text-neutral-700 rounded-lg text-xs font-bold tracking-widest uppercase shadow-sm">
-                Rank #{rank}
+                Rank {rank}
               </span>
               <span className="px-4 py-1.5 bg-primary-600 text-white rounded-lg text-xs font-bold tracking-widest uppercase shadow-sm">
                 {category}

@@ -33,7 +33,7 @@ const ROWS: Row[] = [
   { label: 'Established', value: (c) => c.established ?? '—' },
   {
     label: 'NIRF rank',
-    value: (c) => (c.nirfRank ? `#${c.nirfRank} (${c.nirfCategory ?? c.stream})` : '—'),
+    value: (c) => (c.nirfRank ? `${c.nirfRank} (${c.nirfCategory ?? c.stream})` : '—'),
     score: (c) => c.nirfRank ?? Infinity,
     better: 'low',
   },

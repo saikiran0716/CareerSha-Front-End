@@ -79,7 +79,7 @@ const CollegeProfilePage: React.FC = () => {
                 )}
                 {c.established && <span>Est. {c.established}</span>}
                 {c.ownership && <span>{c.ownership}</span>}
-                {c.nirfRank && <span className="rounded bg-accent-600 px-2 py-0.5 text-white">NIRF #{c.nirfRank}</span>}
+                {c.nirfRank && <span className="rounded bg-accent-600 px-2 py-0.5 text-white">NIRF {c.nirfRank}</span>}
               </p>
               {c.accreditation.length > 0 && (
                 <p className="mt-2 flex items-center gap-1 text-sm text-primary-100">

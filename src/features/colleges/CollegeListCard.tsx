@@ -14,7 +14,7 @@ const formatFee = (lakhs: number) =>
 const figuresOf = (c: CatalogCollege): [string, string][] => {
   const fee = lowestFeeLakhs(c);
   const all: [string, string | undefined][] = [
-    ['NIRF', c.nirfRank ? `#${c.nirfRank}` : undefined],
+    ['NIRF rank', c.nirfRank ? String(c.nirfRank) : undefined],
     ['Fees from', Number.isFinite(fee) ? formatFee(fee) : undefined],
     ['Median package', c.placements?.medianPackage || undefined],
     ['Avg package', c.placements?.medianPackage ? undefined : c.placements?.averagePackage || undefined],

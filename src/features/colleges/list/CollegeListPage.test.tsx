@@ -26,7 +26,7 @@ describe('CollegeListPage', () => {
       .getByRole('heading', { level: 3, name: 'National Institute of Technology Warangal' })
       .closest('article')!;
     expect(within(nitw).getByText('Government')).toBeInTheDocument();
-    expect(within(nitw).getByText('NIRF #21')).toBeInTheDocument();
+    expect(within(nitw).getByText('NIRF 21')).toBeInTheDocument();
     expect(within(nitw).getByText('₹18 LPA')).toBeInTheDocument();
     // Every API college has a CareerSha profile, so the card links there (not to the website)
     expect(within(nitw).getByRole('link', { name: /^View National Institute/ })).toHaveAttribute(
@@ -54,7 +54,7 @@ describe('CollegeListPage', () => {
     expect(cardNames()).toHaveLength(10);
     expect(String(fetchMock.mock.calls.at(-1)![0])).toContain('page=2');
     expect(screen.getByRole('button', { name: 'Page 2' })).toHaveAttribute('aria-current', 'page');
-    expect(screen.getByText('#11')).toBeInTheDocument(); // rank continues across pages
+    expect(screen.getByText('11')).toBeInTheDocument(); // rank continues across pages (shown without "#")
 
     await userEvent.click(screen.getByRole('button', { name: 'Page 3' }));
     await waitFor(() => expect(cardNames()).toHaveLength(5));

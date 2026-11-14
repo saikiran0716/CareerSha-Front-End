@@ -62,7 +62,7 @@ const CollegeRankCard: React.FC<{ college: ListCollege; position?: number; figur
         <CollegeImage college={c} className="absolute inset-0 h-full w-full" />
         {position !== undefined && (
           <span className="absolute left-2 top-2 rounded-lg bg-white/95 px-2 py-0.5 font-brand text-sm text-primary-900 shadow">
-            #{position}
+            {position}
           </span>
         )}
         {c.imageUrl && c.imageCredit && (
@@ -98,7 +98,7 @@ const CollegeRankCard: React.FC<{ college: ListCollege; position?: number; figur
               <span className={`rounded px-2 py-0.5 text-xs ${OWNERSHIP_STYLE[c.ownership]}`}>{c.ownership}</span>
             )}
             {c.nirfRank && (
-              <span className="rounded bg-warning-50 px-2 py-0.5 text-xs text-warning-800">NIRF #{c.nirfRank}</span>
+              <span className="rounded bg-warning-50 px-2 py-0.5 text-xs text-warning-800">NIRF {c.nirfRank}</span>
             )}
             {c.stream && c.stream !== 'Other' && (
               <span className="rounded border border-primary-100 bg-primary-50 px-2 py-0.5 text-xs text-primary-800">

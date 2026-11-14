@@ -52,7 +52,7 @@ export const NirfSection: React.FC<{ rankings: NirfRanking[]; primary?: string |
             <div className="flex items-baseline justify-between gap-3">
               <p className="text-sm text-neutral-600">{r.category}</p>
               <p className="text-2xl text-neutral-900">
-                {r.rank ? `#${r.rank}` : r.rankBand}
+                {r.rank ? `Rank ${r.rank}` : r.rankBand}
                 {r.score != null && <span className="ml-2 text-xs text-neutral-500">score {r.score}</span>}
               </p>
             </div>
@@ -213,7 +213,7 @@ export const RelatedColleges: React.FC<{ title: string; note?: string; colleges:
                   <span className="truncate">{c.location}</span>
                 </span>
                 <span className="mt-1 block text-xs text-neutral-600">
-                  {[c.nirfRank && `NIRF #${c.nirfRank}`, c.ownership, c.medianPackage && `${c.medianPackage} median`]
+                  {[c.nirfRank && `NIRF ${c.nirfRank}`, c.ownership, c.medianPackage && `${c.medianPackage} median`]
                     .filter(Boolean)
                     .join(' · ')}
                 </span>
