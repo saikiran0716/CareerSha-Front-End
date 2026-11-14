@@ -175,7 +175,7 @@ const CollegeListPage: React.FC<{ slug: string }> = ({ slug }) => {
           )}
 
           {shown.length > 0 ? (
-            <ol className="space-y-4">
+            <ol className="space-y-2">
               {shown.map((c, i) => (
                 <li key={c.id}>
                   <CollegeRankCard college={c} position={sort === 'rank' && !filtered ? i + 1 : undefined} />
@@ -214,7 +214,7 @@ const CollegeListPage: React.FC<{ slug: string }> = ({ slug }) => {
                   ? `We are still adding colleges${list.city ? ` in ${list.city}` : ''} — meanwhile, popular choices nationally.`
                   : `Only a few colleges${list.city ? ` in ${list.city}` : ''} are listed yet — popular choices nationally.`}
               </p>
-              <ul className="mt-4 space-y-4">
+              <ul className="mt-3 space-y-2">
                 {list.alsoPopular.map((c) => (
                   <li key={c.id}>
                     <CollegeRankCard college={c} />
