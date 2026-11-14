@@ -15,6 +15,7 @@ export type ListOwnership = 'Government' | 'Private' | 'Deemed';
 export interface ListCollege {
   id: string;
   name: string;
+  shortName?: string;
   location: string;
   stream?: ListStream;
   ownership?: ListOwnership;
@@ -24,7 +25,10 @@ export interface ListCollege {
   avgPackage?: string;
   medianPackage?: string;
   imageUrl?: string;
+  imageCredit?: string;
   logoUrl?: string;
+  /** e.g. "77.7%" (latest year, main programme) */
+  placementRate?: string;
   /** Numbers for sorting (lakhs) */
   feesLakhs?: number;
   packageLpa?: number;

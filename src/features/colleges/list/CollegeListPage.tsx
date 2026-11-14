@@ -4,7 +4,7 @@ import { ChevronRight, Search, SearchX } from 'lucide-react';
 import SEO from '../../../components/common/SEO';
 import PageLoader from '../../../components/common/loaders/PageLoader';
 import FaqSection from '../../content/footer-page/FaqSection';
-import CollegeRankCard, { CollegeListHeader } from './CollegeRankCard';
+import CollegeRankCard from './CollegeRankCard';
 import ListSidebar from './ListSidebar';
 import { useAsync } from '../../../hooks/useAsync';
 import {
@@ -183,8 +183,7 @@ const CollegeListPage: React.FC<{ slug: string }> = ({ slug }) => {
 
           {shown.length > 0 ? (
             <>
-              <CollegeListHeader figures={figures} />
-              <ol className="space-y-2">
+              <ol className="space-y-4">
                 {shown.map((c, i) => (
                   <li key={c.id}>
                     <CollegeRankCard
@@ -228,10 +227,8 @@ const CollegeListPage: React.FC<{ slug: string }> = ({ slug }) => {
                   ? `We are still adding colleges${list.city ? ` in ${list.city}` : ''} — meanwhile, popular choices nationally.`
                   : `Only a few colleges${list.city ? ` in ${list.city}` : ''} are listed yet — popular choices nationally.`}
               </p>
-              <div className="mt-3">
-                <CollegeListHeader figures={figures} />
-              </div>
-              <ul className="space-y-2">
+              <div className="mt-3"></div>
+              <ul className="space-y-4">
                 {list.alsoPopular.map((c) => (
                   <li key={c.id}>
                     <CollegeRankCard college={c} figures={figures} />
