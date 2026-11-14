@@ -4,10 +4,8 @@ import { MapPin } from 'lucide-react';
 import { CatalogCollege } from '../../data/catalog/types';
 import SaveCollegeButton from '../account/SaveCollegeButton';
 import CompareButton from '../compare/CompareButton';
+import CollegeImage from './CollegeImage';
 import { lowestFeeLakhs, placeOf } from '../../services/catalogService';
-
-// Served from /public
-const college_image = '/college_images/college_image.jpg';
 
 const formatFee = (lakhs: number) =>
   Number.isFinite(lakhs) ? (lakhs < 1 ? `₹${Math.round(lakhs * 100000).toLocaleString('en-IN')}` : `₹${lakhs} L`) : '—';
@@ -29,7 +27,15 @@ const figuresOf = (c: CatalogCollege): [string, string][] => {
 const CollegeListCard: React.FC<{ college: CatalogCollege }> = ({ college: c }) => (
   <article className="flex flex-col gap-6 rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md md:flex-row">
     <div className="relative h-[160px] w-full shrink-0 overflow-hidden rounded-xl md:w-[230px]">
-      <img src={college_image} alt="" className="h-full w-full object-cover" />
+      <CollegeImage college={c} className="h-full w-full" />
+      {c.imageUrl && c.imageCredit && (
+        <p
+          title={c.imageCredit}
+          className="absolute inset-x-0 bottom-0 truncate bg-black/50 px-2 py-0.5 text-[10px] text-white"
+        >
+          {c.imageCredit}
+        </p>
+      )}
       <SaveCollegeButton
         college={{ name: c.shortName, location: placeOf(c), slug: c.slug }}
         className="absolute right-2 top-2"

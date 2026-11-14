@@ -5,6 +5,7 @@ import SaveCollegeButton from '../../account/SaveCollegeButton';
 import { compareService } from '../../../services/compareService';
 import { useCompare } from '../../../hooks/useCompare';
 import { ListCollege, ListFigures } from '../../../services/collegeListService';
+import { mediaUrl } from '../../../services/catalogService';
 
 /** Column layout shared by the rows and the header row: a figure column only for figures the list has. */
 const GRID_COLS = [
@@ -93,7 +94,11 @@ const CollegeRankCard: React.FC<{ college: ListCollege; position?: number; figur
           aria-hidden="true"
           className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-50 font-brand text-sm text-primary-800"
         >
-          {initials(c.name) || c.name[0]}
+          {c.logoUrl ? (
+            <img src={mediaUrl(c.logoUrl)} alt="" loading="lazy" className="max-h-8 max-w-8 object-contain" />
+          ) : (
+            initials(c.name) || c.name[0]
+          )}
           {position !== undefined && (
             <span className="absolute -left-1.5 -top-1.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-primary-800 px-1 text-[10px] text-white">
               {position}

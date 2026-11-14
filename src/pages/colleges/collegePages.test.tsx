@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { screen, within } from '@testing-library/react';
+import { fireEvent, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ExploreCollegesPage from './ExploreCollegesPage';
 import CollegeProfilePage from './CollegeProfilePage';
@@ -86,6 +86,23 @@ describe('College profile page', () => {
     expect(screen.queryByRole('link', { name: /official website/i })).not.toBeInTheDocument();
     expect(screen.getAllByRole('tab').map((t) => t.textContent)).toEqual(['Overview', 'Reviews', 'Q&A']);
     expect(screen.getByRole('tab', { name: 'Overview' })).toHaveAttribute('aria-selected', 'true'); // ?tab= ignored
+  });
+
+  it('shows the campus photo with its credit, and a placeholder when there is none', async () => {
+    renderAt(<CollegeProfilePage />, '/colleges/test-nit-warangal', '/colleges/:slug');
+    const photo = await screen.findByRole('img', { name: /national institute of technology warangal campus/i });
+    expect(photo).toHaveAttribute('src', 'https://upload.wikimedia.org/nitw.jpg');
+    expect(screen.getByText('Photo: A. Kumar, CC BY-SA 4.0, via Wikimedia Commons')).toBeInTheDocument();
+
+    fireEvent.error(photo); // a broken link falls back to the placeholder
+    expect(screen.getByRole('img', { name: 'National Institute of Technology Warangal' })).toBeInTheDocument();
+  });
+
+  it('uses a placeholder on Explore cards without a photo', async () => {
+    renderAt(<ExploreCollegesPage />, '/colleges?stream=Medical', '/colleges');
+    expect(await screen.findByRole('img', { name: 'All India Institute of Medical Sciences Delhi' })).toHaveTextContent(
+      'AIIMSMedical',
+    );
   });
 
   it('shows NIRF placements with the programme table and source', async () => {

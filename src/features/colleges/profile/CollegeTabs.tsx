@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { CheckCircle2 } from 'lucide-react';
 import { CatalogCollege } from '../../../data/catalog/types';
 import { placeOf } from '../../../services/catalogService';
+import CollegeImage from '../CollegeImage';
 import { ENTRANCE_EXAMS_DATA } from '../../../data/exams/examDetailData';
 
 const card = 'rounded-2xl border border-neutral-200 bg-white p-5';
@@ -40,6 +41,12 @@ export const ExamLink: React.FC<{ id: string }> = ({ id }) => {
 
 export const OverviewTab: React.FC<{ c: CatalogCollege }> = ({ c }) => (
   <div className="space-y-5">
+    {c.imageUrl && (
+      <figure className={`${card} overflow-hidden p-0`}>
+        <CollegeImage college={c} className="h-56 w-full sm:h-72" />
+        {c.imageCredit && <figcaption className="px-5 py-2 text-xs text-neutral-500">{c.imageCredit}</figcaption>}
+      </figure>
+    )}
     <section className={card}>
       <h2 className="text-xl text-neutral-900">About {c.shortName}</h2>
       <p className="mt-2 text-neutral-700 leading-relaxed">

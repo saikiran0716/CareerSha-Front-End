@@ -79,6 +79,9 @@ export const TEST_COLLEGES: CatalogCollege[] = [
       },
     ],
     website: 'https://nitw.ac.in',
+    imageUrl: 'https://upload.wikimedia.org/nitw.jpg',
+    imageCredit: 'Photo: A. Kumar, CC BY-SA 4.0, via Wikimedia Commons',
+    logoUrl: 'https://upload.wikimedia.org/nitw-logo.png',
   }),
   college({
     slug: 'test-iiit-hyderabad',

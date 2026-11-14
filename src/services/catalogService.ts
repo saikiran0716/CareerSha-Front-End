@@ -1,6 +1,6 @@
 import { SAMPLE_EXAM_EXTRAS } from '../data/catalog/examExtras';
 import { CatalogCollege, ExamExtras, Ownership, Stream, STREAMS } from '../data/catalog/types';
-import { buildApiUrl } from './apiConfig';
+import { buildApiUrl, SERVER_ROOT } from './apiConfig';
 
 /**
  * College catalog, served by the backend (GET /api/colleges/, /api/colleges/<slug>/).
@@ -65,6 +65,10 @@ export const STATES = [
 ];
 
 export const DEFAULT_PAGE_SIZE = 20;
+
+/** Uploaded files come back as /media/… paths on the backend; links (http…) are used as they are. */
+export const mediaUrl = (path: string) =>
+  /^https?:\/\//i.test(path) ? path : `${SERVER_ROOT}${path.startsWith('/') ? '' : '/'}${path}`;
 
 /** "Warangal, Telangana"; either part may be missing in the official data. */
 export const placeOf = (c: Pick<CatalogCollege, 'city' | 'state'>) => [c.city, c.state].filter(Boolean).join(', ');

@@ -82,6 +82,10 @@ export interface CatalogCollege {
   facilities: string[];
   website: string;
   dataSource?: string;
+  /** Campus photo (uploaded /media/… path or a Wikimedia link) and who to credit for it */
+  imageUrl?: string | null;
+  imageCredit?: string | null;
+  logoUrl?: string | null;
   /** Every program and year we have placement figures for (newest first) */
   placementHistory?: PlacementRow[];
 }

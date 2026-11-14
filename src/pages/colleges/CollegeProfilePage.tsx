@@ -8,7 +8,7 @@ import CompareButton from '../../features/compare/CompareButton';
 import ReviewsSection from '../../features/community/ReviewsSection';
 import QnaSection from '../../features/community/QnaSection';
 import { CoursesTab, CutoffsTab, OverviewTab, PlacementsTab } from '../../features/colleges/profile/CollegeTabs';
-import { catalogService, placeOf } from '../../services/catalogService';
+import { catalogService, mediaUrl, placeOf } from '../../services/catalogService';
 import { CatalogCollege } from '../../data/catalog/types';
 import { useAsync } from '../../hooks/useAsync';
 import NotFound from '../NotFound';
@@ -63,7 +63,14 @@ const CollegeProfilePage: React.FC = () => {
           </nav>
           <div className="mt-4 flex flex-wrap items-start justify-between gap-4">
             <div className="min-w-0">
-              <h1 className="text-2xl sm:text-3xl">{c.name}</h1>
+              <h1 className="flex items-center gap-3 text-2xl sm:text-3xl">
+                {c.logoUrl && (
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white p-1.5">
+                    <img src={mediaUrl(c.logoUrl)} alt="" className="max-h-full max-w-full object-contain" />
+                  </span>
+                )}
+                {c.name}
+              </h1>
               <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-primary-100">
                 {placeOf(c) && (
                   <span className="flex items-center gap-1">

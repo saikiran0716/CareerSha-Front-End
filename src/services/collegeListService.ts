@@ -23,6 +23,8 @@ export interface ListCollege {
   fees?: string;
   avgPackage?: string;
   medianPackage?: string;
+  imageUrl?: string;
+  logoUrl?: string;
   /** Numbers for sorting (lakhs) */
   feesLakhs?: number;
   packageLpa?: number;
