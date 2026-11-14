@@ -124,6 +124,17 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                 );
               })}
               <div className="relative py-2">
+                <Link
+                  to="/community"
+                  aria-current={location.pathname.startsWith('/community') ? 'page' : undefined}
+                  className={`text-[13px] font-semibold text-neutral-700 transition-colors flex items-center gap-1 py-2 px-3 border-b-2 hover:border-primary-800 ${
+                    location.pathname.startsWith('/community') ? 'border-primary-800' : 'border-transparent'
+                  }`}
+                >
+                  Discussions
+                </Link>
+              </div>
+              <div className="relative py-2">
                 <a
                   href={BLOG_URL}
                   className="text-[13px] font-semibold text-neutral-700 transition-colors flex items-center gap-1 py-2 px-3 border-b-2 border-transparent hover:border-primary-800"
@@ -296,6 +307,13 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                   Home
                 </Link>
                 <MobileMegaMenu onNavigate={() => setIsMobileMenuOpen(false)} />
+                <Link
+                  to="/community"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block w-full p-4 text-sm font-bold rounded-xl text-neutral-800 transition-colors hover:bg-neutral-50 hover:text-primary-800"
+                >
+                  Discussions
+                </Link>
                 <a
                   href={BLOG_URL}
                   className="block w-full p-4 text-sm font-bold rounded-xl text-neutral-800 transition-colors hover:bg-neutral-50 hover:text-primary-800"

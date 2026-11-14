@@ -19,6 +19,19 @@ describe('Blogs link (separate blog website)', () => {
     links.forEach((l) => expect(l).toHaveAttribute('href', BLOG_URL));
   });
 
+  it('links Discussions to the community forum and marks it on that page', async () => {
+    renderAt(
+      <Header user={null} onOpenAuth={vi.fn()} onLogout={vi.fn()} isDarkMode={false} onToggleDarkMode={vi.fn()} />,
+      '/community',
+    );
+    const desktop = screen.getByRole('link', { name: 'Discussions' });
+    expect(desktop).toHaveAttribute('href', '/community');
+    expect(desktop).toHaveAttribute('aria-current', 'page');
+
+    await userEvent.click(screen.getByRole('button', { name: 'Open menu' }));
+    expect(screen.getAllByRole('link', { name: 'Discussions' })).toHaveLength(2);
+  });
+
   it('redirects old in-site blog URLs to the blog site', () => {
     const replace = vi.fn();
     vi.stubGlobal('location', { ...window.location, replace });
