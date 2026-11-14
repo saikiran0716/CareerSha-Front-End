@@ -15,8 +15,10 @@ describe('CollegeListPage', () => {
     expect(screen.getByText('Showing 5 of 5 colleges')).toBeInTheDocument();
 
     const iith = screen.getByRole('heading', { level: 3, name: 'IIT Hyderabad' }).closest('article')!;
-    expect(within(iith).getByText(/Government · NIRF #8/)).toBeInTheDocument();
-    expect(within(iith).getAllByText(/₹20.07 LPA avg/).length).toBeGreaterThan(0);
+    expect(within(iith).getByText('Government')).toBeInTheDocument();
+    expect(within(iith).getByText('NIRF #8')).toBeInTheDocument();
+    expect(within(iith).getByText('₹20.07 LPA')).toBeInTheDocument();
+    expect(within(iith).getByText('₹10L')).toBeInTheDocument();
     expect(within(iith).getByRole('link', { name: /official website/i })).toHaveAttribute(
       'href',
       'https://www.iith.ac.in/',

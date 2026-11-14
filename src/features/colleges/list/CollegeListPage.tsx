@@ -5,7 +5,7 @@ import SEO from '../../../components/common/SEO';
 import PageLoader from '../../../components/common/loaders/PageLoader';
 import SampleDataNotice from '../../../components/common/SampleDataNotice';
 import FaqSection from '../../content/footer-page/FaqSection';
-import CollegeRankCard from './CollegeRankCard';
+import CollegeRankCard, { CollegeListHeader } from './CollegeRankCard';
 import ListSidebar from './ListSidebar';
 import { useAsync } from '../../../hooks/useAsync';
 import {
@@ -175,13 +175,16 @@ const CollegeListPage: React.FC<{ slug: string }> = ({ slug }) => {
           )}
 
           {shown.length > 0 ? (
-            <ol className="space-y-2">
-              {shown.map((c, i) => (
-                <li key={c.id}>
-                  <CollegeRankCard college={c} position={sort === 'rank' && !filtered ? i + 1 : undefined} />
-                </li>
-              ))}
-            </ol>
+            <>
+              <CollegeListHeader />
+              <ol className="space-y-2">
+                {shown.map((c, i) => (
+                  <li key={c.id}>
+                    <CollegeRankCard college={c} position={sort === 'rank' && !filtered ? i + 1 : undefined} />
+                  </li>
+                ))}
+              </ol>
+            </>
           ) : filtered || list.alsoPopular.length === 0 ? (
             <div className="rounded-2xl border border-dashed border-neutral-300 bg-white p-8 text-center">
               <SearchX className="mx-auto h-8 w-8 text-neutral-400" />
@@ -214,7 +217,10 @@ const CollegeListPage: React.FC<{ slug: string }> = ({ slug }) => {
                   ? `We are still adding colleges${list.city ? ` in ${list.city}` : ''} — meanwhile, popular choices nationally.`
                   : `Only a few colleges${list.city ? ` in ${list.city}` : ''} are listed yet — popular choices nationally.`}
               </p>
-              <ul className="mt-3 space-y-2">
+              <div className="mt-3">
+                <CollegeListHeader />
+              </div>
+              <ul className="space-y-2">
                 {list.alsoPopular.map((c) => (
                   <li key={c.id}>
                     <CollegeRankCard college={c} />
