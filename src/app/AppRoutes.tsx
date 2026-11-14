@@ -19,7 +19,7 @@ const ExamsHubPage = lazy(() => import('../pages/exams/ExamsHubPage'));
 const ExamDetailsPage = lazy(() => import('../pages/exams/ExamDetailsPage'));
 const GovtExamsPage = lazy(() => import('../pages/exams/GovtExamsPage'));
 const ExploreCollegesPage = lazy(() => import('../pages/colleges/ExploreCollegesPage'));
-const CollegeDetailPage = lazy(() => import('../pages/colleges/CollegeDetailPage'));
+const CollegeByNameRedirect = lazy(() => import('../pages/colleges/CollegeByNameRedirect'));
 const CollegeProfilePage = lazy(() => import('../pages/colleges/CollegeProfilePage'));
 const ComparePage = lazy(() => import('../pages/colleges/ComparePage'));
 const CollegeMatchResultsPage = lazy(() => import('../pages/colleges/CollegeMatchResultsPage'));
@@ -128,7 +128,7 @@ const AppRoutes: React.FC<AppRoutesProps> = ({ user, onOpenAuth, onAskAI }) => (
       {Object.entries(EXAM_REDIRECTS).map(([from, to]) => (
         <Route key={from} path={`/college/${from}/*`} element={<Navigate to={`/exams/${to}`} replace />} />
       ))}
-      <Route path="/college/:collegeName" element={<CollegeDetailPage />} />
+      <Route path="/college/:collegeName" element={<CollegeByNameRedirect />} />
 
       {/* Content */}
       <Route path="/news" element={<NewsPage />} />

@@ -2,10 +2,36 @@ import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { collegeCollections } from '../../../data/home/homeContent';
+import { catalogService } from '../../../services/catalogService';
+import { useAsync } from '../../../hooks/useAsync';
+
+type Filters = (typeof collegeCollections)[number]['filters'];
+
+/** /colleges?stream=…&ownership=… — the Explore page with the collection's filters (sorted by rank). */
+const exploreUrl = (f: Filters) => {
+  const params = new URLSearchParams();
+  if (f.streams?.length) params.set('stream', f.streams.join(','));
+  if (f.ownership?.length) params.set('ownership', f.ownership.join(','));
+  params.set('sort', 'rank');
+  return `/colleges?${params.toString()}`;
+};
 
 const CollegeCollections: React.FC = () => {
   const navigate = useNavigate();
   const collectionsRef = useRef<HTMLDivElement>(null);
+  // Real totals for each collection (page_size=1: only the count is needed).
+  const { data: counts } = useAsync(
+    () =>
+      Promise.all(
+        collegeCollections.map((c) =>
+          catalogService
+            .listColleges({ ...c.filters, pageSize: 1 })
+            .then((page) => page.count)
+            .catch(() => null),
+        ),
+      ),
+    [],
+  );
 
   const scrollCollections = (direction: 'left' | 'right') => {
     const container = collectionsRef.current;
@@ -24,7 +50,7 @@ const CollegeCollections: React.FC = () => {
           </p>
         </div>
         <button
-          onClick={() => navigate('/search')}
+          onClick={() => navigate('/colleges')}
           className="text-xs font-black text-primary-600 dark:text-primary-400 uppercase tracking-widest hover:underline flex items-center gap-1"
         >
           View all <ChevronRight className="h-3.5 w-3.5" />
@@ -46,10 +72,10 @@ const CollegeCollections: React.FC = () => {
           ref={collectionsRef}
           className="flex gap-5 overflow-x-auto scroll-smooth pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
-          {collegeCollections.map((collection) => (
+          {collegeCollections.map((collection, i) => (
             <button
               key={collection.title}
-              onClick={() => navigate(collection.route)}
+              onClick={() => navigate(exploreUrl(collection.filters))}
               className="group/card relative min-w-[240px] max-w-[240px] aspect-[4/5] overflow-hidden rounded-2xl text-left shadow-sm border border-neutral-100 dark:border-neutral-800 transition hover:shadow-md hover:-translate-y-1"
             >
               <img
@@ -66,7 +92,11 @@ const CollegeCollections: React.FC = () => {
                 </span>
                 <div>
                   <h3 className="text-sm font-black text-white leading-tight">{collection.title}</h3>
-                  <p className="text-xs text-white/80 font-bold mt-0.5">{collection.count}</p>
+                  {counts?.[i] ? (
+                    <p className="text-xs text-white/80 font-bold mt-0.5">
+                      {counts[i]!.toLocaleString('en-IN')} colleges
+                    </p>
+                  ) : null}
                 </div>
               </div>
             </button>

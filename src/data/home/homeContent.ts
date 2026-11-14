@@ -1,3 +1,4 @@
+import type { Ownership, Stream } from '../catalog/types';
 import type React from 'react';
 import { BarChart3, Building2, Calculator, GraduationCap, Target, MapPin } from 'lucide-react';
 
@@ -121,44 +122,46 @@ export const jobOpenings = [
   },
 ];
 
-export const collegeCollections = [
+/** Home page college collections: each opens Explore with these filters; counts come from the API. */
+export const collegeCollections: {
+  title: string;
+  tag: string;
+  filters: { streams?: Stream[]; ownership?: Ownership[] };
+  image: string;
+  color: string;
+}[] = [
   {
     title: 'Top Engineering Colleges',
     tag: 'Engineering',
-    count: '500+ Colleges',
-    route: '/engineering',
+    filters: { streams: ['Engineering'] },
     image: 'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=800&q=80',
     color: 'from-primary-600/90 to-primary-900/90',
   },
   {
     title: 'Best Medical Colleges',
     tag: 'Medical',
-    count: '200+ Colleges',
-    route: '/medical',
+    filters: { streams: ['Medical'] },
     image: 'https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?auto=format&fit=crop&w=800&q=80',
     color: 'from-danger-600/90 to-danger-900/90',
   },
   {
     title: 'Top MBA Colleges',
     tag: 'MBA',
-    count: '150+ Colleges',
-    route: '/mba',
+    filters: { streams: ['Management'] },
     image: 'https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=800&q=80',
     color: 'from-success-600/90 to-success-900/90',
   },
   {
-    title: 'Colleges Under ₹5 Lakhs',
-    tag: 'Budget',
-    count: '300+ Colleges',
-    route: '/search',
+    title: 'B.Ed Colleges',
+    tag: 'Education',
+    filters: { streams: ['Education'] },
     image: 'https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=800&q=80',
     color: 'from-warning-600/90 to-warning-900/90',
   },
   {
     title: 'Top Government Colleges',
     tag: 'Govt',
-    count: '250+ Colleges',
-    route: '/search',
+    filters: { ownership: ['Government'] },
     image: 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=800&q=80',
     color: 'from-accent-600/90 to-accent-900/90',
   },

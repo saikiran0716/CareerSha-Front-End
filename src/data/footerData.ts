@@ -9,7 +9,6 @@ import { TOOLS_SCHOLARSHIP } from './admission-tools/scholarshipData';
 import { TOOLS_ABROAD } from './admission-tools/studyAbroadData';
 import { TOOLS_PREDICTOR } from './admission-tools/predictorData';
 import { TOOLS_RANK } from './admission-tools/rankEstimatorData';
-import { TOOLS_REVIEWS } from './admission-tools/reviewsData';
 import { TOOLS_COMPARE } from './admission-tools/compareData';
 import { TOOLS_COUNSELOR } from './admission-tools/counselorData';
 
@@ -355,10 +354,12 @@ export const FOOTER_PAGES: Record<string, PageData> = {
   'tool-reviews': {
     title: 'College Reviews',
     description: 'Student & Alumni Verdicts',
-    items: TOOLS_REVIEWS,
+    items: [], // reviews are written by students on each college page (no sample reviews)
     type: 'review',
     content:
-      '<p>Read authentic reviews from current students and alumni about campus life, placements, and faculty.</p>',
+      '<p>Reviews are written by current students and alumni on each college’s page. ' +
+      '<a href="/colleges">Find your college</a>, open its <strong>Reviews</strong> tab to read them, ' +
+      'or write one about your own college to help the next batch.</p>',
     faqs: COMMON_FAQS,
   },
   'tool-compare': {

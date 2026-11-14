@@ -1,4 +1,4 @@
-import { StudentProfile, AIResponse, College, CollegeDetail } from '../types';
+import { StudentProfile, AIResponse, College } from '../types';
 import { buildApiUrl } from './apiConfig';
 import type { PageData } from '../data/types';
 export type { PageData };
@@ -163,14 +163,5 @@ export const getCollegeSuggestions = async (query: string): Promise<string[]> =>
   } catch (error) {
     console.error('Error fetching suggestions:', error);
     return [];
-  }
-};
-
-export const getCollegeDetails = async (collegeName: string): Promise<CollegeDetail | null> => {
-  try {
-    return (await callBackendAI('college-details', { collegeName })) as CollegeDetail;
-  } catch (error) {
-    console.error('Error fetching college details:', error);
-    return null;
   }
 };

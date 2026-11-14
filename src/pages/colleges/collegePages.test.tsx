@@ -1,9 +1,10 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { fireEvent, screen, within } from '@testing-library/react';
+import { fireEvent, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ExploreCollegesPage from './ExploreCollegesPage';
 import CollegeProfilePage from './CollegeProfilePage';
 import ComparePage from './ComparePage';
+import CollegeByNameRedirect from './CollegeByNameRedirect';
 import ExamDetailsPage from '../exams/ExamDetailsPage';
 import { renderAt } from '../../test/utils';
 import { installFakeCatalogApi } from '../../test/fakeCatalogApi';
@@ -210,5 +211,17 @@ describe('Exam page new tabs', () => {
 
     await userEvent.click(screen.getByRole('button', { name: /q&a/i }));
     expect(await screen.findByText(/no questions yet/i)).toBeInTheDocument();
+  });
+});
+
+describe('/college/<name> links from recommendations', () => {
+  it('opens the matching college from the catalog', async () => {
+    renderAt(<CollegeByNameRedirect />, '/college/NIT%20Warangal', '/college/:collegeName');
+    await waitFor(() => expect(screen.getByTestId('location')).toHaveTextContent('/colleges/test-nit-warangal'));
+  });
+
+  it('searches Explore when no single college matches', async () => {
+    renderAt(<CollegeByNameRedirect />, '/college/Unknown%20College', '/college/:collegeName');
+    await waitFor(() => expect(screen.getByTestId('location')).toHaveTextContent(/^\/colleges$/));
   });
 });
