@@ -1,0 +1,117 @@
+/* ==========================================================================
+   Dark mode fallback
+   --------------------------------------------------------------------------
+   Many components were written for light mode only. In dark mode these rules
+   recolour the common light-mode classes (white cards, grey text, borders,
+   navy text) — but only on elements that do NOT already set their own
+   `dark:` class for that property, so hand-tuned dark styles always win.
+   ========================================================================== */
+
+/* ---- surfaces ---- */
+.dark body {
+  background-color: rgb(var(--color-neutral-950));
+}
+.dark .bg-white:not([class*='dark:bg-']),
+.dark [class~='bg-white/95']:not([class*='dark:bg-']),
+.dark [class~='bg-white/80']:not([class*='dark:bg-']) {
+  background-color: rgb(var(--color-neutral-900));
+}
+.dark .bg-neutral-50:not([class*='dark:bg-']),
+.dark [class~='bg-neutral-50/30']:not([class*='dark:bg-']),
+.dark [class~='bg-neutral-50/50']:not([class*='dark:bg-']),
+.dark [class~='bg-neutral-50/60']:not([class*='dark:bg-']),
+.dark [class~='bg-neutral-50/70']:not([class*='dark:bg-']),
+.dark .bg-neutral-100:not([class*='dark:bg-']) {
+  background-color: rgb(var(--color-neutral-800) / 0.6);
+}
+.dark .bg-primary-50:not([class*='dark:bg-']),
+.dark [class~='bg-primary-50/40']:not([class*='dark:bg-']),
+.dark .bg-primary-100:not([class*='dark:bg-']) {
+  background-color: rgb(var(--color-primary-900) / 0.6);
+}
+.dark .hover\:bg-neutral-50:hover:not([class*='dark:hover:bg-']),
+.dark .hover\:bg-white:hover:not([class*='dark:hover:bg-']) {
+  background-color: rgb(var(--color-neutral-800));
+}
+.dark .hover\:bg-primary-50:hover:not([class*='dark:hover:bg-']) {
+  background-color: rgb(var(--color-primary-900));
+}
+
+/* Pastel icon tiles (bg-*-50) would glow on dark cards: show them as a faint tint instead. */
+.dark .bg-accent-50:not([class*='dark:bg-']),
+.dark .bg-secondary-50:not([class*='dark:bg-']),
+.dark .bg-success-50:not([class*='dark:bg-']),
+.dark .bg-danger-50:not([class*='dark:bg-']),
+.dark .bg-orange-50:not([class*='dark:bg-']),
+.dark .bg-pink-50:not([class*='dark:bg-']),
+.dark .bg-rose-50:not([class*='dark:bg-']),
+.dark .bg-sky-50:not([class*='dark:bg-']),
+.dark .bg-cyan-50:not([class*='dark:bg-']),
+.dark .bg-teal-50:not([class*='dark:bg-']),
+.dark .bg-yellow-50:not([class*='dark:bg-']) {
+  background-color: rgb(255 255 255 / 0.06);
+}
+
+/* ---- text ---- */
+.dark .text-neutral-900:not([class*='dark:text-']),
+.dark .text-neutral-800:not([class*='dark:text-']),
+.dark .text-slate-900:not([class*='dark:text-']) {
+  color: rgb(var(--color-neutral-100));
+}
+.dark .text-neutral-700:not([class*='dark:text-']),
+.dark .text-neutral-600:not([class*='dark:text-']) {
+  color: rgb(var(--color-neutral-300));
+}
+.dark .text-neutral-500:not([class*='dark:text-']) {
+  color: rgb(var(--color-neutral-400));
+}
+.dark .text-primary-900:not([class*='dark:text-']),
+.dark .text-primary-800:not([class*='dark:text-']),
+.dark .text-primary-700:not([class*='dark:text-']),
+.dark .text-primary-600:not([class*='dark:text-']) {
+  color: rgb(var(--color-primary-300));
+}
+.dark .hover\:text-primary-800:hover:not([class*='dark:hover:text-']),
+.dark .hover\:text-primary-900:hover:not([class*='dark:hover:text-']),
+.dark .hover\:text-neutral-900:hover:not([class*='dark:hover:text-']) {
+  color: rgb(var(--color-primary-200));
+}
+
+/* Status text (errors, success messages) sits on the toned-down tints above. */
+.dark .text-danger-600:not([class*='dark:text-']),
+.dark .text-danger-700:not([class*='dark:text-']),
+.dark .text-danger-800:not([class*='dark:text-']) {
+  color: rgb(var(--color-danger-300));
+}
+.dark .text-success-600:not([class*='dark:text-']),
+.dark .text-success-700:not([class*='dark:text-']),
+.dark .text-success-800:not([class*='dark:text-']) {
+  color: rgb(var(--color-success-300));
+}
+
+/* ---- borders ---- */
+.dark .border-neutral-50:not([class*='dark:border-']),
+.dark .border-neutral-100:not([class*='dark:border-']),
+.dark [class~='border-neutral-100/80']:not([class*='dark:border-']),
+.dark .border-neutral-200:not([class*='dark:border-']),
+.dark [class~='border-neutral-200/60']:not([class*='dark:border-']),
+.dark .border-primary-100:not([class*='dark:border-']) {
+  border-color: rgb(var(--color-neutral-800));
+}
+.dark .hover\:border-primary-300:hover:not([class*='dark:hover:border-']),
+.dark .hover\:border-primary-200:hover:not([class*='dark:hover:border-']) {
+  border-color: rgb(var(--color-primary-500));
+}
+
+/* Navy borders/underlines (nav hover, selected chips) would vanish on navy-black. */
+.dark .hover\:border-primary-800:hover,
+.dark .border-primary-800:not([class*='dark:border-']) {
+  border-color: rgb(var(--color-primary-300));
+}
+
+/* ---- form fields ---- */
+.dark input:not([class*='dark:bg-']):not([type='checkbox']):not([type='radio']),
+.dark select:not([class*='dark:bg-']),
+.dark textarea:not([class*='dark:bg-']) {
+  color: rgb(var(--color-neutral-100));
+}

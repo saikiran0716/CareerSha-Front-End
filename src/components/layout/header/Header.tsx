@@ -136,15 +136,15 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
             <div className="flex items-center justify-end gap-4 lg:gap-6 lg:flex-1">
               {/* Actions Section */}
               <div className="flex items-center gap-2 sm:gap-3">
-                {/* Theme Toggle - Hidden on very small mobile to save space, visible in menu if needed */}
+                {/* Light / dark theme toggle */}
                 {DARK_MODE_ENABLED && (
                   <button
                     onClick={onToggleDarkMode}
                     aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-                    className="hidden sm:flex p-2 rounded-xl bg-neutral-50 dark:bg-neutral-900 text-neutral-500 dark:text-neutral-400 hover:text-secondary-600 dark:hover:text-secondary-400 transition-all border border-neutral-200 dark:border-neutral-800 shadow-sm"
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-50 dark:bg-neutral-900 text-primary-800 dark:text-accent-400 hover:bg-primary-50 dark:hover:bg-neutral-800 transition-colors border border-neutral-200 dark:border-neutral-700"
                     title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
                   >
-                    {isDarkMode ? <Sun size={18} className="animate-pulse-slow" /> : <Moon size={18} />}
+                    {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
                   </button>
                 )}
 
