@@ -24,28 +24,30 @@ const PredictorsHubPage = () => {
 
       {/* Main Grid */}
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 mt-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2.5 sm:gap-4">
           {PREDICTORS_DATA.map((item) => (
             <Link
               key={item.id}
               to={item.route}
-              className="bg-white rounded-[14px] p-4 shadow-[0_2px_8px_rgb(0,0,0,0.03)] border border-neutral-100 flex flex-col h-full hover:shadow-[0_8px_24px_rgb(0,0,0,0.06)] hover:-translate-y-1 hover:border-neutral-200 transition-all duration-300 group"
+              className="bg-white rounded-[14px] p-3 sm:p-4 shadow-[0_2px_8px_rgb(0,0,0,0.03)] border border-neutral-100 flex flex-col h-full hover:shadow-[0_8px_24px_rgb(0,0,0,0.06)] hover:-translate-y-1 hover:border-neutral-200 transition-all duration-300 group"
             >
               {/* Header */}
-              <div className="flex items-center gap-3 mb-3">
-                <div className={`w-10 h-10 rounded-[10px] flex items-center justify-center shrink-0 ${item.iconBg}`}>
+              <div className="flex items-center gap-2 sm:gap-3 sm:mb-3">
+                <div
+                  className={`w-8 h-8 sm:w-10 sm:h-10 rounded-[10px] flex items-center justify-center shrink-0 ${item.iconBg}`}
+                >
                   <item.icon className={item.iconClass} />
                 </div>
-                <h3 className="text-[14px] font-bold text-neutral-900 leading-tight group-hover:text-primary-600 transition-colors">
+                <h3 className="text-[13px] sm:text-[14px] font-bold text-neutral-900 leading-tight group-hover:text-primary-600 transition-colors">
                   {item.title}
                 </h3>
               </div>
 
               {/* Description */}
-              <p className="text-xs text-neutral-500 leading-relaxed mb-4 flex-1">{item.description}</p>
+              <p className="hidden sm:block text-xs text-neutral-500 leading-relaxed mb-4 flex-1">{item.description}</p>
 
               {/* Action Link Footer */}
-              <div className="flex items-center justify-between mt-auto pt-3 border-t border-neutral-50">
+              <div className="hidden sm:flex items-center justify-between mt-auto pt-3 border-t border-neutral-50">
                 <span className={`text-xs font-bold ${item.buttonColor.split(' ')[0]}`}>Explore now</span>
                 <div className={`w-6 h-6 rounded-full flex items-center justify-center ${item.iconBg}`}>
                   <ArrowRight className={`w-3 h-3 ${item.buttonColor.split(' ')[0]}`} />

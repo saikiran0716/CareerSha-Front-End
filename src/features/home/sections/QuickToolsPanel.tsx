@@ -6,15 +6,15 @@ const QuickToolsPanel: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="bg-white dark:bg-neutral-900 rounded-[2rem] p-6 shadow-sm border border-neutral-100/80 dark:border-neutral-800/60">
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
+    <section className="bg-white dark:bg-neutral-900 rounded-[2rem] p-3 sm:p-6 shadow-sm border border-neutral-100/80 dark:border-neutral-800/60">
+      <div className="grid grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-5">
         {quickTools.map((tool) => {
           const Icon = tool.icon;
           return (
             <button
               key={tool.title}
               onClick={() => navigate(tool.href)}
-              className={`group flex flex-col items-center text-center p-4 rounded-2xl transition-all duration-300 border relative ${
+              className={`group flex flex-col items-center text-center px-1.5 py-3 sm:p-4 rounded-2xl transition-all duration-300 border relative ${
                 tool.highlight
                   ? 'bg-primary-50/30 dark:bg-primary-950/10 border-primary-200/80 dark:border-primary-800/50 shadow-[0_4px_12px_rgba(59,130,246,0.04)] hover:border-primary-400 dark:hover:border-primary-600 hover:shadow-[0_12px_24px_-8px_rgba(59,130,246,0.15)] hover:-translate-y-1'
                   : 'bg-neutral-50/30 dark:bg-neutral-900/30 border-neutral-100/70 dark:border-neutral-800/40 hover:bg-white dark:hover:bg-neutral-800/60 hover:border-neutral-200 dark:hover:border-neutral-700 hover:shadow-[0_12px_24px_-8px_rgba(0,0,0,0.06)] hover:-translate-y-1'
@@ -26,12 +26,16 @@ const QuickToolsPanel: React.FC = () => {
                 </span>
               )}
               <div
-                className={`mb-3 flex h-11 w-11 items-center justify-center rounded-full ${tool.bgClass} shadow-sm group-hover:scale-110 transition-transform duration-300`}
+                className={`mb-2 sm:mb-3 flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full ${tool.bgClass} shadow-sm group-hover:scale-110 transition-transform duration-300`}
               >
-                <Icon className="h-5 w-5" />
+                <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
               </div>
-              <p className="text-xs font-extrabold text-neutral-900 dark:text-white leading-tight mb-1">{tool.title}</p>
-              <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-snug">{tool.description}</p>
+              <p className="text-[11px] sm:text-xs font-extrabold text-neutral-900 dark:text-white leading-tight sm:mb-1">
+                {tool.title}
+              </p>
+              <p className="hidden sm:block text-xs text-neutral-500 dark:text-neutral-400 leading-snug">
+                {tool.description}
+              </p>
             </button>
           );
         })}

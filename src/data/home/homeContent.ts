@@ -174,14 +174,14 @@ export const DEMO_LIVE_UPDATES = [
     title: 'JEE Main: exam pattern, syllabus and marking scheme explained',
     category: 'Engineering',
     link: '/exams/jee-main',
-    isLive: true,
+    isLive: false,
   },
   {
     id: -2,
     title: 'NEET UG: how the All India Quota and state quota counselling work',
     category: 'Medical',
     link: '/exams/neet',
-    isLive: true,
+    isLive: false,
   },
   {
     id: -3,
