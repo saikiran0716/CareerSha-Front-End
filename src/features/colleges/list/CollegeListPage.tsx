@@ -3,12 +3,12 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { ChevronRight, Search, SearchX } from 'lucide-react';
 import SEO from '../../../components/common/SEO';
 import PageLoader from '../../../components/common/loaders/PageLoader';
-import LoadMore from '../../../components/common/LoadMore';
+import Pagination from '../../../components/common/Pagination';
 import FaqSection from '../../content/footer-page/FaqSection';
 import CollegeRankCard from './CollegeRankCard';
 import ListSidebar from './ListSidebar';
 import { useDebounced } from '../../../hooks/useDebounced';
-import { useInfiniteList } from '../../../hooks/useInfiniteList';
+import { usePagedList } from '../../../hooks/usePagedList';
 import {
   CollegeList,
   ListCollege,
@@ -44,6 +44,8 @@ const SORTS: { value: ListSort; label: string }[] = [
   { value: 'name', label: 'Name (A–Z)' },
 ];
 const OWNERSHIPS: (ListOwnership | 'All')[] = ['All', 'Government', 'Private', 'Deemed'];
+/** Colleges per page (the API's page_size). */
+const PAGE_SIZE = 10;
 
 /** Headline numbers for the hero: figures for the whole list from the API. */
 const summary = (stats: ListStats) => {
@@ -61,14 +63,17 @@ const CollegeListPage: React.FC<{ slug: string }> = ({ slug }) => {
   const search = useDebounced(q.trim(), 350);
   const ownership = (params.get('own') as ListOwnership | null) ?? 'All';
   const sort = (params.get('sort') as ListSort | null) ?? 'rank';
+  const page = Math.max(1, Number(params.get('page')) || 1);
+  const resultsTop = React.useRef<HTMLParagraphElement>(null);
 
-  const pages = useInfiniteList<ListCollege, CollegeList | null>(
-    (page) =>
-      getCollegeList(slug, { page, q: search, ownership, sort }).then((result) => ({
+  const pages = usePagedList<ListCollege, CollegeList | null>(
+    (p) =>
+      getCollegeList(slug, { page: p, q: search, ownership, sort }).then((result) => ({
         items: result?.colleges ?? [],
         count: result?.count ?? 0,
         first: result,
       })),
+    page,
     [slug, search, ownership, sort],
   );
   // The page's own text and header figures, kept while new results load.
@@ -82,7 +87,15 @@ const CollegeListPage: React.FC<{ slug: string }> = ({ slug }) => {
     const next = new URLSearchParams(params);
     if (value === empty) next.delete(key);
     else next.set(key, value);
+    next.delete('page'); // new search / filter / sort starts at page 1
     setParams(next, { replace: true });
+  };
+  const goToPage = (n: number) => {
+    const next = new URLSearchParams(params);
+    if (n === 1) next.delete('page');
+    else next.set('page', String(n));
+    setParams(next);
+    resultsTop.current?.scrollIntoView?.({ behavior: 'smooth', block: 'start' });
   };
 
   if (list === undefined) return <PageLoader />;
@@ -191,7 +204,7 @@ const CollegeListPage: React.FC<{ slug: string }> = ({ slug }) => {
           )}
 
           {hasColleges && (
-            <p className="text-sm text-neutral-600" aria-live="polite">
+            <p ref={resultsTop} className="scroll-mt-24 text-sm text-neutral-600" aria-live="polite">
               {pages.loading
                 ? 'Loading…'
                 : `${pages.count.toLocaleString('en-IN')} college${pages.count === 1 ? '' : 's'}${
@@ -208,18 +221,12 @@ const CollegeListPage: React.FC<{ slug: string }> = ({ slug }) => {
                     <CollegeRankCard
                       college={c}
                       figures={figures}
-                      position={sort === 'rank' && !filtered ? i + 1 : undefined}
+                      position={sort === 'rank' && !filtered ? (page - 1) * PAGE_SIZE + i + 1 : undefined}
                     />
                   </li>
                 ))}
               </ol>
-              <LoadMore
-                shown={shown.length}
-                total={pages.count}
-                hasMore={pages.hasMore}
-                loading={pages.loadingMore}
-                onLoadMore={pages.loadMore}
-              />
+              <Pagination page={page} pageSize={PAGE_SIZE} total={pages.count} onChange={goToPage} />
             </>
           ) : pages.loading ? null : filtered || list.alsoPopular.length === 0 ? (
             <div className="rounded-2xl border border-dashed border-neutral-300 bg-white p-8 text-center">

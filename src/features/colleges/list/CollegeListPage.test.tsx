@@ -34,29 +34,38 @@ describe('CollegeListPage', () => {
       '/colleges/test-nit-warangal',
     );
     expect(within(nitw).getByRole('button', { name: /add .* to compare/i })).toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: /load more/i })).not.toBeInTheDocument(); // all shown
+    expect(screen.queryByRole('navigation', { name: 'Pagination' })).not.toBeInTheDocument(); // one page
 
     // Sidebar
     expect(screen.getByRole('link', { name: /predict my colleges/i })).toHaveAttribute('href', '/college-matcher');
     expect(screen.getByRole('link', { name: 'JEE Main' })).toBeInTheDocument();
   });
 
-  it('loads 10 colleges at a time', async () => {
+  it('shows 10 colleges per page with page numbers', async () => {
     renderAt(<CollegeListPage slug="nursing-india" />, '/nursing/india');
     expect(await screen.findByText('25 colleges')).toBeInTheDocument();
     expect(cardNames()).toHaveLength(10);
-    expect(screen.getByText('Showing 10 of 25 colleges')).toBeInTheDocument();
+    expect(screen.getByText('Showing 1–10 of 25 colleges')).toBeInTheDocument();
     expect(String(fetchMock.mock.calls[0][0])).toContain('page_size=10');
+    expect(screen.getByRole('button', { name: 'Previous page' })).toBeDisabled();
 
-    await userEvent.click(screen.getByRole('button', { name: 'Load more colleges' }));
-    await waitFor(() => expect(cardNames()).toHaveLength(20));
-    expect(cardNames()[10]).toBe('Nursing College 11'); // next page appended in order
+    await userEvent.click(screen.getByRole('button', { name: 'Next page' }));
+    await waitFor(() => expect(cardNames()[0]).toBe('Nursing College 11')); // page 2 replaces page 1
+    expect(cardNames()).toHaveLength(10);
     expect(String(fetchMock.mock.calls.at(-1)![0])).toContain('page=2');
+    expect(screen.getByRole('button', { name: 'Page 2' })).toHaveAttribute('aria-current', 'page');
+    expect(screen.getByText('#11')).toBeInTheDocument(); // rank continues across pages
 
-    await userEvent.click(screen.getByRole('button', { name: 'Load more colleges' }));
-    await waitFor(() => expect(cardNames()).toHaveLength(25));
-    expect(screen.queryByRole('button', { name: /load more/i })).not.toBeInTheDocument();
-    expect(screen.getByText('You have seen all 25 colleges')).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'Page 3' }));
+    await waitFor(() => expect(cardNames()).toHaveLength(5));
+    expect(screen.getByText('Showing 21–25 of 25 colleges')).toBeInTheDocument();
+  });
+
+  it('opens on the page in the URL', async () => {
+    renderAt(<CollegeListPage slug="nursing-india" />, '/nursing/india?page=2');
+    await screen.findByText('25 colleges');
+    expect(String(fetchMock.mock.calls[0][0])).toContain('page=2');
+    expect(cardNames()[0]).toBe('Nursing College 11');
   });
 
   it('searches and filters the whole list on the server, and can clear them', async () => {

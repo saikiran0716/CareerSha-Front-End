@@ -294,9 +294,10 @@ body {
   }
 }
 
-/* Prevent horizontal scroll globally */
+/* Prevent horizontal scroll globally. `clip` (not `hidden`) so the page doesn't become a scroll
+   container — `hidden` here silently breaks every `position: sticky` (e.g. list sidebars). */
 html,
 body {
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }

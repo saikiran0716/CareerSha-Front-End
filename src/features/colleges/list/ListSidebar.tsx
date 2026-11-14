@@ -53,7 +53,7 @@ const ListSidebar: React.FC<{ stream?: ListStream }> = ({ stream }) => {
   const exams = examStream ? getStreamExams(examStream) : undefined;
 
   return (
-    <aside className="space-y-5 lg:sticky lg:top-24">
+    <aside className="space-y-5 lg:sticky lg:top-24 lg:self-start">
       <section className="rounded-2xl bg-primary-800 p-5 text-white">
         <Target className="h-6 w-6 text-accent-400" />
         <h2 className="mt-2 text-base text-white">Which of these can you get?</h2>

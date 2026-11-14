@@ -4,14 +4,14 @@ import SEO from '../../components/common/SEO';
 import ExploreSearchHeader from '../../features/colleges/ExploreSearchHeader';
 import ExploreFilters, { ExploreFilterValues } from '../../features/colleges/ExploreFilters';
 import CollegeListCard from '../../features/colleges/CollegeListCard';
-import LoadMore from '../../components/common/LoadMore';
+import Pagination from '../../components/common/Pagination';
 import { catalogService, CollegeFilters } from '../../services/catalogService';
 import { CatalogCollege, Ownership, Stream } from '../../data/catalog/types';
-import { useInfiniteList } from '../../hooks/useInfiniteList';
-
-/** Colleges loaded per step (more load as the visitor scrolls). */
-const PAGE_SIZE = 10;
+import { usePagedList } from '../../hooks/usePagedList';
 import { useCompare } from '../../hooks/useCompare';
+
+/** Colleges per page. */
+const PAGE_SIZE = 10;
 
 type Sort = NonNullable<CollegeFilters['sort']>;
 const list = (v: string | null) => (v ? v.split(',').filter(Boolean) : []);
@@ -29,6 +29,8 @@ const ExploreCollegesPage: React.FC = () => {
     exam: params.get('exam') ?? '',
   };
   const sort = (params.get('sort') as Sort) || 'relevance';
+  const page = Math.max(1, Number(params.get('page')) || 1);
+  const resultsTop = React.useRef<HTMLDivElement>(null);
 
   const update = (next: Partial<{ q: string; sort: Sort } & ExploreFilterValues>) => {
     const merged = { q: search, sort, ...filters, ...next };
@@ -39,12 +41,21 @@ const ExploreCollegesPage: React.FC = () => {
     if (merged.states.length) out.state = merged.states.join(',');
     if (merged.exam) out.exam = merged.exam;
     if (merged.sort !== 'relevance') out.sort = merged.sort;
-    setParams(out, { replace: true });
+    setParams(out, { replace: true }); // filters changed: back to page 1
+  };
+  const goToPage = (n: number) => {
+    const next = new URLSearchParams(params);
+    if (n === 1) next.delete('page');
+    else next.set('page', String(n));
+    setParams(next);
+    resultsTop.current?.scrollIntoView?.({ behavior: 'smooth', block: 'start' });
   };
 
-  const key = params.toString();
-  const results = useInfiniteList<CatalogCollege>(
-    (page) =>
+  const next = new URLSearchParams(params);
+  next.delete('page');
+  const key = next.toString();
+  const results = usePagedList<CatalogCollege>(
+    (p) =>
       catalogService
         .listColleges({
           search,
@@ -53,10 +64,11 @@ const ExploreCollegesPage: React.FC = () => {
           states: filters.states,
           exam: filters.exam || undefined,
           sort,
-          page,
+          page: p,
           pageSize: PAGE_SIZE,
         })
         .then((r) => ({ items: r.results, count: r.count })),
+    page,
     [key],
   );
   const { items: colleges, count, loading, error } = results;
@@ -81,7 +93,7 @@ const ExploreCollegesPage: React.FC = () => {
             <ExploreFilters values={filters} options={catalogService.filterOptions()} onChange={(v) => update(v)} />
           </div>
 
-          <div className="flex-1">
+          <div ref={resultsTop} className="min-w-0 flex-1 scroll-mt-24">
             <div className="mb-6 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
               <p className="text-sm text-neutral-700" aria-live="polite">
                 {loading
@@ -121,13 +133,7 @@ const ExploreCollegesPage: React.FC = () => {
                 ))}
               </div>
             )}
-            <LoadMore
-              shown={colleges.length}
-              total={count}
-              hasMore={results.hasMore}
-              loading={results.loadingMore}
-              onLoadMore={results.loadMore}
-            />
+            {!error && <Pagination page={page} pageSize={PAGE_SIZE} total={count} onChange={goToPage} />}
           </div>
         </div>
       </div>

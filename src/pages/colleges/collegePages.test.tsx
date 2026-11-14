@@ -37,15 +37,17 @@ describe('Explore Colleges', () => {
     expect(await screen.findByText('29 colleges found')).toBeInTheDocument();
   });
 
-  it('loads 10 colleges at a time', async () => {
+  it('shows 10 colleges per page with page numbers', async () => {
     renderAt(<ExploreCollegesPage />, '/colleges?stream=Nursing', '/colleges');
     expect(await screen.findByText('25 colleges found')).toBeInTheDocument();
     expect(screen.getAllByRole('link', { name: 'View details' })).toHaveLength(10);
-    expect(screen.getByText('Showing 10 of 25 colleges')).toBeInTheDocument();
+    expect(screen.getByText('Showing 1–10 of 25 colleges')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Page 1' })).toHaveAttribute('aria-current', 'page');
 
-    await userEvent.click(screen.getByRole('button', { name: 'Load more colleges' }));
-    await waitFor(() => expect(screen.getAllByRole('link', { name: 'View details' })).toHaveLength(20));
-    expect(screen.getByText('Showing 20 of 25 colleges')).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'Page 3' }));
+    await waitFor(() => expect(screen.getAllByRole('link', { name: 'View details' })).toHaveLength(5));
+    expect(screen.getByText('Showing 21–25 of 25 colleges')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Next page' })).toBeDisabled();
   });
 
   it('shows an error when the API is down', async () => {
