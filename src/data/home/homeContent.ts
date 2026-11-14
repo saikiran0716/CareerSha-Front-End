@@ -163,3 +163,38 @@ export const collegeCollections = [
     color: 'from-accent-600/90 to-accent-900/90',
   },
 ];
+
+/**
+ * Demo items for the homepage "Live Updates" card, shown only while the news API returns nothing.
+ * They are guides (no invented announcements or dates) and link to existing pages.
+ */
+export const DEMO_LIVE_UPDATES = [
+  {
+    id: -1,
+    title: 'JEE Main: exam pattern, syllabus and marking scheme explained',
+    category: 'Engineering',
+    link: '/exams/jee-main',
+    isLive: true,
+  },
+  {
+    id: -2,
+    title: 'NEET UG: how the All India Quota and state quota counselling work',
+    category: 'Medical',
+    link: '/exams/neet',
+    isLive: true,
+  },
+  {
+    id: -3,
+    title: 'CAT: which IIMs and B-schools accept your percentile',
+    category: 'MBA',
+    link: '/exams/cat',
+    isLive: false,
+  },
+  {
+    id: -4,
+    title: 'Estimate your JEE Main rank from your expected score',
+    category: 'Predictor',
+    link: '/rank-estimator/jee-main',
+    isLive: false,
+  },
+].map((item) => ({ ...item, date: 'Guide', image: '' }));

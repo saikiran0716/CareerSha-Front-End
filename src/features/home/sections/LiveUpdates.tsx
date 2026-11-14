@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Newspaper } from 'lucide-react';
 import { getLatestNewsItems, NewsItem } from '../../../services/homeContentService';
+import { DEMO_LIVE_UPDATES } from '../../../data/home/homeContent';
+import { SHOW_SAMPLE_DATA_NOTICE } from '../../../config/features';
 
 const MAX_ITEMS = 4;
 
@@ -9,11 +11,16 @@ const MAX_ITEMS = 4;
 const LiveUpdates: React.FC = () => {
   const navigate = useNavigate();
   const [items, setItems] = useState<NewsItem[] | null>(null);
+  const [isDemo, setIsDemo] = useState(false);
 
   useEffect(() => {
     let active = true;
     getLatestNewsItems().then((news) => {
-      if (active) setItems(news.slice(0, MAX_ITEMS));
+      if (!active) return;
+      // No news from the API yet: show demo guides instead of an empty card.
+      const demo = news.length === 0;
+      setIsDemo(demo);
+      setItems((demo ? DEMO_LIVE_UPDATES : news).slice(0, MAX_ITEMS));
     });
     return () => {
       active = false;
@@ -23,7 +30,14 @@ const LiveUpdates: React.FC = () => {
   return (
     <section className="bg-white dark:bg-neutral-900 rounded-[2rem] p-5 shadow-sm border border-neutral-100/80 dark:border-neutral-800/60">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-base font-bold text-neutral-900 dark:text-white">Live Updates</h2>
+        <h2 className="flex items-center gap-2 text-base font-bold text-neutral-900 dark:text-white">
+          Live Updates
+          {isDemo && SHOW_SAMPLE_DATA_NOTICE && (
+            <span className="rounded-full bg-neutral-100 px-2 py-0.5 text-[10px] font-medium uppercase text-neutral-500">
+              Sample
+            </span>
+          )}
+        </h2>
         <button
           onClick={() => navigate('/news')}
           className="text-xs font-black text-primary-600 dark:text-primary-400 hover:underline uppercase tracking-widest"
