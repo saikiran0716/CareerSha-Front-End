@@ -91,7 +91,7 @@ const FooterDirectory: React.FC<FooterDirectoryProps> = ({ onNavigate }) => {
             'Chandigarh',
             'Coimbatore',
             'Nagpur',
-            'Noids',
+            'Noida',
             'Gurgaon',
           ].map((city) => {
             const cityPath = `/city/${city.toLowerCase().replace(' ', '-')}`;
@@ -99,7 +99,7 @@ const FooterDirectory: React.FC<FooterDirectoryProps> = ({ onNavigate }) => {
               <button
                 key={city}
                 onClick={() => onNavigate?.(cityPath)}
-                className="hover:text-white transition-all duration-300 border-b border-transparent hover:border-secondary-500 pb-1 text-center md:text-left"
+                className="w-fit justify-self-center md:justify-self-start hover:text-white transition-colors duration-300 pb-1 text-center md:text-left"
               >
                 {city}
               </button>
