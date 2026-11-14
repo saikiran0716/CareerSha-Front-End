@@ -13,6 +13,7 @@
 }
 .dark .bg-white:not([class*='dark:bg-']),
 .dark [class~='bg-white/95']:not([class*='dark:bg-']),
+.dark [class~='bg-white/90']:not([class*='dark:bg-']),
 .dark [class~='bg-white/80']:not([class*='dark:bg-']) {
   background-color: rgb(var(--color-neutral-900));
 }

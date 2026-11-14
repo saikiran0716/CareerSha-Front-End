@@ -101,8 +101,8 @@ export const useFooterPageData = (initialData: PageData, pageId: string) => {
           });
         } catch (e) {
           console.error('Failed to fetch footer content', e);
-          setError(true);
-          setData((prev) => ({ ...prev, items: [] })); // Remove fallback items on error
+          // Keep the built-in sample items; only show the error when there is nothing to show.
+          setError(!initialData.items?.length);
         } finally {
           setLoading(false);
         }

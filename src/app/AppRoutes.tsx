@@ -38,6 +38,7 @@ const ReportDetailPage = lazy(() => import('../pages/account/ReportDetailPage'))
 const MyPredictionsPage = lazy(() => import('../pages/account/MyPredictionsPage'));
 const SavedCollegesPage = lazy(() => import('../pages/account/SavedCollegesPage'));
 const GenericFooterPage = lazy(() => import('../features/content/GenericFooterPage'));
+const CollegeListPage = lazy(() => import('../features/colleges/list/CollegeListPage'));
 const StaticInfoPage = lazy(() => import('../features/content/StaticInfoPage'));
 
 interface AppRoutesProps {
@@ -48,12 +49,15 @@ interface AppRoutesProps {
 
 const goBack = () => window.history.back();
 
-/** Wraps a data-driven category page in the standard page container. */
-const CategoryPage: React.FC<{ pageId: string; onAskAI: (t: string) => void }> = ({ pageId, onAskAI }) => (
-  <div className="page-container py-12">
-    <GenericFooterPage data={FOOTER_PAGES[pageId]} onBack={goBack} onAskAI={onAskAI} pageId={pageId} />
-  </div>
-);
+/** Data-driven category page: college lists get the ranked list design, other types the generic page. */
+const CategoryPage: React.FC<{ pageId: string; onAskAI: (t: string) => void }> = ({ pageId, onAskAI }) =>
+  FOOTER_PAGES[pageId]?.type === 'college' ? (
+    <CollegeListPage slug={pageId} />
+  ) : (
+    <div className="py-12">
+      <GenericFooterPage data={FOOTER_PAGES[pageId]} onBack={goBack} onAskAI={onAskAI} pageId={pageId} />
+    </div>
+  );
 
 /** Top-level category routes backed by FOOTER_PAGES entries. */
 const CATEGORY_ROUTES: Record<string, string> = {
