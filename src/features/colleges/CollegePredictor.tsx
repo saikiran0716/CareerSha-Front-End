@@ -214,7 +214,7 @@ export const CollegePredictorView = ({ profile }: { profile?: PredictorPrefill |
 
   return (
     <section className="w-full bg-neutral-50 py-6 font-sans min-h-screen">
-      <div className="w-full max-w-[1440px] mx-auto px-3 sm:px-4 lg:px-4 xl:px-4">
+      <div className="page-container">
         {/* Breadcrumb / Top Navigation */}
         <div className="text-xs text-neutral-500 font-medium mb-6">
           <span>Home</span> <span className="mx-1">&gt;</span> <span>Predictors</span>{' '}

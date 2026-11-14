@@ -132,7 +132,7 @@ export const RankEstimator: React.FC<RankEstimatorProps> = ({ defaultExam }) => 
 
   return (
     <section className="w-full bg-neutral-50 rounded-[32px] py-8 sm:py-16 mt-0 mb-6 font-sans relative overflow-hidden">
-      <div className="relative z-[1] w-full max-w-[1400px] mx-auto px-6 lg:px-8 animate-fade">
+      <div className="relative z-[1] page-container animate-fade">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* ── LEFT: form ── */}
           <div className="space-y-8 flex flex-col justify-center">

@@ -76,7 +76,7 @@ const ExamDetailsPage: React.FC = () => {
       />
       {/* Top Navigation */}
       <nav className="sticky top-[72px] z-50 w-full bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md border-b border-neutral-100 dark:border-neutral-800">
-        <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-16 h-16 flex items-center justify-between">
+        <div className="page-container h-16 flex items-center justify-between">
           <button
             onClick={() => navigate(-1)}
             className="flex items-center gap-2 text-neutral-500 hover:text-secondary-600 font-bold text-xs uppercase tracking-[0.2em] transition-all -ml-1"
@@ -95,7 +95,7 @@ const ExamDetailsPage: React.FC = () => {
 
       {/* Exam Hero Section */}
       <div className="relative pt-12 pb-24 lg:pt-20 lg:pb-32 overflow-hidden bg-neutral-50 dark:bg-neutral-900/40">
-        <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-16 relative z-10">
+        <div className="page-container relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-10 text-center lg:text-left">
               <div className="space-y-4">
@@ -176,7 +176,7 @@ const ExamDetailsPage: React.FC = () => {
       </div>
 
       {/* Tabs & Content */}
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-16 -mt-12 relative z-20 pb-24">
+      <div className="page-container -mt-12 relative z-20 pb-24">
         <div className="bg-white dark:bg-neutral-900 rounded-[3rem] shadow-2xl shadow-neutral-200/50 dark:shadow-none border border-neutral-100 dark:border-neutral-800 overflow-hidden">
           {/* Navigation Tabs */}
           <div className="flex items-center border-b border-neutral-50 dark:border-neutral-800 overflow-x-auto no-scrollbar">

@@ -50,7 +50,7 @@ const goBack = () => window.history.back();
 
 /** Wraps a data-driven category page in the standard page container. */
 const CategoryPage: React.FC<{ pageId: string; onAskAI: (t: string) => void }> = ({ pageId, onAskAI }) => (
-  <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 py-12">
+  <div className="page-container py-12">
     <GenericFooterPage data={FOOTER_PAGES[pageId]} onBack={goBack} onAskAI={onAskAI} pageId={pageId} />
   </div>
 );

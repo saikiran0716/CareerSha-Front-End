@@ -17,7 +17,7 @@ const StaticLayout: React.FC<StaticLayoutProps> = ({ title, description, canonic
       <SEO title={title} description={description} canonical={canonical} />
       {/* Header Section */}
       <div className="bg-white border-b border-neutral-200 sticky top-0 z-20">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 h-16 flex items-center gap-4">
+        <div className="page-container h-16 flex items-center gap-4">
           <button
             onClick={() => navigate('/')}
             className="flex-shrink-0 flex items-center gap-1.5 text-neutral-500 hover:text-highlight transition-all duration-300 text-xs sm:text-xs font-black uppercase tracking-[0.1em] sm:tracking-[0.2em]"

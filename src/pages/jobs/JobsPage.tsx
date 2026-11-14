@@ -20,7 +20,7 @@ const JobsPage = () => {
       />
       {/* Hero Section */}
       <div className="bg-white border-b border-neutral-200 pt-8 pb-8">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="page-container">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-12">
             {/* Left Side: Header & Search */}
             <div className="flex-1 w-full">
@@ -127,7 +127,7 @@ const JobsPage = () => {
       </div>
 
       {/* Main Content Area */}
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+      <div className="page-container mt-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
           {/* Left Sidebar - Filters */}
           <div className="hidden lg:block lg:col-span-3">

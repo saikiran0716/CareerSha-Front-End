@@ -129,7 +129,7 @@ const NewsNotifications: React.FC = () => {
             `,
         }}
       />
-      <div className="max-w-[1440px] mx-auto px-2 sm:px-4 lg:px-6">
+      <div className="page-container">
         <div className="bg-white dark:bg-neutral-900/80 backdrop-blur-sm rounded-[1.25rem] px-4 py-2 md:px-5 md:py-3 shadow-[0_4px_25px_rgba(0,0,0,0.03)] border border-neutral-100 dark:border-neutral-800/80 news-container-mobile">
           <div className="flex justify-between items-center mb-3 px-1 news-header-mobile">
             <div className="flex items-center gap-3">

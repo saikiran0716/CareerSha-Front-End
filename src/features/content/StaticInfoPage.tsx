@@ -13,7 +13,7 @@ const StaticInfoPage: React.FC<StaticInfoPageProps> = ({ data, onBack }) => {
       <SEO title={data.title} description={data.description} />
       {/* Simple Title Section */}
       <div className="border-b border-neutral-100 dark:border-neutral-800">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 h-10 flex items-center justify-center relative uppercase">
+        <div className="page-container h-10 flex items-center justify-center relative uppercase">
           <button
             onClick={onBack}
             className="absolute left-4 sm:left-6 lg:left-8 flex items-center gap-1 text-neutral-500 hover:text-secondary-600 dark:hover:text-secondary-400 transition-colors text-xs font-bold tracking-widest uppercase"

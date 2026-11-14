@@ -223,7 +223,7 @@ const CollegeMatchResults: React.FC = () => {
       >
         {/* SLIM TOP NAV */}
         <header className="sticky top-0 z-[100] bg-white border-b border-neutral-200 shadow-sm">
-          <div className="max-w-[1400px] mx-auto px-8 flex items-center justify-between h-14">
+          <div className="page-container flex items-center justify-between h-14">
             <button
               onClick={() => navigate(-1)}
               className="w-8 h-8 bg-neutral-100 hover:bg-neutral-200 rounded-lg text-neutral-600 transition-all flex items-center justify-center active:scale-95"
@@ -249,7 +249,7 @@ const CollegeMatchResults: React.FC = () => {
           </div>
         </header>
 
-        <main className="max-w-[1400px] mx-auto px-8 py-8 relative z-10">
+        <main className="page-container py-8 relative z-10">
           {/* PAGE TITLE + CHIPS */}
           <div className="flex flex-wrap items-end justify-between gap-4 mb-6">
             <h1 className="text-2xl sm:text-[38px] font-black text-neutral-900 tracking-tight leading-none uppercase">

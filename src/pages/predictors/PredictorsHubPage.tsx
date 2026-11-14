@@ -13,7 +13,7 @@ const PredictorsHubPage = () => {
       />
       {/* Hero Section */}
       <div className="bg-white border-b border-neutral-200 pt-10 pb-10">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="page-container">
           <h1 className="text-3xl font-extrabold text-neutral-900 mb-2 tracking-tight">Predict Your Future</h1>
           <p className="text-[14px] text-neutral-500 max-w-2xl leading-relaxed">
             Our intelligent predictors help you make informed decisions about your career, college and exams based on
@@ -23,7 +23,7 @@ const PredictorsHubPage = () => {
       </div>
 
       {/* Main Grid */}
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+      <div className="page-container mt-8">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2.5 sm:gap-4">
           {PREDICTORS_DATA.map((item) => (
             <Link

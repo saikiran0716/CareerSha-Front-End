@@ -11,7 +11,7 @@ const ExamsHubPage: React.FC = () => {
         keywords="entrance exams 2026, JEE Main registration, NEET exam dates, catalyst entrance exam, gate 2026 syllabus, mba cat exam india"
         canonical="https://www.careersha.com/exams"
       />
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="page-container">
         <h1 className="text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-white mb-8 text-center">
           Entrance Exams 2026 in India
         </h1>

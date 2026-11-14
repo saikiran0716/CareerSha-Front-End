@@ -24,7 +24,7 @@ const HomeView: React.FC<HomeViewProps> = ({ onStartCounseling, onAskAI }) => {
         <div className="absolute top-[20%] right-[10%] w-[30%] h-[30%] bg-primary-950/10 dark:bg-primary-950/20 rounded-full blur-[100px]" />
       </div>
 
-      <main className="mx-auto max-w-[1440px] px-6 py-6">
+      <main className="page-container py-6">
         <div className="grid grid-cols-1 xl:grid-cols-[1fr_352px] gap-12 items-start">
           {/* LEFT COLUMN: Hero, Quick Tools, Collections, Stats */}
           <div className="space-y-8 min-w-0">

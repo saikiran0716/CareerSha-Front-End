@@ -11,7 +11,7 @@ const SearchPage: React.FC = () => {
         title="Search Colleges, Exams & Courses in India"
         description="Search top colleges, entrance exams, and courses across India with smart filters and tools."
       />
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="page-container">
         <h1 className="text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-white mb-8 text-center">
           Search Colleges, Exams & Courses
         </h1>

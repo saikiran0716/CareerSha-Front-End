@@ -60,7 +60,7 @@ const ExploreCollegesPage: React.FC = () => {
         description="Discover and compare engineering, medical, management, law and design colleges. Filter by stream, exam, state and ownership."
         keywords="explore colleges, colleges in india, college comparison, college fees, college cutoffs, college placements"
       />
-      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-12 py-8">
+      <div className="page-container py-8">
         <ExploreSearchHeader
           search={search}
           onSearch={(q) => update({ q })}

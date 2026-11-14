@@ -41,13 +41,7 @@ const ExamResultsPage: React.FC<ExamResultsPageProps> = ({ compact = false }) =>
   };
 
   return (
-    <div
-      className={
-        compact
-          ? 'font-sans pb-12 w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8'
-          : 'w-full pt-4 pb-12 mb-6 font-sans max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8'
-      }
-    >
+    <div className={compact ? 'font-sans pb-12 page-container' : 'w-full pt-4 pb-12 mb-6 font-sans page-container'}>
       {!compact && (
         <div className="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-l-4 border-secondary-600 pl-4 sm:pl-5 py-1">
           <div className="flex flex-col gap-1">

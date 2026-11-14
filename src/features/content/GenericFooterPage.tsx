@@ -27,7 +27,7 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
       <SEO title={data.title} description={data.description} />
       {/* Navigation / Header Area */}
       <div className="bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800 sticky top-0 z-50 shadow-sm/50 backdrop-blur-md bg-white/80 dark:bg-neutral-900/80">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 h-14 flex items-center justify-center relative">
+        <div className="page-container h-14 flex items-center justify-center relative">
           {/* Back Button - Absolute Left */}
           <button
             onClick={onBack}
@@ -46,9 +46,7 @@ const GenericFooterPage: React.FC<GenericFooterPageProps> = ({ data: initialData
         </div>
       </div>
 
-      <main
-        className={`max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 ${data.type === 'review' ? 'pt-2 pb-4' : 'pt-4 pb-8'} relative z-0`}
-      >
+      <main className={`page-container ${data.type === 'review' ? 'pt-2 pb-4' : 'pt-4 pb-8'} relative z-0`}>
         {/* Hero / description + search */}
         <div
           className={`max-w-4xl mx-auto text-center ${data.type === 'review' ? 'mb-2' : 'mb-4'} animate-fade relative z-[9999]`}

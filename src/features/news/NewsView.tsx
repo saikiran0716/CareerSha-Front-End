@@ -21,7 +21,7 @@ const NewsView: React.FC = () => {
     <div className="w-full min-h-screen bg-secondary-50 dark:bg-neutral-950 animate-fade">
       {/* Professional Header */}
       <header className="sticky top-0 z-50 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl border-b border-neutral-100 dark:border-neutral-800">
-        <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 h-20 flex items-center justify-between">
+        <div className="page-container h-20 flex items-center justify-between">
           <button
             onClick={() => navigate('/')}
             className="flex items-center gap-2 text-neutral-600 dark:text-neutral-400 font-bold hover:text-neutral-900 dark:hover:text-white transition-colors group"
@@ -32,7 +32,7 @@ const NewsView: React.FC = () => {
         </div>
       </header>
 
-      <main className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 pt-4 pb-12">
+      <main className="page-container pt-4 pb-12">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div className="space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-rose-50 dark:bg-rose-950/30 rounded-full text-rose-600 dark:text-rose-400 text-xs font-black uppercase tracking-[0.2em]">

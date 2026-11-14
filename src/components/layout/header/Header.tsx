@@ -56,7 +56,7 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
     <>
       <header className="sticky top-0 z-[100] bg-white shadow-sm transition-all duration-300">
         <div className="w-full">
-          <div className="mx-auto max-w-[1440px] px-6 flex items-center justify-between py-3">
+          <div className="page-container flex items-center justify-between py-3">
             {/* Left: Logo and Mobile Menu Button */}
             <div className="flex items-center gap-4 lg:flex-1">
               <button

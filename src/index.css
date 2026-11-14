@@ -15,6 +15,14 @@
   }
 }
 @tailwind components;
+
+/* One page width and side gap for the whole site (header, footer and every full-width page):
+   max 1440px, 16px gap on phones, 24px on tablets, 32px on laptops and up. Change it here only. */
+@layer components {
+  .page-container {
+    @apply mx-auto w-full max-w-[1440px] px-4 sm:px-6 lg:px-8;
+  }
+}
 @tailwind utilities;
 
 /* All colors live in ./styles/theme.css — edit that file to re-theme the site. */

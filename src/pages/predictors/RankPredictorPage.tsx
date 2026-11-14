@@ -11,7 +11,7 @@ const RankPredictorPage: React.FC = () => {
         keywords="jee main rank predictor, neet rank estimator, eamcet rank predictor 2026, rank calculator india, competitive exam rank"
         canonical="https://www.careersha.com/rank-estimator"
       />
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="page-container">
         <h1 className="text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-white mb-8 text-center">
           Rank Estimator Tool
         </h1>
