@@ -4,6 +4,14 @@ import { CheckCircle2 } from 'lucide-react';
 import { CatalogCollege } from '../../../data/catalog/types';
 import { placeOf } from '../../../services/catalogService';
 import CollegeImage from '../CollegeImage';
+import {
+  AccessibilitySection,
+  NirfSection,
+  RelatedColleges,
+  ResearchSection,
+  StudentsSection,
+} from './OverviewSections';
+import { generatedAbout } from './collegeText';
 import { ENTRANCE_EXAMS_DATA } from '../../../data/exams/examDetailData';
 
 const card = 'rounded-2xl border border-neutral-200 bg-white p-5';
@@ -39,68 +47,154 @@ export const ExamLink: React.FC<{ id: string }> = ({ id }) => {
   );
 };
 
-export const OverviewTab: React.FC<{ c: CatalogCollege }> = ({ c }) => (
-  <div className="space-y-5">
-    {c.imageUrl && (
-      <figure className={`${card} overflow-hidden p-0`}>
-        <CollegeImage college={c} className="h-56 w-full sm:h-72" />
-        {c.imageCredit && <figcaption className="px-5 py-2 text-xs text-neutral-500">{c.imageCredit}</figcaption>}
-      </figure>
-    )}
-    <section className={card}>
-      <h2 className="text-xl text-neutral-900">About {c.shortName}</h2>
-      <p className="mt-2 text-neutral-700 leading-relaxed">
-        {c.about ||
-          `${c.name} is ${c.ownership === 'Government' ? 'a government' : c.ownership === 'Private' ? 'a private' : 'an'} ` +
-            `${c.stream !== 'Other' ? `${c.stream.toLowerCase()} ` : ''}institution` +
-            `${placeOf(c) ? ` in ${placeOf(c)}` : ''}${c.established ? `, established in ${c.established}` : ''}.`}
-      </p>
-      <ul className="mt-4 grid gap-2 sm:grid-cols-2">
-        {c.highlights.map((h) => (
-          <li key={h} className="flex items-start gap-2 text-sm text-neutral-700">
-            <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-success-600" /> {h}
-          </li>
-        ))}
-      </ul>
-    </section>
+/** A quick-facts row: label, then a value (text or a link). */
+type Fact = [string, React.ReactNode];
 
-    <section className={card}>
-      <h2 className="text-xl text-neutral-900">Quick facts</h2>
-      <dl className="mt-3 grid gap-x-6 gap-y-3 sm:grid-cols-2">
-        {[
-          ['Established', c.established ?? '—'],
-          ['Ownership', c.ownership ?? '—'],
-          ['Location', placeOf(c) || '—'],
-          [
-            'NIRF rank',
-            c.nirfRank ? `#${c.nirfRank} (${c.nirfCategory ?? c.stream}${c.nirfYear ? ` ${c.nirfYear}` : ''})` : '—',
-          ],
-          ['Campus', c.campusAcres ? `${c.campusAcres} acres` : '—'],
-          ['Approvals', c.accreditation.join(', ') || '—'],
-        ].map(([k, v]) => (
-          <div key={k as string} className="flex justify-between gap-4 border-b border-neutral-100 pb-2 text-sm">
-            <dt className="text-neutral-500">{k}</dt>
-            <dd className="text-right text-neutral-900">{v}</dd>
-          </div>
-        ))}
-      </dl>
-    </section>
+const quickFacts = (c: CatalogCollege): Fact[] => {
+  const facts: (Fact | false)[] = [
+    !!(c.universityType || c.collegeType) && ['Type', c.universityType ?? c.collegeType],
+    !!c.ownership && [
+      'Ownership',
+      c.management && c.management !== c.ownership ? `${c.ownership} (${c.management})` : c.ownership,
+    ],
+    !!c.affiliatedUniversity && [
+      'Affiliated to',
+      c.affiliatedUniversity!.slug ? (
+        <Link to={`/colleges/${c.affiliatedUniversity!.slug}`} className="text-primary-700 hover:underline">
+          {c.affiliatedUniversity!.name}
+        </Link>
+      ) : (
+        c.affiliatedUniversity!.name
+      ),
+    ],
+    !!placeOf(c) && [
+      'Location',
+      [c.district && c.district !== c.city ? `${c.city} (${c.district} district)` : c.city, c.state]
+        .filter(Boolean)
+        .join(', '),
+    ],
+    !!c.locationType && ['Area', c.locationType],
+    !!c.established && ['Established', c.established],
+    !!c.nirfRank && [
+      'NIRF rank',
+      `#${c.nirfRank} (${c.nirfCategory ?? c.stream}${c.nirfYear ? ` ${c.nirfYear}` : ''})`,
+    ],
+    !!c.campusAcres && ['Campus', `${c.campusAcres} acres`],
+    c.accreditation.length > 0 && ['Approvals', c.accreditation.join(', ')],
+    !!c.website && [
+      'Website',
+      <a
+        href={c.website}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="break-all text-primary-700 hover:underline"
+      >
+        {c.website.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}
+      </a>,
+    ],
+  ];
+  return facts.filter((f): f is Fact => !!f);
+};
 
-    {c.facilities.length > 0 && (
+export const OverviewTab: React.FC<{ c: CatalogCollege }> = ({ c }) => {
+  const facts = quickFacts(c);
+  const nirf = c.nirfFacts;
+  return (
+    <div className="space-y-5">
+      {c.imageUrl && (
+        <figure className={`${card} overflow-hidden p-0`}>
+          <CollegeImage college={c} className="h-56 w-full sm:h-72" />
+          {c.imageCredit && <figcaption className="px-5 py-2 text-xs text-neutral-500">{c.imageCredit}</figcaption>}
+        </figure>
+      )}
+
       <section className={card}>
-        <h2 className="text-xl text-neutral-900">Facilities</h2>
-        <ul className="mt-3 flex flex-wrap gap-2">
-          {c.facilities.map((f) => (
-            <li key={f} className="rounded-full bg-neutral-100 px-3 py-1 text-sm text-neutral-700">
-              {f}
-            </li>
+        <h2 className="text-xl text-neutral-900">About {c.shortName}</h2>
+        <div className="mt-2 space-y-3 leading-relaxed text-neutral-700">
+          {(c.about || generatedAbout(c, placeOf(c))).split(/\n\s*\n/).map((paragraph) => (
+            <p key={paragraph.slice(0, 40)}>{paragraph}</p>
           ))}
-        </ul>
+        </div>
+        {c.about && c.aboutSource && (
+          <p className="mt-3 text-xs text-neutral-500">
+            From{' '}
+            {c.aboutUrl ? (
+              <a
+                href={c.aboutUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary-700 hover:underline"
+              >
+                {c.aboutSource}
+              </a>
+            ) : (
+              c.aboutSource
+            )}
+            {c.aboutSource === 'Wikipedia' && ', available under CC BY-SA 4.0'}
+          </p>
+        )}
+        {c.highlights.length > 0 && (
+          <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+            {c.highlights.map((h) => (
+              <li key={h} className="flex items-start gap-2 text-sm text-neutral-700">
+                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-success-600" /> {h}
+              </li>
+            ))}
+          </ul>
+        )}
       </section>
-    )}
-    {c.dataSource && <p className="text-xs text-neutral-500">Source: {c.dataSource}</p>}
-  </div>
-);
+
+      {facts.length > 0 && (
+        <section className={card}>
+          <h2 className="text-xl text-neutral-900">Quick facts</h2>
+          <dl className="mt-3 grid gap-x-6 gap-y-3 sm:grid-cols-2">
+            {facts.map(([k, v]) => (
+              <div key={k} className="flex justify-between gap-4 border-b border-neutral-100 pb-2 text-sm">
+                <dt className="shrink-0 text-neutral-500">{k}</dt>
+                <dd className="text-right text-neutral-900">{v}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      )}
+
+      <NirfSection rankings={c.nirfRankings ?? []} primary={c.nirfCategory} />
+      {nirf && <StudentsSection facts={nirf} />}
+      {nirf && <ResearchSection facts={nirf} />}
+
+      {c.facilities.length > 0 && (
+        <section className={card}>
+          <h2 className="text-xl text-neutral-900">Facilities</h2>
+          <ul className="mt-3 flex flex-wrap gap-2">
+            {c.facilities.map((f) => (
+              <li key={f} className="rounded-full bg-neutral-100 px-3 py-1 text-sm text-neutral-700">
+                {f}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+      {nirf && <AccessibilitySection facts={nirf} />}
+
+      {c.affiliatedColleges && (
+        <RelatedColleges
+          title="Affiliated colleges"
+          note={`${c.affiliatedColleges.count.toLocaleString('en-IN')} colleges are affiliated to ${c.shortName}. Top ones:`}
+          colleges={c.affiliatedColleges.colleges}
+        />
+      )}
+      <RelatedColleges
+        title={`More colleges in ${
+          c.district && c.district.toLowerCase() !== (c.city ?? '').toLowerCase()
+            ? `${c.district} district${c.state ? `, ${c.state}` : ''}`
+            : c.district || c.city || 'this area'
+        }`}
+        colleges={c.nearby ?? []}
+      />
+      {c.dataSource && <p className="text-xs text-neutral-500">Source: {c.dataSource}</p>}
+    </div>
+  );
+};
 
 export const CoursesTab: React.FC<{ c: CatalogCollege }> = ({ c }) => {
   if (c.courses.length === 0) return <NoData title="Courses & fees" what="Course and fee details" />;

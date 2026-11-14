@@ -88,6 +88,46 @@ describe('College profile page', () => {
     expect(screen.getByRole('cell', { name: '2,496' })).toBeInTheDocument();
   });
 
+  it('shows about, quick facts, NIRF scores, students, research and nearby colleges', async () => {
+    renderAt(<CollegeProfilePage />, '/colleges/test-nit-warangal', '/colleges/:slug');
+    expect(await screen.findByText('NIT Warangal is a public engineering institute.')).toBeInTheDocument();
+    expect(screen.getByText('It was founded in 1959.')).toBeInTheDocument(); // paragraphs kept
+    expect(screen.getByRole('link', { name: 'Wikipedia' })).toHaveAttribute(
+      'href',
+      'https://en.wikipedia.org/wiki/NIT_Warangal',
+    );
+
+    // Quick facts: AISHE details, affiliation linked to the university's page
+    expect(screen.getByText('Constituent / University College')).toBeInTheDocument();
+    expect(screen.getByText('Government (Central Government)')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Kakatiya University' })).toHaveAttribute(
+      'href',
+      '/colleges/test-kakatiya-university',
+    );
+    expect(screen.getByText('Warangal (Hanamkonda district), Telangana')).toBeInTheDocument();
+
+    // NIRF parameter scores
+    expect(screen.getByRole('heading', { name: /nirf ranking 2025/i })).toBeInTheDocument();
+    expect(screen.getByText('Teaching & resources').nextSibling).toHaveTextContent('70.1');
+
+    // Students & faculty, research
+    expect(screen.getByText('Students').previousSibling).toHaveTextContent('8,000');
+    expect(screen.getByText('Women').previousSibling).toHaveTextContent('25%');
+    expect(screen.getByText('Students per teacher').previousSibling).toHaveTextContent('20');
+    expect(screen.getByText('PhD scholars').previousSibling).toHaveTextContent('1,000');
+    expect(screen.getByText('Research funding').previousSibling).toHaveTextContent('₹45 Cr');
+    expect(screen.getByText('Yes, more than 80% of the buildings')).toBeInTheDocument();
+
+    // Nearby colleges
+    expect(
+      screen.getByRole('heading', { name: 'More colleges in Hanamkonda district, Telangana' }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /kakatiya institute of technology and science/i })).toHaveAttribute(
+      'href',
+      '/colleges/test-kitsw',
+    );
+  });
+
   it('hides the tabs a college has no data for', async () => {
     renderAt(<CollegeProfilePage />, '/colleges/test-balaji-education?tab=placements', '/colleges/:slug');
     expect(await screen.findByText(/a private education institution in chennai, tamil nadu/i)).toBeInTheDocument();

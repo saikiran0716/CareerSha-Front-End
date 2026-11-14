@@ -88,6 +88,24 @@ export interface CatalogCollege {
   logoUrl?: string | null;
   /** Every program and year we have placement figures for (newest first) */
   placementHistory?: PlacementRow[];
+  district?: string | null;
+  /** e.g. "Affiliated College", "Autonomous College" (AISHE) */
+  collegeType?: string | null;
+  /** For universities, e.g. "Central University", "State Public University" */
+  universityType?: string | null;
+  /** e.g. "Private Un-Aided", "State Government" */
+  management?: string | null;
+  locationType?: 'Urban' | 'Rural' | null;
+  /** The university the college is affiliated to (slug when it has a page here) */
+  affiliatedUniversity?: { name: string; slug: string | null } | null;
+  /** Where the about text comes from, e.g. "Wikipedia", with a link */
+  aboutSource?: string | null;
+  aboutUrl?: string | null;
+  nirfFacts?: NirfFacts | null;
+  /** Detail page only: colleges in the same district (same department first) */
+  nearby?: RelatedCollege[];
+  /** Detail page only, for universities: colleges affiliated to it */
+  affiliatedColleges?: { count: number; colleges: RelatedCollege[] };
 }
 
 export interface PlacementRow {
@@ -106,6 +124,44 @@ export interface NirfRanking {
   rank: number | null;
   rankBand: string | null;
   score: number | null;
+  /** NIRF parameter scores out of 100: teaching (tlr), research (rpc), graduation outcomes (go), outreach (oi), perception */
+  parameters?: Partial<Record<'tlr' | 'rpc' | 'go' | 'oi' | 'perception', number>> | null;
+}
+
+/** Institution-wide figures from the college's NIRF data PDF (latest year). */
+export interface NirfFacts {
+  students?: {
+    total: number;
+    male: number;
+    female: number;
+    within_state: number;
+    outside_state: number;
+    outside_country: number;
+    economically_backward: number;
+    socially_challenged: number;
+    full_fee_reimbursement: number;
+  };
+  phd?: { full_time?: number; part_time?: number; graduated?: number };
+  faculty?: number;
+  research?: { projects?: number; partners?: number; amount?: number; year?: string };
+  consultancy?: { projects?: number; partners?: number; amount?: number; year?: string };
+  spending?: { library?: number; labs?: number };
+  accessibility?: { lifts_ramps?: string; wheelchairs?: string; toilets?: string };
+}
+
+/** A college in a related list (nearby, affiliated) — the list-card shape from the API. */
+export interface RelatedCollege {
+  id: string;
+  name: string;
+  shortName?: string | null;
+  location: string;
+  stream?: Stream | null;
+  ownership?: Ownership | null;
+  nirfRank?: number | null;
+  medianPackage?: string | null;
+  imageUrl?: string | null;
+  logoUrl?: string | null;
+  profileSlug?: string | null;
 }
 
 export interface ExamCutoff {
