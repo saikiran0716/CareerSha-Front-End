@@ -4,7 +4,6 @@ import userEvent from '@testing-library/user-event';
 import Header from './Header';
 import { renderAt } from '../../../test/utils';
 import { navigationData } from '../../../data/navigationData';
-import { SAMPLE_COLLEGES } from '../../../data/catalog/colleges';
 import { ENTRANCE_EXAMS_DATA } from '../../../data/exams/examDetailData';
 import { GENERIC_FOOTER_SLUGS, footerSlugToPath } from '../../../app/footerRoutePaths';
 import { getStreamExams } from '../../../data/exams/streamExams';
@@ -48,7 +47,7 @@ const routeExists = (url: string) => {
   }
   if (STATIC.includes(pathname) || footerPaths.has(pathname)) return true;
   const [, a, b] = pathname.split('/');
-  if (a === 'colleges') return SAMPLE_COLLEGES.some((c) => c.slug === b);
+  if (a === 'colleges') return /^[a-z0-9]+(-[a-z0-9]+)*$/.test(b ?? ''); // profiles come from the API
   if (a === 'exams') return b in ENTRANCE_EXAMS_DATA;
   if (a === 'rank-estimator') return EXAMS.some((e) => e.slug === b);
   return false;
@@ -89,7 +88,10 @@ describe('desktop mega menu', () => {
     expect(engineering).toHaveAttribute('aria-expanded', 'true');
     expect(within(menu).getByRole('tab', { name: 'Top Ranked Colleges' })).toHaveAttribute('aria-selected', 'true');
     expect(within(menu).getByRole('link', { name: 'Top IITs in India' })).toHaveAttribute('href', '/iits/india');
-    expect(within(menu).getByRole('link', { name: /indian institute of technology delhi/i })).toBeInTheDocument(); // featured
+    expect(within(menu).getByRole('link', { name: 'IIT Delhi' })).toHaveAttribute(
+      'href',
+      '/colleges/indian-institute-of-technology-delhi',
+    ); // featured
 
     await userEvent.hover(within(menu).getByRole('tab', { name: 'Rank Predictors' }));
     expect(within(menu).getByRole('link', { name: 'JEE Main Rank Predictor' })).toHaveAttribute(

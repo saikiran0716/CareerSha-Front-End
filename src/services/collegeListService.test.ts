@@ -1,7 +1,7 @@
-import { describe, expect, it } from 'vitest';
-import { buildCollegeList, filterColleges, getCollegeList, parseLakhs } from './collegeListService';
-import { GENERIC_FOOTER_SLUGS } from '../app/footerRoutePaths';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { filterColleges, getCollegeList, ListCollege, parseLakhs, toCollegeList } from './collegeListService';
 import { FOOTER_PAGES } from '../data/footerData';
+import { installFakeCatalogApi } from '../test/fakeCatalogApi';
 
 describe('parseLakhs', () => {
   it('reads lakh, thousand, crore and LPA values', () => {
@@ -13,69 +13,78 @@ describe('parseLakhs', () => {
   });
 });
 
-describe('buildCollegeList', () => {
-  it('uses the curated city list, with ownership, NIRF and links worked out', () => {
-    const list = buildCollegeList('eng-hyd')!;
-    expect(list.title).toBe('Engineering Colleges in Hyderabad');
+describe('getCollegeList', () => {
+  beforeEach(() => {
+    installFakeCatalogApi();
+  });
+
+  it('loads the colleges from the API and keeps our own page text', async () => {
+    const list = (await getCollegeList('eng-hyd'))!;
+    expect(list.title).toBe('Engineering Colleges in Hyderabad'); // from footerData
+    expect(list.faqs).toEqual(FOOTER_PAGES['eng-hyd'].faqs);
     expect(list.stream).toBe('Engineering');
-    const iith = list.colleges.find((c) => c.name === 'IIT Hyderabad')!;
-    expect(iith).toMatchObject({ ownership: 'Government', nirfRank: 8, feesLakhs: 10, packageLpa: 20.07 });
-    // Colleges with a full CareerSha profile link to it
-    expect(list.colleges.find((c) => c.name === 'IIIT Hyderabad')?.profileSlug).toBe('iiit-hyderabad');
+    const nitw = list.colleges.find((c) => c.id === 'test-nit-warangal')!;
+    expect(nitw).toMatchObject({ ownership: 'Government', nirfRank: 21, profileSlug: 'test-nit-warangal' });
+    expect('feesLakhs' in nitw).toBe(false); // null from the API becomes "missing"
   });
 
-  it('builds city pages from every stream and merges duplicates', () => {
-    const list = buildCollegeList('city-new-delhi')!;
-    expect(list.city).toBe('Delhi');
-    const names = list.colleges.map((c) => c.name.toLowerCase());
-    expect(new Set(names).size).toBe(names.length);
-    expect(list.colleges.some((c) => c.stream === 'Engineering')).toBe(true);
-    expect(list.colleges.some((c) => c.stream === 'Management')).toBe(true);
+  it('uses the API title for lists without a page of our own', async () => {
+    const list = (await getCollegeList('education-india'))!;
+    expect(list.title).toBe('Top Education Colleges in India');
+    expect(list.colleges.map((c) => c.name)).toEqual(['Sri Balaji College of Education']);
   });
 
-  it('adds national picks under short city lists, without repeating colleges', () => {
-    const list = buildCollegeList('med-chennai')!;
-    expect(list.colleges.length).toBeLessThan(5);
-    expect(list.alsoPopular.length).toBeGreaterThan(0);
-    expect(list.alsoPopular.some((p) => list.colleges.some((c) => c.id === p.id))).toBe(false);
-  });
-
-  it('keeps only government colleges on the government list', () => {
-    const list = buildCollegeList('med-government')!;
-    expect(list.colleges.length).toBeGreaterThan(0);
-    expect(list.colleges.every((c) => c.ownership === 'Government')).toBe(true);
-  });
-
-  it('returns a list for every college page in the menu/footer, and null for other pages', async () => {
-    for (const slug of GENERIC_FOOTER_SLUGS) {
-      const isList = FOOTER_PAGES[slug].type === 'college' && !/^(legal|company|site)-/.test(slug);
-      const list = await getCollegeList(slug);
-      expect(list !== null, slug).toBe(isList);
-      if (list) expect(list.colleges.length + list.alsoPopular.length, slug).toBeGreaterThanOrEqual(0);
-    }
+  it('returns null for unknown slugs and site pages', async () => {
     expect(await getCollegeList('tools-loan')).toBeNull();
+    expect(await getCollegeList('legal-privacy')).toBeNull();
+  });
+});
+
+describe('toCollegeList', () => {
+  it('prefers custom text from the backend over our defaults', () => {
+    const list = toCollegeList('eng-hyd', {
+      slug: 'eng-hyd',
+      title: 'Ignored',
+      description: 'From the admin',
+      stream: 'Engineering',
+      city: 'Hyderabad',
+      colleges: [],
+      alsoPopular: [],
+      content: '<p>Guide</p>',
+      faqs: [{ question: 'Q?', answer: 'A.' }],
+    });
+    expect(list).toMatchObject({ description: 'From the admin', content: '<p>Guide</p>', city: 'Hyderabad' });
+    expect(list.faqs).toEqual([{ question: 'Q?', answer: 'A.' }]);
   });
 });
 
 describe('filterColleges', () => {
-  const { colleges } = buildCollegeList('mba-india')!;
+  const college = (name: string, location: string, extra: Partial<ListCollege> = {}): ListCollege => ({
+    id: name,
+    name,
+    location,
+    extraStats: [],
+    highlights: [],
+    ...extra,
+  });
+  const colleges = [
+    college('IIM Ahmedabad', 'Ahmedabad, Gujarat', { packageLpa: 34, feesLakhs: 25, ownership: 'Government' }),
+    college('XLRI', 'Jamshedpur, Jharkhand', { packageLpa: 30, feesLakhs: 28, ownership: 'Private' }),
+    college('Nirma', 'Ahmedabad, Gujarat', { packageLpa: 12, ownership: 'Private' }),
+  ];
 
-  it('searches by name and area', () => {
-    const res = filterColleges(colleges, { q: 'ahmedabad' });
-    expect(res.length).toBeGreaterThan(0);
-    expect(res.every((c) => `${c.name} ${c.location}`.toLowerCase().includes('ahmedabad'))).toBe(true);
+  it('searches by name and area, and filters by ownership', () => {
+    expect(filterColleges(colleges, { q: 'ahmedabad' }).map((c) => c.name)).toEqual(['IIM Ahmedabad', 'Nirma']);
+    expect(filterColleges(colleges, { ownership: 'Private' }).map((c) => c.name)).toEqual(['XLRI', 'Nirma']);
   });
 
-  it('sorts by package (highest first) and fees (lowest first)', () => {
-    const byPkg = filterColleges(colleges, { sort: 'package' }).map((c) => c.packageLpa ?? -1);
-    expect(byPkg).toEqual([...byPkg].sort((a, b) => b - a));
-    const byFees = filterColleges(colleges, { sort: 'fees' })
-      .map((c) => c.feesLakhs)
-      .filter((v): v is number => v !== undefined);
-    expect(byFees).toEqual([...byFees].sort((a, b) => a - b));
+  it('sorts by package (highest first), fees (lowest first, unknown last) and name', () => {
+    expect(filterColleges(colleges, { sort: 'package' }).map((c) => c.packageLpa)).toEqual([34, 30, 12]);
+    expect(filterColleges(colleges, { sort: 'fees' }).map((c) => c.name)).toEqual(['IIM Ahmedabad', 'XLRI', 'Nirma']);
+    expect(filterColleges(colleges, { sort: 'name' }).map((c) => c.name)).toEqual(['IIM Ahmedabad', 'Nirma', 'XLRI']);
   });
 
-  it('keeps the curated order for "top ranked"', () => {
+  it('keeps the server order for "top ranked"', () => {
     expect(filterColleges(colleges, { sort: 'rank' })).toEqual(colleges);
   });
 });

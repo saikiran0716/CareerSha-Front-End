@@ -3,7 +3,6 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { ChevronRight, Search, SearchX } from 'lucide-react';
 import SEO from '../../../components/common/SEO';
 import PageLoader from '../../../components/common/loaders/PageLoader';
-import SampleDataNotice from '../../../components/common/SampleDataNotice';
 import FaqSection from '../../content/footer-page/FaqSection';
 import CollegeRankCard, { CollegeListHeader } from './CollegeRankCard';
 import ListSidebar from './ListSidebar';
@@ -14,8 +13,9 @@ import {
   filterColleges,
   getCollegeList,
   ListCollege,
+  ListStream,
+  hasFigures,
 } from '../../../services/collegeListService';
-import { ListStream } from '../../../data/collegeLists/sources';
 
 const STREAM_LABEL: Partial<Record<ListStream, { name: string; url: string }>> = {
   Engineering: { name: 'Engineering', url: '/colleges?stream=Engineering' },
@@ -26,7 +26,7 @@ const STREAM_LABEL: Partial<Record<ListStream, { name: string; url: string }>> =
 };
 const SORTS: { value: ListSort; label: string }[] = [
   { value: 'rank', label: 'Top ranked' },
-  { value: 'package', label: 'Highest package' },
+  { value: 'package', label: 'Best package' },
   { value: 'fees', label: 'Lowest fees' },
   { value: 'name', label: 'Name (A–Z)' },
 ];
@@ -42,7 +42,7 @@ const summary = (cs: ListCollege[]) => {
   const fee = min(cs.map((c) => c.feesLakhs));
   if (Number.isFinite(fee)) items.push({ label: 'Fees from', value: lakhs(fee) });
   const pkg = max(cs.map((c) => c.packageLpa));
-  if (Number.isFinite(pkg)) items.push({ label: 'Avg package up to', value: `₹${+pkg.toFixed(1)} LPA` });
+  if (Number.isFinite(pkg)) items.push({ label: 'Package up to', value: `₹${+pkg.toFixed(1)} LPA` });
   const gov = cs.filter((c) => c.ownership === 'Government').length;
   if (gov) items.push({ label: 'Government', value: String(gov) });
   return items;
@@ -66,7 +66,16 @@ const CollegeListPage: React.FC<{ slug: string }> = ({ slug }) => {
   if (loading) return <PageLoader />;
   if (!list) return null;
 
-  const shown = filterColleges(list.colleges, { q, ownership, sort });
+  // Fee / package columns and sorts only when the list has those figures.
+  const figures = hasFigures([...list.colleges, ...list.alsoPopular]);
+  const sorts = SORTS.filter((s) =>
+    s.value === 'fees' ? figures.fees : s.value === 'package' ? figures.package : true,
+  );
+  const shown = filterColleges(list.colleges, {
+    q,
+    ownership,
+    sort: sorts.some((s) => s.value === sort) ? sort : 'rank',
+  });
   const ownerships = (['Government', 'Private', 'Deemed'] as const).filter((o) =>
     list.colleges.some((c) => c.ownership === o),
   );
@@ -119,8 +128,6 @@ const CollegeListPage: React.FC<{ slug: string }> = ({ slug }) => {
 
       <div className="page-container mt-6 grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_300px]">
         <main className="min-w-0 space-y-5">
-          <SampleDataNotice />
-
           {list.colleges.length > 0 && (
             <div className="flex flex-col gap-3 rounded-2xl border border-neutral-200 bg-white p-3 sm:flex-row sm:items-center">
               <label className="flex flex-1 items-center gap-2 rounded-xl bg-neutral-50 px-3">
@@ -158,7 +165,7 @@ const CollegeListPage: React.FC<{ slug: string }> = ({ slug }) => {
                   onChange={(e) => update('sort', e.target.value, 'rank')}
                   className="rounded-lg border border-neutral-200 bg-white px-2 py-2 text-sm text-neutral-800"
                 >
-                  {SORTS.map((s) => (
+                  {sorts.map((s) => (
                     <option key={s.value} value={s.value}>
                       {s.label}
                     </option>
@@ -176,11 +183,15 @@ const CollegeListPage: React.FC<{ slug: string }> = ({ slug }) => {
 
           {shown.length > 0 ? (
             <>
-              <CollegeListHeader />
+              <CollegeListHeader figures={figures} />
               <ol className="space-y-2">
                 {shown.map((c, i) => (
                   <li key={c.id}>
-                    <CollegeRankCard college={c} position={sort === 'rank' && !filtered ? i + 1 : undefined} />
+                    <CollegeRankCard
+                      college={c}
+                      figures={figures}
+                      position={sort === 'rank' && !filtered ? i + 1 : undefined}
+                    />
                   </li>
                 ))}
               </ol>
@@ -218,12 +229,12 @@ const CollegeListPage: React.FC<{ slug: string }> = ({ slug }) => {
                   : `Only a few colleges${list.city ? ` in ${list.city}` : ''} are listed yet — popular choices nationally.`}
               </p>
               <div className="mt-3">
-                <CollegeListHeader />
+                <CollegeListHeader figures={figures} />
               </div>
               <ul className="space-y-2">
                 {list.alsoPopular.map((c) => (
                   <li key={c.id}>
-                    <CollegeRankCard college={c} />
+                    <CollegeRankCard college={c} figures={figures} />
                   </li>
                 ))}
               </ul>

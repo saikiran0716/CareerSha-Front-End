@@ -1,11 +1,10 @@
-import { SAMPLE_QUESTIONS, SAMPLE_REVIEWS } from '../data/catalog/community';
 import { Answer, CommunityTarget, Question, Review } from '../data/catalog/types';
 import { authService } from './authService';
 
 /**
  * Reviews and Q&A.
  *
- * NOW: sample content + anything the visitor posts, stored in this browser.
+ * NOW: what visitors post, stored in this browser (no made-up sample reviews).
  * LATER: replace the bodies of these functions with calls to the endpoints described in
  * docs/api/community-api.md — the function signatures already match that API.
  */
@@ -59,7 +58,7 @@ export const communityService = {
   // ---------------- reviews ----------------
   async listReviews(target: CommunityTarget): Promise<Review[]> {
     const store = load();
-    return [...store.reviews, ...SAMPLE_REVIEWS]
+    return store.reviews
       .filter((r) => sameTarget(r.target, target))
       .map((r) => ({ ...r, helpful: r.helpful + (store.votes[r.id] ?? 0) }))
       .sort(byNewest);
@@ -86,9 +85,7 @@ export const communityService = {
       upvotes: q.upvotes + (store.votes[q.id] ?? 0),
       answers: q.answers.map((a) => ({ ...a, upvotes: a.upvotes + (store.votes[a.id] ?? 0) })),
     });
-    // answers posted locally to sample questions are stored on a local copy of the question
-    const localIds = new Set(store.questions.map((q) => q.id));
-    return [...store.questions, ...SAMPLE_QUESTIONS.filter((q) => !localIds.has(q.id))]
+    return store.questions
       .filter((q) => sameTarget(q.target, target))
       .map(withVotes)
       .sort((a, b) => b.upvotes - a.upvotes || byNewest(a, b));
@@ -119,9 +116,7 @@ export const communityService = {
       upvotes: 0,
     };
     const store = load();
-    const local = store.questions.find((q) => q.id === questionId);
-    const sample = SAMPLE_QUESTIONS.find((q) => q.id === questionId);
-    const base = local ?? (sample ? { ...sample, answers: [...sample.answers] } : null);
+    const base = store.questions.find((q) => q.id === questionId);
     if (!base) throw new Error('Question not found');
     const updated = { ...base, answers: [...base.answers, answer] };
     save({ ...store, questions: [updated, ...store.questions.filter((q) => q.id !== questionId)] });

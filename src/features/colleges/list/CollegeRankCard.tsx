@@ -4,10 +4,17 @@ import { ChevronRight, ExternalLink, GitCompare, MapPin } from 'lucide-react';
 import SaveCollegeButton from '../../account/SaveCollegeButton';
 import { compareService } from '../../../services/compareService';
 import { useCompare } from '../../../hooks/useCompare';
-import { ListCollege } from '../../../services/collegeListService';
+import { ListCollege, ListFigures } from '../../../services/collegeListService';
 
-/** Column layout shared by the rows and the header row (CollegeListHeader). */
-export const ROW_GRID = 'sm:grid sm:grid-cols-[minmax(0,1fr)_120px_120px_128px] sm:items-center sm:gap-4';
+/** Column layout shared by the rows and the header row: a figure column only for figures the list has. */
+const GRID_COLS = [
+  'sm:grid-cols-[minmax(0,1fr)_128px]',
+  'sm:grid-cols-[minmax(0,1fr)_120px_128px]',
+  'sm:grid-cols-[minmax(0,1fr)_120px_120px_128px]',
+];
+const rowGrid = (figures: ListFigures) =>
+  `sm:grid sm:items-center sm:gap-4 ${GRID_COLS[Number(figures.fees) + Number(figures.package)]}`;
+const ALL_FIGURES: ListFigures = { fees: true, package: true };
 
 const initials = (name: string) =>
   name
@@ -56,25 +63,29 @@ const Figure: React.FC<{ label: string; value?: string; strong?: boolean }> = ({
 );
 
 /** Header row naming the columns (desktop only). */
-export const CollegeListHeader: React.FC = () => (
+export const CollegeListHeader: React.FC<{ figures?: ListFigures }> = ({ figures = ALL_FIGURES }) => (
   <div
     aria-hidden="true"
-    className={`hidden px-5 pb-1 text-[11px] uppercase tracking-wider text-neutral-500 ${ROW_GRID}`}
+    className={`hidden px-5 pb-1 text-[11px] uppercase tracking-wider text-neutral-500 ${rowGrid(figures)}`}
   >
     <span className="pl-[52px]">College</span>
-    <span>Tuition fees</span>
-    <span>Avg package</span>
+    {figures.fees && <span>Tuition fees</span>}
+    {figures.package && <span>Package (median)</span>}
     <span />
   </div>
 );
 
 /** One college in a list: name and location, tuition fees, average package and actions. */
-const CollegeRankCard: React.FC<{ college: ListCollege; position?: number }> = ({ college: c, position }) => {
+const CollegeRankCard: React.FC<{ college: ListCollege; position?: number; figures?: ListFigures }> = ({
+  college: c,
+  position,
+  figures = ALL_FIGURES,
+}) => {
   const profile = c.profileSlug ? `/colleges/${c.profileSlug}` : undefined;
 
   return (
     <article
-      className={`rounded-xl border border-neutral-200 bg-white px-4 py-3.5 transition-shadow hover:shadow-sm sm:px-5 ${ROW_GRID}`}
+      className={`rounded-xl border border-neutral-200 bg-white px-4 py-3.5 transition-shadow hover:shadow-sm sm:px-5 ${rowGrid(figures)}`}
     >
       {/* College */}
       <div className="flex min-w-0 items-center gap-3">
@@ -121,10 +132,12 @@ const CollegeRankCard: React.FC<{ college: ListCollege; position?: number }> = (
       </div>
 
       {/* Figures: labelled boxes on phones, plain columns on desktop */}
-      <dl className="mt-3 grid grid-cols-2 gap-3 rounded-lg bg-neutral-50 px-3 py-2 sm:contents">
-        <Figure label="Tuition fees" value={c.fees} />
-        <Figure label="Avg package" value={c.avgPackage} strong />
-      </dl>
+      {(figures.fees || figures.package) && (
+        <dl className="mt-3 grid grid-cols-2 gap-3 rounded-lg bg-neutral-50 px-3 py-2 sm:contents">
+          {figures.fees && <Figure label="Tuition fees" value={c.fees} />}
+          {figures.package && <Figure label="Package" value={c.medianPackage ?? c.avgPackage} strong />}
+        </dl>
+      )}
 
       {/* Actions */}
       <div className="mt-3 flex items-center justify-end gap-1.5 sm:mt-0">

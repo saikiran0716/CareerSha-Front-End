@@ -16,6 +16,9 @@ const POPULAR: { label: string; stream: Stream }[] = [
   { label: 'Medical Colleges', stream: 'Medical' },
   { label: 'Law Colleges', stream: 'Law' },
   { label: 'Design Colleges', stream: 'Design' },
+  { label: 'Nursing Colleges', stream: 'Nursing' },
+  { label: 'Pharmacy Colleges', stream: 'Pharmacy' },
+  { label: 'B.Ed Colleges', stream: 'Education' },
 ];
 
 const ExploreSearchHeader: React.FC<ExploreSearchHeaderProps> = ({ search, onSearch, onPickStream, compareCount }) => {

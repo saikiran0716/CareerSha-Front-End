@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { ChevronRight, Target } from 'lucide-react';
 import { NavCategory, NavLink, navigationData } from '../../../data/navigationData';
 import { ExamStream, getStreamExams, streamExamUrl } from '../../../data/exams/streamExams';
-import { ListStream } from '../../../data/collegeLists/sources';
+import { ListStream } from '../../../services/collegeListService';
 
 const NAV_CATEGORY: Partial<Record<ListStream, string>> = {
   Engineering: 'engineering',

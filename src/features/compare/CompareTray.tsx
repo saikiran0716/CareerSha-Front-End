@@ -1,16 +1,21 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { X } from 'lucide-react';
-import { SAMPLE_COLLEGES } from '../../data/catalog/colleges';
+import { catalogService } from '../../services/catalogService';
 import { compareService } from '../../services/compareService';
+import { useAsync } from '../../hooks/useAsync';
 import { useCompare } from '../../hooks/useCompare';
-
-const nameOf = (slug: string) => SAMPLE_COLLEGES.find((c) => c.slug === slug)?.shortName ?? slug;
 
 /** Bottom bar listing the colleges picked for comparison (hidden on the compare page itself). */
 const CompareTray: React.FC = () => {
   const list = useCompare();
   const { pathname } = useLocation();
+  // Names for the chips (the compare list only stores slugs).
+  const { data: colleges = [] } = useAsync(
+    () => (list.length ? catalogService.getColleges(list) : Promise.resolve([])),
+    [list.join(',')],
+  );
+  const nameOf = (slug: string) => colleges.find((c) => c.slug === slug)?.shortName ?? slug.replace(/-/g, ' ');
   if (list.length === 0 || pathname === '/compare') return null;
 
   return (

@@ -1,19 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { Plus, X } from 'lucide-react';
 import SEO from '../../components/common/SEO';
-import SampleDataNotice from '../../components/common/SampleDataNotice';
 import { Stars } from '../../components/common/StarRating';
-import { SAMPLE_COLLEGES } from '../../data/catalog/colleges';
 import { CatalogCollege } from '../../data/catalog/types';
 import { catalogService, lowestFeeLakhs } from '../../services/catalogService';
 import { compareService, MAX_COMPARE } from '../../services/compareService';
 import { averageRating, communityService } from '../../services/communityService';
 import { useAsync } from '../../hooks/useAsync';
 import { useCompare } from '../../hooks/useCompare';
+import { useDebounced } from '../../hooks/useDebounced';
 
 /** "₹24 LPA" -> 24, "₹1.2 Cr" -> 120 (for picking the best value in a row). */
-const packageLakhs = (v: string) => {
+const packageLakhs = (v?: string) => {
+  if (!v) return -1;
   const n = parseFloat(v.replace(/[^\d.]/g, ''));
   if (Number.isNaN(n)) return -1;
   return /cr/i.test(v) ? n * 100 : n;
@@ -28,37 +28,44 @@ interface Row {
 }
 
 const ROWS: Row[] = [
-  { label: 'Location', value: (c) => `${c.city}, ${c.state}` },
-  { label: 'Ownership', value: (c) => c.ownership },
-  { label: 'Established', value: (c) => c.established },
+  { label: 'Location', value: (c) => [c.city, c.state].filter(Boolean).join(', ') || '—' },
+  { label: 'Ownership', value: (c) => c.ownership ?? '—' },
+  { label: 'Established', value: (c) => c.established ?? '—' },
   {
     label: 'NIRF rank',
-    value: (c) => (c.nirfRank ? `#${c.nirfRank} (${c.stream})` : '—'),
+    value: (c) => (c.nirfRank ? `#${c.nirfRank} (${c.nirfCategory ?? c.stream})` : '—'),
     score: (c) => c.nirfRank ?? Infinity,
     better: 'low',
   },
   {
     label: 'Lowest course fee',
-    value: (c) => `₹${lowestFeeLakhs(c).toFixed(lowestFeeLakhs(c) < 1 ? 2 : 1)} L`,
+    value: (c) =>
+      Number.isFinite(lowestFeeLakhs(c)) ? `₹${lowestFeeLakhs(c).toFixed(lowestFeeLakhs(c) < 1 ? 2 : 1)} L` : '—',
     score: (c) => lowestFeeLakhs(c),
     better: 'low',
   },
   {
     label: 'Placement rate',
-    value: (c) => c.placements.placementRate,
-    score: (c) => parseFloat(c.placements.placementRate) || -1,
+    value: (c) => c.placements?.placementRate || '—',
+    score: (c) => parseFloat(c.placements?.placementRate ?? '') || -1,
+    better: 'high',
+  },
+  {
+    label: 'Median package',
+    value: (c) => c.placements?.medianPackage || '—',
+    score: (c) => packageLakhs(c.placements?.medianPackage),
     better: 'high',
   },
   {
     label: 'Average package',
-    value: (c) => c.placements.averagePackage,
-    score: (c) => packageLakhs(c.placements.averagePackage),
+    value: (c) => c.placements?.averagePackage || '—',
+    score: (c) => packageLakhs(c.placements?.averagePackage),
     better: 'high',
   },
   {
     label: 'Highest package',
-    value: (c) => c.placements.highestPackage,
-    score: (c) => packageLakhs(c.placements.highestPackage),
+    value: (c) => c.placements?.highestPackage || '—',
+    score: (c) => packageLakhs(c.placements?.highestPackage),
     better: 'high',
   },
   {
@@ -74,9 +81,60 @@ const ROWS: Row[] = [
     score: (_c, r) => r || -1,
     better: 'high',
   },
-  { label: 'Courses', value: (c) => c.courses.map((x) => x.name).join(', ') },
-  { label: 'Top recruiters', value: (c) => c.placements.topRecruiters.slice(0, 4).join(', ') },
+  { label: 'Courses', value: (c) => c.courses.map((x) => x.name).join(', ') || '—' },
+  { label: 'Top recruiters', value: (c) => c.placements?.topRecruiters.slice(0, 4).join(', ') || '—' },
 ];
+
+/** Search box that adds a college to the comparison. */
+const AddCollege: React.FC<{ exclude: string[] }> = ({ exclude }) => {
+  const [q, setQ] = useState('');
+  const term = useDebounced(q.trim());
+  const { data: found, loading } = useAsync(
+    async () =>
+      term.length < 2
+        ? []
+        : (await catalogService.listColleges({ search: term, pageSize: 8 })).results.filter(
+            (c) => !exclude.includes(c.slug),
+          ),
+    [term, exclude.join(',')],
+  );
+  return (
+    <div className="relative max-w-md">
+      <label className="flex items-center gap-2 text-sm text-neutral-700">
+        <Plus size={16} /> Add a college
+        <input
+          type="search"
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder="Type a college name or city…"
+          className="flex-1 rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm"
+        />
+      </label>
+      {term.length >= 2 && (
+        <ul className="absolute z-10 mt-1 w-full overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-lg">
+          {loading && <li className="px-3 py-2 text-sm text-neutral-500">Searching…</li>}
+          {!loading && !found?.length && <li className="px-3 py-2 text-sm text-neutral-500">No colleges found</li>}
+          {!loading &&
+            found?.map((c) => (
+              <li key={c.slug}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    compareService.toggle(c.slug);
+                    setQ('');
+                  }}
+                  className="w-full px-3 py-2 text-left text-sm hover:bg-primary-50"
+                >
+                  {c.shortName}
+                  <span className="ml-1 text-xs text-neutral-500">{[c.city, c.state].filter(Boolean).join(', ')}</span>
+                </button>
+              </li>
+            ))}
+        </ul>
+      )}
+    </div>
+  );
+};
 
 /** /compare — side-by-side comparison of up to 4 colleges (?c=slug1,slug2 also works for sharing). */
 const ComparePage: React.FC = () => {
@@ -100,7 +158,6 @@ const ComparePage: React.FC = () => {
     return Object.fromEntries(entries) as Record<string, number>;
   }, [list.join(',')]);
 
-  const available = SAMPLE_COLLEGES.filter((c) => !list.includes(c.slug));
   const shareUrl = `${window.location.origin}/compare?c=${list.join(',')}`;
 
   return (
@@ -116,25 +173,8 @@ const ComparePage: React.FC = () => {
             Pick up to {MAX_COMPARE} colleges. The best value in each row is highlighted.
           </p>
         </div>
-        <SampleDataNotice />
 
-        {list.length < MAX_COMPARE && (
-          <label className="flex flex-wrap items-center gap-2 text-sm text-neutral-700">
-            <Plus size={16} /> Add a college
-            <select
-              className="rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm"
-              value=""
-              onChange={(e) => e.target.value && compareService.toggle(e.target.value)}
-            >
-              <option value="">Choose…</option>
-              {available.map((c) => (
-                <option key={c.slug} value={c.slug}>
-                  {c.shortName} ({c.stream})
-                </option>
-              ))}
-            </select>
-          </label>
-        )}
+        {list.length < MAX_COMPARE && <AddCollege exclude={list} />}
 
         {colleges.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-neutral-300 bg-white p-10 text-center">
@@ -177,7 +217,8 @@ const ComparePage: React.FC = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-neutral-100">
-                  {ROWS.map((row) => {
+                  {/* rows where no college has data are left out */}
+                  {ROWS.filter((row) => colleges.some((c) => row.value(c, ratings[c.slug] ?? 0) !== '—')).map((row) => {
                     const scores = row.score ? colleges.map((c) => row.score!(c, ratings[c.slug] ?? 0)) : [];
                     const valid = scores.filter((s) => Number.isFinite(s) && s >= 0);
                     const best =

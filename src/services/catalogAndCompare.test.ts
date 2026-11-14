@@ -1,64 +1,78 @@
-import { describe, expect, it } from 'vitest';
-import { catalogService, lowestFeeLakhs } from './catalogService';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { catalogService, collegeQuery, lowestFeeLakhs } from './catalogService';
 import { compareService, MAX_COMPARE } from './compareService';
 import { averageRating, communityService } from './communityService';
-import { SAMPLE_COLLEGES } from '../data/catalog/colleges';
+import { installFakeCatalogApi, TEST_COLLEGES } from '../test/fakeCatalogApi';
 
 describe('catalogService', () => {
-  it('filters by stream, ownership, state, exam and search', async () => {
-    const eng = await catalogService.listColleges({ streams: ['Engineering'] });
-    expect(eng.length).toBeGreaterThan(0);
-    expect(eng.every((c) => c.stream === 'Engineering')).toBe(true);
-
-    const telangana = await catalogService.listColleges({ states: ['Telangana'], ownership: ['Government'] });
-    expect(telangana.map((c) => c.slug)).toEqual(['nit-warangal']);
-
-    const cat = await catalogService.listColleges({ exam: 'cat' });
-    expect(cat.every((c) => c.courses.some((x) => x.exams.includes('cat')))).toBe(true);
-
-    const search = await catalogService.listColleges({ search: 'warangal' });
-    expect(search.map((c) => c.slug)).toEqual(['nit-warangal']);
+  let fetchMock: ReturnType<typeof installFakeCatalogApi>;
+  beforeEach(() => {
+    fetchMock = installFakeCatalogApi();
   });
 
-  it('sorts by NIRF rank and by fees', async () => {
-    const byRank = await catalogService.listColleges({ sort: 'rank' });
-    const ranks = byRank.map((c) => c.nirfRank ?? Infinity);
-    expect(ranks).toEqual([...ranks].sort((a, b) => a - b));
-
-    const byFees = await catalogService.listColleges({ sort: 'fees' });
-    const fees = byFees.map(lowestFeeLakhs);
-    expect(fees).toEqual([...fees].sort((a, b) => a - b));
+  it('sends filters, sort and paging to the API', () => {
+    expect(
+      collegeQuery({
+        search: ' nit ',
+        streams: ['Engineering', 'Medical'],
+        ownership: ['Government'],
+        states: ['Tamil Nadu'],
+        exam: 'jee-main',
+        sort: 'fees',
+        page: 3,
+        pageSize: 10,
+      }),
+    ).toBe(
+      'q=nit&stream=Engineering%2CMedical&ownership=Government&state=Tamil+Nadu&exam=jee-main&sort=fees&page=3&page_size=10',
+    );
+    expect(collegeQuery({ sort: 'relevance', page: 1 })).toBe('page_size=20');
   });
 
-  it('parses fees in lakhs and rupees', () => {
-    const aiims = SAMPLE_COLLEGES.find((c) => c.slug === 'aiims-delhi')!;
-    expect(lowestFeeLakhs(aiims)).toBeCloseTo(0.05); // ₹5,000
-    const nitw = SAMPLE_COLLEGES.find((c) => c.slug === 'nit-warangal')!;
-    expect(lowestFeeLakhs(nitw)).toBe(2); // M.Tech ₹2 L
+  it('lists one page of colleges with the total count', async () => {
+    const page = await catalogService.listColleges({ states: ['Telangana'], pageSize: 1 });
+    expect(page.count).toBe(2);
+    expect(page.results.map((c) => c.slug)).toEqual(['test-nit-warangal']);
+    expect(String(fetchMock.mock.calls[0][0])).toContain('/api/colleges/?state=Telangana&page_size=1');
+  });
+
+  it('gets one college, several by slug, and null for unknown ones', async () => {
+    expect((await catalogService.getCollege('test-aiims-delhi'))?.shortName).toBe('AIIMS Delhi');
+    expect(await catalogService.getCollege('nope')).toBeNull();
+    const two = await catalogService.getColleges(['test-iiit-hyderabad', 'missing', 'test-nit-warangal']);
+    expect(two.map((c) => c.slug)).toEqual(['test-iiit-hyderabad', 'test-nit-warangal']);
+
+    fetchMock.mockClear();
+    expect(await catalogService.getColleges([])).toEqual([]);
+    expect(fetchMock).not.toHaveBeenCalled();
   });
 
   it('finds colleges accepting an exam and returns exam extras', async () => {
     const jee = await catalogService.collegesAcceptingExam('jee-main');
-    expect(jee.map((c) => c.slug)).toContain('nit-trichy');
+    expect(jee.map((c) => c.slug)).toEqual(['test-nit-warangal', 'test-iiit-hyderabad']);
     expect((await catalogService.getExamExtras('neet'))?.cutoffs.length).toBeGreaterThan(0);
     expect(await catalogService.getExamExtras('unknown')).toBeNull();
-    expect(await catalogService.getCollege('nope')).toBeNull();
   });
 
-  it('every sample college has consistent data', () => {
-    const slugs = new Set<string>();
-    for (const c of SAMPLE_COLLEGES) {
-      expect(slugs.has(c.slug)).toBe(false);
-      slugs.add(c.slug);
-      expect(c.courses.length).toBeGreaterThan(0);
-      for (const row of c.cutoffs) expect(c.courses.map((x) => x.name)).toContain(row.course);
-    }
+  it('parses fees in lakhs, rupees and crores', () => {
+    const [nitw, , aiims, education] = TEST_COLLEGES;
+    expect(lowestFeeLakhs(aiims)).toBeCloseTo(0.05); // ₹5,000
+    expect(lowestFeeLakhs(nitw)).toBe(2); // M.Tech ₹2 L
+    expect(lowestFeeLakhs({ ...nitw, courses: [{ ...nitw.courses[0], totalFees: '₹1.2 Cr' }] })).toBe(120);
+    expect(lowestFeeLakhs(education)).toBe(Number.POSITIVE_INFINITY); // no courses yet
+  });
+
+  it('offers every stream, ownership and state as filters', () => {
+    const options = catalogService.filterOptions();
+    expect(options.streams).toContain('Education');
+    expect(options.streams).not.toContain('Other');
+    expect(options.states).toContain('Telangana');
+    expect(options.states).toHaveLength(36);
   });
 });
 
 describe('compareService', () => {
   it('adds, removes and caps the list', () => {
-    const slugs = SAMPLE_COLLEGES.slice(0, MAX_COMPARE + 1).map((c) => c.slug);
+    const slugs = ['a', 'b', 'c', 'd', 'e'];
     slugs.slice(0, MAX_COMPARE).forEach((s) => expect(compareService.toggle(s)).toBe(true));
     expect(compareService.toggle(slugs[MAX_COMPARE])).toBe(false); // full
     expect(compareService.list()).toHaveLength(MAX_COMPARE);
@@ -76,7 +90,12 @@ describe('compareService', () => {
 });
 
 describe('communityService', () => {
-  const target = { type: 'college' as const, id: 'nit-trichy' };
+  const target = { type: 'college' as const, id: 'test-nit-warangal' };
+
+  it('starts empty: no made-up reviews or questions', async () => {
+    expect(await communityService.listReviews(target)).toEqual([]);
+    expect(await communityService.listQuestions({ type: 'exam', id: 'neet' })).toEqual([]);
+  });
 
   it('adds reviews and counts helpful votes once', async () => {
     const review = await communityService.addReview({
@@ -100,22 +119,13 @@ describe('communityService', () => {
 
   it('asks, answers and sorts questions by votes', async () => {
     const q1 = await communityService.askQuestion(target, 'What is the CSE cutoff for OBC?');
-    const q2 = await communityService.askQuestion(target, 'How are the hostels at NIT Trichy?', 'For first years');
+    const q2 = await communityService.askQuestion(target, 'How are the hostels?', 'For first years');
     await communityService.vote(q2.id);
     await communityService.answerQuestion(q1.id, 'Around 3,000 closing rank last year.');
 
     const list = await communityService.listQuestions(target);
     expect(list.map((q) => q.id)).toEqual([q2.id, q1.id]);
     expect(list[1].answers.map((a) => a.body)).toEqual(['Around 3,000 closing rank last year.']);
-  });
-
-  it('can answer a sample question without duplicating it', async () => {
-    const sampleTarget = { type: 'exam' as const, id: 'neet' };
-    const [sample] = await communityService.listQuestions(sampleTarget);
-    await communityService.answerQuestion(sample.id, 'Usually 600+ for a good government seat.');
-
-    const list = await communityService.listQuestions(sampleTarget);
-    expect(list.filter((q) => q.id === sample.id)).toHaveLength(1);
-    expect(list[0].answers.at(-1)?.body).toContain('600+');
+    await expect(communityService.answerQuestion('q-unknown', 'x')).rejects.toThrow('Question not found');
   });
 });

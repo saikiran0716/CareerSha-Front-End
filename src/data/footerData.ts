@@ -1,27 +1,3 @@
-import { IMAGES } from './constants';
-import { ALL_MBA } from './mba/mbaData';
-import { MBA_INDIA } from './mba/mbaDataIndia';
-import { MBA_IIMS } from './mba/mbaDataIIMs';
-import { MBA_EXECUTIVE } from './mba/mbaDataExecutive';
-import { MBA_DISTANCE } from './mba/mbaDataDistance';
-import { MBA_ONLINE } from './mba/mbaDataOnline';
-import { ALL_ENGG } from './engineering/engData';
-import { ENG_INDIA } from './engineering/engDataIndia';
-import { ENG_IITS } from './engineering/engDataIITs';
-import { ENG_NITS } from './engineering/engDataNITs';
-import { ENG_HYDERABAD } from './engineering/engDataHyderabad';
-import { ENG_MUMBAI } from './engineering/engDataMumbai';
-import { ENG_DELHI } from './engineering/engDataDelhi';
-import { ENG_BANGALORE } from './engineering/engDataBangalore';
-import { ENG_MTECH } from './engineering/engDataMTech';
-import { MED_INDIA } from './medical/medDataIndia';
-import { MED_AIIMS } from './medical/medDataAIIMS';
-import { MED_PG } from './medical/medDataPG';
-import { ALL_BDS } from './medical/bdsData';
-import { ALL_PHARMA } from './medical/pharmaData';
-import { ALL_NURSING } from './medical/nursingData';
-import { ALL_PARAMEDICAL } from './medical/paramedicalData';
-
 // Mock EXAMS Data to replace deleted files for footer functionality
 const EXAMS_MANAGEMENT: PageItem[] = [];
 const EXAMS_ENGINEERING: PageItem[] = [];
@@ -41,18 +17,8 @@ import { PageItem, PageData } from './types';
 
 // Reusable Assets
 
-// Note: IMAGES constant moved to constants.ts
-// Note: ALL_MBA, ALL_ENGG, ALL_MED moved to separate files
-
-// Colleges Data Imports (aliases for local usage in this file if needed, though we imported them as ALL_MBA etc above)
-const COLLEGES_MBA = ALL_MBA;
-const COLLEGES_ENGG = ALL_ENGG;
-const COLLEGES_MED = MED_INDIA;
-
-const getCollegesByCity = (city: string): PageItem[] => {
-  const all = [...ALL_MBA, ...ALL_ENGG, ...MED_INDIA];
-  return all.filter((c) => c.subtitle.toLowerCase().includes(city.toLowerCase()));
-};
+// College list pages load their colleges from the API (collegeListService); entries here only
+// hold the page text: title, description, guide content and FAQs.
 
 const COMMON_FAQS = [
   {
@@ -86,16 +52,11 @@ const generateCityContent = (city: string) => `
   </ul>
 `;
 
-const generateCityData = (city: string, colleges: PageItem[] = []): PageData => {
-  // Merge explicit colleges with generated ones, verifying duplicates
-  let cityColleges = [...colleges, ...getCollegesByCity(city)];
-  // Deduplicate by title to avoid repeating if curated is also in generated (unlikely but safe)
-  cityColleges = Array.from(new Map(cityColleges.map((item) => [item.title, item])).values());
-
+const generateCityData = (city: string): PageData => {
   return {
     title: `Top Colleges in ${city}`,
     description: `Explore the best Tier 1 and Tier 2 educational institutions in ${city}. Compare fees, placements, and rankings.`,
-    items: cityColleges.length ? cityColleges : [ALL_ENGG[0], ALL_MBA[0], MED_INDIA[0]], // Fallback if no match
+    items: [],
     type: 'college',
     content: generateCityContent(city),
     faqs: [
@@ -113,7 +74,7 @@ export const FOOTER_PAGES: Record<string, PageData> = {
   'mba-india': {
     title: 'MBA Colleges in India 2026 - Top MBA Colleges | CareerSha',
     description: 'Explore top MBA colleges in India, entrance exams, fees, placements and career guidance.',
-    items: COLLEGES_MBA.slice(0, 150),
+    items: [],
     type: 'college',
     content: `
             <div class="prose prose-slate max-w-none">
@@ -136,9 +97,7 @@ export const FOOTER_PAGES: Record<string, PageData> = {
   'mba-delhi': {
     title: 'MBA Colleges in Delhi NCR',
     description: 'Premier management institutes in the capital region.',
-    items: getCollegesByCity('Delhi')
-      .filter((c) => COLLEGES_MBA.some((m) => m.title === c.title))
-      .concat(getCollegesByCity('Gurgaon'), getCollegesByCity('Ghaziabad'), getCollegesByCity('Noida')),
+    items: [],
     type: 'college',
     content: '<p>Delhi NCR is a hub for corporate headquarters.</p>',
     faqs: COMMON_FAQS,
@@ -146,7 +105,7 @@ export const FOOTER_PAGES: Record<string, PageData> = {
   'mba-bangalore': {
     title: 'MBA Colleges in Bangalore',
     description: 'Top B-schools in the Silicon Valley of India.',
-    items: getCollegesByCity('Bangalore').filter((c) => COLLEGES_MBA.some((m) => m.title === c.title)),
+    items: [],
     type: 'college',
     content: '<p>Bangalore, the startup capital, is perfect for aspirants looking into Tech-MBA.</p>',
     faqs: COMMON_FAQS,
@@ -154,7 +113,7 @@ export const FOOTER_PAGES: Record<string, PageData> = {
   'mba-mumbai': {
     title: 'MBA Colleges in Mumbai',
     description: 'Leading management institutes in the financial capital.',
-    items: getCollegesByCity('Mumbai').filter((c) => COLLEGES_MBA.some((m) => m.title === c.title)),
+    items: [],
     type: 'college',
     content: '<p>Mumbai offers unparalleled exposure to the Finance and BFSI sectors.</p>',
     faqs: COMMON_FAQS,
@@ -164,7 +123,7 @@ export const FOOTER_PAGES: Record<string, PageData> = {
   'eng-india': {
     title: 'Engineering Colleges in India 2026 - Top BTech Colleges | CareerSha',
     description: 'Find top engineering colleges, JEE counselling, cutoff and placements in India.',
-    items: ENG_INDIA,
+    items: [],
     type: 'college',
     content: `
             <div class="prose prose-slate max-w-none">
@@ -187,7 +146,7 @@ export const FOOTER_PAGES: Record<string, PageData> = {
   'iits-india': {
     title: 'List of IITs in India',
     description: 'Premier Institutes of Technology.',
-    items: ENG_IITS,
+    items: [],
     type: 'college',
     content:
       '<p>The Indian Institutes of Technology (IITs) are autonomous public technical universities located across India.</p>',
@@ -196,7 +155,7 @@ export const FOOTER_PAGES: Record<string, PageData> = {
   'nits-india': {
     title: 'List of NITs in India',
     description: 'National Institutes of Technology.',
-    items: ENG_NITS,
+    items: [],
     type: 'college',
     content:
       '<p>The National Institutes of Technology (NITs) are premier public technical universities funded by the Government of India.</p>',
@@ -205,7 +164,7 @@ export const FOOTER_PAGES: Record<string, PageData> = {
   'eng-hyd': {
     title: 'Engineering Colleges in Hyderabad',
     description: 'Best technical campuses in Hyderabad.',
-    items: ENG_HYDERABAD,
+    items: [],
     type: 'college',
     content: 'Hyderabad is a major IT hub.',
     faqs: COMMON_FAQS,
@@ -213,7 +172,7 @@ export const FOOTER_PAGES: Record<string, PageData> = {
   'eng-mumbai': {
     title: 'Engineering Colleges in Mumbai',
     description: 'Best technical campuses in Mumbai.',
-    items: ENG_MUMBAI,
+    items: [],
     type: 'college',
     content: 'Mumbai is home to IIT Bombay and ICT.',
     faqs: COMMON_FAQS,
@@ -221,7 +180,7 @@ export const FOOTER_PAGES: Record<string, PageData> = {
   'eng-delhi': {
     title: 'Engineering Colleges in Delhi',
     description: 'Best technical campuses in Delhi.',
-    items: ENG_DELHI,
+    items: [],
     type: 'college',
     content: 'Delhi is home to IIT Delhi and DTU.',
     faqs: COMMON_FAQS,
@@ -229,7 +188,7 @@ export const FOOTER_PAGES: Record<string, PageData> = {
   'eng-bangalore': {
     title: 'Engineering Colleges in Bangalore',
     description: 'Best technical campuses in Bangalore.',
-    items: ENG_BANGALORE,
+    items: [],
     type: 'college',
     content: 'Bangalore is the Silicon Valley of India.',
     faqs: COMMON_FAQS,
@@ -237,7 +196,7 @@ export const FOOTER_PAGES: Record<string, PageData> = {
   'eng-mtech': {
     title: 'Top M.Tech Colleges in India',
     description: 'Masters in Technology from premier institutes like IITs, IISc, and NITs.',
-    items: ENG_MTECH,
+    items: [],
     type: 'college',
     content:
       '<p>M.Tech is the preferred choice for students aiming for research, teaching, or specialized technical roles. GATE score is the primary criterion for admission.</p>',
@@ -248,7 +207,7 @@ export const FOOTER_PAGES: Record<string, PageData> = {
   'med-india': {
     title: 'Medical Colleges in India 2026 - MBBS, NEET Colleges | CareerSha',
     description: 'Discover top medical colleges, NEET counselling, MBBS fees and rankings in India.',
-    items: MED_INDIA,
+    items: [],
     type: 'college',
     content: `
             <div class="prose prose-slate max-w-none">
@@ -271,7 +230,7 @@ export const FOOTER_PAGES: Record<string, PageData> = {
   'aiims-colleges': {
     title: 'All AIIMS Colleges in India',
     description: 'Premier Medical Institutes.',
-    items: MED_AIIMS,
+    items: [],
     type: 'college',
     content: '<p>AIIMS are a group of autonomous public medical colleges of higher education.</p>',
     faqs: COMMON_FAQS,
@@ -279,7 +238,7 @@ export const FOOTER_PAGES: Record<string, PageData> = {
   'med-pg': {
     title: 'Top MD/MS Colleges in India',
     description: 'Post-graduate medical specialty courses.',
-    items: MED_PG,
+    items: [],
     type: 'college',
     content: '<p>MD/MS is the next step after MBBS for specialization. Admission is via NEET PG or INI-CET.</p>',
     faqs: COMMON_FAQS,
@@ -449,7 +408,7 @@ CITIES_LIST.forEach((city) => {
   FOOTER_PAGES[`mba-${slug}`] = {
     title: `MBA Colleges in ${city}`,
     description: `Top Management Institutes in ${city}.`,
-    items: getCollegesByCity(city).filter((c) => COLLEGES_MBA.some((m) => m.title === c.title)),
+    items: [],
     type: 'college',
     content: `<p>${city} is a prime destination for management studies.</p>`,
     faqs: COMMON_FAQS,
@@ -459,7 +418,7 @@ CITIES_LIST.forEach((city) => {
   FOOTER_PAGES[`eng-${slug}`] = {
     title: `Engineering Colleges in ${city}`,
     description: `Best B.Tech Colleges in ${city}.`,
-    items: getCollegesByCity(city).filter((c) => COLLEGES_ENGG.some((e) => e.title === c.title)),
+    items: [],
     type: 'college',
     content: `<p>${city} offers great technical education opportunities.</p>`,
     faqs: COMMON_FAQS,
@@ -469,98 +428,27 @@ CITIES_LIST.forEach((city) => {
   FOOTER_PAGES[`med-${slug}`] = {
     title: `Medical Colleges in ${city}`,
     description: `Top MBBS/BDS Colleges in ${city}.`,
-    items: getCollegesByCity(city).filter((c) => COLLEGES_MED.some((m) => m.title === c.title)),
+    items: [],
     type: 'college',
     content: `<p>Top medical institutions in ${city}.</p>`,
     faqs: COMMON_FAQS,
   };
 
-  // Generic City Page
-  // We already have some manual ones in the object above (lines 249-265 of original),
-  // but the object above is now cut off in this replacement.
-  // We should re-add them or let this loop handle them if they weren't special.
-  // The manual ones had some extra curated items passed to generateCityData.
-  // Let's Handle a few special cases if needed, but for now we follow the improved generateCityData logic which merges manual+auto.
-  // Actually, looking at the previous file, the manual items were passed TO generateCityData.
-  // Since I am replacing the big block, I need to preserve those calls.
-
-  let manualItems: PageItem[] = [];
-  if (city === 'Pune')
-    manualItems = [
-      {
-        title: 'Symbiosis (SIBM)',
-        subtitle: 'Pune, MH',
-        tags: ['Private', 'MBA', 'Tier 2'],
-        stats: [{ label: 'Avg Pkg', value: '₹24 LPA' }],
-        image: IMAGES.mba,
-      },
-    ];
-  if (city === 'Jaipur')
-    manualItems = [
-      {
-        title: 'MNIT Jaipur',
-        subtitle: 'Jaipur, Rajasthan',
-        tags: ['NIT', 'Public', 'Tier 1'],
-        stats: [{ label: 'Avg Pkg', value: '₹12 LPA' }],
-        image: IMAGES.eng,
-      },
-    ];
-  if (city === 'Bhopal')
-    manualItems = [
-      {
-        title: 'IISER Bhopal',
-        subtitle: 'Bhopal, MP',
-        tags: ['Science', 'Research', 'Tier 1'],
-        stats: [{ label: 'Focus', value: 'Pure Sci' }],
-        image: IMAGES.eng,
-      },
-    ];
-  if (city === 'Chandigarh')
-    manualItems = [
-      {
-        title: 'Punjab Engineering College',
-        subtitle: 'Chandigarh',
-        tags: ['Deemed', 'Public', 'Tier 2'],
-        stats: [{ label: 'Avg Pkg', value: '₹14 LPA' }],
-        image: IMAGES.eng,
-      },
-    ];
-  if (city === 'Coimbatore')
-    manualItems = [
-      {
-        title: 'PSG Tech',
-        subtitle: 'Coimbatore, TN',
-        tags: ['Private', 'Top Tier', 'Tier 2'],
-        stats: [{ label: 'Avg Pkg', value: '₹8 LPA' }],
-        image: IMAGES.eng,
-      },
-    ];
-  if (city === 'Nagpur')
-    manualItems = [
-      {
-        title: 'VNIT Nagpur',
-        subtitle: 'Nagpur, MH',
-        tags: ['NIT', 'Public', 'Tier 1'],
-        stats: [{ label: 'Avg Pkg', value: '₹10 LPA' }],
-        image: IMAGES.eng,
-      },
-    ];
-
-  FOOTER_PAGES[`city-${slug}`] = generateCityData(city, manualItems);
+  FOOTER_PAGES[`city-${slug}`] = generateCityData(city);
 });
 
 // MBA Specific Pages
 const SHARED_MBA_INDIA = {
   title: 'Top MBA Colleges in India',
-  items: MBA_INDIA,
+  items: [],
   type: 'college' as const,
   description: 'Explore the best MBA colleges in India...',
 };
 
-FOOTER_PAGES['mba-iims'] = { ...SHARED_MBA_INDIA, title: 'Top IIMs in India', items: MBA_IIMS };
-FOOTER_PAGES['mba-executive'] = { ...SHARED_MBA_INDIA, title: 'Best Executive MBA Programs', items: MBA_EXECUTIVE };
-FOOTER_PAGES['mba-distance'] = { ...SHARED_MBA_INDIA, title: 'Top Distance MBA Colleges', items: MBA_DISTANCE };
-FOOTER_PAGES['mba-online'] = { ...SHARED_MBA_INDIA, title: 'Best Online MBA Programs', items: MBA_ONLINE };
+FOOTER_PAGES['mba-iims'] = { ...SHARED_MBA_INDIA, title: 'Top IIMs in India' };
+FOOTER_PAGES['mba-executive'] = { ...SHARED_MBA_INDIA, title: 'Best Executive MBA Programs' };
+FOOTER_PAGES['mba-distance'] = { ...SHARED_MBA_INDIA, title: 'Top Distance MBA Colleges' };
+FOOTER_PAGES['mba-online'] = { ...SHARED_MBA_INDIA, title: 'Best Online MBA Programs' };
 
 FOOTER_PAGES['btech-india'] = FOOTER_PAGES['eng-india'];
 
@@ -570,7 +458,7 @@ FOOTER_PAGES['mbbs-india'] = FOOTER_PAGES['med-india'];
 FOOTER_PAGES['pharma-india'] = {
   title: 'Top B.Pharma Colleges in India',
   description: 'Best Pharmacy Institutes for B.Pharma and M.Pharma.',
-  items: ALL_PHARMA,
+  items: [],
   type: 'college',
   content: '<p>Pharmacy is a growing sector in India. NIPER and Jamia Hamdard are among the top institutes.</p>',
   faqs: COMMON_FAQS,
@@ -580,7 +468,7 @@ FOOTER_PAGES['pharma-india'] = {
 FOOTER_PAGES['nursing-india'] = {
   title: 'Top Nursing Colleges in India',
   description: 'Best Institutes for B.Sc Nursing and GNM.',
-  items: ALL_NURSING,
+  items: [],
   type: 'college',
   content: '<p>Nursing offers immense career opportunities in healthcare. AIIMS and CMC Vellore are top choices.</p>',
   faqs: COMMON_FAQS,
@@ -590,7 +478,7 @@ FOOTER_PAGES['nursing-india'] = {
 FOOTER_PAGES['bds-india'] = {
   title: 'Top Dental Colleges (BDS) in India',
   description: 'Best Dental Institutes for BDS.',
-  items: ALL_BDS,
+  items: [],
   type: 'college',
   content: '<p>BDS is the most popular medical course after MBBS. Maulana Azad Dental College is the top choice.</p>',
   faqs: COMMON_FAQS,
@@ -600,7 +488,7 @@ FOOTER_PAGES['bds-india'] = {
 FOOTER_PAGES['paramedical-india'] = {
   title: 'Top Paramedical Colleges in India',
   description: 'Best Institutes for Allied Health Sciences.',
-  items: ALL_PARAMEDICAL,
+  items: [],
   type: 'college',
   content: '<p>Paramedical courses like BPT, MLT, and Optometry are in high demand.</p>',
   faqs: COMMON_FAQS,
@@ -669,7 +557,7 @@ FOOTER_PAGES['site-sitemap'] = {
 FOOTER_PAGES['mba-top-colleges'] = {
   ...FOOTER_PAGES['mba-india'],
   title: 'Top 10 MBA Colleges in India',
-  items: COLLEGES_MBA.slice(0, 10),
+  items: [],
 };
 FOOTER_PAGES['eng-top-colleges'] = FOOTER_PAGES['eng-india'];
 FOOTER_PAGES['med-top-colleges'] = FOOTER_PAGES['med-india'];

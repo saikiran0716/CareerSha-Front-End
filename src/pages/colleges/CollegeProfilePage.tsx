@@ -3,13 +3,13 @@ import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { ExternalLink, MapPin, ShieldCheck } from 'lucide-react';
 import SEO from '../../components/common/SEO';
 import PageLoader from '../../components/common/loaders/PageLoader';
-import SampleDataNotice from '../../components/common/SampleDataNotice';
 import SaveCollegeButton from '../../features/account/SaveCollegeButton';
 import CompareButton from '../../features/compare/CompareButton';
 import ReviewsSection from '../../features/community/ReviewsSection';
 import QnaSection from '../../features/community/QnaSection';
 import { CoursesTab, CutoffsTab, OverviewTab, PlacementsTab } from '../../features/colleges/profile/CollegeTabs';
-import { catalogService } from '../../services/catalogService';
+import { catalogService, placeOf } from '../../services/catalogService';
+import { CatalogCollege } from '../../data/catalog/types';
 import { useAsync } from '../../hooks/useAsync';
 import NotFound from '../NotFound';
 
@@ -23,16 +23,27 @@ const TABS = [
 ] as const;
 type TabId = (typeof TABS)[number]['id'];
 
+/** Data tabs show only when the college has that data; overview, reviews and Q&A always show. */
+const hasTabData = (c: CatalogCollege, id: TabId) =>
+  id === 'courses'
+    ? c.courses.length > 0
+    : id === 'cutoffs'
+      ? c.cutoffs.length > 0
+      : id === 'placements'
+        ? !!c.placements
+        : true;
+
 /** /colleges/:slug — college profile with tabs (tab kept in ?tab= so it can be linked). */
 const CollegeProfilePage: React.FC = () => {
   const { slug = '' } = useParams();
   const [params, setParams] = useSearchParams();
   const { data: college, loading } = useAsync(() => catalogService.getCollege(slug), [slug]);
-  const tab: TabId = TABS.some((t) => t.id === params.get('tab')) ? (params.get('tab') as TabId) : 'overview';
 
   if (loading) return <PageLoader />;
   if (!college) return <NotFound />;
   const c = college;
+  const tabs = TABS.filter((t) => hasTabData(c, t.id));
+  const tab: TabId = tabs.find((t) => t.id === params.get('tab'))?.id ?? 'overview';
 
   return (
     <div className="min-h-screen bg-neutral-50 pb-24">
@@ -54,35 +65,38 @@ const CollegeProfilePage: React.FC = () => {
             <div className="min-w-0">
               <h1 className="text-2xl sm:text-3xl">{c.name}</h1>
               <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-primary-100">
-                <span className="flex items-center gap-1">
-                  <MapPin size={14} /> {c.city}, {c.state}
-                </span>
-                <span>Est. {c.established}</span>
-                <span>{c.ownership}</span>
+                {placeOf(c) && (
+                  <span className="flex items-center gap-1">
+                    <MapPin size={14} /> {placeOf(c)}
+                  </span>
+                )}
+                {c.established && <span>Est. {c.established}</span>}
+                {c.ownership && <span>{c.ownership}</span>}
                 {c.nirfRank && <span className="rounded bg-accent-600 px-2 py-0.5 text-white">NIRF #{c.nirfRank}</span>}
               </p>
-              <p className="mt-2 flex items-center gap-1 text-sm text-primary-100">
-                <ShieldCheck size={14} /> {c.accreditation.join(' · ')}
-              </p>
+              {c.accreditation.length > 0 && (
+                <p className="mt-2 flex items-center gap-1 text-sm text-primary-100">
+                  <ShieldCheck size={14} /> {c.accreditation.join(' · ')}
+                </p>
+              )}
             </div>
             <div className="flex flex-wrap items-center gap-2">
-              <SaveCollegeButton
-                college={{ name: c.shortName, location: `${c.city}, ${c.state}`, slug: c.slug }}
-                variant="label"
-              />
+              <SaveCollegeButton college={{ name: c.shortName, location: placeOf(c), slug: c.slug }} variant="label" />
               <CompareButton slug={c.slug} name={c.shortName} className="w-40" />
-              <a
-                href={c.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 rounded-lg bg-white px-4 py-2 text-xs font-bold text-primary-800"
-              >
-                Official website <ExternalLink size={12} />
-              </a>
+              {c.website && (
+                <a
+                  href={c.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 rounded-lg bg-white px-4 py-2 text-xs font-bold text-primary-800"
+                >
+                  Official website <ExternalLink size={12} />
+                </a>
+              )}
             </div>
           </div>
           <div role="tablist" aria-label="College sections" className="mt-6 flex overflow-x-auto">
-            {TABS.map((t) => (
+            {tabs.map((t) => (
               <button
                 key={t.id}
                 role="tab"
@@ -102,7 +116,6 @@ const CollegeProfilePage: React.FC = () => {
       </header>
 
       <main className="mx-auto max-w-[1200px] space-y-5 px-4 sm:px-6 pt-6">
-        <SampleDataNotice />
         <div role="tabpanel" id="college-tabpanel" aria-labelledby={`tab-${tab}`}>
           {tab === 'overview' && <OverviewTab c={c} />}
           {tab === 'courses' && <CoursesTab c={c} />}

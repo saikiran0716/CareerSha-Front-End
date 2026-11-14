@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ExploreCollegesPage from './ExploreCollegesPage';
@@ -6,8 +6,13 @@ import CollegeProfilePage from './CollegeProfilePage';
 import ComparePage from './ComparePage';
 import ExamDetailsPage from '../exams/ExamDetailsPage';
 import { renderAt } from '../../test/utils';
+import { installFakeCatalogApi } from '../../test/fakeCatalogApi';
 import { compareService } from '../../services/compareService';
 import { communityService } from '../../services/communityService';
+
+beforeEach(() => {
+  installFakeCatalogApi();
+});
 
 describe('Explore Colleges', () => {
   it('lists colleges and filters by stream from the URL', async () => {
@@ -15,9 +20,10 @@ describe('Explore Colleges', () => {
     expect(await screen.findByText('1 college found')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /all india institute of medical sciences/i })).toHaveAttribute(
       'href',
-      '/colleges/aiims-delhi',
+      '/colleges/test-aiims-delhi',
     );
     expect(screen.getByRole('checkbox', { name: 'Medical' })).toBeChecked();
+    expect(screen.queryByRole('note')).not.toBeInTheDocument(); // no "sample data" notice any more
   });
 
   it('searches and clears filters', async () => {
@@ -27,29 +33,37 @@ describe('Explore Colleges', () => {
     expect(await screen.findByText('No colleges match these filters')).toBeInTheDocument();
 
     await userEvent.click(screen.getByRole('button', { name: 'Clear search and filters' }));
-    expect(await screen.findByText(/colleges found/)).toBeInTheDocument();
+    expect(await screen.findByText('4 colleges found')).toBeInTheDocument();
+  });
+
+  it('pages through results', async () => {
+    renderAt(<ExploreCollegesPage />, '/colleges?page=1', '/colleges');
+    expect(await screen.findByText('4 colleges found')).toBeInTheDocument();
+    expect(screen.queryByRole('navigation', { name: 'Pages' })).not.toBeInTheDocument(); // fits on one page
+  });
+
+  it('shows an error when the API is down', async () => {
+    const fetchMock = installFakeCatalogApi();
+    fetchMock.mockImplementation(() => Promise.resolve(new Response('oops', { status: 500 })));
+    renderAt(<ExploreCollegesPage />, '/colleges', '/colleges');
+    expect(await screen.findByText(/could not load colleges/i)).toBeInTheDocument();
   });
 
   it('adds colleges to compare from the cards and shows the count', async () => {
-    renderAt(<ExploreCollegesPage />, '/colleges?q=nit', '/colleges');
+    renderAt(<ExploreCollegesPage />, '/colleges?q=warangal', '/colleges');
     await userEvent.click(await screen.findByRole('button', { name: 'Add NIT Warangal to compare' }));
-    expect(compareService.list()).toEqual(['nit-warangal']);
+    expect(compareService.list()).toEqual(['test-nit-warangal']);
     expect(screen.getByRole('link', { name: /compare \(1\)/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Remove NIT Warangal from compare' })).toHaveAttribute(
       'aria-pressed',
       'true',
     );
   });
-
-  it('shows the sample-data notice', async () => {
-    renderAt(<ExploreCollegesPage />, '/colleges', '/colleges');
-    expect(await screen.findByRole('note')).toHaveTextContent(/sample data/i);
-  });
 });
 
 describe('College profile page', () => {
   it('shows overview and switches tabs', async () => {
-    renderAt(<CollegeProfilePage />, '/colleges/nit-warangal', '/colleges/:slug');
+    renderAt(<CollegeProfilePage />, '/colleges/test-nit-warangal', '/colleges/:slug');
     expect(
       await screen.findByRole('heading', { level: 1, name: /national institute of technology warangal/i }),
     ).toBeInTheDocument();
@@ -61,13 +75,32 @@ describe('College profile page', () => {
     expect(within(table).getAllByRole('link', { name: /jee main/i })[0]).toHaveAttribute('href', '/exams/jee-main');
 
     await userEvent.click(screen.getByRole('tab', { name: 'Cutoffs' }));
-    expect(screen.getByRole('cell', { name: '2,400' })).toBeInTheDocument(); // General CSE 2025
+    expect(screen.getByRole('cell', { name: '2,400' })).toBeInTheDocument(); // 2025
     await userEvent.selectOptions(screen.getByRole('combobox', { name: /year/i }), '2024');
     expect(screen.getByRole('cell', { name: '2,496' })).toBeInTheDocument();
   });
 
+  it('hides the tabs a college has no data for', async () => {
+    renderAt(<CollegeProfilePage />, '/colleges/test-balaji-education?tab=placements', '/colleges/:slug');
+    expect(await screen.findByText(/a private education institution in chennai, tamil nadu/i)).toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: /official website/i })).not.toBeInTheDocument();
+    expect(screen.getAllByRole('tab').map((t) => t.textContent)).toEqual(['Overview', 'Reviews', 'Q&A']);
+    expect(screen.getByRole('tab', { name: 'Overview' })).toHaveAttribute('aria-selected', 'true'); // ?tab= ignored
+  });
+
+  it('shows NIRF placements with the programme table and source', async () => {
+    renderAt(<CollegeProfilePage />, '/colleges/test-nit-warangal?tab=placements', '/colleges/:slug');
+    expect(
+      await screen.findByRole('heading', { name: /placements 2025\s*\(UG 4-year programmes\)/i }),
+    ).toBeInTheDocument();
+    expect(screen.getByText('₹16 LPA')).toBeInTheDocument(); // median
+    expect(screen.getByText(/source: nirf 2025 institute data/i)).toBeInTheDocument();
+    const table = screen.getByRole('table');
+    expect(within(table).getByRole('row', { name: /PG 2-year 2025 400 300 75% ₹9 LPA 20/ })).toBeInTheDocument();
+  });
+
   it('opens the tab named in the URL and posts a review', async () => {
-    renderAt(<CollegeProfilePage />, '/colleges/nit-trichy?tab=reviews', '/colleges/:slug');
+    renderAt(<CollegeProfilePage />, '/colleges/test-nit-warangal?tab=reviews', '/colleges/:slug');
     expect(await screen.findByText(/no reviews yet/i)).toBeInTheDocument();
 
     await userEvent.click(screen.getByRole('button', { name: 'Write a review' }));
@@ -86,17 +119,17 @@ describe('College profile page', () => {
     expect(screen.getByText('1 review')).toBeInTheDocument();
   });
 
-  it('shows Q&A and lets visitors ask and upvote', async () => {
-    renderAt(<CollegeProfilePage />, '/colleges/nit-warangal?tab=qna', '/colleges/:slug');
-    expect(await screen.findByText(/what jee main rank is needed/i)).toBeInTheDocument();
+  it('lets visitors ask and upvote questions', async () => {
+    renderAt(<CollegeProfilePage />, '/colleges/test-nit-warangal?tab=qna', '/colleges/:slug');
+    expect(await screen.findByText(/no questions yet/i)).toBeInTheDocument();
 
     await userEvent.type(screen.getByLabelText('Ask a question'), 'Is there a good coding club culture?');
     await userEvent.click(screen.getByRole('button', { name: 'Post question' }));
     expect(await screen.findByText('Is there a good coding club culture?')).toBeInTheDocument();
 
-    const upvote = screen.getAllByRole('button', { name: /upvote question/i })[0];
-    await userEvent.click(upvote);
-    expect(communityService.hasVoted('q-1')).toBe(true);
+    await userEvent.click(screen.getAllByRole('button', { name: /upvote question/i })[0]);
+    const [question] = await communityService.listQuestions({ type: 'college', id: 'test-nit-warangal' });
+    expect(communityService.hasVoted(question.id)).toBe(true);
   });
 
   it('shows 404 for an unknown college', async () => {
@@ -107,22 +140,33 @@ describe('College profile page', () => {
 
 describe('Compare page', () => {
   it('compares selected colleges and highlights the best value', async () => {
-    compareService.set(['nit-warangal', 'iiit-hyderabad']);
+    compareService.set(['test-nit-warangal', 'test-iiit-hyderabad']);
     renderAt(<ComparePage />, '/compare', '/compare');
 
     const table = await screen.findByRole('table', { name: 'College comparison' });
-    expect(within(table).getByRole('link', { name: 'NIT Warangal' })).toHaveAttribute('href', '/colleges/nit-warangal');
+    expect(within(table).getByRole('link', { name: 'NIT Warangal' })).toHaveAttribute(
+      'href',
+      '/colleges/test-nit-warangal',
+    );
     const avgRow = within(table).getByRole('row', { name: /average package/i });
     expect(within(avgRow).getByText('₹32 LPA').closest('td')).toHaveTextContent('(best)');
 
     await userEvent.click(within(table).getByRole('button', { name: 'Remove NIT Warangal' }));
-    expect(compareService.list()).toEqual(['iiit-hyderabad']);
+    expect(compareService.list()).toEqual(['test-iiit-hyderabad']);
+  });
+
+  it('adds a college by searching', async () => {
+    compareService.set(['test-nit-warangal']);
+    renderAt(<ComparePage />, '/compare', '/compare');
+    await userEvent.type(screen.getByRole('searchbox'), 'aiims');
+    await userEvent.click(await screen.findByRole('button', { name: /AIIMS Delhi/ }));
+    expect(compareService.list()).toEqual(['test-nit-warangal', 'test-aiims-delhi']);
   });
 
   it('accepts a shared link', async () => {
-    renderAt(<ComparePage />, '/compare?c=iit-delhi,iit-bombay', '/compare');
-    expect(await screen.findByRole('link', { name: 'IIT Bombay' })).toBeInTheDocument();
-    expect(compareService.list()).toEqual(['iit-delhi', 'iit-bombay']);
+    renderAt(<ComparePage />, '/compare?c=test-aiims-delhi,test-iiit-hyderabad', '/compare');
+    expect(await screen.findByRole('link', { name: 'IIIT Hyderabad' })).toBeInTheDocument();
+    expect(compareService.list()).toEqual(['test-aiims-delhi', 'test-iiit-hyderabad']);
   });
 
   it('shows an empty state', () => {
@@ -142,11 +186,12 @@ describe('Exam page new tabs', () => {
     expect(await screen.findByText(/how to check your result/i)).toBeInTheDocument();
 
     await userEvent.click(screen.getByRole('button', { name: /^colleges$/i }));
-    expect(
-      await screen.findByRole('link', { name: /nit trichy|national institute of technology tiruchirappalli/i }),
-    ).toHaveAttribute('href', '/colleges/nit-trichy');
+    expect(await screen.findByRole('link', { name: /national institute of technology warangal/i })).toHaveAttribute(
+      'href',
+      '/colleges/test-nit-warangal',
+    );
 
     await userEvent.click(screen.getByRole('button', { name: /q&a/i }));
-    expect(await screen.findByText(/should i attempt both jee main sessions/i)).toBeInTheDocument();
+    expect(await screen.findByText(/no questions yet/i)).toBeInTheDocument();
   });
 });

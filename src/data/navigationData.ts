@@ -1,4 +1,3 @@
-import { SAMPLE_COLLEGES } from './catalog/colleges';
 import { Stream } from './catalog/types';
 import { GOVT_EXAM_CATEGORIES, getGovtCategory, govtExamsUrl } from './exams/govtExams';
 import { ExamStream, getStreamExams, streamExamUrl } from './exams/streamExams';
@@ -46,16 +45,32 @@ const reviews = (slug: string, name: string): NavLink => ({
   url: `/colleges/${slug}?tab=reviews`,
 });
 
-/** Top colleges of a stream by NIRF rank, linked to their pages. */
-const featured = (stream: Stream, count = 3): NavLink[] =>
-  SAMPLE_COLLEGES.filter((c) => c.stream === stream)
-    .sort((a, b) => (a.nirfRank ?? 999) - (b.nirfRank ?? 999))
-    .slice(0, count)
-    .map((c) => ({ name: c.name, url: `/colleges/${c.slug}` }));
+/** College pages (slugs from the backend catalog) used in the menus. */
+const FEATURED: Partial<Record<Stream, NavLink[]>> = {
+  Engineering: [
+    { name: 'IIT Madras', url: '/colleges/indian-institute-of-technology-madras' },
+    { name: 'IIT Delhi', url: '/colleges/indian-institute-of-technology-delhi' },
+    { name: 'IIT Bombay', url: '/colleges/indian-institute-of-technology-bombay' },
+  ],
+  Medical: [
+    { name: 'AIIMS New Delhi', url: '/colleges/all-india-institute-of-medical-sciences-delhi' },
+    { name: 'PGIMER Chandigarh', url: '/colleges/post-graduate-institute-of-medical-education-and-research' },
+    { name: 'CMC Vellore', url: '/colleges/christian-medical-college' },
+  ],
+  Management: [
+    { name: 'IIM Ahmedabad', url: '/colleges/indian-institute-of-management-ahmedabad' },
+    { name: 'IIM Bangalore', url: '/colleges/indian-institute-of-management-bangalore' },
+    { name: 'IIM Kozhikode', url: '/colleges/indian-institute-of-management-kozhikode' },
+  ],
+  Law: [{ name: 'NLSIU Bengaluru', url: '/colleges/national-law-school-of-india-university' }],
+  Design: [{ name: 'NIFT New Delhi', url: '/colleges/national-institute-of-fashion-technology-new-delhi' }],
+};
+const featured = (stream: Stream): NavLink[] => FEATURED[stream] ?? [];
 
-/** States that have colleges of this stream in the catalog. */
+/** States with the most colleges; every state is available as a filter on /colleges. */
+const MENU_STATES = ['Delhi', 'Karnataka', 'Maharashtra', 'Tamil Nadu', 'Telangana', 'Uttar Pradesh'];
 const byState = (stream: Stream): NavLink[] =>
-  [...new Set(SAMPLE_COLLEGES.filter((c) => c.stream === stream).map((c) => c.state))].sort().map((state) => ({
+  MENU_STATES.map((state) => ({
     name: `${stream} Colleges in ${state}`,
     url: explore(stream, `&state=${encodeURIComponent(state)}`),
   }));
@@ -221,11 +236,11 @@ export const navigationData: NavCategory[] = [
       {
         title: 'College Reviews',
         links: [
-          reviews('iit-delhi', 'IIT Delhi'),
-          reviews('iit-bombay', 'IIT Bombay'),
-          reviews('nit-warangal', 'NIT Warangal'),
-          reviews('iiit-hyderabad', 'IIIT Hyderabad'),
-          reviews('bits-pilani', 'BITS Pilani'),
+          reviews('indian-institute-of-technology-delhi', 'IIT Delhi'),
+          reviews('indian-institute-of-technology-bombay', 'IIT Bombay'),
+          reviews('national-institute-of-technology-warangal', 'NIT Warangal'),
+          reviews('international-institute-of-information-technology-hyderabad', 'IIIT Hyderabad'),
+          reviews('birla-institute-of-technology-science-pilani', 'BITS Pilani'),
           REVIEWS_ALL,
         ],
       },
@@ -314,7 +329,7 @@ export const navigationData: NavCategory[] = [
       compareGroup('Medical', []),
       {
         title: 'College Reviews',
-        links: [reviews('aiims-delhi', 'AIIMS Delhi'), REVIEWS_ALL],
+        links: [reviews('all-india-institute-of-medical-sciences-delhi', 'AIIMS Delhi'), REVIEWS_ALL],
       },
       resources([
         { name: 'NEET UG Pattern & Syllabus', url: '/exams/neet' },
@@ -391,7 +406,7 @@ export const navigationData: NavCategory[] = [
       compareGroup('MBA', []),
       {
         title: 'College Reviews',
-        links: [reviews('iim-ahmedabad', 'IIM Ahmedabad'), REVIEWS_ALL],
+        links: [reviews('indian-institute-of-management-ahmedabad', 'IIM Ahmedabad'), REVIEWS_ALL],
       },
       resources([
         { name: 'CAT Pattern & Syllabus', url: '/exams/cat' },
@@ -515,7 +530,7 @@ export const navigationData: NavCategory[] = [
             links: [
               predictor('clat', 'CLAT'),
               predictor('lawcet', 'LAWCET'),
-              reviews('nlsiu-bangalore', 'NLSIU Bengaluru'),
+              reviews('national-law-school-of-india-university', 'NLSIU Bengaluru'),
             ],
           },
         ],
@@ -546,7 +561,10 @@ export const navigationData: NavCategory[] = [
           ...examSections('design'),
           {
             title: 'Predictors & Reviews',
-            links: [predictor('nata', 'NATA (Architecture)'), reviews('nift-delhi', 'NIFT Delhi')],
+            links: [
+              predictor('nata', 'NATA (Architecture)'),
+              reviews('national-institute-of-fashion-technology-new-delhi', 'NIFT Delhi'),
+            ],
           },
         ],
       },
