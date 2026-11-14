@@ -7,13 +7,15 @@ import CollegeImage from '../CollegeImage';
 import {
   AccessibilitySection,
   AdmissionsSection,
+  ContactSection,
+  MapSection,
   NirfSection,
   RatingCard,
   RelatedColleges,
   ResearchSection,
   StudentsSection,
 } from './OverviewSections';
-import { admissionExams, collegeFaqs, generatedAbout } from './collegeText';
+import { admissionExams, collegeFaqs, generatedAbout, mapUrl } from './collegeText';
 import FaqSection from '../../content/footer-page/FaqSection';
 import { communityService } from '../../../services/communityService';
 import { useAsync } from '../../../hooks/useAsync';
@@ -80,6 +82,13 @@ const quickFacts = (c: CatalogCollege): Fact[] => {
     ],
     !!c.locationType && ['Area', c.locationType],
     !!c.established && ['Established', c.established],
+    !c.nirfFacts?.students?.total &&
+      !!c.wikidataFacts?.students && [
+        'Students',
+        `${c.wikidataFacts.students!.count.toLocaleString('en-IN')}${c.wikidataFacts.students!.year ? ` (${c.wikidataFacts.students!.year})` : ''}`,
+      ],
+    !c.nirfFacts?.faculty &&
+      !!c.wikidataFacts?.staff && ['Staff', c.wikidataFacts.staff!.count.toLocaleString('en-IN')],
     !!c.nirfRank && ['NIRF rank', `${c.nirfRank} (${c.nirfCategory ?? c.stream}${c.nirfYear ? ` ${c.nirfYear}` : ''})`],
     !!c.campusAcres && ['Campus', `${c.campusAcres} acres`],
     c.accreditation.length > 0 && ['Approvals', c.accreditation.join(', ')],
@@ -184,6 +193,10 @@ export const OverviewTab: React.FC<{ c: CatalogCollege }> = ({ c }) => {
         </section>
       )}
       {nirf && <AccessibilitySection facts={nirf} />}
+      <ContactSection facts={c.wikidataFacts} website={c.website || undefined} />
+      {c.wikidataFacts?.location && (
+        <MapSection location={c.wikidataFacts.location} name={c.name} mapLink={mapUrl(c)} />
+      )}
 
       <section className={card}>
         <FaqSection faqs={collegeFaqs(c, placeOf(c))} />

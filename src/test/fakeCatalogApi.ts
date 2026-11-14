@@ -90,6 +90,12 @@ export const TEST_COLLEGES: CatalogCollege[] = [
     about: 'NIT Warangal is a public engineering institute.\n\nIt was founded in 1959.',
     aboutSource: 'Wikipedia',
     aboutUrl: 'https://en.wikipedia.org/wiki/NIT_Warangal',
+    wikidataFacts: {
+      social: { facebook: 'https://www.facebook.com/nitwarangal' },
+      motto: 'Knowledge is power',
+      email: 'info@nitw.ac.in',
+      location: { lat: 17.983, lng: 79.53 },
+    },
     nirfRankings: [
       {
         year: 2025,

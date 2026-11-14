@@ -128,6 +128,21 @@ describe('College profile page', () => {
     );
   });
 
+  it('shows contact links, motto and a map from Wikidata', async () => {
+    renderAt(<CollegeProfilePage />, '/colleges/test-nit-warangal', '/colleges/:slug');
+    expect(await screen.findByRole('heading', { name: /contact & links/i })).toBeInTheDocument();
+    expect(screen.getByText(/knowledge is power/i)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Facebook' })).toHaveAttribute(
+      'href',
+      'https://www.facebook.com/nitwarangal',
+    );
+    expect(screen.getByRole('link', { name: 'info@nitw.ac.in' })).toHaveAttribute('href', 'mailto:info@nitw.ac.in');
+    expect(screen.getByTitle('Map of National Institute of Technology Warangal')).toHaveAttribute(
+      'src',
+      expect.stringContaining('marker=17.983,79.53'),
+    );
+  });
+
   it('shows admissions, FAQs, the rating card and a map link', async () => {
     renderAt(<CollegeProfilePage />, '/colleges/test-nit-warangal', '/colleges/:slug');
     expect(await screen.findByRole('heading', { name: 'Admissions' })).toBeInTheDocument();

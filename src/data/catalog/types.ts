@@ -102,6 +102,8 @@ export interface CatalogCollege {
   aboutSource?: string | null;
   aboutUrl?: string | null;
   nirfFacts?: NirfFacts | null;
+  /** From Wikidata (well-known colleges): social links, contacts, motto, map location, size */
+  wikidataFacts?: WikidataFacts | null;
   /** Detail page only: colleges in the same district (same department first) */
   nearby?: RelatedCollege[];
   /** Detail page only, for universities: colleges affiliated to it */
@@ -147,6 +149,16 @@ export interface NirfFacts {
   consultancy?: { projects?: number; partners?: number; amount?: number; year?: string };
   spending?: { library?: number; labs?: number };
   accessibility?: { lifts_ramps?: string; wheelchairs?: string; toilets?: string };
+}
+
+export interface WikidataFacts {
+  social?: Partial<Record<'facebook' | 'x' | 'instagram' | 'youtube' | 'linkedin', string>>;
+  phone?: string;
+  email?: string;
+  motto?: string;
+  location?: { lat: number; lng: number };
+  students?: { count: number; year: number | null };
+  staff?: { count: number; year: number | null };
 }
 
 /** A college in a related list (nearby, affiliated) — the list-card shape from the API. */

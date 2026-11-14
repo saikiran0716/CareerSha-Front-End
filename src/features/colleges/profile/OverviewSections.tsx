@@ -1,7 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Accessibility, BookOpen, ClipboardList, FlaskConical, GraduationCap, MapPin, Users } from 'lucide-react';
-import { NirfFacts, NirfRanking, RelatedCollege, Review } from '../../../data/catalog/types';
+import {
+  Accessibility,
+  BookOpen,
+  ClipboardList,
+  FlaskConical,
+  GraduationCap,
+  MapPin,
+  Phone,
+  Users,
+} from 'lucide-react';
+import { NirfFacts, NirfRanking, RelatedCollege, Review, WikidataFacts } from '../../../data/catalog/types';
 import { Stars } from '../../../components/common/StarRating';
 import { averageRating } from '../../../services/communityService';
 import CollegeImage from '../CollegeImage';
@@ -288,6 +297,113 @@ export const RatingCard: React.FC<{ reviews: Review[]; name: string; slug: strin
       <Link to={`/colleges/${slug}?tab=reviews`} className="text-sm text-primary-700 hover:underline">
         {reviews.length ? 'Read reviews' : 'Be the first to review'}
       </Link>
+    </section>
+  );
+};
+
+const SOCIAL_LABELS: [keyof NonNullable<WikidataFacts['social']>, string][] = [
+  ['facebook', 'Facebook'],
+  ['x', 'X (Twitter)'],
+  ['instagram', 'Instagram'],
+  ['youtube', 'YouTube'],
+  ['linkedin', 'LinkedIn'],
+];
+
+/** Motto, phone, email, website and social media links. */
+export const ContactSection: React.FC<{ facts?: WikidataFacts | null; website?: string }> = ({ facts, website }) => {
+  if (!facts) return null;
+  const social = SOCIAL_LABELS.filter(([key]) => facts.social?.[key]);
+  if (!facts.motto && !facts.phone && !facts.email && !social.length) return null;
+  return (
+    <section className={card}>
+      <SectionTitle icon={<Phone size={20} />}>Contact &amp; links</SectionTitle>
+      {facts.motto && <p className="mt-2 text-sm italic text-neutral-600">Motto: “{facts.motto}”</p>}
+      <dl className="mt-3 space-y-2 text-sm">
+        {facts.phone && (
+          <div className="flex justify-between gap-4 border-b border-neutral-100 pb-2">
+            <dt className="text-neutral-500">Phone</dt>
+            <dd>
+              <a href={`tel:${facts.phone.replace(/[^\d+]/g, '')}`} className="text-primary-700 hover:underline">
+                {facts.phone}
+              </a>
+            </dd>
+          </div>
+        )}
+        {facts.email && (
+          <div className="flex justify-between gap-4 border-b border-neutral-100 pb-2">
+            <dt className="text-neutral-500">Email</dt>
+            <dd>
+              <a href={`mailto:${facts.email}`} className="break-all text-primary-700 hover:underline">
+                {facts.email}
+              </a>
+            </dd>
+          </div>
+        )}
+        {website && (
+          <div className="flex justify-between gap-4 border-b border-neutral-100 pb-2">
+            <dt className="text-neutral-500">Website</dt>
+            <dd>
+              <a
+                href={website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="break-all text-primary-700 hover:underline"
+              >
+                {website.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}
+              </a>
+            </dd>
+          </div>
+        )}
+      </dl>
+      {social.length > 0 && (
+        <ul className="mt-3 flex flex-wrap gap-2" aria-label="Social media">
+          {social.map(([key, label]) => (
+            <li key={key}>
+              <a
+                href={facts.social![key]}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex rounded-full border border-neutral-200 px-3 py-1 text-sm text-neutral-700 hover:border-primary-300 hover:text-primary-800"
+              >
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+      <p className="mt-3 text-xs text-neutral-500">Source: Wikidata.</p>
+    </section>
+  );
+};
+
+/** A small OpenStreetMap of the campus (free, no API key), with a link to Google Maps directions. */
+export const MapSection: React.FC<{ location: { lat: number; lng: number }; name: string; mapLink: string }> = ({
+  location,
+  name,
+  mapLink,
+}) => {
+  const d = 0.01;
+  const bbox = [location.lng - d, location.lat - d * 0.6, location.lng + d, location.lat + d * 0.6].join(',');
+  return (
+    <section className={`${card} p-0 overflow-hidden`}>
+      <div className="flex items-center justify-between px-5 pt-5">
+        <SectionTitle icon={<MapPin size={20} />}>Location</SectionTitle>
+        <a
+          href={mapLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-sm text-primary-700 hover:underline"
+        >
+          Directions
+        </a>
+      </div>
+      <iframe
+        title={`Map of ${name}`}
+        src={`https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${location.lat},${location.lng}`}
+        loading="lazy"
+        className="mt-3 h-64 w-full border-0"
+      />
+      <p className="px-5 py-2 text-xs text-neutral-500">© OpenStreetMap contributors</p>
     </section>
   );
 };
