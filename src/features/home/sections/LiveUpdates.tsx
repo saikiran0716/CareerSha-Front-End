@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Newspaper } from 'lucide-react';
 import { getLatestNewsItems, NewsItem } from '../../../services/homeContentService';
+import NewsLink from '../../news/NewsLink';
 import { DEMO_LIVE_UPDATES } from '../../../data/home/homeContent';
 import { SHOW_SAMPLE_DATA_NOTICE } from '../../../config/features';
 
@@ -68,11 +69,9 @@ const LiveUpdates: React.FC = () => {
         )}
 
         {items?.map((item) => (
-          <a
+          <NewsLink
             key={item.id}
-            href={item.link || '/news'}
-            target={item.link?.startsWith('http') ? '_blank' : undefined}
-            rel="noopener noreferrer"
+            to={item.link || '/news'}
             className="flex items-center gap-3.5 p-3 rounded-2xl border border-neutral-50 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/50 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition duration-200"
           >
             <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-50 text-primary-600 shadow-sm">
@@ -89,7 +88,7 @@ const LiveUpdates: React.FC = () => {
                 {[item.category, item.date].filter(Boolean).join(' · ')}
               </p>
             </div>
-          </a>
+          </NewsLink>
         ))}
       </div>
     </section>

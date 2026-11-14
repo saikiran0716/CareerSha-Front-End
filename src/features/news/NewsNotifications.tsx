@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { ChevronRight, ChevronLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { getLatestNewsItems, NewsItem } from '../../services/homeContentService';
+import NewsLink from './NewsLink';
 
 const NEWS_DATA = [
   {
@@ -9,7 +10,7 @@ const NEWS_DATA = [
     title: 'JEE MAINS 2026 Session 1 Results Out; Paper 2 Answer Key Challenge Ends Today',
     date: 'February 21, 2026, 09:15 AM IST',
     image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=80&w=200',
-    link: 'https://jeemain.nta.nic.in',
+    link: '/news',
     isLive: true,
     category: 'ENTRANCE',
   },
@@ -166,10 +167,8 @@ const NewsNotifications: React.FC = () => {
                   key={news.id}
                   className="flex-shrink-0 flex items-center snap-start w-[90%] sm:w-[48%] lg:w-[32.2%] xl:w-[24.2%] news-item-mobile"
                 >
-                  <a
-                    href={news.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <NewsLink
+                    to={news.link}
                     className="flex items-start gap-4 p-2 rounded-2xl w-full group cursor-pointer hover:bg-neutral-50/80 dark:hover:bg-white/5 transition-all duration-300"
                   >
                     <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden flex-shrink-0 shadow-md ring-1 ring-neutral-100 dark:ring-neutral-800 news-image-mobile">
@@ -196,7 +195,7 @@ const NewsNotifications: React.FC = () => {
                         {news.date}
                       </p>
                     </div>
-                  </a>
+                  </NewsLink>
                   {index !== newsItems.length - 1 && (
                     <div className="h-12 w-[1px] bg-neutral-100 dark:bg-neutral-800 ml-4 hidden lg:block flex-shrink-0 opacity-60" />
                   )}

@@ -25,6 +25,7 @@ const ComparePage = lazy(() => import('../pages/colleges/ComparePage'));
 const CollegeMatchResultsPage = lazy(() => import('../pages/colleges/CollegeMatchResultsPage'));
 const ResultsPage = lazy(() => import('../pages/results/ResultsPage'));
 const NewsPage = lazy(() => import('../pages/news/NewsPage'));
+const NewsDetailPage = lazy(() => import('../pages/news/NewsDetailPage'));
 const JobsPage = lazy(() => import('../pages/jobs/JobsPage'));
 const CommunityPage = lazy(() => import('../pages/community/CommunityPage'));
 const AboutUs = lazy(() => import('../pages/static/AboutUs'));
@@ -131,9 +132,10 @@ const AppRoutes: React.FC<AppRoutesProps> = ({ user, onOpenAuth, onAskAI }) => (
 
       {/* Content */}
       <Route path="/news" element={<NewsPage />} />
+      <Route path="/news/:newsId" element={<NewsDetailPage />} />
       <Route path="/latest-news" element={<Navigate to="/news" replace />} />
-      {/* The blog is a separate website; keep old in-site blog links working */}
-      <Route path="/blogs" element={<ExternalRedirect to={BLOG_URL} label="blog" />} />
+      {/* The blog is a separate website (blogs.careersha.com); keep old in-site blog links working */}
+      <Route path="/blogs/*" element={<ExternalRedirect to={BLOG_URL} label="blog" />} />
       <Route path="/blog/*" element={<ExternalRedirect to={BLOG_URL} label="blog" />} />
       <Route path="/jobs" element={<JobsPage />} />
       <Route path="/community" element={<CommunityPage />} />

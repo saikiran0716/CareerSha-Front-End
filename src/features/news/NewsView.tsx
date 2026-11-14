@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ChevronLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { getLatestNewsItems, NewsItem } from '../../services/homeContentService';
+import NewsLink from './NewsLink';
 
 const NewsView: React.FC = () => {
   const navigate = useNavigate();
@@ -61,11 +62,9 @@ const NewsView: React.FC = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {newsItems.map((news, idx) => (
-            <a
+            <NewsLink
               key={`${news.id}-${idx}`}
-              href={news.link}
-              target="_blank"
-              rel="noopener noreferrer"
+              to={news.link}
               className="flex items-start gap-4 p-4 rounded-[2rem] bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-white/5 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] dark:hover:shadow-none transition-all duration-300 group cursor-pointer"
             >
               <div className="relative w-24 h-24 rounded-2xl overflow-hidden flex-shrink-0 shadow-sm ring-1 ring-neutral-100 dark:ring-neutral-800">
@@ -92,7 +91,7 @@ const NewsView: React.FC = () => {
                   {news.date}
                 </p>
               </div>
-            </a>
+            </NewsLink>
           ))}
         </div>
       </main>
