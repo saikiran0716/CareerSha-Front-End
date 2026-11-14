@@ -20,7 +20,6 @@ export interface ChatResponse {
 // Helper for Backend AI Calls
 const callBackendAI = async (endpoint: string, payload: unknown) => {
   const endpointUrl = buildApiUrl(`/ai/${endpoint}/`);
-  console.log(`Calling Backend AI endpoint: ${endpointUrl}`);
 
   try {
     const response = await fetch(endpointUrl, {

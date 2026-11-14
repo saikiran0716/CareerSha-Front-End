@@ -33,16 +33,8 @@ const AboutUs: React.FC = () => {
         and Reach college lists.
       </p>
 
-      {/* TODO: Remove the roadmap content */}
       <p>
-        <strong>3. Career Roadmap System</strong>
-        <br />
-        Structured pathways from 10th / 12th → Graduation → Job roles across 20+ career domains like Software
-        Engineering, Data Science, and Robotics.
-      </p>
-
-      <p>
-        <strong>4. Unified Exam Intelligence Hub</strong>
+        <strong>3. Unified Exam Intelligence Hub</strong>
         <br />
         Centralized access to JEE, NEET, GATE, CAT, EAMCET, Board Results, and Government job exams.
       </p>

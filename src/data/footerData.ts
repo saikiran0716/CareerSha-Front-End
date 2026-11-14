@@ -1,9 +1,6 @@
 import { IMAGES } from './constants';
 import { ALL_MBA } from './mba/mbaData';
 import { MBA_INDIA } from './mba/mbaDataIndia';
-import { MBA_DELHI } from './mba/mbaDataDelhi';
-import { MBA_BANGALORE } from './mba/mbaDataBangalore';
-import { MBA_MUMBAI } from './mba/mbaDataMumbai';
 import { MBA_IIMS } from './mba/mbaDataIIMs';
 import { MBA_EXECUTIVE } from './mba/mbaDataExecutive';
 import { MBA_DISTANCE } from './mba/mbaDataDistance';
@@ -558,29 +555,16 @@ const SHARED_MBA_INDIA = {
   items: MBA_INDIA,
   type: 'college' as const,
   description: 'Explore the best MBA colleges in India...',
-}; // Define locally or use existing structure logic
+};
 
-FOOTER_PAGES['mba-india'] = { ...SHARED_MBA_INDIA }; // Map explicitly
-
-FOOTER_PAGES['mba-delhi'] = { ...SHARED_MBA_INDIA, title: 'Top MBA Colleges in Delhi', items: MBA_DELHI };
-FOOTER_PAGES['mba-bangalore'] = { ...SHARED_MBA_INDIA, title: 'Top MBA Colleges in Bangalore', items: MBA_BANGALORE };
-FOOTER_PAGES['mba-mumbai'] = { ...SHARED_MBA_INDIA, title: 'Top MBA Colleges in Mumbai', items: MBA_MUMBAI };
 FOOTER_PAGES['mba-iims'] = { ...SHARED_MBA_INDIA, title: 'Top IIMs in India', items: MBA_IIMS };
 FOOTER_PAGES['mba-executive'] = { ...SHARED_MBA_INDIA, title: 'Best Executive MBA Programs', items: MBA_EXECUTIVE };
 FOOTER_PAGES['mba-distance'] = { ...SHARED_MBA_INDIA, title: 'Top Distance MBA Colleges', items: MBA_DISTANCE };
 FOOTER_PAGES['mba-online'] = { ...SHARED_MBA_INDIA, title: 'Best Online MBA Programs', items: MBA_ONLINE };
 
-// Legacy aliases (if needed) or remove if now covered
-// FOOTER_PAGES['online-mba'] = ...; // We can remove the old aliases OR map them to new keys if safe.
-// For now, let's keep old keys mapping to new structure if they were used elsewhere, or just define new ones.
-// The user asked to create specific files/links. The footer directory uses specific logic.
-// I will remove the old lines 180-182 and replace with these new proper definitions.
-
 FOOTER_PAGES['btech-india'] = FOOTER_PAGES['eng-india'];
-// FOOTER_PAGES['iits-india'] and 'nits-india' are now explicitly defined above
 
 FOOTER_PAGES['mbbs-india'] = FOOTER_PAGES['med-india'];
-// FOOTER_PAGES['aiims-colleges'] explicitly defined above
 
 // Pharmacy
 FOOTER_PAGES['pharma-india'] = {
@@ -726,7 +710,6 @@ FOOTER_PAGES['med-government'] = {
     '<p>Government colleges like AIIMS and MAMC are the top choice for NEET aspirants due to low fees and high patient inflow.</p>',
   faqs: COMMON_FAQS,
 };
-FOOTER_PAGES['mbbs-india'] = FOOTER_PAGES['med-india']; // Alias for MBBS
 
 // Design
 const COMMON_DESIGN_CONTENT = { type: 'college' as const, faqs: COMMON_FAQS, items: [] };
@@ -825,38 +808,6 @@ FOOTER_PAGES['company-contact'] = {
 // --- NEWLY ADDED KEYS TO MATCH FOOTER NAVIGATION ---
 
 // ENGINEERING
-FOOTER_PAGES['iits-india'] = {
-  title: 'List of IITs in India',
-  description: 'Indian Institutes of Technology.',
-  items: [],
-  type: 'college',
-  content: '<p>IITs are the premier engineering institutes in India.</p>',
-  faqs: COMMON_FAQS,
-};
-FOOTER_PAGES['nits-india'] = {
-  title: 'List of NITs in India',
-  description: 'National Institutes of Technology.',
-  items: [],
-  type: 'college',
-  content: '<p>NITs offer excellent technical education across India.</p>',
-  faqs: COMMON_FAQS,
-};
-FOOTER_PAGES['eng-hyd'] = {
-  title: 'Engineering Colleges in Hyderabad',
-  description: 'Top Engineering Institutes in Hyderabad.',
-  items: [],
-  type: 'college',
-  content: '<p>Hyderabad is a major IT hub with numerous engineering colleges.</p>',
-  faqs: COMMON_FAQS,
-};
-FOOTER_PAGES['eng-mumbai'] = {
-  title: 'Engineering Colleges in Mumbai',
-  description: 'Top Engineering Institutes in Mumbai.',
-  items: [],
-  type: 'college',
-  content: '<p>Mumbai offers great industrial exposure for engineering students.</p>',
-  faqs: COMMON_FAQS,
-};
 FOOTER_PAGES['eng-arch'] = {
   title: 'Top Architecture (B.Arch) Colleges',
   description: 'Best Institutes for Architecture.',
@@ -873,32 +824,8 @@ FOOTER_PAGES['eng-diploma'] = {
   content: '<p>Diploma courses offer practical technical skills.</p>',
   faqs: COMMON_FAQS,
 };
-FOOTER_PAGES['eng-mtech'] = {
-  title: 'Top M.Tech Colleges in India',
-  description: 'Masters in Technology.',
-  items: [],
-  type: 'college',
-  content: '<p>M.Tech is for specialization after B.Tech.</p>',
-  faqs: COMMON_FAQS,
-};
 
 // MEDICAL
-FOOTER_PAGES['aiims-colleges'] = {
-  title: 'List of AIIMS in India',
-  description: 'All India Institutes of Medical Sciences.',
-  items: [],
-  type: 'college',
-  content: '<p>AIIMS are the most prestigious medical colleges in India.</p>',
-  faqs: COMMON_FAQS,
-};
-FOOTER_PAGES['bds-india'] = {
-  title: 'Top BDS Colleges in India',
-  description: 'Dental Colleges.',
-  items: [],
-  type: 'college',
-  content: '<p>BDS is the second most popular medical course after MBBS.</p>',
-  faqs: COMMON_FAQS,
-};
 FOOTER_PAGES['med-kerala'] = {
   title: 'Medical Colleges in Kerala',
   description: 'Top Medical Institutes in Kerala.',
@@ -913,30 +840,6 @@ FOOTER_PAGES['med-karnataka'] = {
   items: [],
   type: 'college',
   content: '<p>Karnataka is a hub for medical education in South India.</p>',
-  faqs: COMMON_FAQS,
-};
-FOOTER_PAGES['pharma-india'] = {
-  title: 'Top B.Pharma Colleges',
-  description: 'Pharmacy Institutes.',
-  items: [],
-  type: 'college',
-  content: '<p>B.Pharma opens careers in the pharmaceutical industry.</p>',
-  faqs: COMMON_FAQS,
-};
-FOOTER_PAGES['nursing-india'] = {
-  title: 'Top Nursing Colleges',
-  description: 'B.Sc Nursing Institutes.',
-  items: [],
-  type: 'college',
-  content: '<p>Nursing is a noble and high-demand profession.</p>',
-  faqs: COMMON_FAQS,
-};
-FOOTER_PAGES['paramedical-india'] = {
-  title: 'Top Paramedical Colleges',
-  description: 'Allied Health Sciences.',
-  items: [],
-  type: 'college',
-  content: '<p>Paramedical courses support the healthcare system.</p>',
   faqs: COMMON_FAQS,
 };
 
@@ -1025,17 +928,6 @@ FOOTER_PAGES['tools-hub'] = {
         { label: 'Status', value: 'Updated' },
       ],
     },
-    // TODO: remove the roadmaps content
-    // {
-    //     title: 'Career Roadmaps',
-    //     subtitle: 'Explore step-by-step roadmaps for top careers',
-    //     tags: ['Planning', 'Guides'],
-    //     link: '/roadmaps',
-    //     stats: [
-    //         { label: 'Type', value: 'Guide' },
-    //         { label: 'Status', value: 'Updated' }
-    //     ]
-    // },
     {
       title: 'Search Colleges',
       subtitle: 'Search colleges, exams, and courses in India',
@@ -1059,8 +951,7 @@ FOOTER_PAGES['tools-hub'] = {
   ],
   type: 'generic',
 
-  // {TODO: remove the roadmap conent}
   content: `<p><strong>Access all CareerSha tools in one place:</strong> College Predictor, Rank Estimator, Results Checker, and News Hub for 2026 admissions. These AI-powered tools help you navigate the entire college admission journey—from exam scores to seat allotment.</p>
-    <p><strong>CareerSha Tools Hub</strong> brings the main admission tools together in one place. Each page below has a clear purpose: estimate your rank, match colleges, review results, and follow a career roadmap.</p><p>Use the dedicated pages rather than query-string shortcuts so the URLs remain stable, crawlable, and easy to index.</p>`,
+    <p><strong>CareerSha Tools Hub</strong> brings the main admission tools together in one place. Each page below has a clear purpose: estimate your rank, match colleges, review results and follow the latest news.</p>`,
   faqs: [],
 };

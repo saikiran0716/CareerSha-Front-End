@@ -36,9 +36,8 @@ const HomePage: React.FC<{ onAskAI: (question: string) => void }> = ({ onAskAI }
 
   return (
     <main className="relative z-10 w-full flex flex-col gap-0 overflow-x-hidden px-0 pb-8 pt-0">
-      {/* We should remove the roadmap seo */}
       <SEO
-        title="CareerSha | Career Roadmap, College Predictor & Exam Guidance"
+        title="CareerSha | College Predictor, Rank Predictor & Exam Guidance"
         description="Explore colleges, exams, cutoffs and AI-powered guidance for JEE, NEET, MBA and more in one modern landing page."
         keywords="college predictor, rank predictor, JEE Main 2026, NEET 2026, career guidance India, college matching tool"
         canonical="https://www.careersha.com/"

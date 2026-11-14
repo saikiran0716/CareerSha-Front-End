@@ -66,12 +66,11 @@ const ExamsHubPage: React.FC = () => {
           </p>
 
           <h2>Preparation Tips and Resources</h2>
-          {/* TODO: Remove the roadmap content */}
           <p>
             Success in these entrance exams requires more than just hard work; it requires a strategic approach.
             Utilizing <strong>previous years' question papers</strong>, mock tests, and standardized study materials can
-            significantly boost your performance. CareerSha provides detailed roadmaps and toolkits to help you navigate
-            these challenges effectively.
+            significantly boost your performance. CareerSha's exam guides, rank predictors and college tools help you
+            navigate these challenges effectively.
           </p>
 
           <p>
