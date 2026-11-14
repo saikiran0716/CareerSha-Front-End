@@ -9,6 +9,7 @@ import MegaMenu from './MegaMenu';
 import MobileMegaMenu from './MobileMegaMenu';
 import { ACCOUNT_LINKS } from '../../../features/account/accountNav';
 import { ACCOUNT_REQUIRES_SIGN_IN } from '../../../config/features';
+import { BLOG_URL } from '../../../config/links';
 
 interface HeaderProps {
   user: User | null;
@@ -123,12 +124,12 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                 );
               })}
               <div className="relative py-2">
-                <Link
-                  to="/blogs"
+                <a
+                  href={BLOG_URL}
                   className="text-[13px] font-semibold text-neutral-700 transition-colors flex items-center gap-1 py-2 px-3 border-b-2 border-transparent hover:border-primary-800"
                 >
                   Blogs
-                </Link>
+                </a>
               </div>
             </nav>
 
@@ -295,17 +296,12 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                   Home
                 </Link>
                 <MobileMegaMenu onNavigate={() => setIsMobileMenuOpen(false)} />
-                <Link
-                  to="/blogs"
-                  className={`block w-full p-4 text-sm font-bold rounded-xl transition-colors ${
-                    location.pathname.startsWith('/blogs')
-                      ? 'bg-primary-50 text-primary-800'
-                      : 'text-neutral-800 hover:bg-neutral-50 hover:text-primary-800'
-                  }`}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                <a
+                  href={BLOG_URL}
+                  className="block w-full p-4 text-sm font-bold rounded-xl text-neutral-800 transition-colors hover:bg-neutral-50 hover:text-primary-800"
                 >
                   Blogs
-                </Link>
+                </a>
               </div>
             </div>
 
