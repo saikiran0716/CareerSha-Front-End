@@ -78,18 +78,13 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
               <div className="relative py-2">
                 <Link
                   to="/"
-                  className={`text-[13px] font-semibold transition-all flex items-center gap-1 py-2 px-3 rounded-lg border-b-2 ${
-                    location.pathname === '/'
-                      ? 'text-primary-800 border-primary-800'
-                      : 'text-neutral-700 border-transparent hover:text-primary-800'
-                  }`}
+                  className="text-[13px] font-semibold text-neutral-700 transition-colors flex items-center gap-1 py-2 px-3 border-b-2 border-transparent hover:border-primary-800"
                 >
                   Home
                 </Link>
               </div>
               {navigationData.map((cat) => {
                 const open = activeMenu === cat.title;
-                const current = location.pathname + location.search === cat.url;
                 return (
                   <div
                     key={cat.title}
@@ -108,10 +103,8 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                       }}
                       aria-expanded={open}
                       aria-haspopup="true"
-                      className={`text-[13px] font-semibold transition-all flex items-center gap-1 py-2 px-3 rounded-lg border-b-2 ${
-                        open || current
-                          ? 'text-primary-800 border-primary-800'
-                          : 'text-neutral-700 border-transparent hover:text-primary-800'
+                      className={`text-[13px] font-semibold text-neutral-700 transition-colors flex items-center gap-1 py-2 px-3 border-b-2 ${
+                        open ? 'border-primary-800' : 'border-transparent hover:border-primary-800'
                       }`}
                     >
                       {cat.title}
@@ -132,11 +125,7 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
               <div className="relative py-2">
                 <Link
                   to="/blogs"
-                  className={`text-[13px] font-semibold transition-all flex items-center gap-1 py-2 px-3 rounded-lg border-b-2 ${
-                    location.pathname.startsWith('/blogs')
-                      ? 'text-primary-800 border-primary-800'
-                      : 'text-neutral-700 border-transparent hover:text-primary-800'
-                  }`}
+                  className="text-[13px] font-semibold text-neutral-700 transition-colors flex items-center gap-1 py-2 px-3 border-b-2 border-transparent hover:border-primary-800"
                 >
                   Blogs
                 </Link>
