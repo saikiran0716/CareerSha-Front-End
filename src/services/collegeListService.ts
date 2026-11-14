@@ -46,6 +46,12 @@ export interface CollegeList {
   description: string;
   stream?: ListStream;
   city?: string;
+  /** Matching colleges in the whole list (after search / ownership filters) */
+  count: number;
+  page: number;
+  pageSize: number;
+  /** Figures for the whole list (before filters), for the page header */
+  stats: ListStats;
   colleges: ListCollege[];
   /** Shown under short lists: the stream's national top list, so a page is never nearly empty */
   alsoPopular: ListCollege[];
@@ -54,12 +60,36 @@ export interface CollegeList {
   faqs: { question: string; answer: string }[];
 }
 
+export interface ListStats {
+  count: number;
+  government: number;
+  bestPackage?: string;
+  lowestFees?: string;
+}
+
+export interface ListQuery {
+  page?: number;
+  pageSize?: number;
+  q?: string;
+  ownership?: ListOwnership | 'All';
+  sort?: ListSort;
+}
+
+export const LIST_PAGE_SIZE = 10;
+
 /** The API sends null for missing values; the page components expect them to be absent. */
 type Nullable<T> = { [K in keyof T]: T[K] | null };
 type ApiListCollege = Nullable<ListCollege>;
-type ApiCollegeList = Omit<Nullable<CollegeList>, 'colleges' | 'alsoPopular'> & {
+type ApiCollegeList = Omit<
+  Nullable<CollegeList>,
+  'colleges' | 'alsoPopular' | 'stats' | 'count' | 'page' | 'pageSize'
+> & {
+  count?: number | null;
+  page?: number | null;
+  pageSize?: number | null;
   colleges: ApiListCollege[];
   alsoPopular: ApiListCollege[];
+  stats?: Nullable<ListStats> | null;
 };
 
 const withoutNulls = <T extends object>(obj: T) =>
@@ -86,6 +116,15 @@ export const toCollegeList = (slug: string, data: ApiCollegeList): CollegeList =
     description: data.description || page?.description || '',
     stream: data.stream ?? undefined,
     city: data.city ?? undefined,
+    count: data.count ?? data.colleges?.length ?? 0,
+    page: data.page ?? 1,
+    pageSize: data.pageSize ?? data.colleges?.length ?? 0,
+    stats: {
+      count: data.stats?.count ?? data.count ?? data.colleges?.length ?? 0,
+      government: data.stats?.government ?? 0,
+      bestPackage: data.stats?.bestPackage ?? undefined,
+      lowestFees: data.stats?.lowestFees ?? undefined,
+    },
     colleges: (data.colleges ?? []).map(toListCollege),
     alsoPopular: (data.alsoPopular ?? []).map(toListCollege),
     content: data.content || page?.content || undefined,
@@ -93,10 +132,16 @@ export const toCollegeList = (slug: string, data: ApiCollegeList): CollegeList =
   };
 };
 
-/** The list for a page slug, or null when the slug is not a college list. */
-export const getCollegeList = async (slug: string): Promise<CollegeList | null> => {
+/** One page of the list for a page slug, or null when the slug is not a college list. */
+export const getCollegeList = async (slug: string, query: ListQuery = {}): Promise<CollegeList | null> => {
   if (/^(legal|company|site)-/.test(slug)) return null;
-  const data = await getJson<ApiCollegeList>(`/college-lists/${encodeURIComponent(slug)}/`);
+  const params = new URLSearchParams();
+  params.set('page_size', String(query.pageSize ?? LIST_PAGE_SIZE));
+  if (query.page && query.page > 1) params.set('page', String(query.page));
+  if (query.q?.trim()) params.set('q', query.q.trim());
+  if (query.ownership && query.ownership !== 'All') params.set('ownership', query.ownership);
+  if (query.sort && query.sort !== 'rank') params.set('sort', query.sort);
+  const data = await getJson<ApiCollegeList>(`/college-lists/${encodeURIComponent(slug)}/?${params.toString()}`);
   return data ? toCollegeList(slug, data) : null;
 };
 
@@ -116,33 +161,8 @@ export const parseLakhs = (value?: string): number | undefined => {
 
 export type ListSort = 'rank' | 'fees' | 'package' | 'name';
 
-/** Filters and sorts a list on the client (search text, ownership, sort order). */
-export const filterColleges = (
-  colleges: ListCollege[],
-  { q = '', ownership = 'All', sort = 'rank' }: { q?: string; ownership?: ListOwnership | 'All'; sort?: ListSort },
-): ListCollege[] => {
-  const needle = q.trim().toLowerCase();
-  const list = colleges.filter(
-    (c) =>
-      (ownership === 'All' || c.ownership === ownership) &&
-      (!needle || `${c.name} ${c.location} ${c.highlights.join(' ')}`.toLowerCase().includes(needle)),
-  );
-  const last = Number.POSITIVE_INFINITY;
-  const by: Record<ListSort, (a: ListCollege, b: ListCollege) => number> = {
-    rank: () => 0, // keep the server's ranked order
-    fees: (a, b) => (a.feesLakhs ?? last) - (b.feesLakhs ?? last),
-    package: (a, b) => (b.packageLpa ?? -1) - (a.packageLpa ?? -1),
-    name: (a, b) => a.name.localeCompare(b.name),
-  };
-  return sort === 'rank' ? list : [...list].sort(by[sort]);
-};
-
-/** True when any college has fees or a package to show (otherwise list pages hide those columns). */
+/** Which figures a list has data for (list cards leave the others out). */
 export interface ListFigures {
   fees: boolean;
   package: boolean;
 }
-export const hasFigures = (colleges: ListCollege[]): ListFigures => ({
-  fees: colleges.some((c) => c.fees),
-  package: colleges.some((c) => c.avgPackage || c.medianPackage),
-});

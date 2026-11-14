@@ -3,18 +3,20 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { ChevronRight, Search, SearchX } from 'lucide-react';
 import SEO from '../../../components/common/SEO';
 import PageLoader from '../../../components/common/loaders/PageLoader';
+import LoadMore from '../../../components/common/LoadMore';
 import FaqSection from '../../content/footer-page/FaqSection';
 import CollegeRankCard from './CollegeRankCard';
 import ListSidebar from './ListSidebar';
-import { useAsync } from '../../../hooks/useAsync';
+import { useDebounced } from '../../../hooks/useDebounced';
+import { useInfiniteList } from '../../../hooks/useInfiniteList';
 import {
+  CollegeList,
+  ListCollege,
   ListOwnership,
   ListSort,
-  filterColleges,
-  getCollegeList,
-  ListCollege,
+  ListStats,
   ListStream,
-  hasFigures,
+  getCollegeList,
 } from '../../../services/collegeListService';
 
 const STREAM_LABEL: Partial<Record<ListStream, { name: string; url: string }>> = {
@@ -23,6 +25,17 @@ const STREAM_LABEL: Partial<Record<ListStream, { name: string; url: string }>> =
   Medical: { name: 'Medical', url: '/colleges?stream=Medical' },
   Law: { name: 'Law', url: '/colleges?stream=Law' },
   Design: { name: 'Design', url: '/colleges?stream=Design' },
+  Dental: { name: 'Dental', url: '/colleges?stream=Dental' },
+  Pharmacy: { name: 'Pharmacy', url: '/colleges?stream=Pharmacy' },
+  Nursing: { name: 'Nursing', url: '/colleges?stream=Nursing' },
+  Paramedical: { name: 'Paramedical', url: '/colleges?stream=Paramedical' },
+  Architecture: { name: 'Architecture', url: '/colleges?stream=Architecture' },
+  Science: { name: 'Science', url: '/colleges?stream=Science' },
+  Commerce: { name: 'Commerce', url: '/colleges?stream=Commerce' },
+  Arts: { name: 'Arts', url: '/colleges?stream=Arts' },
+  Education: { name: 'B.Ed', url: '/colleges?stream=Education' },
+  Hospitality: { name: 'Hotel management', url: '/colleges?stream=Hospitality' },
+  Agriculture: { name: 'Agriculture', url: '/colleges?stream=Agriculture' },
 };
 const SORTS: { value: ListSort; label: string }[] = [
   { value: 'rank', label: 'Top ranked' },
@@ -30,31 +43,40 @@ const SORTS: { value: ListSort; label: string }[] = [
   { value: 'fees', label: 'Lowest fees' },
   { value: 'name', label: 'Name (A–Z)' },
 ];
+const OWNERSHIPS: (ListOwnership | 'All')[] = ['All', 'Government', 'Private', 'Deemed'];
 
-const min = (xs: (number | undefined)[]) => Math.min(...xs.filter((x): x is number => x !== undefined));
-const max = (xs: (number | undefined)[]) => Math.max(...xs.filter((x): x is number => x !== undefined));
-const lakhs = (n: number) =>
-  n >= 100 ? `₹${+(n / 100).toFixed(1)} Cr` : n >= 1 ? `₹${+n.toFixed(1)} L` : `₹${Math.round(n * 100)}K`;
-
-/** Headline numbers for the hero, computed from the list. */
-const summary = (cs: ListCollege[]) => {
-  const items: { label: string; value: string }[] = [{ label: 'Colleges', value: String(cs.length) }];
-  const fee = min(cs.map((c) => c.feesLakhs));
-  if (Number.isFinite(fee)) items.push({ label: 'Fees from', value: lakhs(fee) });
-  const pkg = max(cs.map((c) => c.packageLpa));
-  if (Number.isFinite(pkg)) items.push({ label: 'Package up to', value: `₹${+pkg.toFixed(1)} LPA` });
-  const gov = cs.filter((c) => c.ownership === 'Government').length;
-  if (gov) items.push({ label: 'Government', value: String(gov) });
+/** Headline numbers for the hero: figures for the whole list from the API. */
+const summary = (stats: ListStats) => {
+  const items: { label: string; value: string }[] = [{ label: 'Colleges', value: stats.count.toLocaleString('en-IN') }];
+  if (stats.lowestFees) items.push({ label: 'Fees from', value: stats.lowestFees });
+  if (stats.bestPackage) items.push({ label: 'Package up to', value: stats.bestPackage });
+  if (stats.government) items.push({ label: 'Government', value: stats.government.toLocaleString('en-IN') });
   return items;
 };
 
-/** Ranked college list for a header-menu page (/eng/hyd, /mbbs/india, /mba/delhi, …). */
+/** Ranked college list for a header-menu page (/eng/hyd, /mbbs/india, /mba/delhi, …), 10 at a time. */
 const CollegeListPage: React.FC<{ slug: string }> = ({ slug }) => {
-  const { data: list, loading } = useAsync(() => getCollegeList(slug), [slug]);
   const [params, setParams] = useSearchParams();
   const q = params.get('q') ?? '';
+  const search = useDebounced(q.trim(), 350);
   const ownership = (params.get('own') as ListOwnership | null) ?? 'All';
   const sort = (params.get('sort') as ListSort | null) ?? 'rank';
+
+  const pages = useInfiniteList<ListCollege, CollegeList | null>(
+    (page) =>
+      getCollegeList(slug, { page, q: search, ownership, sort }).then((result) => ({
+        items: result?.colleges ?? [],
+        count: result?.count ?? 0,
+        first: result,
+      })),
+    [slug, search, ownership, sort],
+  );
+  // The page's own text and header figures, kept while new results load.
+  const [list, setList] = React.useState<CollegeList | null | undefined>(undefined);
+  React.useEffect(() => {
+    if (!pages.loading) setList(pages.first);
+  }, [pages.loading, pages.first]);
+  React.useEffect(() => setList(undefined), [slug]);
 
   const update = (key: string, value: string, empty: string) => {
     const next = new URLSearchParams(params);
@@ -63,24 +85,17 @@ const CollegeListPage: React.FC<{ slug: string }> = ({ slug }) => {
     setParams(next, { replace: true });
   };
 
-  if (loading) return <PageLoader />;
+  if (list === undefined) return <PageLoader />;
   if (!list) return null;
 
-  // Fee / package columns and sorts only when the list has those figures.
-  const figures = hasFigures([...list.colleges, ...list.alsoPopular]);
   const sorts = SORTS.filter((s) =>
-    s.value === 'fees' ? figures.fees : s.value === 'package' ? figures.package : true,
+    s.value === 'fees' ? !!list.stats.lowestFees : s.value === 'package' ? !!list.stats.bestPackage : true,
   );
-  const shown = filterColleges(list.colleges, {
-    q,
-    ownership,
-    sort: sorts.some((s) => s.value === sort) ? sort : 'rank',
-  });
-  const ownerships = (['Government', 'Private', 'Deemed'] as const).filter((o) =>
-    list.colleges.some((c) => c.ownership === o),
-  );
+  const figures = { fees: !!list.stats.lowestFees, package: !!list.stats.bestPackage };
+  const shown = pages.items;
   const crumb = list.stream && STREAM_LABEL[list.stream];
-  const filtered = q || ownership !== 'All';
+  const filtered = !!search || ownership !== 'All';
+  const hasColleges = list.stats.count > 0;
 
   return (
     <div className="pb-16">
@@ -113,9 +128,9 @@ const CollegeListPage: React.FC<{ slug: string }> = ({ slug }) => {
           <h1 className="mt-3 text-3xl text-neutral-900 sm:text-4xl">{list.title}</h1>
           <p className="mt-2 max-w-3xl text-neutral-600">{list.description}</p>
 
-          {list.colleges.length > 0 && (
+          {hasColleges && (
             <dl className="mt-6 flex flex-wrap gap-3">
-              {summary(list.colleges).map((s) => (
+              {summary(list.stats).map((s) => (
                 <div key={s.label} className="rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-2.5">
                   <dt className="text-[11px] uppercase tracking-wide text-neutral-500">{s.label}</dt>
                   <dd className="text-lg text-neutral-900">{s.value}</dd>
@@ -128,7 +143,7 @@ const CollegeListPage: React.FC<{ slug: string }> = ({ slug }) => {
 
       <div className="page-container mt-6 grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_300px]">
         <main className="min-w-0 space-y-5">
-          {list.colleges.length > 0 && (
+          {hasColleges && (
             <div className="flex flex-col gap-3 rounded-2xl border border-neutral-200 bg-white p-3 sm:flex-row sm:items-center">
               <label className="flex flex-1 items-center gap-2 rounded-xl bg-neutral-50 px-3">
                 <Search className="h-4 w-4 text-neutral-400" />
@@ -141,9 +156,9 @@ const CollegeListPage: React.FC<{ slug: string }> = ({ slug }) => {
                   className="w-full bg-transparent py-2.5 text-sm outline-none"
                 />
               </label>
-              {ownerships.length > 1 && (
+              {list.stats.count > 1 && (
                 <div role="group" aria-label="Ownership" className="flex gap-1">
-                  {(['All', ...ownerships] as const).map((o) => (
+                  {OWNERSHIPS.map((o) => (
                     <button
                       key={o}
                       type="button"
@@ -175,15 +190,19 @@ const CollegeListPage: React.FC<{ slug: string }> = ({ slug }) => {
             </div>
           )}
 
-          {list.colleges.length > 0 && (
+          {hasColleges && (
             <p className="text-sm text-neutral-600" aria-live="polite">
-              Showing {shown.length} of {list.colleges.length} colleges
+              {pages.loading
+                ? 'Loading…'
+                : `${pages.count.toLocaleString('en-IN')} college${pages.count === 1 ? '' : 's'}${
+                    filtered ? ' match' : ''
+                  }`}
             </p>
           )}
 
           {shown.length > 0 ? (
             <>
-              <ol className="space-y-4">
+              <ol className={`space-y-4 transition-opacity ${pages.loading ? 'opacity-50' : ''}`}>
                 {shown.map((c, i) => (
                   <li key={c.id}>
                     <CollegeRankCard
@@ -194,8 +213,15 @@ const CollegeListPage: React.FC<{ slug: string }> = ({ slug }) => {
                   </li>
                 ))}
               </ol>
+              <LoadMore
+                shown={shown.length}
+                total={pages.count}
+                hasMore={pages.hasMore}
+                loading={pages.loadingMore}
+                onLoadMore={pages.loadMore}
+              />
             </>
-          ) : filtered || list.alsoPopular.length === 0 ? (
+          ) : pages.loading ? null : filtered || list.alsoPopular.length === 0 ? (
             <div className="rounded-2xl border border-dashed border-neutral-300 bg-white p-8 text-center">
               <SearchX className="mx-auto h-8 w-8 text-neutral-400" />
               <p className="mt-3 text-neutral-800">
@@ -223,7 +249,7 @@ const CollegeListPage: React.FC<{ slug: string }> = ({ slug }) => {
                 Top {crumb?.name ?? ''} colleges in India
               </h2>
               <p className="text-sm text-neutral-600">
-                {list.colleges.length === 0
+                {list.stats.count === 0
                   ? `We are still adding colleges${list.city ? ` in ${list.city}` : ''} — meanwhile, popular choices nationally.`
                   : `Only a few colleges${list.city ? ` in ${list.city}` : ''} are listed yet — popular choices nationally.`}
               </p>

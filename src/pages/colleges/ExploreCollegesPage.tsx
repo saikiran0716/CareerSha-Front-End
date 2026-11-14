@@ -4,9 +4,13 @@ import SEO from '../../components/common/SEO';
 import ExploreSearchHeader from '../../features/colleges/ExploreSearchHeader';
 import ExploreFilters, { ExploreFilterValues } from '../../features/colleges/ExploreFilters';
 import CollegeListCard from '../../features/colleges/CollegeListCard';
-import { catalogService, CollegeFilters, DEFAULT_PAGE_SIZE } from '../../services/catalogService';
-import { Ownership, Stream } from '../../data/catalog/types';
-import { useAsync } from '../../hooks/useAsync';
+import LoadMore from '../../components/common/LoadMore';
+import { catalogService, CollegeFilters } from '../../services/catalogService';
+import { CatalogCollege, Ownership, Stream } from '../../data/catalog/types';
+import { useInfiniteList } from '../../hooks/useInfiniteList';
+
+/** Colleges loaded per step (more load as the visitor scrolls). */
+const PAGE_SIZE = 10;
 import { useCompare } from '../../hooks/useCompare';
 
 type Sort = NonNullable<CollegeFilters['sort']>;
@@ -25,11 +29,9 @@ const ExploreCollegesPage: React.FC = () => {
     exam: params.get('exam') ?? '',
   };
   const sort = (params.get('sort') as Sort) || 'relevance';
-  const page = Math.max(1, Number(params.get('page')) || 1);
 
-  /** Any change other than the page number goes back to page 1. */
-  const update = (next: Partial<{ q: string; sort: Sort; page: number } & ExploreFilterValues>) => {
-    const merged = { q: search, sort, ...filters, page: 1, ...next };
+  const update = (next: Partial<{ q: string; sort: Sort } & ExploreFilterValues>) => {
+    const merged = { q: search, sort, ...filters, ...next };
     const out: Record<string, string> = {};
     if (merged.q) out.q = merged.q;
     if (merged.streams.length) out.stream = merged.streams.join(',');
@@ -37,32 +39,27 @@ const ExploreCollegesPage: React.FC = () => {
     if (merged.states.length) out.state = merged.states.join(',');
     if (merged.exam) out.exam = merged.exam;
     if (merged.sort !== 'relevance') out.sort = merged.sort;
-    if (merged.page > 1) out.page = String(merged.page);
     setParams(out, { replace: true });
-    if (next.page) window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const key = params.toString();
-  const {
-    data: result,
-    loading,
-    error,
-  } = useAsync(
-    () =>
-      catalogService.listColleges({
-        search,
-        streams: filters.streams as Stream[],
-        ownership: filters.ownership as Ownership[],
-        states: filters.states,
-        exam: filters.exam || undefined,
-        sort,
-        page,
-      }),
+  const results = useInfiniteList<CatalogCollege>(
+    (page) =>
+      catalogService
+        .listColleges({
+          search,
+          streams: filters.streams as Stream[],
+          ownership: filters.ownership as Ownership[],
+          states: filters.states,
+          exam: filters.exam || undefined,
+          sort,
+          page,
+          pageSize: PAGE_SIZE,
+        })
+        .then((r) => ({ items: r.results, count: r.count })),
     [key],
   );
-  const colleges = result?.results ?? [];
-  const count = result?.count ?? 0;
-  const pages = Math.max(1, Math.ceil(count / DEFAULT_PAGE_SIZE));
+  const { items: colleges, count, loading, error } = results;
 
   return (
     <div className="min-h-screen bg-neutral-50 pb-24 font-sans">
@@ -118,34 +115,19 @@ const ExploreCollegesPage: React.FC = () => {
                 </button>
               </div>
             ) : (
-              <div className="space-y-5">
+              <div className={`space-y-5 transition-opacity ${loading ? 'opacity-50' : ''}`}>
                 {colleges.map((college) => (
                   <CollegeListCard key={college.slug} college={college} />
                 ))}
               </div>
             )}
-
-            {pages > 1 && (
-              <nav aria-label="Pages" className="mt-8 flex items-center justify-center gap-3 text-sm">
-                <button
-                  onClick={() => update({ page: page - 1 })}
-                  disabled={page <= 1 || loading}
-                  className="rounded-lg border border-neutral-300 bg-white px-4 py-2 text-neutral-800 disabled:opacity-40"
-                >
-                  Previous
-                </button>
-                <span className="text-neutral-600">
-                  Page {page} of {pages.toLocaleString('en-IN')}
-                </span>
-                <button
-                  onClick={() => update({ page: page + 1 })}
-                  disabled={page >= pages || loading}
-                  className="rounded-lg border border-neutral-300 bg-white px-4 py-2 text-neutral-800 disabled:opacity-40"
-                >
-                  Next
-                </button>
-              </nav>
-            )}
+            <LoadMore
+              shown={colleges.length}
+              total={count}
+              hasMore={results.hasMore}
+              loading={results.loadingMore}
+              onLoadMore={results.loadMore}
+            />
           </div>
         </div>
       </div>

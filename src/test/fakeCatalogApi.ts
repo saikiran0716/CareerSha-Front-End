@@ -148,7 +148,20 @@ const LIST_STREAM: Record<string, CatalogCollege['stream']> = {
   eng: 'Engineering',
   med: 'Medical',
   education: 'Education',
+  nursing: 'Nursing',
 };
+
+/** 25 nursing colleges, for paging tests ("Nursing College 01" … "25"; the first 5 are government). */
+const NURSING_COLLEGES: CatalogCollege[] = Array.from({ length: 25 }, (_, i) =>
+  college({
+    slug: `test-nursing-${i + 1}`,
+    name: `Nursing College ${String(i + 1).padStart(2, '0')}`,
+    city: i % 2 ? 'Pune' : 'Mumbai',
+    state: 'Maharashtra',
+    stream: 'Nursing',
+    ownership: i < 5 ? 'Government' : 'Private',
+  }),
+);
 
 const handle = (url: URL): Promise<Response> => {
   const path = url.pathname.replace(/^.*?\/api/, '');
@@ -165,7 +178,7 @@ const handle = (url: URL): Promise<Response> => {
     }
     const csv = (k: string) => (p.get(k) ? p.get(k)!.split(',') : []);
     const q = (p.get('q') ?? '').toLowerCase();
-    let list = TEST_COLLEGES.filter(
+    let list = [...TEST_COLLEGES, ...NURSING_COLLEGES].filter(
       (c) =>
         (!q || [c.name, c.shortName, c.city, c.state, c.stream].some((v) => v.toLowerCase().includes(q))) &&
         (!csv('stream').length || csv('stream').includes(c.stream)) &&
@@ -198,18 +211,35 @@ const handle = (url: URL): Promise<Response> => {
     if (!stream) return json({ error: 'College list not found.' }, 404);
     const tail = rest.join('-');
     const city = tail && tail !== 'india' ? (tail === 'hyd' ? 'hyderabad' : tail) : '';
-    const ofStream = TEST_COLLEGES.filter((c) => c.stream === stream);
+    const ofStream = [...TEST_COLLEGES, ...NURSING_COLLEGES].filter((c) => c.stream === stream);
     // Like the backend, "hyd" also covers the districts around the city (Warangal is a test stand-in).
     const inCity = (c: CatalogCollege) => c.city.toLowerCase() === city || (tail === 'hyd' && c.state === 'Telangana');
-    const colleges = city ? ofStream.filter(inCity) : ofStream;
+    const all = city ? ofStream.filter(inCity) : ofStream;
+    const q = (p.get('q') ?? '').toLowerCase();
+    const matching = all.filter(
+      (c) =>
+        (!q || `${c.name} ${c.city}`.toLowerCase().includes(q)) &&
+        (!p.get('ownership') || c.ownership === p.get('ownership')),
+    );
+    const page = Number(p.get('page') ?? 1);
+    const size = Number(p.get('page_size') ?? 100);
     return json({
       slug,
       title: `Top ${stream} Colleges in India`,
       description: '',
       stream,
       city: city || null,
-      colleges: colleges.map(listEntry),
-      alsoPopular: colleges.length < 5 ? ofStream.filter((c) => !colleges.includes(c)).map(listEntry) : [],
+      count: matching.length,
+      page,
+      pageSize: size,
+      stats: {
+        count: all.length,
+        government: all.filter((c) => c.ownership === 'Government').length,
+        bestPackage: all.find((c) => c.placements)?.placements?.medianPackage ?? null,
+        lowestFees: null,
+      },
+      colleges: matching.slice((page - 1) * size, page * size).map(listEntry),
+      alsoPopular: all.length < 5 && page === 1 ? ofStream.filter((c) => !all.includes(c)).map(listEntry) : [],
       content: null,
       faqs: [],
     });

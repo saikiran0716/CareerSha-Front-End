@@ -34,13 +34,18 @@ describe('Explore Colleges', () => {
     expect(await screen.findByText('No colleges match these filters')).toBeInTheDocument();
 
     await userEvent.click(screen.getByRole('button', { name: 'Clear search and filters' }));
-    expect(await screen.findByText('4 colleges found')).toBeInTheDocument();
+    expect(await screen.findByText('29 colleges found')).toBeInTheDocument();
   });
 
-  it('pages through results', async () => {
-    renderAt(<ExploreCollegesPage />, '/colleges?page=1', '/colleges');
-    expect(await screen.findByText('4 colleges found')).toBeInTheDocument();
-    expect(screen.queryByRole('navigation', { name: 'Pages' })).not.toBeInTheDocument(); // fits on one page
+  it('loads 10 colleges at a time', async () => {
+    renderAt(<ExploreCollegesPage />, '/colleges?stream=Nursing', '/colleges');
+    expect(await screen.findByText('25 colleges found')).toBeInTheDocument();
+    expect(screen.getAllByRole('link', { name: 'View details' })).toHaveLength(10);
+    expect(screen.getByText('Showing 10 of 25 colleges')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('button', { name: 'Load more colleges' }));
+    await waitFor(() => expect(screen.getAllByRole('link', { name: 'View details' })).toHaveLength(20));
+    expect(screen.getByText('Showing 20 of 25 colleges')).toBeInTheDocument();
   });
 
   it('shows an error when the API is down', async () => {
