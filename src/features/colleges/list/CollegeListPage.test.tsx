@@ -54,7 +54,7 @@ describe('CollegeListPage', () => {
     expect(cardNames()).toHaveLength(10);
     expect(String(fetchMock.mock.calls.at(-1)![0])).toContain('page=2');
     expect(screen.getByRole('button', { name: 'Page 2' })).toHaveAttribute('aria-current', 'page');
-    expect(screen.getByText('11')).toBeInTheDocument(); // rank continues across pages (shown without "#")
+    expect(screen.getByRole('heading', { level: 3, name: 'Nursing College 11' })).toBeInTheDocument(); // page 2 starts at the 11th
 
     await userEvent.click(screen.getByRole('button', { name: 'Page 3' }));
     await waitFor(() => expect(cardNames()).toHaveLength(5));

@@ -47,9 +47,8 @@ const figuresOf = (c: ListCollege, figures: ListFigures): [string, string, boole
 };
 
 /** One college in a list page: photo, name, place, tags, key figures and actions. */
-const CollegeRankCard: React.FC<{ college: ListCollege; position?: number; figures?: ListFigures }> = ({
+const CollegeRankCard: React.FC<{ college: ListCollege; figures?: ListFigures }> = ({
   college: c,
-  position,
   figures = ALL_FIGURES,
 }) => {
   const profile = c.profileSlug ? `/colleges/${c.profileSlug}` : undefined;
@@ -57,14 +56,9 @@ const CollegeRankCard: React.FC<{ college: ListCollege; position?: number; figur
 
   return (
     <article className="flex flex-col gap-4 rounded-2xl border border-neutral-200 bg-white p-3 transition-shadow hover:shadow-md sm:flex-row sm:p-4">
-      {/* Photo (or department placeholder) with the rank */}
+      {/* Photo (or department placeholder) */}
       <div className="relative h-44 w-full shrink-0 overflow-hidden rounded-xl sm:h-auto sm:min-h-[150px] sm:w-[220px]">
         <CollegeImage college={c} className="absolute inset-0 h-full w-full" />
-        {position !== undefined && (
-          <span className="absolute left-2 top-2 rounded-lg bg-white/95 px-2 py-0.5 font-brand text-sm text-primary-900 shadow">
-            {position}
-          </span>
-        )}
         {c.imageUrl && c.imageCredit && (
           <p
             title={c.imageCredit}

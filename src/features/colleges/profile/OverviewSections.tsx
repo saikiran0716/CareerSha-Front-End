@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Accessibility, BookOpen, FlaskConical, GraduationCap, MapPin, Users } from 'lucide-react';
-import { NirfFacts, NirfRanking, RelatedCollege } from '../../../data/catalog/types';
+import { Accessibility, BookOpen, ClipboardList, FlaskConical, GraduationCap, MapPin, Users } from 'lucide-react';
+import { NirfFacts, NirfRanking, RelatedCollege, Review } from '../../../data/catalog/types';
+import { Stars } from '../../../components/common/StarRating';
+import { averageRating } from '../../../services/communityService';
 import CollegeImage from '../CollegeImage';
-import { rupees } from './collegeText';
+import { AdmissionExam, rupees } from './collegeText';
 
 const card = 'rounded-2xl border border-neutral-200 bg-white p-5';
 
@@ -222,6 +224,70 @@ export const RelatedColleges: React.FC<{ title: string; note?: string; colleges:
           </li>
         ))}
       </ul>
+    </section>
+  );
+};
+
+/** Entrance exams usually used for the college's department, linked to our exam pages. */
+export const AdmissionsSection: React.FC<{ exams: AdmissionExam[]; name: string; website?: string }> = ({
+  exams,
+  name,
+  website,
+}) => (
+  <section className={card}>
+    <SectionTitle icon={<ClipboardList size={20} />}>Admissions</SectionTitle>
+    <p className="mt-1 text-sm text-neutral-600">Entrance exams usually used for these courses:</p>
+    <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+      {exams.map((exam) => (
+        <li key={exam.name} className="rounded-xl border border-neutral-100 px-4 py-3">
+          {exam.id ? (
+            <Link to={`/exams/${exam.id}`} className="text-sm text-primary-700 hover:underline">
+              {exam.name}
+            </Link>
+          ) : (
+            <span className="text-sm text-neutral-900">{exam.name}</span>
+          )}
+          {exam.note && <p className="mt-0.5 text-xs text-neutral-500">{exam.note}</p>}
+        </li>
+      ))}
+    </ul>
+    <p className="mt-3 text-xs text-neutral-500">
+      Check {name}’s admission notice
+      {website && (
+        <>
+          {' '}
+          on its{' '}
+          <a href={website} target="_blank" rel="noopener noreferrer" className="text-primary-700 hover:underline">
+            official website
+          </a>
+        </>
+      )}{' '}
+      for the exact exams, eligibility, cut-offs and dates.
+    </p>
+  </section>
+);
+
+/** Average student rating with a link to the reviews, or an invitation to write the first one. */
+export const RatingCard: React.FC<{ reviews: Review[]; name: string; slug: string }> = ({ reviews, name, slug }) => {
+  const average = averageRating(reviews);
+  return (
+    <section className={`${card} flex flex-wrap items-center justify-between gap-3`}>
+      {reviews.length ? (
+        <div className="flex items-center gap-3">
+          <span className="text-3xl text-neutral-900">{average.toFixed(1)}</span>
+          <span>
+            <Stars value={average} />
+            <span className="block text-xs text-neutral-500">
+              {reviews.length} student review{reviews.length > 1 ? 's' : ''}
+            </span>
+          </span>
+        </div>
+      ) : (
+        <p className="text-sm text-neutral-600">No student reviews of {name} yet.</p>
+      )}
+      <Link to={`/colleges/${slug}?tab=reviews`} className="text-sm text-primary-700 hover:underline">
+        {reviews.length ? 'Read reviews' : 'Be the first to review'}
+      </Link>
     </section>
   );
 };

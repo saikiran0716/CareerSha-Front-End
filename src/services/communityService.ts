@@ -1,49 +1,56 @@
 import { Answer, CommunityTarget, Question, Review } from '../data/catalog/types';
+import { buildApiUrl } from './apiConfig';
 import { authService } from './authService';
 
 /**
- * Reviews and Q&A.
- *
- * NOW: what visitors post, stored in this browser (no made-up sample reviews).
- * LATER: replace the bodies of these functions with calls to the endpoints described in
- * docs/api/community-api.md — the function signatures already match that API.
+ * Reviews and Q&A, stored on the backend and shared by all visitors
+ * (GET/POST /api/reviews/, /api/questions/, /api/votes/ — see docs/api/catalog-and-community-api.md).
+ * Anyone can read; posting and voting need a signed-in account.
  */
 
-const STORE_KEY = 'careersha:community';
-
-interface LocalStore {
-  reviews: Review[];
-  questions: Question[];
-  /** ids this browser has already voted for, so a vote counts once */
-  voted: string[];
-  /** vote counts added locally, by item id */
-  votes: Record<string, number>;
+/** Thrown when an action needs a signed-in user, or the server refuses it (message is shown to the user). */
+export class CommunityError extends Error {
+  constructor(
+    message: string,
+    readonly status: number,
+  ) {
+    super(message);
+  }
 }
 
-const empty = (): LocalStore => ({ reviews: [], questions: [], voted: [], votes: {} });
-
-const load = (): LocalStore => {
-  try {
-    return { ...empty(), ...JSON.parse(localStorage.getItem(STORE_KEY) || '{}') };
-  } catch {
-    return empty();
-  }
-};
-
 const listeners = new Set<() => void>();
-const save = (store: LocalStore) => {
-  try {
-    localStorage.setItem(STORE_KEY, JSON.stringify(store));
-  } catch {
-    /* storage unavailable */
-  }
-  listeners.forEach((l) => l());
+const changed = () => listeners.forEach((l) => l());
+
+/** Items the signed-in user has voted for (from the server's "votedByMe" and from votes made here). */
+const voted = new Set<string>();
+// Votes belong to one account: forget them when someone signs in or out.
+authService.onStateChange(() => voted.clear());
+
+const query = (target: CommunityTarget) =>
+  `targetType=${encodeURIComponent(target.type)}&targetId=${encodeURIComponent(target.id)}`;
+
+const request = async <T>(path: string, init: RequestInit = {}): Promise<T> => {
+  const res = await fetch(buildApiUrl(path), {
+    ...init,
+    headers: { Accept: 'application/json', 'Content-Type': 'application/json', ...authService.getAuthHeaders() },
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new CommunityError(data?.error || 'Something went wrong. Please try again.', res.status);
+  return data as T;
 };
 
-const sameTarget = (a: CommunityTarget, b: CommunityTarget) => a.type === b.type && a.id === b.id;
-const authorName = () => authService.getCurrentUser()?.name || 'Guest';
-const newId = (prefix: string) => `${prefix}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`;
-const byNewest = <T extends { createdAt: string }>(a: T, b: T) => b.createdAt.localeCompare(a.createdAt);
+const post = <T>(path: string, body: unknown = {}): Promise<T> => {
+  if (!authService.getCurrentUser()?.token) {
+    return Promise.reject(new CommunityError('Please sign in first.', 401));
+  }
+  return request<T>(path, { method: 'POST', body: JSON.stringify(body) });
+};
+
+type WithVote<T> = T & { votedByMe?: boolean };
+const remember = <T extends { id: string }>(item: WithVote<T>): T => {
+  if (item.votedByMe) voted.add(item.id);
+  return item;
+};
 
 export type NewReview = Omit<Review, 'id' | 'author' | 'createdAt' | 'helpful'>;
 
@@ -55,87 +62,59 @@ export const communityService = {
     };
   },
 
+  /** True when posting is possible (a signed-in user). */
+  canPost: () => !!authService.getCurrentUser()?.token,
+
   // ---------------- reviews ----------------
   async listReviews(target: CommunityTarget): Promise<Review[]> {
-    const store = load();
-    return store.reviews
-      .filter((r) => sameTarget(r.target, target))
-      .map((r) => ({ ...r, helpful: r.helpful + (store.votes[r.id] ?? 0) }))
-      .sort(byNewest);
+    return (await request<WithVote<Review>[]>(`/reviews/?${query(target)}`)).map(remember);
   },
 
   async addReview(input: NewReview): Promise<Review> {
-    const review: Review = {
-      ...input,
-      id: newId('rv'),
-      author: authorName(),
-      createdAt: new Date().toISOString(),
-      helpful: 0,
-    };
-    const store = load();
-    save({ ...store, reviews: [review, ...store.reviews] });
+    const review = await post<Review>('/reviews/', input);
+    changed();
     return review;
   },
 
   // ---------------- questions & answers ----------------
   async listQuestions(target: CommunityTarget): Promise<Question[]> {
-    const store = load();
-    const withVotes = (q: Question): Question => ({
-      ...q,
-      upvotes: q.upvotes + (store.votes[q.id] ?? 0),
-      answers: q.answers.map((a) => ({ ...a, upvotes: a.upvotes + (store.votes[a.id] ?? 0) })),
-    });
-    return store.questions
-      .filter((q) => sameTarget(q.target, target))
-      .map(withVotes)
-      .sort((a, b) => b.upvotes - a.upvotes || byNewest(a, b));
+    const questions = await request<WithVote<Question & { answers: WithVote<Answer>[] }>[]>(
+      `/questions/?${query(target)}`,
+    );
+    return questions.map((q) => remember({ ...q, answers: q.answers.map(remember) }));
   },
 
   async askQuestion(target: CommunityTarget, title: string, body?: string): Promise<Question> {
-    const question: Question = {
-      id: newId('q'),
-      target,
-      author: authorName(),
-      title: title.trim(),
-      body: body?.trim() || undefined,
-      createdAt: new Date().toISOString(),
-      upvotes: 0,
-      answers: [],
-    };
-    const store = load();
-    save({ ...store, questions: [question, ...store.questions] });
+    const question = await post<Question>('/questions/', { target, title: title.trim(), body: body?.trim() ?? '' });
+    changed();
     return question;
   },
 
   async answerQuestion(questionId: string, body: string): Promise<Answer> {
-    const answer: Answer = {
-      id: newId('a'),
-      author: authorName(),
-      body: body.trim(),
-      createdAt: new Date().toISOString(),
-      upvotes: 0,
-    };
-    const store = load();
-    const base = store.questions.find((q) => q.id === questionId);
-    if (!base) throw new Error('Question not found');
-    const updated = { ...base, answers: [...base.answers, answer] };
-    save({ ...store, questions: [updated, ...store.questions.filter((q) => q.id !== questionId)] });
+    const answer = await post<Answer>(`/questions/${questionId.replace(/^q-/, '')}/answers/`, { body: body.trim() });
+    changed();
     return answer;
   },
 
-  /** Upvote a question / answer, or mark a review helpful. Counts once per browser. */
+  /** Upvote a question / answer, or mark a review helpful. Counts once per user; false if already voted. */
   async vote(itemId: string): Promise<boolean> {
-    const store = load();
-    if (store.voted.includes(itemId)) return false;
-    save({
-      ...store,
-      voted: [...store.voted, itemId],
-      votes: { ...store.votes, [itemId]: (store.votes[itemId] ?? 0) + 1 },
-    });
+    try {
+      if (itemId.startsWith('rv-')) await post(`/reviews/${itemId.slice(3)}/helpful/`);
+      else await post('/votes/', { itemId });
+    } catch (error) {
+      if (error instanceof CommunityError && error.status === 409) {
+        voted.add(itemId);
+        changed();
+        return false;
+      }
+      throw error;
+    }
+    voted.add(itemId);
+    changed();
     return true;
   },
 
-  hasVoted: (itemId: string) => load().voted.includes(itemId),
+  hasVoted: (itemId: string) => voted.has(itemId),
 };
 
 /** Average of the overall ratings, rounded to one decimal (0 when there are no reviews). */

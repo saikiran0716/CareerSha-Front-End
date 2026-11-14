@@ -13,12 +13,15 @@ const AuthPage: React.FC<AuthPageProps> = ({ user, onAuthSuccess }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const isLoginPage = location.pathname === '/login';
+  // Back to the page that sent the visitor here (e.g. "Sign in to write a review"); only our own pages.
+  const from = (location.state as { from?: unknown } | null)?.from;
+  const returnTo = typeof from === 'string' && from.startsWith('/') && !from.startsWith('//') ? from : '/dashboard';
 
   useEffect(() => {
     if (user) {
-      navigate('/dashboard');
+      navigate(returnTo, { replace: true });
     }
-  }, [user, navigate]);
+  }, [user, navigate, returnTo]);
 
   if (user) return null;
 

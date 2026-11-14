@@ -3,6 +3,7 @@ import { catalogService, collegeQuery, lowestFeeLakhs } from './catalogService';
 import { compareService, MAX_COMPARE } from './compareService';
 import { averageRating, communityService } from './communityService';
 import { installFakeCatalogApi, TEST_COLLEGES } from '../test/fakeCatalogApi';
+import { signIn } from '../test/utils';
 
 describe('catalogService', () => {
   let fetchMock: ReturnType<typeof installFakeCatalogApi>;
@@ -91,6 +92,16 @@ describe('compareService', () => {
 
 describe('communityService', () => {
   const target = { type: 'college' as const, id: 'test-nit-warangal' };
+  beforeEach(() => {
+    installFakeCatalogApi();
+    signIn();
+  });
+
+  it('posting needs a signed-in account', async () => {
+    localStorage.clear(); // signed out
+    expect(communityService.canPost()).toBe(false);
+    await expect(communityService.askQuestion(target, 'What is the CSE cutoff?')).rejects.toThrow('Please sign in');
+  });
 
   it('starts empty: no made-up reviews or questions', async () => {
     expect(await communityService.listReviews(target)).toEqual([]);
@@ -108,7 +119,7 @@ describe('communityService', () => {
       liked: 'Great peers and teaching quality overall.',
       improve: '',
     });
-    expect(review.author).toBe('Guest');
+    expect(review.author).toBe('Priya Sharma'); // the signed-in user
 
     expect(await communityService.vote(review.id)).toBe(true);
     expect(await communityService.vote(review.id)).toBe(false);
@@ -126,6 +137,6 @@ describe('communityService', () => {
     const list = await communityService.listQuestions(target);
     expect(list.map((q) => q.id)).toEqual([q2.id, q1.id]);
     expect(list[1].answers.map((a) => a.body)).toEqual(['Around 3,000 closing rank last year.']);
-    await expect(communityService.answerQuestion('q-unknown', 'x')).rejects.toThrow('Question not found');
+    await expect(communityService.answerQuestion('q-unknown', 'x')).rejects.toThrow('Not found');
   });
 });

@@ -6,7 +6,7 @@ import CollegeProfilePage from './CollegeProfilePage';
 import ComparePage from './ComparePage';
 import CollegeByNameRedirect from './CollegeByNameRedirect';
 import ExamDetailsPage from '../exams/ExamDetailsPage';
-import { renderAt } from '../../test/utils';
+import { renderAt, signIn } from '../../test/utils';
 import { installFakeCatalogApi } from '../../test/fakeCatalogApi';
 import { compareService } from '../../services/compareService';
 import { communityService } from '../../services/communityService';
@@ -128,6 +128,24 @@ describe('College profile page', () => {
     );
   });
 
+  it('shows admissions, FAQs, the rating card and a map link', async () => {
+    renderAt(<CollegeProfilePage />, '/colleges/test-nit-warangal', '/colleges/:slug');
+    expect(await screen.findByRole('heading', { name: 'Admissions' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'JEE Main' })).toHaveAttribute('href', '/exams/jee-main');
+    expect(screen.getByText('No student reviews of NIT Warangal yet.')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Be the first to review' })).toHaveAttribute(
+      'href',
+      '/colleges/test-nit-warangal?tab=reviews',
+    );
+    expect(screen.getByRole('link', { name: /(map)/ })).toHaveAttribute(
+      'href',
+      expect.stringContaining('google.com/maps/search'),
+    );
+
+    await userEvent.click(screen.getByRole('button', { name: /what is the nirf ranking of nit warangal/i }));
+    expect(screen.getByText('In NIRF 2025, NIT Warangal is ranked 21 in Engineering.')).toBeInTheDocument();
+  });
+
   it('hides the tabs a college has no data for', async () => {
     renderAt(<CollegeProfilePage />, '/colleges/test-balaji-education?tab=placements', '/colleges/:slug');
     expect(await screen.findByText(/a private education institution in chennai, tamil nadu/i)).toBeInTheDocument();
@@ -164,7 +182,17 @@ describe('College profile page', () => {
     expect(within(table).getByRole('row', { name: /PG 2-year 2025 400 300 75% ₹9 LPA 20/ })).toBeInTheDocument();
   });
 
+  it('asks signed-out visitors to sign in before writing or asking', async () => {
+    renderAt(<CollegeProfilePage />, '/colleges/test-nit-warangal?tab=reviews', '/colleges/:slug');
+    expect(await screen.findByRole('link', { name: /sign in to write a review/i })).toHaveAttribute('href', '/login');
+    expect(screen.queryByRole('button', { name: 'Write a review' })).not.toBeInTheDocument();
+    await userEvent.click(screen.getByRole('tab', { name: 'Q&A' }));
+    expect(await screen.findByRole('link', { name: /sign in to ask a question/i })).toBeInTheDocument();
+    expect(screen.queryByLabelText('Ask a question')).not.toBeInTheDocument();
+  });
+
   it('opens the tab named in the URL and posts a review', async () => {
+    signIn();
     renderAt(<CollegeProfilePage />, '/colleges/test-nit-warangal?tab=reviews', '/colleges/:slug');
     expect(await screen.findByText(/no reviews yet/i)).toBeInTheDocument();
 
@@ -184,7 +212,8 @@ describe('College profile page', () => {
     expect(screen.getByText('1 review')).toBeInTheDocument();
   });
 
-  it('lets visitors ask and upvote questions', async () => {
+  it('lets signed-in visitors ask and upvote questions', async () => {
+    signIn();
     renderAt(<CollegeProfilePage />, '/colleges/test-nit-warangal?tab=qna', '/colleges/:slug');
     expect(await screen.findByText(/no questions yet/i)).toBeInTheDocument();
 

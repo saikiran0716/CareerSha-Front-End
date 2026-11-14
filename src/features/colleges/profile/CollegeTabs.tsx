@@ -6,12 +6,17 @@ import { placeOf } from '../../../services/catalogService';
 import CollegeImage from '../CollegeImage';
 import {
   AccessibilitySection,
+  AdmissionsSection,
   NirfSection,
+  RatingCard,
   RelatedColleges,
   ResearchSection,
   StudentsSection,
 } from './OverviewSections';
-import { generatedAbout } from './collegeText';
+import { admissionExams, collegeFaqs, generatedAbout } from './collegeText';
+import FaqSection from '../../content/footer-page/FaqSection';
+import { communityService } from '../../../services/communityService';
+import { useAsync } from '../../../hooks/useAsync';
 import { ENTRANCE_EXAMS_DATA } from '../../../data/exams/examDetailData';
 
 const card = 'rounded-2xl border border-neutral-200 bg-white p-5';
@@ -96,6 +101,10 @@ const quickFacts = (c: CatalogCollege): Fact[] => {
 export const OverviewTab: React.FC<{ c: CatalogCollege }> = ({ c }) => {
   const facts = quickFacts(c);
   const nirf = c.nirfFacts;
+  const { data: reviews = [] } = useAsync(
+    () => communityService.listReviews({ type: 'college', id: c.slug }).catch(() => []),
+    [c.slug],
+  );
   return (
     <div className="space-y-5">
       {c.imageUrl && (
@@ -141,6 +150,8 @@ export const OverviewTab: React.FC<{ c: CatalogCollege }> = ({ c }) => {
         )}
       </section>
 
+      <RatingCard reviews={reviews} name={c.shortName} slug={c.slug} />
+
       {facts.length > 0 && (
         <section className={card}>
           <h2 className="text-xl text-neutral-900">Quick facts</h2>
@@ -155,6 +166,7 @@ export const OverviewTab: React.FC<{ c: CatalogCollege }> = ({ c }) => {
         </section>
       )}
 
+      <AdmissionsSection exams={admissionExams(c)} name={c.shortName} website={c.website || undefined} />
       <NirfSection rankings={c.nirfRankings ?? []} primary={c.nirfCategory} />
       {nirf && <StudentsSection facts={nirf} />}
       {nirf && <ResearchSection facts={nirf} />}
@@ -172,6 +184,10 @@ export const OverviewTab: React.FC<{ c: CatalogCollege }> = ({ c }) => {
         </section>
       )}
       {nirf && <AccessibilitySection facts={nirf} />}
+
+      <section className={card}>
+        <FaqSection faqs={collegeFaqs(c, placeOf(c))} />
+      </section>
 
       {c.affiliatedColleges && (
         <RelatedColleges

@@ -1,15 +1,14 @@
 # Catalog & Community API (for the backend)
 
-The frontend currently uses **sample data** for colleges, exam cutoffs/results, reviews and Q&A
-(`src/data/catalog/`) and stores visitors' posts in the browser. When these endpoints exist, only two
-files change — every page keeps working:
+These endpoints are live on the backend and used by the frontend:
 
-| Frontend file                      | Replace with calls to         |
-| ---------------------------------- | ----------------------------- |
-| `src/services/catalogService.ts`   | Catalog endpoints below       |
-| `src/services/communityService.ts` | Reviews & Q&A endpoints below |
+| Frontend file                      | Uses                                                    |
+| ---------------------------------- | ------------------------------------------------------- |
+| `src/services/catalogService.ts`   | Catalog endpoints below (colleges, college lists)       |
+| `src/services/communityService.ts` | Reviews & Q&A endpoints below (shared by all visitors)  |
 
-Then set `SHOW_SAMPLE_DATA_NOTICE = false` in `src/config/features.ts`.
+Exam cutoffs/results (`/exams/{examId}/extras/`) are still local data in `src/data/catalog/examExtras.ts`.
+Reviews and Q&A: anyone can read; posting and voting need a signed-in account.
 
 All paths are under the existing base: `${VITE_API_BASE_URL}/api`. JSON field names match the
 TypeScript types in `src/data/catalog/types.ts` (camelCase). Auth uses the existing header

@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowBigUp, MessageCircle } from 'lucide-react';
 import { CommunityTarget, Question } from '../../data/catalog/types';
-import { communityService } from '../../services/communityService';
+import { useNavigate } from 'react-router-dom';
+import { communityService, CommunityError } from '../../services/communityService';
 import { useAsync } from '../../hooks/useAsync';
+import { useCurrentUser } from '../../hooks/useCurrentUser';
+import SignInPrompt from './SignInPrompt';
 import { formatDate } from '../account/accountNav';
 
 const inputClass =
@@ -10,9 +13,12 @@ const inputClass =
 
 const Upvote: React.FC<{ id: string; count: number; label: string }> = ({ id, count, label }) => {
   const voted = communityService.hasVoted(id);
+  const signedIn = !!useCurrentUser()?.token;
+  const navigate = useNavigate();
   return (
     <button
-      onClick={() => communityService.vote(id)}
+      onClick={() => (signedIn ? communityService.vote(id).catch(() => undefined) : navigate('/login'))}
+      title={signedIn ? undefined : 'Sign in to vote'}
       disabled={voted}
       aria-pressed={voted}
       aria-label={`Upvote ${label} (${count})`}
@@ -27,6 +33,9 @@ const Upvote: React.FC<{ id: string; count: number; label: string }> = ({ id, co
 const AnswerForm: React.FC<{ questionId: string }> = ({ questionId }) => {
   const [open, setOpen] = useState(false);
   const [body, setBody] = useState('');
+  const [error, setError] = useState('');
+  const signedIn = !!useCurrentUser()?.token;
+  if (!signedIn) return <SignInPrompt action="answer" compact />;
   if (!open)
     return (
       <button onClick={() => setOpen(true)} className="text-sm text-primary-700 hover:underline">
@@ -39,11 +48,20 @@ const AnswerForm: React.FC<{ questionId: string }> = ({ questionId }) => {
       onSubmit={async (e) => {
         e.preventDefault();
         if (body.trim().length < 10) return;
-        await communityService.answerQuestion(questionId, body);
-        setBody('');
-        setOpen(false);
+        try {
+          await communityService.answerQuestion(questionId, body);
+          setBody('');
+          setOpen(false);
+        } catch (err) {
+          setError(err instanceof CommunityError ? err.message : 'Could not post your answer.');
+        }
       }}
     >
+      {error && (
+        <p role="alert" className="text-sm text-danger-700">
+          {error}
+        </p>
+      )}
       <label className="block text-sm text-neutral-700">
         Your answer
         <textarea className={`${inputClass} mt-1`} rows={3} value={body} onChange={(e) => setBody(e.target.value)} />
@@ -109,13 +127,20 @@ const QnaSection: React.FC<{ target: CommunityTarget; subject: string }> = ({ ta
   useEffect(() => communityService.subscribe(reload), [reload]);
   const [title, setTitle] = useState('');
   const [details, setDetails] = useState('');
+  const [error, setError] = useState('');
+  const signedIn = !!useCurrentUser()?.token;
 
   const ask = async (e: React.FormEvent) => {
     e.preventDefault();
     if (title.trim().length < 10) return;
-    await communityService.askQuestion(target, title, details);
-    setTitle('');
-    setDetails('');
+    try {
+      await communityService.askQuestion(target, title, details);
+      setTitle('');
+      setDetails('');
+      setError('');
+    } catch (err) {
+      setError(err instanceof CommunityError ? err.message : 'Could not post your question.');
+    }
   };
 
   return (
@@ -124,38 +149,46 @@ const QnaSection: React.FC<{ target: CommunityTarget; subject: string }> = ({ ta
         Questions about {subject}
       </h2>
 
-      <form
-        onSubmit={ask}
-        className="space-y-3 rounded-2xl border border-neutral-200 bg-white p-5"
-        aria-label={`New question about ${subject}`}
-      >
-        <label className="block text-sm text-neutral-700">
-          Ask a question
-          <input
-            className={`${inputClass} mt-1`}
-            placeholder={`e.g. What rank is needed for ${subject}?`}
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            maxLength={200}
-          />
-        </label>
-        <label className="block text-sm text-neutral-700">
-          Details (optional)
-          <textarea
-            className={`${inputClass} mt-1`}
-            rows={2}
-            value={details}
-            onChange={(e) => setDetails(e.target.value)}
-          />
-        </label>
-        <button
-          type="submit"
-          disabled={title.trim().length < 10}
-          className="rounded-xl bg-primary-800 px-5 py-2.5 text-sm font-bold text-white hover:bg-primary-700 disabled:bg-neutral-400"
+      {!signedIn && <SignInPrompt action="ask a question" />}
+      {signedIn && (
+        <form
+          onSubmit={ask}
+          className="space-y-3 rounded-2xl border border-neutral-200 bg-white p-5"
+          aria-label={`New question about ${subject}`}
         >
-          Post question
-        </button>
-      </form>
+          {error && (
+            <p role="alert" className="text-sm text-danger-700">
+              {error}
+            </p>
+          )}
+          <label className="block text-sm text-neutral-700">
+            Ask a question
+            <input
+              className={`${inputClass} mt-1`}
+              placeholder={`e.g. What rank is needed for ${subject}?`}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              maxLength={200}
+            />
+          </label>
+          <label className="block text-sm text-neutral-700">
+            Details (optional)
+            <textarea
+              className={`${inputClass} mt-1`}
+              rows={2}
+              value={details}
+              onChange={(e) => setDetails(e.target.value)}
+            />
+          </label>
+          <button
+            type="submit"
+            disabled={title.trim().length < 10}
+            className="rounded-xl bg-primary-800 px-5 py-2.5 text-sm font-bold text-white hover:bg-primary-700 disabled:bg-neutral-400"
+          >
+            Post question
+          </button>
+        </form>
+      )}
 
       {loading ? (
         <p className="text-sm text-neutral-500">Loading questions…</p>

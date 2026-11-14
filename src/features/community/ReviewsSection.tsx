@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { ThumbsUp } from 'lucide-react';
 import { CommunityTarget, Review } from '../../data/catalog/types';
-import { averageRating, communityService, NewReview } from '../../services/communityService';
+import { useNavigate } from 'react-router-dom';
+import { averageRating, communityService, CommunityError, NewReview } from '../../services/communityService';
 import { useAsync } from '../../hooks/useAsync';
+import { useCurrentUser } from '../../hooks/useCurrentUser';
+import SignInPrompt from './SignInPrompt';
 import { Stars, StarInput } from '../../components/common/StarRating';
 import { formatDate } from '../account/accountNav';
 
@@ -54,8 +57,12 @@ const ReviewForm: React.FC<{ target: CommunityTarget; courses: string[]; onDone:
       liked: liked.trim(),
       improve: improve.trim(),
     };
-    await communityService.addReview(review);
-    onDone();
+    try {
+      await communityService.addReview(review);
+      onDone();
+    } catch (err) {
+      setError(err instanceof CommunityError ? err.message : 'Could not post your review. Please try again.');
+    }
   };
 
   return (
@@ -130,6 +137,7 @@ const ReviewsSection: React.FC<{ target: CommunityTarget; courses?: string[] }> 
     reload,
   } = useAsync(() => communityService.listReviews(target), [target.type, target.id]);
   const [writing, setWriting] = useState(false);
+  const signedIn = !!useCurrentUser()?.token;
   useEffect(() => communityService.subscribe(reload), [reload]);
 
   const avg = averageRating(reviews);
@@ -142,7 +150,7 @@ const ReviewsSection: React.FC<{ target: CommunityTarget; courses?: string[] }> 
         <h2 id="reviews-heading" className="text-xl text-neutral-900">
           Student reviews
         </h2>
-        {!writing && (
+        {!writing && signedIn && (
           <button
             onClick={() => setWriting(true)}
             className="rounded-xl bg-primary-800 px-4 py-2 text-sm font-bold text-white hover:bg-primary-700"
@@ -152,7 +160,8 @@ const ReviewsSection: React.FC<{ target: CommunityTarget; courses?: string[] }> 
         )}
       </div>
 
-      {writing && <ReviewForm target={target} courses={courses} onDone={() => setWriting(false)} />}
+      {!signedIn && <SignInPrompt action="write a review" />}
+      {writing && signedIn && <ReviewForm target={target} courses={courses} onDone={() => setWriting(false)} />}
 
       {reviews.length > 0 && (
         <div className="grid gap-4 rounded-2xl border border-neutral-200 bg-white p-5 sm:grid-cols-[180px_1fr]">
@@ -218,9 +227,12 @@ const ReviewsSection: React.FC<{ target: CommunityTarget; courses?: string[] }> 
 
 const HelpfulButton: React.FC<{ id: string; count: number }> = ({ id, count }) => {
   const voted = communityService.hasVoted(id);
+  const signedIn = !!useCurrentUser()?.token;
+  const navigate = useNavigate();
   return (
     <button
-      onClick={() => communityService.vote(id)}
+      onClick={() => (signedIn ? communityService.vote(id).catch(() => undefined) : navigate('/login'))}
+      title={signedIn ? undefined : 'Sign in to mark reviews helpful'}
       disabled={voted}
       aria-pressed={voted}
       className="mt-3 inline-flex items-center gap-1.5 rounded-lg px-2 py-1 text-sm text-neutral-600 hover:bg-neutral-50 disabled:text-primary-700"

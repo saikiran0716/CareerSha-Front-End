@@ -292,11 +292,90 @@ const handle = (url: URL): Promise<Response> => {
   return json({ error: 'Not found' }, 404);
 };
 
-/** Replaces global fetch with the fake API; returns the mock so tests can inspect calls. */
-export const installFakeCatalogApi = () => {
-  const mock = vi.fn((input: RequestInfo | URL) =>
-    handle(new URL(typeof input === 'string' ? input : input.toString(), 'http://localhost')),
+// ---------------- reviews & Q&A (in memory, like the backend's /reviews/, /questions/, /votes/) ----------------
+
+interface StoredItem {
+  id: string;
+  target?: { type: string; id: string };
+  upvotes?: number;
+  helpful?: number;
+  [key: string]: unknown;
+}
+
+const community = {
+  reviews: [] as StoredItem[],
+  questions: [] as (StoredItem & { answers: StoredItem[] })[],
+  votes: new Set<string>(),
+  next: 1,
+};
+
+const handleCommunity = (url: URL, init: RequestInit): Promise<Response> | null => {
+  const path = url.pathname.replace(/^.*?\/api/, '');
+  if (!/^\/(reviews|questions|votes)\//.test(path)) return null;
+  const method = (init.method ?? 'GET').toUpperCase();
+  const p = url.searchParams;
+  const onTarget = (t?: { type: string; id: string }) => t?.type === p.get('targetType') && t?.id === p.get('targetId');
+  if (method === 'GET') {
+    if (path === '/reviews/') return json(community.reviews.filter((r) => onTarget(r.target)));
+    if (path === '/questions/') {
+      const list = community.questions.filter((q) => onTarget(q.target));
+      return json([...list].sort((a, b) => (b.upvotes ?? 0) - (a.upvotes ?? 0)));
+    }
+  }
+  const headers = new Headers(init.headers);
+  if (!headers.get('Authorization')) return json({ error: 'Please sign in first.' }, 401);
+  const body = JSON.parse(String(init.body ?? '{}'));
+  const now = new Date().toISOString();
+  const author = 'Priya Sharma';
+  if (path === '/reviews/') {
+    if (community.reviews.some((r) => r.target?.id === body.target.id)) {
+      return json({ error: 'You have already reviewed this.' }, 409);
+    }
+    const values = Object.values(body.ratings as Record<string, number>);
+    const review = {
+      ...body,
+      id: `rv-${community.next++}`,
+      author,
+      createdAt: now,
+      helpful: 0,
+      overall: Math.round((values.reduce((s, v) => s + v, 0) / values.length) * 10) / 10,
+    };
+    community.reviews.unshift(review);
+    return json(review, 201);
+  }
+  if (path === '/questions/') {
+    const question = { ...body, id: `q-${community.next++}`, author, createdAt: now, upvotes: 0, answers: [] };
+    community.questions.unshift(question);
+    return json(question, 201);
+  }
+  const answerTo = path.match(/^\/questions\/(\d+)\/answers\/$/);
+  if (answerTo) {
+    const question = community.questions.find((q) => q.id === `q-${answerTo[1]}`);
+    const answer = { id: `a-${community.next++}`, author, body: body.body, createdAt: now, upvotes: 0 };
+    question?.answers.push(answer);
+    return json(answer, 201);
+  }
+  const helpful = path.match(/^\/reviews\/(\d+)\/helpful\/$/);
+  const itemId = helpful ? `rv-${helpful[1]}` : (body.itemId as string);
+  if (community.votes.has(itemId)) return json({ error: 'You have already voted for this.' }, 409);
+  community.votes.add(itemId);
+  const item = [...community.reviews, ...community.questions, ...community.questions.flatMap((q) => q.answers)].find(
+    (i) => i.id === itemId,
   );
+  if (!item) return json({ error: 'Not found.' }, 404);
+  if (helpful) return json({ helpful: (item.helpful = (item.helpful ?? 0) + 1) });
+  return json({ upvotes: (item.upvotes = (item.upvotes ?? 0) + 1) });
+};
+
+/** Replaces global fetch with the fake API (catalog + reviews & Q&A); returns the mock so tests can inspect calls. */
+export const installFakeCatalogApi = () => {
+  community.reviews = [];
+  community.questions = [];
+  community.votes = new Set();
+  const mock = vi.fn((input: RequestInfo | URL, init: RequestInit = {}) => {
+    const url = new URL(typeof input === 'string' ? input : input.toString(), 'http://localhost');
+    return handleCommunity(url, init) ?? handle(url);
+  });
   vi.stubGlobal('fetch', mock);
   return mock;
 };

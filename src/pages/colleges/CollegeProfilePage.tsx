@@ -9,6 +9,7 @@ import ReviewsSection from '../../features/community/ReviewsSection';
 import QnaSection from '../../features/community/QnaSection';
 import { CoursesTab, CutoffsTab, OverviewTab, PlacementsTab } from '../../features/colleges/profile/CollegeTabs';
 import { catalogService, mediaUrl, placeOf } from '../../services/catalogService';
+import { collegeFaqs, collegeSchema, mapUrl } from '../../features/colleges/profile/collegeText';
 import { CatalogCollege } from '../../data/catalog/types';
 import { useAsync } from '../../hooks/useAsync';
 import NotFound from '../NotFound';
@@ -51,6 +52,7 @@ const CollegeProfilePage: React.FC = () => {
         title={`${c.shortName}: Courses, Fees, Cutoffs, Placements & Reviews`}
         description={`${c.name} — courses and fees, cutoffs, placements, student reviews and Q&A.`}
         keywords={`${c.shortName}, ${c.shortName} fees, ${c.shortName} cutoff, ${c.shortName} placements, ${c.shortName} reviews`}
+        schema={collegeSchema(c, collegeFaqs(c, placeOf(c)))}
       />
 
       <header className="bg-primary-800 text-white">
@@ -73,9 +75,16 @@ const CollegeProfilePage: React.FC = () => {
               </h1>
               <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-primary-100">
                 {placeOf(c) && (
-                  <span className="flex items-center gap-1">
+                  <a
+                    href={mapUrl(c)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="View on map"
+                    className="flex items-center gap-1 hover:text-white hover:underline"
+                  >
                     <MapPin size={14} /> {placeOf(c)}
-                  </span>
+                    <span className="text-xs text-primary-200">(map)</span>
+                  </a>
                 )}
                 {c.established && <span>Est. {c.established}</span>}
                 {c.ownership && <span>{c.ownership}</span>}

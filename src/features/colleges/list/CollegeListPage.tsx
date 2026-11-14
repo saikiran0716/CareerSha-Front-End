@@ -216,13 +216,9 @@ const CollegeListPage: React.FC<{ slug: string }> = ({ slug }) => {
           {shown.length > 0 ? (
             <>
               <ol className={`space-y-4 transition-opacity ${pages.loading ? 'opacity-50' : ''}`}>
-                {shown.map((c, i) => (
+                {shown.map((c) => (
                   <li key={c.id}>
-                    <CollegeRankCard
-                      college={c}
-                      figures={figures}
-                      position={sort === 'rank' && !filtered ? (page - 1) * PAGE_SIZE + i + 1 : undefined}
-                    />
+                    <CollegeRankCard college={c} figures={figures} />
                   </li>
                 ))}
               </ol>
