@@ -78,10 +78,10 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
               <div className="relative py-2">
                 <Link
                   to="/"
-                  className={`text-[13px] font-semibold transition-all flex items-center gap-1 py-2 px-3 rounded-lg ${
+                  className={`text-[13px] font-semibold transition-all flex items-center gap-1 py-2 px-3 rounded-lg border-b-2 ${
                     location.pathname === '/'
-                      ? 'text-primary-600 dark:text-primary-400 font-bold'
-                      : 'text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white'
+                      ? 'text-primary-800 border-accent-500'
+                      : 'text-neutral-700 border-transparent hover:text-primary-800'
                   }`}
                 >
                   Home
@@ -111,7 +111,7 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                       className={`text-[13px] font-semibold transition-all flex items-center gap-1 py-2 px-3 rounded-lg border-b-2 ${
                         open || current
                           ? 'text-primary-700 border-accent-500'
-                          : 'text-neutral-700 border-transparent hover:text-neutral-900'
+                          : 'text-neutral-700 border-transparent hover:text-primary-800'
                       }`}
                     >
                       {cat.title}
@@ -129,6 +129,18 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                   </div>
                 );
               })}
+              <div className="relative py-2">
+                <Link
+                  to="/blogs"
+                  className={`text-[13px] font-semibold transition-all flex items-center gap-1 py-2 px-3 rounded-lg border-b-2 ${
+                    location.pathname.startsWith('/blogs')
+                      ? 'text-primary-800 border-accent-500'
+                      : 'text-neutral-700 border-transparent hover:text-primary-800'
+                  }`}
+                >
+                  Blogs
+                </Link>
+              </div>
             </nav>
 
             {/* Right Side Items (Search & Actions) */}
@@ -294,6 +306,17 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                   Home
                 </Link>
                 <MobileMegaMenu onNavigate={() => setIsMobileMenuOpen(false)} />
+                <Link
+                  to="/blogs"
+                  className={`block w-full p-4 text-sm font-bold rounded-xl transition-colors ${
+                    location.pathname.startsWith('/blogs')
+                      ? 'bg-primary-50 text-primary-800'
+                      : 'text-neutral-800 hover:bg-neutral-50 hover:text-primary-800'
+                  }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Blogs
+                </Link>
               </div>
             </div>
 
