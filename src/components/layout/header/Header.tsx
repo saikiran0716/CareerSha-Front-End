@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, ChevronDown, User as UserIcon, Sun, Moon, LogOut } from 'lucide-react';
+import { Menu, X, User as UserIcon, Sun, Moon, LogOut } from 'lucide-react';
 import Logo from '../../common/Logo';
 import { DARK_MODE_ENABLED } from '../../../hooks/useDarkMode';
 import { User } from '../../../services/authService';
@@ -16,6 +16,17 @@ const TOP_LINKS = [
   { to: '/jobs', label: 'Jobs' },
   { to: '/community', label: 'Community' },
 ];
+
+/** Shared look of every desktop navbar item: underlined on hover and on its own page. */
+const NAV_ITEM = 'text-[13px] font-semibold text-neutral-700 transition-colors flex items-center py-2 px-3 border-b-2';
+
+/** True when the current URL is the category's page, e.g. /colleges?stream=Engineering for Engineering. */
+const isCurrentPage =(url: string, pathname: string, search: string) => {
+  const target = new URL(url, 'https://x');
+  if (pathname !== target.pathname) return false;
+  const current = new URLSearchParams(search);
+  return [...target.searchParams].every(([key, value]) => current.get(key) === value);
+};
 
 interface HeaderProps {
   user: User | null;
@@ -85,13 +96,15 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
               <div className="relative py-2">
                 <Link
                   to="/"
-                  className="text-[13px] font-semibold text-neutral-700 transition-colors flex items-center gap-1 py-2 px-3 border-b-2 border-transparent hover:border-primary-800"
+                  aria-current={location.pathname === '/' ? 'page' : undefined}
+                  className={`${NAV_ITEM} ${location.pathname === '/' ? 'border-primary-800' : 'border-transparent hover:border-primary-800'}`}
                 >
                   Home
                 </Link>
               </div>
               {navigationData.map((cat) => {
                 const open = activeMenu === cat.title;
+                const current = isCurrentPage(cat.url, location.pathname, location.search);
                 return (
                   <div
                     key={cat.title}
@@ -110,15 +123,10 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                       }}
                       aria-expanded={open}
                       aria-haspopup="true"
-                      className={`text-[13px] font-semibold text-neutral-700 transition-colors flex items-center gap-1 py-2 px-3 border-b-2 ${
-                        open ? 'border-primary-800' : 'border-transparent hover:border-primary-800'
-                      }`}
+                      aria-current={current ? 'page' : undefined}
+                      className={`${NAV_ITEM} ${open || current ? 'border-primary-800' : 'border-transparent hover:border-primary-800'}`}
                     >
                       {cat.title}
-                      <ChevronDown
-                        size={14}
-                        className={`transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
-                      />
                     </button>
 
                     {open && (
@@ -134,9 +142,7 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                   <Link
                     to={to}
                     aria-current={location.pathname.startsWith(to) ? 'page' : undefined}
-                    className={`text-[13px] font-semibold text-neutral-700 transition-colors flex items-center gap-1 py-2 px-3 border-b-2 ${
-                      location.pathname.startsWith(to) ? 'border-primary-800' : 'border-transparent hover:border-primary-800'
-                    }`}
+                    className={`${NAV_ITEM} ${location.pathname.startsWith(to) ? 'border-primary-800' : 'border-transparent hover:border-primary-800'}`}
                   >
                     {label}
                   </Link>
