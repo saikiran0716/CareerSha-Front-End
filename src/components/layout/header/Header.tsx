@@ -11,6 +11,12 @@ import { ACCOUNT_LINKS } from '../../../features/account/accountNav';
 import { ACCOUNT_REQUIRES_SIGN_IN } from '../../../config/features';
 import { BLOG_URL } from '../../../config/links';
 
+/** Plain links after the mega-menu categories (highlighted on their pages). */
+const TOP_LINKS = [
+  { to: '/jobs', label: 'Jobs' },
+  { to: '/community', label: 'Community' },
+];
+
 interface HeaderProps {
   user: User | null;
   onOpenAuth: () => void;
@@ -123,17 +129,19 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                   </div>
                 );
               })}
-              <div className="relative py-2">
-                <Link
-                  to="/jobs"
-                  aria-current={location.pathname.startsWith('/jobs') ? 'page' : undefined}
-                  className={`text-[13px] font-semibold text-neutral-700 transition-colors flex items-center gap-1 py-2 px-3 border-b-2 ${
-                    location.pathname.startsWith('/jobs') ? 'border-primary-800' : 'border-transparent hover:border-primary-800'
-                  }`}
-                >
-                  Jobs
-                </Link>
-              </div>
+              {TOP_LINKS.map(({ to, label }) => (
+                <div key={to} className="relative py-2">
+                  <Link
+                    to={to}
+                    aria-current={location.pathname.startsWith(to) ? 'page' : undefined}
+                    className={`text-[13px] font-semibold text-neutral-700 transition-colors flex items-center gap-1 py-2 px-3 border-b-2 ${
+                      location.pathname.startsWith(to) ? 'border-primary-800' : 'border-transparent hover:border-primary-800'
+                    }`}
+                  >
+                    {label}
+                  </Link>
+                </div>
+              ))}
               <div className="relative py-2">
                 <a
                   href={BLOG_URL}
@@ -307,18 +315,21 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                   Home
                 </Link>
                 <MobileMegaMenu onNavigate={() => setIsMobileMenuOpen(false)} />
-                <Link
-                  to="/jobs"
-                  aria-current={location.pathname.startsWith('/jobs') ? 'page' : undefined}
-                  className={`block w-full p-4 text-sm font-bold rounded-xl transition-colors ${
-                    location.pathname.startsWith('/jobs')
-                      ? 'bg-secondary-50 dark:bg-secondary-950/40 text-secondary-600 dark:text-secondary-400'
-                      : 'text-neutral-800 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-800'
-                  }`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Jobs
-                </Link>
+                {TOP_LINKS.map(({ to, label }) => (
+                  <Link
+                    key={to}
+                    to={to}
+                    aria-current={location.pathname.startsWith(to) ? 'page' : undefined}
+                    className={`block w-full p-4 text-sm font-bold rounded-xl transition-colors ${
+                      location.pathname.startsWith(to)
+                        ? 'bg-secondary-50 dark:bg-secondary-950/40 text-secondary-600 dark:text-secondary-400'
+                        : 'text-neutral-800 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-800'
+                    }`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {label}
+                  </Link>
+                ))}
                 <a
                   href={BLOG_URL}
                   className="block w-full p-4 text-sm font-bold rounded-xl text-neutral-800 transition-colors hover:bg-neutral-50 hover:text-primary-800"

@@ -30,6 +30,10 @@ const JobsPage = lazy(() => import('../pages/jobs/JobsPage'));
 const JobDetailPage = lazy(() => import('../pages/jobs/JobDetailPage'));
 const QuestionPapersPage = lazy(() => import('../pages/tools/QuestionPapersPage'));
 const CommunityPage = lazy(() => import('../pages/community/CommunityPage'));
+const CommunityDetailPage = lazy(() => import('../pages/community/CommunityDetailPage'));
+const CommunityPostPage = lazy(() => import('../pages/community/PostPage'));
+const CommunitySubmitPage = lazy(() => import('../pages/community/SubmitPage'));
+const CommunityUserPage = lazy(() => import('../pages/community/UserPage'));
 const AboutUs = lazy(() => import('../pages/static/AboutUs'));
 const ContactUs = lazy(() => import('../pages/static/ContactUs'));
 const PrivacyPolicy = lazy(() => import('../pages/static/PrivacyPolicy'));
@@ -144,6 +148,10 @@ const AppRoutes: React.FC<AppRoutesProps> = ({ user, onOpenAuth, onAskAI }) => (
       <Route path="/tools/question-papers" element={<QuestionPapersPage />} />
       <Route path="/question-papers" element={<Navigate to="/tools/question-papers" replace />} />
       <Route path="/community" element={<CommunityPage />} />
+      <Route path="/community/c/:slug" element={<CommunityDetailPage />} />
+      <Route path="/community/post/:id" element={<CommunityPostPage />} />
+      <Route path="/community/submit" element={<CommunitySubmitPage />} />
+      <Route path="/community/u/:username" element={<CommunityUserPage />} />
 
       {/* Category landing pages */}
       {Object.entries(CATEGORY_ROUTES).map(([path, pageId]) => (
