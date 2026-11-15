@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Newspaper } from 'lucide-react';
 import { getLatestNewsItems, NewsItem } from '../../../services/homeContentService';
+import { getLatestBlogPosts, mergeByTime } from '../../../services/blogFeedService';
 import NewsLink from '../../news/NewsLink';
 import { DEMO_LIVE_UPDATES } from '../../../data/home/homeContent';
 import { SHOW_SAMPLE_DATA_NOTICE } from '../../../config/features';
 
 const MAX_ITEMS = 4;
 
-/** Latest items from the news API (same source as the News page). */
+/** Latest news (same source as the News page) and new blog posts, newest first. */
 const LiveUpdates: React.FC = () => {
   const navigate = useNavigate();
   const [items, setItems] = useState<NewsItem[] | null>(null);
@@ -16,12 +17,13 @@ const LiveUpdates: React.FC = () => {
 
   useEffect(() => {
     let active = true;
-    getLatestNewsItems().then((news) => {
+    Promise.all([getLatestNewsItems(), getLatestBlogPosts()]).then(([news, posts]) => {
       if (!active) return;
-      // No news from the API yet: show demo guides instead of an empty card.
-      const demo = news.length === 0;
+      const latest = mergeByTime(news, posts);
+      // Nothing from the news API or the blog yet: show demo guides instead of an empty card.
+      const demo = latest.length === 0;
       setIsDemo(demo);
-      setItems((demo ? DEMO_LIVE_UPDATES : news).slice(0, MAX_ITEMS));
+      setItems((demo ? DEMO_LIVE_UPDATES : latest).slice(0, MAX_ITEMS));
     });
     return () => {
       active = false;

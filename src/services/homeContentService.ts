@@ -8,6 +8,8 @@ export interface NewsItem {
   link: string;
   isLive: boolean;
   category: string;
+  /** Publish time in ms, for sorting news and blog posts together. */
+  timestamp?: number;
 }
 
 export interface NewsDetail extends NewsItem {
@@ -57,6 +59,7 @@ const toNewsItem = (item: NewsApiItem): NewsItem => ({
   link: toNewsLink(item.id, item.link),
   isLive: item.is_live,
   category: item.category,
+  timestamp: new Date(item.published_at || item.created_at).getTime(),
 });
 
 export const getLatestNewsItems = async (): Promise<NewsItem[]> => {
