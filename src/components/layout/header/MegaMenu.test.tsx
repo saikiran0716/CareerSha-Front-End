@@ -29,6 +29,7 @@ const STATIC = [
   '/jobs',
   '/community',
   '/tools',
+  '/tools/question-papers',
   '/govt-exams',
   '/account/predictions',
 ];

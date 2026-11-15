@@ -599,6 +599,7 @@ export const navigationData: NavCategory[] = [
           { name: 'All Colleges', url: '/colleges' },
           { name: 'All Entrance Exams', url: '/exams' },
           { name: 'Compare Colleges', url: '/compare' },
+          { name: 'Previous Year Papers', url: '/tools/question-papers' },
           { name: 'All Tools', url: '/tools' },
         ],
       },

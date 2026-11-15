@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import SEO from '../../components/common/SEO';
 import {
   ChevronLeft,
@@ -120,6 +120,15 @@ const ExamDetailsPage: React.FC = () => {
                     {point}
                   </div>
                 ))}
+              </div>
+              <div className="flex justify-center lg:justify-start">
+                <Link
+                  to={`/tools/question-papers?exam=${examId}`}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-primary-800 hover:bg-primary-700 text-white text-sm font-bold shadow-sm transition-colors"
+                >
+                  <FileText size={16} aria-hidden="true" />
+                  Previous year papers &amp; answer keys
+                </Link>
               </div>
             </div>
             {/* Exam specific Hero Graphic (Kept original logic) */}

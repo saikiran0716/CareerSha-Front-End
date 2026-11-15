@@ -28,6 +28,7 @@ const NewsPage = lazy(() => import('../pages/news/NewsPage'));
 const NewsDetailPage = lazy(() => import('../pages/news/NewsDetailPage'));
 const JobsPage = lazy(() => import('../pages/jobs/JobsPage'));
 const JobDetailPage = lazy(() => import('../pages/jobs/JobDetailPage'));
+const QuestionPapersPage = lazy(() => import('../pages/tools/QuestionPapersPage'));
 const CommunityPage = lazy(() => import('../pages/community/CommunityPage'));
 const AboutUs = lazy(() => import('../pages/static/AboutUs'));
 const ContactUs = lazy(() => import('../pages/static/ContactUs'));
@@ -140,6 +141,8 @@ const AppRoutes: React.FC<AppRoutesProps> = ({ user, onOpenAuth, onAskAI }) => (
       <Route path="/blog/*" element={<ExternalRedirect to={BLOG_URL} label="blog" />} />
       <Route path="/jobs" element={<JobsPage />} />
       <Route path="/jobs/:slug" element={<JobDetailPage />} />
+      <Route path="/tools/question-papers" element={<QuestionPapersPage />} />
+      <Route path="/question-papers" element={<Navigate to="/tools/question-papers" replace />} />
       <Route path="/community" element={<CommunityPage />} />
 
       {/* Category landing pages */}

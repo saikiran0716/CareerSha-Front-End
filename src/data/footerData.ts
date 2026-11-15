@@ -788,6 +788,16 @@ FOOTER_PAGES['tools-hub'] = {
   description: 'Use CareerSha tools like JEE, NEET, EAMCET rank predictors and college predictor.',
   items: [
     {
+      title: 'Previous Year Question Papers',
+      subtitle: 'Papers, answer keys, solutions and syllabus for JEE, NEET, GATE, CAT, UPSC and more',
+      tags: ['Free Download', 'Exam Prep'],
+      link: '/tools/question-papers',
+      stats: [
+        { label: 'Type', value: 'Papers' },
+        { label: 'Status', value: 'Open' },
+      ],
+    },
+    {
       title: 'College Predictor',
       subtitle: 'Find matching colleges from your rank and category',
       tags: ['Live Tool', 'Admissions'],
