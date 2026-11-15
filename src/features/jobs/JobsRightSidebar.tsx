@@ -1,117 +1,131 @@
-import { Bell, Briefcase, FileText, TrendingUp, Compass, ArrowRight } from 'lucide-react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, BookOpen, Building2, GraduationCap, Mail, Target } from 'lucide-react';
+import type { Job, JobFacets } from '../../services/jobsService';
+import { Deadline } from './JobCard';
+import { BLOG_URL } from '../../config/links';
 
-const topCompanies = [
-  { name: 'Google', openings: '256 Openings', logo: 'G', color: 'text-primary-500 bg-primary-50' },
-  { name: 'Microsoft', openings: '198 Openings', logo: 'M', color: 'text-primary-600 bg-primary-50' },
-  { name: 'Amazon', openings: '165 Openings', logo: 'a', color: 'text-orange-500 bg-orange-50 font-bold' },
-  { name: 'Deloitte', openings: '124 Openings', logo: 'D.', color: 'text-white bg-black font-bold' },
-  { name: 'Infosys', openings: '98 Openings', logo: 'In', color: 'text-primary-700 bg-primary-50 font-bold' },
+interface Props {
+  facets: JobFacets | null;
+  closingSoon: Job[];
+  onPickCompany: (name: string) => void;
+}
+
+const resources = [
+  { title: 'Career guides', desc: 'Exams, admissions and careers on our blog', icon: BookOpen, href: BLOG_URL, external: true },
+  { title: 'Government exams', desc: 'Dates, eligibility and patterns', icon: Building2, href: '/govt-exams' },
+  { title: 'College Matcher', desc: 'Find colleges that fit your rank', icon: GraduationCap, href: '/college-matcher' },
+  { title: 'Rank Estimator', desc: 'Turn marks into a likely rank', icon: Target, href: '/rank-estimator' },
 ];
 
-const careerResources = [
-  { title: 'Resume Builder', desc: 'Create a professional resume', icon: FileText },
-  { title: 'Interview Tips', desc: 'Prepare for your next interview', icon: Briefcase },
-  { title: 'Salary Insights', desc: 'Know your worth in the market', icon: TrendingUp },
-  { title: 'Career Guidance', desc: 'Get expert career advice', icon: Compass },
-];
-
-export const JobsRightSidebar = () => {
-  return (
-    <div className="flex flex-col gap-6">
-      {/* Top Companies Hiring */}
-      <div className="bg-white rounded-2xl shadow-sm border border-neutral-200 p-5">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="font-bold text-neutral-800 text-[15px]">Top Companies Hiring</h3>
-          <button className="text-[12px] font-bold text-primary-600 hover:text-primary-700">View all</button>
-        </div>
-        <div className="flex flex-col gap-4">
-          {topCompanies.map((company, idx) => (
-            <div key={idx} className="flex items-center justify-between group cursor-pointer">
-              <div className="flex items-center gap-3">
-                <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-[15px] ${company.color}`}>
-                  {company.logo}
-                </div>
-                <span className="text-[13px] font-bold text-neutral-800 group-hover:text-primary-600 transition-colors">
-                  {company.name}
+/** Right column: companies hiring, jobs closing soon, career links and how employers list a job. */
+export const JobsRightSidebar: React.FC<Props> = ({ facets, closingSoon, onPickCompany }) => (
+  <div className="flex flex-col gap-6">
+    {facets && facets.companies.length > 0 && (
+      <section className="bg-white rounded-2xl shadow-sm border border-neutral-200 p-5">
+        <h2 className="font-bold text-neutral-800 text-[15px] mb-4">Companies Hiring</h2>
+        <ul className="flex flex-col gap-3">
+          {facets.companies.map((company) => (
+            <li key={company.name}>
+              <button
+                type="button"
+                onClick={() => onPickCompany(company.name)}
+                className="w-full flex items-center justify-between gap-3 group text-left"
+              >
+                <span className="flex items-center gap-3 min-w-0">
+                  <span className="w-8 h-8 rounded-lg bg-primary-50 text-primary-700 font-bold flex items-center justify-center shrink-0">
+                    {company.name.charAt(0)}
+                  </span>
+                  <span className="text-[13px] font-bold text-neutral-800 group-hover:text-primary-600 transition-colors truncate">
+                    {company.name}
+                  </span>
                 </span>
-              </div>
-              <span className="text-[12px] text-primary-600 font-medium bg-primary-50 px-2 py-0.5 rounded text-right">
-                {company.openings}
-              </span>
-            </div>
+                <span className="text-[12px] text-primary-600 font-medium bg-primary-50 px-2 py-0.5 rounded shrink-0">
+                  {company.count} opening{company.count === 1 ? '' : 's'}
+                </span>
+              </button>
+            </li>
           ))}
-        </div>
-      </div>
+        </ul>
+      </section>
+    )}
 
-      {/* Get Job Alerts */}
-      <div className="bg-secondary-50/50 rounded-2xl shadow-sm border border-secondary-100 p-5 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-32 h-32 bg-secondary-100 rounded-bl-full opacity-50 pointer-events-none"></div>
-        <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 rounded-full bg-secondary-100 flex items-center justify-center text-secondary-600">
-              <Bell className="w-5 h-5" />
-            </div>
-            <h3 className="font-bold text-neutral-800 text-[15px]">Get Job Alerts</h3>
-          </div>
-          <p className="text-[13px] text-neutral-600 mb-4">
-            Create alerts and get notified when new jobs match your profile.
-          </p>
-          <button className="w-full py-2.5 bg-primary-800 hover:bg-primary-700 text-white font-bold text-[13px] rounded-lg transition-colors shadow-sm">
-            Create Alert
-          </button>
-        </div>
-      </div>
+    {closingSoon.length > 0 && (
+      <section className="bg-white rounded-2xl shadow-sm border border-neutral-200 p-5">
+        <h2 className="font-bold text-neutral-800 text-[15px] mb-4">Closing Soon</h2>
+        <ul className="flex flex-col gap-3">
+          {closingSoon.map((job) => (
+            <li key={job.id}>
+              <Link
+                to={`/jobs/${job.slug}`}
+                className="block p-3 bg-neutral-50 rounded-xl border border-neutral-100 hover:border-primary-200 transition-colors group"
+              >
+                <span className="block text-[13px] font-bold text-neutral-900 group-hover:text-primary-600 transition-colors">
+                  {job.title}
+                </span>
+                <span className="block text-[12px] text-neutral-500 mt-0.5">
+                  {job.company} · {job.location}
+                </span>
+                <span className="block mt-1.5">
+                  <Deadline lastDate={job.lastDate} />
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
 
-      {/* Career Resources */}
-      <div className="bg-white rounded-2xl shadow-sm border border-neutral-200 p-5">
-        <h3 className="font-bold text-neutral-800 text-[15px] mb-4">Career Resources</h3>
-        <div className="flex flex-col gap-5">
-          {careerResources.map((resource, idx) => {
-            const Icon = resource.icon;
-            return (
-              <div key={idx} className="flex items-start gap-3 group cursor-pointer">
-                <div className="w-8 h-8 rounded-lg bg-neutral-50 border border-neutral-100 flex items-center justify-center text-neutral-500 group-hover:text-primary-600 group-hover:border-primary-200 transition-colors shrink-0">
-                  <Icon className="w-4 h-4" />
-                </div>
-                <div>
-                  <h4 className="text-[13px] font-bold text-neutral-800 group-hover:text-primary-600 transition-colors">
-                    {resource.title}
-                  </h4>
-                  <p className="text-[12px] text-neutral-500">{resource.desc}</p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-        <button className="text-[12px] font-bold text-primary-600 hover:text-primary-700 mt-5 flex items-center gap-1 group">
-          View all resources
-          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-        </button>
-      </div>
+    <section className="bg-white rounded-2xl shadow-sm border border-neutral-200 p-5">
+      <h2 className="font-bold text-neutral-800 text-[15px] mb-4">Career Resources</h2>
+      <ul className="flex flex-col gap-4">
+        {resources.map(({ title, desc, icon: Icon, href, external }) => {
+          const body = (
+            <>
+              <span className="w-8 h-8 rounded-lg bg-neutral-50 border border-neutral-100 flex items-center justify-center text-neutral-500 group-hover:text-primary-600 group-hover:border-primary-200 transition-colors shrink-0">
+                <Icon className="w-4 h-4" aria-hidden="true" />
+              </span>
+              <span>
+                <span className="block text-[13px] font-bold text-neutral-800 group-hover:text-primary-600 transition-colors">
+                  {title}
+                </span>
+                <span className="block text-[12px] text-neutral-500">{desc}</span>
+              </span>
+            </>
+          );
+          return (
+            <li key={title}>
+              {external ? (
+                <a href={href} className="flex items-start gap-3 group">
+                  {body}
+                </a>
+              ) : (
+                <Link to={href} className="flex items-start gap-3 group">
+                  {body}
+                </Link>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    </section>
 
-      {/* Recommended For You */}
-      <div className="bg-white rounded-2xl shadow-sm border border-neutral-200 p-5">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="font-bold text-neutral-800 text-[15px]">Recommended For You</h3>
-          <button className="text-[12px] font-bold text-primary-600 hover:text-primary-700">View all</button>
-        </div>
-        <div className="flex items-start gap-3 p-3 bg-neutral-50 rounded-xl border border-neutral-100 hover:border-primary-200 cursor-pointer transition-colors group">
-          <div className="w-10 h-10 rounded-lg bg-yellow-400 text-primary-900 font-black flex items-center justify-center shrink-0">
-            f
-          </div>
-          <div>
-            <h4 className="text-[13px] font-bold text-neutral-900 group-hover:text-primary-600 transition-colors">
-              Senior Software Engineer
-            </h4>
-            <div className="flex items-center gap-2 text-[12px] text-neutral-500 mt-1">
-              <span>Flipkart</span>
-              <span className="w-1 h-1 rounded-full bg-neutral-300"></span>
-              <span>Bengaluru</span>
-            </div>
-            <div className="text-[12px] font-medium text-neutral-600 mt-1">₹ 20 - 35 LPA</div>
-          </div>
-        </div>
+    <section className="bg-secondary-50/50 rounded-2xl shadow-sm border border-secondary-100 p-5">
+      <div className="flex items-center gap-3 mb-2">
+        <span className="w-10 h-10 rounded-full bg-secondary-100 flex items-center justify-center text-secondary-600">
+          <Mail className="w-5 h-5" aria-hidden="true" />
+        </span>
+        <h2 className="font-bold text-neutral-800 text-[15px]">Hiring students or freshers?</h2>
       </div>
-    </div>
-  );
-};
+      <p className="text-[13px] text-neutral-600 mb-4">
+        Send us your opening and the link to apply, and our team will list it on CareerSha.
+      </p>
+      <Link
+        to="/contact-us"
+        className="w-full inline-flex items-center justify-center gap-1.5 py-2.5 bg-primary-800 hover:bg-primary-700 text-white font-bold text-[13px] rounded-lg transition-colors shadow-sm"
+      >
+        List a job <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+      </Link>
+    </section>
+  </div>
+);
