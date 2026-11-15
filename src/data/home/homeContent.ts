@@ -1,6 +1,6 @@
 import type { Ownership, Stream } from '../catalog/types';
 import type React from 'react';
-import { BarChart3, Building2, Calculator, GraduationCap, Target, MapPin } from 'lucide-react';
+import { Briefcase, Building2, FileText, GraduationCap, Target, MapPin } from 'lucide-react';
 
 /** Static content for the homepage sections (features/home/sections). */
 
@@ -40,23 +40,23 @@ export const quickTools: QuickTool[] = [
     title: 'Compare Colleges',
     description: 'Compare fees, placements, cutoffs & more',
     icon: Building2,
-    href: '/college-matcher',
+    href: '/compare',
     bgClass: 'bg-accent-50 dark:bg-accent-950/40 text-accent-600 dark:text-accent-400',
     iconClass: 'text-accent-600 dark:text-accent-400',
   },
   {
-    title: 'Cutoff Analyzer',
-    description: 'Check previous year cutoffs',
-    icon: BarChart3,
-    href: '/results',
+    title: 'Previous Papers',
+    description: 'Question papers, answer keys & syllabus',
+    icon: FileText,
+    href: '/tools/question-papers',
     bgClass: 'bg-warning-50 dark:bg-warning-950/40 text-warning-600 dark:text-warning-400',
     iconClass: 'text-warning-600 dark:text-warning-400',
   },
   {
-    title: 'Rank Converter',
-    description: 'Convert ranks across exams',
+    title: 'Rank Predictor',
+    description: 'Marks to rank for 19 exams',
     icon: Target,
-    href: '/rank-estimator',
+    href: '/predictors',
     bgClass: 'bg-success-50 dark:bg-success-950/40 text-success-600 dark:text-success-400',
     iconClass: 'text-success-600 dark:text-success-400',
   },
@@ -64,44 +64,17 @@ export const quickTools: QuickTool[] = [
     title: 'College Finder',
     description: 'Find colleges by location & filters',
     icon: MapPin,
-    href: '/search',
+    href: '/colleges',
     bgClass: 'bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400',
     iconClass: 'text-rose-600 dark:text-rose-400',
   },
   {
-    title: 'Fee & ROI Calculator',
-    description: 'Calculate fees, ROI & future salary',
-    icon: Calculator,
-    href: '/college-matcher',
+    title: 'Jobs & Internships',
+    description: 'Openings for students & freshers',
+    icon: Briefcase,
+    href: '/jobs',
     bgClass: 'bg-orange-50 dark:bg-orange-950/40 text-orange-600 dark:text-orange-400',
     iconClass: 'text-orange-600 dark:text-orange-400',
-  },
-];
-
-export const jobOpenings = [
-  {
-    role: 'Junior Software Developer',
-    company: 'TCS Digital',
-    location: 'Bangalore / Remote',
-    type: 'Full-time',
-    color:
-      'text-secondary-600 bg-secondary-50 dark:bg-secondary-900/30 dark:text-secondary-400 border-secondary-200 dark:border-secondary-800',
-  },
-  {
-    role: 'Business Analyst',
-    company: 'Deloitte',
-    location: 'Mumbai',
-    type: 'Entry Level',
-    color:
-      'text-primary-600 bg-primary-50 dark:bg-primary-900/30 dark:text-primary-400 border-primary-200 dark:border-primary-800',
-  },
-  {
-    role: 'Clinical Data Trainee',
-    company: 'Sun Pharma',
-    location: 'Pune',
-    type: 'Internship',
-    color:
-      'text-success-600 bg-success-50 dark:bg-success-900/30 dark:text-success-400 border-success-200 dark:border-success-800',
   },
 ];
 
