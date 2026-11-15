@@ -6,6 +6,7 @@ import { getLatestBlogPosts, mergeByTime } from '../../../services/blogFeedServi
 import NewsLink from '../../news/NewsLink';
 import { DEMO_LIVE_UPDATES } from '../../../data/home/homeContent';
 import { SHOW_SAMPLE_DATA_NOTICE } from '../../../config/features';
+import { BLOG_URL } from '../../../config/links';
 
 const MAX_ITEMS = 4;
 
@@ -41,12 +42,12 @@ const LiveUpdates: React.FC = () => {
             </span>
           )}
         </h2>
-        <button
-          onClick={() => navigate('/news')}
+        <a
+          href={BLOG_URL}
           className="text-xs font-black text-primary-600 dark:text-primary-400 hover:underline uppercase tracking-widest"
         >
           View all
-        </button>
+        </a>
       </div>
 
       <div className="space-y-3">

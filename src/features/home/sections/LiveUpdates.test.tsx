@@ -2,6 +2,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { screen, within } from '@testing-library/react';
 import LiveUpdates from './LiveUpdates';
 import { renderAt } from '../../../test/utils';
+import { BLOG_URL } from '../../../config/links';
 
 const news = [
   { id: 7, title: 'JEE Main registration opens', category: 'ENGINEERING', image: '', link: '', is_live: false,
@@ -32,8 +33,9 @@ const mockApis = (newsBody: unknown, blogBody: unknown) =>
 
 afterEach(() => vi.unstubAllGlobals());
 
-/** Link texts in display order (all items arrive in one render). */
-const titles = () => screen.getAllByRole('link').map((a) => a.textContent ?? '');
+/** Item link texts in display order (all items arrive in one render). */
+const titles = () =>
+  screen.getAllByRole('link').filter((a) => a.textContent !== 'View all').map((a) => a.textContent ?? '');
 
 describe('Live Updates on the home page', () => {
   it('mixes new blog posts with news, newest first', async () => {
@@ -51,6 +53,7 @@ describe('Live Updates on the home page', () => {
     expect(link).toHaveAttribute('href', 'https://blogs.careersha.com/new-post/');
     expect(within(link).getByText(/^Blog/)).toBeInTheDocument();
     expect(screen.queryByText('Sample')).not.toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'View all' })).toHaveAttribute('href', BLOG_URL);
   });
 
   it('still shows news when the blog is down', async () => {
