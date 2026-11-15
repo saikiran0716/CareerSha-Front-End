@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Search } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Flame, Search } from 'lucide-react';
 import { trendingTopics } from '../../../data/home/homeContent';
 
 const HeroSection: React.FC = () => {
@@ -10,10 +10,6 @@ const HeroSection: React.FC = () => {
   const goToSearch = () => {
     const query = searchQuery.trim();
     navigate(query ? `/search?query=${encodeURIComponent(query)}` : '/search');
-  };
-
-  const handleTrendingClick = (topic: string) => {
-    navigate(`/search?query=${encodeURIComponent(topic)}`);
   };
 
   return (
@@ -58,21 +54,21 @@ const HeroSection: React.FC = () => {
             </button>
           </div>
 
-          {/* Trending tags */}
-          <div className="mt-4 flex flex-nowrap items-center gap-2 text-xs overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            <span className="font-extrabold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mr-1">
-              Trending:
+          {/* Trending: each topic opens its own page (exam guide, college list, predictor…) */}
+          <nav aria-label="Trending" className="mt-4 flex flex-wrap items-center gap-2 text-xs">
+            <span className="inline-flex items-center gap-1 font-extrabold text-orange-600 uppercase tracking-wider mr-1">
+              <Flame className="h-3.5 w-3.5" aria-hidden="true" /> Trending
             </span>
             {trendingTopics.map((topic) => (
-              <button
-                key={topic}
-                onClick={() => handleTrendingClick(topic)}
-                className="shrink-0 rounded-full border border-neutral-200/60 dark:border-neutral-800 bg-white dark:bg-neutral-900 px-3.5 py-1.5 font-bold text-neutral-700 dark:text-neutral-300 shadow-sm transition hover:border-primary-400 hover:text-primary-600 dark:hover:text-primary-400 dark:hover:border-primary-500"
+              <Link
+                key={topic.to}
+                to={topic.to}
+                className="shrink-0 rounded-full border border-neutral-200/60 dark:border-neutral-800 bg-white dark:bg-neutral-900 px-3.5 py-1.5 font-bold text-neutral-700 dark:text-neutral-300 shadow-sm transition hover:border-primary-400 hover:bg-primary-50 hover:text-primary-700 dark:hover:text-primary-400 dark:hover:border-primary-500"
               >
-                {topic}
-              </button>
+                {topic.label}
+              </Link>
             ))}
-          </div>
+          </nav>
         </div>
       </div>
 

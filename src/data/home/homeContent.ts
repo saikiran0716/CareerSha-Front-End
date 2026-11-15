@@ -14,7 +14,17 @@ export type QuickTool = {
   highlight?: boolean;
 };
 
-export const trendingTopics = ['JEE Main', 'NEET', 'CUET', 'BTech', 'MBA'];
+/** Trending topics under the home search box; each opens its own page (not a search). */
+export const trendingTopics: { label: string; to: string }[] = [
+  { label: 'JEE Main 2026', to: '/exams/jee-main' },
+  { label: 'NEET UG', to: '/exams/neet' },
+  { label: 'Rank Predictor', to: '/predictors' },
+  { label: 'College Predictor', to: '/college-matcher' },
+  { label: 'B.Tech Colleges', to: '/colleges?stream=Engineering' },
+  { label: 'MBA Colleges', to: '/colleges?stream=Management' },
+  { label: 'CUET', to: '/rank-estimator/cuet' },
+  { label: 'Previous Papers', to: '/tools/question-papers' },
+];
 
 export const quickTools: QuickTool[] = [
   {
@@ -65,33 +75,6 @@ export const quickTools: QuickTool[] = [
     href: '/college-matcher',
     bgClass: 'bg-orange-50 dark:bg-orange-950/40 text-orange-600 dark:text-orange-400',
     iconClass: 'text-orange-600 dark:text-orange-400',
-  },
-];
-
-export const communityThreads = [
-  {
-    author: 'Aman Kumar',
-    title: 'Is CSE in a Tier-2 college worth it?',
-    replies: 23,
-    time: '2h ago',
-    avatar: 'AK',
-    avatarBg: 'bg-secondary-600 text-white',
-  },
-  {
-    author: 'Neha Singh',
-    title: 'Best colleges for biotechnology in India?',
-    replies: 18,
-    time: '4h ago',
-    avatar: 'NS',
-    avatarBg: 'bg-pink-600 text-white',
-  },
-  {
-    author: 'Rohit Verma',
-    title: 'Which branch has the best future?',
-    replies: 31,
-    time: '6h ago',
-    avatar: 'RV',
-    avatarBg: 'bg-warning-600 text-white',
   },
 ];
 
