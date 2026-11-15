@@ -23,8 +23,8 @@ const HeroSection: React.FC = () => {
             for Your Rank
           </h1>
           <p className="text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm max-w-xl leading-relaxed">
-            Explore 50K+ colleges, 200+ entrance exams, cutoffs, placements, and get personalized AI-powered guidance to
-            shape your future.
+            Explore 50,000+ colleges, entrance and government exams, cutoffs, placements and previous papers, and get
+            personalized AI-powered guidance to shape your future.
           </p>
         </div>
 
