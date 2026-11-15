@@ -1,21 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CheckCircle2 } from 'lucide-react';
 import SEO from '../../components/common/SEO';
 import { ExamConfig } from './types';
 import { PREDICTOR_YEAR } from './exams';
 import PredictorForm from './components/PredictorForm';
 import PredictorContent from './components/PredictorContent';
+import RankTables from './components/RankTables';
+import { getRankModel } from './rankModel';
 
 const SITE_URL = 'https://www.careersha.com';
 
 /** Full rank-predictor page for one exam, driven entirely by its config. */
 const RankPredictor: React.FC<{ exam: ExamConfig }> = ({ exam }) => {
   const { name, slug, admissionFor, seo } = exam;
+  const model = getRankModel(slug);
+  const [marks, setMarks] = useState<number | null>(null);
 
   const highlights = [
-    `Check your expected rank based on ${name} score`,
-    `Find your chances of getting top ${admissionFor} colleges`,
-    'Get personalized category & state quota analysis',
+    `Instant expected rank and percentile from your ${name} score`,
+    model?.categories.length
+      ? `Category-wise ranks (${model.categories.map((c) => c.id).join(', ')})`
+      : `Find your chances at top ${admissionFor} colleges`,
+    'Full marks-vs-rank table and marks needed for every target rank',
   ];
 
   return (
@@ -46,8 +52,14 @@ const RankPredictor: React.FC<{ exam: ExamConfig }> = ({ exam }) => {
 
       {/* Form card overlapping the hero */}
       <div className="max-w-3xl mx-auto px-4 sm:px-6 relative -mt-16 z-10 mb-16">
-        <PredictorForm exam={exam} />
+        <PredictorForm exam={exam} onPredict={setMarks} />
       </div>
+
+      {model && (
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 mb-12">
+          <RankTables exam={exam} model={model} highlightMarks={marks} />
+        </div>
+      )}
 
       <PredictorContent exam={exam} />
     </div>

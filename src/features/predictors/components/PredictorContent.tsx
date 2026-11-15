@@ -56,9 +56,8 @@ const PredictorContent: React.FC<{ exam: ExamConfig }> = ({ exam }) => {
         <div className="text-[15px] text-neutral-600 dark:text-neutral-400 leading-relaxed space-y-4">
           <p>
             Candidates who have appeared for the <span className="text-primary-500 font-medium">{name} exam</span> can
-            use our advanced rank predictor to estimate their All India Rank (AIR) before the official results are
-            declared. The tool utilizes historical data, previous year cutoffs, and difficulty level analysis to provide
-            a highly accurate prediction.
+            use this rank predictor to estimate their rank before the official results are declared. It uses recent
+            years' marks-vs-rank trends to give an expected rank range, percentile and category-wise rank instantly.
           </p>
           <p>
             Knowing your expected rank early helps you make informed decisions about your{' '}
@@ -74,15 +73,15 @@ const PredictorContent: React.FC<{ exam: ExamConfig }> = ({ exam }) => {
           <li>
             Enter your estimated score out of {maxMarks} in the <strong>{name} Score</strong> field.
           </li>
-          <li>Select your category (UR, OBC, SC, ST, etc.) from the dropdown menu.</li>
+          <li>Select your category (where the exam has reservation) to see your category rank.</li>
           <li>
             {secondaryField.kind === 'State'
               ? 'Select your domicile State to check state-quota specific chances.'
               : `Select your preferred option under ${secondaryField.label}.`}
           </li>
           <li>
-            Click on the <strong>"Check Rank"</strong> button to generate your predicted AIR and personalized admission
-            analysis.
+            Click <strong>"Check Rank"</strong> for your expected rank at once, then use the tables below to compare
+            scores. For a written admission analysis, click <strong>"Get admission analysis"</strong>.
           </li>
         </ul>
       </section>
