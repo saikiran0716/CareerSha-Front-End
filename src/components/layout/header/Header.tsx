@@ -4,7 +4,7 @@ import { Menu, X, User as UserIcon, Sun, Moon, LogOut } from 'lucide-react';
 import Logo from '../../common/Logo';
 import { DARK_MODE_ENABLED } from '../../../hooks/useDarkMode';
 import { User } from '../../../services/authService';
-import { navigationData } from '../../../data/navigationData';
+import { NavCategory, navigationData } from '../../../data/navigationData';
 import MegaMenu from './MegaMenu';
 import MobileMegaMenu from './MobileMegaMenu';
 import { ACCOUNT_LINKS } from '../../../features/account/accountNav';
@@ -16,6 +16,11 @@ const TOP_LINKS = [
   { to: '/jobs', label: 'Jobs' },
   { to: '/community', label: 'Community' },
 ];
+
+/** "More" goes at the very end of the navbar, after Jobs, Community and Blogs. */
+const LAST_SLUGS = ['more'];
+const MAIN_CATEGORIES = navigationData.filter((c) => !LAST_SLUGS.includes(c.slug));
+const LAST_CATEGORIES = navigationData.filter((c) => LAST_SLUGS.includes(c.slug));
 
 /** Shared look of every desktop navbar item: underlined on hover and on its own page. */
 const NAV_ITEM = 'text-[13px] font-semibold text-neutral-700 transition-colors flex items-center py-2 px-3 border-b-2';
@@ -70,6 +75,42 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
   const menuUser: User | null =
     user ?? (ACCOUNT_REQUIRES_SIGN_IN ? null : { id: 'guest', name: 'Guest', email: 'Not signed in' });
 
+  /** A navbar item with a mega-menu: underlined on hover, while open and on its own page. */
+  const renderCategory = (cat: NavCategory) => {
+    const open = activeMenu === cat.title;
+    const current = isCurrentPage(cat.url, location.pathname, location.search);
+    return (
+      <div
+        key={cat.title}
+        onMouseEnter={() => handleEnter(cat.title)}
+        onMouseLeave={handleLeave}
+        onFocus={() => handleEnter(cat.title)}
+        onBlur={(e) => {
+          if (!e.currentTarget.contains(e.relatedTarget as Node)) handleLeave();
+        }}
+        className="py-2"
+      >
+        <button
+          onClick={() => {
+            setActiveMenu(null);
+            navigate(cat.url);
+          }}
+          aria-expanded={open}
+          aria-haspopup="true"
+          aria-current={current ? 'page' : undefined}
+          className={`${NAV_ITEM} ${open || current ? 'border-primary-800' : 'border-transparent hover:border-primary-800'}`}
+        >
+          {cat.title}
+        </button>
+        {open && (
+          <div className="absolute left-1/2 top-full z-50 -translate-x-1/2">
+            <MegaMenu category={cat} onClose={() => setActiveMenu(null)} />
+          </div>
+        )}
+      </div>
+    );
+  };
+
   return (
     <>
       <header className="sticky top-0 z-[100] bg-white shadow-sm transition-all duration-300">
@@ -102,41 +143,7 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                   Home
                 </Link>
               </div>
-              {navigationData.map((cat) => {
-                const open = activeMenu === cat.title;
-                const current = isCurrentPage(cat.url, location.pathname, location.search);
-                return (
-                  <div
-                    key={cat.title}
-                    onMouseEnter={() => handleEnter(cat.title)}
-                    onMouseLeave={handleLeave}
-                    onFocus={() => handleEnter(cat.title)}
-                    onBlur={(e) => {
-                      if (!e.currentTarget.contains(e.relatedTarget as Node)) handleLeave();
-                    }}
-                    className="py-2"
-                  >
-                    <button
-                      onClick={() => {
-                        setActiveMenu(null);
-                        navigate(cat.url);
-                      }}
-                      aria-expanded={open}
-                      aria-haspopup="true"
-                      aria-current={current ? 'page' : undefined}
-                      className={`${NAV_ITEM} ${open || current ? 'border-primary-800' : 'border-transparent hover:border-primary-800'}`}
-                    >
-                      {cat.title}
-                    </button>
-
-                    {open && (
-                      <div className="absolute left-1/2 top-full z-50 -translate-x-1/2">
-                        <MegaMenu category={cat} onClose={() => setActiveMenu(null)} />
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
+              {MAIN_CATEGORIES.map((cat) => renderCategory(cat))}
               {TOP_LINKS.map(({ to, label }) => (
                 <div key={to} className="relative py-2">
                   <Link
@@ -149,13 +156,11 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                 </div>
               ))}
               <div className="relative py-2">
-                <a
-                  href={BLOG_URL}
-                  className="text-[13px] font-semibold text-neutral-700 transition-colors flex items-center gap-1 py-2 px-3 border-b-2 border-transparent hover:border-primary-800"
-                >
+                <a href={BLOG_URL} className={`${NAV_ITEM} border-transparent hover:border-primary-800`}>
                   Blogs
                 </a>
               </div>
+              {LAST_CATEGORIES.map((cat) => renderCategory(cat))}
             </nav>
 
             {/* Right Side Items (Search & Actions) */}
@@ -320,7 +325,7 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                 >
                   Home
                 </Link>
-                <MobileMegaMenu onNavigate={() => setIsMobileMenuOpen(false)} />
+                <MobileMegaMenu categories={MAIN_CATEGORIES} onNavigate={() => setIsMobileMenuOpen(false)} />
                 {TOP_LINKS.map(({ to, label }) => (
                   <Link
                     key={to}
@@ -342,6 +347,7 @@ const Header: React.FC<HeaderProps> = ({ user, onOpenAuth, onLogout, isDarkMode,
                 >
                   Blogs
                 </a>
+                <MobileMegaMenu categories={LAST_CATEGORIES} onNavigate={() => setIsMobileMenuOpen(false)} />
               </div>
             </div>
 

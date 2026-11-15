@@ -108,10 +108,16 @@ const QuestionPapersPage = () => {
   const examInfo = useMemo(() => data?.facets.exams.find((e) => e.slug === exam), [data, exam]);
   const examName = examInfo?.name ?? '';
   const hasExamPage = !!exam && exam in ENTRANCE_EXAMS_DATA;
-  const showPicker = !exam && !q;
+  // The exam picker shows until an exam, a type (e.g. all answer keys) or a search is chosen.
+  const showPicker = !exam && !q && !kind;
   const groups = data ? groupByYear(data.results) : [];
 
-  const pageTitle = examName ? `${examName} Previous Year Question Papers` : 'Previous Year Question Papers';
+  const kindTitle = KIND_TAB_LABELS[kind];
+  const pageTitle = examName
+    ? `${examName} Previous Year Question Papers`
+    : kindTitle
+      ? `${kindTitle} for All Exams`
+      : 'Previous Year Question Papers';
 
   return (
     <div className="bg-neutral-50 min-h-screen pb-20">
@@ -259,7 +265,7 @@ const QuestionPapersPage = () => {
             </aside>
 
             <section className="lg:col-span-9 min-w-0" aria-label="Files">
-              {exam && (
+              {(exam || kind) && (
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-neutral-200 pb-px mb-5">
                   <div className="flex items-center gap-5 overflow-x-auto no-scrollbar" role="tablist" aria-label="Type">
                     {[{ id: '', label: 'All', count: data.facets.kinds.reduce((n, k) => n + k.count, 0) }, ...data.facets.kinds]

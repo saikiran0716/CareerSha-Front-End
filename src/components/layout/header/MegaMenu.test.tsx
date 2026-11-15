@@ -119,10 +119,39 @@ describe('top-level items', () => {
     expect(navigationData.map((c) => c.title)).toEqual(['Engineering', 'Medical', 'MBA', 'Predictors', 'More']);
   });
 
+  it('More opens on Exam Preparation: papers by exam, answer keys and prep tools', async () => {
+    renderHeader();
+    await userEvent.hover(screen.getByRole('button', { name: 'More' }));
+    const menu = screen.getByRole('region', { name: 'More menu' });
+    expect(within(menu).getByRole('tab', { name: 'Exam Preparation' })).toHaveAttribute('aria-selected', 'true');
+    const papers = within(menu).getByRole('region', { name: 'Previous Year Papers' });
+    expect(within(papers).getByRole('link', { name: 'JEE Main Papers' })).toHaveAttribute(
+      'href',
+      '/tools/question-papers?exam=jee-main',
+    );
+    expect(within(papers).getByRole('link', { name: 'All Question Papers' })).toHaveAttribute('href', '/tools/question-papers');
+    const keys = within(menu).getByRole('region', { name: 'Answer Keys & Syllabus' });
+    expect(within(keys).getByRole('link', { name: 'Answer Keys' })).toHaveAttribute(
+      'href',
+      '/tools/question-papers?kind=answer-key',
+    );
+    expect(within(menu).getByRole('region', { name: 'Prep Tools' })).toBeInTheDocument();
+  });
+
+  it('More is the last navbar item', () => {
+    renderHeader();
+    const items = screen.getAllByRole('button', { name: /^(Engineering|Medical|MBA|Predictors|More)$/ });
+    expect(items.map((b) => b.textContent)).toEqual(['Engineering', 'Medical', 'MBA', 'Predictors', 'More']);
+    const blogs = screen.getByRole('link', { name: 'Blogs' });
+    const more = screen.getByRole('button', { name: 'More' });
+    expect(blogs.compareDocumentPosition(more) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  });
+
   it('More shows Sarkari Exams in titled columns and opens the exam on the govt exams page', async () => {
     renderHeader();
     await userEvent.hover(screen.getByRole('button', { name: 'More' }));
     const menu = screen.getByRole('region', { name: 'More menu' });
+    await userEvent.click(within(menu).getByRole('tab', { name: 'Sarkari Exams' }));
     expect(within(menu).getByRole('tab', { name: 'Sarkari Exams' })).toHaveAttribute('aria-selected', 'true');
 
     const banking = within(menu).getByRole('region', { name: 'Banking' });

@@ -99,6 +99,16 @@ describe('Previous year question papers page', () => {
     await waitFor(() => expect(lastUrl(fetch)).toContain('q=shift+2'));
   });
 
+  it('lists one type across all exams (e.g. every answer key) when opened from the menu', async () => {
+    const keys = [item({ id: 2, kind: 'answer-key', kindLabel: 'Answer key', title: 'JEE Main 2025 Answer key' })];
+    const fetch = mockFetch({ count: 1, page: 1, pageSize: 30, results: keys, facets });
+    renderAt(<QuestionPapersPage />, '/tools/question-papers?kind=answer-key');
+    expect(await screen.findByRole('heading', { level: 1, name: 'Answer keys for All Exams' })).toBeInTheDocument();
+    expect(lastUrl(fetch)).toContain('kind=answer-key');
+    expect(screen.queryByRole('heading', { name: 'Choose an exam' })).not.toBeInTheDocument();
+    expect(screen.getByText(/JEE Main 2025 ·/)).toBeInTheDocument(); // rows name their exam
+  });
+
   it('builds query strings and spots PDFs', () => {
     expect(materialQueryString({ exam: 'jee-main', kind: '', year: 2025, page: 2 })).toBe(
       'exam=jee-main&year=2025&page=2&page_size=30',

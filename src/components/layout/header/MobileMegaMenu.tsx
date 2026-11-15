@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
-import { navigationData } from '../../../data/navigationData';
+import { NavCategory, navigationData } from '../../../data/navigationData';
 
 /** Mobile version of the mega menu: category -> group -> links, as nested accordions. */
-const MobileMegaMenu: React.FC<{ onNavigate: () => void }> = ({ onNavigate }) => {
+const MobileMegaMenu: React.FC<{ onNavigate: () => void; categories?: NavCategory[] }> = ({
+  onNavigate,
+  categories = navigationData,
+}) => {
   const [openCategory, setOpenCategory] = useState<string | null>(null);
   const [openGroup, setOpenGroup] = useState<string | null>(null);
 
   return (
     <ul className="space-y-1">
-      {navigationData.map((cat) => {
+      {categories.map((cat) => {
         const catOpen = openCategory === cat.slug;
         return (
           <li key={cat.slug}>

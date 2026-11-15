@@ -36,6 +36,8 @@ export interface NavCategory {
 }
 
 const explore = (stream: Stream, extra = '') => `/colleges?stream=${stream}${extra}`;
+/** Previous year papers page, optionally for one exam (exam=jee-main) or type (kind=answer-key). */
+const papers = (query = '') => `/tools/question-papers${query ? `?${query}` : ''}`;
 const predictor = (slug: string, name: string): NavLink => ({
   name: `${name} Rank Predictor`,
   url: `/rank-estimator/${slug}`,
@@ -487,6 +489,44 @@ export const navigationData: NavCategory[] = [
     featured: [],
     groups: [
       {
+        title: 'Exam Preparation',
+        links: [],
+        sections: [
+          {
+            title: 'Previous Year Papers',
+            links: [
+              { name: 'JEE Main Papers', url: papers('exam=jee-main') },
+              { name: 'NEET UG Papers', url: papers('exam=neet') },
+              { name: 'GATE Papers', url: papers('exam=gate') },
+              { name: 'CAT Papers', url: papers('exam=cat') },
+              { name: 'CLAT Papers', url: papers('exam=clat') },
+              { name: 'UPSC CSE Papers', url: papers('exam=upsc-cse') },
+              { name: 'SSC CGL Papers', url: papers('exam=ssc-cgl') },
+            ],
+            all: { name: 'All Question Papers', url: papers() },
+          },
+          {
+            title: 'Answer Keys & Syllabus',
+            links: [
+              { name: 'Answer Keys', url: papers('kind=answer-key') },
+              { name: 'Solutions', url: papers('kind=solution') },
+              { name: 'Sample Papers', url: papers('kind=sample-paper') },
+              { name: 'Syllabus', url: papers('kind=syllabus') },
+            ],
+          },
+          {
+            title: 'Prep Tools',
+            links: [
+              { name: 'Entrance Exams: Dates & Pattern', url: '/exams' },
+              { name: 'Rank Estimator', url: '/rank-estimator' },
+              { name: 'College Predictor', url: '/college-matcher' },
+              { name: 'Exam Results', url: '/results' },
+            ],
+            all: { name: 'All Tools', url: '/tools' },
+          },
+        ],
+      },
+      {
         title: 'Sarkari Exams',
         links: [],
         sections: [
@@ -599,7 +639,6 @@ export const navigationData: NavCategory[] = [
           { name: 'All Colleges', url: '/colleges' },
           { name: 'All Entrance Exams', url: '/exams' },
           { name: 'Compare Colleges', url: '/compare' },
-          { name: 'Previous Year Papers', url: '/tools/question-papers' },
           { name: 'All Tools', url: '/tools' },
         ],
       },
